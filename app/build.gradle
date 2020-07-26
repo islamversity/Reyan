@@ -1,0 +1,249 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+//apply plugin: 'jacoco-android'
+
+//apply plugin: 'com.google.firebase.crashlytics'
+
+apply from: "$rootDir/projectDependencyGraph.gradle"
+
+//check.dependsOn detekt
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        archivesBaseName = "Reyan"
+        applicationId "com.islamversity.Reyan"
+        minSdkVersion projectMinSdkVersion
+        targetSdkVersion projectTargetSdkVersion
+        versionCode 21000001
+        versionName "0.0.1"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+    }
+    signingConfigs {
+        release {
+            storeFile file(releaseKeyStoreAddress)
+            storePassword "$releaseKeyStorePass"
+            keyAlias "$releaseKeyAlias"
+            keyPassword "$releaseKeyPass"
+        }
+    }
+    buildTypes {
+        release {
+            debuggable isReleaseDebuggable
+            minifyEnabled isReleaseMinify
+            multiDexEnabled isReleaseMultiDex
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"),
+                    "$proguardFileAddress")
+            signingConfig signingConfigs.release
+        }
+        debug {
+            ext.alwaysUpdateBuildId = false
+            debuggable isDebugDebuggable
+            minifyEnabled isDebugMinify
+            multiDexEnabled isDebugMultiDex
+            proguardFiles(getDefaultProguardFile("proguard-android.txt"),
+                    "$proguardFileAddress")
+//            testCoverageEnabled true
+        }
+    }
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def date = new Date()
+            def formattedDate = date.format('dd.MM.yy-HH.mm')
+            outputFileName = output.outputFile.name.replace(".apk", "-v${variant.versionName}-${formattedDate}.apk")
+        }
+    }
+    compileOptions {
+        // Flag to enable support for the new language APIs
+        coreLibraryDesugaringEnabled true
+        // Sets Java compatibility to Java 8
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    packagingOptions {
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
+        exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/slider_release.kotlin_module'
+        exclude 'META-INF/kotlinx-serialization-runtime.kotlin_module'
+        exclude 'META-INF/ktor-http.kotlin_module'
+        exclude 'META-INF/ktor-utils.kotlin_module'
+        exclude 'META-INF/ktor-io.kotlin_module'
+        exclude 'META-INF/ktor-http-cio.kotlin_module'
+        exclude 'META-INF/ktor-client-core.kotlin_module'
+        pickFirst("META-INF/kotlinx-coroutines-core.kotlin_module")
+    }
+    androidExtensions {
+        defaultCacheImplementation = "SPARSE_ARRAY"
+        experimental = true
+    }
+
+
+//    dynamicFeatures = [":search"]
+
+    testOptions.unitTests.includeAndroidResources = true
+    sourceSets {
+        String sharedTestDir = 'src/sharedTest/java'
+        test {
+            java.srcDirs += sharedTestDir
+        }
+
+        androidTest {
+            java.srcDirs += sharedTestDir
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation kotlinStd8
+
+    testImplementation junit
+    testImplementation truth
+    testImplementation mockkUnit
+    testImplementation robolectric
+    testImplementation supportTestRunner
+    testImplementation supportTestCore
+    testImplementation supportTestRule
+    testImplementation supportJunitExt
+    testImplementation espressoCore
+
+    androidTestImplementation supportTestRunner
+    androidTestImplementation supportTestCore
+    androidTestImplementation supportTestRule
+    androidTestImplementation supportJunitExt
+    androidTestImplementation espressoCore
+    androidTestImplementation espressoIntents
+
+    implementation(project(core))
+    implementation(project(domain))
+    implementation(project(base))
+    implementation(project(daggerCore))
+    implementation(project(home))
+    implementation(project(navigation))
+    implementation(project(search))
+
+    implementation viewModel
+
+    implementation dagger
+    kapt daggerCompiler
+    implementation jetbrainsAnnotation
+
+    implementation okHttpLogging
+    implementation okHttp
+
+    //noinspection GradleDependency
+    implementation compat
+    implementation coreKts
+
+    implementation coroutines
+    implementation coroutinesCommon
+
+    implementation conductor
+
+    implementation timber
+
+    implementation fresco
+    implementation soLoader
+    implementation frescoOkHttp
+    implementation slider
+
+    implementation firebaseCore
+    implementation firebaseAnalytics
+    implementation firebaseCrashlyticsSDK
+    implementation firebaseMessaging
+    implementation firebaseRemoteConfig
+
+    debugImplementation leakCanary
+
+    implementation epoxy
+    kapt epoxyCompiler
+
+    debugImplementation flipper
+    releaseImplementation flipperNoOp
+    debugImplementation flipperNetworkPlugin
+    debugImplementation flipperFrescoPlugin
+
+    debugImplementation stetho
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.5'
+}
+//apply plugin: 'com.google.gms.google-services'
+
+
+//project.afterEvaluate {
+//    //Gather build type and product flavor names in a list
+//    def buildTypes = android.buildTypes.collect { type -> type.name }
+//    def productFlavors = android.productFlavors.collect { flavor -> flavor.name }
+//    if (!productFlavors) productFlavors.add('')
+//
+//    productFlavors.each { productFlavorName ->
+//        buildTypes.each { buildTypeName ->
+//
+//            //Define the sourceName and the sourcePath.
+//            def sourceName, sourcePath
+//            if (!productFlavorName) {
+//                sourceName = sourcePath = "${buildTypeName}"
+//            } else {
+//                sourceName = "${productFlavorName}${buildTypeName.capitalize()}"
+//                sourcePath = "${productFlavorName}/${buildTypeName}"
+//            }
+//
+//            def testTaskName = "test${sourceName.capitalize()}UnitTest"
+//
+//            task "create${sourceName.capitalize()}UnitTestCoverageReport"(type: JacocoReport, dependsOn: "$testTaskName") {
+//
+//                group = "Reporting"
+//                description =
+//                        "Generate Jacoco coverage reports on the ${sourceName.capitalize()} build."
+//
+//                reports {
+//                    xml.enabled true
+////                    removed for faster builds
+//                    html.enabled true
+//                }
+//
+//                //Directory where the compiled class files are
+//                classDirectories =
+//                        fileTree(dir: "${project.buildDir}/intermediates/classes/${sourcePath}",
+//                                excludes: ['**/R.class',
+//                                           '**/BR.class',
+//                                           '**/R$*.class',
+//                                           '**/*$ViewInjector*.*',
+//                                           '**/*$ViewBinder*.*',
+//                                           '**/BuildConfig.*',
+//                                           'android/**',
+//                                           '**/Manifest*.*',
+//                                           '**/*$Lambda$*.*', // Jacoco can not handle several "$" in class name.
+//                                           '**/*Module.*', // Modules for Dagger.
+//                                           '**/*Dagger*.*', // Dagger auto-generated code.
+//                                           '**/*MembersInjector*.*', // Dagger auto-generated code.
+//                                           '**/*_Provide*Factory*.*',
+//                                           '**/*_Factory.*', //Dagger auto-generated code
+//                                           '**/*$*$*.*', // Anonymous classes generated by kotlin
+//                                           '**/*Activity.class' //exclude activities
+//                                ])
+//
+//                sourceDirectories = files(["src/main/java",
+//                                           "src/main/kotlin",
+//                                           "src/$productFlavorName/java",
+//                                           "src/$productFlavorName/kotlin",
+//                                           "src/$buildTypeName/java",
+//                                           "src/$buildTypeName/kotlin"])
+//
+//                executionData = files("${project.buildDir}/jacoco/${testTaskName}.exec")
+//            }
+//        }
+//    }
+//}

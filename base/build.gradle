@@ -1,0 +1,32 @@
+apply from: androidLib
+
+dependencies {
+
+    implementation(project(core))
+    implementation(project(daggerCore))
+
+    testImplementation junit
+    androidTestImplementation supportTestRunner
+    androidTestImplementation espressoCore
+
+    implementation kotlinStd8
+
+    implementation compat
+    implementation design
+
+    implementation conductor
+
+    implementation dagger
+    implementation findBugs
+    kapt daggerCompiler
+
+    implementation coreKts
+    implementation coroutines
+    implementation coroutinesAndroid
+
+    implementation timber
+
+    debugImplementation leakCanary
+
+    implementation epoxy
+}

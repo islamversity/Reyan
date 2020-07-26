@@ -1,0 +1,10 @@
+apply from : androidLib
+
+dependencies {
+
+    implementation okHttp
+    implementation coroutines
+    implementation junit
+    implementation conductor
+    implementation compat
+}

@@ -1,0 +1,52 @@
+apply from: androidLib
+apply plugin: 'kotlinx-serialization'
+
+android{
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation junit
+    androidTestImplementation supportTestRunner
+    androidTestImplementation espressoCore
+
+    implementation(project(domain))
+    implementation(project(core))
+    implementation(project(navigation))
+    implementation(project(db))
+
+    implementation conductor
+    implementation compat
+
+    implementation kotlinStd8
+
+    implementation dagger
+    kapt daggerCompiler
+
+    implementation okHttp
+    implementation okHttpLogging
+    implementation sqlDelightAndroidAdapter
+
+    implementation coroutines
+
+    implementation fresco
+    implementation frescoOkHttp
+
+    implementation javaxAnnotation
+    implementation findBugs
+    implementation timber
+
+    implementation androidSerialization
+    implementation (okhttpEngine) {
+        transitive false
+    }
+
+    debugImplementation flipper
+    releaseImplementation flipperNoOp
+    debugImplementation flipperNetworkPlugin
+    debugImplementation flipperFrescoPlugin
+
+    debugImplementation chucker
+    releaseImplementation chuckerNoop
+}
