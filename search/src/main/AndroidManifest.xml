@@ -1,0 +1,11 @@
+<manifest
+    xmlns:dist="http://schemas.android.com/apk/distribution"
+    package="com.islamversity.search">
+<!--    <dist:module-->
+<!--        dist:onDemand="true"-->
+<!--        dist:instant="false"-->
+<!--        dist:title="@string/search">-->
+<!--        <dist:fusing dist:include="true"/>-->
+<!--    </dist:module>-->
+</manifest>
+

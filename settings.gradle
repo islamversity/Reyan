@@ -1,0 +1,13 @@
+include ':app',
+        ':db',
+        ':base',
+        ':core',
+        ':domain',
+        ':search',
+        ':daggercore',
+        ':home',
+        ':navigation',
+        ':kotlintesthelpers',
+        ':view-component'
+
+enableFeaturePreview("GRADLE_METADATA")

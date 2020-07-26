@@ -1,0 +1,109 @@
+buildscript {
+    apply from: "dependencies.gradle"
+    apply from: "extras.gradle"
+    repositories {
+        google()
+        jcenter()
+        gradlePluginPortal()
+        mavenCentral()
+        maven {
+            url 'https://maven.fabric.io/public'
+        }
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:4.1.0-alpha08'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+        classpath 'com.google.gms:google-services:4.3.3'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.0'
+        classpath "com.github.ben-manes:gradle-versions-plugin:0.27.0"
+        classpath "com.squareup.sqldelight:gradle-plugin:${Versions.sqlDelight}"
+        classpath "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
+        classpath "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin:0.5.1"
+    }
+}
+
+plugins {
+    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC16")
+}
+
+apply plugin: "com.github.ben-manes.versions"
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+        maven {
+            url "https://maven.google.com"
+        }
+        maven {
+            url 'http://storage.googleapis.com/r8-releases/raw'
+        }
+        maven { url "https://dl.bintray.com/arrow-kt/arrow-kt/" }
+    }
+    apply plugin: 'io.gitlab.arturbosch.detekt'
+    dependencies {
+        detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:${Versions.detekt}"
+    }
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        jvmTarget "1.8"
+    }
+}
+
+detekt {
+    toolVersion = Versions.detekt
+    input = files("src/main/kotlin")
+    filters = ".*/resources/.*,.*/build/.*"
+    config = files("detekt.yml")
+}
+
+ext {
+    def values = loadValues()
+    releaseKeyStoreAddress = values.getProperty('releaseKeyStoreAddress')
+    releaseKeyStorePass = values.getProperty('releaseKeyStorePass')
+    releaseKeyAlias = values.getProperty('releaseKeyAlias')
+    releaseKeyPass = values.getProperty('releaseKeyPass')
+}
+
+def loadValues() {
+    Properties localProperties = new Properties()
+    if (project.rootProject.file('local.properties').exists()) {
+        localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
+    }
+    if (localProperties.getProperty('releaseKeyStoreAddress') != null) {
+        return localProperties
+    }
+
+    String releaseKeyStoreAddress = System.getenv("RELEASE_KEY_STORE_ADDRESS")
+    if (releaseKeyStoreAddress == null) {
+        releaseKeyStoreAddress = "../debug.keystore"
+    } else {
+        releaseKeyStoreAddress = System.getenv("HOME") + releaseKeyStoreAddress
+    }
+
+    String releaseKeyStorePass = System.getenv("BITRISEIO_ANDROID_KEYSTORE_PASSWORD")
+    if (releaseKeyStorePass == null) {
+        releaseKeyStorePass = "android"
+    }
+
+    String releaseKeyAlias = System.getenv("BITRISEIO_ANDROID_KEYSTORE_ALIAS")
+    if (releaseKeyAlias == null) {
+        releaseKeyAlias = "androiddebugkey"
+    }
+
+    String releaseKeyPass = System.getenv("BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
+    if (releaseKeyPass == null) {
+        releaseKeyPass = "android"
+    }
+
+    localProperties.setProperty('releaseKeyStoreAddress', releaseKeyStoreAddress)
+    localProperties.setProperty('releaseKeyStorePass', releaseKeyStorePass)
+    localProperties.setProperty('releaseKeyAlias', releaseKeyAlias)
+    localProperties.setProperty('releaseKeyPass', releaseKeyPass)
+
+    return localProperties
+}
