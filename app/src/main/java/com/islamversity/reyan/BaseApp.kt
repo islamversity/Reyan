@@ -44,6 +44,6 @@ abstract class BaseApp : Application(), CoreComponentProvider {
     }
 
     private fun initCrashlytics() {
-        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!DEBUG)
+//        FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(!DEBUG)
     }
 }
