@@ -6,19 +6,19 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
-//apply plugin: 'jacoco-android'
-
-//apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.firebase.crashlytics'
 
 apply from: "$rootDir/projectDependencyGraph.gradle"
 
+//apply plugin: 'jacoco-android'
 //check.dependsOn detekt
 
 android {
     compileSdkVersion 28
     defaultConfig {
         archivesBaseName = "Reyan"
-        applicationId "com.islamversity.Reyan"
+        applicationId "com.islamversity.reyan"
         minSdkVersion projectMinSdkVersion
         targetSdkVersion projectTargetSdkVersion
         versionCode 21000001
@@ -33,6 +33,12 @@ android {
             keyAlias "$releaseKeyAlias"
             keyPassword "$releaseKeyPass"
         }
+        debug {
+            storeFile file(debugKeyStoreAddress)
+            storePassword "$debugKeyStorePass"
+            keyAlias "$debugKeyAlias"
+            keyPassword "$debugKeyPass"
+        }
     }
     buildTypes {
         release {
@@ -44,20 +50,13 @@ android {
             signingConfig signingConfigs.release
         }
         debug {
-            ext.alwaysUpdateBuildId = false
+            applicationIdSuffix ".debug"
             debuggable isDebugDebuggable
             minifyEnabled isDebugMinify
             multiDexEnabled isDebugMultiDex
             proguardFiles(getDefaultProguardFile("proguard-android.txt"),
                     "$proguardFileAddress")
 //            testCoverageEnabled true
-        }
-    }
-    applicationVariants.all { variant ->
-        variant.outputs.all { output ->
-            def date = new Date()
-            def formattedDate = date.format('dd.MM.yy-HH.mm')
-            outputFileName = output.outputFile.name.replace(".apk", "-v${variant.versionName}-${formattedDate}.apk")
         }
     }
     compileOptions {
@@ -147,7 +146,6 @@ dependencies {
     implementation okHttpLogging
     implementation okHttp
 
-    //noinspection GradleDependency
     implementation compat
     implementation coreKts
 
@@ -163,11 +161,9 @@ dependencies {
     implementation frescoOkHttp
     implementation slider
 
-    implementation firebaseCore
     implementation firebaseAnalytics
-    implementation firebaseCrashlyticsSDK
+//    implementation firebaseCrashlyticsSDK
     implementation firebaseMessaging
-    implementation firebaseRemoteConfig
 
     debugImplementation leakCanary
 
@@ -180,9 +176,8 @@ dependencies {
     debugImplementation flipperFrescoPlugin
 
     debugImplementation stetho
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.5'
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.9'
 }
-//apply plugin: 'com.google.gms.google-services'
 
 
 //project.afterEvaluate {

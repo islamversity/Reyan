@@ -6,9 +6,6 @@ buildscript {
         jcenter()
         gradlePluginPortal()
         mavenCentral()
-        maven {
-            url 'https://maven.fabric.io/public'
-        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.0.1'
@@ -67,6 +64,14 @@ ext {
     releaseKeyStorePass = values.getProperty('releaseKeyStorePass')
     releaseKeyAlias = values.getProperty('releaseKeyAlias')
     releaseKeyPass = values.getProperty('releaseKeyPass')
+
+    //there must be a local.properties files, at least to fill in the debug values
+    debugKeyStoreAddress = values.getProperty('debugKeyStoreAddress')
+    debugKeyStorePass = values.getProperty('debugKeyStorePass')
+    debugKeyAlias = values.getProperty('debugKeyAlias')
+    debugKeyPass = values.getProperty('debugKeyPass')
+
+
 }
 
 def loadValues() {
@@ -80,24 +85,24 @@ def loadValues() {
 
     String releaseKeyStoreAddress = System.getenv("RELEASE_KEY_STORE_ADDRESS")
     if (releaseKeyStoreAddress == null) {
-        releaseKeyStoreAddress = "../debug.keystore"
+        releaseKeyStoreAddress = localProperties.getProperty('debugKeyStoreAddress')
     } else {
         releaseKeyStoreAddress = System.getenv("HOME") + releaseKeyStoreAddress
     }
 
     String releaseKeyStorePass = System.getenv("BITRISEIO_ANDROID_KEYSTORE_PASSWORD")
     if (releaseKeyStorePass == null) {
-        releaseKeyStorePass = "android"
+        releaseKeyStorePass = localProperties.getProperty('debugKeyStorePass')
     }
 
     String releaseKeyAlias = System.getenv("BITRISEIO_ANDROID_KEYSTORE_ALIAS")
     if (releaseKeyAlias == null) {
-        releaseKeyAlias = "androiddebugkey"
+        releaseKeyAlias = localProperties.getProperty('debugKeyAlias')
     }
 
     String releaseKeyPass = System.getenv("BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
     if (releaseKeyPass == null) {
-        releaseKeyPass = "android"
+        releaseKeyPass = localProperties.getProperty('debugKeyPass')
     }
 
     localProperties.setProperty('releaseKeyStoreAddress', releaseKeyStoreAddress)
