@@ -79,31 +79,18 @@ def loadValues() {
     if (project.rootProject.file('local.properties').exists()) {
         localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
     }
-    if (localProperties.getProperty('releaseKeyStoreAddress') != null) {
+
+    //if running on CI fill the variables using environment
+    if (System.getenv("BITRISE_BUILD_TYPE") != null) {
+        loadPropertiesFromCI(localProperties)
         return localProperties
     }
 
-    String releaseKeyStoreAddress = System.getenv("RELEASE_KEY_STORE_ADDRESS")
-    if (releaseKeyStoreAddress == null) {
-        releaseKeyStoreAddress = localProperties.getProperty('debugKeyStoreAddress')
-    } else {
-        releaseKeyStoreAddress = System.getenv("HOME") + releaseKeyStoreAddress
-    }
-
-    String releaseKeyStorePass = System.getenv("BITRISEIO_ANDROID_KEYSTORE_PASSWORD")
-    if (releaseKeyStorePass == null) {
-        releaseKeyStorePass = localProperties.getProperty('debugKeyStorePass')
-    }
-
-    String releaseKeyAlias = System.getenv("BITRISEIO_ANDROID_KEYSTORE_ALIAS")
-    if (releaseKeyAlias == null) {
-        releaseKeyAlias = localProperties.getProperty('debugKeyAlias')
-    }
-
-    String releaseKeyPass = System.getenv("BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
-    if (releaseKeyPass == null) {
-        releaseKeyPass = localProperties.getProperty('debugKeyPass')
-    }
+    //otherwise there should a local.properties file with debug values already set
+    String releaseKeyStoreAddress = localProperties.getProperty('debugKeyStoreAddress')
+    String releaseKeyStorePass = localProperties.getProperty('debugKeyStorePass')
+    String releaseKeyAlias = localProperties.getProperty('debugKeyAlias')
+    String releaseKeyPass = localProperties.getProperty('debugKeyPass')
 
     localProperties.setProperty('releaseKeyStoreAddress', releaseKeyStoreAddress)
     localProperties.setProperty('releaseKeyStorePass', releaseKeyStorePass)
@@ -111,4 +98,45 @@ def loadValues() {
     localProperties.setProperty('releaseKeyPass', releaseKeyPass)
 
     return localProperties
+}
+
+def loadPropertiesFromCI(localProperties) {
+    String buildType = System.getenv("BITRISE_BUILD_TYPE")
+
+    String keyStorePassEnvKey
+    String keyAliasEnvKey
+    String privateKeyPassEnvKey
+
+    if (buildType == "DEPLOY") {
+        keyStorePassEnvKey = "BITRISEIO_ANDROID_KEYSTORE_PASSWORD"
+        keyAliasEnvKey = "BITRISEIO_ANDROID_KEYSTORE_ALIAS"
+        privateKeyPassEnvKey = "BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD"
+    } else if (buildType == "PRIMARY") {
+        keyStorePassEnvKey = "DEBUG_KEYSTORE_PASSWORD"
+        keyAliasEnvKey = "DEBUG_KEY_ALIAS"
+        privateKeyPassEnvKey = "DEBUG_PRIVATE_KEY_PASSWORD"
+    } else if (buildType == "PULL_REQUEST") {
+        keyStorePassEnvKey = "PR_KEYSTORE_PASSWORD"
+        keyAliasEnvKey = "PR_KEY_ALIAS"
+        privateKeyPassEnvKey = "PR_PRIVATE_KEY_PASSWORD"
+    } else {
+        throw IllegalArgumentException("buildType is not recognized")
+    }
+
+    String keyStoreAddress = System.getenv("HOME") + System.getenv("KEY_STORE_ADDRESS")
+    String keyStorePassword = System.getenv(keyStorePassEnvKey)
+    String keyAliasPassword = System.getenv(keyAliasEnvKey)
+    String privateKeyPassword = System.getenv(privateKeyPassEnvKey)
+
+    localProperties.setProperty('releaseKeyStoreAddress', keyStoreAddress)
+    localProperties.setProperty('debugKeyStoreAddress', keyStoreAddress)
+
+    localProperties.setProperty('releaseKeyStorePass', keyStorePassword)
+    localProperties.setProperty('debugKeyStorePass', keyStorePassword)
+
+    localProperties.setProperty('releaseKeyAlias', keyAliasPassword)
+    localProperties.setProperty('debugKeyAlias', keyAliasPassword)
+
+    localProperties.setProperty('releaseKeyPass', privateKeyPassword)
+    localProperties.setProperty('debugKeyPass', privateKeyPassword)
 }
