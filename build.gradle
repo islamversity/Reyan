@@ -122,7 +122,6 @@ def loadPropertiesFromCI(localProperties) {
     } else {
         throw IllegalArgumentException("buildType is not recognized")
     }
-
     String keyStoreAddress = System.getenv("HOME") + System.getenv("KEY_STORE_ADDRESS")
     String keyStorePassword = System.getenv(keyStorePassEnvKey)
     String keyAliasPassword = System.getenv(keyAliasEnvKey)
