@@ -1,0 +1,30 @@
+getNameContent:
+SELECT * FROM name
+WHERE id = ?;
+
+getNameId:
+SELECT * FROM name
+WHERE content = ?;
+
+getNameByParentIdAndCalligraphy:
+SELECT * FROM name
+WHERE parentId = ?
+AND
+calligraphy IN (SELECT id FROM calligraphy WHERE code = ?);
+
+getAllNamesForParentId:
+SELECT * FROM name
+WHERE parentId = ?;
+
+getAllNames:
+SELECT * FROM name;
+
+insertName:
+INSERT OR REPLACE INTO name
+(id, parentId, calligraphy, content)
+SELECT ?, :parentId, :calligraphy, :content
+WHERE NOT EXISTS (SELECT * FROM name WHERE parentId = :parentId AND calligraphy = :calligraphy);
+
+getNameLastId:
+SELECT last_insert_rowid();
+

@@ -1,0 +1,16 @@
+getAllCalligraphies:
+SELECT * FROM calligraphy;
+
+getCalligraphyCode:
+SELECT * FROM calligraphy
+WHERE id = ?;
+
+getCalligraphyId:
+SELECT * FROM calligraphy
+WHERE code = ?;
+
+insertCalligraphy:
+INSERT OR REPLACE INTO calligraphy
+(id, languageCode, name, friendlyName, code)
+SELECT ?, :languageCode, :name, :friendlyName, ?
+WHERE NOT EXISTS (SELECT * FROM calligraphy WHERE languageCode = :languageCode AND name = :name);
