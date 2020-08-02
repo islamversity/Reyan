@@ -39,7 +39,7 @@ object Versions {
     val ktor = "1.3.2"
     val stately = "1.0.2"
     val multiplatformSettings = "0.6"
-    val coroutines = "1.3.5-native-mt"
+    val coroutines = "1.3.8"
     val flowBinding = "1.3.2"
     val koin = "3.0.0-alpha-9"
     val cocoapodsext = "0.6"
@@ -199,11 +199,13 @@ object Deps {
         val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
         val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
         val flowBinding = "ru.ldralighieri.corbind:corbind:${Versions.flowBinding}"
+        val turbine = "app.cash.turbine:turbine:0.1.1"
     }
 
     object SqlDelight {
         val gradle = "com.squareup.sqldelight:gradle-plugin:${Versions.sqlDelight}"
         val runtime = "com.squareup.sqldelight:runtime:${Versions.sqlDelight}"
+        val jvmTest = "com.squareup.sqldelight:sqlite-driver:${Versions.sqlDelight}"
         val runtimeJdk = "com.squareup.sqldelight:runtime-jvm:${Versions.sqlDelight}"
         val driverIos = "com.squareup.sqldelight:native-driver:${Versions.sqlDelight}"
         val driverAndroid = "com.squareup.sqldelight:android-driver:${Versions.sqlDelight}"
