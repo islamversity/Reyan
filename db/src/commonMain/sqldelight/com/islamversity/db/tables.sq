@@ -1,0 +1,111 @@
+import com.islamversity.db.model.AyaId;
+import com.islamversity.db.model.AyaContentId;
+import com.islamversity.db.model.CalligraphyId;
+import com.islamversity.db.model.NameId;
+import com.islamversity.db.model.SoraId;
+import com.islamversity.db.model.RawId;
+import com.islamversity.db.model.Calligraphy;
+import com.islamversity.db.model.LanguageCode;
+import com.islamversity.db.model.CalligraphyName;
+
+CREATE TABLE IF NOT EXISTS calligraphy (
+    rowId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    id TEXT AS CalligraphyId NOT NULL,
+    languageCode TEXT AS LanguageCode NOT NULL,
+    name TEXT AS CalligraphyName NOT NULL,
+    friendlyName TEXT NOT NULL,
+    code TEXT AS Calligraphy UNIQUE NOT NULL
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS calligraphy_id
+ON calligraphy (id);
+
+CREATE UNIQUE INDEX IF NOT EXISTS calligraphy_language_name
+ON calligraphy (languageCode, name);
+
+CREATE UNIQUE INDEX IF NOT EXISTS calligraphy_code
+ON calligraphy (code);
+
+CREATE VIEW IF NOT EXISTS no_rowId_calligraphy
+AS
+SELECT id, languageCode, name, friendlyName FROM calligraphy;
+
+CREATE TABLE IF NOT EXISTS name (
+    rowId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    id TEXT AS NameId NOT NULL,
+    parentId TEXT AS RawId NOT NULL,
+    calligraphy TEXT AS CalligraphyId NOT NULL,
+    content TEXT NOT NULL,
+    FOREIGN KEY(calligraphy) REFERENCES calligraphy(id)
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS name_id
+ON name (id);
+
+CREATE INDEX IF NOT EXISTS name_content
+ON name (content);
+
+CREATE UNIQUE INDEX IF NOT EXISTS name_parent_calligraphy
+ON name(parentId, calligraphy);
+
+CREATE VIEW IF NOT EXISTS no_rowId_name
+AS
+SELECT id, parentId, calligraphy, content FROM name;
+
+
+CREATE TABLE IF NOT EXISTS sora (
+    rowId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    id TEXT AS SoraId NOT NULL,
+    orderId INTEGER NOT NULL
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS sora_id
+ON sora (id);
+
+CREATE UNIQUE INDEX IF NOT EXISTS sora_orderId
+ON sora (orderId);
+
+CREATE VIEW IF NOT EXISTS no_rowId_sora
+AS
+SELECT id, orderId FROM sora;
+
+CREATE TABLE IF NOT EXISTS aya (
+    rowId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    id TEXT AS AyaId NOT NULL,
+    orderId INTEGER NOT NULL,
+    soraId TEXT AS SoraId NOT NULL,
+    FOREIGN KEY(soraId) REFERENCES sora(id)
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS aya_id
+ON aya (id);
+
+CREATE UNIQUE INDEX IF NOT EXISTS aya_sora_orderId
+ON aya(soraId, orderId);
+
+CREATE VIEW IF NOT EXISTS no_rowId_aya
+AS
+SELECT id, orderId, soraId FROM aya;
+
+CREATE TABLE IF NOT EXISTS aya_content (
+    rowId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    id TEXT AS AyaContentId NOT NULL,
+    ayaId TEXT AS AyaId NOT NULL,
+    calligraphy TEXT AS CalligraphyId NOT NULL,
+    content TEXT NOT NULL,
+    FOREIGN KEY(ayaId) REFERENCES aya(id),
+    FOREIGN KEY(calligraphy) REFERENCES calligraphy(id)
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS aya_ayaId_calligraphy
+ON aya_content (ayaId, calligraphy);
+
+CREATE UNIQUE INDEX IF NOT EXISTS aya_content_id
+ON aya_content (id);
+
+CREATE INDEX IF NOT EXISTS rowId_aya_content
+ON aya_content (content);
+
+CREATE VIEW IF NOT EXISTS no_rowId_aya_content
+AS
+SELECT id, ayaId, calligraphy, content FROM aya_content;

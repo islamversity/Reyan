@@ -32,4 +32,9 @@ kotlin {
         implementation(kotlin("stdlib", Versions.kotlin))
         implementation(Deps.Coroutines.jdk)
     }
+    sourceSets {
+        all {
+            languageSettings.enableLanguageFeature("InlineClasses")
+        }
+    }
 }
