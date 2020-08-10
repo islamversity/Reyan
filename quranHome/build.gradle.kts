@@ -23,6 +23,7 @@ kotlin {
             languageSettings.apply {
                 useExperimentalAnnotation("kotlin.ExperimentalStdlibApi")
                 useExperimentalAnnotation("kotlinx.coroutines.ExperimentalCoroutinesApi")
+                useExperimentalAnnotation("kotlin.time.ExperimentalTime")
             }
         }
     }

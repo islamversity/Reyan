@@ -7,9 +7,10 @@ import dagger.Module
     includes = [
         SurahListModule::class,
         JuzListModule::class,
-        SettingsModule::class,
+        SettingsRepoModule::class,
         MappersModule::class,
-        LocalDataSourceModule::class
+        LocalDataSourceModule::class,
+        SearchRepoModule::class
     ]
 )
 abstract class DomainModule

@@ -1,4 +1,4 @@
-package com.islamversity.domain.mappers
+package com.islamversity.domain.mapper
 
 import com.islamversity.core.Mapper
 import com.islamversity.domain.model.Calligraphy
@@ -7,7 +7,7 @@ import com.islamversity.domain.model.CalligraphyName
 import com.islamversity.domain.model.Language
 import com.islamversity.db.Calligraphy as CalligraphyEntity
 
-class CalligraphyEntityDomainMapper : Mapper<CalligraphyEntity, Calligraphy> {
+class CalligraphyEntityRepoMapper : Mapper<CalligraphyEntity, Calligraphy> {
     override fun map(item: CalligraphyEntity): Calligraphy =
         Calligraphy(
             CalligraphyId(item.id.id),

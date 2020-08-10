@@ -3,21 +3,28 @@ package com.islamversity.navigation
 import android.app.Application
 import android.os.Bundle
 import com.bluelinelabs.conductor.Controller
+import java.lang.reflect.Constructor
 
 object ControllerFactory {
 
     @JvmStatic
-    fun createController(controller: Screens, app: Application? = null): Controller =
-        app
-            ?.run {
-                controller.createWithContext(this)
-            }
-            ?: controller.createWithBundle()
-            ?: controller.createWithEmptyConstructor()
-
-    private fun Screens.createWithContext(app: Application): Controller? =
-        Class.forName(name)
+    fun createController(controller: Screens, app: Application? = null): Controller {
+        val constructors = Class.forName(controller.name)
             .constructors
+
+        return app
+            ?.run {
+                controller.createWithContext(constructors, this)
+            }
+            ?: controller.createWithBundle(constructors)
+            ?: createWithEmptyConstructor(constructors)
+    }
+
+    private fun Screens.createWithContext(
+        constructors: Array<Constructor<*>>,
+        app: Application
+    ): Controller? =
+        constructors
             .find { constructor ->
                 constructor
                     .parameterTypes
@@ -42,25 +49,27 @@ object ControllerFactory {
                 } as Controller
             }
 
-    private fun Screens.createWithBundle(): Controller? {
+    private fun Screens.createWithBundle(constructors: Array<Constructor<*>>): Controller? {
         if (extras == null) {
             return null
         }
+
 
         val extra = Bundle().apply {
             putByteArray(extras.first, extras.second)
         }
 
-        return Class.forName(name)
-            .constructors
-            .first()
-            .newInstance(extra) as Controller
+        return try {
+            constructors
+                .first()
+                .newInstance(extra) as Controller
+        } catch (e: IllegalArgumentException) {
+            null
+        }
     }
 
-
-    private fun Screens.createWithEmptyConstructor(): Controller =
-        Class.forName(name)
-            .constructors
+    private fun createWithEmptyConstructor(constructors: Array<Constructor<*>>): Controller =
+        constructors
             .first()
             .newInstance() as Controller
 }
