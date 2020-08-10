@@ -4,28 +4,28 @@ import com.islamversity.core.Mapper
 import com.islamversity.db.model.JuzEntity
 import com.islamversity.db.model.Surah
 import com.islamversity.domain.mapper.JuzDBRepoMapper
-import com.islamversity.domain.mapper.SurahDBRepoMapper
-import com.islamversity.domain.mappers.CalligraphyEntityDomainMapper
+import com.islamversity.domain.mapper.CalligraphyEntityRepoMapper
 import com.islamversity.domain.model.Calligraphy
 import com.islamversity.domain.model.JuzRepoModel
-import com.islamversity.domain.model.SurahRepoModel
-import com.islamversity.db.Calligraphy as CalligraphyEntity
 import dagger.Module
 import dagger.Provides
+import com.islamversity.domain.mapper.SurahEntityRepoMapper
+
+import com.islamversity.domain.model.surah.SurahRepoModel
+import com.islamversity.db.Calligraphy as CalligraphyEntity
 
 @Module
 object MappersModule {
 
-    @JvmStatic
     @Provides
-    fun provideCalligraphyEntityDomainMapper() : Mapper<CalligraphyEntity, Calligraphy> =
-        CalligraphyEntityDomainMapper()
+    @JvmStatic
+    fun provideJuzEntityRepoMapper(): Mapper<JuzEntity, JuzRepoModel> = JuzDBRepoMapper()
 
     @Provides
     @JvmStatic
-    fun bindSurahMapper(): Mapper<Surah, SurahRepoModel> = SurahDBRepoMapper()
+    fun provideCalligraphyEntityRepoMapper() : Mapper<CalligraphyEntity, Calligraphy> = CalligraphyEntityRepoMapper()
 
     @Provides
     @JvmStatic
-    fun bindJuzMapper(): Mapper<JuzEntity, JuzRepoModel> = JuzDBRepoMapper()
+    fun provideSurahEntityRepoMapper(): Mapper<Surah, SurahRepoModel> = SurahEntityRepoMapper()
 }

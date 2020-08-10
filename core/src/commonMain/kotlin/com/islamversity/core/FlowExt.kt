@@ -1,10 +1,27 @@
 package com.islamversity.core
 
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 import kotlin.reflect.KClass
+import kotlin.time.Duration
 
 typealias FlowBlock<T, U> = Flow<T>.() -> Flow<U>
+
+fun <T> Flow<T>.throttleFirst(windowDuration: Duration): Flow<T> {
+    var job: Job = Job().apply { complete() }
+    return onCompletion { job.cancel() }.run {
+        flow {
+            coroutineScope {
+                collect { value ->
+                    if (!job.isActive) {
+                        emit(value)
+                        job = launch { delay(windowDuration) }
+                    }
+                }
+            }
+        }
+    }
+}
 
 inline fun <reified R> Flow<*>.ofType() = transform {
     if (R::class.isInstance(it)) {
@@ -12,7 +29,7 @@ inline fun <reified R> Flow<*>.ofType() = transform {
     }
 }
 
-fun <T, U : Any> Flow<T>.notOfType(u : KClass<U>): Flow<T> =
+fun <T, U : Any> Flow<T>.notOfType(u: KClass<U>): Flow<T> =
     filter { !u.isInstance(it) }
 
 fun <T> suspendToFlow(block: suspend () -> T): Flow<T> = flow {
@@ -73,8 +90,8 @@ fun <T> delayedFlow(immediate: T, delayed: T): Flow<T> =
         emit(delayed)
     }
 
-fun <T, U> Flow<T>.zipPair(other : Flow<U>) : Flow<Pair<T, U>> =
+fun <T, U> Flow<T>.zipPair(other: Flow<U>): Flow<Pair<T, U>> =
     zip(other) { t, u -> t to u }
 
-fun <T, U> Flow<T>.zipPair(other : U) : Flow<Pair<T, U>> =
+fun <T, U> Flow<T>.zipPair(other: U): Flow<Pair<T, U>> =
     zip(flowOf(other)) { t, u -> t to u }

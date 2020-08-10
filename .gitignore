@@ -33,8 +33,18 @@ captures/
 
 # IntelliJ
 *.iml
+.idea/*
 .idea/
-
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/gradle.xml
+.idea/assetWizardSettings.xml
+.idea/dictionaries
+.idea/libraries
+.idea/caches
+.idea/artifacts
+.idea
+debugKeystore.jks
 # Keystore files
 # Uncomment the following line if you do not want to check your keystore files in.
 #*.jks
@@ -73,5 +83,4 @@ src/main/kotlin/com/
 src/androidTest/
 src/main/java/com/islamversity/reyan/home/
 src/test/
-/debugKeystore.jks
 /.idea/

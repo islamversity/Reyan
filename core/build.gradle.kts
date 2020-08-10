@@ -19,4 +19,14 @@ kotlin {
         implementation(kotlin("stdlib", Versions.kotlin))
         implementation(Deps.Coroutines.jdk)
     }
+
+    sourceSets {
+        all {
+            languageSettings.apply {
+                useExperimentalAnnotation("kotlinx.coroutines.ExperimentalCoroutinesApi")
+                useExperimentalAnnotation("kotlinx.serialization.InternalSerializationApi")
+                useExperimentalAnnotation("kotlin.time.ExperimentalTime")
+            }
+        }
+    }
 }

@@ -44,6 +44,7 @@ kotlin {
     }
     android()
     sourceSets["androidMain"].dependencies {
+
         implementation(kotlin("stdlib", Versions.kotlin))
 
         implementation(Deps.Android.Support.compat)
@@ -71,6 +72,7 @@ kotlin {
         implementation(Deps.Coroutines.jdk)
         implementation(Deps.Coroutines.flowBinding)
 
+        implementation(project(Deps.Modules.domain))
         implementation(project(Deps.Modules.daggerCore))
         implementation(project(Deps.Modules.base))
         implementation(project(Deps.Modules.navigation))

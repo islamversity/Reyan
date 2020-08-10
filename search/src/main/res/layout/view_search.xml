@@ -53,10 +53,14 @@
         android:id="@+id/searchList"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:paddingTop="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vSearchBack" />
+        app:layout_constraintTop_toBottomOf="@+id/vSearchBack"
+        tools:listitem="@layout/row_sura"
+        tools:itemCount="2"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
