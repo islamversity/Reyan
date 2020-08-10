@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.islamversity.base.CoroutineView
 import com.islamversity.core.mvi.MviPresenter
+import com.islamversity.core.throttleFirst
 import com.islamversity.daggercore.CoreComponent
 import com.islamversity.daggercore.lifecycleComponent
 import com.islamversity.daggercore.navigator.DaggerDefaultNavigationComponent
@@ -16,11 +17,11 @@ import com.islamversity.quran_home.di.DaggerQuranHomeComponent
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import org.jetbrains.annotations.NotNull
+import ru.ldralighieri.corbind.view.clicks
 import javax.inject.Inject
 import kotlin.time.DurationUnit
 import kotlin.time.ExperimentalTime
 import kotlin.time.toDuration
-
 
 class QuranHomeView : CoroutineView<QuranHomeViewBinding, QuranHomeState, QuranHomeIntent>() {
 
@@ -58,7 +59,7 @@ class QuranHomeView : CoroutineView<QuranHomeViewBinding, QuranHomeState, QuranH
         binding.rvSurah.withModelsAsync {
             state.surahList.forEach {
                 surahView {
-                    id(it.index)
+                    id(it.id.id)
                     surah(it)
                     listener {
                         intentChannel.offer(QuranHomeIntent.ItemClick(SurahRowActionModel(it)))
@@ -79,9 +80,18 @@ class QuranHomeView : CoroutineView<QuranHomeViewBinding, QuranHomeState, QuranH
         }
     }
 
-    @ExperimentalTime
-    override fun intents(): Flow<QuranHomeIntent> {
-        return listOf(flowOf(QuranHomeIntent.Initial), intentChannel.receiveAsFlow()).merge()
+    override fun intents(): Flow<QuranHomeIntent> =
+        listOf(
+            flowOf(QuranHomeIntent.Initial),
+            intentChannel.receiveAsFlow(),
+            searchClicks()
+        ).merge()
 
-    }
+    private fun searchClicks() : Flow<QuranHomeIntent> =
+        binding.imgSearch.clicks()
+            .throttleFirst(300.toDuration(DurationUnit.MILLISECONDS))
+            .map {
+                QuranHomeIntent.SearchClicked
+            }
+
 }

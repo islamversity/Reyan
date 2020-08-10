@@ -14,7 +14,8 @@ import dagger.Component
         CoreComponent::class],
     modules = [
         SearchModule::class,
-        NavigatorModule::class]
+        NavigatorModule::class
+    ]
 )
 interface SearchComponent {
     fun inject(view: SearchView)
@@ -23,7 +24,6 @@ interface SearchComponent {
     interface Builder {
         @BindsInstance
         fun bindRouter(router: Router): Builder
-
         fun coreComponent(coreComponent: CoreComponent): Builder
         fun build(): SearchComponent
     }

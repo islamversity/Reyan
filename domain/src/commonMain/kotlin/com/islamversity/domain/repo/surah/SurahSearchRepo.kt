@@ -10,17 +10,17 @@ import com.islamversity.domain.model.toDB
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
+interface SurahSearchRepo {
 
-interface SurahListRepo {
-    fun getAllSurah(calligraphy: Calligraphy): Flow<List<SurahRepoModel>>
+    fun search(query: String, calligraphy: Calligraphy): Flow<List<SurahRepoModel>>
 }
 
-class SurahListRepoImpl(
+class SurahSearchRepoImpl(
     private val dataSource: SurahLocalDataSource,
     private val mapper: Mapper<Surah, SurahRepoModel>
-) : SurahListRepo {
+) : SurahSearchRepo {
 
-    override fun getAllSurah(calligraphy: Calligraphy): Flow<List<SurahRepoModel>> =
+    override fun search(query: String, calligraphy: Calligraphy): Flow<List<SurahRepoModel>> =
         dataSource.observeAllSurahs(calligraphy.toDB())
             .map {
                 mapper.listMap(it)

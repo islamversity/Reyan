@@ -1,6 +1,7 @@
 package com.islamversity.search
 
 import com.islamversity.core.mvi.MviIntent
+import com.islamversity.search.model.SurahRowActionModel
 
 sealed class SearchIntent : MviIntent {
     object Initial : SearchIntent()
@@ -9,9 +10,7 @@ sealed class SearchIntent : MviIntent {
         val query: String
     ) : SearchIntent()
 
-    data class NextPage(
-        val query: String,
-        val totalItemsCount: Int,
-        val page: Int
+    data class ItemClick(
+        val action : SurahRowActionModel
     ) : SearchIntent()
 }

@@ -12,9 +12,9 @@ import com.russhwolf.settings.Settings
 import dagger.Module
 import dagger.Provides
 
-@Module
-object SettingsModule {
 
+@Module
+object SettingsRepoModule {
 
     @JvmStatic
     @Provides

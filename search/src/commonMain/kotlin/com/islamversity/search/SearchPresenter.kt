@@ -21,5 +21,13 @@ class SearchPresenter(
                 preState.copy(
                     base = BaseState.withError(result.err)
                 )
+
+            SearchResult.Loading -> preState.copy(
+                    base = BaseState.loading()
+                    )
+            is SearchResult.Data -> preState.copy(
+                base = BaseState.stable(),
+                items = result.items
+            )
         }
 }

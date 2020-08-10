@@ -37,6 +37,59 @@ abstract class BasePresenter<I : MviIntent, S : MviViewState, R : MviResult>(
     private val startState: S
 ) : MviPresenter<I, S> {
 
+
+    private val presenterJob = SupervisorJob()
+    protected val uiScope = CoroutineScope(Dispatchers.Main + presenterJob)
+    private val holder = StatePublisher(startState, uiScope)
+
+    private val reducer: suspend (S, R) -> S = { preState, result ->
+        reduce(preState, result)
+    }
+
+    private val intents = Channel<I>(Channel.UNLIMITED)
+    private val states: Flow<S> = compose()
+
+    private fun compose(): Flow<S> =
+        intents
+            .receiveAsFlow()
+            .publish(filterIntent())
+            .let(processor.actionProcessor)
+            .scan(startState, reducer)
+            .distinctUntilChanged()
+            .onEach {
+                logNewState(it)
+            }
+
+    init {
+        holder.start(states)
+    }
+
+    override fun processIntents(intents: I) {
+        if (!this.intents.isClosedForSend) {
+            this.intents.offer(intents)
+        }
+    }
+
+    override fun states(): Flow<S> = holder.receiveStates()
+
+    protected open suspend fun logNewState(newState: S) {
+
+    }
+
+    protected open fun filterIntent(): List<FlowBlock<I, I>> =
+        listOf<FlowBlock<I, I>>({
+            this
+        })
+
+    protected abstract fun reduce(preState: S, result: R): S
+
+    override fun close() {
+        intents.cancel()
+        holder.close()
+        presenterJob.cancel()
+    }
+
+
     class StatePublisher<S : MviViewState>(
         private var latestState: S,
         private val scope: CoroutineScope
@@ -90,55 +143,4 @@ abstract class BasePresenter<I : MviIntent, S : MviViewState, R : MviResult>(
         }
     }
 
-
-    private val presenterJob = SupervisorJob()
-    protected val uiScope = CoroutineScope(Dispatchers.Main + presenterJob)
-    private val holder = StatePublisher(startState, uiScope)
-
-    private val reducer: suspend (S, R) -> S = { preState, result ->
-        reduce(preState, result)
-    }
-
-    private val intents = Channel<I>(Channel.UNLIMITED)
-    private val states: Flow<S> = compose()
-
-    private fun compose(): Flow<S> =
-        intents
-            .receiveAsFlow()
-            .publish(filterIntent())
-            .let(processor.actionProcessor)
-            .scan(startState, reducer)
-            .distinctUntilChanged()
-            .onEach {
-                logNewState(it)
-            }
-
-    init {
-        holder.start(states)
-    }
-
-    override fun processIntents(intents: I) {
-        if (!this.intents.isClosedForSend) {
-            this.intents.offer(intents)
-        }
-    }
-
-    override fun states(): Flow<S> = holder.receiveStates()
-
-    protected open suspend fun logNewState(newState: S) {
-
-    }
-
-    protected open fun filterIntent(): List<FlowBlock<I, I>> =
-        listOf<FlowBlock<I, I>>({
-            this
-        })
-
-    protected abstract fun reduce(preState: S, result: R): S
-
-    override fun close() {
-        intents.cancel()
-        holder.close()
-        presenterJob.cancel()
-    }
 }

@@ -5,7 +5,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
-import com.airbnb.epoxy.AfterPropsSet
 import com.airbnb.epoxy.CallbackProp
 import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
@@ -30,7 +29,6 @@ class SurahView @JvmOverloads constructor(
         binding.index.text = surah.order.toString()
         binding.reveal.text = "(${surah.revealedType.name})"
     }
-
 
     @CallbackProp
     fun listener(listener: (() -> Unit)?) {

@@ -92,9 +92,6 @@ android {
         experimental = true
     }
 
-
-//    dynamicFeatures = [":search"]
-
     testOptions.unitTests.includeAndroidResources = true
     sourceSets {
         String sharedTestDir = 'src/sharedTest/java'
