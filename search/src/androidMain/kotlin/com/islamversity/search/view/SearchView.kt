@@ -77,8 +77,8 @@ class SearchView(
 
     override fun intents(): Flow<SearchIntent> =
         listOf(
-            searchQueryIntents(),
-            nextPageIntents()
+            searchQueryIntents()
+//            nextPageIntents()
         ).merge()
 
     private fun searchQueryIntents() =
@@ -92,20 +92,20 @@ class SearchView(
                 SearchIntent.Search(it)
             }
 
-    private fun nextPageIntents() =
-        binding.searchList.pages()
-            .combine(binding.edtSearch.textChangeEvents()
-                .filter { it.text.toString().length > 1 }
-            ) { first, second ->
-                first to second
-            }
-            .map {
-                SearchIntent.NextPage(
-                    it.second.text.toString(),
-                    it.first.totalItemsCount,
-                    it.first.page
-                )
-            }
+//    private fun nextPageIntents() =
+//        binding.searchList.pages()
+//            .combine(binding.edtSearch.textChangeEvents()
+//                .filter { it.text.toString().length > 1 }
+//            ) { first, second ->
+//                first to second
+//            }
+//            .map {
+//                SearchIntent.NextPage(
+//                    it.second.text.toString(),
+//                    it.first.totalItemsCount,
+//                    it.first.page
+//                )
+//            }
 
     private fun renderList(state: SearchState) {
         binding.searchList.withModelsAsync {

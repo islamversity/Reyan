@@ -21,5 +21,7 @@ class SearchPresenter(
                 preState.copy(
                     base = BaseState.withError(result.err)
                 )
+            SearchResult.Loading -> TODO()
+            is SearchResult.Data -> TODO()
         }
 }
