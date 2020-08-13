@@ -5,8 +5,18 @@ import com.islamversity.navigation.Navigator
 import com.islamversity.core.mvi.BaseProcessor
 
 class SearchProcessor(
-    navigator: Navigator
+    private val navigator: Navigator
 ) : BaseProcessor<SearchIntent, SearchResult>() {
 
     override fun transformers(): List<FlowBlock<SearchIntent, SearchResult>> = listOf()
+
+
+
+
+
+
+
+
+
+
 }
