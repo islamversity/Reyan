@@ -1,6 +1,7 @@
 package com.islamversity.search
 
 import com.islamversity.core.mvi.MviIntent
+import com.islamversity.domain.model.sora.SoraRowActionModel
 import com.islamversity.domain.model.sora.SoraUIModel
 
 sealed class SearchIntent : MviIntent {
@@ -18,6 +19,6 @@ sealed class SearchIntent : MviIntent {
 //    ) : SearchIntent()
 
     data class ItemClick(
-        val item : SoraUIModel
+        val item : SoraRowActionModel
     ) : SearchIntent()
 }

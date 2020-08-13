@@ -8,14 +8,18 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.islamversity.base.*
 import com.islamversity.core.mvi.MviPresenter
 import com.islamversity.daggercore.CoreComponent
+import com.islamversity.domain.model.sora.SoraRowActionModel
 import com.islamversity.navigation.fromByteArray
 import com.islamversity.navigation.model.SearchLocalModel
 import com.islamversity.search.SearchIntent
 import com.islamversity.search.SearchState
 import com.islamversity.search.databinding.ViewSearchBinding
 import com.islamversity.search.di.DaggerSearchComponent
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.map
 import kotlinx.coroutines.flow.*
 import ru.ldralighieri.corbind.widget.textChangeEvents
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import kotlin.time.DurationUnit
 import kotlin.time.toDuration
@@ -23,6 +27,8 @@ import kotlin.time.toDuration
 class SearchView(
     bundle: Bundle
 ) : CoroutineView<ViewSearchBinding, SearchState, SearchIntent>(bundle) {
+
+    private val itemClickChannel = Channel<SoraRowActionModel>()
 
     private val searchLocal: SearchLocalModel? =
         bundle
@@ -68,18 +74,13 @@ class SearchView(
         super.onDestroyView(view)
     }
 
-    override fun render(state: SearchState) {
-        renderLoading(state.base)
-        renderError(state.base)
-
-        renderList(state)
-    }
-
     override fun intents(): Flow<SearchIntent> =
         listOf(
-            searchQueryIntents()
+            searchQueryIntents(),
 //            nextPageIntents()
+            itemClickIntent()
         ).merge()
+
 
     private fun searchQueryIntents() =
         binding.edtSearch.textChangeEvents()
@@ -91,6 +92,13 @@ class SearchView(
             .map {
                 SearchIntent.Search(it)
             }
+
+    private fun itemClickIntent() = itemClickChannel
+        .receiveAsFlow()
+        .debounce(300.0.toDuration(DurationUnit.MILLISECONDS))
+        .map {
+            SearchIntent.ItemClick(it)
+        }
 
 //    private fun nextPageIntents() =
 //        binding.searchList.pages()
@@ -106,6 +114,13 @@ class SearchView(
 //                    it.first.page
 //                )
 //            }
+
+    override fun render(state: SearchState) {
+        renderLoading(state.base)
+        renderError(state.base)
+
+        renderList(state)
+    }
 
     private fun renderList(state: SearchState) {
         binding.searchList.withModelsAsync {
