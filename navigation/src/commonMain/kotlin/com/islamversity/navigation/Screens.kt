@@ -2,6 +2,8 @@ package com.islamversity.navigation
 
 import com.islamversity.navigation.model.SearchLocalModel
 import com.islamversity.navigation.model.SearchLocalModel.Sinker.EXTRA_SEARCH
+import com.islamversity.navigation.model.SoraDetailLocalModel
+import com.islamversity.navigation.model.SoraDetailLocalModel.Sinker.EXTRA_SORA_DETAIL
 
 sealed class Screens(
     val name: String,
@@ -30,5 +32,19 @@ sealed class Screens(
     ), Dynamic {
         override val module: String
             get() = "search"
+    }
+
+    class SoraDetail(
+        model: SoraDetailLocalModel,
+        pushAnimation: NavigationAnimation? = null,
+        popAnimation: NavigationAnimation? = null
+    ) : Screens(
+        "com.islamversity.sora_detail.view.SoraDetailView",
+        EXTRA_SORA_DETAIL to SoraDetailLocalModel.toByteArray(model),
+        pushAnimation,
+        popAnimation
+    ), Dynamic {
+        override val module: String
+            get() = "sora_detail"
     }
 }

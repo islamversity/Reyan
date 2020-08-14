@@ -100,21 +100,6 @@ class SearchView(
             SearchIntent.ItemClick(it)
         }
 
-//    private fun nextPageIntents() =
-//        binding.searchList.pages()
-//            .combine(binding.edtSearch.textChangeEvents()
-//                .filter { it.text.toString().length > 1 }
-//            ) { first, second ->
-//                first to second
-//            }
-//            .map {
-//                SearchIntent.NextPage(
-//                    it.second.text.toString(),
-//                    it.first.totalItemsCount,
-//                    it.first.page
-//                )
-//            }
-
     override fun render(state: SearchState) {
         renderLoading(state.base)
         renderError(state.base)

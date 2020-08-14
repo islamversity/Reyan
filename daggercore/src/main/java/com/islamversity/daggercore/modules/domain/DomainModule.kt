@@ -3,6 +3,8 @@ package com.islamversity.daggercore.modules.domain
 import dagger.Module
 
 @Module(
-    includes = []
+    includes = [
+        SearchRepoModule::class
+    ]
 )
 abstract class DomainModule

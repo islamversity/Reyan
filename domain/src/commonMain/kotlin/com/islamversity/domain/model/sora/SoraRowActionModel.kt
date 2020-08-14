@@ -1,3 +1,3 @@
 package com.islamversity.domain.model.sora
 
-class SoraRowActionModel(sm : SoraUIModel)
+class SoraRowActionModel(val selectedItem : SoraUIModel)
