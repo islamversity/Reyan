@@ -4,7 +4,8 @@ import dagger.Module
 
 @Module(
     includes = [
-        SearchRepoModule::class
+        SearchRepoModule::class,
+        MappersModule::class
     ]
 )
 abstract class DomainModule

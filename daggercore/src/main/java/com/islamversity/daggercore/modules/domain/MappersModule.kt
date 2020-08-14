@@ -8,6 +8,7 @@ import com.islamversity.domain.model.sora.SoraRepoModel
 import dagger.Module
 import dagger.Provides
 
+@Module
 object MappersModule {
 
     @Provides

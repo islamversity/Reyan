@@ -1,6 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="jar" name="db-jvm">
-    <output-path>$PROJECT_DIR$/db/build/libs</output-path>
-    <root id="archive" name="db-jvm.jar" />
-  </artifact>
-</component>

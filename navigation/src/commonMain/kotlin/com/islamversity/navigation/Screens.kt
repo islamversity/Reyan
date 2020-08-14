@@ -12,6 +12,9 @@ sealed class Screens(
     val popAnimation: NavigationAnimation? = null
 ) {
 
+    /**
+     * Screens supporting dynamic loading (Dynamic Feature Module) should implement this interface
+     */
     interface Dynamic {
         val module: String
     }
@@ -29,10 +32,7 @@ sealed class Screens(
         EXTRA_SEARCH to SearchLocalModel.toByteArray(model),
         pushAnimation,
         popAnimation
-    ), Dynamic {
-        override val module: String
-            get() = "search"
-    }
+    )
 
     class SoraDetail(
         model: SoraDetailLocalModel,
@@ -43,8 +43,5 @@ sealed class Screens(
         EXTRA_SORA_DETAIL to SoraDetailLocalModel.toByteArray(model),
         pushAnimation,
         popAnimation
-    ), Dynamic {
-        override val module: String
-            get() = "sora_detail"
-    }
+    )
 }

@@ -2,6 +2,7 @@ package com.islamversity.search
 
 import com.islamversity.core.FlowBlock
 import com.islamversity.core.Mapper
+import com.islamversity.core.listMap
 import com.islamversity.core.mvi.BaseProcessor
 import com.islamversity.core.ofType
 import com.islamversity.domain.model.sora.SoraRepoModel
@@ -41,7 +42,7 @@ class SearchProcessor(
             .map {
                 it.action.selectedItem
             }
-            .map{
+            .map {
                 SoraDetailLocalModel(
                     backTransitionName = it.name,
                     textTransitionName = it.name,

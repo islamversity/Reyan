@@ -1,6 +1,7 @@
 package com.islamversity.domain.repo
 
 import com.islamversity.core.Mapper
+import com.islamversity.core.listMap
 import com.islamversity.core.suspendToFlow
 import com.islamversity.db.datasource.SoraLocalDataSource
 import com.islamversity.db.model.SoraEntityModel
@@ -22,7 +23,6 @@ class SoraSearchRepoImpl(
 
         dataSource.searchSora(query)
             .map{
-                mapper.listMap(it ?: listOf())
+                mapper.listMap(it)
             }
 }
-
