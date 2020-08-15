@@ -1,0 +1,44 @@
+getAllAyaBySoraId:
+SELECT aya.rowId, aya.id, aya.orderId, aya_content.content AS aya FROM aya
+LEFT JOIN aya_content ON
+aya_content.ayaId = aya.id
+AND
+calligraphy IN (SELECT id FROM calligraphy WHERE code = :ayaCaligraphyCode)
+WHERE aya.soraId = :soraId;
+
+getAllAyaBySoraOrder:
+SELECT aya.rowId, aya.id, aya.orderId, aya_content.content AS aya FROM aya
+LEFT JOIN aya_content ON
+aya_content.ayaId = aya.id
+AND
+aya_content.calligraphy IN (SELECT id FROM calligraphy WHERE code = :ayaCaligraphyCode)
+WHERE aya.soraId IN (
+SELECT id FROM sora
+WHERE sora.orderId = :soraOrder
+);
+
+getAllAyaBySoraOrderAndCalligraphy:
+SELECT aya.rowId, aya.id, aya.orderId, aya_content.content AS aya FROM aya
+LEFT JOIN aya_content ON
+aya_content.ayaId = aya.id
+AND
+aya_content.calligraphy IN (SELECT id FROM calligraphy WHERE code = :ayaCaligraphyCode)
+WHERE aya.soraId IN (
+SELECT id FROM sora
+WHERE sora.orderId = :soraOrder
+);
+
+getAyaById:
+SELECT aya.rowId, aya.id, aya.orderId, aya.soraId , aya_content.content AS aya FROM aya
+LEFT JOIN aya_content ON
+aya_content.ayaId = aya.id
+AND
+aya_content.calligraphy IN (SELECT id FROM calligraphy WHERE code = :ayaCaligraphyCode)
+WHERE aya.id = :id;
+
+insertAya:
+INSERT OR REPLACE INTO aya
+(id, orderId, soraId) VALUES (
+?,
+?,
+?);

@@ -1,0 +1,23 @@
+getAyaContent:
+SELECT * FROM aya_content
+WHERE id = ?;
+
+getAyaContentId:
+SELECT * FROM aya_content
+WHERE content = ?;
+
+getAyaWithAyaIdAndCalligraphy:
+SELECT * FROM aya_content
+WHERE ayaId = :ayaId AND calligraphy = :calligraphy;
+
+getAllAyaContents:
+SELECT * FROM aya_content;
+
+insertAyaContent:
+INSERT OR REPLACE INTO aya_content
+(id, ayaId, calligraphy, content)
+SELECT ?, :ayaId, :calligraphy, :content
+WHERE NOT EXISTS (SELECT * FROM aya_content WHERE ayaId = :ayaId AND calligraphy = :calligraphy);
+
+getAyaContentLastId:
+SELECT last_insert_rowid();

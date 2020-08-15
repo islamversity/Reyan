@@ -1,3 +1,4 @@
+include ':db-test'
 include ':app',
         ':db',
         ':base',
