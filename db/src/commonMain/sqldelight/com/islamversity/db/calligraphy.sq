@@ -1,3 +1,45 @@
+import com.islamversity.db.model.CalligraphyId;
+import com.islamversity.db.model.Calligraphy;
+import com.islamversity.db.model.LanguageCode;
+import com.islamversity.db.model.CalligraphyName;
+
+CREATE TABLE IF NOT EXISTS calligraphy (
+    rowIndex INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    id TEXT AS CalligraphyId NOT NULL,
+    languageCode TEXT AS LanguageCode NOT NULL,
+    name TEXT AS CalligraphyName,
+    friendlyName TEXT NOT NULL,
+    code TEXT AS Calligraphy UNIQUE NOT NULL
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS calligraphy_id
+ON calligraphy (id);
+
+CREATE UNIQUE INDEX IF NOT EXISTS calligraphy_language_name
+ON calligraphy (languageCode, name);
+
+CREATE UNIQUE INDEX IF NOT EXISTS calligraphy_code
+ON calligraphy (code);
+
+CREATE VIEW IF NOT EXISTS no_rowId_calligraphy
+AS
+SELECT id, languageCode, name, friendlyName FROM calligraphy;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 getAllCalligraphies:
 SELECT * FROM calligraphy;
 

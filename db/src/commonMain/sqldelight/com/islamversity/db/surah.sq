@@ -1,0 +1,136 @@
+import com.islamversity.db.model.SurahId;
+import com.islamversity.db.model.RevealTypeId;
+import com.islamversity.db.model.RevealTypeFlag;
+import com.islamversity.db.model.SurahOrderId;
+
+CREATE TABLE IF NOT EXISTS surah (
+    rowIndex INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    id TEXT AS SurahId NOT NULL,
+    orderIndex INTEGER AS SurahOrderId NOT NULL,
+    revealType TEXT AS RevealTypeId NOT NULL,
+    revealFlag TEXT AS RevealTypeFlag NOT NULL,
+    FOREIGN KEY(revealType) REFERENCES surahRevealType(id)
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS surah_id
+ON surah (id);
+
+CREATE UNIQUE INDEX IF NOT EXISTS surah_orderIndex
+ON surah (orderIndex);
+
+CREATE VIEW IF NOT EXISTS no_rowId_surah
+AS
+SELECT id, orderIndex FROM surah;
+
+
+getAllSurah:
+SELECT
+surah.rowIndex,
+surah.id,
+surah.orderIndex,
+surahName.content AS name,
+revealType.content AS revealType,
+revealFlag
+FROM surah
+
+LEFT JOIN name surahName ON
+surahName.rowId = surah.id
+AND
+surahName.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode)
+
+LEFT JOIN name revealType ON
+revealType.rowId = surah.revealType
+AND
+revealType.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode);
+
+
+
+
+
+
+getSurahWithOrder:
+SELECT
+surah.rowIndex,
+surah.id,
+surah.orderIndex,
+surahName.content AS name,
+revealType.content AS revealType,
+revealFlag
+FROM surah
+
+LEFT JOIN name surahName ON
+surahName.rowId = surah.id
+AND
+surahName.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode)
+
+LEFT JOIN name revealType ON
+revealType.rowId = surah.revealType
+AND
+revealType.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode)
+
+WHERE surah.orderIndex = :soraOrder;
+
+
+
+
+
+
+
+getSurahWithId:
+SELECT
+surah.rowIndex,
+surah.id,
+surah.orderIndex,
+surahName.content AS name,
+revealType.content AS revealType,
+revealFlag
+FROM surah
+
+LEFT JOIN name surahName ON
+surahName.rowId = surah.id
+AND
+surahName.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode)
+
+LEFT JOIN name revealType ON
+revealType.rowId = surah.revealType
+AND
+revealType.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode)
+
+WHERE surah.id = :surahId;
+
+
+findSurahByName:
+SELECT
+surah.rowIndex,
+surah.id,
+surah.orderIndex,
+surahName.content AS name,
+revealType.content AS revealType,
+revealFlag
+FROM surah
+
+LEFT JOIN name surahName ON
+surahName.rowId = surah.id
+AND
+surahName.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode)
+
+LEFT JOIN name revealType ON
+revealType.rowId = surah.revealType
+AND
+revealType.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode)
+
+WHERE surah.id IN (SELECT rowId FROM name queryName WHERE queryName.content LIKE :query);
+
+
+
+
+
+insertSurah:
+INSERT OR REPLACE INTO surah
+(id, orderIndex, revealType, revealFlag)
+SELECT
+:id,
+:orderIndex,
+:revealType,
+:revealFlag
+WHERE NOT EXISTS (SELECT * FROM surah WHERE orderIndex = :orderIndex);

@@ -34,7 +34,7 @@ class NameLocalDataSourceImpl(
 ) : NameLocalDataSource {
     override suspend fun insertName(name: No_rowId_name, context: CoroutineContext) {
         withContext(context) {
-            queries.insertName(name.id, name.parentId, name.calligraphy, name.content)
+            queries.insertName(name.id, name.rowId, name.calligraphy, name.content)
         }
     }
 

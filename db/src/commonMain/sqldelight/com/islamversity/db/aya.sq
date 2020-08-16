@@ -1,44 +1,184 @@
+import com.islamversity.db.model.AyaId;
+import com.islamversity.db.model.SurahId;
+import com.islamversity.db.model.AyaOrderId;
+import com.islamversity.db.model.SajdahId;
+import com.islamversity.db.model.SajdahTypeFlag;
+import com.islamversity.db.model.Juz;
+import com.islamversity.db.model.Hizb;
+
+CREATE TABLE IF NOT EXISTS aya (
+    rowIndex INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    id TEXT AS AyaId NOT NULL,
+    orderIndex INTEGER AS AyaOrderId NOT NULL,
+    surahId TEXT AS SurahId NOT NULL,
+    sajdahId TEXT AS SajdahId NOT NULL,
+    sajdahType TEXT AS SajdahTypeFlag NOT NULL,
+    juzOrderIndex INTEGER AS Juz NOT NULL,
+    hizbOrderIndex INTEGER AS Hizb NOT NULL,
+    FOREIGN KEY(surahId) REFERENCES surah(id),
+    FOREIGN KEY(sajdahId) REFERENCES sajdah(id)
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS aya_id
+ON aya (id);
+
+CREATE UNIQUE INDEX IF NOT EXISTS aya_surah_orderIndex
+ON aya(surahId, orderIndex);
+
+CREATE VIEW IF NOT EXISTS no_rowId_aya
+AS
+SELECT id, orderIndex, surahId FROM aya;
+
+
+
+
+
+
+
 getAllAyaBySoraId:
-SELECT aya.rowId, aya.id, aya.orderId, aya_content.content AS aya FROM aya
-LEFT JOIN aya_content ON
-aya_content.ayaId = aya.id
+SELECT
+aya.rowIndex,
+aya.id,
+aya.orderIndex,
+aya.surahId,
+ayaContent.content AS ayaText,
+sajdahName.content,
+aya.sajdahType,
+aya.juzOrderIndex,
+aya.hizbOrderIndex FROM aya
+LEFT JOIN aya_content ayaContent ON
+ayaContent.ayaId = aya.id
 AND
-calligraphy IN (SELECT id FROM calligraphy WHERE code = :ayaCaligraphyCode)
-WHERE aya.soraId = :soraId;
+ayaContent.calligraphy IN (SELECT id FROM calligraphy WHERE code = :ayaCaligraphyCode)
+LEFT JOIN name sajdahName ON
+sajdahName.rowId = aya.sajdahId
+AND
+sajdahName.calligraphy IN (SELECT id FROM calligraphy WHERE code = :ayaCaligraphyCode)
+WHERE aya.surahId = :surahId;
+
+
+
+
+
 
 getAllAyaBySoraOrder:
-SELECT aya.rowId, aya.id, aya.orderId, aya_content.content AS aya FROM aya
-LEFT JOIN aya_content ON
-aya_content.ayaId = aya.id
+SELECT
+aya.rowIndex,
+aya.id,
+aya.orderIndex,
+aya.surahId,
+ayaContent.content AS ayaText,
+sajdahName.content,
+aya.sajdahType,
+aya.juzOrderIndex,
+aya.hizbOrderIndex FROM aya
+
+LEFT JOIN aya_content ayaContent ON
+ayaContent.ayaId = aya.id
 AND
-aya_content.calligraphy IN (SELECT id FROM calligraphy WHERE code = :ayaCaligraphyCode)
-WHERE aya.soraId IN (
-SELECT id FROM sora
-WHERE sora.orderId = :soraOrder
+ayaContent.calligraphy IN (SELECT id FROM calligraphy WHERE code = :ayaCaligraphyCode)
+
+LEFT JOIN name sajdahName ON
+sajdahName.rowId = aya.sajdahId
+AND
+sajdahName.calligraphy IN (SELECT id FROM calligraphy WHERE code = :ayaCaligraphyCode)
+
+WHERE aya.surahId IN (
+SELECT id FROM surah
+WHERE surah.orderIndex = :surahOrder
 );
+
+
+
 
 getAllAyaBySoraOrderAndCalligraphy:
-SELECT aya.rowId, aya.id, aya.orderId, aya_content.content AS aya FROM aya
+SELECT aya.id, aya.orderIndex, aya_content.content AS aya FROM aya
 LEFT JOIN aya_content ON
 aya_content.ayaId = aya.id
 AND
 aya_content.calligraphy IN (SELECT id FROM calligraphy WHERE code = :ayaCaligraphyCode)
-WHERE aya.soraId IN (
-SELECT id FROM sora
-WHERE sora.orderId = :soraOrder
+WHERE aya.surahId IN (
+SELECT id FROM surah
+WHERE surah.orderIndex = :surahOrder
 );
 
+
+
+
+
+
+
 getAyaById:
-SELECT aya.rowId, aya.id, aya.orderId, aya.soraId , aya_content.content AS aya FROM aya
-LEFT JOIN aya_content ON
-aya_content.ayaId = aya.id
+SELECT
+aya.rowIndex,
+aya.id,
+aya.orderIndex,
+aya.surahId,
+ayaContent.content AS ayaText,
+sajdahName.content,
+aya.sajdahType,
+aya.juzOrderIndex,
+aya.hizbOrderIndex FROM aya
+
+LEFT JOIN aya_content ayaContent ON
+ayaContent.ayaId = aya.id
 AND
-aya_content.calligraphy IN (SELECT id FROM calligraphy WHERE code = :ayaCaligraphyCode)
+ayaContent.calligraphy IN (SELECT id FROM calligraphy WHERE code = :ayaCaligraphyCode)
+
+LEFT JOIN name sajdahName ON
+sajdahName.rowId = aya.sajdahId
+AND
+sajdahName.calligraphy IN (SELECT id FROM calligraphy WHERE code = :ayaCaligraphyCode)
+
 WHERE aya.id = :id;
+
+
+
+
+
+
+
+
+getAllJuz:
+SELECT
+DISTINCT aya.juzOrderIndex,
+aya.id,
+aya.orderIndex,
+aya.surahId,
+aya.hizbOrderIndex
+FROM aya
+GROUP BY aya.juzOrderIndex
+ORDER BY aya.juzOrderIndex ASC;
+
+
+
+
+
+
+
+
+
+
+getAllHizb:
+SELECT
+DISTINCT aya.hizbOrderIndex,
+aya.id,
+aya.orderIndex,
+aya.surahId,
+aya.juzOrderIndex
+FROM aya
+GROUP BY aya.hizbOrderIndex
+ORDER BY aya.hizbOrderIndex ASC;
+
+
+
+
+
+
+
 
 insertAya:
 INSERT OR REPLACE INTO aya
-(id, orderId, soraId) VALUES (
-?,
-?,
-?);
+(id, orderIndex, surahId, sajdahId, sajdahType, juzOrderIndex, hizbOrderIndex)
+SELECT ?, :orderIndex, :surahId, ?, ?, ?, ?
+WHERE NOT EXISTS (SELECT * FROM aya WHERE surahId = :surahId AND orderIndex = :orderIndex);
