@@ -21,13 +21,13 @@ interface AyaLocalDataSource {
     )
 
     fun observeAllAyasForSora(
-        soraId: SoraId,
+        surahId: SurahId,
         calligraphy: Calligraphy,
         context: CoroutineContext = Dispatchers.Default
     ): Flow<List<Aya>>
 
     fun observeAllAyasForSora(
-        soraOrder: Long,
+        soraOrder: SurahOrderId,
         calligraphy: Calligraphy,
         context: CoroutineContext = Dispatchers.Default
     ): Flow<List<Aya>>
@@ -37,6 +37,10 @@ interface AyaLocalDataSource {
         calligraphy: Calligraphy,
         context: CoroutineContext = Dispatchers.Default
     ): Flow<Aya?>
+
+    fun getJuz(context: CoroutineContext = Dispatchers.Default): Flow<List<JuzEntity>>
+
+    fun getHizb(context: CoroutineContext = Dispatchers.Default): Flow<List<HizbEntity>>
 }
 
 class AyaLocalDataSourceImpl(
@@ -50,7 +54,7 @@ class AyaLocalDataSourceImpl(
     ) {
         withContext(context) {
             //order is important
-            ayaQueries.insertAya(aya.id, aya.order, aya.soraId)
+            ayaQueries.insertAya(aya.id, aya.order, aya.surahId, aya.sajdahId, aya.sajdahTypeFlag, aya.juz, aya.hizb)
             insertContent(aya.content)
         }
     }
@@ -63,7 +67,7 @@ class AyaLocalDataSourceImpl(
             ayaQueries.transaction {
                 ayas.forEach {
                     //order is important
-                    ayaQueries.insertAya(it.id, it.order, it.soraId)
+                    ayaQueries.insertAya(it.id, it.order, it.surahId, it.sajdahId, it.sajdahTypeFlag, it.juz, it.hizb)
                     insertContent(it.content)
                 }
             }
@@ -71,24 +75,20 @@ class AyaLocalDataSourceImpl(
     }
 
     override fun observeAllAyasForSora(
-        soraId: SoraId,
+        surahId: SurahId,
         calligraphy: Calligraphy,
         context: CoroutineContext
     ): Flow<List<Aya>> =
-        ayaQueries.getAllAyaBySoraId(calligraphy, soraId) { index, id, order, content ->
-            Aya.WithSoraId(index, id, order, content!!, soraId)
-        }
+        ayaQueries.getAllAyaBySoraId(calligraphy, surahId, ayaMapper)
             .asFlow()
             .mapToList(context)
 
     override fun observeAllAyasForSora(
-        soraOrder: Long,
+        soraOrder: SurahOrderId,
         calligraphy: Calligraphy,
         context: CoroutineContext
     ): Flow<List<Aya>> =
-        ayaQueries.getAllAyaBySoraOrder(calligraphy, soraOrder) { index, id, order, content ->
-            Aya.WithSoraOrderCalligraphy(index, id, order, content!!, soraOrder, calligraphy)
-        }
+        ayaQueries.getAllAyaBySoraOrder(calligraphy, soraOrder, ayaMapper)
             .asFlow()
             .mapToList()
 
@@ -97,14 +97,49 @@ class AyaLocalDataSourceImpl(
         calligraphy: Calligraphy,
         context: CoroutineContext
     ): Flow<Aya?> =
-        ayaQueries.getAyaById(calligraphy, entityId) { index, id, order, soraId, aya ->
-            Aya.WithSoraId(index, id, order, aya!!, soraId)
-        }
+        ayaQueries.getAyaById(calligraphy, entityId, ayaMapper)
             .asFlow()
             .mapToOneOrNull(context)
 
+    override fun getJuz(context: CoroutineContext): Flow<List<JuzEntity>> =
+        ayaQueries.getAllJuz { juzOrderIndex, id, orderIndex, surahId, hizbOrderIndex ->
+            JuzEntity(id, surahId, juzOrderIndex, hizbOrderIndex)
+        }
+            .asFlow()
+            .mapToList(context)
+
+    override fun getHizb(context: CoroutineContext): Flow<List<HizbEntity>> =
+        ayaQueries.getAllHizb { juzOrderIndex, id, orderIndex, surahId, hizbOrderIndex ->
+            HizbEntity(id, surahId, hizbOrderIndex, juzOrderIndex)
+        }
+            .asFlow()
+            .mapToList(context)
+
     private fun insertContent(ayaContent: No_rowId_aya_content) {
         ayaContentQueries.insertAyaContent(ayaContent.id, ayaContent.ayaId, ayaContent.calligraphy, ayaContent.content)
+    }
+
+    private val ayaMapper: (
+        rowIndex: Long,
+        id: AyaId,
+        orderIndex: AyaOrderId,
+        surahId: SurahId,
+        ayaText: String?,
+        sajdahText: String?,
+        sajdahTypeFlag: SajdahTypeFlag,
+        juzOrderIndex: Juz,
+        hizbOrderIndex: Hizb
+    ) -> Aya = { rowIndex, id, orderIndex, surahId, ayaText, sajdahText, sajdahType, juzOrderIndex, hizbOrderIndex ->
+        Aya(
+            rowIndex,
+            id,
+            orderIndex,
+            surahId,
+            ayaText!!,
+            SajdahType(sajdahType, sajdahText!!),
+            juzOrderIndex,
+            hizbOrderIndex
+        )
     }
 
 }

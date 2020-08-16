@@ -1,3 +1,35 @@
+import com.islamversity.db.model.AyaContentId;
+import com.islamversity.db.model.AyaId;
+import com.islamversity.db.model.CalligraphyId;
+
+CREATE TABLE IF NOT EXISTS aya_content (
+    rowIndex INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    id TEXT AS AyaContentId NOT NULL,
+    ayaId TEXT AS AyaId NOT NULL,
+    calligraphy TEXT AS CalligraphyId NOT NULL,
+    content TEXT NOT NULL,
+    FOREIGN KEY(ayaId) REFERENCES aya(id),
+    FOREIGN KEY(calligraphy) REFERENCES calligraphy(id)
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS aya_ayaId_calligraphy
+ON aya_content (ayaId, calligraphy);
+
+CREATE UNIQUE INDEX IF NOT EXISTS aya_content_id
+ON aya_content (id);
+
+CREATE INDEX IF NOT EXISTS rowId_aya_content
+ON aya_content (content);
+
+CREATE VIEW IF NOT EXISTS no_rowId_aya_content
+AS
+SELECT id, ayaId, calligraphy, content FROM aya_content;
+
+
+
+
+
+
 getAyaContent:
 SELECT * FROM aya_content
 WHERE id = ?;

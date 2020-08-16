@@ -36,15 +36,19 @@ data class Calligraphy(
     //en, fa, ar, ...
     internal val languageCode: LanguageCode,
     //uthmani, nastaligh
-    internal val calligraphyName: CalligraphyName
+    internal val calligraphyName: CalligraphyName?
 ) {
     init {
         languageCode.validated()
-        calligraphyName.validated()
+        calligraphyName?.validated()
     }
 
     val code: String
-        get() = "${languageCode.lang}_${calligraphyName.name}"
+        get() = if(calligraphyName != null){
+            "${languageCode.lang}_${calligraphyName.name}"
+        }else{
+            languageCode.lang
+        }
 
 
     companion object {
@@ -53,13 +57,17 @@ data class Calligraphy(
          */
         operator fun invoke(code: String): Calligraphy {
             val codes = code.split("_")
-            if (codes.size < 2) {
-                throw IllegalArgumentException("a calligraphy is created using 3 parts: languageCode, levelType, calligraphyCode")
+            if (codes.isEmpty()) {
+                throw IllegalArgumentException("a calligraphy is created using at least one parameter: LanguageCode")
             }
             val lang = LanguageCode(codes[0])
-            val calligraphy = CalligraphyName(codes[1])
+            val calligraphyName =  if(codes.size > 1){
+                CalligraphyName(codes[1])
+            }else{
+                null
+            }
 
-            return Calligraphy(lang, calligraphy)
+            return Calligraphy(lang, calligraphyName)
         }
     }
 }
