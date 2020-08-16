@@ -17,8 +17,10 @@ import io.ktor.client.statement.readText
 import io.ktor.http.URLProtocol
 import io.ktor.utils.io.charsets.Charsets
 import io.ktor.utils.io.core.use
+import kotlinx.serialization.InternalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.serializer
+import kotlin.reflect.typeOf
 
 @Suppress("MemberVisibilityCanBePrivate")
 sealed class Response<T>(
@@ -96,7 +98,7 @@ suspend inline fun <reified T> parseSuccess(code: Int, response: HttpResponse): 
 
     val text = response.responseToString()
 
-    val parsed = jsonSerializer.parse(serializer, text)
+    val parsed = jsonSerializer.decodeFromString(serializer, text)
 
     return Response.Success(code, parsed as T)
 }

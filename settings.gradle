@@ -1,10 +1,11 @@
-include ':db-test'
-include ':app',
+include ':db-test',
+        ':app',
         ':db',
         ':base',
         ':core',
         ':domain',
         ':search',
+        ':settings',
         ':daggercore',
         ':quranHome',
         ':navigation',

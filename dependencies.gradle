@@ -30,7 +30,6 @@ ext {
                     kotlinStd7 = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}",
                     kotlinStd8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}",
                     coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}",
-                    coroutinesCommon = "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:${Versions.coroutines}",
                     coroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}",
                     flowBinding = "ru.ldralighieri.corbind:corbind:${Versions.flowBinding}"
             ],
@@ -46,7 +45,8 @@ ext {
                     vectorDrawable = "androidx.vectordrawable:vectordrawable:${Versions.androidSupport}",
                     recyclerView = "androidx.recyclerview:recyclerview:${Versions.androidSupport}",
                     multiDex = "androidx.multidex:multidex:${Versions.multidex}",
-                    constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+                    constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}",
+                    sqlite = "androidx.sqlite:sqlite-framework:2.1.0"
             ],
 
             archComponent = [
@@ -127,6 +127,7 @@ ext {
                     quranHome = ":quranHome",
                     db = ":db",
                     viewComponent = ":view-component",
+                    settings = ":settings",
                     search = ":search"
             ],
             ktor = [

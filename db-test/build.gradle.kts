@@ -43,9 +43,10 @@ dependencies {
     androidTestImplementation(Deps.Android.Test.junitExt)
     androidTestImplementation(Deps.Android.Test.espressoCore)
     androidTestImplementation(Deps.Android.Test.espressoIntents)
-    androidTestImplementation(Deps.ktor.Serialization.jvm)
+    androidTestImplementation(Deps.Serialization.core)
     androidTestImplementation(Deps.SqlDelight.driverAndroid)
     androidTestImplementation(Deps.Coroutines.test)
     androidTestImplementation(Deps.Coroutines.turbine)
+    androidTestImplementation(Deps.Android.Support.sqlite)
 
 }

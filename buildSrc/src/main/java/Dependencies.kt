@@ -2,7 +2,7 @@ import org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDepen
 
 object Versions {
 
-    val kotlin = "1.3.72"
+    val kotlin = "1.4.0"
     val detekt = "1.10.0"
     val androidXTest = "1.1.0"
     val supportJunitExt = "1.0.0"
@@ -20,7 +20,7 @@ object Versions {
     val timber = "4.7.1"
     val fresco = "2.0.0"
     val conductor = "3.0.0-rc2"
-    val epoxy = "3.9.0"
+    val epoxy = "4.0.0-beta6"
     val flipper = "0.31.1"
     val chucker = "3.1.2"
     val soLoader = "0.5.1"
@@ -35,11 +35,12 @@ object Versions {
     val truth = "1.0.1"
 
 
-    val sqlDelight = "1.3.0"
-    val ktor = "1.3.2"
-    val stately = "1.0.2"
+    val sqlDelight = "1.4.3"
+    val ktor = "1.4.0"
+    val serialization = "1.0.0-RC"
+    val stately = "1.1.0"
     val multiplatformSettings = "0.6.1"
-    val coroutines = "1.3.8"
+    val coroutines = "1.3.9"
     val flowBinding = "1.3.2"
     val koin = "3.0.0-alpha-9"
     val cocoapodsext = "0.6"
@@ -71,6 +72,7 @@ object Deps {
             val multiDex = "androidx.multidex:multidex:${Versions.multidex}"
             val constraintLayout =
                 "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+            val sqlite = "androidx.sqlite:sqlite-framework:2.1.0"
         }
 
         object Jetpack {
@@ -166,6 +168,7 @@ object Deps {
         val core = ":core"
         val navigation = ":navigation"
         val quranHome = ":quranHome"
+        val settings = ":settings"
         val db = ":db"
         val viewComponent = ":view-component"
     }
@@ -194,13 +197,13 @@ object Deps {
     }
 
     object Coroutines {
-        val common = "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:${Versions.coroutines}"
+        val common = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
         val jdk = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
         val native = "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:${Versions.coroutines}"
         val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
         val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
         val flowBinding = "ru.ldralighieri.corbind:corbind:${Versions.flowBinding}"
-        val turbine = "app.cash.turbine:turbine:0.1.1"
+        val turbine = "app.cash.turbine:turbine:0.2.1"
     }
 
     object SqlDelight {
@@ -211,6 +214,11 @@ object Deps {
         val driverIos = "com.squareup.sqldelight:native-driver:${Versions.sqlDelight}"
         val driverAndroid = "com.squareup.sqldelight:android-driver:${Versions.sqlDelight}"
         val coroutines = "com.squareup.sqldelight:coroutines-extensions:${Versions.sqlDelight}"
+    }
+
+
+    object Serialization {
+        val core = "org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.serialization}"
     }
 
     object ktor {
@@ -236,8 +244,7 @@ object Deps {
         object Serialization {
             val common = "io.ktor:ktor-client-serialization:${Versions.ktor}"
             val jvm = "io.ktor:ktor-client-serialization-jvm:${Versions.ktor}"
-            val ios = "io.ktor:ktor-client-serialization-native:${Versions.ktor}"
-            val js = "io.ktor:ktor-client-serialization-js:${Versions.ktor}"
+            val native = "io.ktor:ktor-client-serialization-native:${Versions.ktor}"
         }
 
         object Logger {
