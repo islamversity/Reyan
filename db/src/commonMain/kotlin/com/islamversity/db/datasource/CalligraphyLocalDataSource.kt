@@ -77,14 +77,14 @@ class CalligraphyLocalDataSourceImpl(
 
     override fun getAllSurahNameCalligraphies(context: CoroutineContext): Flow<List<com.islamversity.db.Calligraphy>> =
         queries.getSurahNameCalligraphies { calligraphy, rowIndex, languageCode, name, friendlyName, code ->
-            CalligraphyEntity.Impl(rowIndex!!, calligraphy, languageCode!!, name, friendlyName!!, code!!)
+            CalligraphyEntity(rowIndex!!, calligraphy, languageCode!!, name, friendlyName!!, code!!)
         }
             .asFlow()
             .mapToList(context)
 
     override fun getAllAyaCalligraphies(context: CoroutineContext): Flow<List<com.islamversity.db.Calligraphy>> =
         queries.getAyaCalligraphies { calligraphy, rowIndex, languageCode, name, friendlyName, code ->
-            CalligraphyEntity.Impl(rowIndex!!, calligraphy, languageCode!!, name, friendlyName!!, code!!)
+            CalligraphyEntity(rowIndex!!, calligraphy, languageCode!!, name, friendlyName!!, code!!)
         }
             .asFlow()
             .mapToList(context)

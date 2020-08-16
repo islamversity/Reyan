@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/defaultBackground"
+    android:id="@+id/parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/surahSelectorCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#A8D6D6"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:layout_marginTop="10dp"
+        android:visibility="visible">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/surahSelector"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/surah_calligraphy"
+                android:textColor="#000"
+                android:paddingStart="15dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tvCurrentSurahName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/surahSelector"
+                android:paddingStart="30dp"
+                android:textSize="15sp"
+                tools:text="English" />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/ayaSelectorCardView"
+        android:layout_below="@id/surahSelectorCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#A8D6D6"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/calligraphySelector"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/aya_calligraphy"
+                android:textColor="#000"
+                android:paddingStart="15dp"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/currentAyaCalligraphyTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/calligraphySelector"
+                android:paddingStart="30dp"
+                android:textSize="15sp"
+                tools:text="Othman Taha" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.cardview.widget.CardView
+
+        android:id="@+id/fontSizeCardView"
+        android:layout_below="@id/ayaSelectorCardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="#A8D6D6"
+        android:paddingStart="15dp"
+        android:paddingEnd="5dp"
+        android:layout_marginTop="10dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textSizeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Font Size"
+                android:textColor="#000"
+                android:paddingStart="15dp"
+                android:textSize="20sp" />
+
+            <androidx.appcompat.widget.AppCompatSeekBar
+                android:id="@+id/skFontSize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textSizeTextView"
+                android:max="50"
+                />
+
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

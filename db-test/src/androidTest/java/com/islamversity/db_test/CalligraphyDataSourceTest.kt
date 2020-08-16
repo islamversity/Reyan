@@ -9,6 +9,8 @@ import com.islamversity.db.datasource.CalligraphyLocalDataSourceImpl
 import com.islamversity.db.model.*
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.squareup.sqldelight.db.SqlDriver
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
@@ -18,7 +20,6 @@ import org.junit.runner.RunWith
 import java.util.*
 import kotlin.time.ExperimentalTime
 
-/*
 @ExperimentalTime
 @RunWith(AndroidJUnit4::class)
 class CalligraphyDataSourceTest {
@@ -38,15 +39,8 @@ class CalligraphyDataSourceTest {
             InstrumentationRegistry.getInstrumentation().targetContext,
             dbName
         )
-        val calligraphyAdapter =
-            Calligraphy.Adapter(CalligraphyIdAdapter(), LanguageCodeAdapter(), CalligraphyNameAdapter(), CalligraphyAdapter())
-        val nameAdapter = Name.Adapter(NameIdAdapter(), RawIdAdapter(), CalligraphyIdAdapter())
-        val soraAdapter = Surah.Adapter(SurahIdAdapter(), SurahRevealTypeIdAdapter())
-        val ayaAdapter = Aya.Adapter(AyaIdAdapter(), SurahIdAdapter())
-        val ayaContentAdapter = Aya_content.Adapter(AyaContentIdAdapter(), AyaIdAdapter(), CalligraphyIdAdapter())
-        val surahTypeAdapter = SurahRevealType.Adapter(SurahRevealTypeIdAdapter(), RevealTypeFlagAdapter())
 
-        db = Main(driver, calligraphyAdapter, nameAdapter, soraAdapter, surahTypeAdapter, ayaAdapter, ayaContentAdapter)
+        db = createMainDB(driver)
 
         dataSource = CalligraphyLocalDataSourceImpl(db.calligraphyQueries)
     }
@@ -66,17 +60,24 @@ class CalligraphyDataSourceTest {
 
         dataSource.insertCalligraphy(id, lang, name, friendlyName, code, dispatcher)
 
-        dataSource.observeAllCallygraphies(dispatcher).test {
-            val list = expectItem()
-            val first = list.first()
+//        dataSource.observeAllCallygraphies(dispatcher).test {
+//            val list = expectItem()
+//            val first = list.first()
+//
+//            Truth.assertThat(first.id).isEqualTo(id)
+//            Truth.assertThat(first.languageCode).isEqualTo(lang)
+//            Truth.assertThat(first.name).isEqualTo(name)
+//            Truth.assertThat(first.friendlyName).isEqualTo(friendlyName)
+//
+//            cancelAndIgnoreRemainingEvents()
+//        }
+        val first = dataSource.observeAllCallygraphies(dispatcher).first().first()
 
-            Truth.assertThat(first.id).isEqualTo(id)
-            Truth.assertThat(first.languageCode).isEqualTo(lang)
-            Truth.assertThat(first.name).isEqualTo(name)
-            Truth.assertThat(first.friendlyName).isEqualTo(friendlyName)
+        Truth.assertThat(first.id).isEqualTo(id)
+        Truth.assertThat(first.languageCode).isEqualTo(lang)
+        Truth.assertThat(first.name).isEqualTo(name)
+        Truth.assertThat(first.friendlyName).isEqualTo(friendlyName)
 
-            cancelAndIgnoreRemainingEvents()
-        }
     }
 
     @Test
@@ -123,4 +124,3 @@ class CalligraphyDataSourceTest {
         }
     }
 }
-*/

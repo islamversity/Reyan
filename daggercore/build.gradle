@@ -18,6 +18,7 @@ dependencies {
 
     implementation conductor
     implementation compat
+    implementation sqlite
 
     implementation kotlinStd8
 

@@ -2,6 +2,7 @@ package com.islamversity.daggercore
 
 import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
 import com.islamversity.daggercore.modules.DatabaseModule
+import com.islamversity.daggercore.modules.domain.CalligraphyModule
 import com.islamversity.daggercore.modules.network.NetworkModule
 import com.islamversity.daggercore.scope.AppScope
 import com.islamversity.daggercore.modules.domain.DomainModule
@@ -14,6 +15,7 @@ import javax.inject.Singleton
     modules = [
         NetworkModule::class,
         DomainModule::class,
+        CalligraphyModule::class,
         DatabaseModule::class,
         FrescoModule::class]
 )

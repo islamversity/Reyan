@@ -27,8 +27,10 @@ sealed class Screens(
         EXTRA_SEARCH to SearchLocalModel.toByteArray(model),
         pushAnimation,
         popAnimation
-    ), Dynamic {
-        override val module: String
-            get() = "search"
-    }
+    )
+
+    class Settings(
+    ) : Screens(
+        "com.islamversity.settings.SettingsView"
+    )
 }

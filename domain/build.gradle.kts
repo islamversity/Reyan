@@ -11,7 +11,7 @@ kotlin {
         all {
             languageSettings.apply {
                 useExperimentalAnnotation("kotlinx.coroutines.ExperimentalCoroutinesApi")
-                useExperimentalAnnotation("kotlinx.serialization.ImplicitReflectionSerializer")
+                useExperimentalAnnotation("kotlinx.serialization.InternalSerializationApi")
             }
         }
     }
@@ -30,6 +30,7 @@ kotlin {
         implementation(project(Deps.Modules.db))
 
         implementation(Deps.Coroutines.common)
+        implementation(Deps.Serialization.core)
 
         implementation(Deps.ktor.Core.common)
         implementation(Deps.ktor.Json.common)

@@ -136,6 +136,7 @@ dependencies {
     implementation(project(quranHome))
     implementation(project(navigation))
     implementation(project(search))
+    implementation(project(settings))
 
     implementation viewModel
 
@@ -150,7 +151,7 @@ dependencies {
     implementation coreKts
 
     implementation coroutines
-    implementation coroutinesCommon
+    implementation coroutinesAndroid
 
     implementation conductor
 

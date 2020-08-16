@@ -4,13 +4,13 @@ import com.islamversity.core.*
 import com.islamversity.domain.model.servermodels.error.ErrorServerModel
 import io.ktor.utils.io.errors.IOException
 import kotlinx.coroutines.flow.*
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonException
 
 fun Response<*>.getErrorRepoModel(): ErrorHolder =
     (this as Response.Error)
         .runCatching {
-            Json.parse(ErrorServerModel.serializer(), body)
+            Json.decodeFromString(ErrorServerModel.serializer(), body)
         }
         .getOrNull()
         ?.let {
@@ -35,7 +35,6 @@ fun <T> createThrowableErrorResponse(throwable: Throwable): Response<T> {
 
 fun getThrowableErrorMessage(throwable: Throwable): String =
     when (throwable) {
-        is JsonException -> "Malformed Json"
         is IOException -> "Failed To read"
         is NoSuchElementException -> "No Element Found"
         is IllegalArgumentException -> "Wrong Argument"
