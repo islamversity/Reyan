@@ -6,6 +6,8 @@ import com.islamversity.daggercore.modules.DatabaseModule
 import com.islamversity.domain.repo.juz.JuzListRepo
 import com.islamversity.domain.repo.surah.GetSurahsUsecase
 import com.islamversity.domain.repo.surah.SurahListRepo
+import com.islamversity.domain.repo.CalligraphyRepo
+import com.islamversity.domain.repo.SettingRepo
 import dagger.BindsInstance
 import io.ktor.client.engine.HttpClientEngine
 import okhttp3.OkHttpClient
@@ -18,6 +20,9 @@ interface BaseComponent {
     fun httpClient() : HttpClientEngine
 
     fun frescoConfig(): ImagePipelineConfig
+
+    fun provideCalligraphyRepo(): CalligraphyRepo
+    fun provideSettingsRepo() : SettingRepo
 
     fun surahListRepo(): SurahListRepo
 

@@ -14,8 +14,8 @@ fun createMainDB(
         provideCalligraphyAdapter(),
         provideNameAdapter(),
         provideSajdahAdapter(),
-        provideSurahRevealTypeAdapter(),
-        provideSurahAdapter()
+        provideSurahAdapter(),
+        provideSurahRevealTypeAdapter()
     )
 
 

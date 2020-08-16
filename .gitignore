@@ -73,3 +73,5 @@ src/main/kotlin/com/
 src/androidTest/
 src/main/java/com/islamversity/reyan/home/
 src/test/
+/debugKeystore.jks
+/.idea/

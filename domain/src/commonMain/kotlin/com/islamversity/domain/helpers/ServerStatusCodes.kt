@@ -1,7 +1,6 @@
 package com.islamversity.domain.helpers
 
 import io.ktor.http.URLParserException
-import kotlinx.serialization.json.JsonException
 
 
 //server status codes
@@ -42,7 +41,7 @@ fun getStatusCodeErrorString(code: Int) = when (code) {
 }
 
 fun getServerErrorStatusCode(throwable: Throwable): Int = when (throwable) {
-    is JsonException -> STATUS_JSON_MALFORMED
+//    is JsonException -> STATUS_JSON_MALFORMED
 //    is TimeoutException -> STATUS_TIMEOUT
 //    is InterruptedIOException -> STATUS_INTERRUPTED
 //    is ConnectException -> STATUS_FAILED_CONNECT
