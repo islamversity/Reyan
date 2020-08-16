@@ -2,33 +2,59 @@ package com.islamversity.db.model
 
 import com.islamversity.db.No_rowId_aya_content
 
-sealed class Aya(
-    open val index: Long,
-    open val id: AyaId,
-    open val order: Long,
-    open val content: String
-) {
-    data class WithSoraId(
-        override val index: Long,
-        override val id: AyaId,
-        override val order: Long,
-        override val content: String,
-        val soraId: SoraId
-    ) : Aya(index, id, order, content)
-
-    data class WithSoraOrderCalligraphy(
-        override val index: Long,
-        override val id: AyaId,
-        override val order: Long,
-        override val content: String,
-        val soraOrder: Long,
-        val soraCalligraphy : Calligraphy
-    ) : Aya(index, id, order, content)
+data class Aya(
+    val index: Long,
+    val id: AyaId,
+    val order: AyaOrderId,
+    val surahId: SurahId,
+    val content: String,
+    val sajdahType : SajdahType,
+    val juz: Juz,
+    val hizb: Hizb
+){
+    init{
+        juz.validated()
+        hizb.validated()
+    }
 }
 
 data class AyaWithFullContent(
     val id: AyaId,
-    val soraId: SoraId,
-    val order: Long,
-    val content: No_rowId_aya_content
-)
+    val surahId: SurahId,
+    val order: AyaOrderId,
+    val content: No_rowId_aya_content,
+    val sajdahId: SajdahId,
+    val sajdahTypeFlag: SajdahTypeFlag,
+    val juz: Juz,
+    val hizb: Hizb
+){
+    init {
+        juz.validated()
+        hizb.validated()
+    }
+}
+
+private val juzRange = 1..30
+private val hizbRange = 1..120
+
+inline class Juz(val value: Long) {
+    val isValid: Boolean
+        get() = value in juzRange
+
+    fun validated(){
+        if(!isValid){
+            error("juz=$value is not a valid juz")
+        }
+    }
+}
+
+inline class Hizb(val value: Long){
+    val isValid: Boolean
+        get() = value in hizbRange
+
+    fun validated(){
+        if(!isValid){
+            error("hizb=$value is not a valid hizb")
+        }
+    }
+}
