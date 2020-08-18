@@ -84,7 +84,7 @@ class SearchView(
     private fun searchQueryIntents() =
         binding.edtSearch.textChangeEvents()
             .filter { it.text.toString().length > 1 }
-            .debounce(1.0.toDuration(DurationUnit.SECONDS))
+//            .debounce(1.0.toDuration(DurationUnit.SECONDS))
             .map {
                 it.text.toString()
             }

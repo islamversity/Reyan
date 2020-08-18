@@ -133,7 +133,7 @@ dependencies {
     implementation(project(domain))
     implementation(project(base))
     implementation(project(daggerCore))
-    implementation(project(home))
+    implementation(project(quranHome))
     implementation(project(navigation))
     implementation(project(search))
 

@@ -12,7 +12,7 @@ inline fun <reified R> Flow<*>.ofType() = transform {
     }
 }
 
-fun <T, U : Any> Flow<T>.noOfType(u : KClass<U>): Flow<T> =
+fun <T, U : Any> Flow<T>.notOfType(u : KClass<U>): Flow<T> =
     filter { !u.isInstance(it) }
 
 fun <T> suspendToFlow(block: suspend () -> T): Flow<T> = flow {
