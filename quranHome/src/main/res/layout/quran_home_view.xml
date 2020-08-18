@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    tools:background="@color/defaultBackground"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/ablHome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/low_margin"
+        app:cardElevation="0dp"
+        android:background="@android:color/transparent"
+        tools:ignore="UnusedAttribute">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/low_margin"
+            android:layout_marginVertical="@dimen/low_margin"
+            app:cardCornerRadius="12dp">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbarHome"
+                android:layout_width="match_parent"
+                android:layout_height="?android:attr/actionBarSize"
+                android:background="@color/blue_l1"
+                app:titleTextColor="@color/yellow">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/txtJuzTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:text="@string/juz"
+                        android:textColor="@color/yellow"
+                        android:textSize="@dimen/extra_large_text"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText,SpUsage" />
+
+                    <TextView
+                        android:id="@+id/txtIndexTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/surah_index"
+                        android:textColor="@color/yellow"
+                        android:textSize="@dimen/extra_large_text"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText,SpUsage" />
+
+                    <ImageView
+                        android:id="@+id/imgSearch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/min_margin"
+                        android:background="?android:attr/selectableItemBackground"
+                        android:contentDescription="@string/search"
+                        android:padding="@dimen/low_margin"
+                        app:srcCompat="@drawable/ic_search_black_24dp"
+                        app:tint="@color/yellow" />
+
+                </RelativeLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </androidx.cardview.widget.CardView>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:orientation="horizontal">
+
+        <com.islamversity.base.epoxyhelper.EpoxyAsyncRecyclerView
+            android:id="@+id/rvJuz"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:clipToPadding="false"
+            android:layout_marginLeft="8dp"
+            android:paddingTop="?android:attr/actionBarSize"
+            tools:itemCount="114"
+            tools:listitem="@layout/number_view" />
+
+        <com.islamversity.base.epoxyhelper.EpoxyAsyncRecyclerView
+            android:id="@+id/rvSurah"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:clipToPadding="false"
+            android:paddingTop="?android:attr/actionBarSize"
+            tools:itemCount="114"
+            tools:listitem="@layout/surah_view" />
+
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

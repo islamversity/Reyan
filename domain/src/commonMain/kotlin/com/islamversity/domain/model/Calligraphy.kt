@@ -24,3 +24,5 @@ data class Calligraphy(
     }
 }
 
+fun Calligraphy.toDB() = com.islamversity.db.model.Calligraphy(code.code)
+

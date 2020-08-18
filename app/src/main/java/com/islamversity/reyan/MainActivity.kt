@@ -15,7 +15,7 @@ import com.islamversity.daggercore.lifecycle.LifecycleComponentProvider
 import com.islamversity.daggercore.lifecycle.LifecycleEvent
 import com.islamversity.daggercore.lifecycle.Permissions
 import com.islamversity.daggercore.lifecycle.PermissionsResult
-import com.islamversity.home.view.HomeView
+import com.islamversity.quran_home.view.QuranHomeView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.channels.Channel
 import javax.inject.Inject
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity(),
         setContentView(R.layout.activity_main)
 
         router = Conductor.attachRouter(this, root, savedInstanceState)
-        val view = HomeView()
+        val view = QuranHomeView()
         if (!router.hasRootController()) {
             router.setRoot(RouterTransaction.with(view))
         }
