@@ -1,6 +1,7 @@
 package com.islamversity.db.model
 
 import com.islamversity.db.No_rowId_aya_content
+import com.squareup.sqldelight.ColumnAdapter
 
 data class Aya(
     val index: Long,
@@ -57,4 +58,20 @@ inline class Hizb(val value: Long){
             error("hizb=$value is not a valid hizb")
         }
     }
+}
+
+class JuzAdapter : ColumnAdapter<Juz, Long> {
+    override fun decode(databaseValue: Long): Juz =
+        Juz(databaseValue)
+
+    override fun encode(value: Juz): Long =
+        value.value
+}
+
+class HizbAdapter : ColumnAdapter<Hizb, Long> {
+    override fun decode(databaseValue: Long): Hizb =
+        Hizb(databaseValue)
+
+    override fun encode(value: Hizb): Long =
+        value.value
 }
