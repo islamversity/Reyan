@@ -40,8 +40,19 @@ private val rawIdAdapter = RawIdAdapter()
 private val surahRevealTypeIdAdapter = SurahRevealTypeIdAdapter()
 private val surahFlagAdapter = RevealTypeFlagAdapter()
 
+private val juzOrderAdapter = JuzAdapter()
+private val hizbOrderAdapter = HizbAdapter()
+
 private fun provideAyaAdapter() =
-    Aya.Adapter(ayaIdAdapter, ayaOrderIdAdapter, surahIdAdapter, sajdahIdAdapter, sajdahTypeFlagAdapter)
+    Aya.Adapter(
+        ayaIdAdapter,
+        ayaOrderIdAdapter,
+        surahIdAdapter,
+        sajdahIdAdapter,
+        sajdahTypeFlagAdapter,
+        juzOrderAdapter,
+        hizbOrderAdapter
+    )
 
 private fun provideAyaContentAdapter(): Aya_content.Adapter =
     Aya_content.Adapter(ayaContentIdAdapter, ayaIdAdapter, calligraphyIdAdapter)
