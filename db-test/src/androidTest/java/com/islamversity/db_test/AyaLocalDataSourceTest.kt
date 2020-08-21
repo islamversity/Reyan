@@ -5,9 +5,6 @@ import androidx.test.platform.app.InstrumentationRegistry
 import app.cash.turbine.test
 import com.google.common.truth.Truth
 import com.islamversity.db.*
-import com.islamversity.db.Aya
-import com.islamversity.db.Calligraphy
-import com.islamversity.db.Surah
 import com.islamversity.db.datasource.AyaLocalDataSourceImpl
 import com.islamversity.db.datasource.SurahLocalDataSourceImpl
 import com.islamversity.db.model.*
