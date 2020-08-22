@@ -1,0 +1,17 @@
+import com.islamversity.db.model.BismillahId;
+-- we will only have a single id just to reference in name table
+-- the name stays the same for every typeFlag so single id is enough
+CREATE TABLE bismillah (
+    rowIndex INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    id TEXT AS BismillahId NOT NULL
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS bismillah_id
+ON bismillah (id);
+
+
+insertBismillah:
+INSERT OR REPLACE INTO bismillah
+(id)
+SELECT :id
+WHERE COUNT(id) = 0;
