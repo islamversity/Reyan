@@ -10,6 +10,7 @@ fun createMainDB(
         driver,
         provideAyaAdapter(),
         provideAyaContentAdapter(),
+        provideBismillahAdapter(),
         provideCalligraphyAdapter(),
         provideNameAdapter(),
         provideSajdahAdapter(),
@@ -40,8 +41,12 @@ private val rawIdAdapter = RawIdAdapter()
 private val surahRevealTypeIdAdapter = SurahRevealTypeIdAdapter()
 private val surahFlagAdapter = RevealTypeFlagAdapter()
 
+private val bismillahTypeIdAdapter = BismillahIdAdapter()
+private val bismillahFlagAdapter = BismillahTypeFlagAdapter()
+
 private val juzOrderAdapter = JuzAdapter()
 private val hizbOrderAdapter = HizbAdapter()
+
 
 private fun provideAyaAdapter() =
     Aya.Adapter(
@@ -58,7 +63,12 @@ private fun provideAyaContentAdapter(): Aya_content.Adapter =
     Aya_content.Adapter(ayaContentIdAdapter, ayaIdAdapter, calligraphyIdAdapter)
 
 private fun provideCalligraphyAdapter(): Calligraphy.Adapter =
-    Calligraphy.Adapter(calligraphyIdAdapter, languageCodeAdapter, calligraphyNameAdapter, calligraphyAdapter)
+    Calligraphy.Adapter(
+        calligraphyIdAdapter,
+        languageCodeAdapter,
+        calligraphyNameAdapter,
+        calligraphyAdapter
+    )
 
 private fun provideSajdahAdapter(): Sajdah.Adapter =
     Sajdah.Adapter(sajdahIdAdapter, sajdahTypeFlagAdapter)
@@ -69,6 +79,16 @@ private fun provideNameAdapter(): Name.Adapter =
 private fun provideSurahRevealTypeAdapter(): SurahRevealType.Adapter =
     SurahRevealType.Adapter(surahRevealTypeIdAdapter, surahFlagAdapter)
 
+private fun provideBismillahAdapter() : Bismillah.Adapter =
+    Bismillah.Adapter(bismillahTypeIdAdapter)
+
 private fun provideSurahAdapter(): Surah.Adapter =
-    Surah.Adapter(surahIdAdapter, surahOrderIdAdapter, surahRevealTypeIdAdapter, surahFlagAdapter)
+    Surah.Adapter(
+        surahIdAdapter,
+        surahOrderIdAdapter,
+        surahRevealTypeIdAdapter,
+        surahFlagAdapter,
+        bismillahTypeIdAdapter,
+        bismillahFlagAdapter
+    )
 
