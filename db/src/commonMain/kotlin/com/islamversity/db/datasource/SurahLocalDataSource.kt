@@ -38,8 +38,8 @@ interface SurahLocalDataSource {
     ): Flow<Surah?>
 
     fun findSurahByName(
-        nameQuery : String,
-        calligraphy : Calligraphy,
+        nameQuery: String,
+        calligraphy: Calligraphy,
         context: CoroutineContext = Dispatchers.Default
     ): Flow<List<Surah>>
 }
@@ -52,7 +52,14 @@ class SurahLocalDataSourceImpl(
     override suspend fun insertSurah(surah: SurahWithFullName, context: CoroutineContext) {
         withContext(context) {
             //order is important
-            surahQueries.insertSurah(surah.id, surah.order, surah.revealTypeId, surah.revealTypeFlag)
+            surahQueries.insertSurah(
+                surah.id,
+                surah.order,
+                surah.revealTypeId,
+                surah.revealTypeFlag,
+                surah.bismillahId,
+                surah.bismillahTypeFlag
+            )
             insertName(surah.name)
         }
     }
@@ -65,7 +72,14 @@ class SurahLocalDataSourceImpl(
             surahQueries.transaction {
                 surahs.forEach {
                     //order is important
-                    surahQueries.insertSurah(it.id, it.order, it.revealTypeId, it.revealTypeFlag)
+                    surahQueries.insertSurah(
+                        it.id,
+                        it.order,
+                        it.revealTypeId,
+                        it.revealTypeFlag,
+                        it.bismillahId,
+                        it.bismillahTypeFlag
+                    )
                     insertName(it.name)
                 }
             }
@@ -80,7 +94,11 @@ class SurahLocalDataSourceImpl(
             .asFlow()
             .mapToList(context)
 
-    override fun getSurahWithId(entityId: SurahId, calligraphy: Calligraphy, context: CoroutineContext): Flow<Surah?> =
+    override fun getSurahWithId(
+        entityId: SurahId,
+        calligraphy: Calligraphy,
+        context: CoroutineContext
+    ): Flow<Surah?> =
         surahQueries.getSurahWithId(calligraphy, entityId, surahMapper)
             .asFlow()
             .mapToOneOrNull(context)
@@ -94,13 +112,22 @@ class SurahLocalDataSourceImpl(
             .asFlow()
             .mapToOneOrNull(context)
 
-    override fun findSurahByName(nameQuery: String, calligraphy: Calligraphy, context: CoroutineContext): Flow<List<Surah>> =
+    override fun findSurahByName(
+        nameQuery: String,
+        calligraphy: Calligraphy,
+        context: CoroutineContext
+    ): Flow<List<Surah>> =
         surahQueries.findSurahByName(calligraphy, nameQuery, surahMapper)
             .asFlow()
             .mapToList(context)
 
     private fun insertName(surahName: No_rowId_name) {
-        nameQueries.insertName(surahName.id, surahName.rowId, surahName.calligraphy, surahName.content)
+        nameQueries.insertName(
+            surahName.id,
+            surahName.rowId,
+            surahName.calligraphy,
+            surahName.content
+        )
     }
 
     private val surahMapper: (
@@ -109,8 +136,17 @@ class SurahLocalDataSourceImpl(
         orderIndex: SurahOrderId,
         name: String?,
         revealType: String?,
-        revealFlag: RevealTypeFlag
-    ) -> Surah = { index, id, orderIndex, name, revealType, revealFlag ->
-        Surah(index, id, orderIndex, name!!, RevealType.fromFLag(revealFlag, revealType!!))
+        revealFlag: RevealTypeFlag,
+        bismillah: String?,
+        bismillahFlag: BismillahTypeFlag
+    ) -> Surah = { index, id, orderIndex, name, revealType, revealFlag, bismillah, bismillahFlag ->
+        Surah(
+            index,
+            id,
+            orderIndex,
+            name!!,
+            RevealType.fromFLag(revealFlag, revealType!!),
+            BismillahType.fromFLag(bismillahFlag, bismillah!!)
+        )
     }
 }

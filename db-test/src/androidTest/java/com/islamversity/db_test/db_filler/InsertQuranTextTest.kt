@@ -9,12 +9,12 @@ import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.squareup.sqldelight.db.SqlDriver
 import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonObject
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.File
-import java.sql.RowId
 import java.util.*
 
 @ExperimentalStdlibApi
@@ -64,6 +64,28 @@ class InsertQuranTextTest {
                 it.read(bytes)
                 bytes.decodeToString()
             }
+        val quranDataObject = Json.parseJson(quranDataText)
+            .jsonObject
+            .getObject("quran")
+            .jsonObject
+
+        val quranArabicText = InstrumentationRegistry.getInstrumentation().targetContext
+            .resources
+            .assets
+            .open("quran-simple-one-line.json")
+            .use {
+                val bytes = ByteArray(it.available())
+                it.read(bytes)
+                bytes.decodeToString()
+            }
+
+
+        val surahQueries = db.surahQueries
+        val nameQueries = db.nameQueries
+        val bismillahQueries = db.bismillahQueries
+        val ayaQueries = db.ayaQueries
+        val ayaCQueries = db.ayaContentQueries
+
 
         val calligraphyArId = calligraphyArabicFiller()
         val calligraphyEnAngId = calligraphyEnglishAnglicizedFiller()
@@ -75,23 +97,162 @@ class InsertQuranTextTest {
         val medinanRevealId = RevealTypeId(getRandomUUID())
         db.suraRevealTypeQueries.insertType(meccaRevealId, RevealTypeFlag.MECCAN)
         db.suraRevealTypeQueries.insertType(medinanRevealId, RevealTypeFlag.MEDINAN)
+
         //sajdah types
         val sajdahObligatoryId = SajdahId(getRandomUUID())
         val sajdahRecommendedId = SajdahId(getRandomUUID())
         val sajdahNoneId = SajdahId(getRandomUUID())
-
         db.sajdahQueries.insertSajdah(sajdahObligatoryId, SajdahTypeFlag.OBLIGATORY)
         db.sajdahQueries.insertSajdah(sajdahRecommendedId, SajdahTypeFlag.RECOMMENDED)
         db.sajdahQueries.insertSajdah(sajdahNoneId, SajdahTypeFlag.NONE)
 
+        //bismillah types
+        val bismillahId = BismillahId(getRandomUUID())
+        bismillahQueries.insertBismillah(bismillahId)
 
-        //region sajdah and reveal type names
-        //inserting names
+        insertRevealAndSajdahTypeAndBismillahNames(
+            meccaRevealId,
+            calligraphyArId,
+            medinanRevealId,
+            sajdahObligatoryId,
+            sajdahRecommendedId,
+            sajdahNoneId,
+            bismillahId,
+            calligraphyEnAngId,
+            calligraphyEnId
+        )
+
+        val revealMap = mapOf(
+            RevealTypeFlag.MECCAN.raw.toLowerCase()
+                .capitalize() to (meccaRevealId to RevealTypeFlag.MECCAN),
+            RevealTypeFlag.MEDINAN.raw.toLowerCase()
+                .capitalize() to (medinanRevealId to RevealTypeFlag.MEDINAN)
+        )
+
+        val sajdaIdMap = mapOf(
+            SajdahTypeFlag.RECOMMENDED to sajdahRecommendedId,
+            SajdahTypeFlag.OBLIGATORY to sajdahObligatoryId,
+            SajdahTypeFlag.NONE to sajdahNoneId
+        )
+
+        val surahs = parseSurah(
+            quranDataObject,
+            revealMap,
+            bismillahId,
+            calligraphyArId,
+            calligraphyEnId,
+            calligraphyEnAngId
+        )
+
+        surahs.forEach {
+            surahQueries.insertSurah(
+                it.id,
+                it.orderIndex,
+                it.revealType,
+                it.revealFlag,
+                it.bismillahId,
+                it.bismillahTypeFlag
+            )
+            it.names.forEach { n ->
+                nameQueries.insertName(n.id, n.rowId, n.calligraphy, n.content)
+            }
+        }
+
+        val sajdaMap = getSajdaMap(quranDataObject, sajdaIdMap)
+
+        val juzMap = getJuzMap(quranDataObject)
+
+        val hizbMap = getHizbMap(quranDataObject)
+
+    }
+
+    private fun getSajdaMap(
+        quranDataObject: JsonObject,
+        sajdaIdMap: Map<SajdahTypeFlag, SajdahId>
+    ): Map<Pair<Long, Long>, Pair<SajdahId?, SajdahTypeFlag>> {
+        return mapOf(
+            *quranDataObject
+                .getObject("sajdas")
+                .jsonObject
+                .getArray("sajda")
+                .map {
+                    val sajda = it.jsonObject
+
+                    val key = sajda.getPrimitive("_sura").content.toLong() to
+                            sajda.getPrimitive("_aya").content.toLong()
+
+                    val flag = SajdahTypeFlag(sajda.getPrimitive("_type").content.toUpperCase())
+
+                    val value = sajdaIdMap[flag] to flag
+                    key to value
+                }
+                .toTypedArray()
+        )
+    }
+
+    private fun getJuzMap(quranDataObject: JsonObject) {
+        quranDataObject
+            .getObject("juzs")
+            .jsonObject
+            .getArray("juz")
+            .map {
+                val obj = it.jsonObject
+                val key = obj.getPrimitive("_sura").content.toLong() to
+                        obj.getPrimitive("_aya").content.toLong()
+
+                val value = Juz(obj.getPrimitive("_index").long)
+
+                key to value
+            }
+            .toTypedArray()
+            .let {
+                mapOf(*it)
+            }
+    }
+
+    private fun getHizbMap(quranDataObject: JsonObject) {
+        quranDataObject
+            .getObject("hizbs")
+            .jsonObject
+            .getArray("quarter")
+            .map {
+                val obj = it.jsonObject
+                val key = obj.getPrimitive("_sura").content.toLong() to
+                        obj.getPrimitive("_aya").content.toLong()
+
+                val value = Hizb(obj.getPrimitive("_index").long)
+
+                key to value
+            }
+            .toTypedArray()
+            .let {
+                mapOf(*it)
+            }
+    }
+
+    private fun insertRevealAndSajdahTypeAndBismillahNames(
+        meccaRevealId: RevealTypeId,
+        calligraphyArId: CalligraphyId,
+        medinanRevealId: RevealTypeId,
+        sajdahObligatoryId: SajdahId,
+        sajdahRecommendedId: SajdahId,
+        sajdahNoneId: SajdahId,
+        bismillahId: BismillahId,
+        calligraphyEnAngId: CalligraphyId,
+        calligraphyEnId: CalligraphyId
+    ) {
         val meccaArId = NameId(getRandomUUID())
         val medinanArId = NameId(getRandomUUID())
         db.nameQueries.insertName(meccaArId, meccaRevealId.raw, calligraphyArId, "مكية")
         db.nameQueries.insertName(medinanArId, medinanRevealId.raw, calligraphyArId, "مدنية")
 
+        val bismillahArId = NameId(getRandomUUID())
+        db.nameQueries.insertName(
+            bismillahArId,
+            bismillahId.raw,
+            calligraphyArId,
+            "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم"
+        )
 
         val obligatoryArId = NameId(getRandomUUID())
         val recommendedArId = NameId(getRandomUUID())
@@ -119,6 +280,14 @@ class InsertQuranTextTest {
             medinanRevealId.raw,
             calligraphyEnAngId,
             RevealTypeFlag.MEDINAN.raw.toLowerCase().capitalize()
+        )
+
+        val bismillahEnAngId = NameId(getRandomUUID())
+        db.nameQueries.insertName(
+            bismillahEnAngId,
+            bismillahId.raw,
+            calligraphyEnAngId,
+            "In the name of Allah, Most Gracious, Most Merciful."
         )
 
         val obligatoryEnAngId = NameId(getRandomUUID())
@@ -160,6 +329,14 @@ class InsertQuranTextTest {
             RevealTypeFlag.MEDINAN.raw.toLowerCase().capitalize()
         )
 
+        val bismillahEnId = NameId(getRandomUUID())
+        db.nameQueries.insertName(
+            bismillahEnId,
+            bismillahId.raw,
+            calligraphyEnId,
+            "In the name of Allah, Most Gracious, Most Merciful."
+        )
+
         val obligatoryEnId = NameId(getRandomUUID())
         val recommendedEnId = NameId(getRandomUUID())
         val noneEnId = NameId(getRandomUUID())
@@ -181,21 +358,17 @@ class InsertQuranTextTest {
             calligraphyArId,
             SajdahTypeFlag.NONE.raw.toLowerCase().capitalize()
         )
-//endregion
+    }
 
-        val revealMap = mapOf(
-            RevealTypeFlag.MECCAN.raw.toLowerCase()
-                .capitalize() to (meccaRevealId to RevealTypeFlag.MECCAN),
-            RevealTypeFlag.MEDINAN.raw.toLowerCase()
-                .capitalize() to (medinanRevealId to RevealTypeFlag.MEDINAN)
-        )
-        val surahQueries = db.surahQueries
-        val nameQueries = db.nameQueries
-
-        val surahs = Json.parseJson(quranDataText)
-            .jsonObject
-            .getObject("quran")
-            .jsonObject
+    private fun parseSurah(
+        quranDataObject: JsonObject,
+        revealMap: Map<String, Pair<RevealTypeId, RevealTypeFlag>>,
+        bismillahId: BismillahId,
+        calligraphyArId: CalligraphyId,
+        calligraphyEnId: CalligraphyId,
+        calligraphyEnAngId: CalligraphyId
+    ): List<S> {
+        return quranDataObject
             .getObject("suras")
             .jsonObject
             .getArray("sura")
@@ -203,6 +376,8 @@ class InsertQuranTextTest {
                 val sura = it.jsonObject
                 val r = revealMap[sura.getPrimitive("_type").content]!!
                 val surahId = SurahId(getRandomUUID())
+                val surahIndex = sura.getPrimitive("index").content.toLong()
+
                 val names = listOf(
                     N(
                         NameId(getRandomUUID()),
@@ -224,48 +399,24 @@ class InsertQuranTextTest {
                     )
                 )
 
+                val bismillahFlag = if (surahIndex == 1L) {
+                    BismillahTypeFlag.FIRST_AYA
+                } else if (surahIndex == 9L) {
+                    BismillahTypeFlag.NONE
+                } else {
+                    BismillahTypeFlag.NEEDED
+                }
 
                 S(
                     surahId,
-                    SurahOrderId(sura.getPrimitive("index").content.toLong()),
+                    SurahOrderId(surahIndex),
                     r.first,
                     r.second,
+                    bismillahId,
+                    bismillahFlag,
                     names
                 )
             }
-
-        surahs.forEach {
-            surahQueries.insertSurah(it.id, it.orderIndex, it.revealType, it.revealFlag)
-            it.names.forEach { n ->
-                nameQueries.insertName(n.id, n.rowId, n.calligraphy, n.content)
-            }
-        }
-
-
-//        val ayaParser = async {
-//            array.map {
-//                val obj = it.jsonObject
-//                val id = obj.getPrimitive("index").long
-//                obj.getArray("aya").map {
-//                    val ayaObj = it.jsonObject
-//
-//                    Aya.Impl(
-//                        ayaObj.getPrimitive("index").long,
-//                        ayaObj.getPrimitive("text").content,
-//                        id
-//                    )
-//                }
-//            }.flatten()
-//        }
-//
-//
-//        val array = Json.parseJson(quranText).jsonObject.getArray("quran")
-//        val soras: List<Sora.Impl> = array.map {
-//            val obj = it.jsonObject
-//            Sora.Impl(obj.getPrimitive("index").long, obj.getPrimitive("name").content)
-//        }
-
-
     }
 
     private fun calligraphyArabicFiller(): CalligraphyId {
@@ -325,12 +476,21 @@ data class S(
     val orderIndex: SurahOrderId,
     val revealType: RevealTypeId,
     val revealFlag: RevealTypeFlag,
+    val bismillahId: BismillahId,
+    val bismillahTypeFlag: BismillahTypeFlag,
     val names: List<N>
 )
 
 data class N(
     val id: NameId,
     val rowId: RawId,
+    val calligraphy: CalligraphyId,
+    val content: String
+)
+
+data class AC(
+    val id: AyaContentId,
+    val ayaId: AyaId,
     val calligraphy: CalligraphyId,
     val content: String
 )

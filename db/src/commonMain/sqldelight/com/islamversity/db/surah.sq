@@ -2,6 +2,8 @@ import com.islamversity.db.model.SurahId;
 import com.islamversity.db.model.RevealTypeId;
 import com.islamversity.db.model.RevealTypeFlag;
 import com.islamversity.db.model.SurahOrderId;
+import com.islamversity.db.model.BismillahId;
+import com.islamversity.db.model.BismillahTypeFlag;
 
 CREATE TABLE IF NOT EXISTS surah (
     rowIndex INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -9,6 +11,8 @@ CREATE TABLE IF NOT EXISTS surah (
     orderIndex INTEGER AS SurahOrderId NOT NULL,
     revealType TEXT AS RevealTypeId NOT NULL,
     revealFlag TEXT AS RevealTypeFlag NOT NULL,
+    bismillahId TEXT AS BismillahId NOT NULL,
+    bismillahFlag TEXT AS BismillahTypeFlag NOT NULL,
     FOREIGN KEY(revealType) REFERENCES surahRevealType(id)
 );
 
@@ -30,7 +34,9 @@ surah.id,
 surah.orderIndex,
 surahName.content AS name,
 revealType.content AS revealType,
-revealFlag
+revealFlag,
+bismillahType.content AS bismillahType,
+bismillahFlag
 FROM surah
 
 LEFT JOIN name surahName ON
@@ -41,7 +47,12 @@ surahName.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCod
 LEFT JOIN name revealType ON
 revealType.rowId = surah.revealType
 AND
-revealType.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode);
+revealType.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode)
+
+LEFT JOIN name bismillahType ON
+bismillahType.rowId = surah.bismillahId
+AND
+bismillahType.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode);
 
 
 
@@ -55,7 +66,9 @@ surah.id,
 surah.orderIndex,
 surahName.content AS name,
 revealType.content AS revealType,
-revealFlag
+revealFlag,
+bismillahType.content AS bismillahType,
+bismillahFlag
 FROM surah
 
 LEFT JOIN name surahName ON
@@ -67,6 +80,11 @@ LEFT JOIN name revealType ON
 revealType.rowId = surah.revealType
 AND
 revealType.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode)
+
+LEFT JOIN name bismillahType ON
+bismillahType.rowId = surah.bismillahId
+AND
+bismillahType.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode)
 
 WHERE surah.orderIndex = :soraOrder;
 
@@ -83,7 +101,9 @@ surah.id,
 surah.orderIndex,
 surahName.content AS name,
 revealType.content AS revealType,
-revealFlag
+revealFlag,
+bismillahType.content AS bismillahType,
+bismillahFlag
 FROM surah
 
 LEFT JOIN name surahName ON
@@ -95,6 +115,11 @@ LEFT JOIN name revealType ON
 revealType.rowId = surah.revealType
 AND
 revealType.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode)
+
+LEFT JOIN name bismillahType ON
+bismillahType.rowId = surah.bismillahId
+AND
+bismillahType.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode)
 
 WHERE surah.id = :surahId;
 
@@ -106,7 +131,9 @@ surah.id,
 surah.orderIndex,
 surahName.content AS name,
 revealType.content AS revealType,
-revealFlag
+revealFlag,
+bismillahType.content AS bismillahType,
+bismillahFlag
 FROM surah
 
 LEFT JOIN name surahName ON
@@ -119,6 +146,11 @@ revealType.rowId = surah.revealType
 AND
 revealType.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode)
 
+LEFT JOIN name bismillahType ON
+bismillahType.rowId = surah.bismillahId
+AND
+bismillahType.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode)
+
 WHERE surah.id IN (SELECT rowId FROM name queryName WHERE queryName.content LIKE :query);
 
 
@@ -127,10 +159,12 @@ WHERE surah.id IN (SELECT rowId FROM name queryName WHERE queryName.content LIKE
 
 insertSurah:
 INSERT OR REPLACE INTO surah
-(id, orderIndex, revealType, revealFlag)
+(id, orderIndex, revealType, revealFlag, bismillahId, bismillahFlag)
 SELECT
 :id,
 :orderIndex,
-:revealType,
-:revealFlag
+?,
+?,
+?,
+?
 WHERE NOT EXISTS (SELECT * FROM surah WHERE orderIndex = :orderIndex);
