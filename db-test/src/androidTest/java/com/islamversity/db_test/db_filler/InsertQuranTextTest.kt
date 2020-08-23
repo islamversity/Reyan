@@ -1,21 +1,62 @@
 package com.islamversity.db_test.db_filler
 
+import android.os.Build
+import android.util.Log
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.platform.app.InstrumentationRegistry
 import com.islamversity.db.*
 import com.islamversity.db.model.*
+import com.islamversity.db.model.Aya
 import com.islamversity.db.model.Calligraphy
+import com.squareup.sqldelight.Transacter
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.squareup.sqldelight.db.SqlDriver
 import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.json.content
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.io.File
 import java.util.*
+
+
+data class S(
+    val id: SurahId,
+    val orderIndex: SurahOrderId,
+    val revealType: RevealTypeId,
+    val revealFlag: RevealTypeFlag,
+    val bismillahTypeFlag: BismillahTypeFlag,
+    val names: List<N>
+)
+
+data class N(
+    val id: NameId,
+    val rowId: RawId,
+    val calligraphy: CalligraphyId,
+    val content: String
+)
+
+data class A(
+    val id: AyaId,
+    val orderIndex: AyaOrderId,
+    val surahId: SurahId,
+    val sajdahId: SajdahId,
+    val sajdahType: SajdahTypeFlag,
+    val juzOrderIndex: Juz,
+    val hizbOrderIndex: HizbQuarter,
+    val contents: List<AC>
+)
+
+data class AC(
+    val id: AyaContentId,
+    val ayaId: AyaId,
+    val calligraphy: CalligraphyId,
+    val content: String
+)
 
 @ExperimentalStdlibApi
 @RunWith(AndroidJUnit4::class)
@@ -27,10 +68,15 @@ class InsertQuranTextTest {
 
     @Before
     fun setup() {
-        val file = File(
-            InstrumentationRegistry.getInstrumentation().targetContext.getNoBackupFilesDir(),
-            dbName
-        )
+        val file = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            File(
+                InstrumentationRegistry.getInstrumentation().targetContext.noBackupFilesDir,
+                dbName
+            )
+        } else {
+            InstrumentationRegistry.getInstrumentation().targetContext.getDatabasePath(dbName)
+        }
+
         file.delete()
 
         driver = AndroidSqliteDriver(
@@ -69,7 +115,7 @@ class InsertQuranTextTest {
             .getObject("quran")
             .jsonObject
 
-        val quranArabicText = InstrumentationRegistry.getInstrumentation().targetContext
+        val quranArabicJson = InstrumentationRegistry.getInstrumentation().targetContext
             .resources
             .assets
             .open("quran-simple-one-line.json")
@@ -78,6 +124,39 @@ class InsertQuranTextTest {
                 it.read(bytes)
                 bytes.decodeToString()
             }
+            .let {
+                Json.parseJson(it)
+            }
+            .jsonObject
+            .getArray("quran")
+
+        val quranEnglishJson = InstrumentationRegistry.getInstrumentation().targetContext
+            .resources
+            .assets
+            .open("quran-en-Abdullah-Yusuf-Ali.json")
+            .use {
+                val bytes = ByteArray(it.available())
+                it.read(bytes)
+                bytes.decodeToString()
+            }
+            .let {
+                Json.parseJson(it)
+            }
+            .jsonArray
+
+        val quranFarsiJson = InstrumentationRegistry.getInstrumentation().targetContext
+            .resources
+            .assets
+            .open("quran-farsi-makarem.json")
+            .use {
+                val bytes = ByteArray(it.available())
+                it.read(bytes)
+                bytes.decodeToString()
+            }
+            .let {
+                Json.parseJson(it)
+            }
+            .jsonArray
 
 
         val surahQueries = db.surahQueries
@@ -110,14 +189,13 @@ class InsertQuranTextTest {
         val bismillahId = BismillahId(getRandomUUID())
         bismillahQueries.insertBismillah(bismillahId)
 
-        insertRevealAndSajdahTypeAndBismillahNames(
+        insertRevealAndSajdahTypeNames(
             meccaRevealId,
             calligraphyArId,
             medinanRevealId,
             sajdahObligatoryId,
             sajdahRecommendedId,
             sajdahNoneId,
-            bismillahId,
             calligraphyEnAngId,
             calligraphyEnId
         )
@@ -129,34 +207,21 @@ class InsertQuranTextTest {
                 .capitalize() to (medinanRevealId to RevealTypeFlag.MEDINAN)
         )
 
+        val surahs = parseSurah(
+            quranDataObject,
+            revealMap,
+            calligraphyArId,
+            calligraphyEnId,
+            calligraphyEnAngId
+        )
+
         val sajdaIdMap = mapOf(
             SajdahTypeFlag.RECOMMENDED to sajdahRecommendedId,
             SajdahTypeFlag.OBLIGATORY to sajdahObligatoryId,
             SajdahTypeFlag.NONE to sajdahNoneId
         )
 
-        val surahs = parseSurah(
-            quranDataObject,
-            revealMap,
-            bismillahId,
-            calligraphyArId,
-            calligraphyEnId,
-            calligraphyEnAngId
-        )
-
-        surahs.forEach {
-            surahQueries.insertSurah(
-                it.id,
-                it.orderIndex,
-                it.revealType,
-                it.revealFlag,
-                it.bismillahId,
-                it.bismillahTypeFlag
-            )
-            it.names.forEach { n ->
-                nameQueries.insertName(n.id, n.rowId, n.calligraphy, n.content)
-            }
-        }
+        val surahOrderIdMap = insertSurahAndGetIdMap(surahs, surahQueries, nameQueries)
 
         val sajdaMap = getSajdaMap(quranDataObject, sajdaIdMap)
 
@@ -164,12 +229,232 @@ class InsertQuranTextTest {
 
         val hizbMap = getHizbMap(quranDataObject)
 
+        //we should insert calligraphy (3 types)for aya_content and then bismillah
+        val arabicSimpleCall = CalligraphyId(getRandomUUID())
+        val arLang = LanguageCode("ar")
+        val arCallName = CalligraphyName("simple")
+        db.calligraphyQueries.insertCalligraphy(
+            arabicSimpleCall,
+            arLang,
+            arCallName,
+            "عربي-بسيط",
+            Calligraphy(arLang, arCallName)
+        )
+        val enAYACall = CalligraphyId(getRandomUUID())
+        val enAYALang = LanguageCode("en")
+        val enAYACallName = CalligraphyName("Abdullah Yusuf Ali")
+        db.calligraphyQueries.insertCalligraphy(
+            enAYACall,
+            enAYALang,
+            enAYACallName,
+            "English-Yusuf Ali",
+            Calligraphy(enAYALang, enAYACallName)
+        )
+        val faMakaremCall = CalligraphyId(getRandomUUID())
+        val faMakaremLang = LanguageCode("fa")
+        val faMakaremCallName = CalligraphyName("مکارم شیرازی")
+        db.calligraphyQueries.insertCalligraphy(
+            faMakaremCall,
+            faMakaremLang,
+            faMakaremCallName,
+            "فارسی-مکارم شیرازی",
+            Calligraphy(faMakaremLang, faMakaremCallName)
+        )
+
+        val ayaList = parseAya(
+            juzMap,
+            hizbMap,
+            quranArabicJson,
+            surahOrderIdMap,
+            quranEnglishJson,
+            quranFarsiJson,
+            sajdaMap,
+            sajdahNoneId,
+            arabicSimpleCall,
+            enAYACall,
+            faMakaremCall
+        )
+
+        nameQueries.insertName(
+            NameId(getRandomUUID()),
+            bismillahId.raw,
+            arabicSimpleCall,
+            "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ"
+        )
+        nameQueries.insertName(
+            NameId(getRandomUUID()),
+            bismillahId.raw,
+            faMakaremCall,
+            "به نام خداوند بخشنده بخشایشگر"
+        )
+        nameQueries.insertName(
+            NameId(getRandomUUID()),
+            bismillahId.raw,
+            enAYACall,
+            "In the name of Allah, Most Gracious, Most Merciful."
+        )
+
+        ayaQueries.transaction {
+            ayaList.forEach { a ->
+                ayaQueries.insertAya(
+                    a.id,
+                    a.orderIndex,
+                    a.surahId,
+                    a.sajdahId,
+                    a.sajdahType,
+                    a.juzOrderIndex,
+                    a.hizbOrderIndex
+                )
+
+                a.contents.forEach { ac ->
+                    ayaCQueries.insertAyaContent(
+                        ac.id,
+                        ac.ayaId,
+                        ac.calligraphy,
+                        ac.content
+                    )
+                }
+            }
+        }
+
+        val timeTaken = System.currentTimeMillis() - testBeginningTime
+
+        Log.d("Database filler", "total time took to fill the databse=$timeTaken")
+    }
+
+    private fun parseAya(
+        juzMap: Map<Pair<Long, Long>, Juz>,
+        hizbMap: Map<Pair<Long, Long>, HizbQuarter>,
+        quranArabicJson: JsonArray,
+        surahOrderIdMap: Map<SurahOrderId, SurahId>,
+        quranEnglishJson: JsonArray,
+        quranFarsiJson: JsonArray,
+        sajdaMap: Map<Pair<Long, Long>, Pair<SajdahId, SajdahTypeFlag>>,
+        sajdahNoneId: SajdahId,
+        arabicSimpleCall: CalligraphyId,
+        enAYACall: CalligraphyId,
+        faMakaremCall: CalligraphyId
+    ): ArrayList<A> {
+        var juz = juzMap[1L to 1L]!!
+        var hizb = hizbMap[1L to 1L]!!
+
+        val ayaList = ArrayList<A>()
+
+        for (i in 0 until quranArabicJson.size) {
+            val arSurah = quranArabicJson[i].jsonObject
+            val surahIndex = arSurah["index"]!!.content.toLong()
+            val surahId = surahIndex.let { surahOrderIdMap[SurahOrderId(it)] }!!
+
+            val enSurah = quranEnglishJson[i].jsonObject
+            val faSurah = quranFarsiJson[i].jsonObject
+
+            assert(surahIndex == enSurah["index"]!!.content.toLong())
+            assert(surahIndex == faSurah["index"]!!.content.toLong())
+
+            val enSurahAya = enSurah["aya"]!!.jsonArray
+
+            val faSurahAya = faSurah["aya"]!!.jsonArray
+
+            for (j in 0 until arSurah["aya"]!!.jsonArray.size) {
+                val arabicAya = quranArabicJson[i].jsonObject["aya"]!!.jsonArray[j].jsonObject
+
+                val ayaId = AyaId(getRandomUUID())
+                val orderIndex = AyaOrderId(arabicAya.getPrimitive("index").content.toLong())
+
+                val surahOrderAyaOrderPair = surahIndex to orderIndex.order
+
+                val sajdahIdType =
+                    sajdaMap[surahOrderAyaOrderPair] ?: sajdahNoneId to SajdahTypeFlag.NONE
+
+                juz = juzMap[surahOrderAyaOrderPair] ?: juz
+
+                hizb = hizbMap[surahOrderAyaOrderPair] ?: hizb
+
+
+                val arAyaContentId = AyaContentId(getRandomUUID())
+
+                val arabicC = AC(
+                    arAyaContentId,
+                    ayaId,
+                    arabicSimpleCall,
+                    arabicAya.getPrimitive("text").content
+                )
+
+                val enAya = enSurahAya[j].jsonObject
+                val enAyaContentId = AyaContentId(getRandomUUID())
+                assert(orderIndex.order == enAya.getPrimitive("index").content.toLong())
+
+
+                val englishC = AC(
+                    enAyaContentId,
+                    ayaId,
+                    enAYACall,
+                    enAya.getPrimitive("text").content
+                )
+
+                val faAya = faSurahAya[j].jsonObject
+                val faAyaContentId = AyaContentId(getRandomUUID())
+                assert(orderIndex.order == faAya.getPrimitive("index").content.toLong())
+
+
+                val farsiC = AC(
+                    faAyaContentId,
+                    ayaId,
+                    faMakaremCall,
+                    faAya.getPrimitive("text").content
+                )
+
+                val aya = A(
+                    ayaId,
+                    orderIndex,
+                    surahId,
+                    sajdahIdType.first,
+                    sajdahIdType.second,
+                    juz,
+                    hizb,
+                    listOf(
+                        arabicC
+                        , englishC,
+                        farsiC
+                    )
+                )
+
+                ayaList.add(aya)
+            }
+        }
+        return ayaList
+    }
+
+    private fun insertSurahAndGetIdMap(
+        surahs: List<S>,
+        surahQueries: SurahQueries,
+        nameQueries: NameQueries
+    ): Map<SurahOrderId, SurahId> {
+        val surahOrderIdMap = mutableMapOf<SurahOrderId, SurahId>()
+
+        surahQueries.transaction {
+            surahs.forEach {
+                surahOrderIdMap[it.orderIndex] = it.id
+                surahQueries.insertSurah(
+                    it.id,
+                    it.orderIndex,
+                    it.revealType,
+                    it.revealFlag,
+                    it.bismillahTypeFlag
+                )
+                it.names.forEach { n ->
+                    nameQueries.insertName(n.id, n.rowId, n.calligraphy, n.content)
+                }
+            }
+        }
+
+        return surahOrderIdMap
     }
 
     private fun getSajdaMap(
         quranDataObject: JsonObject,
         sajdaIdMap: Map<SajdahTypeFlag, SajdahId>
-    ): Map<Pair<Long, Long>, Pair<SajdahId?, SajdahTypeFlag>> {
+    ): Map<Pair<Long, Long>, Pair<SajdahId, SajdahTypeFlag>> {
         return mapOf(
             *quranDataObject
                 .getObject("sajdas")
@@ -183,14 +468,14 @@ class InsertQuranTextTest {
 
                     val flag = SajdahTypeFlag(sajda.getPrimitive("_type").content.toUpperCase())
 
-                    val value = sajdaIdMap[flag] to flag
+                    val value = sajdaIdMap[flag]!! to flag
                     key to value
                 }
                 .toTypedArray()
         )
     }
 
-    private fun getJuzMap(quranDataObject: JsonObject) {
+    private fun getJuzMap(quranDataObject: JsonObject) =
         quranDataObject
             .getObject("juzs")
             .jsonObject
@@ -208,9 +493,8 @@ class InsertQuranTextTest {
             .let {
                 mapOf(*it)
             }
-    }
 
-    private fun getHizbMap(quranDataObject: JsonObject) {
+    private fun getHizbMap(quranDataObject: JsonObject) =
         quranDataObject
             .getObject("hizbs")
             .jsonObject
@@ -220,7 +504,7 @@ class InsertQuranTextTest {
                 val key = obj.getPrimitive("_sura").content.toLong() to
                         obj.getPrimitive("_aya").content.toLong()
 
-                val value = Hizb(obj.getPrimitive("_index").long)
+                val value = HizbQuarter(obj.getPrimitive("_index").long)
 
                 key to value
             }
@@ -228,16 +512,15 @@ class InsertQuranTextTest {
             .let {
                 mapOf(*it)
             }
-    }
 
-    private fun insertRevealAndSajdahTypeAndBismillahNames(
+
+    private fun insertRevealAndSajdahTypeNames(
         meccaRevealId: RevealTypeId,
         calligraphyArId: CalligraphyId,
         medinanRevealId: RevealTypeId,
         sajdahObligatoryId: SajdahId,
         sajdahRecommendedId: SajdahId,
         sajdahNoneId: SajdahId,
-        bismillahId: BismillahId,
         calligraphyEnAngId: CalligraphyId,
         calligraphyEnId: CalligraphyId
     ) {
@@ -245,14 +528,6 @@ class InsertQuranTextTest {
         val medinanArId = NameId(getRandomUUID())
         db.nameQueries.insertName(meccaArId, meccaRevealId.raw, calligraphyArId, "مكية")
         db.nameQueries.insertName(medinanArId, medinanRevealId.raw, calligraphyArId, "مدنية")
-
-        val bismillahArId = NameId(getRandomUUID())
-        db.nameQueries.insertName(
-            bismillahArId,
-            bismillahId.raw,
-            calligraphyArId,
-            "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم"
-        )
 
         val obligatoryArId = NameId(getRandomUUID())
         val recommendedArId = NameId(getRandomUUID())
@@ -280,14 +555,6 @@ class InsertQuranTextTest {
             medinanRevealId.raw,
             calligraphyEnAngId,
             RevealTypeFlag.MEDINAN.raw.toLowerCase().capitalize()
-        )
-
-        val bismillahEnAngId = NameId(getRandomUUID())
-        db.nameQueries.insertName(
-            bismillahEnAngId,
-            bismillahId.raw,
-            calligraphyEnAngId,
-            "In the name of Allah, Most Gracious, Most Merciful."
         )
 
         val obligatoryEnAngId = NameId(getRandomUUID())
@@ -329,14 +596,6 @@ class InsertQuranTextTest {
             RevealTypeFlag.MEDINAN.raw.toLowerCase().capitalize()
         )
 
-        val bismillahEnId = NameId(getRandomUUID())
-        db.nameQueries.insertName(
-            bismillahEnId,
-            bismillahId.raw,
-            calligraphyEnId,
-            "In the name of Allah, Most Gracious, Most Merciful."
-        )
-
         val obligatoryEnId = NameId(getRandomUUID())
         val recommendedEnId = NameId(getRandomUUID())
         val noneEnId = NameId(getRandomUUID())
@@ -363,7 +622,6 @@ class InsertQuranTextTest {
     private fun parseSurah(
         quranDataObject: JsonObject,
         revealMap: Map<String, Pair<RevealTypeId, RevealTypeFlag>>,
-        bismillahId: BismillahId,
         calligraphyArId: CalligraphyId,
         calligraphyEnId: CalligraphyId,
         calligraphyEnAngId: CalligraphyId
@@ -376,7 +634,7 @@ class InsertQuranTextTest {
                 val sura = it.jsonObject
                 val r = revealMap[sura.getPrimitive("_type").content]!!
                 val surahId = SurahId(getRandomUUID())
-                val surahIndex = sura.getPrimitive("index").content.toLong()
+                val surahIndex = sura.getPrimitive("_index").content.toLong()
 
                 val names = listOf(
                     N(
@@ -412,7 +670,6 @@ class InsertQuranTextTest {
                     SurahOrderId(surahIndex),
                     r.first,
                     r.second,
-                    bismillahId,
                     bismillahFlag,
                     names
                 )
@@ -456,12 +713,12 @@ class InsertQuranTextTest {
         val languageCode = LanguageCode("en")
         val calligraphyName = CalligraphyName("Anglicized")
         val friendlyName = "English-Anglicized"
-        val calligraphy = Calligraphy(languageCode, null)
+        val calligraphy = Calligraphy(languageCode, calligraphyName)
 
         db.calligraphyQueries.insertCalligraphy(
             calligraphyId,
             languageCode,
-            null,
+            calligraphyName,
             friendlyName,
             calligraphy
         )
@@ -470,400 +727,3 @@ class InsertQuranTextTest {
 
     private fun getRandomUUID() = UUID.randomUUID().toString()
 }
-
-data class S(
-    val id: SurahId,
-    val orderIndex: SurahOrderId,
-    val revealType: RevealTypeId,
-    val revealFlag: RevealTypeFlag,
-    val bismillahId: BismillahId,
-    val bismillahTypeFlag: BismillahTypeFlag,
-    val names: List<N>
-)
-
-data class N(
-    val id: NameId,
-    val rowId: RawId,
-    val calligraphy: CalligraphyId,
-    val content: String
-)
-
-data class AC(
-    val id: AyaContentId,
-    val ayaId: AyaId,
-    val calligraphy: CalligraphyId,
-    val content: String
-)
-
-
-/*
-    @Test
-    fun parsingAndInsertingWithoutCoroutines() {
-        val testBeginningTime = System.currentTimeMillis()
-        val quranText = InstrumentationRegistry.getInstrumentation().targetContext
-            .resources
-            .assets
-            .open("quran-simple-one-line.json")
-            .use {
-                val bytes = ByteArray(it.available())
-                it.read(bytes)
-                bytes.decodeToString()
-            }
-
-
-        val array = Json.parseJson(quranText).jsonObject.getArray("quran")
-        val soras: List<Sora.Impl> = array.map {
-            val obj = it.jsonObject
-            Sora.Impl(obj.getPrimitive("index").long, obj.getPrimitive("name").content)
-        }
-
-        val ayaArray: List<Aya> = array.map {
-                val obj = it.jsonObject
-                val id = obj.getPrimitive("index").long
-                obj.getArray("aya").map {
-                    val ayaObj = it.jsonObject
-
-                    Aya.Impl(
-                        ayaObj.getPrimitive("index").long,
-                        ayaObj.getPrimitive("text").content,
-                        id
-                    )
-                }
-            }.flatten()
-
-
-        val queries = db.soraQueries
-        val transactionTime = measureTimeMillis {
-            queries.transaction {
-                soras.forEach {
-                    queries.insertSora(it.id, it.title)
-                }
-            }
-        }
-        Log.e("test tag", "time taken to insert using transaction= $transactionTime")
-
-        val ayaQueries = db.ayaQueries
-
-        val ayaTransactionTime = measureTimeMillis {
-            ayaQueries.transaction {
-                ayaArray.forEach {
-                    ayaQueries.insertAya(it.id, it.text, it.sora)
-                }
-            }
-        }
-
-        Log.e("test tag", "time taken to insert ayas using transaction= $ayaTransactionTime")
-
-        val timeTakenToRunTheTest = System.currentTimeMillis() - testBeginningTime
-
-
-        Log.e("test tag", "running test without coroutines=$timeTakenToRunTheTest")
-    }
-
-    @ExperimentalStdlibApi
-    @Test
-    fun zInsertingSoraNamesWithTransactionTest() {
-        val startingToParse = System.currentTimeMillis()
-        val quranText = InstrumentationRegistry.getInstrumentation().targetContext
-            .resources
-            .assets
-            .open("quran-simple-one-line.json")
-            .use {
-                val bytes = ByteArray(it.available())
-                it.read(bytes)
-                bytes.decodeToString()
-            }
-
-
-        val array = Json.parseJson(quranText).jsonObject.getArray("quran")
-        val soras: List<Sora.Impl> = array.map {
-            val obj = it.jsonObject
-            Sora.Impl(obj.getPrimitive("index").long, obj.getPrimitive("name").content)
-        }
-
-        val ayaArray: List<Aya> = array.map {
-            val obj = it.jsonObject
-            val id = obj.getPrimitive("index").long
-            obj.getArray("aya").map {
-                val ayaObj = it.jsonObject
-
-                Aya.Impl(
-                    ayaObj.getPrimitive("index").long,
-                    ayaObj.getPrimitive("text").content,
-                    id
-                )
-            }
-        }
-            .flatten()
-
-        val parsingAyas = System.currentTimeMillis() - startingToParse
-        Log.e("test tag", "time taken to parse all the ayas= $parsingAyas")
-
-        val queries = db.soraQueries
-        val transactionTime = measureTimeMillis {
-            queries.transaction {
-                soras.forEach {
-                    queries.insertSora(it.id, it.title)
-                }
-            }
-        }
-        Log.e("test tag", "time taken to insert using transaction= $transactionTime")
-
-
-        val insertTime = measureTimeMillis {
-            soras.forEach {
-                queries.insertSora(it.id, it.title)
-            }
-        }
-
-        Log.e("test tag", "time taken to insert= $insertTime")
-
-        val ayaQueries = db.ayaQueries
-
-
-        val ayaTransactionTime = measureTimeMillis {
-            ayaQueries.transaction {
-                ayaArray.forEach {
-                    ayaQueries.insertAya(it.id, it.text, it.sora)
-                }
-            }
-        }
-        Log.e("test tag", "time taken to insert ayas using transaction= $ayaTransactionTime")
-
-
-        val ayaInsertTime = measureTimeMillis {
-            ayaArray.forEach {
-                ayaQueries.insertAya(it.id, it.text, it.sora)
-            }
-        }
-
-        Log.e("test tag", "time taken to insert ayas= $ayaInsertTime")
-    }
-
-    @Test
-    fun insertingSoraNamesUsingTransactionTest(){
-        val startingToParse = System.currentTimeMillis()
-        val quranText = InstrumentationRegistry.getInstrumentation().targetContext
-            .resources
-            .assets
-            .open("quran-simple-one-line.json")
-            .use {
-                val bytes = ByteArray(it.available())
-                it.read(bytes)
-                bytes.decodeToString()
-            }
-
-
-        val array = Json.parseJson(quranText).jsonObject.getArray("quran")
-        val soras: List<Sora.Impl> = array.map {
-            val obj = it.jsonObject
-            Sora.Impl(obj.getPrimitive("index").long, obj.getPrimitive("name").content)
-        }
-
-        val ayaArray: List<Aya> = array.map {
-            val obj = it.jsonObject
-            val id = obj.getPrimitive("index").long
-            obj.getArray("aya").map {
-                val ayaObj = it.jsonObject
-
-                Aya.Impl(
-                    ayaObj.getPrimitive("index").long,
-                    ayaObj.getPrimitive("text").content,
-                    id
-                )
-            }
-        }
-            .flatten()
-
-        val parsingAyas = System.currentTimeMillis() - startingToParse
-        Log.e("test tag", "time taken to parse all the ayas= $parsingAyas")
-
-        val queries = db.soraQueries
-        val transactionTime = measureTimeMillis {
-            queries.transaction {
-                soras.forEach {
-                    queries.insertSora(it.id, it.title)
-                }
-            }
-        }
-        Log.e("test tag", "time taken to insert using transaction= $transactionTime")
-
-    }
-
-    @Test
-    fun insertingSoraNamesUsingNormalInsertTest(){
-        val startingToParse = System.currentTimeMillis()
-        val quranText = InstrumentationRegistry.getInstrumentation().targetContext
-            .resources
-            .assets
-            .open("quran-simple-one-line.json")
-            .use {
-                val bytes = ByteArray(it.available())
-                it.read(bytes)
-                bytes.decodeToString()
-            }
-
-
-        val array = Json.parseJson(quranText).jsonObject.getArray("quran")
-        val soras: List<Sora.Impl> = array.map {
-            val obj = it.jsonObject
-            Sora.Impl(obj.getPrimitive("index").long, obj.getPrimitive("name").content)
-        }
-
-        val ayaArray: List<Aya> = array.map {
-            val obj = it.jsonObject
-            val id = obj.getPrimitive("index").long
-            obj.getArray("aya").map {
-                val ayaObj = it.jsonObject
-
-                Aya.Impl(
-                    ayaObj.getPrimitive("index").long,
-                    ayaObj.getPrimitive("text").content,
-                    id
-                )
-            }
-        }
-            .flatten()
-
-        val parsingAyas = System.currentTimeMillis() - startingToParse
-        Log.e("test tag", "time taken to parse all the ayas= $parsingAyas")
-
-
-        val queries = db.soraQueries
-
-        val insertTime = measureTimeMillis {
-            soras.forEach {
-                queries.insertSora(it.id, it.title)
-            }
-        }
-
-
-        Log.e("test tag", "time taken to insert= $insertTime")
-
-    }
-
-    @Test
-    fun insertingAyasWithTransactionTest(){
-        val startingToParse = System.currentTimeMillis()
-        val quranText = InstrumentationRegistry.getInstrumentation().targetContext
-            .resources
-            .assets
-            .open("quran-simple-one-line.json")
-            .use {
-                val bytes = ByteArray(it.available())
-                it.read(bytes)
-                bytes.decodeToString()
-            }
-
-
-        val array = Json.parseJson(quranText).jsonObject.getArray("quran")
-        val soras: List<Sora.Impl> = array.map {
-            val obj = it.jsonObject
-            Sora.Impl(obj.getPrimitive("index").long, obj.getPrimitive("name").content)
-        }
-
-        val ayaArray: List<Aya> = array.map {
-            val obj = it.jsonObject
-            val id = obj.getPrimitive("index").long
-            obj.getArray("aya").map {
-                val ayaObj = it.jsonObject
-
-                Aya.Impl(
-                    ayaObj.getPrimitive("index").long,
-                    ayaObj.getPrimitive("text").content,
-                    id
-                )
-            }
-        }
-            .flatten()
-
-        val parsingAyas = System.currentTimeMillis() - startingToParse
-        Log.e("test tag", "time taken to parse all the ayas= $parsingAyas")
-
-        val queries = db.soraQueries
-        val transactionTime = measureTimeMillis {
-            queries.transaction {
-                soras.forEach {
-                    queries.insertSora(it.id, it.title)
-                }
-            }
-        }
-
-        Log.e("test tag", "time taken to insert using transaction= $transactionTime")
-
-        val ayaQueries = db.ayaQueries
-
-
-        val ayaTransactionTime = measureTimeMillis {
-            ayaQueries.transaction {
-                ayaArray.forEach {
-                    ayaQueries.insertAya(it.id, it.text, it.sora)
-                }
-            }
-        }
-        Log.e("test tag", "time taken to insert ayas using transaction= $ayaTransactionTime")
-    }
-
-
-    @Test
-    fun insertingAyasWithNormalInsertTest(){
-        val startingToParse = System.currentTimeMillis()
-        val quranText = InstrumentationRegistry.getInstrumentation().targetContext
-            .resources
-            .assets
-            .open("quran-simple-one-line.json")
-            .use {
-                val bytes = ByteArray(it.available())
-                it.read(bytes)
-                bytes.decodeToString()
-            }
-
-
-        val array = Json.parseJson(quranText).jsonObject.getArray("quran")
-        val soras: List<Sora.Impl> = array.map {
-            val obj = it.jsonObject
-            Sora.Impl(obj.getPrimitive("index").long, obj.getPrimitive("name").content)
-        }
-
-        val ayaArray: List<Aya> = array.map {
-            val obj = it.jsonObject
-            val id = obj.getPrimitive("index").long
-            obj.getArray("aya").map {
-                val ayaObj = it.jsonObject
-
-                Aya.Impl(
-                    ayaObj.getPrimitive("index").long,
-                    ayaObj.getPrimitive("text").content,
-                    id
-                )
-            }
-        }
-            .flatten()
-
-        val parsingAyas = System.currentTimeMillis() - startingToParse
-        Log.e("test tag", "time taken to parse all the ayas= $parsingAyas")
-
-        val queries = db.soraQueries
-        val transactionTime = measureTimeMillis {
-            queries.transaction {
-                soras.forEach {
-                    queries.insertSora(it.id, it.title)
-                }
-            }
-        }
-
-        Log.e("test tag", "time taken to insert using transaction= $transactionTime")
-
-        val ayaQueries = db.ayaQueries
-
-
-        val ayaInsertTime = measureTimeMillis {
-            ayaArray.forEach {
-                ayaQueries.insertAya(it.id, it.text, it.sora)
-            }
-        }
-
-        Log.e("test tag", "time taken to insert ayas= $ayaInsertTime")
-    }
-}
-*/

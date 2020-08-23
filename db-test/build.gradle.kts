@@ -33,6 +33,7 @@ android {
 
 dependencies {
     implementation(project(Deps.Modules.db))
+    implementation(project(Deps.Modules.daggerCore))
     implementation(Deps.Kotlin.jvmStd8)
     androidTestImplementation(Deps.Android.Test.junit)
     androidTestImplementation(Deps.Android.Test.truth)

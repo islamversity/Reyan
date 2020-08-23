@@ -4,5 +4,5 @@ data class HizbEntity(
     val ayaId : AyaId,
     val surahId: SurahId,
     val juz : Juz,
-    val hizb: Hizb
+    val hizb: HizbQuarter
 )

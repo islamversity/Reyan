@@ -128,7 +128,7 @@ class AyaLocalDataSourceImpl(
         sajdahText: String?,
         sajdahTypeFlag: SajdahTypeFlag,
         juzOrderIndex: Juz,
-        hizbOrderIndex: Hizb
+        hizbOrderIndex: HizbQuarter
     ) -> Aya = { rowIndex, id, orderIndex, surahId, ayaText, sajdahText, sajdahType, juzOrderIndex, hizbOrderIndex ->
         Aya(
             rowIndex,

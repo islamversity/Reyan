@@ -4,7 +4,7 @@ import com.islamversity.db.model.AyaOrderId;
 import com.islamversity.db.model.SajdahId;
 import com.islamversity.db.model.SajdahTypeFlag;
 import com.islamversity.db.model.Juz;
-import com.islamversity.db.model.Hizb;
+import com.islamversity.db.model.HizbQuarter;
 
 CREATE TABLE IF NOT EXISTS aya (
     rowIndex INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -14,7 +14,7 @@ CREATE TABLE IF NOT EXISTS aya (
     sajdahId TEXT AS SajdahId NOT NULL,
     sajdahType TEXT AS SajdahTypeFlag NOT NULL,
     juzOrderIndex INTEGER AS Juz NOT NULL,
-    hizbOrderIndex INTEGER AS Hizb NOT NULL,
+    hizbQuarterOrderIndex INTEGER AS HizbQuarter NOT NULL,
     FOREIGN KEY(surahId) REFERENCES surah(id),
     FOREIGN KEY(sajdahId) REFERENCES sajdah(id)
 );
@@ -45,7 +45,7 @@ ayaContent.content AS ayaText,
 sajdahName.content,
 aya.sajdahType,
 aya.juzOrderIndex,
-aya.hizbOrderIndex FROM aya
+aya.hizbQuarterOrderIndex FROM aya
 LEFT JOIN aya_content ayaContent ON
 ayaContent.ayaId = aya.id
 AND
@@ -71,7 +71,7 @@ ayaContent.content AS ayaText,
 sajdahName.content,
 aya.sajdahType,
 aya.juzOrderIndex,
-aya.hizbOrderIndex FROM aya
+aya.hizbQuarterOrderIndex FROM aya
 
 LEFT JOIN aya_content ayaContent ON
 ayaContent.ayaId = aya.id
@@ -118,7 +118,7 @@ ayaContent.content AS ayaText,
 sajdahName.content,
 aya.sajdahType,
 aya.juzOrderIndex,
-aya.hizbOrderIndex FROM aya
+aya.hizbQuarterOrderIndex FROM aya
 
 LEFT JOIN aya_content ayaContent ON
 ayaContent.ayaId = aya.id
@@ -145,7 +145,7 @@ DISTINCT aya.juzOrderIndex,
 aya.id,
 aya.orderIndex,
 aya.surahId,
-aya.hizbOrderIndex
+aya.hizbQuarterOrderIndex
 FROM aya
 GROUP BY aya.juzOrderIndex
 ORDER BY aya.juzOrderIndex ASC;
@@ -161,14 +161,14 @@ ORDER BY aya.juzOrderIndex ASC;
 
 getAllHizb:
 SELECT
-DISTINCT aya.hizbOrderIndex,
+DISTINCT aya.hizbQuarterOrderIndex,
 aya.id,
 aya.orderIndex,
 aya.surahId,
 aya.juzOrderIndex
 FROM aya
-GROUP BY aya.hizbOrderIndex
-ORDER BY aya.hizbOrderIndex ASC;
+GROUP BY aya.hizbQuarterOrderIndex
+ORDER BY aya.hizbQuarterOrderIndex ASC;
 
 
 
@@ -179,6 +179,6 @@ ORDER BY aya.hizbOrderIndex ASC;
 
 insertAya:
 INSERT OR REPLACE INTO aya
-(id, orderIndex, surahId, sajdahId, sajdahType, juzOrderIndex, hizbOrderIndex)
+(id, orderIndex, surahId, sajdahId, sajdahType, juzOrderIndex, hizbQuarterOrderIndex)
 SELECT ?, :orderIndex, :surahId, ?, ?, ?, ?
 WHERE NOT EXISTS (SELECT * FROM aya WHERE surahId = :surahId AND orderIndex = :orderIndex);
