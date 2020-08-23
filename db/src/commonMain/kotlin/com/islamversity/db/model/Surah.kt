@@ -8,7 +8,7 @@ data class Surah(
     val order : SurahOrderId,
     val name : String,
     val revealedType : RevealType,
-    val bismillahType: BismillahType
+    val bismillahType: BismillahTypeFlag
 )
 
 data class SurahWithFullName(

@@ -11,7 +11,7 @@ data class Aya(
     val content: String,
     val sajdahType : SajdahType,
     val juz: Juz,
-    val hizb: Hizb
+    val hizb: HizbQuarter
 ){
     init{
         juz.validated()
@@ -27,7 +27,7 @@ data class AyaWithFullContent(
     val sajdahId: SajdahId,
     val sajdahTypeFlag: SajdahTypeFlag,
     val juz: Juz,
-    val hizb: Hizb
+    val hizb: HizbQuarter
 ){
     init {
         juz.validated()
@@ -36,7 +36,7 @@ data class AyaWithFullContent(
 }
 
 private val juzRange = 1..30
-private val hizbRange = 1..120
+private val hizbRange = 1..240
 
 inline class Juz(val value: Long) {
     val isValid: Boolean
@@ -49,7 +49,7 @@ inline class Juz(val value: Long) {
     }
 }
 
-inline class Hizb(val value: Long){
+inline class HizbQuarter(val value: Long){
     val isValid: Boolean
         get() = value in hizbRange
 
@@ -68,10 +68,10 @@ class JuzAdapter : ColumnAdapter<Juz, Long> {
         value.value
 }
 
-class HizbAdapter : ColumnAdapter<Hizb, Long> {
-    override fun decode(databaseValue: Long): Hizb =
-        Hizb(databaseValue)
+class HizbAdapter : ColumnAdapter<HizbQuarter, Long> {
+    override fun decode(databaseValue: Long): HizbQuarter =
+        HizbQuarter(databaseValue)
 
-    override fun encode(value: Hizb): Long =
+    override fun encode(value: HizbQuarter): Long =
         value.value
 }

@@ -57,7 +57,6 @@ class SurahLocalDataSourceImpl(
                 surah.order,
                 surah.revealTypeId,
                 surah.revealTypeFlag,
-                surah.bismillahId,
                 surah.bismillahTypeFlag
             )
             insertName(surah.name)
@@ -77,7 +76,6 @@ class SurahLocalDataSourceImpl(
                         it.order,
                         it.revealTypeId,
                         it.revealTypeFlag,
-                        it.bismillahId,
                         it.bismillahTypeFlag
                     )
                     insertName(it.name)
@@ -137,16 +135,15 @@ class SurahLocalDataSourceImpl(
         name: String?,
         revealType: String?,
         revealFlag: RevealTypeFlag,
-        bismillah: String?,
         bismillahFlag: BismillahTypeFlag
-    ) -> Surah = { index, id, orderIndex, name, revealType, revealFlag, bismillah, bismillahFlag ->
+    ) -> Surah = { index, id, orderIndex, name, revealType, revealFlag, bismillahFlag ->
         Surah(
             index,
             id,
             orderIndex,
             name!!,
             RevealType.fromFLag(revealFlag, revealType!!),
-            BismillahType.fromFLag(bismillahFlag, bismillah!!)
+            bismillahFlag
         )
     }
 }

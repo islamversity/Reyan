@@ -27,6 +27,8 @@ import java.nio.channels.Channels
 import java.nio.channels.FileChannel
 import java.nio.channels.ReadableByteChannel
 import java.util.concurrent.Callable
+import java.util.zip.ZipEntry
+import java.util.zip.ZipInputStream
 
 private const val LOG_TAG = "SQLiteCopyOpenHelper"
 
@@ -157,7 +159,8 @@ class SQLiteCopyOpenHelper(
         )
         intermediateFile.deleteOnExit()
         val output = FileOutputStream(intermediateFile).channel
-        copy(input, output)
+        unpackZip(input, output)
+//        copy(input, output)
         val parent = destinationFile.parentFile
         if (parent != null && !parent.exists() && !parent.mkdirs()) {
             throw IOException(
@@ -229,4 +232,32 @@ private fun copy(input: ReadableByteChannel, output: FileChannel) {
         input.close()
         output.close()
     }
+}
+
+//this method can be much faster and more reliable
+// also we can use OkIO for better performance
+fun unpackZip(input: ReadableByteChannel, output: FileChannel): Boolean {
+    ZipInputStream(Channels.newInputStream(input)).use { zis ->
+        try {
+            val ze: ZipEntry = zis.nextEntry
+            val filename: String = ze.name
+
+
+            val buffer = ByteArray(1024 * 4)
+            var count: Int
+
+            val fout = Channels.newOutputStream(output)
+
+            while (zis.read(buffer).also { count = it } != -1) {
+                fout.write(buffer, 0, count)
+            }
+
+            output.force(false)
+            zis.closeEntry()
+        }finally {
+            output.close()
+            input.close()
+        }
+    }
+    return true
 }

@@ -24,7 +24,7 @@ import java.util.concurrent.Callable
  * Implementation of [SupportSQLiteOpenHelper.Factory] that creates
  * [SQLiteCopyOpenHelper].
  */
-internal class SQLiteCopyOpenHelperFactory(
+class SQLiteCopyOpenHelperFactory(
     private val mCopyFromAssetPath: String?,
     private val mCopyFromFile: File?,
     private val mCopyFromInputStream: Callable<InputStream>?,
