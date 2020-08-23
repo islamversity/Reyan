@@ -88,7 +88,6 @@ private fun provideSurahAdapter(): Surah.Adapter =
         surahOrderIdAdapter,
         surahRevealTypeIdAdapter,
         surahFlagAdapter,
-        bismillahTypeIdAdapter,
         bismillahFlagAdapter
     )
 

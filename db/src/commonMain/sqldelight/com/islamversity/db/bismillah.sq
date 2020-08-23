@@ -13,5 +13,4 @@ ON bismillah (id);
 insertBismillah:
 INSERT OR REPLACE INTO bismillah
 (id)
-SELECT :id
-WHERE COUNT(id) = 0;
+SELECT :id;
