@@ -17,9 +17,15 @@
   
   Our goal is to make, reading the Holy Quran easier than ever and encourage our user to read more.
   
-  **Reyan is based on MVI. the picture below demonstraits our architecture**
+### Architecture
+  Reyan is based on **MVI**. the picture below demonstraits our architecture:
   
   ![MVI Graph](assets/MVI-Dependency%20Graph.001.jpeg)
+
+### Modules
+   The architecture is based on different layers, following picture shows the dependency and level of the modules:
+
+    ![Module](assets/Modules.jpeg)
  
 # Contributions
 * Bug fixes and Pull Requests are highly appreciated and you're more than welcome to send us your feedbacks
