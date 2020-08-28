@@ -38,6 +38,7 @@ allprojects {
             url 'http://storage.googleapis.com/r8-releases/raw'
         }
         maven { url "https://dl.bintray.com/arrow-kt/arrow-kt/" }
+        maven{ url  "https://kotlin.bintray.com/kotlinx/"}
     }
     apply plugin: 'io.gitlab.arturbosch.detekt'
     dependencies {

@@ -105,7 +105,8 @@ ext {
                     chucker = "com.github.ChuckerTeam.Chucker:library:${Versions.chucker}",
                     chuckerNoop = "com.github.ChuckerTeam.Chucker:library-no-op:${Versions.chucker}",
                     soLoader = "com.facebook.soloader:soloader:${Versions.soLoader}",
-                    stetho = "com.facebook.stetho:stetho:${Versions.stetho}"
+                    stetho = "com.facebook.stetho:stetho:${Versions.stetho}",
+                    multiplatformSettings = "com.russhwolf:multiplatform-settings-no-arg:${Versions.multiplatformSettings}"
             ],
 
             databse = [
