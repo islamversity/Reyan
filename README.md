@@ -25,7 +25,7 @@
 ### Modules
    The architecture is based on different layers, following picture shows the dependency and level of the modules:
 
-    ![Module](assets/Modules.jpeg)
+   ![Module](assets/Modules.jpeg)
  
 # Contributions
 * Bug fixes and Pull Requests are highly appreciated and you're more than welcome to send us your feedbacks
