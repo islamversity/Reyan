@@ -14,7 +14,7 @@ interface CalligraphyLocalDataSource {
         lang: LanguageCode,
         name: CalligraphyName,
         friendlyName: String,
-        code : Calligraphy,
+        code: Calligraphy,
         context: CoroutineContext = Dispatchers.Default
     )
 
@@ -29,6 +29,12 @@ interface CalligraphyLocalDataSource {
     ): Flow<CalligraphyEntity?>
 
     fun observeAllCallygraphies(context: CoroutineContext = Dispatchers.Default): Flow<List<CalligraphyEntity>>
+
+    fun getAllSurahNameCalligraphies(context: CoroutineContext = Dispatchers.Default): Flow<List<CalligraphyEntity>>
+    fun getAllAyaCalligraphies(context: CoroutineContext = Dispatchers.Default): Flow<List<CalligraphyEntity>>
+
+    fun getArabicSurahCalligraphy(context: CoroutineContext = Dispatchers.Default): Flow<CalligraphyEntity>
+    fun getArabicSimpleAyaCalligraphy(context: CoroutineContext = Dispatchers.Default): Flow<CalligraphyEntity>
 }
 
 class CalligraphyLocalDataSourceImpl(
@@ -40,7 +46,7 @@ class CalligraphyLocalDataSourceImpl(
         lang: LanguageCode,
         name: CalligraphyName,
         friendlyName: String,
-        code : Calligraphy,
+        code: Calligraphy,
         context: CoroutineContext
     ) {
         withContext(context) {
@@ -68,4 +74,28 @@ class CalligraphyLocalDataSourceImpl(
         queries.getAllCalligraphies()
             .asFlow()
             .mapToList(context)
+
+    override fun getAllSurahNameCalligraphies(context: CoroutineContext): Flow<List<com.islamversity.db.Calligraphy>> =
+        queries.getSurahNameCalligraphies { calligraphy, rowIndex, languageCode, name, friendlyName, code ->
+            CalligraphyEntity.Impl(rowIndex!!, calligraphy, languageCode!!, name, friendlyName!!, code!!)
+        }
+            .asFlow()
+            .mapToList(context)
+
+    override fun getAllAyaCalligraphies(context: CoroutineContext): Flow<List<com.islamversity.db.Calligraphy>> =
+        queries.getAyaCalligraphies { calligraphy, rowIndex, languageCode, name, friendlyName, code ->
+            CalligraphyEntity.Impl(rowIndex!!, calligraphy, languageCode!!, name, friendlyName!!, code!!)
+        }
+            .asFlow()
+            .mapToList(context)
+
+    override fun getArabicSurahCalligraphy(context: CoroutineContext): Flow<CalligraphyEntity> =
+        queries.getArabicSurahCalligraphy()
+            .asFlow()
+            .mapToOne(context)
+
+    override fun getArabicSimpleAyaCalligraphy(context: CoroutineContext): Flow<CalligraphyEntity> =
+        queries.getSimpleArabicSurahContentCalligraphy()
+            .asFlow()
+            .mapToOne(context)
 }

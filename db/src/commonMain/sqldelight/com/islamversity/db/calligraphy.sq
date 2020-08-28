@@ -56,3 +56,31 @@ INSERT OR REPLACE INTO calligraphy
 (id, languageCode, name, friendlyName, code)
 SELECT ?, :languageCode, :name, :friendlyName, ?
 WHERE NOT EXISTS (SELECT * FROM calligraphy WHERE languageCode = :languageCode AND name = :name);
+
+
+getSurahNameCalligraphies:
+SELECT DISTINCT name.calligraphy, call.rowIndex,  call.languageCode, call.name, call.friendlyName , call.code
+FROM name
+LEFT JOIN calligraphy call
+ON call.id = name.calligraphy
+WHERE name.rowid IN (SELECT id FROM surah)
+GROUP BY name.calligraphy;
+
+
+getAyaCalligraphies:
+SELECT DISTINCT aya_content.calligraphy, call.rowIndex,  call.languageCode, call.name, call.friendlyName , call.code
+FROM aya_content
+LEFT JOIN calligraphy call
+ON call.id = aya_content.calligraphy
+WHERE aya_content.ayaId IN (SELECT id FROM aya)
+GROUP BY aya_content.calligraphy;
+
+
+
+getArabicSurahCalligraphy:
+SELECT * FROM calligraphy
+WHERE code == 'ar';
+
+getSimpleArabicSurahContentCalligraphy:
+SELECT * FROM calligraphy
+WHERE code == 'ar_simple';
