@@ -36,9 +36,9 @@ kotlin {
         implementation(Deps.ktor.Serialization.common)
 
         implementation(Deps.Tools.stately)
-        implementation(Deps.Tools.islandTime)
 
-        implementation(Deps.Tools.islandTime)
+        implementation(Deps.Kotlin.dateTime)
+        implementation(Deps.Tools.multiplatformSettings)
     }
 
     jvm()

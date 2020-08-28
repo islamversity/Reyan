@@ -37,6 +37,8 @@ dependencies {
     implementation findBugs
     implementation timber
 
+    implementation multiplatformSettings
+
     implementation androidSerialization
     implementation (okhttpEngine) {
         transitive false

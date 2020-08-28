@@ -38,7 +38,7 @@ object Versions {
     val sqlDelight = "1.3.0"
     val ktor = "1.3.2"
     val stately = "1.0.2"
-    val multiplatformSettings = "0.6"
+    val multiplatformSettings = "0.6.1"
     val coroutines = "1.3.8"
     val flowBinding = "1.3.2"
     val koin = "3.0.0-alpha-9"
@@ -51,6 +51,7 @@ object Deps {
     object Kotlin {
         val common = "stdlib-common"
         val jvmStd8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+        val dateTime = "org.jetbrains.kotlinx:kotlinx-datetime:0.1.0"
     }
 
     object Android {
@@ -250,12 +251,11 @@ object Deps {
     object Tools {
         val stately = "co.touchlab:stately-common:${Versions.stately}"
         val multiplatformSettings =
-            "com.russhwolf:multiplatform-settings:${Versions.multiplatformSettings}"
+            "com.russhwolf:multiplatform-settings-no-arg:${Versions.multiplatformSettings}"
         val multiplatformSettingsTest =
             "com.russhwolf:multiplatform-settings-test:${Versions.multiplatformSettings}"
         val koinCore = "org.koin:koin-core:${Versions.koin}"
         val cocoapodsext = "co.touchlab:kotlinnativecocoapods:${Versions.cocoapodsext}"
-        val islandTime = "io.islandtime:core:0.2.1"
         val okio = "com.squareup.okio:okio:2.6.0"
     }
 }

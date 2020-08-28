@@ -24,7 +24,6 @@ kotlin {
         implementation(Deps.SqlDelight.runtime)
         implementation(Deps.Coroutines.common)
         implementation(Deps.Tools.stately)
-        implementation(Deps.Tools.islandTime)
     }
 
     jvm()
