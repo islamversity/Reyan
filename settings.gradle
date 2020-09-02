@@ -6,7 +6,7 @@ include ':app',
         ':domain',
         ':search',
         ':daggercore',
-        ':home',
+        ':quranHome',
         ':navigation',
         ':kotlintesthelpers',
         ':view-component'

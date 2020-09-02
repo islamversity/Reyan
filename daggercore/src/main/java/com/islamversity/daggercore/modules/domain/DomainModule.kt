@@ -5,6 +5,8 @@ import dagger.Module
 
 @Module(
     includes = [
+        SurahListModule::class,
+        JuzListModule::class,
         SettingsModule::class,
         MappersModule::class,
         LocalDataSourceModule::class

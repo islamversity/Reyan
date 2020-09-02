@@ -16,7 +16,7 @@ sealed class Screens(
 
     internal object Test : Screens("com.islamversity.navigation.TestController")
 
-    object Home : Screens("com.islamversity.home.view.HomeView")
+    object Home : Screens("com.islamversity.quran_home.view.HomeView")
 
     class Search(
         model: SearchLocalModel,

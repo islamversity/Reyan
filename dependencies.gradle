@@ -124,7 +124,7 @@ ext {
                     base = ":base",
                     core = ":core",
                     navigation = ":navigation",
-                    home = ":home",
+                    quranHome = ":quranHome",
                     db = ":db",
                     viewComponent = ":view-component",
                     search = ":search"

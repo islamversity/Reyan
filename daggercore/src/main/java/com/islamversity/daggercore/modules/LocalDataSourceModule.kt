@@ -1,8 +1,7 @@
 package com.islamversity.daggercore.modules
 
-import com.islamversity.db.CalligraphyQueries
-import com.islamversity.db.datasource.CalligraphyLocalDataSource
-import com.islamversity.db.datasource.CalligraphyLocalDataSourceImpl
+import com.islamversity.db.*
+import com.islamversity.db.datasource.*
 import dagger.Module
 import dagger.Provides
 
@@ -13,4 +12,21 @@ object LocalDataSourceModule {
     @Provides
     fun provideCalligraphyDS(queries : CalligraphyQueries) : CalligraphyLocalDataSource =
         CalligraphyLocalDataSourceImpl(queries)
+
+    @JvmStatic
+    @Provides
+    fun provideSurahDataSource(
+        surahQueries: SurahQueries,
+        nameQueries: NameQueries
+    ): SurahLocalDataSource =
+        SurahLocalDataSourceImpl(surahQueries, nameQueries)
+
+    @JvmStatic
+    @Provides
+    fun provideAyaDataSource(
+        ayaQueries: AyaQueries,
+        ayaContentQueries: AyaContentQueries
+    ): AyaLocalDataSource =
+        AyaLocalDataSourceImpl(ayaQueries, ayaContentQueries)
+
 }

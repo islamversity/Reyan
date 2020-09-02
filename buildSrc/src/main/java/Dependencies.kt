@@ -165,7 +165,7 @@ object Deps {
         val base = ":base"
         val core = ":core"
         val navigation = ":navigation"
-        val home = ":home"
+        val quranHome = ":quranHome"
         val db = ":db"
         val viewComponent = ":view-component"
     }
