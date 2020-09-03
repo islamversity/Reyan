@@ -23,5 +23,4 @@ object JuzListModule {
             ayaDataSource,
             juzMapper
         )
-
 }
