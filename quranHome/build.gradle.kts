@@ -45,6 +45,7 @@ kotlin {
         implementation(Deps.Android.Jetpack.coreKts)
 
         implementation(Deps.Android.Tools.conductor)
+        implementation(Deps.Android.Tools.conductorViewPager)
         implementation(Deps.Android.Tools.timber)
         implementation(Deps.Android.Tools.fresco)
         implementation(Deps.Android.Tools.slider)

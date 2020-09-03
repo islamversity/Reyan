@@ -1,114 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/motionLayout"
     android:layout_width="match_parent"
-    tools:background="@color/defaultBackground"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/home_motion"
+    app:motionProgress="1.0"
+    tools:showPaths="true">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/ablHome"
+    <ImageView
+        android:id="@+id/setting"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_margin="24dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_outline_settings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/inputCard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/low_margin"
+        android:layout_height="40dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:cardCornerRadius="25dp"
         app:cardElevation="0dp"
-        android:background="@android:color/transparent"
-        tools:ignore="UnusedAttribute">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <androidx.cardview.widget.CardView
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/low_margin"
-            android:layout_marginVertical="@dimen/low_margin"
-            app:cardCornerRadius="12dp">
+            android:layout_height="match_parent"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbarHome"
-                android:layout_width="match_parent"
-                android:layout_height="?android:attr/actionBarSize"
-                android:background="@color/blue_l1"
-                app:titleTextColor="@color/yellow">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center"
+                android:fontFamily="@font/vazir"
+                android:text="جستجو" />
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start|center"
+                android:src="@drawable/ic_outline_search" />
+        </FrameLayout>
 
-                    <TextView
-                        android:id="@+id/txtJuzTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:paddingStart="8dp"
-                        android:paddingEnd="8dp"
-                        android:text="@string/juz"
-                        android:textColor="@color/yellow"
-                        android:textSize="@dimen/extra_large_text"
-                        android:textStyle="bold"
-                        tools:ignore="HardcodedText,SpUsage" />
+    </androidx.cardview.widget.CardView>
 
-                    <TextView
-                        android:id="@+id/txtIndexTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:text="@string/surah_index"
-                        android:textColor="@color/yellow"
-                        android:textSize="@dimen/extra_large_text"
-                        android:textStyle="bold"
-                        tools:ignore="HardcodedText,SpUsage" />
-
-                    <ImageView
-                        android:id="@+id/imgSearch"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginEnd="@dimen/min_margin"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:contentDescription="@string/search"
-                        android:padding="@dimen/low_margin"
-                        app:srcCompat="@drawable/ic_search_black_24dp"
-                        app:tint="@color/yellow" />
-
-                </RelativeLayout>
-
-            </androidx.appcompat.widget.Toolbar>
-
-        </androidx.cardview.widget.CardView>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <RelativeLayout
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:orientation="horizontal">
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputCard"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="#009688"
+        app:tabIndicatorFullWidth="true"
+        app:tabIndicatorHeight="4dp"
+        app:tabMinWidth="100dp"
+        app:tabMode="auto"
+        app:tabSelectedTextColor="#009688"
+        app:tabTextAppearance="@style/TabLayoutTitle"
+        app:tabTextColor="#70AF72" />
 
-        <com.islamversity.base.epoxyhelper.EpoxyAsyncRecyclerView
-            android:id="@+id/rvJuz"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:clipToPadding="false"
-            android:layout_marginLeft="8dp"
-            android:paddingTop="?android:attr/actionBarSize"
-            tools:itemCount="114"
-            tools:listitem="@layout/number_view" />
+    <View
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@drawable/elevation"
+        app:layout_constraintEnd_toEndOf="@+id/tabLayout"
+        app:layout_constraintStart_toStartOf="@+id/tabLayout"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
-        <com.islamversity.base.epoxyhelper.EpoxyAsyncRecyclerView
-            android:id="@+id/rvSurah"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_centerHorizontal="true"
-            android:clipToPadding="false"
-            android:paddingTop="?android:attr/actionBarSize"
-            tools:itemCount="114"
-            tools:listitem="@layout/surah_view" />
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
-    </RelativeLayout>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>

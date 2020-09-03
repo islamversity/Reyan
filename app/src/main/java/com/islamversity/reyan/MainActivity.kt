@@ -15,7 +15,7 @@ import com.islamversity.daggercore.lifecycle.LifecycleComponentProvider
 import com.islamversity.daggercore.lifecycle.LifecycleEvent
 import com.islamversity.daggercore.lifecycle.Permissions
 import com.islamversity.daggercore.lifecycle.PermissionsResult
-import com.islamversity.quran_home.view.QuranHomeView
+import com.islamversity.quran_home.feature.home.QuranHomeView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.channels.Channel
 import javax.inject.Inject
