@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.Keep
 import com.bluelinelabs.conductor.changehandler.SharedElementTransitionChangeHandler
-import com.bluelinelabs.conductor.internal.TransitionUtils
+import com.bluelinelabs.conductor.internal.LegacyTransitionUtils
 import java.util.*
 
 @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -63,7 +63,7 @@ class ArcFadeMoveChangeHandler : SharedElementTransitionChangeHandler {
                 if (from != null) {
                     for (name in sharedElementNames) {
                         val namedView =
-                            TransitionUtils.findNamedView(
+                            LegacyTransitionUtils.findNamedView(
                                 from,
                                 name
                             )
@@ -73,7 +73,6 @@ class ArcFadeMoveChangeHandler : SharedElementTransitionChangeHandler {
                     }
                 }
             }
-
             override fun onTransitionEnd(transition: Transition) {}
             override fun onTransitionCancel(transition: Transition) {}
             override fun onTransitionPause(transition: Transition) {}
