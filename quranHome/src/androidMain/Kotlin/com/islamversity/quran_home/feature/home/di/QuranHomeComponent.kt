@@ -1,11 +1,11 @@
-package com.islamversity.quran_home.di
+package com.islamversity.quran_home.feature.home.di
 
 import com.bluelinelabs.conductor.Router
 import com.islamversity.daggercore.CoreComponent
 import com.islamversity.daggercore.lifecycle.LifecycleComponent
 import com.islamversity.daggercore.navigator.DefaultNavigationComponent
 import com.islamversity.daggercore.scope.FeatureScope
-import com.islamversity.quran_home.view.QuranHomeView
+import com.islamversity.quran_home.feature.home.QuranHomeView
 import dagger.BindsInstance
 import dagger.Component
 
@@ -16,8 +16,7 @@ import dagger.Component
         LifecycleComponent::class,
         DefaultNavigationComponent::class],
     modules = [
-        QuranHomeModule::class,
-        MapperModule::class]
+        QuranHomeModule::class]
 )
 interface QuranHomeComponent {
     fun inject(view: QuranHomeView)
