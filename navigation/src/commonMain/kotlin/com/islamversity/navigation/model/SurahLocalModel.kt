@@ -5,18 +5,18 @@ import okio.BufferedSink
 import okio.BufferedSource
 
 
-data class SurahDetailLocalModel(
+data class SurahLocalModel(
     val backTransitionName : String = "",
     val textTransitionName : String = "",
     val surahID: String,
     val surahName : String,
     val ayaOrder : Int
 ){
-    companion object Sinker : SinkSerializer<SurahDetailLocalModel> {
+    companion object Sinker : SinkSerializer<SurahLocalModel> {
         const val EXTRA_SURAH_DETAIL = "extra_surah_detail"
 
-        override fun BufferedSource.readFromSink(): SurahDetailLocalModel =
-            SurahDetailLocalModel(
+        override fun BufferedSource.readFromSink(): SurahLocalModel =
+            SurahLocalModel(
                 readUtf8(),
                 readUtf8(),
                 readUtf8(),
@@ -24,7 +24,7 @@ data class SurahDetailLocalModel(
                 readInt()
             )
 
-        override fun BufferedSink.writeToSink(obj: SurahDetailLocalModel) {
+        override fun BufferedSink.writeToSink(obj: SurahLocalModel) {
             writeUtf8(obj.backTransitionName)
             writeUtf8(obj.textTransitionName)
             writeUtf8(obj.surahID)

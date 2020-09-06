@@ -134,6 +134,7 @@ dependencies {
     implementation(project(navigation))
     implementation(project(search))
     implementation(project(settings))
+    implementation(project(surah))
 
     implementation viewModel
 

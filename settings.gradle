@@ -10,6 +10,7 @@ include ':db-test',
         ':quranHome',
         ':navigation',
         ':kotlintesthelpers',
+        ':surah',
         ':view-component'
 
 enableFeaturePreview("GRADLE_METADATA")

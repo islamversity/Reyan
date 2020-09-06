@@ -172,6 +172,7 @@ object Deps {
         val settings = ":settings"
         val db = ":db"
         val viewComponent = ":view-component"
+        val surah = ":surah"
     }
 
     object Dagger {
