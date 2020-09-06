@@ -6,7 +6,7 @@ import com.islamversity.db.datasource.SurahLocalDataSource
 import com.islamversity.db.model.Surah
 import com.islamversity.domain.model.Calligraphy
 import com.islamversity.domain.model.surah.SurahRepoModel
-import com.islamversity.domain.model.toDB
+import com.islamversity.domain.model.toEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 
@@ -21,7 +21,7 @@ class SurahListRepoImpl(
 ) : SurahListRepo {
 
     override fun getAllSurah(calligraphy: Calligraphy): Flow<List<SurahRepoModel>> =
-        dataSource.observeAllSurahs(calligraphy.toDB())
+        dataSource.observeAllSurahs(calligraphy.toEntity())
             .map {
                 mapper.listMap(it)
             }

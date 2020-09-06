@@ -24,5 +24,6 @@ data class Calligraphy(
     }
 }
 
-fun Calligraphy.toDB() = com.islamversity.db.model.Calligraphy(code.code)
+fun Calligraphy.toEntity() = com.islamversity.db.model.Calligraphy(code.code)
+fun CalligraphyId.toEntity() = com.islamversity.db.model.CalligraphyId(id)
 
