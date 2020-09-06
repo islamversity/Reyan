@@ -8,6 +8,8 @@ class AyaRepoUIMapper : Mapper<AyaRepoModel, AyaUIModel>{
     override fun map(item: AyaRepoModel): AyaUIModel =
         AyaUIModel(
             item.id.id,
-            item.content
+            item.content,
+            item.order,
+            0
         )
 }

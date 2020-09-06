@@ -14,4 +14,10 @@ sealed class SurahResult : MviResult {
         val startFrom: Int,
         val fontSize: Int
     ) : SurahResult()
+
+    sealed class Bismillah : SurahResult(){
+        object Hide : Bismillah()
+        object Show : Bismillah()
+        data class Content(val value : String) : Bismillah()
+    }
 }
