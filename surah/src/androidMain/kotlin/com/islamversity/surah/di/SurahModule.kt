@@ -3,6 +3,7 @@ package com.islamversity.surah.di
 import com.islamversity.core.mvi.MviPresenter
 import com.islamversity.core.mvi.MviProcessor
 import com.islamversity.daggercore.scope.FeatureScope
+import com.islamversity.domain.repo.aya.GetAyaUseCase
 import com.islamversity.navigation.Navigator
 import com.islamversity.surah.*
 import dagger.Module
@@ -14,10 +15,12 @@ object SurahModule {
     @Provides
     @JvmStatic
     fun bindProcessor(
-        navigator: Navigator
+        navigator: Navigator,
+        getAyaUseCase: GetAyaUseCase,
     ): MviProcessor<SurahIntent, SurahResult> =
         SurahProcessor(
-            navigator = navigator
+            navigator = navigator,
+            getAyaUseCase = getAyaUseCase
         )
 
     @FeatureScope

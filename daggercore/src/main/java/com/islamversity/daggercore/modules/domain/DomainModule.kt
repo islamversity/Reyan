@@ -10,7 +10,8 @@ import dagger.Module
         SettingsRepoModule::class,
         MappersModule::class,
         LocalDataSourceModule::class,
-        SearchRepoModule::class
+        SearchRepoModule::class,
+        AyaModule::class,
     ]
 )
 abstract class DomainModule
