@@ -22,13 +22,13 @@ interface AyaLocalDataSource {
 
     fun observeAllAyasForSora(
         surahId: SurahId,
-        calligraphy: Calligraphy,
+        calligraphy: CalligraphyId,
         context: CoroutineContext = Dispatchers.Default
     ): Flow<List<Aya>>
 
     fun observeAllAyasForSora(
         soraOrder: SurahOrderId,
-        calligraphy: Calligraphy,
+        calligraphy: CalligraphyId,
         context: CoroutineContext = Dispatchers.Default
     ): Flow<List<Aya>>
 
@@ -76,7 +76,7 @@ class AyaLocalDataSourceImpl(
 
     override fun observeAllAyasForSora(
         surahId: SurahId,
-        calligraphy: Calligraphy,
+        calligraphy: CalligraphyId,
         context: CoroutineContext
     ): Flow<List<Aya>> =
         ayaQueries.getAllAyaBySoraId(calligraphy, surahId, ayaMapper)
@@ -85,7 +85,7 @@ class AyaLocalDataSourceImpl(
 
     override fun observeAllAyasForSora(
         soraOrder: SurahOrderId,
-        calligraphy: Calligraphy,
+        calligraphy: CalligraphyId,
         context: CoroutineContext
     ): Flow<List<Aya>> =
         ayaQueries.getAllAyaBySoraOrder(calligraphy, soraOrder, ayaMapper)
