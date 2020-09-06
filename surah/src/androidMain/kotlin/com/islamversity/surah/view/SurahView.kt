@@ -21,7 +21,7 @@ class SurahView(
     bundle: Bundle
 ) : CoroutineView<ViewSurahBinding, SurahState, SurahIntent>(bundle) {
 
-    private val searchLocal: SurahLocalModel? =
+    private val surahLocal: SurahLocalModel =
         bundle
             .getByteArray(SurahLocalModel.EXTRA_SURAH_DETAIL)!!
             .let {
@@ -51,11 +51,27 @@ class SurahView(
     }
 
     override fun intents(): Flow<SurahIntent> =
-        flowOf()
+        flowOf(
+            SurahIntent.Initial(
+                surahLocal.surahID,
+                surahLocal.startingAyaOrder,
+                surahLocal.bismillahType
+            )
+        )
 
     override fun render(state: SurahState) {
         renderLoading(state.base)
         renderError(state.base)
 
+        //render bismillah
+
+        binding.ayaList.withModelsAsync {
+            state.ayas.forEach {
+                ayaView {
+                    id(it.id)
+                    model(it)
+                }
+            }
+        }
     }
 }
