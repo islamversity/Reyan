@@ -6,13 +6,11 @@ import com.islamversity.core.listMap
 import com.islamversity.core.mvi.BaseProcessor
 import com.islamversity.core.ofType
 import com.islamversity.domain.model.surah.SurahRepoModel
-import com.islamversity.domain.repo.SettingRepo
 import com.islamversity.domain.repo.surah.SearchSurahNameUseCase
-import com.islamversity.domain.repo.surah.SurahSearchRepo
 import com.islamversity.navigation.NavigationAnimation
 import com.islamversity.navigation.Navigator
 import com.islamversity.navigation.Screens
-import com.islamversity.navigation.model.SurahDetailLocalModel
+import com.islamversity.navigation.model.SurahLocalModel
 import com.islamversity.navigation.navigateTo
 import com.islamversity.search.model.SurahUIModel
 import kotlinx.coroutines.flow.flatMapLatest
@@ -45,7 +43,7 @@ class SearchProcessor(
                 it.action.selectedItem
             }
             .map {
-                SurahDetailLocalModel(
+                SurahLocalModel(
                     backTransitionName = it.name,
                     textTransitionName = it.name,
                     surahID = it.id.id,
