@@ -13,7 +13,7 @@ class QuranHomeProcessor(
     navigator: Navigator
 ) : BaseProcessor<QuranHomeIntent, QuranHomeResult>() {
     override fun transformers(): List<FlowBlock<QuranHomeIntent, QuranHomeResult>> =
-        listOf(itemClick, searchClicked)
+        listOf(itemClick, settingsClicked, searchClicked)
 
     private val itemClick: FlowBlock<QuranHomeIntent, QuranHomeResult> = {
         ofType<QuranHomeIntent.SelectTab>()
@@ -25,6 +25,14 @@ class QuranHomeProcessor(
             .map {
                 //TODO ADD TRANSITION
                 Screens.Search(SearchLocalModel())
+            }
+            .navigateTo(navigator)
+    }
+
+    private val settingsClicked: FlowBlock<QuranHomeIntent, QuranHomeResult> = {
+        ofType<QuranHomeIntent.SettingsClicked>()
+            .map {
+                Screens.Settings()
             }
             .navigateTo(navigator)
     }

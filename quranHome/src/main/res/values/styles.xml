@@ -6,4 +6,16 @@
         <item name="android:fontFamily">@font/vazir</item>
     </style>
 
+    <style name="TabLayout">
+        <item name="tabMinWidth">100dp</item>
+        <item name="tabIndicatorHeight">4dp</item>
+        <item name="tabIndicatorFullWidth">true</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabMode">auto</item>
+        <item name="tabIndicatorColor">@color/accent_color_1</item>
+        <item name="tabSelectedTextColor">@color/accent_color_1</item>
+        <item name="tabTextColor">@color/accent_color_2</item>
+        <item name="tabTextAppearance">@style/TabLayoutTitle</item>
+    </style>
+
 </resources>

@@ -7,4 +7,5 @@ sealed class QuranHomeIntent : MviIntent {
 
     object Initial : QuranHomeIntent()
     object SearchClicked : QuranHomeIntent()
+    object SettingsClicked : QuranHomeIntent()
 }

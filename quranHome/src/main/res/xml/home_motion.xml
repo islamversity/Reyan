@@ -18,12 +18,6 @@
             <KeyAttribute
                 android:alpha="1"
                 motion:framePosition="10"
-                motion:motionTarget="@id/setting" />
-
-
-            <KeyAttribute
-                android:alpha="1"
-                motion:framePosition="10"
                 motion:motionTarget="@id/appBar" />
 
             <KeyAttribute
@@ -45,7 +39,7 @@
                 motion:motionTarget="@id/inputCard">
                 <CustomAttribute
                     motion:attributeName="radius"
-                    motion:customDimension="25dp" />
+                    motion:customDimension="@dimen/search_input_radius" />
             </KeyAttribute>
 
         </KeyFrameSet>
@@ -55,18 +49,19 @@
     <ConstraintSet android:id="@+id/start">
 
         <Constraint
-            android:id="@+id/setting"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:padding="8dp"
-            android:translationY="-50dp"
+            android:id="@+id/settings"
+            android:layout_width="@dimen/toolbar_icon_size"
+            android:layout_height="@dimen/toolbar_icon_size"
+            android:padding="@dimen/low_padding"
+            android:translationX="@dimen/large_margin"
+            android:translationY="-48dp"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
-            android:id="@+id/tablayout"
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="?actionBarSize"
             android:layout_marginTop="0dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
@@ -90,19 +85,19 @@
 
 
         <Constraint
-            android:id="@+id/setting"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_margin="24dp"
-            android:padding="8dp"
-            android:translationY="0dp"
+            android:id="@+id/settings"
+            android:layout_width="@dimen/toolbar_icon_size"
+            android:layout_height="@dimen/toolbar_icon_size"
+            android:padding="@dimen/low_padding"
+            android:translationX="@dimen/large_margin"
+            android:translationY="@dimen/large_margin"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
-            android:id="@+id/tablayout"
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
+            android:layout_height="?appBarLayoutStyle"
             android:layout_marginTop="55dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
@@ -111,11 +106,11 @@
         <Constraint
             android:id="@id/inputCard"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginStart="50dp"
+            android:layout_height="@dimen/search_input_height"
+            android:layout_marginStart="@dimen/search_input_margin"
             android:layout_marginTop="100dp"
-            android:layout_marginEnd="50dp"
-            motion:layout_constraintBottom_toBottomOf="@id/tablayout"
+            android:layout_marginEnd="@dimen/search_input_margin"
+            motion:layout_constraintBottom_toBottomOf="@id/tabLayout"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />

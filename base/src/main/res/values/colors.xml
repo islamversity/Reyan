@@ -6,4 +6,6 @@
 
     <color name="blue_l1">#34374F</color>
     <color name="yellow">#FFFDE701</color>
+    <color name="accent_color_1">#009688</color>
+    <color name="accent_color_2">#70AF72</color>
 </resources>
