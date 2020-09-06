@@ -44,5 +44,17 @@ class SurahPresenter(
                     startFrom = result.startFrom,
                     mainAyaFontSize = result.fontSize
                 )
+            SurahResult.Bismillah.Hide ->
+                preState.copy(
+                    showBismillah = false
+                )
+            SurahResult.Bismillah.Show ->
+                preState.copy(
+                    showBismillah = true
+                )
+            is SurahResult.Bismillah.Content ->
+                preState.copy(
+                    bismillah = result.value
+                )
         }
 }

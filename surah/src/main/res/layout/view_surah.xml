@@ -29,25 +29,8 @@
         app:tint="@color/yellow"
         tools:ignore="RtlHardcoded" />
 
-    <EditText
-        android:id="@+id/edtSearch"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
-        android:fontFamily="@font/montserrat"
-        android:importantForAutofill="no"
-        android:inputType="text"
-        android:paddingLeft="@dimen/medium_margin"
-        android:textColor="@android:color/white"
-        android:textColorHint="@color/yellow"
-        app:layout_constraintBottom_toBottomOf="@+id/vSearchBack"
-        app:layout_constraintLeft_toRightOf="@+id/imgBack"
-        app:layout_constraintRight_toRightOf="@+id/vSearchBack"
-        app:layout_constraintTop_toTopOf="@+id/vSearchBack"
-        tools:ignore="RtlHardcoded,RtlSymmetry,UnusedAttribute" />
-
     <com.islamversity.base.epoxyhelper.EpoxyAsyncRecyclerView
-        android:id="@+id/searchList"
+        android:id="@+id/ayaList"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:paddingTop="5dp"
