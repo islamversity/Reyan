@@ -18,12 +18,6 @@
             <KeyAttribute
                 android:alpha="1"
                 motion:framePosition="10"
-                motion:motionTarget="@id/setting" />
-
-
-            <KeyAttribute
-                android:alpha="1"
-                motion:framePosition="10"
                 motion:motionTarget="@id/appBar" />
 
             <KeyAttribute
@@ -59,12 +53,13 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:padding="8dp"
-            android:translationY="-50dp"
+            android:translationX="24dp"
+            android:translationY="-48dp"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
-            android:id="@+id/tablayout"
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="0dp"
@@ -93,14 +88,14 @@
             android:id="@+id/setting"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:layout_margin="24dp"
             android:padding="8dp"
-            android:translationY="0dp"
+            android:translationX="24dp"
+            android:translationY="24dp"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
-            android:id="@+id/tablayout"
+            android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:layout_marginTop="55dp"
@@ -115,7 +110,7 @@
             android:layout_marginStart="50dp"
             android:layout_marginTop="100dp"
             android:layout_marginEnd="50dp"
-            motion:layout_constraintBottom_toBottomOf="@id/tablayout"
+            motion:layout_constraintBottom_toBottomOf="@id/tabLayout"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />

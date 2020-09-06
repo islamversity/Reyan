@@ -35,6 +35,9 @@ class QuranHomeView : CoroutineView<QuranHomeViewBinding, QuranHomeState, QuranH
 
     override fun beforeBindingView(binding: QuranHomeViewBinding) {
         super.beforeBindingView(binding)
+        binding.settings.setOnClickListener {
+            intentChannel.offer(QuranHomeIntent.SettingsClicked)
+        }
         binding.inputCard.setOnClickListener {
             ValueAnimator.ofFloat(binding.motionLayout.progress, 0F).apply {
                 duration = 300
