@@ -32,7 +32,6 @@ class QuranHomeProcessor(
     private val settingsClicked: FlowBlock<QuranHomeIntent, QuranHomeResult> = {
         ofType<QuranHomeIntent.SettingsClicked>()
             .map {
-                //TODO ADD TRANSITION
                 Screens.Settings()
             }
             .navigateTo(navigator)
