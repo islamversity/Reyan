@@ -44,11 +44,9 @@ class SearchProcessor(
             }
             .map {
                 SurahLocalModel(
-                    backTransitionName = it.name,
-                    textTransitionName = it.name,
                     surahID = it.id.id,
                     surahName = it.name,
-                    ayaOrder = 1
+                    startingAyaOrder = 1
                 )
             }
             .map {
