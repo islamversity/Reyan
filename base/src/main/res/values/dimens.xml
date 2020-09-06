@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="low_margin">4dp</dimen>
+    <dimen name="low_padding">4dp</dimen>
     <dimen name="min_margin">8dp</dimen>
     <dimen name="medium_margin">16dp</dimen>
+    <dimen name="medium_padding">16dp</dimen>
     <dimen name="large_margin">24dp</dimen>
     <dimen name="min_corner_radius">10dp</dimen>
     <dimen name="small_text">12dp</dimen>
@@ -15,4 +17,11 @@
     <dimen name="dialog_corners">2dp</dimen>
 
     <dimen name="toolbar_elevation">10dp</dimen>
+    <dimen name="search_input_height">40dp</dimen>
+    <dimen name="search_input_margin">50dp</dimen>
+    <dimen name="search_input_radius">25dp</dimen>
+
+    <dimen name="toolbar_icon_size">32dp</dimen>
+    <dimen name="elevation_height">4dp</dimen>
+
 </resources>

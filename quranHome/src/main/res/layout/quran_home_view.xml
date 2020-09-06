@@ -11,25 +11,25 @@
 
     <ImageView
         android:id="@+id/settings"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:padding="4dp"
+        android:layout_width="@dimen/toolbar_icon_size"
+        android:layout_height="@dimen/toolbar_icon_size"
         android:background="?selectableItemBackgroundBorderless"
-        android:translationX="24dp"
-        android:translationY="24dp"
+        android:padding="4dp"
         android:src="@drawable/ic_outline_settings"
+        android:translationX="@dimen/large_margin"
+        android:translationY="@dimen/large_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/inputCard"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginStart="50dp"
+        android:layout_height="@dimen/search_input_height"
+        android:layout_marginStart="@dimen/search_input_margin"
         android:layout_marginTop="100dp"
-        app:cardCornerRadius="25dp"
+        android:layout_marginEnd="@dimen/search_input_margin"
+        app:cardCornerRadius="@dimen/search_input_radius"
         app:cardElevation="0dp"
-        android:layout_marginEnd="50dp"
         app:layout_constraintBottom_toBottomOf="@id/tabLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,15 +38,15 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp">
+            android:paddingStart="@dimen/medium_padding"
+            android:paddingEnd="@dimen/medium_padding">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|center"
                 android:fontFamily="@font/vazir"
-                android:text="جستجو" />
+                android:text="@string/search" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -59,28 +59,19 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
+        style="@style/TabLayout"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="?actionBarSize"
         android:layout_gravity="bottom"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:layout_marginTop="55dp"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/inputCard"
-        app:tabGravity="fill"
-        app:tabIndicatorColor="#009688"
-        app:tabIndicatorFullWidth="true"
-        app:tabIndicatorHeight="4dp"
-        app:tabMinWidth="100dp"
-        app:tabMode="auto"
-        app:tabSelectedTextColor="#009688"
-        app:tabTextAppearance="@style/TabLayoutTitle"
-        app:tabTextColor="#70AF72" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <View
         android:id="@+id/appBar"
         android:layout_width="match_parent"
-        android:layout_height="4dp"
+        android:layout_height="@dimen/elevation_height"
         android:background="@drawable/elevation"
         app:layout_constraintEnd_toEndOf="@+id/tabLayout"
         app:layout_constraintStart_toStartOf="@+id/tabLayout"
