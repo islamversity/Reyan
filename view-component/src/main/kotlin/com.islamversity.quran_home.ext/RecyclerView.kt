@@ -1,4 +1,4 @@
-package com.islamversity.quran_home.feature
+package com.islamversity.quran_home.ext
 
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat

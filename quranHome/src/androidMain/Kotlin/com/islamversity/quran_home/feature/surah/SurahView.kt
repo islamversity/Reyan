@@ -8,8 +8,8 @@ import android.widget.LinearLayout
 import com.airbnb.epoxy.CallbackProp
 import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
-import com.islamversity.quran_home.databinding.SurahViewBinding
 import com.islamversity.quran_home.feature.surah.model.SurahUIModel
+import com.islamversity.view_component.databinding.RowSurahBinding
 
 @ModelView(
     autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT,
@@ -20,14 +20,14 @@ class SurahView @JvmOverloads constructor(
     attributeSet: AttributeSet? = null
 ) : LinearLayout(context, attributeSet) {
 
-    private val binding = SurahViewBinding.inflate(LayoutInflater.from(context), this, true)
+    private val binding = RowSurahBinding.inflate(LayoutInflater.from(context), this, true)
 
     @SuppressLint("SetTextI18n")
     @ModelProp
     fun surah(surah: SurahUIModel){
-        binding.title.text = surah.name
-        binding.index.text = surah.order.toString()
-        binding.reveal.text = "(${surah.revealedType.name})"
+        binding.name.text = surah.name
+        binding.order.text = surah.order.toString()
+        binding.revealed.text = "(${surah.revealedType.name})"
     }
 
     @CallbackProp

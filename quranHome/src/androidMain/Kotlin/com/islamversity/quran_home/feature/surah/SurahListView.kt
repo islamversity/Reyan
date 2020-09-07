@@ -9,7 +9,7 @@ import com.islamversity.daggercore.lifecycleComponent
 import com.islamversity.daggercore.navigator.DaggerDefaultNavigationComponent
 import com.islamversity.quran_home.R
 import com.islamversity.quran_home.databinding.SurahListViewBinding
-import com.islamversity.quran_home.feature.setDivider
+import com.islamversity.quran_home.ext.setDivider
 import com.islamversity.quran_home.feature.surah.di.DaggerSurahListComponent
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
