@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="colorPrimary">@color/green</color>
+
+    <!--    Texts-->
+    <color name="text_default">#1a1a1d</color>
+    <color name="text_gray">#282a31</color>
+    <color name="text_green">@color/green</color>
+
+    <!--    Backgrounds-->
+    <color name="background_default_">#ffe2f1f6</color>
+
+
+    <color name="green">#FF265d28</color>
+    <color name="transparent">#00000000</color>
+    <color name="gray900">#333333</color>
+    <color name="gray800">#404040</color>
+    <color name="gray700">#737373</color>
+    <color name="gray600">#9a9a9a</color>
+    <color name="gray500">#bebebe</color>
+    <color name="gray400">#ebebeb</color>
+    <color name="gray200">#fafafa</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+
+
+</resources>
