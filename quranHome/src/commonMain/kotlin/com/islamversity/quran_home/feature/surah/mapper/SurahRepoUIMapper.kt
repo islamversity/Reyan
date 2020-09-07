@@ -10,6 +10,7 @@ class SurahRepoUIMapper : Mapper<SurahRepoModel, SurahUIModel> {
         SurahUIModel(
             item.id,
             item.order,
+            item.ayaCount,
             item.name,
             item.revealedType
         )

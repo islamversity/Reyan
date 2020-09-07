@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import com.airbnb.epoxy.CallbackProp
 import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
+import com.islamversity.quran_home.R
 import com.islamversity.quran_home.feature.surah.model.SurahUIModel
 import com.islamversity.view_component.databinding.RowSurahBinding
 
@@ -21,13 +22,14 @@ class SurahView @JvmOverloads constructor(
 ) : LinearLayout(context, attributeSet) {
 
     private val binding = RowSurahBinding.inflate(LayoutInflater.from(context), this, true)
+    private val ayaTitle by lazy { context.getString(R.string.aya) }
 
     @SuppressLint("SetTextI18n")
     @ModelProp
-    fun surah(surah: SurahUIModel){
+    fun surah(surah: SurahUIModel) {
         binding.name.text = surah.name
         binding.order.text = surah.order.toString()
-        binding.revealed.text = "(${surah.revealedType.name})"
+        binding.revealedAyaCount.text = "${surah.revealedType.name} - ${surah.ayaCount} $ayaTitle"
     }
 
     @CallbackProp
