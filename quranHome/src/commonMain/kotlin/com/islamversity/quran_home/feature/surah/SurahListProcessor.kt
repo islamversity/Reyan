@@ -6,7 +6,7 @@ import com.islamversity.core.listMap
 import com.islamversity.core.mvi.BaseProcessor
 import com.islamversity.core.ofType
 import com.islamversity.domain.model.surah.SurahRepoModel
-import com.islamversity.domain.repo.surah.GetSurahsUsecase
+import com.islamversity.domain.repo.surah.GetSurahUsecase
 import com.islamversity.navigation.Navigator
 import com.islamversity.navigation.Screens
 import com.islamversity.navigation.model.SearchLocalModel
@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.map
 
 class SurahListProcessor(
     private val navigator: Navigator,
-    private val surahsUsecase: GetSurahsUsecase,
+    private val surahUsecase: GetSurahUsecase,
     private val surahMapper: Mapper<SurahRepoModel, SurahUIModel>
 ) : BaseProcessor<SurahListIntent, SurahListResult>() {
     override fun transformers(): List<FlowBlock<SurahListIntent, SurahListResult>> =
@@ -26,7 +26,7 @@ class SurahListProcessor(
     private val loadSurahs: FlowBlock<SurahListIntent, SurahListResult> = {
         ofType<SurahListIntent.Initial>()
             .flatMapMerge {
-                surahsUsecase.getSurahs()
+                surahUsecase.getSurahs()
             }
             .map {
                 SurahListResult.SurahsSuccess(

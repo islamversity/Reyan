@@ -17,8 +17,8 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 
 class SearchProcessor(
-    private val searchUsecase : SearchSurahNameUseCase,
-    private val navigator: Navigator,
+    searchUsecase : SearchSurahNameUseCase,
+    navigator: Navigator,
     mapper: Mapper<SurahRepoModel, SurahUIModel>
 ) : BaseProcessor<SearchIntent, SearchResult>() {
 
@@ -46,7 +46,7 @@ class SearchProcessor(
                 SurahLocalModel(
                     surahID = it.id.id,
                     surahName = it.name,
-                    startingAyaOrder = 1
+                    startingAyaOrder = 1,
                 )
             }
             .map {

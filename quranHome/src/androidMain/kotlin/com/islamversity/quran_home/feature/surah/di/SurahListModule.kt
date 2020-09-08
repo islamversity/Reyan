@@ -5,7 +5,7 @@ import com.islamversity.core.mvi.MviPresenter
 import com.islamversity.core.mvi.MviProcessor
 import com.islamversity.daggercore.scope.FeatureScope
 import com.islamversity.domain.model.surah.SurahRepoModel
-import com.islamversity.domain.repo.surah.GetSurahsUsecase
+import com.islamversity.domain.repo.surah.GetSurahUsecase
 import com.islamversity.navigation.Navigator
 import com.islamversity.quran_home.feature.surah.*
 import com.islamversity.quran_home.feature.surah.model.SurahUIModel
@@ -26,12 +26,12 @@ object SurahListModule {
     @Provides
     fun provideProcessor(
         navigator: Navigator,
-        surahsUsecase: GetSurahsUsecase,
+        surahUsecase: GetSurahUsecase,
         surahMapper: Mapper<SurahRepoModel, SurahUIModel>
     ): MviProcessor<SurahListIntent, SurahListResult> =
         SurahListProcessor(
             navigator,
-            surahsUsecase,
+            surahUsecase,
             surahMapper
         )
 

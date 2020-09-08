@@ -80,7 +80,7 @@ private fun provideSurahRevealTypeAdapter(): SurahRevealType.Adapter =
     SurahRevealType.Adapter(surahRevealTypeIdAdapter, surahFlagAdapter)
 
 private fun provideBismillahAdapter() : Bismillah.Adapter =
-    Bismillah.Adapter(bismillahTypeIdAdapter)
+    Bismillah.Adapter(bismillahTypeIdAdapter, bismillahFlagAdapter)
 
 private fun provideSurahAdapter(): Surah.Adapter =
     Surah.Adapter(

@@ -40,12 +40,12 @@ FROM surah
 LEFT JOIN name surahName ON
 surahName.rowId = surah.id
 AND
-surahName.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode)
+surahName.calligraphy = :calligraphyId
 
 LEFT JOIN name revealType ON
 revealType.rowId = surah.revealType
 AND
-revealType.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode);
+revealType.calligraphy = :calligraphyId;
 
 
 
@@ -66,12 +66,12 @@ FROM surah
 LEFT JOIN name surahName ON
 surahName.rowId = surah.id
 AND
-surahName.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode)
+surahName.calligraphy = :calligraphyId
 
 LEFT JOIN name revealType ON
 revealType.rowId = surah.revealType
 AND
-revealType.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode)
+revealType.calligraphy = :calligraphyId
 
 WHERE surah.orderIndex = :soraOrder;
 
@@ -95,12 +95,12 @@ FROM surah
 LEFT JOIN name surahName ON
 surahName.rowId = surah.id
 AND
-surahName.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode)
+surahName.calligraphy = :calligraphyId
 
 LEFT JOIN name revealType ON
 revealType.rowId = surah.revealType
 AND
-revealType.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode)
+revealType.calligraphy = :calligraphyId
 
 WHERE surah.id = :surahId;
 
@@ -119,12 +119,12 @@ FROM surah
 LEFT JOIN name surahName ON
 surahName.rowId = surah.id
 AND
-surahName.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode)
+surahName.calligraphy = :calligraphyId
 
 LEFT JOIN name revealType ON
 revealType.rowId = surah.revealType
 AND
-revealType.calligraphy IN (SELECT id FROM calligraphy WHERE code = :caligraphyCode)
+revealType.calligraphy = :calligraphyId
 
 WHERE surah.id IN (SELECT rowId FROM name queryName WHERE queryName.content LIKE :query);
 
