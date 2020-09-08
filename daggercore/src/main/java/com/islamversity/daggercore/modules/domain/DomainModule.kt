@@ -12,6 +12,7 @@ import dagger.Module
         LocalDataSourceModule::class,
         SearchRepoModule::class,
         AyaModule::class,
+        BismillahModule::class,
     ]
 )
 abstract class DomainModule

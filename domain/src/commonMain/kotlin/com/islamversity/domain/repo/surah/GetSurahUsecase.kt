@@ -1,26 +1,35 @@
 package com.islamversity.domain.repo.surah
 
+import com.islamversity.domain.model.surah.SurahID
 import com.islamversity.domain.model.surah.SurahRepoModel
 import com.islamversity.domain.repo.SettingRepo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flow
 
-
-interface GetSurahsUsecase {
+interface GetSurahUsecase {
     fun getSurahs(): Flow<List<SurahRepoModel>>
+
+    fun getSurah(id: SurahID): Flow<SurahRepoModel?>
 }
 
-class GetSurahsUsecaseImpl(
-    private val surahListRepo: SurahListRepo,
+class GetSurahUsecaseImpl(
+    private val surahRepo: SurahRepo,
     private val settingRepo: SettingRepo
-) : GetSurahsUsecase {
+) : GetSurahUsecase {
     override fun getSurahs() =
         flow {
             emit(settingRepo.getCurrentSurahCalligraphy())
         }
             .flatMapMerge {
-                surahListRepo.getAllSurah(it)
+                surahRepo.getAllSurah(it.id)
             }
 
+    override fun getSurah(id: SurahID): Flow<SurahRepoModel?> =
+        flow {
+            emit(settingRepo.getCurrentSurahCalligraphy())
+        }
+            .flatMapMerge {
+                surahRepo.getSurah(id, it.id)
+            }
 }
