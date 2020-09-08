@@ -21,25 +21,25 @@ interface SurahLocalDataSource {
     )
 
     fun observeAllSurahs(
-        calligraphy: Calligraphy,
+        calligraphy: CalligraphyId,
         context: CoroutineContext = Dispatchers.Default
     ): Flow<List<Surah>>
 
     fun getSurahWithId(
         entityId: SurahId,
-        calligraphy: Calligraphy,
+        calligraphy: CalligraphyId,
         context: CoroutineContext = Dispatchers.Default
     ): Flow<Surah?>
 
     fun getSurahWithOrderAndCalligraphy(
         order: SurahOrderId,
-        calligraphy: Calligraphy,
+        calligraphy: CalligraphyId,
         context: CoroutineContext = Dispatchers.Default
     ): Flow<Surah?>
 
     fun findSurahByName(
         nameQuery: String,
-        calligraphy: Calligraphy,
+        calligraphy: CalligraphyId,
         context: CoroutineContext = Dispatchers.Default
     ): Flow<List<Surah>>
 }
@@ -85,7 +85,7 @@ class SurahLocalDataSourceImpl(
     }
 
     override fun observeAllSurahs(
-        calligraphy: Calligraphy,
+        calligraphy: CalligraphyId,
         context: CoroutineContext
     ): Flow<List<Surah>> =
         surahQueries.getAllSurah(calligraphy, surahMapper)
@@ -94,7 +94,7 @@ class SurahLocalDataSourceImpl(
 
     override fun getSurahWithId(
         entityId: SurahId,
-        calligraphy: Calligraphy,
+        calligraphy: CalligraphyId,
         context: CoroutineContext
     ): Flow<Surah?> =
         surahQueries.getSurahWithId(calligraphy, entityId, surahMapper)
@@ -103,7 +103,7 @@ class SurahLocalDataSourceImpl(
 
     override fun getSurahWithOrderAndCalligraphy(
         order: SurahOrderId,
-        calligraphy: Calligraphy,
+        calligraphy: CalligraphyId,
         context: CoroutineContext
     ): Flow<Surah?> =
         surahQueries.getSurahWithOrder(calligraphy, order, surahMapper)
@@ -112,7 +112,7 @@ class SurahLocalDataSourceImpl(
 
     override fun findSurahByName(
         nameQuery: String,
-        calligraphy: Calligraphy,
+        calligraphy: CalligraphyId,
         context: CoroutineContext
     ): Flow<List<Surah>> =
         surahQueries.findSurahByName(calligraphy, nameQuery, surahMapper)
