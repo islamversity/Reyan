@@ -31,12 +31,10 @@ object SurahListModule {
     @Provides
     fun bindGetSurahListUsecase(
         surahListRepo: SurahListRepo,
-        ayaListRepo: AyaListRepo,
         settingRepo: SettingRepo
     ): GetSurahsUsecase =
         GetSurahsUsecaseImpl(
             surahListRepo,
-            ayaListRepo,
             settingRepo
         )
 }

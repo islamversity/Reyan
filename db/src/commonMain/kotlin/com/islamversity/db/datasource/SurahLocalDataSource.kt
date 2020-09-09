@@ -135,15 +135,17 @@ class SurahLocalDataSourceImpl(
         name: String?,
         revealType: String?,
         revealFlag: RevealTypeFlag,
-        bismillahFlag: BismillahTypeFlag
-    ) -> Surah = { index, id, orderIndex, name, revealType, revealFlag, bismillahFlag ->
+        bismillahFlag: BismillahTypeFlag,
+        ayaCount: AyaOrderId
+    ) -> Surah = { index, id, orderIndex, name, revealType, revealFlag, bismillahFlag, ayaCount ->
         Surah(
             index,
             id,
             orderIndex,
             name!!,
             RevealType.fromFLag(revealFlag, revealType!!),
-            bismillahFlag
+            bismillahFlag,
+            ayaCount.order
         )
     }
 }

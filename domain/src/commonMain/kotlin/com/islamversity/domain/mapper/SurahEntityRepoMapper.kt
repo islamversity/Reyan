@@ -16,6 +16,7 @@ class SurahEntityRepoMapper : Mapper<Surah, SurahRepoModel> {
             revealedType = when(item.revealedType){
                 is RevealType.MECCAN -> RevealedType.MECCAN(item.revealedType.name)
                 is RevealType.MEDINAN -> RevealedType.MEDINAN(item.revealedType.name)
-            }
+            },
+            ayaCount = item.ayaCount
         )
 }

@@ -30,11 +30,17 @@ getAllSurah:
 SELECT
 surah.rowIndex,
 surah.id,
-surah.orderIndex,
+surah.orderIndex AS orderIndex,
 surahName.content AS name,
 revealType.content AS revealType,
 revealFlag,
-bismillahFlag
+bismillahFlag,
+(SELECT
+orderIndex
+FROM aya
+WHERE aya.surahId = surah.id
+ORDER BY orderIndex
+DESC LIMIT 1) ayaCount
 FROM surah
 
 LEFT JOIN name surahName ON
@@ -60,7 +66,13 @@ surah.orderIndex,
 surahName.content AS name,
 revealType.content AS revealType,
 revealFlag,
-bismillahFlag
+bismillahFlag,
+(SELECT
+orderIndex
+FROM aya
+WHERE aya.surahId = surah.id
+ORDER BY orderIndex
+DESC LIMIT 1) ayaCount
 FROM surah
 
 LEFT JOIN name surahName ON
@@ -89,7 +101,13 @@ surah.orderIndex,
 surahName.content AS name,
 revealType.content AS revealType,
 revealFlag,
-bismillahFlag
+bismillahFlag,
+(SELECT
+orderIndex
+FROM aya
+WHERE aya.surahId = surah.id
+ORDER BY orderIndex
+DESC LIMIT 1) ayaCount
 FROM surah
 
 LEFT JOIN name surahName ON
@@ -113,7 +131,13 @@ surah.orderIndex,
 surahName.content AS name,
 revealType.content AS revealType,
 revealFlag,
-bismillahFlag
+bismillahFlag,
+(SELECT
+orderIndex
+FROM aya
+WHERE aya.surahId = surah.id
+ORDER BY orderIndex
+DESC LIMIT 1) ayaCount
 FROM surah
 
 LEFT JOIN name surahName ON
