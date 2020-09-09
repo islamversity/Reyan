@@ -6,6 +6,7 @@ import com.islamversity.db.model.Calligraphy
 import com.islamversity.db.model.Surah
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 

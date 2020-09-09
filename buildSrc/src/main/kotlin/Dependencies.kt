@@ -20,7 +20,7 @@ object Versions {
     val timber = "4.7.1"
     val fresco = "2.0.0"
     val conductor = "3.0.0-rc3"
-    val epoxy = "4.0.0-beta6"
+    val epoxy = "4.1.0"
     val flipper = "0.31.1"
     val chucker = "3.1.2"
     val soLoader = "0.5.1"

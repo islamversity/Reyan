@@ -21,7 +21,10 @@ class SurahSearchRepoImpl(
 ) : SurahSearchRepo {
 
     override fun search(query: String, calligraphy: Calligraphy): Flow<List<SurahRepoModel>> =
-        dataSource.observeAllSurahs(calligraphy.id.toEntity())
+        dataSource.findSurahByName(
+            nameQuery = query,
+            calligraphy = calligraphy.id.toEntity()
+        )
             .map {
                 mapper.listMap(it)
             }

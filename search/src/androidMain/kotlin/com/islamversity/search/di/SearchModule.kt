@@ -12,6 +12,8 @@ import com.islamversity.navigation.Navigator
 import com.islamversity.search.*
 import com.islamversity.search.mapper.SurahRepoUIMapper
 import com.islamversity.search.model.SurahUIModel
+import com.islamversity.search.view.SurahUIItemMapper
+import com.islamversity.view_component.SurahItemModel
 import dagger.Module
 import dagger.Provides
 
@@ -43,5 +45,9 @@ object SearchModule {
     @Provides
     @JvmStatic
     fun bindSoraRepoUIMapper(): Mapper<SurahRepoModel, SurahUIModel> = SurahRepoUIMapper()
+
+    @Provides
+    @JvmStatic
+    fun bindSurahUIItemMapper(): Mapper<SurahUIModel, SurahItemModel> = SurahUIItemMapper()
 
 }
