@@ -42,7 +42,6 @@ aya.id,
 aya.orderIndex,
 aya.surahId,
 ayaContent.content AS ayaText,
-sajdahName.content,
 aya.sajdahType,
 aya.juzOrderIndex,
 aya.hizbQuarterOrderIndex FROM aya
@@ -52,10 +51,6 @@ ayaContent.ayaId = aya.id
 AND
 ayaContent.calligraphy = :calligraphy
 
-LEFT JOIN name sajdahName ON
-sajdahName.rowId = aya.sajdahId
-AND
-sajdahName.calligraphy = :calligraphy
 WHERE aya.surahId = :surahId
 
 ORDER BY aya.orderIndex ASC;
@@ -72,7 +67,6 @@ aya.id,
 aya.orderIndex,
 aya.surahId,
 ayaContent.content AS ayaText,
-sajdahName.content,
 aya.sajdahType,
 aya.juzOrderIndex,
 aya.hizbQuarterOrderIndex FROM aya
@@ -81,11 +75,6 @@ LEFT JOIN aya_content ayaContent ON
 ayaContent.ayaId = aya.id
 AND
 ayaContent.calligraphy = :calligraphy
-
-LEFT JOIN name sajdahName ON
-sajdahName.rowId = aya.sajdahId
-AND
-sajdahName.calligraphy = :calligraphy
 
 WHERE aya.surahId IN (
 SELECT id FROM surah
@@ -121,7 +110,6 @@ aya.id,
 aya.orderIndex,
 aya.surahId,
 ayaContent.content AS ayaText,
-sajdahName.content,
 aya.sajdahType,
 aya.juzOrderIndex,
 aya.hizbQuarterOrderIndex FROM aya
@@ -130,11 +118,6 @@ LEFT JOIN aya_content ayaContent ON
 ayaContent.ayaId = aya.id
 AND
 ayaContent.calligraphy IN (SELECT id FROM calligraphy WHERE code = :ayaCaligraphyCode)
-
-LEFT JOIN name sajdahName ON
-sajdahName.rowId = aya.sajdahId
-AND
-sajdahName.calligraphy IN (SELECT id FROM calligraphy WHERE code = :ayaCaligraphyCode)
 
 WHERE aya.id = :id;
 

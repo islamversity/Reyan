@@ -8,55 +8,61 @@
     android:orientation="vertical">
 
     <View
-        android:id="@+id/vSearchBack"
+        android:id="@+id/view_search_bar"
         android:layout_width="0dp"
         android:layout_height="?android:attr/actionBarSize"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        android:background="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imgBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/medium_margin"
-        android:background="?android:attr/selectableItemBackground"
+        android:id="@+id/img_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="@dimen/min_margin"
         android:contentDescription="@string/back"
-        android:padding="6dp"
-        app:layout_constraintBottom_toBottomOf="@+id/vSearchBack"
-        app:layout_constraintLeft_toLeftOf="@+id/vSearchBack"
-        app:layout_constraintTop_toTopOf="@+id/vSearchBack"
-        app:srcCompat="@drawable/ic_arrow_back_black_24dp"
+        android:padding="@dimen/min_padding"
+        app:layout_constraintBottom_toBottomOf="@+id/view_search_bar"
+        app:layout_constraintStart_toStartOf="@+id/view_search_bar"
+        app:layout_constraintTop_toTopOf="@+id/view_search_bar"
+        app:srcCompat="@drawable/ic_round_arrow_back"
         tools:ignore="RtlHardcoded" />
 
     <EditText
-        android:id="@+id/edtSearch"
+        android:id="@+id/edt_search"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="?android:attr/actionBarSize"
         android:background="@android:color/transparent"
-        android:fontFamily="@font/english_regular_light"
+        android:fontFamily="@font/arabic_regular"
         android:hint="@string/search"
         android:importantForAutofill="no"
         android:inputType="text"
-        android:paddingLeft="@dimen/medium_margin"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/vSearchBack"
-        app:layout_constraintLeft_toRightOf="@+id/imgBack"
-        app:layout_constraintRight_toRightOf="@+id/vSearchBack"
-        app:layout_constraintTop_toTopOf="@+id/vSearchBack"
-        tools:ignore="RtlHardcoded,RtlSymmetry,UnusedAttribute" />
+        android:maxLines="1"
+        android:paddingLeft="@dimen/low_padding"
+        android:paddingTop="@dimen/low_padding"
+        android:paddingRight="@dimen/low_padding"
+        android:paddingBottom="@dimen/low_padding"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey"
+        app:layout_constraintBottom_toBottomOf="@+id/view_search_bar"
+        app:layout_constraintLeft_toRightOf="@+id/img_back"
+        app:layout_constraintRight_toRightOf="@+id/view_search_bar"
+        app:layout_constraintTop_toTopOf="@+id/view_search_bar" />
 
     <com.islamversity.base.epoxyhelper.EpoxyAsyncRecyclerView
-        android:id="@+id/searchList"
+        android:id="@+id/list_search"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:paddingTop="5dp"
+        android:clipToPadding="false"
+        android:paddingTop="@dimen/min_padding"
+        android:paddingBottom="@dimen/medium_padding"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vSearchBack"
-        tools:itemCount="2"
-        tools:listitem="@layout/row_sura" />
-
+        app:layout_constraintTop_toBottomOf="@+id/view_search_bar"
+        tools:itemCount="15"
+        tools:listitem="@layout/row_surah" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

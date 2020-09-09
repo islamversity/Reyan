@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/home_motion"
+    android:background="@drawable/immersive_background"
     app:motionProgress="1.0"
     tools:showPaths="true">
 
@@ -15,11 +16,13 @@
         android:layout_height="@dimen/toolbar_icon_size"
         android:background="?selectableItemBackgroundBorderless"
         android:padding="4dp"
-        android:src="@drawable/ic_outline_settings"
+        app:srcCompat="@drawable/ic_outline_settings"
+        app:tint="@color/green_dark"
         android:translationX="@dimen/large_margin"
         android:translationY="@dimen/large_margin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="Settings" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/inputCard"

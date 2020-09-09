@@ -9,6 +9,7 @@ import com.islamversity.base.CoroutineView
 import com.islamversity.base.hideKeyboard
 import com.islamversity.base.showKeyboard
 import com.islamversity.base.transitionNameCompat
+import com.islamversity.core.Mapper
 import com.islamversity.core.mvi.MviPresenter
 import com.islamversity.core.throttleFirst
 import com.islamversity.daggercore.CoreComponent
@@ -19,6 +20,9 @@ import com.islamversity.search.SearchState
 import com.islamversity.search.databinding.ViewSearchBinding
 import com.islamversity.search.di.DaggerSearchComponent
 import com.islamversity.search.model.SurahRowActionModel
+import com.islamversity.search.model.SurahUIModel
+import com.islamversity.view_component.SurahItemModel
+import com.islamversity.view_component.surahItem
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
 import ru.ldralighieri.corbind.widget.textChangeEvents
@@ -42,6 +46,9 @@ class SearchView(
     @Inject
     override lateinit var presenter: MviPresenter<SearchIntent, SearchState>
 
+    @Inject
+    lateinit var surahMapper : Mapper<SurahUIModel, SurahItemModel>
+
     override fun bindView(inflater: LayoutInflater, container: ViewGroup): ViewSearchBinding =
         ViewSearchBinding.inflate(inflater, container, false)
 
@@ -56,7 +63,7 @@ class SearchView(
 
     override fun beforeBindingView(binding: ViewSearchBinding) {
         searchLocal?.apply {
-            binding.vSearchBack.transitionNameCompat = backTransitionName
+            binding.viewSearchBar.transitionNameCompat = backTransitionName
             binding.edtSearch.transitionNameCompat = textTransitionName
         }
 
@@ -68,11 +75,11 @@ class SearchView(
         binding.root.showKeyboard()
 
         val layoutManager = GridLayoutManager(binding.root.context, 3)
-        binding.searchList.layoutManager = layoutManager
+        binding.listSearch.layoutManager = layoutManager
     }
 
     override fun onDestroyView(view: View) {
-        binding.searchList.adapter = null
+        binding.listSearch.adapter = null
         super.onDestroyView(view)
     }
 
@@ -110,13 +117,13 @@ class SearchView(
     }
 
     private fun renderList(state: SearchState) {
-        binding.searchList.withModelsAsync {
-            state.items.forEach { suim ->
-                surahRowView {
-                    id(suim.id.id)
-                    uiItem(suim)
+        binding.listSearch.withModelsAsync {
+            state.items.forEach { model ->
+                surahItem {
+                    id(model.id.id)
+                    uiItem(surahMapper.map(model))
                     listener {
-                        itemClickChannel.offer(it)
+                        itemClickChannel.offer(SurahRowActionModel(model))
                     }
                 }
             }
