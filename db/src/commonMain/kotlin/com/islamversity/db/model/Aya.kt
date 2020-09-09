@@ -9,7 +9,7 @@ data class Aya(
     val order: AyaOrderId,
     val surahId: SurahId,
     val content: String,
-    val sajdahType : SajdahType,
+    val sajdahType : SajdahTypeFlag,
     val juz: Juz,
     val hizb: HizbQuarter
 ){
