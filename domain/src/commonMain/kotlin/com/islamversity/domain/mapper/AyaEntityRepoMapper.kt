@@ -10,7 +10,7 @@ class AyaEntityRepoMapper : Mapper<Aya, AyaRepoModel> {
         AyaRepoModel(
             AyaID(item.id.id),
             item.content,
-            item.index,
+            item.order.order,
             item.juz.value,
             item.hizb.value
         )

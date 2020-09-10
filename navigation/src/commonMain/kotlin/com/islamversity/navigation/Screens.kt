@@ -34,7 +34,7 @@ sealed class Screens(
         popAnimation
     )
 
-    class SurahDetail(
+    class Surah(
         model: SurahLocalModel,
         pushAnimation: NavigationAnimation? = null,
         popAnimation: NavigationAnimation? = null

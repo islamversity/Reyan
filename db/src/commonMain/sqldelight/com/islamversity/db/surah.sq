@@ -126,7 +126,17 @@ revealType.rowId = surah.revealType
 AND
 revealType.calligraphy = :calligraphyId
 
-WHERE surah.id IN (SELECT rowId FROM name queryName WHERE queryName.content LIKE :query);
+WHERE surah.id IN (
+  SELECT rowId
+  FROM name queryName
+  WHERE
+  queryName.calligraphy = :calligraphyId
+  AND
+  queryName.content LIKE '%' || :query || '%')
+
+ORDER BY surah.orderIndex ASC;
+
+
 
 
 
