@@ -64,6 +64,9 @@ class SurahView(
         renderError(state.base)
 
         //render bismillah
+        if (state.closeScreen) {
+            router.popController(this)
+        }
 
         binding.tvBismillah visible state.showBismillah
         binding.tvBismillah.setText(state.bismillah)

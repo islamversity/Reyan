@@ -55,6 +55,9 @@ class SurahPresenter(
                 preState.copy(
                     bismillah = result.value
                 )
-            SurahResult.SurahNotFound -> TODO()
+            SurahResult.SurahNotFound ->
+                preState.copy(
+                    closeScreen = true
+                )
         }
 }
