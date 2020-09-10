@@ -83,7 +83,11 @@ class SurahProcessor(
             },
             {
                 filter { it.bismillahType == BismillahRepoType.NEEDED }.flatMapMerge {
-                    TODO()
+                    bismillahUsecase.getBismillahWithType(it.bismillahType)
+                        .filterNotNull()
+                        .map {
+                            SurahResult.Bismillah.Content(it.content)
+                        }
                 }
             }
         )
