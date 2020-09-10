@@ -50,7 +50,7 @@ class SearchProcessor(
                 )
             }
             .map {
-                Screens.SurahDetail(
+                Screens.Surah(
                     it,
                     NavigationAnimation.ArcFadeMove(
                         it.surahName

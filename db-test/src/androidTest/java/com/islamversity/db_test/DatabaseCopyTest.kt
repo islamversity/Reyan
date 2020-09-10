@@ -9,6 +9,7 @@ import com.islamversity.daggercore.sqlitehelper.SQLiteCopyOpenHelperFactory
 import com.islamversity.db.Main
 import com.islamversity.db.createMainDB
 import com.islamversity.db.model.BismillahId
+import com.islamversity.db.model.BismillahTypeFlag
 import com.squareup.sqldelight.android.AndroidSqliteDriver
 import com.squareup.sqldelight.db.SqlDriver
 import org.junit.Before
@@ -68,7 +69,7 @@ class DatabaseCopyTest {
 
         val query = db.bismillahQueries
 
-        query.insertBismillah(BismillahId("1"))
+        query.insertBismillah(BismillahId("1"), BismillahTypeFlag.NEEDED)
 
         val timeTakenToCreateAndInsertOneRow = System.currentTimeMillis() - creationIsStarted
 

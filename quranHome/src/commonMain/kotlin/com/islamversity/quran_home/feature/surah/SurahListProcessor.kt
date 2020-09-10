@@ -10,6 +10,7 @@ import com.islamversity.domain.repo.surah.GetSurahUsecase
 import com.islamversity.navigation.Navigator
 import com.islamversity.navigation.Screens
 import com.islamversity.navigation.model.SearchLocalModel
+import com.islamversity.navigation.model.SurahLocalModel
 import com.islamversity.navigation.navigateTo
 import com.islamversity.quran_home.feature.surah.model.SurahUIModel
 import kotlinx.coroutines.flow.flatMapMerge
@@ -41,7 +42,7 @@ class SurahListProcessor(
                 it.action.surah
             }
             .map {
-                Screens.Search(SearchLocalModel())
+                Screens.Surah(SurahLocalModel(it.id.id, it.name, 0))
             }
             .navigateTo(navigator)
     }
