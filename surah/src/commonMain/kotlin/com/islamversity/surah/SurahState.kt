@@ -11,6 +11,7 @@ data class SurahState(
     val ayas : List<AyaUIModel>,
     val mainAyaFontSize : Int,
     val startFrom : Int,
+    val closeScreen : Boolean,
 ) : BaseViewState {
     companion object {
         fun idle() =
@@ -20,7 +21,8 @@ data class SurahState(
                 mainAyaFontSize = 0,
                 startFrom = 0,
                 showBismillah = false,
-                bismillah = ""
+                bismillah = "",
+                closeScreen = false
             )
     }
 }
