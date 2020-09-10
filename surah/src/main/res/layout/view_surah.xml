@@ -29,6 +29,17 @@
         app:tint="@color/yellow"
         tools:ignore="RtlHardcoded" />
 
+    <TextView
+        android:id="@+id/tvBismillah"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textSize="14dp"
+        android:visibility="visible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vSearchBack" />
+
+
     <com.islamversity.base.epoxyhelper.EpoxyAsyncRecyclerView
         android:id="@+id/ayaList"
         android:layout_width="0dp"
@@ -37,9 +48,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vSearchBack"
-        tools:itemCount="2"
-        />
+        app:layout_constraintTop_toBottomOf="@+id/tvBismillah"
+        tools:itemCount="2" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

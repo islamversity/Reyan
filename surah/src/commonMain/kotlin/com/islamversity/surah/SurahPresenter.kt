@@ -41,7 +41,6 @@ class SurahPresenter(
             is SurahResult.MainAyasLoaded ->
                 preState.copy(
                     ayas = result.ayas,
-                    startFrom = result.startFrom,
                     mainAyaFontSize = result.fontSize
                 )
             SurahResult.Bismillah.Hide ->
@@ -56,5 +55,6 @@ class SurahPresenter(
                 preState.copy(
                     bismillah = result.value
                 )
+            SurahResult.SurahNotFound -> TODO()
         }
 }
