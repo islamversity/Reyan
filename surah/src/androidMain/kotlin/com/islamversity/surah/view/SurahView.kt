@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.islamversity.base.CoroutineView
+import com.islamversity.base.visible
 import com.islamversity.core.mvi.MviPresenter
 import com.islamversity.daggercore.CoreComponent
 import com.islamversity.navigation.fromByteArray
@@ -55,7 +56,6 @@ class SurahView(
             SurahIntent.Initial(
                 surahLocal.surahID,
                 surahLocal.startingAyaOrder,
-                surahLocal.bismillahType
             )
         )
 
@@ -64,6 +64,10 @@ class SurahView(
         renderError(state.base)
 
         //render bismillah
+
+        binding.tvBismillah visible state.showBismillah
+        binding.tvBismillah.setText(state.bismillah)
+        binding.tvBismillah.textSize = state.mainAyaFontSize.toFloat()
 
         binding.ayaList.withModelsAsync {
             state.ayas.forEach {
