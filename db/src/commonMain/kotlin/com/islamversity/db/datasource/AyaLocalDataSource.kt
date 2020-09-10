@@ -136,7 +136,7 @@ class AyaLocalDataSourceImpl(
             orderIndex,
             surahId,
             ayaText!!,
-            SajdahType(sajdahType, sajdahText!!),
+            SajdahType(sajdahType, sajdahText),
             juzOrderIndex,
             hizbOrderIndex
         )
