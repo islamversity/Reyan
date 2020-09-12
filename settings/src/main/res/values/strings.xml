@@ -2,4 +2,6 @@
 <resources>
     <string name="surah_calligraphy">Surah Calligraphy</string>
     <string name="aya_calligraphy">Aya Calligraphy</string>
+    <string name="calligraphy">Calligraphy</string>
+    <string name="font_size">Font size</string>
 </resources>
