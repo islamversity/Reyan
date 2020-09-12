@@ -126,6 +126,7 @@ dependencies {
     androidTestImplementation espressoCore
     androidTestImplementation espressoIntents
 
+    implementation(project(viewComponent))
     implementation(project(core))
     implementation(project(domain))
     implementation(project(base))

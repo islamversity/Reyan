@@ -36,6 +36,7 @@ kotlin {
     }
     android()
     sourceSets["androidMain"].dependencies {
+        implementation(project(Deps.Modules.viewComponent))
         implementation(kotlin("stdlib", Versions.kotlin))
 
         implementation(Deps.Android.Support.compat)

@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="colorPrimary">@color/green</color>
+    <color name="defaultBackground">#e2f1f6</color>
+    <color name="immersive_background">#88000000</color>
+    <color name="dialog_background">#fafafa</color>
+
+    <color name="blue_l1">#34374F</color>
+    <color name="yellow">#FFFDE701</color>
+    <color name="colorPrimaryDark">#009688</color>
+    <color name="colorPrimary">#70AF72</color>
+
+
+    <color name="colorAccent">#FDE701</color>
 
     <!--    Texts-->
     <color name="text_default">#1a1a1d</color>
@@ -19,6 +29,7 @@
     <color name="gray700">#737373</color>
     <color name="gray600">#9a9a9a</color>
     <color name="gray500">#bebebe</color>
+    <color name="gray450">#D7D7D7</color>
     <color name="gray400">#ebebeb</color>
     <color name="gray200">#fafafa</color>
     <color name="white">#ffffff</color>
