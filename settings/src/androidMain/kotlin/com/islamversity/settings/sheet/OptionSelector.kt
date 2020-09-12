@@ -4,31 +4,30 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.islamversity.base.epoxyhelper.EpoxyAsyncRecyclerView
 import com.islamversity.settings.R
+import com.islamversity.settings.databinding.SheetOptionBinding
 
 
 class OptionSelector(context: Context) : BottomSheetDialog(context) {
 
+    @RecyclerView.Orientation
+    private var orientation = RecyclerView.VERTICAL
     private var dismissListener: DismissListener? = null
+    private val options = mutableListOf<String>()
     private var defaultPosition = 0
     private var maxHeight = 0
 
-    @RecyclerView.Orientation
-    private var orientation = RecyclerView.VERTICAL
-
-    private val options = mutableListOf<String>()
-    private lateinit var epoxyView: EpoxyAsyncRecyclerView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window.requestFeature(Window.FEATURE_NO_TITLE)
+        window!!.requestFeature(Window.FEATURE_NO_TITLE)
+        val binding = SheetOptionBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         setContentView(R.layout.sheet_option)
         window!!.apply {
             setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -38,30 +37,32 @@ class OptionSelector(context: Context) : BottomSheetDialog(context) {
             )
         }
 
-        findViewById<View>(R.id.backButton)!!.setOnClickListener { dismiss() }
-        epoxyView = findViewById(R.id.epoxyView)!!
-        epoxyView.layoutManager = LinearLayoutManager(context, orientation, false)
-        epoxyView.scrollToPosition(defaultPosition)
-        epoxyView.withModelsAsync {
-            if (orientation == RecyclerView.VERTICAL) {
-                options.forEach {
-                    fullWidthOptionView {
-                        id(it)
-                        item(it)
-                        listener {
-                            dismissListener?.dismissSheet(options.indexOf(it))
-                            dismiss()
+        binding.backButton.setOnClickListener { dismiss() }
+
+        binding.epoxyView.apply {
+            layoutManager = LinearLayoutManager(context, orientation, false)
+            scrollToPosition(defaultPosition)
+            withModelsAsync {
+                if (orientation == RecyclerView.VERTICAL) {
+                    options.forEach {
+                        fullWidthOptionView {
+                            id(it)
+                            item(it)
+                            listener {
+                                dismissListener?.dismissSheet(options.indexOf(it))
+                                dismiss()
+                            }
                         }
                     }
-                }
-            } else {
-                options.forEach {
-                    optionView {
-                        id(it)
-                        item(it)
-                        listener {
-                            dismissListener?.dismissSheet(options.indexOf(it))
-                            dismiss()
+                } else {
+                    options.forEach {
+                        optionView {
+                            id(it)
+                            item(it)
+                            listener {
+                                dismissListener?.dismissSheet(options.indexOf(it))
+                                dismiss()
+                            }
                         }
                     }
                 }
@@ -94,5 +95,10 @@ class OptionSelector(context: Context) : BottomSheetDialog(context) {
     fun dismissListener(dismissListener: DismissListener): OptionSelector {
         this.dismissListener = dismissListener
         return this
+    }
+
+    override fun onDetachedFromWindow() {
+        dismissListener = null
+        super.onDetachedFromWindow()
     }
 }
