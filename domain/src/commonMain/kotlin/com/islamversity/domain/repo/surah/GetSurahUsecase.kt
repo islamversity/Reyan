@@ -18,17 +18,13 @@ class GetSurahUsecaseImpl(
     private val settingRepo: SettingRepo
 ) : GetSurahUsecase {
     override fun getSurahs() =
-        flow {
-            emit(settingRepo.getCurrentSurahCalligraphy())
-        }
+        settingRepo.getCurrentSurahCalligraphy()
             .flatMapMerge {
                 surahRepo.getAllSurah(it.id)
             }
 
     override fun getSurah(id: SurahID): Flow<SurahRepoModel?> =
-        flow {
-            emit(settingRepo.getCurrentSurahCalligraphy())
-        }
+        settingRepo.getCurrentSurahCalligraphy()
             .flatMapMerge {
                 surahRepo.getSurah(id, it.id)
             }
