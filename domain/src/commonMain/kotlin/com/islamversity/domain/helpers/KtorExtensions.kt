@@ -42,7 +42,7 @@ fun getThrowableErrorMessage(throwable: Throwable): String =
     }
 
 fun <T, U> Flow<Response<T>>.eitherError(map: (T) -> U): Flow<Either<ErrorHolder, U>> =
-    listMerge(
+    publish(
         {
             filter { it.isNotSuccessful }
                 .map { it.getErrorRepoModel().left() }

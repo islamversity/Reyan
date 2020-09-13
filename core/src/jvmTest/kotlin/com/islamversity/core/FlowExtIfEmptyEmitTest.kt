@@ -9,7 +9,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
 
-class FlowExtTest {
+class FlowExtIfEmptyEmitTest {
 
     @Test
     fun `returns if flow was empty`() = runBlockingTest {
@@ -80,7 +80,5 @@ class FlowExtTest {
         channel.offer(7)
 
         Unit
-
     }
-
 }

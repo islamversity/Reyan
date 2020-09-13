@@ -52,6 +52,7 @@ object Deps {
         val common = "stdlib-common"
         val jvmStd8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
         val dateTime = "org.jetbrains.kotlinx:kotlinx-datetime:0.1.0"
+        val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
     }
 
     object Android {
@@ -190,11 +191,11 @@ object Deps {
     }
 
     object KotlinTest {
-        val common = "org.jetbrains.kotlin:kotlin-test-common:${Versions.kotlin}"
+//        val common = "org.jetbrains.kotlin:kotlin-test-common:${Versions.kotlin}"
+        val common = "org.jetbrains.kotlin:kotlin-test-multiplatform"
         val annotations = "org.jetbrains.kotlin:kotlin-test-annotations-common:${Versions.kotlin}"
         val jvm = "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
         val junit = "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
-        val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
     }
 
     object Coroutines {
