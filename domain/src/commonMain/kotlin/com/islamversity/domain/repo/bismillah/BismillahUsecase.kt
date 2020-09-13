@@ -17,9 +17,7 @@ class BismillahUsecaseImpl(
     private val settingRepo: SettingRepo
 ) : BismillahUsecase {
     override fun getBismillahWithType(type: BismillahRepoType): Flow<BismillahRepoModel?> =
-        flow {
-            emit(settingRepo.getCurrentQuranReadCalligraphy())
-        }
+        settingRepo.getCurrentQuranReadCalligraphy()
             .flatMapMerge {
                 repo.getBismillah(type, it.id)
             }

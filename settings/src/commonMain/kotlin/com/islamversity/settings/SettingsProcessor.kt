@@ -59,7 +59,7 @@ class SettingsProcessor(
 
     private val getSurahFontSize: FlowBlock<SettingsIntent, SettingsResult> = {
         ofType<SettingsIntent.Initial>()
-            .map {
+            .flatMapMerge {
                 settingsRepo.getCurrentFontSize()
             }
             .map {
@@ -71,7 +71,7 @@ class SettingsProcessor(
 
     private val getCurrentSurahNameCalligraphy: FlowBlock<SettingsIntent, SettingsResult> = {
         ofType<SettingsIntent.Initial>()
-            .map {
+            .flatMapMerge {
                 settingsRepo.getCurrentSurahCalligraphy()
             }
             .map {
@@ -83,7 +83,7 @@ class SettingsProcessor(
 
     private val getCurrentAyaCalligraphy: FlowBlock<SettingsIntent, SettingsResult> = {
         ofType<SettingsIntent.Initial>()
-            .map {
+            .flatMapMerge {
                 settingsRepo.getCurrentQuranReadCalligraphy()
             }
             .map {

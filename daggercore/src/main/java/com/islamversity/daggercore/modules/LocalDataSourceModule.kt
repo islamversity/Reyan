@@ -36,4 +36,11 @@ object LocalDataSourceModule {
     ) : BismillahLocalDataSource =
         BismillahLocalDataSourceImpl(bismillahQueries)
 
+    @JvmStatic
+    @Provides
+    fun provideSettings(
+        bismillahQueries: SettingsQueries
+    ) : SettingsDataSource =
+        SettingsDataSourceImpl(bismillahQueries)
+
 }

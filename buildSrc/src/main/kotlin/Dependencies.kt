@@ -39,7 +39,6 @@ object Versions {
     val ktor = "1.4.0"
     val serialization = "1.0.0-RC"
     val stately = "1.1.0"
-    val multiplatformSettings = "0.6.1"
     val coroutines = "1.3.9"
     val flowBinding = "1.3.2"
     val koin = "3.0.0-alpha-9"
@@ -259,12 +258,9 @@ object Deps {
 
     object Tools {
         val stately = "co.touchlab:stately-common:${Versions.stately}"
-        val multiplatformSettings =
-            "com.russhwolf:multiplatform-settings-no-arg:${Versions.multiplatformSettings}"
-        val multiplatformSettingsTest =
-            "com.russhwolf:multiplatform-settings-test:${Versions.multiplatformSettings}"
         val koinCore = "org.koin:koin-core:${Versions.koin}"
         val cocoapodsext = "co.touchlab:kotlinnativecocoapods:${Versions.cocoapodsext}"
         val okio = "com.squareup.okio:okio:2.6.0"
+        val logger = "co.touchlab:kermit:0.1.7"
     }
 }

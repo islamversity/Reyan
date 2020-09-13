@@ -17,9 +17,7 @@ class GetAyaUseCaseImpl(
     private val settingRepo: SettingRepo
 ) : GetAyaUseCase {
     override fun observeAyaMain(surahID: SurahID): Flow<List<AyaRepoModel>> =
-        flow {
-            emit(settingRepo.getCurrentQuranReadCalligraphy())
-        }
+        settingRepo.getCurrentQuranReadCalligraphy()
             .flatMapMerge {
                 ayaListRepo.observeAllAyas(surahID, it.id)
             }

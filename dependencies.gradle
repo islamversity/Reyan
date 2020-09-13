@@ -106,7 +106,7 @@ ext {
                     chuckerNoop = "com.github.ChuckerTeam.Chucker:library-no-op:${Versions.chucker}",
                     soLoader = "com.facebook.soloader:soloader:${Versions.soLoader}",
                     stetho = "com.facebook.stetho:stetho:${Versions.stetho}",
-                    multiplatformSettings = "com.russhwolf:multiplatform-settings-no-arg:${Versions.multiplatformSettings}"
+                    klogger = "co.touchlab:kermit:0.1.7"
             ],
 
             databse = [

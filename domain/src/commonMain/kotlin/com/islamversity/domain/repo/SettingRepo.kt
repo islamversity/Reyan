@@ -1,27 +1,38 @@
 package com.islamversity.domain.repo
 
+import co.touchlab.kermit.Kermit
+import com.islamversity.core.Logger
 import com.islamversity.core.Mapper
 import com.islamversity.db.datasource.CalligraphyLocalDataSource
+import com.islamversity.db.datasource.SettingsDataSource
 import com.islamversity.db.model.CalligraphyId
 import com.islamversity.domain.model.Calligraphy
 import com.islamversity.domain.model.QuranReadFontSize
-import com.russhwolf.settings.Settings
-import com.russhwolf.settings.invoke
-import com.russhwolf.settings.set
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.*
 import kotlin.coroutines.CoroutineContext
 import com.islamversity.db.Calligraphy as CalligraphyEntity
 
 interface SettingRepo {
 
-    suspend fun getCurrentSurahCalligraphy(context: CoroutineContext = Dispatchers.Default): Calligraphy
-    suspend fun getCurrentQuranReadCalligraphy(context: CoroutineContext = Dispatchers.Default): Calligraphy
-    suspend fun getCurrentFontSize(context: CoroutineContext = Dispatchers.Default): QuranReadFontSize
+    fun getCurrentSurahCalligraphy(context: CoroutineContext = Dispatchers.Default): Flow<Calligraphy>
+    fun getCurrentQuranReadCalligraphy(context: CoroutineContext = Dispatchers.Default): Flow<Calligraphy>
+    fun getCurrentFontSize(context: CoroutineContext = Dispatchers.Default): Flow<QuranReadFontSize>
 
-    fun setSurahCalligraphy(calligraphy: Calligraphy)
-    fun setQuranReadCalligraphy(calligraphy: Calligraphy)
-    fun setQuranReadFont(font: QuranReadFontSize)
+    suspend fun setSurahCalligraphy(
+        calligraphy: Calligraphy,
+        context: CoroutineContext = Dispatchers.Default
+    )
+
+    suspend fun setQuranReadCalligraphy(
+        calligraphy: Calligraphy,
+        context: CoroutineContext = Dispatchers.Default
+    )
+
+    suspend fun setQuranReadFont(
+        font: QuranReadFontSize,
+        context: CoroutineContext = Dispatchers.Default
+    )
 }
 
 private const val KEY_SURAH_CALLIGRAPHY = "KEY_SURAH_CALLIGRAPHY"
@@ -29,42 +40,70 @@ private const val KEY_QURAN_READ_CALLIGRAPHY = "KEY_QURAN_READ_CALLIGRAPHY"
 private const val KEY_QURAN_READ_FONT_SIZE = "KEY_QURAN_READ_FONT_SIZE"
 
 class SettingRepoImpl(
-    private val settings: Settings = Settings(),
+    private val settingsDataSource: SettingsDataSource,
     private val calligraphyDS: CalligraphyLocalDataSource,
-    private val mapper: Mapper<CalligraphyEntity, Calligraphy>
+    private val mapper: Mapper<CalligraphyEntity, Calligraphy>,
 ) : SettingRepo {
 
-    override suspend fun getCurrentSurahCalligraphy(context: CoroutineContext): Calligraphy {
-        val calligraphyEntity = settings.getStringOrNull(KEY_SURAH_CALLIGRAPHY)?.let {
-            calligraphyDS.getCalligraphyById(CalligraphyId(it)).first()
-        } ?: calligraphyDS.getArabicSurahCalligraphy().first()
+    override fun getCurrentSurahCalligraphy(context: CoroutineContext): Flow<Calligraphy> =
+        settingsDataSource.observeKey(
+            KEY_SURAH_CALLIGRAPHY,
+            {
+                calligraphyDS.getArabicSurahCalligraphy().first().id.id
+            },
+            context
+        )
+            .flatMapMerge {
+                calligraphyDS.getCalligraphyById(CalligraphyId(it))
+            }
+            .map {
+                mapper.map(it!!)
+            }
 
-        return mapper.map(calligraphyEntity)
+    override fun getCurrentQuranReadCalligraphy(context: CoroutineContext): Flow<Calligraphy> =
+        settingsDataSource.observeKey(
+            KEY_QURAN_READ_CALLIGRAPHY,
+            {
+                calligraphyDS.getArabicSimpleAyaCalligraphy().first().id.id
+            },
+            context
+        )
+            .flatMapMerge {
+                calligraphyDS.getCalligraphyById(CalligraphyId(it))
+            }
+            .map {
+                mapper.map(it!!)
+            }
+
+
+    override fun getCurrentFontSize(context: CoroutineContext): Flow<QuranReadFontSize> =
+        settingsDataSource.observeKey(
+            KEY_QURAN_READ_FONT_SIZE,
+            {
+                QuranReadFontSize.DEFAULT.size.toString()
+            },
+            context
+        )
+            .map {
+                QuranReadFontSize(it.toDouble())
+            }
+            .onEach {
+                Logger.log { "SettingRepo found fontSize=$it" }
+            }
+
+
+    override suspend fun setSurahCalligraphy(calligraphy: Calligraphy, context: CoroutineContext) {
+        settingsDataSource.put(KEY_SURAH_CALLIGRAPHY, calligraphy.id.id, context)
     }
 
-    override suspend fun getCurrentQuranReadCalligraphy(context: CoroutineContext): Calligraphy {
-        val calligraphyEntity = settings.getStringOrNull(KEY_QURAN_READ_CALLIGRAPHY)?.let {
-            calligraphyDS.getCalligraphyById(CalligraphyId(it)).first()
-        } ?: calligraphyDS.getArabicSimpleAyaCalligraphy().first()
-
-        return mapper.map(calligraphyEntity)
+    override suspend fun setQuranReadCalligraphy(
+        calligraphy: Calligraphy,
+        context: CoroutineContext
+    ) {
+        settingsDataSource.put(KEY_QURAN_READ_CALLIGRAPHY, calligraphy.id.id, context)
     }
 
-    override suspend fun getCurrentFontSize(context: CoroutineContext): QuranReadFontSize {
-        return settings.getDoubleOrNull(KEY_QURAN_READ_FONT_SIZE)?.let {
-            QuranReadFontSize(it)
-        } ?: QuranReadFontSize.DEFAULT
-    }
-
-    override fun setSurahCalligraphy(calligraphy: Calligraphy) {
-        settings[KEY_SURAH_CALLIGRAPHY] = calligraphy.id.id
-    }
-
-    override fun setQuranReadCalligraphy(calligraphy: Calligraphy) {
-        settings[KEY_QURAN_READ_CALLIGRAPHY] = calligraphy.id.id
-    }
-
-    override fun setQuranReadFont(font: QuranReadFontSize) {
-        settings[KEY_QURAN_READ_FONT_SIZE] = font.size
+    override suspend fun setQuranReadFont(font: QuranReadFontSize, context: CoroutineContext) {
+        settingsDataSource.put(KEY_QURAN_READ_FONT_SIZE, font.size.toString(), context)
     }
 }
