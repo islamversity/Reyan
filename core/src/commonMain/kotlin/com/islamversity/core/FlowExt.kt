@@ -23,7 +23,7 @@ fun <T> Flow<T>.throttleFirst(windowDuration: Duration): Flow<T> {
     }
 }
 
-inline fun <reified R> Flow<*>.ofType() = transform {
+inline fun <reified R> Flow<*>.ofType(): Flow<R> = transform {
     if (R::class.isInstance(it)) {
         emit(it as R)
     }
@@ -36,19 +36,24 @@ fun <T> suspendToFlow(block: suspend () -> T): Flow<T> = flow {
     emit(block())
 }
 
-fun <T, U> Flow<T>.listMerge(vararg blocks: FlowBlock<T, U>) =
-    blocks.map { block ->
-        block(this)
-    }.merge()
-
-fun <T, U> Flow<T>.publish(vararg blocks: FlowBlock<T, U>) =
+fun <T, U> Flow<T>.publish(vararg blocks: FlowBlock<T, U>): Flow<U> =
     publish(blocks.toList())
 
-fun <T, U> Flow<T>.publish(blocks: List<FlowBlock<T, U>>) =
-    flatMapMerge {
-        blocks.map { block ->
-            block(flowOf(it))
-        }.merge()
+fun <T, U> Flow<T>.publish(blocks: List<FlowBlock<T, U>>): Flow<U> =
+    flow {
+        coroutineScope {
+            val broadCaster = this@publish.broadcastIn(this)
+
+            val mergedFlow = broadCaster
+                .let {
+                    blocks.map { block ->
+                        block(it.asFlow())
+                    }
+                }
+                .merge()
+
+            emitAll(mergedFlow)
+        }
     }
 
 fun <T> Flow<T>.ifEmptyEmit(item: T): Flow<T> {
