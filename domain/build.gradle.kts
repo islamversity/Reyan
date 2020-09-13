@@ -40,7 +40,7 @@ kotlin {
         implementation(Deps.Tools.stately)
 
         implementation(Deps.Kotlin.dateTime)
-        implementation(Deps.Tools.multiplatformSettings)
+        implementation(Deps.Tools.logger)
     }
 
     jvm()

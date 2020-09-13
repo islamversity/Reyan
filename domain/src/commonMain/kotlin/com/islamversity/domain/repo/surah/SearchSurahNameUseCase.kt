@@ -15,9 +15,7 @@ class SearchSurahNameUseCaseImpl(
     private val searchRepo: SurahSearchRepo
 ) : SearchSurahNameUseCase {
     override fun search(query: String): Flow<List<SurahRepoModel>> =
-        flow {
-            emit(settingRepo.getCurrentSurahCalligraphy())
-        }
+        settingRepo.getCurrentSurahCalligraphy()
             .flatMapMerge {
                 searchRepo.search(query, it)
             }

@@ -48,23 +48,21 @@ class SurahProcessor(
                     }
                 )
             )
-
     }
 
     private val getMainAyaProcessor: FlowBlock<SurahRepoModel, SurahResult> = {
         flatMapMerge {
             getAyaUseCase.observeAyaMain(it.id)
                 .mapListWith(ayaMapper)
-                .map {
-                    val fontSize = settingRepo.getCurrentFontSize()
-                    it.map {
-                        it.copy(fontSize = fontSize.size.toInt())
-                    } to fontSize
+                .combine(settingRepo.getCurrentFontSize().map { it.size.toInt() }) { uiModel, font ->
+                    uiModel.map {
+                        it.copy(fontSize = font)
+                    } to font
                 }
                 .map { ayas ->
                     SurahResult.MainAyasLoaded(
                         ayas.first,
-                        ayas.second.size.toInt(),
+                        ayas.second,
                     )
                 }
         }
@@ -82,13 +80,14 @@ class SurahProcessor(
                 }
             },
             {
-                filter { it.bismillahType == BismillahRepoType.NEEDED }.flatMapMerge {
-                    bismillahUsecase.getBismillahWithType(it.bismillahType)
-                        .filterNotNull()
-                        .map {
-                            SurahResult.Bismillah.Content(it.content)
-                        }
-                }
+                filter { it.bismillahType == BismillahRepoType.NEEDED }
+                    .flatMapMerge {
+                        bismillahUsecase.getBismillahWithType(it.bismillahType)
+                            .filterNotNull()
+                            .map {
+                                SurahResult.Bismillah.Content(it.content)
+                            }
+                    }
             }
         )
     }
