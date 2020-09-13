@@ -8,6 +8,12 @@
         <item name="android:padding">@dimen/low_padding</item>
     </style>
 
+
+    <style name="ToolbarIcon.MediumMargin">
+        <item name="android:layout_marginVertical" tools:ignore="NewApi">@dimen/medium_margin</item>
+        <item name="android:layout_marginLeft">@dimen/medium_margin</item>
+    </style>
+
     <style name="Divider">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">1dp</item>
@@ -15,7 +21,8 @@
     </style>
 
     <style name="Divider.LargeMargin">
-        <item name="android:layout_marginHorizontal" tools:ignore="NewApi">@dimen/large_margin</item>
+        <item name="android:layout_marginHorizontal" tools:ignore="NewApi">@dimen/large_margin
+        </item>
     </style>
 
 </resources>

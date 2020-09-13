@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
 import com.islamversity.base.CoroutineView
 import com.islamversity.base.visible
 import com.islamversity.core.mvi.MviPresenter
@@ -14,6 +15,7 @@ import com.islamversity.surah.SurahIntent
 import com.islamversity.surah.SurahState
 import com.islamversity.surah.databinding.ViewSurahBinding
 import com.islamversity.surah.di.DaggerSurahComponent
+import com.islamversity.surah.model.SurahHeaderUIModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
@@ -45,10 +47,7 @@ class SurahView(
     }
 
     override fun beforeBindingView(binding: ViewSurahBinding) {
-    }
-
-    override fun onDestroyView(view: View) {
-        super.onDestroyView(view)
+        binding.ivBack.setOnClickListener { router.handleBack() }
     }
 
     override fun intents(): Flow<SurahIntent> =
@@ -63,16 +62,27 @@ class SurahView(
         renderLoading(state.base)
         renderError(state.base)
 
-        //render bismillah
         if (state.closeScreen) {
             router.popController(this)
         }
 
-        binding.tvBismillah visible state.showBismillah
-        binding.tvBismillah.setText(state.bismillah)
-        binding.tvBismillah.textSize = state.mainAyaFontSize.toFloat()
-
         binding.ayaList.withModelsAsync {
+            surahHeader {
+                id(surahLocal.surahID)
+                model(
+                    SurahHeaderUIModel(
+                        surahLocal.surahID,
+                        state.ayas.size.toString(),
+                        surahLocal.surahName,
+                        surahLocal.surahName,
+                        "Meccan",
+                        state.ayas.size,
+                        20, //appFontSize
+                        true
+                    )
+                )
+            }
+
             state.ayas.forEach {
                 ayaView {
                     id(it.id)
