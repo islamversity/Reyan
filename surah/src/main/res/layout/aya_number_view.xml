@@ -2,28 +2,26 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_width="28dp"
+    android:layout_height="28dp">
 
     <ImageView
-        android:id="@+id/ivSurahOrderShape"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
-        android:scaleType="fitCenter"
-        app:srcCompat="@drawable/ic_surah_order"
+        app:srcCompat="@drawable/ic_number_circle"
         tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/txt_order"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/black"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/small_text"
         tools:ignore="SpUsage"
-        tools:text="114" />
+        tools:text="286" />
 
 </FrameLayout>
