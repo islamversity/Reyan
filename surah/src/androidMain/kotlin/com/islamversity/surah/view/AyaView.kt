@@ -24,12 +24,17 @@ class AyaView @JvmOverloads constructor(
 
     @SuppressLint("SetTextI18n")
     @ModelProp
-    fun model(surah: AyaUIModel){
-        binding.tvAyaNumber.text = surah.order.toString()
+    fun model(surah: AyaUIModel) {
+
+        binding.ayaNumber.txtOrder.text = surah.order.toString()
         binding.tvAyaContent.text = surah.content
+        binding.tvAyaTranslate1.text = surah.content
+        binding.tvAyaTranslate2.text = surah.content
 
         binding.tvAyaContent.textSize = surah.fontSize.toFloat()
-        binding.tvAyaNumber.textSize = surah.fontSize.toFloat()
+        binding.tvAyaTranslate1.textSize = surah.fontSize.toFloat()
+        binding.tvAyaTranslate2.textSize = surah.fontSize.toFloat()
+//        binding.ayaNumber.txtOrder.textSize = surah.fontSize.toFloat()
     }
 
     @CallbackProp

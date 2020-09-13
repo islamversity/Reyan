@@ -1,3 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="play_button">Aya Play Button</string>
+    <string name="aya_bookmark_button">Aya Bookmark Button</string>
+    <string name="aya_share_button">Aya Share Button</string>
 </resources>
