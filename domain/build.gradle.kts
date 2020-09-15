@@ -41,6 +41,8 @@ kotlin {
 
         implementation(Deps.Kotlin.dateTime)
         implementation(Deps.Tools.logger)
+
+        implementation(Deps.Tools.uuid)
     }
 
     jvm()

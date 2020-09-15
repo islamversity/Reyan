@@ -261,7 +261,8 @@ object Deps {
         val stately = "co.touchlab:stately-common:${Versions.stately}"
         val koinCore = "org.koin:koin-core:${Versions.koin}"
         val cocoapodsext = "co.touchlab:kotlinnativecocoapods:${Versions.cocoapodsext}"
-        val okio = "com.squareup.okio:okio:2.6.0"
+        val okio = "com.squareup.okio:okio:2.8.0"
+        val uuid = "com.benasher44:uuid:0.2.2"
         val logger = "co.touchlab:kermit:0.1.7"
     }
 }
