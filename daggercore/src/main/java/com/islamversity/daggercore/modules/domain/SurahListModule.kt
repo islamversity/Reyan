@@ -5,11 +5,10 @@ import com.islamversity.db.datasource.SurahLocalDataSource
 import com.islamversity.db.model.Surah
 import com.islamversity.domain.model.surah.SurahRepoModel
 import com.islamversity.domain.repo.*
-import com.islamversity.domain.repo.aya.AyaListRepo
-import com.islamversity.domain.repo.surah.GetSurahsUsecase
-import com.islamversity.domain.repo.surah.GetSurahsUsecaseImpl
-import com.islamversity.domain.repo.surah.SurahListRepo
-import com.islamversity.domain.repo.surah.SurahListRepoImpl
+import com.islamversity.domain.repo.surah.GetSurahUsecase
+import com.islamversity.domain.repo.surah.GetSurahUsecaseImpl
+import com.islamversity.domain.repo.surah.SurahRepo
+import com.islamversity.domain.repo.surah.SurahRepoImpl
 import dagger.Module
 import dagger.Provides
 
@@ -21,8 +20,8 @@ object SurahListModule {
     fun bindSurahListRepo(
         dataSource: SurahLocalDataSource,
         mapper: Mapper<Surah, SurahRepoModel>
-    ): SurahListRepo =
-        SurahListRepoImpl(
+    ): SurahRepo =
+        SurahRepoImpl(
             dataSource,
             mapper
         )
@@ -30,11 +29,11 @@ object SurahListModule {
     @JvmStatic
     @Provides
     fun bindGetSurahListUsecase(
-        surahListRepo: SurahListRepo,
+        surahRepo: SurahRepo,
         settingRepo: SettingRepo
-    ): GetSurahsUsecase =
-        GetSurahsUsecaseImpl(
-            surahListRepo,
+    ): GetSurahUsecase =
+        GetSurahUsecaseImpl(
+            surahRepo,
             settingRepo
         )
 }

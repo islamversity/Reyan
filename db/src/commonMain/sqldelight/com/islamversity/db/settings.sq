@@ -1,0 +1,31 @@
+CREATE TABLE IF NOT EXISTS settings (
+    rowIndex INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    key TEXT NOT NULL,
+    value TEXT NOT NULL
+);
+
+
+CREATE UNIQUE INDEX IF NOT EXISTS settings_key
+ON settings(key);
+
+
+
+
+
+getWithKey:
+SELECT * FROM settings
+WHERE key = :key;
+
+
+
+
+
+
+upsert:
+INSERT OR REPLACE INTO settings
+(key, value)
+VALUES(:key, :value);
+
+
+
+

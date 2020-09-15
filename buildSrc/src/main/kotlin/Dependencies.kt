@@ -39,7 +39,6 @@ object Versions {
     val ktor = "1.4.0"
     val serialization = "1.0.0-RC"
     val stately = "1.1.0"
-    val multiplatformSettings = "0.6.1"
     val coroutines = "1.3.9"
     val flowBinding = "1.3.2"
     val koin = "3.0.0-alpha-9"
@@ -53,6 +52,7 @@ object Deps {
         val common = "stdlib-common"
         val jvmStd8 = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
         val dateTime = "org.jetbrains.kotlinx:kotlinx-datetime:0.1.0"
+        val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
     }
 
     object Android {
@@ -191,11 +191,11 @@ object Deps {
     }
 
     object KotlinTest {
-        val common = "org.jetbrains.kotlin:kotlin-test-common:${Versions.kotlin}"
+//        val common = "org.jetbrains.kotlin:kotlin-test-common:${Versions.kotlin}"
+        val common = "org.jetbrains.kotlin:kotlin-test-multiplatform"
         val annotations = "org.jetbrains.kotlin:kotlin-test-annotations-common:${Versions.kotlin}"
         val jvm = "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
         val junit = "org.jetbrains.kotlin:kotlin-test-junit:${Versions.kotlin}"
-        val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
     }
 
     object Coroutines {
@@ -259,12 +259,9 @@ object Deps {
 
     object Tools {
         val stately = "co.touchlab:stately-common:${Versions.stately}"
-        val multiplatformSettings =
-            "com.russhwolf:multiplatform-settings-no-arg:${Versions.multiplatformSettings}"
-        val multiplatformSettingsTest =
-            "com.russhwolf:multiplatform-settings-test:${Versions.multiplatformSettings}"
         val koinCore = "org.koin:koin-core:${Versions.koin}"
         val cocoapodsext = "co.touchlab:kotlinnativecocoapods:${Versions.cocoapodsext}"
         val okio = "com.squareup.okio:okio:2.6.0"
+        val logger = "co.touchlab:kermit:0.1.7"
     }
 }

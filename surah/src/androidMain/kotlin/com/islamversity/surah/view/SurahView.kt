@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.islamversity.base.CoroutineView
+import com.islamversity.base.visible
 import com.islamversity.core.mvi.MviPresenter
 import com.islamversity.daggercore.CoreComponent
 import com.islamversity.navigation.fromByteArray
@@ -21,7 +22,7 @@ class SurahView(
     bundle: Bundle
 ) : CoroutineView<ViewSurahBinding, SurahState, SurahIntent>(bundle) {
 
-    private val searchLocal: SurahLocalModel? =
+    private val surahLocal: SurahLocalModel =
         bundle
             .getByteArray(SurahLocalModel.EXTRA_SURAH_DETAIL)!!
             .let {
@@ -51,11 +52,33 @@ class SurahView(
     }
 
     override fun intents(): Flow<SurahIntent> =
-        flowOf()
+        flowOf(
+            SurahIntent.Initial(
+                surahLocal.surahID,
+                surahLocal.startingAyaOrder,
+            )
+        )
 
     override fun render(state: SurahState) {
         renderLoading(state.base)
         renderError(state.base)
 
+        //render bismillah
+        if (state.closeScreen) {
+            router.popController(this)
+        }
+
+        binding.tvBismillah visible state.showBismillah
+        binding.tvBismillah.setText(state.bismillah)
+        binding.tvBismillah.textSize = state.mainAyaFontSize.toFloat()
+
+        binding.ayaList.withModelsAsync {
+            state.ayas.forEach {
+                ayaView {
+                    id(it.id)
+                    model(it)
+                }
+            }
+        }
     }
 }

@@ -2,9 +2,11 @@ package com.islamversity.reyan
 
 import android.app.Application
 import android.util.Log
+import co.touchlab.kermit.LogcatLogger
 import com.facebook.common.logging.FLog
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
+import com.islamversity.core.Logger
 import com.islamversity.reyan.BuildConfig.DEBUG
 import com.islamversity.daggercore.CoreComponent
 import com.islamversity.daggercore.CoreComponentProvider
@@ -29,6 +31,8 @@ abstract class BaseApp : Application(), CoreComponentProvider {
     override fun onCreate() {
         super.onCreate()
         frescoConfig = coreComponent.frescoConfig()
+
+        Logger.init(listOf(LogcatLogger()))
 
         Fresco.initialize(this, frescoConfig)
 

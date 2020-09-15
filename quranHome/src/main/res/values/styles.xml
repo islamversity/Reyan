@@ -12,9 +12,9 @@
         <item name="tabIndicatorFullWidth">true</item>
         <item name="tabGravity">fill</item>
         <item name="tabMode">auto</item>
-        <item name="tabIndicatorColor">@color/accent_color_1</item>
-        <item name="tabSelectedTextColor">@color/accent_color_1</item>
-        <item name="tabTextColor">@color/accent_color_2</item>
+        <item name="tabIndicatorColor">@color/colorPrimaryDark</item>
+        <item name="tabSelectedTextColor">@color/colorPrimaryDark</item>
+        <item name="tabTextColor">@color/colorPrimary</item>
         <item name="tabTextAppearance">@style/TabLayoutTitle</item>
     </style>
 

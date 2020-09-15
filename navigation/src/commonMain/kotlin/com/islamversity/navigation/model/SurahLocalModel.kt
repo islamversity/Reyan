@@ -7,7 +7,7 @@ import okio.BufferedSource
 data class SurahLocalModel(
     val surahID: String,
     val surahName : String,
-    val startingAyaOrder : Int
+    val startingAyaOrder : Int,
 ){
     companion object Sinker : SinkSerializer<SurahLocalModel> {
         const val EXTRA_SURAH_DETAIL = "extra_surah_detail"
@@ -16,7 +16,7 @@ data class SurahLocalModel(
             SurahLocalModel(
                 readUtf8(),
                 readUtf8(),
-                readInt()
+                readInt(),
             )
 
         override fun BufferedSink.writeToSink(obj: SurahLocalModel) {
@@ -24,5 +24,17 @@ data class SurahLocalModel(
             writeUtf8(obj.surahName)
             writeInt(obj.startingAyaOrder)
         }
+    }
+}
+
+enum class BismillahType{
+    NEEDED,
+    FIRST_AYA,
+    NONE,
+    ;
+
+    companion object{
+        fun fromName(name : String) : BismillahType =
+            values().find { it.name == name } ?: error("typeName= $name is not supported")
     }
 }

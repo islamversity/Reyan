@@ -29,4 +29,18 @@ object LocalDataSourceModule {
     ): AyaLocalDataSource =
         AyaLocalDataSourceImpl(ayaQueries, ayaContentQueries)
 
+    @JvmStatic
+    @Provides
+    fun provideBismillah(
+        bismillahQueries: BismillahQueries
+    ) : BismillahLocalDataSource =
+        BismillahLocalDataSourceImpl(bismillahQueries)
+
+    @JvmStatic
+    @Provides
+    fun provideSettings(
+        bismillahQueries: SettingsQueries
+    ) : SettingsDataSource =
+        SettingsDataSourceImpl(bismillahQueries)
+
 }
