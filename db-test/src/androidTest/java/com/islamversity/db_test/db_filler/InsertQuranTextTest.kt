@@ -117,7 +117,8 @@ class InsertQuranTextTest {
                 Json.parseToJsonElement(it)
             }
             .jsonObject
-            .getValue("quran").jsonArray
+            .getValue("quran")
+            .jsonArray
 
         val quranEnglishJson = InstrumentationRegistry.getInstrumentation().targetContext
             .resources
