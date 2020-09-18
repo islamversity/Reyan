@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:background="@color/defaultBackground">
 
     <ImageView
         android:id="@+id/backButton"
         style="@style/ToolbarIcon"
         android:layout_margin="@dimen/medium_margin"
         android:src="@drawable/ic_round_arrow_back"
-        app:tint="@color/defaultBackground" />
+        app:tint="@color/white" />
 
     <LinearLayout
         android:id="@+id/surahCalligraphy"
@@ -128,5 +128,4 @@
             tools:text="@string/app_name" />
 
     </LinearLayout>
-
 </LinearLayout>

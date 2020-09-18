@@ -5,12 +5,16 @@ import com.islamversity.core.Mapper
 import com.islamversity.core.listMap
 import com.islamversity.core.mvi.BaseProcessor
 import com.islamversity.core.ofType
-import com.islamversity.domain.model.*
+import com.islamversity.domain.model.Calligraphy
+import com.islamversity.domain.model.CalligraphyId
+import com.islamversity.domain.model.QuranReadFontSize
 import com.islamversity.domain.repo.CalligraphyRepo
 import com.islamversity.domain.repo.SettingRepo
 import com.islamversity.settings.models.CalligraphyUIModel
-import com.islamversity.settings.models.SettingsViewValues
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flatMapMerge
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.transform
 
 class SettingsProcessor(
     settingsRepo: SettingRepo,
@@ -124,8 +128,8 @@ class SettingsProcessor(
     private val setQuranFontSize: Flow<SettingsIntent>.() -> Flow<SettingsResult> = {
         ofType<SettingsIntent.ChangeQuranFontSize>()
             .transform {
-                settingsRepo.setQuranReadFont(QuranReadFontSize(it.double.toDouble()))
-                emit(SettingsResult.AyaFontSize(it.double.toDouble()))
+                settingsRepo.setQuranReadFont(QuranReadFontSize(it.size))
+                emit(SettingsResult.AyaFontSize(it.size))
             }
     }
 }
