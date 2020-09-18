@@ -18,8 +18,7 @@ class SurahEntityRepoMapper : Mapper<Surah, SurahRepoModel> {
                 is RevealType.MECCAN -> RevealedType.MECCAN(item.revealedType.name)
                 is RevealType.MEDINAN -> RevealedType.MEDINAN(item.revealedType.name)
             },
-            bismillahType = item.bismillahType.toRepo()
-            },
+            bismillahType = item.bismillahType.toRepo(),
             ayaCount = item.ayaCount
         )
 }
