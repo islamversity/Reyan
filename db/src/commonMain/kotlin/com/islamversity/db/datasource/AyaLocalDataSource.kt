@@ -6,6 +6,7 @@ import com.islamversity.db.model.Aya
 import com.islamversity.db.model.Calligraphy
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
@@ -38,10 +39,11 @@ interface AyaLocalDataSource {
         context: CoroutineContext = Dispatchers.Default
     ): Flow<Aya?>
 
-    fun getJuz(context: CoroutineContext = Dispatchers.Default): Flow<List<JuzEntity>>
-
-    fun getHizb(context: CoroutineContext = Dispatchers.Default): Flow<List<HizbEntity>>
+    fun getJuz(surahNameCalligraphy: CalligraphyId, context: CoroutineContext = Dispatchers.Default): Flow<List<JuzEntity>>
 }
+
+const val NUMBER_OF_HIZB_IN_EACH_JUZ_WITH_START_AND_END = 16
+const val NUMBER_OF_START_ENDING_ITEMS = 2
 
 class AyaLocalDataSourceImpl(
     private val ayaQueries: AyaQueries,
@@ -101,19 +103,67 @@ class AyaLocalDataSourceImpl(
             .asFlow()
             .mapToOneOrNull(context)
 
-    override fun getJuz(context: CoroutineContext): Flow<List<JuzEntity>> =
-        ayaQueries.getAllJuz { juzOrderIndex, id, orderIndex, surahId, hizbOrderIndex ->
-            JuzEntity(id, surahId, juzOrderIndex, hizbOrderIndex)
-        }
+    override fun getJuz(surahNameCalligraphy: CalligraphyId, context: CoroutineContext): Flow<List<JuzEntity>> =
+        ayaQueries.getJuzs(surahNameCalligraphy)
             .asFlow()
             .mapToList(context)
+            .map { rows ->
+                val juzs = mutableListOf<JuzEntity>()
 
-    override fun getHizb(context: CoroutineContext): Flow<List<HizbEntity>> =
-        ayaQueries.getAllHizb { juzOrderIndex, id, orderIndex, surahId, hizbOrderIndex ->
-            HizbEntity(id, surahId, hizbOrderIndex, juzOrderIndex)
-        }
-            .asFlow()
-            .mapToList(context)
+                for (index in rows.indices step NUMBER_OF_HIZB_IN_EACH_JUZ_WITH_START_AND_END) {
+                    val startingJuz = rows[index]
+
+                    val hizbs = mutableListOf<HizbEntity>()
+                    var lastHizbIndex = 0
+                    for (hizbIndex in index until rows.size step NUMBER_OF_START_ENDING_ITEMS) {
+                        val startingHizb = rows[hizbIndex]
+                        val endingHizb = rows[hizbIndex + 1]
+
+                        if (startingHizb.juzOrderIndex != startingJuz.juzOrderIndex) {
+                            break
+                        }
+
+                        hizbs.add(
+                            HizbEntity(
+                                startingHizb.id,
+                                startingHizb.orderIndex,
+                                startingHizb.surahId,
+                                startingHizb.content!!,
+
+                                endingHizb.id,
+                                endingHizb.orderIndex,
+                                endingHizb.surahId,
+                                endingHizb.content!!,
+
+                                startingHizb.juzOrderIndex,
+                                startingHizb.hizbQuarterOrderIndex,
+                            )
+                        )
+                        lastHizbIndex = hizbIndex
+                    }
+                    val endingJuz = rows[lastHizbIndex]
+
+
+                    juzs.add(
+                        JuzEntity(
+                            startingJuz.id,
+                            startingJuz.orderIndex,
+                            startingJuz.surahId,
+                            startingJuz.content!!,
+
+                            endingJuz.id,
+                            endingJuz.orderIndex,
+                            endingJuz.surahId,
+                            endingJuz.content!!,
+
+                            startingJuz.juzOrderIndex,
+                            hizbs
+                        )
+                    )
+                }
+
+                juzs
+            }
 
     private fun insertContent(ayaContent: No_rowId_aya_content) {
         ayaContentQueries.insertAyaContent(ayaContent.id, ayaContent.ayaId, ayaContent.calligraphy, ayaContent.content)

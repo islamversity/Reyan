@@ -1,13 +1,15 @@
-<FrameLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
-    <com.islamversity.base.epoxyhelper.EpoxyAsyncRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.islamversity.base.epoxyhelper.EpoxyAsyncRecyclerView
         android:id="@+id/epoxyView"
-        android:layout_width="wrap_content"
-        android:layout_gravity="center"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_gravity="center"
         android:orientation="vertical"
         tools:itemCount="114"
-        tools:listitem="@layout/number_view" />
+        tools:listitem="@layout/row_juz" />
+
 </FrameLayout>

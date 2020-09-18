@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:paddingHorizontal="@dimen/large_padding"
+    android:paddingTop="@dimen/medium_padding">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start|center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/juzNumber"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_bg_juz_number"
+            android:gravity="center"
+            android:singleLine="true"
+            android:textColor="@color/green_dark"
+            android:textSize="@dimen/medium_text"
+            android:textStyle="bold"
+            tools:text="27" />
+
+        <TextView
+            style="@style/blackTitle"
+            android:id="@+id/juzTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_margin"
+            tools:text="Joz Aval" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="start|center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="56dp"
+        android:paddingVertical="@dimen/medium_padding">
+
+        <include
+            android:id="@+id/juzLine"
+            layout="@layout/juz_line"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/endJuzTitle" />
+
+        <TextView
+            android:id="@+id/startJuzTitle"
+            style="@style/greySubtitle"
+            android:layout_below="@+id/juzLine"
+            android:layout_marginTop="@dimen/min_margin"
+            tools:text="Start Name"
+            tools:ignore="SpUsage" />
+
+        <TextView
+            android:id="@+id/endJuzTitle"
+            style="@style/greySubtitle"
+            android:layout_below="@+id/juzLine"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/min_margin"
+            tools:text="Start Name"
+            tools:ignore="SpUsage" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_grey" />
+
+</LinearLayout>

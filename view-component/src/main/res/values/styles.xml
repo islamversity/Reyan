@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="blackTitle" parent="android:TextAppearance">
+        <item name="android:textSize">@dimen/large_text</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="greySubtitle" parent="android:TextAppearance">
+        <item name="android:textSize">@dimen/small_text</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+</resources>
