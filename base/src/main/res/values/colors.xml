@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryDark">#103C3A</color>
+    <color name="colorPrimary">#30B4AC</color>
+    <color name="colorAccent">#72D9D3</color>
+
+    <color name="green_dark">#1B6560</color>
+    <color name="grey_dark">#4F4F4F</color>
+    <color name="grey">#828282</color>
+    <color name="black">#3E3E3E</color>
+
+    <color name="divider_grey">#E0E0E0</color>
+    <color name="divider_green">@color/colorPrimary</color>
+
+    <color name="highlighted">#1A30B4AC</color>
+</resources>

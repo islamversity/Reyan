@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:maxLines="1"
-        android:textColor="@color/text_gray"
+        android:textColor="@color/grey"
         android:textSize="12sp"
         tools:text="114" />
 
