@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_margin="8dp"
-    android:fontFamily="@font/vazir"
+    android:fontFamily="@font/english_regular_light"
     android:gravity="center"
     android:minWidth="50dp"
     android:padding="8dp"

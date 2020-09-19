@@ -9,7 +9,7 @@
         android:id="@+id/dialog_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/immersive_background"
+        android:background="@drawable/immersive_background"
         />
 
     <LinearLayout

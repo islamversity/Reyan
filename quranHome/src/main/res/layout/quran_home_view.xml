@@ -45,7 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|center"
-                android:fontFamily="@font/vazir"
+                android:fontFamily="@font/english_regular_light"
                 android:text="@string/search" />
 
             <ImageView
