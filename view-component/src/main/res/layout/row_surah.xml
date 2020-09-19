@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingTop="18dp"
-    tools:background="@color/white">
+    android:paddingTop="18dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -39,7 +38,7 @@
                     android:layout_height="wrap_content"
                     android:maxLines="1"
                     android:textAlignment="textStart"
-                    android:textColor="@color/text_default"
+                    android:textColor="@color/grey_dark"
                     android:textSize="20sp"
                     tools:text="Al-Munafiqoon" />
 
@@ -55,7 +54,7 @@
                         android:alpha="0.7"
                         android:maxLines="1"
                         android:textAlignment="textStart"
-                        android:textColor="@color/text_gray"
+                        android:textColor="@color/grey"
                         android:textSize="12sp"
                         tools:text="Medinian - " />
 
@@ -66,7 +65,7 @@
                         android:alpha="0.7"
                         android:maxLines="1"
                         android:textAlignment="textStart"
-                        android:textColor="@color/text_gray"
+                        android:textColor="@color/grey"
                         android:textSize="12sp"
                         tools:text="256 verses" />
 
@@ -84,7 +83,7 @@
             android:layout_centerVertical="true"
             android:maxLines="1"
             android:textAlignment="textStart"
-            android:textColor="@color/text_green"
+            android:textColor="@color/green_dark"
             android:textSize="28sp"
             tools:text="المطففین" />
 
@@ -92,7 +91,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/text_green"
+        android:background="@color/divider_grey"
         android:alpha="0.5"
         android:layout_marginTop="16dp"
         />

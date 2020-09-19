@@ -22,7 +22,7 @@
         android:layout_alignParentTop="true"
         android:layout_margin="@dimen/medium_margin"
         android:src="@drawable/ic_outline_close"
-        app:tint="@color/immersive_background" />
+        app:tint="@color/grey" />
 
     <com.islamversity.base.epoxyhelper.EpoxyAsyncRecyclerView
         android:id="@+id/epoxyView"

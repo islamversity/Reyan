@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:orientation="vertical">
 
     <ImageView
@@ -12,7 +11,8 @@
         style="@style/ToolbarIcon"
         android:layout_margin="@dimen/medium_margin"
         android:src="@drawable/ic_round_arrow_back"
-        app:tint="@color/defaultBackground" />
+        app:tint="@color/green_dark"
+        />
 
     <LinearLayout
         android:id="@+id/surahCalligraphy"
@@ -33,7 +33,7 @@
             android:text="@string/surah_calligraphy"
             android:textSize="@dimen/medium_text"
             app:drawableStartCompat="@drawable/ic_outline_calligraphy"
-            app:drawableTint="@color/immersive_background" />
+            app:drawableTint="@color/grey_dark" />
 
         <TextView
             android:id="@+id/surahCalligraphySubtitle"
@@ -52,7 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginHorizontal="@dimen/medium_margin"
-        android:background="@color/immersive_background" />
+        android:background="@color/grey_dark" />
 
     <LinearLayout
         android:id="@+id/ayaCalligraphy"
@@ -73,7 +73,7 @@
             android:text="@string/aya_calligraphy"
             android:textSize="@dimen/medium_text"
             app:drawableStartCompat="@drawable/ic_outline_calligraphy"
-            app:drawableTint="@color/immersive_background" />
+            app:drawableTint="@color/grey_dark" />
 
         <TextView
             android:id="@+id/ayaCalligraphySubtitle"
@@ -92,7 +92,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginHorizontal="@dimen/medium_margin"
-        android:background="@color/immersive_background" />
+        android:background="@color/grey_dark" />
 
     <LinearLayout
         android:id="@+id/fontSize"
@@ -113,7 +113,7 @@
             android:text="@string/font_size"
             android:textSize="@dimen/medium_text"
             app:drawableStartCompat="@drawable/ic_round_format_size"
-            app:drawableTint="@color/immersive_background" />
+            app:drawableTint="@color/grey_dark" />
 
         <TextView
             android:id="@+id/fontSizeSubtitle"
