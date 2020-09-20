@@ -38,11 +38,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/medium_margin"
             android:layout_marginRight="@dimen/min_margin"
+            android:layout_marginTop="@dimen/low_margin"
+            android:gravity="left"
             android:layout_toLeftOf="@+id/txtName"
             android:layout_toRightOf="@+id/item_order"
             android:fontFamily="@font/english_regular_medium"
             android:maxLines="1"
-            android:textAlignment="textStart"
             android:textColor="@color/black"
             android:textSize="@dimen/medium_text"
             tools:ignore="RtlHardcoded,SpUsage"
@@ -71,8 +72,12 @@
                 tools:ignore="SpUsage"
                 tools:text="Medinian - " />
 
+            <Space
+                android:layout_width="@dimen/low_margin"
+                android:layout_height="1dp"/>
+
             <TextView
-                android:id="@+id/verses_count"
+                android:id="@+id/txtVersesCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:maxLines="1"

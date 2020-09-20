@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
+import androidx.annotation.StringRes
 import com.airbnb.epoxy.CallbackProp
 import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
@@ -16,19 +17,21 @@ import com.islamversity.view_component.databinding.RowSurahBinding
 class SurahItem @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
-    defStyleAttr : Int = 0
+    defStyleAttr: Int = 0
 ) : LinearLayout(context, attributeSet, defStyleAttr) {
 
     private val binding = RowSurahBinding.inflate(LayoutInflater.from(context), this, true)
 
-    lateinit var uiItem: SurahItemModel
+    private lateinit var uiItem: SurahItemModel
 
     @ModelProp
     fun uiItem(item: SurahItemModel) {
         uiItem = item
-        binding.txtName.text = uiItem.name
+        binding.txtCalligraphyName.text = uiItem.mainName
+        binding.txtVersesCount.text = binding.root.context.getString(R.string.ayaCount, uiItem.ayaCount)
+        binding.txtName.text = uiItem.arabicName
         binding.itemOrder.txtOrder.text = uiItem.order
-        binding.txtRevealed.text = uiItem.revealType
+        binding.txtRevealed.text = binding.root.context.getString(item.revealType.id)
     }
 
     @CallbackProp
@@ -45,8 +48,21 @@ class SurahItem @JvmOverloads constructor(
 
 data class SurahItemModel(
     val id: String,
-    val name: String,
+    val arabicName: String,
+    val mainName: String,
     val order: String,
-    val revealType: String
-)
+    val revealType: RevealedType,
+    val ayaCount: String,
+){
+    enum class RevealedType(@StringRes val id : Int, val rawName : String) {
+        MECCAN(R.string.meccan, "meccan"),
+        MEDINAN(R.string.medinan, "medinan"),
+        ;
+
+        companion object{
+            operator fun invoke(rawName : String) : RevealedType =
+                values().find { it.rawName == rawName }!!
+        }
+    }
+}
 
