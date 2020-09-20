@@ -42,7 +42,7 @@ class SurahListProcessor(
                 it.action.surah
             }
             .map {
-                Screens.Surah(SurahLocalModel(it.id.id, it.name, 0))
+                Screens.Surah(SurahLocalModel(it.id.id, it.mainName, 0))
             }
             .navigateTo(navigator)
     }

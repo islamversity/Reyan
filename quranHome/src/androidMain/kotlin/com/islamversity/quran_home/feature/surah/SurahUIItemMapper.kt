@@ -8,8 +8,10 @@ class SurahUIItemMapper : Mapper<SurahUIModel, SurahItemModel> {
     override fun map(item: SurahUIModel): SurahItemModel =
         SurahItemModel(
             item.id.id,
-            item.name,
+            item.arabicName,
+            item.mainName,
             item.order.toString(),
-            item.revealedType.name
+            SurahItemModel.RevealedType(item.revealedType.rawName),
+            item.ayaCount.toString()
         )
 }

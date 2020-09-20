@@ -22,15 +22,17 @@ interface SurahLocalDataSource {
     )
 
     fun observeAllSurahs(
-        calligraphy: CalligraphyId,
+        arabicCalligraphy: CalligraphyId,
+        mainCalligraphy: CalligraphyId,
         context: CoroutineContext = Dispatchers.Default
-    ): Flow<List<Surah>>
+    ): Flow<List<SurahWithTwoName>>
 
     fun getSurahWithId(
         entityId: SurahId,
-        calligraphy: CalligraphyId,
+        arabicCalligraphy: CalligraphyId,
+        mainCalligraphy: CalligraphyId,
         context: CoroutineContext = Dispatchers.Default
-    ): Flow<Surah?>
+    ): Flow<SurahWithTwoName?>
 
     fun getSurahWithOrderAndCalligraphy(
         order: SurahOrderId,
@@ -40,9 +42,10 @@ interface SurahLocalDataSource {
 
     fun findSurahByName(
         nameQuery: String,
-        calligraphy: CalligraphyId,
+        arabicCalligraphy: CalligraphyId,
+        mainCalligraphy: CalligraphyId,
         context: CoroutineContext = Dispatchers.Default
-    ): Flow<List<Surah>>
+    ): Flow<List<SurahWithTwoName>>
 }
 
 class SurahLocalDataSourceImpl(
@@ -86,19 +89,25 @@ class SurahLocalDataSourceImpl(
     }
 
     override fun observeAllSurahs(
-        calligraphy: CalligraphyId,
+        arabicCalligraphy: CalligraphyId,
+        mainCalligraphy: CalligraphyId,
         context: CoroutineContext
-    ): Flow<List<Surah>> =
-        surahQueries.getAllSurah(calligraphy, surahMapper)
+    ): Flow<List<SurahWithTwoName>> =
+        surahQueries.getAllSurah(
+            arabicCalligraphy,
+            mainCalligraphy,
+            surahWithTwoNameMapper
+        )
             .asFlow()
             .mapToList(context)
 
     override fun getSurahWithId(
         entityId: SurahId,
-        calligraphy: CalligraphyId,
+        arabicCalligraphy: CalligraphyId,
+        mainCalligraphy: CalligraphyId,
         context: CoroutineContext
-    ): Flow<Surah?> =
-        surahQueries.getSurahWithId(calligraphy, entityId, surahMapper)
+    ): Flow<SurahWithTwoName?> =
+        surahQueries.getSurahWithId(arabicCalligraphy, mainCalligraphy, entityId, surahWithTwoNameMapper)
             .asFlow()
             .mapToOneOrNull(context)
 
@@ -113,10 +122,11 @@ class SurahLocalDataSourceImpl(
 
     override fun findSurahByName(
         nameQuery: String,
-        calligraphy: CalligraphyId,
+        arabicCalligraphy: CalligraphyId,
+        mainCalligraphy: CalligraphyId,
         context: CoroutineContext
-    ): Flow<List<Surah>> =
-        surahQueries.findSurahByName(calligraphy, nameQuery, surahMapper)
+    ): Flow<List<SurahWithTwoName>> =
+        surahQueries.findSurahByName(arabicCalligraphy, mainCalligraphy, nameQuery, surahWithTwoNameMapper)
             .asFlow()
             .mapToList(context)
 
@@ -129,21 +139,41 @@ class SurahLocalDataSourceImpl(
         )
     }
 
+    private val surahWithTwoNameMapper =
+        { rowIndex: Long,
+          id: SurahId,
+          orderIndex: SurahOrderId,
+          arabicName: String?,
+          mainName: String?,
+          revealFlag: RevealTypeFlag,
+          bismillahFlag: BismillahTypeFlag,
+          ayaCount: AyaOrderId ->
+            SurahWithTwoName(
+                rowIndex,
+                id,
+                orderIndex,
+                arabicName!!,
+                mainName!!,
+                revealFlag,
+                bismillahFlag,
+                ayaCount.order
+            )
+        }
+
     private val surahMapper: (
         index: Long,
         id: SurahId,
         orderIndex: SurahOrderId,
         name: String?,
-        revealType: String?,
         revealFlag: RevealTypeFlag,
         bismillahFlag: BismillahTypeFlag
-    ) -> Surah = { index, id, orderIndex, name, revealType, revealFlag, bismillahFlag ->
+    ) -> Surah = { index, id, orderIndex, name, revealFlag, bismillahFlag ->
         Surah(
             index,
             id,
             orderIndex,
             name!!,
-            RevealType.fromFLag(revealFlag, revealType!!),
+            revealFlag,
             bismillahFlag
         )
     }

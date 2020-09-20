@@ -31,21 +31,29 @@ SELECT
 surah.rowIndex,
 surah.id,
 surah.orderIndex,
-surahName.content AS name,
-revealType.content AS revealType,
+arabicName.content AS arabicName,
+mainName.content AS mainName,
 revealFlag,
-bismillahFlag
+bismillahFlag,
+(
+  SELECT aya.orderIndex
+  FROM aya
+  WHERE aya.surahId = surah.id
+  ORDER BY aya.orderIndex DESC
+  LIMIT 1
+) ayaCount
+
 FROM surah
 
-LEFT JOIN name surahName ON
-surahName.rowId = surah.id
+LEFT JOIN name arabicName ON
+arabicName.rowId = surah.id
 AND
-surahName.calligraphy = :calligraphyId
+arabicName.calligraphy = :arabicCalligraphy
 
-LEFT JOIN name revealType ON
-revealType.rowId = surah.revealType
+LEFT JOIN name mainName ON
+mainName.rowId = surah.id
 AND
-revealType.calligraphy = :calligraphyId;
+mainName.calligraphy = :mainCalligraphy;
 
 
 
@@ -58,7 +66,6 @@ surah.rowIndex,
 surah.id,
 surah.orderIndex,
 surahName.content AS name,
-revealType.content AS revealType,
 revealFlag,
 bismillahFlag
 FROM surah
@@ -67,11 +74,6 @@ LEFT JOIN name surahName ON
 surahName.rowId = surah.id
 AND
 surahName.calligraphy = :calligraphyId
-
-LEFT JOIN name revealType ON
-revealType.rowId = surah.revealType
-AND
-revealType.calligraphy = :calligraphyId
 
 WHERE surah.orderIndex = :soraOrder;
 
@@ -86,21 +88,29 @@ SELECT
 surah.rowIndex,
 surah.id,
 surah.orderIndex,
-surahName.content AS name,
-revealType.content AS revealType,
+arabicName.content AS arabicName,
+mainName.content AS mainName,
 revealFlag,
-bismillahFlag
+bismillahFlag,
+(
+  SELECT aya.orderIndex
+  FROM aya
+  WHERE aya.surahId = surah.id
+  ORDER BY aya.orderIndex DESC
+  LIMIT 1
+) ayaCount
+
 FROM surah
 
-LEFT JOIN name surahName ON
-surahName.rowId = surah.id
+LEFT JOIN name arabicName ON
+arabicName.rowId = surah.id
 AND
-surahName.calligraphy = :calligraphyId
+arabicName.calligraphy = :arabicCalligraphy
 
-LEFT JOIN name revealType ON
-revealType.rowId = surah.revealType
+LEFT JOIN name mainName ON
+mainName.rowId = surah.id
 AND
-revealType.calligraphy = :calligraphyId
+mainName.calligraphy = :mainCalligraphy
 
 WHERE surah.id = :surahId;
 
@@ -110,27 +120,35 @@ SELECT
 surah.rowIndex,
 surah.id,
 surah.orderIndex,
-surahName.content AS name,
-revealType.content AS revealType,
+arabicName.content AS arabicName,
+mainName.content AS mainName,
 revealFlag,
-bismillahFlag
+bismillahFlag,
+(
+  SELECT aya.orderIndex
+  FROM aya
+  WHERE aya.surahId = surah.id
+  ORDER BY aya.orderIndex DESC
+  LIMIT 1
+) ayaCount
+
 FROM surah
 
-LEFT JOIN name surahName ON
-surahName.rowId = surah.id
+LEFT JOIN name arabicName ON
+arabicName.rowId = surah.id
 AND
-surahName.calligraphy = :calligraphyId
+arabicName.calligraphy = :arabicCalligraphy
 
-LEFT JOIN name revealType ON
-revealType.rowId = surah.revealType
+LEFT JOIN name mainName ON
+mainName.rowId = surah.id
 AND
-revealType.calligraphy = :calligraphyId
+mainName.calligraphy = :mainCalligraphy
 
 WHERE surah.id IN (
   SELECT rowId
   FROM name queryName
   WHERE
-  queryName.calligraphy = :calligraphyId
+  queryName.calligraphy = :arabicCalligraphy
   AND
   queryName.content LIKE '%' || :query || '%')
 

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ViewComponent</string>
+
+    <string name="ayaCount">%s آيَات</string>
+    <string name="meccan">مكية</string>
+    <string name="medinan">مدنية</string>
+</resources>
