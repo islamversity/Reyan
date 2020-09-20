@@ -1,8 +1,9 @@
 package com.islamversity.daggercore.modules.domain
 
 import com.islamversity.core.Mapper
+import com.islamversity.db.datasource.CalligraphyLocalDataSource
 import com.islamversity.db.datasource.SurahLocalDataSource
-import com.islamversity.db.model.Surah
+import com.islamversity.db.model.SurahWithTwoName
 import com.islamversity.domain.model.surah.SurahRepoModel
 import com.islamversity.domain.repo.SettingRepo
 import com.islamversity.domain.repo.surah.SearchSurahNameUseCase
@@ -19,7 +20,7 @@ object SearchRepoModule {
     @Provides
     fun provideSurahSearchRepo(
         dataSource: SurahLocalDataSource,
-        mapper: Mapper<Surah, SurahRepoModel>
+        mapper: Mapper<SurahWithTwoName, SurahRepoModel>
     ): SurahSearchRepo = SurahSearchRepoImpl(
         dataSource, mapper
     )
@@ -28,8 +29,9 @@ object SearchRepoModule {
     @Provides
     fun provideSearchSurahNameUseCase(
         settingRepo: SettingRepo,
-        searchRepo: SurahSearchRepo
+        searchRepo: SurahSearchRepo,
+        calligraphyDS: CalligraphyLocalDataSource,
     ): SearchSurahNameUseCase = SearchSurahNameUseCaseImpl(
-        settingRepo, searchRepo
+        settingRepo, searchRepo, calligraphyDS
     )
 }

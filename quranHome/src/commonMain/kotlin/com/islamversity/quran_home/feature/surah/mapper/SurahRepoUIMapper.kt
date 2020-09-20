@@ -6,11 +6,13 @@ import com.islamversity.quran_home.feature.surah.model.SurahUIModel
 
 class SurahRepoUIMapper : Mapper<SurahRepoModel, SurahUIModel> {
 
-    override fun map(item: SurahRepoModel) =
+    override fun map(item: SurahRepoModel): SurahUIModel =
         SurahUIModel(
             item.id,
             item.order,
-            item.name,
-            item.revealedType
+            item.arabicName,
+            item.mainName,
+            item.revealedType,
+            item.ayaCount
         )
 }

@@ -11,7 +11,9 @@ class SurahRepoUIMapper(
         SurahUIModel(
             id = item.id,
             order = item.order,
-            name = item.name,
-            revealedTypeText = item.revealedType.name
+            arabicName = item.arabicName,
+            mainName = item.mainName,
+            revealedType = item.revealedType,
+            ayaCount = item.ayaCount
         )
 }

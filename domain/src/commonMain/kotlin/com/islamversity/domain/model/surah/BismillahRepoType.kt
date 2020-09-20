@@ -1,6 +1,5 @@
 package com.islamversity.domain.model.surah
 
-import com.islamversity.db.model.BismillahType
 import com.islamversity.db.model.BismillahTypeFlag
 
 enum class BismillahRepoType {

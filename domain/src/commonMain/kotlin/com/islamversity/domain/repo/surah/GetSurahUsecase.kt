@@ -1,9 +1,12 @@
 package com.islamversity.domain.repo.surah
 
+import com.islamversity.db.datasource.CalligraphyLocalDataSource
+import com.islamversity.domain.model.CalligraphyId
 import com.islamversity.domain.model.surah.SurahID
 import com.islamversity.domain.model.surah.SurahRepoModel
 import com.islamversity.domain.repo.SettingRepo
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combineTransform
 import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flow
 
@@ -15,17 +18,22 @@ interface GetSurahUsecase {
 
 class GetSurahUsecaseImpl(
     private val surahRepo: SurahRepo,
-    private val settingRepo: SettingRepo
+    private val settingRepo: SettingRepo,
+    private val calligraphyDS: CalligraphyLocalDataSource,
 ) : GetSurahUsecase {
     override fun getSurahs() =
-        settingRepo.getCurrentSurahCalligraphy()
+        calligraphyDS.getArabicSurahCalligraphy().combineTransform(settingRepo.getCurrentSurahCalligraphy()) { arabic, main ->
+            emit(arabic to main)
+        }
             .flatMapMerge {
-                surahRepo.getAllSurah(it.id)
+                surahRepo.getAllSurah(arabicCalligraphy = CalligraphyId(it.first.id.id), mainCalligraphy = it.second.id)
             }
 
     override fun getSurah(id: SurahID): Flow<SurahRepoModel?> =
-        settingRepo.getCurrentSurahCalligraphy()
+        calligraphyDS.getArabicSurahCalligraphy().combineTransform(settingRepo.getCurrentSurahCalligraphy()) { arabic, main ->
+            emit(arabic to main)
+        }
             .flatMapMerge {
-                surahRepo.getSurah(id, it.id)
+                surahRepo.getSurah(id, arabicCalligraphy = CalligraphyId(it.first.id.id), mainCalligraphy = it.second.id)
             }
 }

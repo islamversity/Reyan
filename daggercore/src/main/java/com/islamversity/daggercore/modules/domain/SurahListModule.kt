@@ -1,10 +1,11 @@
 package com.islamversity.daggercore.modules.domain
 
 import com.islamversity.core.Mapper
+import com.islamversity.db.datasource.CalligraphyLocalDataSource
 import com.islamversity.db.datasource.SurahLocalDataSource
-import com.islamversity.db.model.Surah
+import com.islamversity.db.model.SurahWithTwoName
 import com.islamversity.domain.model.surah.SurahRepoModel
-import com.islamversity.domain.repo.*
+import com.islamversity.domain.repo.SettingRepo
 import com.islamversity.domain.repo.surah.GetSurahUsecase
 import com.islamversity.domain.repo.surah.GetSurahUsecaseImpl
 import com.islamversity.domain.repo.surah.SurahRepo
@@ -19,7 +20,7 @@ object SurahListModule {
     @Provides
     fun bindSurahListRepo(
         dataSource: SurahLocalDataSource,
-        mapper: Mapper<Surah, SurahRepoModel>
+        mapper: Mapper<SurahWithTwoName, SurahRepoModel>
     ): SurahRepo =
         SurahRepoImpl(
             dataSource,
@@ -30,10 +31,12 @@ object SurahListModule {
     @Provides
     fun bindGetSurahListUsecase(
         surahRepo: SurahRepo,
-        settingRepo: SettingRepo
+        settingRepo: SettingRepo,
+        calligraphyDS: CalligraphyLocalDataSource,
     ): GetSurahUsecase =
         GetSurahUsecaseImpl(
             surahRepo,
-            settingRepo
+            settingRepo,
+            calligraphyDS
         )
 }

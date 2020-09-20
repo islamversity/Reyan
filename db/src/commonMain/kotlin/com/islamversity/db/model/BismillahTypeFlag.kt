@@ -2,30 +2,6 @@ package com.islamversity.db.model
 
 import com.squareup.sqldelight.ColumnAdapter
 
-
-sealed class BismillahType(
-    open val name : String
-) {
-    companion object {
-        fun fromFLag(flag : BismillahTypeFlag, name : String) : BismillahType =
-            when (flag) {
-                BismillahTypeFlag.NONE -> None(name)
-                BismillahTypeFlag.NEEDED -> Needed(name)
-                BismillahTypeFlag.FIRST_AYA -> FirstAya(name)
-            }
-    }
-
-    data class None (
-        val nameInCalligraphy : String
-    ): BismillahType(nameInCalligraphy)
-    data class Needed (
-        val nameInCalligraphy : String
-    ): BismillahType(nameInCalligraphy)
-    data class FirstAya (
-        val nameInCalligraphy : String
-    ): BismillahType(nameInCalligraphy)
-}
-
 enum class BismillahTypeFlag(val raw: String) {
     NONE("NONE"),
     NEEDED("NEEDED"),
