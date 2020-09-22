@@ -2,9 +2,8 @@ package com.islamversity.settings
 
 import com.islamversity.core.mvi.BaseState
 import com.islamversity.core.mvi.BaseViewState
+import com.islamversity.domain.model.QuranReadFontSize
 import com.islamversity.settings.models.CalligraphyUIModel
-
-private const val DEFAULT_QURAN_TEXT_FONT_SIZE = 14
 
 data class SettingsState(
     override val base: BaseState,
@@ -22,7 +21,7 @@ data class SettingsState(
                 surahNameCalligraphies = emptyList(),
                 selectedAyaCalligraphy = null,
                 selectedSurahNameCalligraphy = null,
-                quranTextFontSize = DEFAULT_QURAN_TEXT_FONT_SIZE
+                quranTextFontSize = QuranReadFontSize.DEFAULT.size
             )
     }
 }

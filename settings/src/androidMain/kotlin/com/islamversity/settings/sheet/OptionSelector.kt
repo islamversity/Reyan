@@ -20,7 +20,6 @@ class OptionSelector(context: Context) : BottomSheetDialog(context) {
     private var dismissListener: DismissListener? = null
     private val options = mutableListOf<String>()
     private var defaultPosition = 0
-    private var maxHeight = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,11 +78,6 @@ class OptionSelector(context: Context) : BottomSheetDialog(context) {
 
     fun defaultPosition(defaultPosition: Int): OptionSelector {
         this.defaultPosition = defaultPosition
-        return this
-    }
-
-    fun maxHeight(maxHeight: Int): OptionSelector {
-        this.maxHeight = maxHeight
         return this
     }
 
