@@ -1,6 +1,5 @@
 package com.islamversity.domain.repo
 
-import co.touchlab.kermit.Kermit
 import com.islamversity.core.Logger
 import com.islamversity.core.Mapper
 import com.islamversity.db.datasource.CalligraphyLocalDataSource
@@ -85,7 +84,7 @@ class SettingRepoImpl(
             context
         )
             .map {
-                QuranReadFontSize(it.toDouble())
+                QuranReadFontSize(it.toInt())
             }
             .onEach {
                 Logger.log { "SettingRepo found fontSize=$it" }
