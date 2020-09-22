@@ -1,5 +1,6 @@
 package com.islamversity.settings
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +22,7 @@ import javax.inject.Inject
 
 class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsIntent>() {
 
-    private var defaultSize = 0
+    private var defaultSize = "Default"
 
     @Inject
     override lateinit var presenter: MviPresenter<SettingsIntent, SettingsState>
@@ -40,7 +41,7 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
 
     override fun beforeBindingView(binding: ViewSettingsBinding) {
         super.beforeBindingView(binding)
-        binding.backButton.setOnClickListener { handleBack() }
+        binding.backButton.setOnClickListener { router.handleBack() }
 
         binding.surahCalligraphy.setOnClickListener {
             OptionSelector(binding.surahCalligraphy.context)
@@ -68,12 +69,12 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
                 .show()
         }
 
+        val sizeList = binding.fontSize.context.resources.getStringArray(R.array.font_size).toList()
         binding.fontSize.setOnClickListener {
             OptionSelector(binding.surahCalligraphy.context)
-                .options((1..50).map { it.toString() })
-                .defaultPosition(defaultSize)
-                .maxHeight(300)
-                .orientation(RecyclerView.HORIZONTAL)
+                .options(sizeList)
+                .defaultPosition(sizeList.indexOf(defaultSize))
+                .orientation(RecyclerView.VERTICAL)
                 .dismissListener(object : DismissListener {
                     override fun dismissSheet(position: Int) {
                         intentChannel.offer(SettingsIntent.ChangeQuranFontSize(position))
@@ -91,9 +92,10 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
         binding.surahCalligraphySubtitle.text = state.selectedSurahNameCalligraphy?.name
         binding.ayaCalligraphySubtitle.text = state.selectedAyaCalligraphy?.name
 
-
-        defaultSize = state.quranTextFontSize
-        binding.fontSizeSubtitle.text = state.quranTextFontSize.toString()
+        val sizeList = binding.fontSize.context.resources.getStringArray(R.array.font_size).toList()
+        Log.i("TAG", "render state.quranTextFontSize: " + state.quranTextFontSize)
+        defaultSize = sizeList[if (state.quranTextFontSize > sizeList.size) 1 else state.quranTextFontSize]
+        binding.fontSizeSubtitle.text = defaultSize
 
 
         ayaCalligraphies = state.ayaCalligraphies

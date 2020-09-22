@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
+    android:paddingBottom="50dp"
     android:orientation="vertical">
 
     <View
         android:layout_width="35dp"
         android:layout_height="8dp"
+        android:layout_gravity="center"
         android:layout_marginTop="@dimen/min_margin"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -22,16 +24,15 @@
         android:layout_alignParentTop="true"
         android:layout_margin="@dimen/medium_margin"
         android:src="@drawable/ic_outline_close"
-        app:tint="@color/grey" />
+        app:tint="@color/cardview_dark_background" />
 
     <com.islamversity.base.epoxyhelper.EpoxyAsyncRecyclerView
         android:id="@+id/epoxyView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:clipToPadding="false"
+        android:layout_below="@+id/backButton"
         android:orientation="vertical"
-        android:paddingTop="64dp"
-        android:paddingBottom="48dp"
         tools:itemCount="114"
         tools:listitem="@layout/row_option" />
 

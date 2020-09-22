@@ -4,4 +4,12 @@
     <string name="aya_calligraphy">Aya Calligraphy</string>
     <string name="calligraphy">Calligraphy</string>
     <string name="font_size">Font size</string>
+
+    <string-array name="font_size">
+        <item>Small</item>
+        <item>Default</item>
+        <item>Large</item>
+        <item>Largest</item>
+    </string-array>
+
 </resources>
