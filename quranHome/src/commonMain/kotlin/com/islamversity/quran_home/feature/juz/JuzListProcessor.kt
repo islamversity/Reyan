@@ -7,6 +7,7 @@ import com.islamversity.core.mvi.BaseProcessor
 import com.islamversity.core.ofType
 import com.islamversity.domain.model.JuzRepoModel
 import com.islamversity.domain.repo.juz.JuzListRepo
+import com.islamversity.domain.repo.juz.JuzListUsecase
 import com.islamversity.navigation.Navigator
 import com.islamversity.navigation.Screens
 import com.islamversity.navigation.model.SearchLocalModel
@@ -17,7 +18,7 @@ import kotlinx.coroutines.flow.map
 
 class JuzListProcessor(
     private val navigator: Navigator,
-    private val juzListRepo: JuzListRepo,
+    private val juzListUsecase: JuzListUsecase,
     private val juzMapper: Mapper<JuzRepoModel, JozUIModel>
 ) : BaseProcessor<JuzListIntent, JuzListResult>() {
     override fun transformers(): List<FlowBlock<JuzListIntent, JuzListResult>> =
@@ -27,7 +28,7 @@ class JuzListProcessor(
     private val loadJoz: FlowBlock<JuzListIntent, JuzListResult> = {
         ofType<JuzListIntent.Initial>()
             .flatMapMerge {
-                juzListRepo.getAllJuz()
+                juzListUsecase.getAllJuz()
             }
             .map {
                 JuzListResult.JuzSuccess(
