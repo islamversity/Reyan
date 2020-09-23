@@ -6,6 +6,7 @@ import com.islamversity.core.mvi.MviProcessor
 import com.islamversity.daggercore.scope.FeatureScope
 import com.islamversity.domain.model.JuzRepoModel
 import com.islamversity.domain.repo.juz.JuzListRepo
+import com.islamversity.domain.repo.juz.JuzListUsecase
 import com.islamversity.navigation.Navigator
 import com.islamversity.quran_home.feature.juz.*
 import com.islamversity.quran_home.feature.juz.model.JozUIModel
@@ -26,12 +27,12 @@ object JuzListModule {
     @Provides
     fun provideProcessor(
         navigator: Navigator,
-        juzListRepo: JuzListRepo,
+        jListUsecase: JuzListUsecase,
         juzMapper: Mapper<JuzRepoModel, JozUIModel>
     ): MviProcessor<JuzListIntent, JuzListResult> =
         JuzListProcessor(
             navigator,
-            juzListRepo,
+            jListUsecase,
             juzMapper
         )
 
