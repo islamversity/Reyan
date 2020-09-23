@@ -125,42 +125,22 @@ WHERE aya.id = :id;
 
 
 
+getJuzs:
+SELECT hizbs.id, hizbs.surahId, hizbs.orderIndex, hizbs.juzOrderIndex, hizbs.hizbQuarterOrderIndex, name.content
+FROM (
+SELECT * FROM aya
+GROUP BY hizbQuarterOrderIndex
 
+UNION
 
+SELECT * FROM aya
+GROUP BY hizbQuarterOrderIndex
+HAVING max(rowIndex)
+) hizbs
 
-getAllJuz:
-SELECT
-DISTINCT aya.juzOrderIndex,
-aya.id,
-aya.orderIndex,
-aya.surahId,
-aya.hizbQuarterOrderIndex
-FROM aya
-GROUP BY aya.juzOrderIndex
-ORDER BY aya.juzOrderIndex ASC;
-
-
-
-
-
-
-
-
-
-
-getAllHizb:
-SELECT
-DISTINCT aya.hizbQuarterOrderIndex,
-aya.id,
-aya.orderIndex,
-aya.surahId,
-aya.juzOrderIndex
-FROM aya
-GROUP BY aya.hizbQuarterOrderIndex
-ORDER BY aya.hizbQuarterOrderIndex ASC;
-
-
-
+LEFT JOIN name
+ON name.rowId = hizbs.surahId
+AND name.calligraphy = :calligraphy;
 
 
 
