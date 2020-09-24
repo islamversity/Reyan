@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="juz_title">
+        <item> </item>
+        <item>First</item>
+        <item>Second</item>
+        <item>Third</item>
+        <item>Forth</item>
+        <item>Fifth</item>
+        <item>Sixth</item>
+        <item>Seventh</item>
+        <item>Eighth</item>
+        <item>Ninth</item>
+        <item>Tenth</item>
+        <item>Eleventh</item>
+        <item>Twelfth</item>
+        <item>Thirteenth</item>
+        <item>Fourteenth</item>
+        <item>Fifteenth</item>
+        <item>Sixteenth</item>
+        <item>Seventeenth</item>
+        <item>Eighteenth</item>
+        <item>Nineteenth</item>
+        <item>Twentieth</item>
+        <item>Twenty first</item>
+        <item>Twenty second</item>
+        <item>Twenty third</item>
+        <item>Twenty forth</item>
+        <item>Twenty fifth</item>
+        <item>Twenty sixth</item>
+        <item>Twenty seventh</item>
+        <item>Twenty eighth</item>
+        <item>Twenty ninth</item>
+        <item>Thirtieth</item>
+    </array>
+</resources>
