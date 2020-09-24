@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="juz_title">
+        <item> </item>
+        <item>اول</item>
+        <item>دوم</item>
+        <item>سوم</item>
+        <item>چهارم</item>
+        <item>پنجم</item>
+        <item>ششم</item>
+        <item>هفتم</item>
+        <item>هشتم</item>
+        <item>نهم</item>
+        <item>دهم</item>
+        <item>یازدهم</item>
+        <item>دوازهم</item>
+        <item>سیزدهم</item>
+        <item>چهاردهم</item>
+        <item>پانزدهم</item>
+        <item>شانزدهم</item>
+        <item>هفدهم</item>
+        <item>هجدهم</item>
+        <item>نانزدهم</item>
+        <item>بیستم</item>
+        <item>بیست‌ و یکم</item>
+        <item>بیست‌ و دوم</item>
+        <item>بیست‌ و سوم</item>
+        <item>بیست‌ و چهارم</item>
+        <item>بیست‌ و پنجم</item>
+        <item>بیست‌ و ششم</item>
+        <item>بیست‌ و هفتم</item>
+        <item>بیست‌ و هشتم</item>
+        <item>بیست‌ و نهم</item>
+        <item>سی‌ام</item>
+    </array>
+</resources>

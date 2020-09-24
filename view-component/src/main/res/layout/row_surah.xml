@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?android:selectableItemBackground"
     android:orientation="vertical"
     android:paddingHorizontal="@dimen/large_padding"
     android:paddingTop="@dimen/medium_padding">
@@ -37,12 +38,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/medium_margin"
-            android:layout_marginRight="@dimen/min_margin"
             android:layout_marginTop="@dimen/low_margin"
-            android:gravity="left"
+            android:layout_marginRight="@dimen/min_margin"
             android:layout_toLeftOf="@+id/txtName"
             android:layout_toRightOf="@+id/item_order"
             android:fontFamily="@font/english_regular_medium"
+            android:gravity="left"
             android:maxLines="1"
             android:textColor="@color/black"
             android:textSize="@dimen/medium_text"
@@ -74,7 +75,7 @@
 
             <Space
                 android:layout_width="@dimen/low_margin"
-                android:layout_height="1dp"/>
+                android:layout_height="1dp" />
 
             <TextView
                 android:id="@+id/txtVersesCount"
