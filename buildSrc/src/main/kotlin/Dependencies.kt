@@ -7,7 +7,7 @@ object Versions {
     val androidXTest = "1.1.0"
     val supportJunitExt = "1.0.0"
     val androidSupport = "1.0.0"
-    val googleMaterial = "1.0.0-rc01"
+    val googleMaterial = "1.2.1"
     val constraintLayout = "2.0.0"
     val multidex = "2.0.0"
     val androidArchComponent = "2.2.0"
@@ -135,6 +135,8 @@ object Deps {
                     "desugar_jdk_libs",
                     "1.0.5"
                 )
+
+            val seekBar = "com.github.warkiz.widget:indicatorseekbar:2.1.2"
         }
 
         object Test {
@@ -191,7 +193,7 @@ object Deps {
     }
 
     object KotlinTest {
-//        val common = "org.jetbrains.kotlin:kotlin-test-common:${Versions.kotlin}"
+        //        val common = "org.jetbrains.kotlin:kotlin-test-common:${Versions.kotlin}"
         val common = "org.jetbrains.kotlin:kotlin-test-multiplatform"
         val annotations = "org.jetbrains.kotlin:kotlin-test-annotations-common:${Versions.kotlin}"
         val jvm = "org.jetbrains.kotlin:kotlin-test:${Versions.kotlin}"
@@ -263,6 +265,6 @@ object Deps {
         val cocoapodsext = "co.touchlab:kotlinnativecocoapods:${Versions.cocoapodsext}"
         val okio = "com.squareup.okio:okio:2.8.0"
         val uuid = "com.benasher44:uuid:0.2.2"
-        val logger = "co.touchlab:kermit:0.1.7"
+        val logger = "co.touchlab:kermit:0.1.8"
     }
 }

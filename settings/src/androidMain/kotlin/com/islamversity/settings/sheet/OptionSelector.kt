@@ -1,10 +1,7 @@
 package com.islamversity.settings.sheet
 
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.Window
 import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,8 +9,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.islamversity.settings.R
 import com.islamversity.settings.databinding.SheetOptionBinding
 
-
-class OptionSelector(context: Context) : BottomSheetDialog(context) {
+class OptionSelector(context: Context) : BottomSheetDialog(context, R.style.OptionsSelectorTheme) {
 
     @RecyclerView.Orientation
     private var orientation = RecyclerView.VERTICAL
@@ -23,20 +19,15 @@ class OptionSelector(context: Context) : BottomSheetDialog(context) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window!!.requestFeature(Window.FEATURE_NO_TITLE)
         val binding = SheetOptionBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setContentView(R.layout.sheet_option)
         window!!.apply {
-            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             setLayout(
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.WRAP_CONTENT
             )
         }
-
-        binding.backButton.setOnClickListener { dismiss() }
 
         binding.epoxyView.apply {
             layoutManager = LinearLayoutManager(context, orientation, false)
@@ -73,16 +64,6 @@ class OptionSelector(context: Context) : BottomSheetDialog(context) {
     fun options(options: List<String>): OptionSelector {
         this.options.clear()
         this.options.addAll(options)
-        return this
-    }
-
-    fun defaultPosition(defaultPosition: Int): OptionSelector {
-        this.defaultPosition = defaultPosition
-        return this
-    }
-
-    fun orientation(@RecyclerView.Orientation orientation: Int): OptionSelector {
-        this.orientation = orientation
         return this
     }
 
