@@ -252,7 +252,7 @@ object AnimUtils {
             return this
         }
 
-        override fun setTarget(target: Any) {
+        override fun setTarget(target: Any?) {
             mAnimator.setTarget(target)
         }
 

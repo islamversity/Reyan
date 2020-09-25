@@ -8,6 +8,7 @@ import com.islamversity.core.ofType
 import com.islamversity.domain.model.Calligraphy
 import com.islamversity.domain.model.CalligraphyId
 import com.islamversity.domain.model.QuranReadFontSize
+import com.islamversity.domain.model.TranslateReadFontSize
 import com.islamversity.domain.repo.CalligraphyRepo
 import com.islamversity.domain.repo.SettingRepo
 import com.islamversity.settings.models.CalligraphyUIModel
@@ -26,13 +27,16 @@ class SettingsProcessor(
         getSurahNameCalligraphies,
         getAllAyaCalligraphies,
 
-        getSurahFontSize,
+        getQuranFontSize,
+        getTranslateFontSize,
+
         getCurrentSurahNameCalligraphy,
         getCurrentAyaCalligraphy,
 
         changeSurahNameCalligraphy,
         changeAyaCalligraphy,
-        setQuranFontSize
+        setQuranFontSize,
+        setTranslateFontSize
     )
 
     private val getSurahNameCalligraphies: FlowBlock<SettingsIntent, SettingsResult> = {
@@ -61,15 +65,24 @@ class SettingsProcessor(
             }
     }
 
-    private val getSurahFontSize: FlowBlock<SettingsIntent, SettingsResult> = {
+    private val getQuranFontSize: FlowBlock<SettingsIntent, SettingsResult> = {
         ofType<SettingsIntent.Initial>()
             .flatMapMerge {
-                settingsRepo.getCurrentFontSize()
+                settingsRepo.getQuranFontSize()
             }
             .map {
-                SettingsResult.AyaFontSize(
-                    it.size
-                )
+                SettingsResult.QuranFontSize(it.size)
+            }
+    }
+
+
+    private val getTranslateFontSize: FlowBlock<SettingsIntent, SettingsResult> = {
+        ofType<SettingsIntent.Initial>()
+            .flatMapMerge {
+                settingsRepo.getTranslateFontSize()
+            }
+            .map {
+                SettingsResult.TranslateFontSize(it.size)
             }
     }
 
@@ -129,7 +142,15 @@ class SettingsProcessor(
         ofType<SettingsIntent.ChangeQuranFontSize>()
             .transform {
                 settingsRepo.setQuranReadFont(QuranReadFontSize(it.size))
-                emit(SettingsResult.AyaFontSize(it.size))
+                emit(SettingsResult.QuranFontSize(it.size))
+            }
+    }
+
+    private val setTranslateFontSize: Flow<SettingsIntent>.() -> Flow<SettingsResult> = {
+        ofType<SettingsIntent.ChangeTranslateFontSize>()
+            .transform {
+                settingsRepo.setTranslateReadFont(TranslateReadFontSize(it.size))
+                emit(SettingsResult.TranslateFontSize(it.size))
             }
     }
 }

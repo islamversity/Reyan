@@ -16,4 +16,8 @@ sealed class SettingsIntent : MviIntent {
     class ChangeQuranFontSize(
         val size: Int
     ) : SettingsIntent()
+
+    class ChangeTranslateFontSize(
+        val size: Int
+    ) : SettingsIntent()
 }

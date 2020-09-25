@@ -13,4 +13,5 @@
     <color name="divider_green">@color/colorPrimary</color>
 
     <color name="highlighted">#1A30B4AC</color>
+    <color name="white">#FFFFFF</color>
 </resources>

@@ -7,6 +7,7 @@ import com.islamversity.db.datasource.SettingsDataSource
 import com.islamversity.db.model.CalligraphyId
 import com.islamversity.domain.model.Calligraphy
 import com.islamversity.domain.model.QuranReadFontSize
+import com.islamversity.domain.model.TranslateReadFontSize
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlin.coroutines.CoroutineContext
@@ -16,7 +17,8 @@ interface SettingRepo {
 
     fun getCurrentSurahCalligraphy(context: CoroutineContext = Dispatchers.Default): Flow<Calligraphy>
     fun getCurrentQuranReadCalligraphy(context: CoroutineContext = Dispatchers.Default): Flow<Calligraphy>
-    fun getCurrentFontSize(context: CoroutineContext = Dispatchers.Default): Flow<QuranReadFontSize>
+    fun getQuranFontSize(context: CoroutineContext = Dispatchers.Default): Flow<QuranReadFontSize>
+    fun getTranslateFontSize(context: CoroutineContext = Dispatchers.Default): Flow<TranslateReadFontSize>
 
     suspend fun setSurahCalligraphy(
         calligraphy: Calligraphy,
@@ -32,11 +34,17 @@ interface SettingRepo {
         font: QuranReadFontSize,
         context: CoroutineContext = Dispatchers.Default
     )
+
+    suspend fun setTranslateReadFont(
+        font: TranslateReadFontSize,
+        context: CoroutineContext = Dispatchers.Default
+    )
 }
 
 private const val KEY_SURAH_CALLIGRAPHY = "KEY_SURAH_CALLIGRAPHY"
 private const val KEY_QURAN_READ_CALLIGRAPHY = "KEY_QURAN_READ_CALLIGRAPHY"
 private const val KEY_QURAN_READ_FONT_SIZE = "KEY_QURAN_READ_FONT_SIZE"
+private const val KEY_TRANSLATE_READ_FONT_SIZE = "KEY_TRANSLATE_READ_FONT_SIZE"
 
 class SettingRepoImpl(
     private val settingsDataSource: SettingsDataSource,
@@ -75,7 +83,7 @@ class SettingRepoImpl(
             }
 
 
-    override fun getCurrentFontSize(context: CoroutineContext): Flow<QuranReadFontSize> =
+    override fun getQuranFontSize(context: CoroutineContext): Flow<QuranReadFontSize> =
         settingsDataSource.observeKey(
             KEY_QURAN_READ_FONT_SIZE,
             {
@@ -87,7 +95,22 @@ class SettingRepoImpl(
                 QuranReadFontSize(it.toInt())
             }
             .onEach {
-                Logger.log { "SettingRepo found fontSize=$it" }
+                Logger.log { "SettingRepo found quran fontSize=$it" }
+            }
+
+    override fun getTranslateFontSize(context: CoroutineContext): Flow<TranslateReadFontSize> =
+        settingsDataSource.observeKey(
+            KEY_TRANSLATE_READ_FONT_SIZE,
+            {
+                TranslateReadFontSize.DEFAULT.size.toString()
+            },
+            context
+        )
+            .map {
+                TranslateReadFontSize(it.toInt())
+            }
+            .onEach {
+                Logger.log { "SettingRepo found translate fontSize=$it" }
             }
 
 
@@ -104,5 +127,9 @@ class SettingRepoImpl(
 
     override suspend fun setQuranReadFont(font: QuranReadFontSize, context: CoroutineContext) {
         settingsDataSource.put(KEY_QURAN_READ_FONT_SIZE, font.size.toString(), context)
+    }
+
+    override suspend fun setTranslateReadFont(font: TranslateReadFontSize, context: CoroutineContext) {
+        settingsDataSource.put(KEY_TRANSLATE_READ_FONT_SIZE, font.size.toString(), context)
     }
 }

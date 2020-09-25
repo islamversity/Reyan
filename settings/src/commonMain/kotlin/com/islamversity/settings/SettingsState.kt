@@ -11,7 +11,8 @@ data class SettingsState(
     val surahNameCalligraphies : List<CalligraphyUIModel>,
     val selectedAyaCalligraphy : CalligraphyUIModel?,
     val selectedSurahNameCalligraphy : CalligraphyUIModel?,
-    val quranTextFontSize : Int
+    val quranTextFontSize : Int,
+    val translateTextFontSize : Int
 ) : BaseViewState {
     companion object {
         fun idle() =
@@ -21,7 +22,8 @@ data class SettingsState(
                 surahNameCalligraphies = emptyList(),
                 selectedAyaCalligraphy = null,
                 selectedSurahNameCalligraphy = null,
-                quranTextFontSize = QuranReadFontSize.DEFAULT.size
+                quranTextFontSize = QuranReadFontSize.DEFAULT.size,
+                translateTextFontSize = QuranReadFontSize.DEFAULT.size
             )
     }
 }

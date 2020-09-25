@@ -11,7 +11,8 @@ sealed class SettingsResult : MviResult {
     data class SurahNameCalligraphies(val list: List<CalligraphyUIModel>) : SettingsResult()
     data class AyaCalligraphies(val list: List<CalligraphyUIModel>) : SettingsResult()
 
-    data class AyaFontSize(val fontSize : Int) : SettingsResult()
+    data class QuranFontSize(val fontSize : Int) : SettingsResult()
+    data class TranslateFontSize(val fontSize : Int) : SettingsResult()
 
     data class SurahCalligraphy(val calligraphy : CalligraphyUIModel) : SettingsResult()
     data class AyaCalligraphy(val calligraphy : CalligraphyUIModel) : SettingsResult()

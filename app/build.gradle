@@ -15,7 +15,7 @@ apply from: "$rootDir/projectDependencyGraph.gradle"
 //check.dependsOn detekt
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         archivesBaseName = "Reyan"
         applicationId "com.islamversity.reyan"
@@ -136,6 +136,8 @@ dependencies {
     implementation(project(search))
     implementation(project(settings))
     implementation(project(surah))
+
+    implementation design
 
     implementation viewModel
 

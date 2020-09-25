@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.islamversity.base.widgets.SaveStateMotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/motionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layoutDescription="@xml/home_motion"
     android:background="@drawable/immersive_background"
+    app:layoutDescription="@xml/home_motion"
     app:motionProgress="1.0"
     tools:showPaths="true">
 
@@ -16,13 +16,13 @@
         android:layout_height="@dimen/toolbar_icon_size"
         android:background="?selectableItemBackgroundBorderless"
         android:padding="4dp"
-        app:srcCompat="@drawable/ic_outline_settings"
-        app:tint="@color/green_dark"
         android:translationX="@dimen/large_margin"
         android:translationY="@dimen/large_margin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="Settings" />
+        app:srcCompat="@drawable/ic_outline_settings"
+        app:tint="@color/green_dark"
+        tools:ignore="ContentDescription" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/inputCard"
@@ -55,7 +55,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="start|center"
-                android:src="@drawable/ic_outline_search" />
+                android:src="@drawable/ic_outline_search"
+                tools:ignore="ContentDescription" />
         </FrameLayout>
 
     </androidx.cardview.widget.CardView>
@@ -67,7 +68,6 @@
         android:layout_height="?actionBarSize"
         android:layout_gravity="bottom"
         android:layout_marginTop="55dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -89,4 +89,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
-</androidx.constraintlayout.motion.widget.MotionLayout>
+</com.islamversity.base.widgets.SaveStateMotionLayout>

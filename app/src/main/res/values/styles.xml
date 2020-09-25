@@ -1,24 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:fontFamily">@font/english_regular_light</item>
-        <item name="background">@color/colorPrimaryDark</item>
         <item name="android:statusBarColor">@android:color/white</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
-        <item name="bottomSheetDialogTheme">@style/AppBottomSheetDialogTheme</item>
-    </style>
-
-    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/AppModalStyle</item>
-    </style>
-
-    <style name="AppModalStyle"
-        parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/bg_round_bottom_sheet</item>
     </style>
 
 </resources>
