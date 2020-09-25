@@ -1,128 +1,229 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
-
-    <ImageView
-        android:id="@+id/backButton"
-        style="@style/ToolbarIcon"
-        android:layout_margin="@dimen/medium_margin"
-        android:src="@drawable/ic_round_arrow_back"/>
+    android:background="@drawable/immersive_background"
+    android:fadingEdge="none"
+    android:overScrollMode="never"
+    android:requiresFadingEdge="none">
 
     <LinearLayout
-        android:id="@+id/surahCalligraphy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/surahCalligraphyTitle"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?selectableItemBackground"
-            android:gravity="start"
-            android:paddingStart="@dimen/medium_padding"
-            android:paddingTop="@dimen/medium_padding"
-            android:paddingEnd="@dimen/medium_padding"
-            android:paddingBottom="@dimen/low_padding"
-            android:text="@string/surah_calligraphy"
-            android:textSize="@dimen/medium_text"
-            app:drawableStartCompat="@drawable/ic_outline_calligraphy"/>
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/surahCalligraphySubtitle"
+            <ImageView
+                android:id="@+id/backButton"
+                style="@style/ToolbarIcon"
+                android:layout_gravity="center_vertical|left"
+                android:layout_marginVertical="@dimen/medium_margin"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:src="@drawable/ic_round_arrow_back"
+                app:tint="@color/green_dark"
+                tools:ignore="ContentDescription,RtlHardcoded" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/settings"
+                android:textColor="@color/green_dark"
+                android:textSize="@dimen/extra_large_text"
+                android:textStyle="bold"
+                tools:ignore="SpUsage" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:id="@+id/surahCalligraphy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?selectableItemBackground"
-            android:gravity="left"
-            android:paddingStart="@dimen/medium_padding"
-            android:paddingEnd="@dimen/medium_padding"
-            android:paddingBottom="@dimen/medium_padding"
-            android:textSize="@dimen/small_text"
-            tools:text="@string/surah_calligraphy" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/surahCalligraphyTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingTop="@dimen/medium_padding"
+                android:paddingRight="@dimen/medium_padding"
+                android:paddingBottom="@dimen/low_padding"
+                android:text="@string/surah_calligraphy"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/medium_text"
+                tools:ignore="RtlHardcoded,SpUsage" />
+
+            <TextView
+                android:id="@+id/surahCalligraphySubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arabic_regular"
+                android:gravity="left"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingRight="@dimen/large_padding"
+                android:paddingBottom="@dimen/medium_padding"
+                android:textColor="@color/blackLight"
+                android:textSize="@dimen/large_text"
+                tools:ignore="RtlHardcoded,SpUsage"
+                tools:text="@string/surah_calligraphy" />
+
+        </LinearLayout>
+
+        <View style="@style/Divider.LargeMargin" />
+
+        <LinearLayout
+            android:id="@+id/ayaCalligraphy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ayaCalligraphyTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingTop="@dimen/medium_padding"
+                android:paddingRight="@dimen/large_padding"
+                android:paddingBottom="@dimen/low_padding"
+                android:text="@string/aya_calligraphy"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/medium_text"
+                tools:ignore="SpUsage" />
+
+            <TextView
+                android:id="@+id/ayaCalligraphySubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arabic_regular"
+                android:gravity="left"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingRight="@dimen/large_padding"
+                android:paddingBottom="@dimen/medium_padding"
+                android:textColor="@color/blackLight"
+                android:textSize="@dimen/large_text"
+                tools:ignore="RtlHardcoded,SpUsage"
+                tools:text="@string/aya_calligraphy" />
+        </LinearLayout>
+
+        <View style="@style/Divider.LargeMargin" />
+
+        <LinearLayout
+            android:id="@+id/mainFontSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/mainFontSizeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingTop="@dimen/medium_padding"
+                android:paddingRight="@dimen/large_padding"
+                android:paddingBottom="@dimen/low_padding"
+                android:text="@string/main_text_size"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/medium_text"
+                tools:ignore="RtlHardcoded,SpUsage" />
+
+            <TextView
+                android:id="@+id/mainFontSizeSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arabic_regular"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/large_padding"
+                android:paddingVertical="@dimen/min_padding"
+                android:text="@string/bismillah"
+                android:textColor="@color/blackLight"
+                android:textSize="@dimen/large_text"
+                tools:ignore="SpUsage" />
+
+            <com.warkiz.widget.IndicatorSeekBar
+                android:id="@+id/mainFontSizeSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginRight="@dimen/medium_margin"
+                app:isb_indicator_color="@color/green_dark"
+                app:isb_indicator_text_color="@color/white"
+                app:isb_show_indicator="circular_bubble"
+                app:isb_thumb_color="@color/green_dark"
+                app:isb_tick_texts_color="@color/green_dark"
+                app:isb_track_background_color="@color/colorAccent"
+                app:isb_track_progress_color="@color/green_dark" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/medium_margin" />
+
+        </LinearLayout>
+
+        <View style="@style/Divider.LargeMargin" />
+
+        <LinearLayout
+            android:id="@+id/translateFontSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/translateFontSizeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingTop="@dimen/medium_padding"
+                android:paddingRight="@dimen/large_padding"
+                android:paddingBottom="@dimen/low_padding"
+                android:text="@string/translate_text_size"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/medium_text"
+                tools:ignore="RtlHardcoded,SpUsage" />
+
+            <TextView
+                android:id="@+id/translateFontSizeSubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arabic_regular"
+                android:gravity="center"
+                android:paddingHorizontal="@dimen/large_padding"
+                android:paddingVertical="@dimen/min_padding"
+                android:text="@string/bismillah_translate"
+                android:textColor="@color/blackLight"
+                android:textSize="@dimen/large_text"
+                tools:ignore="SpUsage" />
+
+            <com.warkiz.widget.IndicatorSeekBar
+                android:id="@+id/translateFontSizeSeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/medium_margin"
+                android:layout_marginRight="@dimen/medium_margin"
+                app:isb_indicator_color="@color/green_dark"
+                app:isb_indicator_text_color="@color/white"
+                app:isb_show_indicator="circular_bubble"
+                app:isb_thumb_color="@color/green_dark"
+                app:isb_tick_texts_color="@color/green_dark"
+                app:isb_track_background_color="@color/colorAccent"
+                app:isb_track_progress_color="@color/green_dark" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/medium_margin" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginHorizontal="@dimen/medium_margin"
-        android:background="@color/grey" />
-
-    <LinearLayout
-        android:id="@+id/ayaCalligraphy"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/ayaCalligraphyTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?selectableItemBackground"
-            android:gravity="start"
-            android:paddingStart="@dimen/medium_padding"
-            android:paddingTop="@dimen/medium_padding"
-            android:paddingEnd="@dimen/medium_padding"
-            android:paddingBottom="@dimen/low_padding"
-            android:text="@string/aya_calligraphy"
-            android:textSize="@dimen/medium_text"
-            app:drawableStartCompat="@drawable/ic_outline_calligraphy"
-            app:drawableTint="@color/green_dark" />
-
-        <TextView
-            android:id="@+id/ayaCalligraphySubtitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?selectableItemBackground"
-            android:gravity="left"
-            android:paddingStart="@dimen/medium_padding"
-            android:paddingEnd="@dimen/medium_padding"
-            android:paddingBottom="@dimen/medium_padding"
-            android:textSize="@dimen/small_text"
-            tools:text="@string/aya_calligraphy" />
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginHorizontal="@dimen/medium_margin"
-        android:background="@color/grey" />
-
-    <LinearLayout
-        android:id="@+id/fontSize"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/fontSizeTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?selectableItemBackground"
-            android:gravity="start"
-            android:paddingStart="@dimen/medium_padding"
-            android:paddingTop="@dimen/medium_padding"
-            android:paddingEnd="@dimen/medium_padding"
-            android:paddingBottom="@dimen/low_padding"
-            android:text="@string/font_size"
-            android:textSize="@dimen/medium_text"
-            app:drawableStartCompat="@drawable/ic_round_format_size"
-            app:drawableTint="@color/green_dark" />
-
-        <TextView
-            android:id="@+id/fontSizeSubtitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?selectableItemBackground"
-            android:gravity="left"
-            android:paddingStart="@dimen/medium_padding"
-            android:paddingEnd="@dimen/medium_padding"
-            android:paddingBottom="@dimen/medium_padding"
-            android:textSize="@dimen/small_text"
-            tools:text="@string/app_name" />
-
-    </LinearLayout>
-</LinearLayout>
+</ScrollView>

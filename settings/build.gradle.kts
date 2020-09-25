@@ -71,6 +71,8 @@ kotlin {
             Deps.Android.Tools.epoxyCompilerDep
         )
 
+        implementation(Deps.Android.Tools.seekBar)
+
         implementation(Deps.Coroutines.jdk)
         implementation(Deps.Coroutines.flowBinding)
 

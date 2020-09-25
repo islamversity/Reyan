@@ -54,7 +54,7 @@ class SurahProcessor(
         flatMapMerge {
             getAyaUseCase.observeAyaMain(it.id)
                 .mapListWith(ayaMapper)
-                .combine(settingRepo.getCurrentFontSize().map { it.size.toInt() }) { uiModel, font ->
+                .combine(settingRepo.getQuranFontSize().map { it.size}) { uiModel, font ->
                     uiModel.map {
                         it.copy(fontSize = font)
                     } to font

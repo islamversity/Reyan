@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="settings">تنظیمات</string>
+    <string name="surah_calligraphy">رسم الخط سوره</string>
+    <string name="aya_calligraphy">رسم الخط آیه</string>
+    <string name="calligraphy">رسم الخط</string>
+    <string name="font_size">اندازه متن</string>
+    <string name="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</string>
+    <string name="bismillah_translate">به نام خدای مهربان بخشاینده</string>
+    <string name="translate_text_size">اندازه متن ترجمه</string>
+    <string name="main_text_size">اندازه متن قران</string>
+</resources>

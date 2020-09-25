@@ -13,7 +13,7 @@ val isReleaseShrinkResources = false
 val isDebugTestCoverage = true
 
 val projectMinSdkVersion = 21
-val projectTargetSdkVersion = 28
-val prjectCompileSdkVersion = 28
+val projectTargetSdkVersion = 29
+val prjectCompileSdkVersion = 29
 
 val proguardFileAddress = "../proguard-rules.pro"

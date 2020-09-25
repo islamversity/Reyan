@@ -2,6 +2,6 @@ package com.islamversity.domain.model
 
 inline class QuranReadFontSize(val size : Int){
     companion object {
-        val DEFAULT = QuranReadFontSize(1)
+        val DEFAULT = QuranReadFontSize(40)
     }
 }

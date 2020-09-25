@@ -4,11 +4,8 @@ import com.islamversity.core.FlowBlock
 import com.islamversity.core.publish
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.channels.broadcast
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -54,7 +51,9 @@ abstract class BasePresenter<I : MviIntent, S : MviViewState, R : MviResult>(
             .receiveAsFlow()
             .publish(filterIntent())
             .let(processor.actionProcessor)
-            .scan(startState, reducer)
+            .scan(startState, { preState, result ->
+                reduce(preState, result)
+            })
             .distinctUntilChanged()
             .onEach {
                 logNewState(it)

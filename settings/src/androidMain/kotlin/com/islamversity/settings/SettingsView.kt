@@ -1,17 +1,20 @@
 package com.islamversity.settings
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.islamversity.base.CoroutineView
 import com.islamversity.core.mvi.MviPresenter
 import com.islamversity.daggercore.CoreComponent
+import com.islamversity.domain.model.QuranReadFontSize
+import com.islamversity.domain.model.TranslateReadFontSize
 import com.islamversity.settings.databinding.ViewSettingsBinding
 import com.islamversity.settings.di.DaggerSettingsComponent
 import com.islamversity.settings.models.CalligraphyUIModel
 import com.islamversity.settings.sheet.DismissListener
 import com.islamversity.settings.sheet.OptionSelector
+import com.warkiz.widget.IndicatorSeekBar
+import com.warkiz.widget.OnSeekChangeListener
+import com.warkiz.widget.SeekParams
 import kotlinx.coroutines.channels.BroadcastChannel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
@@ -20,9 +23,12 @@ import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.merge
 import javax.inject.Inject
 
+
 class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsIntent>() {
 
-    private var defaultSize = "Default"
+    private var defaultQuranSize = QuranReadFontSize.DEFAULT.size
+    private var defaultTranslateSize = TranslateReadFontSize.DEFAULT.size
+    private val fontRange = 20..50
 
     @Inject
     override lateinit var presenter: MviPresenter<SettingsIntent, SettingsState>
@@ -68,19 +74,38 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
                 })
                 .show()
         }
+        binding.mainFontSizeSeekBar.min = fontRange.first.toFloat()
+        binding.mainFontSizeSeekBar.max = fontRange.last.toFloat()
+        binding.mainFontSizeSeekBar.onSeekChangeListener = object : OnSeekChangeListener{
+            override fun onSeeking(seekParams: SeekParams) {
+                defaultQuranSize = seekParams.progress
+                binding.mainFontSizeSubtitle.textSize = defaultQuranSize.toFloat()
+            }
 
-        val sizeList = binding.fontSize.context.resources.getStringArray(R.array.font_size).toList()
-        binding.fontSize.setOnClickListener {
-            OptionSelector(binding.surahCalligraphy.context)
-                .options(sizeList)
-                .defaultPosition(sizeList.indexOf(defaultSize))
-                .orientation(RecyclerView.VERTICAL)
-                .dismissListener(object : DismissListener {
-                    override fun dismissSheet(position: Int) {
-                        intentChannel.offer(SettingsIntent.ChangeQuranFontSize(position))
-                    }
-                })
-                .show()
+            override fun onStartTrackingTouch(seekBar: IndicatorSeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: IndicatorSeekBar?) {
+                intentChannel.offer(SettingsIntent.ChangeQuranFontSize(defaultQuranSize))
+            }
+
+        }
+
+        binding.translateFontSizeSeekBar.min = fontRange.first.toFloat()
+        binding.translateFontSizeSeekBar.max = fontRange.last.toFloat()
+        binding.translateFontSizeSeekBar.onSeekChangeListener = object : OnSeekChangeListener{
+            override fun onSeeking(seekParams: SeekParams) {
+                defaultTranslateSize = seekParams.progress
+                binding.translateFontSizeSubtitle.textSize = defaultTranslateSize.toFloat()
+            }
+
+            override fun onStartTrackingTouch(seekBar: IndicatorSeekBar?) {
+            }
+
+            override fun onStopTrackingTouch(seekBar: IndicatorSeekBar?) {
+                intentChannel.offer(SettingsIntent.ChangeTranslateFontSize(defaultTranslateSize))
+            }
+
         }
 
     }
@@ -92,11 +117,11 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
         binding.surahCalligraphySubtitle.text = state.selectedSurahNameCalligraphy?.name
         binding.ayaCalligraphySubtitle.text = state.selectedAyaCalligraphy?.name
 
-        val sizeList = binding.fontSize.context.resources.getStringArray(R.array.font_size).toList()
-        Log.i("TAG", "render state.quranTextFontSize: " + state.quranTextFontSize)
-        defaultSize = sizeList[if (state.quranTextFontSize > sizeList.size) 1 else state.quranTextFontSize]
-        binding.fontSizeSubtitle.text = defaultSize
+        defaultQuranSize = state.quranTextFontSize
+        binding.mainFontSizeSeekBar.setProgress(state.quranTextFontSize.toFloat())
 
+        defaultTranslateSize = state.translateTextFontSize
+        binding.translateFontSizeSeekBar.setProgress(state.translateTextFontSize.toFloat())
 
         ayaCalligraphies = state.ayaCalligraphies
         surahNameCalligraphies = state.surahNameCalligraphies

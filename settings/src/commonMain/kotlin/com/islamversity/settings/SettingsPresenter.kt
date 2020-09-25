@@ -42,9 +42,13 @@ class SettingsPresenter(
                 preState.copy(
                     ayaCalligraphies = result.list
                 )
-            is SettingsResult.AyaFontSize ->
+            is SettingsResult.QuranFontSize ->
                 preState.copy(
-                    quranTextFontSize = result.fontSize.toInt()
+                    quranTextFontSize = result.fontSize
+                )
+            is SettingsResult.TranslateFontSize ->
+                preState.copy(
+                    translateTextFontSize = result.fontSize
                 )
             is SettingsResult.SurahCalligraphy ->
                 preState.copy(

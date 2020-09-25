@@ -33,7 +33,7 @@ class ArcFadeMoveChangeHandler : SharedElementTransitionChangeHandler {
 
     override fun restoreFromBundle(bundle: Bundle) {
         super.restoreFromBundle(bundle)
-        sharedElementNames.addAll(bundle.getStringArrayList(KEY_SHARED_ELEMENT_NAMES))
+        sharedElementNames.addAll(bundle.getStringArrayList(KEY_SHARED_ELEMENT_NAMES) ?: emptyList())
     }
 
     override fun getExitTransition(

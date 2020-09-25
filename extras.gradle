@@ -12,8 +12,8 @@ ext{
 
     proguardFileAddress = "${rootProject.rootDir.absolutePath}\\proguard-rules.pro"
     projectMinSdkVersion = 21
-    projectTargetSdkVersion = 28
-    prjectCompileSdkVersion = 28
+    projectTargetSdkVersion = 29
+    prjectCompileSdkVersion = 29
 
     kotlinLib = "$rootDir/kotlinLib.gradle"
     androidLib = "$rootDir/androidLib.gradle"
