@@ -130,6 +130,8 @@ SELECT hizbs.id, hizbs.surahId, hizbs.orderIndex, hizbs.juzOrderIndex, hizbs.hiz
 FROM (
 SELECT * FROM aya
 GROUP BY hizbQuarterOrderIndex
+HAVING min(rowIndex)
+
 
 UNION
 
