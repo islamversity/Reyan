@@ -141,8 +141,7 @@ class AyaLocalDataSourceImpl(
                         )
                         lastHizbIndex = hizbIndex
                     }
-                    val endingJuz = rows[lastHizbIndex]
-
+                    val endingJuz = rows[lastHizbIndex + 1]
 
                     juzs.add(
                         JuzEntity(
