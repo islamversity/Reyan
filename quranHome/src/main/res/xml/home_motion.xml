@@ -49,16 +49,6 @@
     <ConstraintSet android:id="@+id/start">
 
         <Constraint
-            android:id="@+id/settings"
-            android:layout_width="@dimen/toolbar_icon_size"
-            android:layout_height="@dimen/toolbar_icon_size"
-            android:padding="@dimen/low_padding"
-            android:translationX="@dimen/large_margin"
-            android:translationY="-48dp"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="parent" />
-
-        <Constraint
             android:id="@+id/tabLayout"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
@@ -78,21 +68,21 @@
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
 
+        <Constraint
+            android:id="@id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:layout_marginTop="@dimen/medium_margin"
+            android:layout_marginEnd="@dimen/medium_margin"
+            android:layout_marginBottom="@dimen/medium_margin"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+
     </ConstraintSet>
 
 
     <ConstraintSet android:id="@+id/end">
-
-
-        <Constraint
-            android:id="@+id/settings"
-            android:layout_width="@dimen/toolbar_icon_size"
-            android:layout_height="@dimen/toolbar_icon_size"
-            android:padding="@dimen/low_padding"
-            android:translationX="@dimen/large_margin"
-            android:translationY="@dimen/large_margin"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
             android:id="@+id/tabLayout"
@@ -114,6 +104,18 @@
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
+            android:id="@id/search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_margin"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="@dimen/medium_margin"
+            android:layout_marginBottom="0dp"
+            motion:layout_constraintBottom_toBottomOf="@id/inputCard"
+            motion:layout_constraintEnd_toEndOf="@id/inputCard"
+            motion:layout_constraintTop_toTopOf="@id/inputCard" />
 
     </ConstraintSet>
 
