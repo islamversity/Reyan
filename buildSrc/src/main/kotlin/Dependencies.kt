@@ -83,9 +83,9 @@ object Deps {
 
         object Firebase {
             val core = "com.google.firebase:firebase-core:17.0.1"
-            val analytics = "com.google.firebase:firebase-analytics:17.0.1"
+            val analytics = "com.google.firebase:firebase-analytics:17.5.0"
             val crashlytics = "com.crashlytics.sdk.android:crashlytics:2.10.1"
-            val messaging = "com.google.firebase:firebase-messaging:19.0.1"
+            val messaging = "com.google.firebase:firebase-messaging:20.2.4"
             val remoteConfig = "com.google.firebase:firebase-config:18.0.0"
         }
 
