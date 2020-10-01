@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 buildscript {
     apply from: "dependencies.gradle"
     apply from: "extras.gradle"
@@ -13,6 +15,7 @@ buildscript {
         classpath 'com.google.gms:google-services:4.3.3'
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.2.0'
         classpath "com.github.ben-manes:gradle-versions-plugin:0.27.0"
+        classpath "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${Versions.detekt}"
         classpath "com.squareup.sqldelight:gradle-plugin:${Versions.sqlDelight}"
         classpath "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
         classpath "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin:0.5.1"
@@ -20,7 +23,7 @@ buildscript {
 }
 
 plugins {
-    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC16")
+    id("io.gitlab.arturbosch.detekt").version("1.11.0")
 }
 
 apply plugin: "com.github.ben-manes.versions"
@@ -40,24 +43,37 @@ allprojects {
         maven { url "https://dl.bintray.com/arrow-kt/arrow-kt/" }
         maven{ url  "https://kotlin.bintray.com/kotlinx/"}
     }
-    apply plugin: 'io.gitlab.arturbosch.detekt'
-    dependencies {
-        detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:${Versions.detekt}"
-    }
 }
-
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+tasks.withType(KotlinCompile).configureEach {
     kotlinOptions {
         jvmTarget "1.8"
     }
 }
 
-detekt {
-    toolVersion = Versions.detekt
-    input = files("src/main/kotlin")
-    filters = ".*/resources/.*,.*/build/.*"
-    config = files("detekt.yml")
+subprojects {
+    apply plugin: 'io.gitlab.arturbosch.detekt'
+    detekt {
+        toolVersion = Versions.detekt
+        config = files("${rootDir}/detekt.yml")
+        buildUponDefaultConfig = false
+        reports {
+            html {
+                enabled = true
+                destination = file("${rootDir}/build/reports/detekt_${project.name}.html")
+            }
+            xml.enabled = false
+            txt.enabled = false
+        }
+    }
+    tasks.withType(io.gitlab.arturbosch.detekt.Detekt) {
+        exclude(".*/resources/.*")
+        exclude(".*/build/.*")
+    }
+    dependencies {
+        detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:${Versions.detekt}"
+    }
 }
+
 
 ext {
     def values = loadValues()
@@ -72,8 +88,8 @@ ext {
     debugKeyAlias = values.getProperty('debugKeyAlias')
     debugKeyPass = values.getProperty('debugKeyPass')
 
-
 }
+
 
 def loadValues() {
     Properties localProperties = new Properties()

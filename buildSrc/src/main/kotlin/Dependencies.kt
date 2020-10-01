@@ -3,7 +3,8 @@ import org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDepen
 object Versions {
 
     val kotlin = "1.4.0"
-    val detekt = "1.10.0"
+    val detekt = "1.11.0"
+
     val androidXTest = "1.1.0"
     val supportJunitExt = "1.0.0"
     val androidSupport = "1.0.0"
