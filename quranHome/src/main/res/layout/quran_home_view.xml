@@ -10,15 +10,15 @@
     app:motionProgress="1.0"
     tools:showPaths="true">
 
-    <androidx.cardview.widget.CardView
+    <com.islamversity.base.widgets.CurveView
         android:id="@+id/inputCard"
         android:layout_width="match_parent"
         android:layout_height="@dimen/search_input_height"
         android:layout_marginStart="@dimen/search_input_margin"
         android:layout_marginTop="100dp"
         android:layout_marginEnd="@dimen/search_input_margin"
-        app:cardCornerRadius="@dimen/search_input_radius"
-        app:cardElevation="0dp"
+        app:cv_background="@android:color/white"
+        app:cv_radius="@dimen/search_input_radius"
         app:layout_constraintBottom_toBottomOf="@id/tabLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,17 +48,24 @@
         app:layout_constraintTop_toTopOf="@id/inputCard"
         tools:ignore="ContentDescription" />
 
-    <ImageView
+    <FrameLayout
         android:id="@+id/settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="?selectableItemBackgroundBorderless"
+        android:background="@android:color/transparent"
         android:padding="@dimen/medium_margin"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_outline_settings"
-        app:tint="@color/green_dark"
-        tools:ignore="ContentDescription" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackgroundBorderless"
+            app:srcCompat="@drawable/ic_outline_settings"
+            app:tint="@color/green_dark"
+            tools:ignore="ContentDescription"/>
+
+    </FrameLayout>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
