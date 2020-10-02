@@ -41,7 +41,7 @@ allprojects {
             url 'http://storage.googleapis.com/r8-releases/raw'
         }
         maven { url "https://dl.bintray.com/arrow-kt/arrow-kt/" }
-        maven{ url  "https://kotlin.bintray.com/kotlinx/"}
+        maven { url "https://kotlin.bintray.com/kotlinx/" }
     }
 }
 tasks.withType(KotlinCompile).configureEach {
@@ -55,7 +55,8 @@ subprojects {
     detekt {
         toolVersion = Versions.detekt
         config = files("${rootDir}/detekt.yml")
-        buildUponDefaultConfig = false
+        buildUponDefaultConfig = true
+        autoCorrect = true
         reports {
             html {
                 enabled = true
