@@ -41,12 +41,6 @@ class CurveView @JvmOverloads constructor(
         }
     }
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        setMeasuredDimension(measuredWidth, measuredHeight)
-    }
-
-    @SuppressLint("DrawAllocation")
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
         paint.apply {
@@ -54,8 +48,7 @@ class CurveView @JvmOverloads constructor(
             style = Paint.Style.FILL
         }
 
-        val rectF = RectF(0F, 0F, width.toFloat(), height.toFloat())
-        canvas?.drawRoundRect(rectF, radius, radius, paint)
+        canvas?.drawRoundRect(0F, 0F, width.toFloat(), height.toFloat(), radius, radius, paint)
     }
 
 }
