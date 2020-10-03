@@ -14,7 +14,6 @@ enum class Permissions(
             values()
                 .find { it.rawValue == raw }
                 ?: throw IllegalArgumentException("not a real permission= $raw")
-
     }
 }
 
@@ -35,6 +34,5 @@ enum class PermissionsResult(
             values()
                 .find { it.rawValue == raw }
                 ?: throw IllegalArgumentException("not a real permissionResult= $raw")
-
     }
 }

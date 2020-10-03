@@ -40,5 +40,4 @@ class SQLiteCopyOpenHelperFactory(
             mDelegate.create(configuration)
         )
     }
-
 }

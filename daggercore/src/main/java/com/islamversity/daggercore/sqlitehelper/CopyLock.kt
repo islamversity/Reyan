@@ -53,7 +53,6 @@ class CopyLock(name: String, lockDir: File, processLock: Boolean) {
     private val mFileLevelLock: Boolean
     private var mLockChannel: FileChannel? = null
 
-
     /**
      * Creates a lock with `name` and using `lockDir` as the directory for the
      * lock files.

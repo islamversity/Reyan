@@ -53,16 +53,15 @@ data class SurahItemModel(
     val order: String,
     val revealType: RevealedType,
     val ayaCount: String,
-){
-    enum class RevealedType(@StringRes val id : Int, val rawName : String) {
+) {
+    enum class RevealedType(@StringRes val id: Int, val rawName: String) {
         MECCAN(R.string.meccan, "meccan"),
         MEDINAN(R.string.medinan, "medinan"),
         ;
 
-        companion object{
-            operator fun invoke(rawName : String) : RevealedType =
+        companion object {
+            operator fun invoke(rawName: String): RevealedType =
                 values().find { it.rawName == rawName }!!
         }
     }
 }
-

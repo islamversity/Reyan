@@ -9,8 +9,7 @@ import java.io.IOException
 import java.net.ProtocolException
 import javax.inject.Inject
 
-class NoContentProtocolExceptionInterceptor @Inject constructor(
-) : Interceptor {
+class NoContentProtocolExceptionInterceptor @Inject constructor() : Interceptor {
 
     @Throws(IOException::class)
     override fun intercept(chain: Interceptor.Chain): Response =
@@ -25,5 +24,4 @@ class NoContentProtocolExceptionInterceptor @Inject constructor(
                         .body(EMPTY_BYTE_ARRAY.toResponseBody())
                         .build()
             }
-
 }

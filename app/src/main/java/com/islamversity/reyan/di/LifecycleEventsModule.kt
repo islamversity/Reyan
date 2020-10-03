@@ -14,9 +14,8 @@ object LifecycleEventsModule {
     fun provideEventSubject() =
         Channel<LifecycleEvent>()
 
-
     @JvmStatic
     @Provides
-    fun provideEventObservable(events : Channel<LifecycleEvent>) =
+    fun provideEventObservable(events: Channel<LifecycleEvent>) =
         events.receiveAsFlow()
 }

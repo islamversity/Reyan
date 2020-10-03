@@ -10,7 +10,6 @@ import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import com.bluelinelabs.conductor.Controller
 
-
 fun Context.getScreenWidth(): Int =
     resources.displayMetrics.widthPixels
 
@@ -20,7 +19,6 @@ fun Context.getScreenHeight(): Int =
 @ColorInt
 infix fun Context.getColorCompat(@ColorRes id: Int): Int =
     ContextCompat.getColor(this, id)
-
 
 infix fun Float.pixel(context: Context): Float =
     this *

@@ -1,11 +1,9 @@
 package com.islamversity.base.widgets
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
-import android.graphics.RectF
 import android.util.AttributeSet
 import android.view.View
 import com.islamversity.base.R
@@ -50,5 +48,4 @@ class CurveView @JvmOverloads constructor(
 
         canvas?.drawRoundRect(0F, 0F, width.toFloat(), height.toFloat(), radius, radius, paint)
     }
-
 }

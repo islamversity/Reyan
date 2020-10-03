@@ -10,9 +10,9 @@ class EpoxyAsyncRecyclerView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-): EpoxyRecyclerView(context, attrs, defStyleAttr) {
+) : EpoxyRecyclerView(context, attrs, defStyleAttr) {
 
-    private var internalController : EpoxyController? = null
+    private var internalController: EpoxyController? = null
 
     fun withModelsAsync(buildModels: EpoxyController.() -> Unit) {
         val controller = (internalController as? WithModelsAsyncController)

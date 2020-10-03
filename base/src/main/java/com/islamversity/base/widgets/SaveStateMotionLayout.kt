@@ -8,14 +8,14 @@ import kotlinx.android.parcel.Parcelize
 
 class SaveStateMotionLayout @JvmOverloads constructor(
     context: Context,
-    attrs : AttributeSet? = null,
-    defStyleAttr : Int = 0
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
 ) : MotionLayout(context, attrs, defStyleAttr) {
     @Parcelize
     data class SavedState(
-        val progress : Float, val superState : Parcelable?
+        val progress: Float,
+        val superState: Parcelable?
     ) : Parcelable
-
 
     override fun onSaveInstanceState(): Parcelable? {
         return SavedState(progress, super.onSaveInstanceState())
