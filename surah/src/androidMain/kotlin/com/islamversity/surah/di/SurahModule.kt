@@ -5,14 +5,20 @@ import com.islamversity.core.mvi.MviPresenter
 import com.islamversity.core.mvi.MviProcessor
 import com.islamversity.daggercore.scope.FeatureScope
 import com.islamversity.domain.model.aya.AyaRepoModel
+import com.islamversity.domain.model.surah.SurahRepoModel
 import com.islamversity.domain.repo.SettingRepo
 import com.islamversity.domain.repo.aya.GetAyaUseCase
-import com.islamversity.domain.repo.bismillah.BismillahUsecase
 import com.islamversity.domain.repo.surah.GetSurahUsecase
 import com.islamversity.navigation.Navigator
-import com.islamversity.surah.*
+import com.islamversity.surah.SurahIntent
+import com.islamversity.surah.SurahPresenter
+import com.islamversity.surah.SurahProcessor
+import com.islamversity.surah.SurahResult
+import com.islamversity.surah.SurahState
 import com.islamversity.surah.mapper.AyaRepoUIMapper
+import com.islamversity.surah.mapper.SurahRepoHeaderMapper
 import com.islamversity.surah.model.AyaUIModel
+import com.islamversity.surah.model.SurahHeaderUIModel
 import dagger.Module
 import dagger.Provides
 
@@ -26,16 +32,16 @@ object SurahModule {
         getAyaUseCase: GetAyaUseCase,
         mapper: Mapper<AyaRepoModel, AyaUIModel>,
         settings: SettingRepo,
-        bismillahUsecase: BismillahUsecase,
-        surahUsecase: GetSurahUsecase
+        surahUsecase: GetSurahUsecase,
+        surahRepoHeaderMapper: Mapper<SurahRepoModel, SurahHeaderUIModel>
     ): MviProcessor<SurahIntent, SurahResult> =
         SurahProcessor(
             navigator = navigator,
             getAyaUseCase = getAyaUseCase,
             ayaMapper = mapper,
             settingRepo = settings,
-            bismillahUsecase = bismillahUsecase,
-            surahUsecase = surahUsecase
+            surahUsecase = surahUsecase,
+            surahRepoHeaderMapper = surahRepoHeaderMapper,
         )
 
     @FeatureScope
@@ -50,4 +56,8 @@ object SurahModule {
     @Provides
     @JvmStatic
     fun provideAyaRepoUIMapper(): Mapper<AyaRepoModel, AyaUIModel> = AyaRepoUIMapper()
+
+    @Provides
+    @JvmStatic
+    fun provideSurahRepoHeaderMapper(): Mapper<SurahRepoModel, SurahHeaderUIModel> = SurahRepoHeaderMapper()
 }

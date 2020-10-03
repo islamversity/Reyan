@@ -10,6 +10,7 @@ class AyaRepoUIMapper : Mapper<AyaRepoModel, AyaUIModel>{
             item.id.id,
             item.content,
             item.order,
-            0
+            0,
+            false,
         )
 }

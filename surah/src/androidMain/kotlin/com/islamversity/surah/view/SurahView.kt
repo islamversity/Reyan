@@ -2,11 +2,8 @@ package com.islamversity.surah.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 import com.islamversity.base.CoroutineView
-import com.islamversity.base.visible
 import com.islamversity.core.mvi.MviPresenter
 import com.islamversity.daggercore.CoreComponent
 import com.islamversity.navigation.fromByteArray
@@ -15,6 +12,7 @@ import com.islamversity.surah.SurahIntent
 import com.islamversity.surah.SurahState
 import com.islamversity.surah.databinding.ViewSurahBinding
 import com.islamversity.surah.di.DaggerSurahComponent
+import com.islamversity.surah.model.AyaUIModel
 import com.islamversity.surah.model.SurahHeaderUIModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
@@ -67,26 +65,21 @@ class SurahView(
         }
 
         binding.ayaList.withModelsAsync {
-            surahHeader {
-                id(surahLocal.surahID)
-                model(
-                    SurahHeaderUIModel(
-                        surahLocal.surahID,
-                        state.ayas.size.toString(),
-                        surahLocal.surahName,
-                        surahLocal.surahName,
-                        "Meccan",
-                        state.ayas.size,
-                        20, //appFontSize
-                        true
-                    )
-                )
-            }
+            state.items.forEach {
+                if (it is SurahHeaderUIModel) {
+                    surahHeader {
+                        id(it.rowId)
+                        model(
+                            it
+                        )
+                    }
+                }
 
-            state.ayas.forEach {
-                ayaView {
-                    id(it.id)
-                    model(it)
+                if (it is AyaUIModel) {
+                    ayaView {
+                        id(it.rowId)
+                        model(it)
+                    }
                 }
             }
         }
