@@ -32,7 +32,6 @@ import java.util.zip.ZipInputStream
 
 private const val LOG_TAG = "SQLiteCopyOpenHelper"
 
-
 /**
  * An open helper that will copy & open a pre-populated database if it doesn't exists in internal
  * storage.
@@ -122,8 +121,8 @@ class SQLiteCopyOpenHelper(
                 }
             } else {
                 Log.w(
-                    LOG_TAG, "Failed to delete database file ("
-                            + databaseName + ") for a copy destructive migration."
+                    LOG_TAG, "Failed to delete database file (" +
+                            databaseName + ") for a copy destructive migration."
                 )
             }
         } finally {
@@ -147,8 +146,8 @@ class SQLiteCopyOpenHelper(
             input = Channels.newChannel(inputStream)
         } else {
             throw IllegalStateException(
-                "copyFromAssetPath, copyFromFile and "
-                        + "copyFromInputStream are all null!"
+                "copyFromAssetPath, copyFromFile and " +
+                        "copyFromInputStream are all null!"
             )
         }
 
@@ -164,15 +163,15 @@ class SQLiteCopyOpenHelper(
         val parent = destinationFile.parentFile
         if (parent != null && !parent.exists() && !parent.mkdirs()) {
             throw IOException(
-                "Failed to create directories for "
-                        + destinationFile.absolutePath
+                "Failed to create directories for " +
+                        destinationFile.absolutePath
             )
         }
         if (!intermediateFile.renameTo(destinationFile)) {
             throw IOException(
-                "Failed to move intermediate file ("
-                        + intermediateFile.absolutePath + ") to destination ("
-                        + destinationFile.absolutePath + ")."
+                "Failed to move intermediate file (" +
+                        intermediateFile.absolutePath + ") to destination (" +
+                        destinationFile.absolutePath + ")."
             )
         }
     }
@@ -234,14 +233,13 @@ private fun copy(input: ReadableByteChannel, output: FileChannel) {
     }
 }
 
-//this method can be much faster and more reliable
+// this method can be much faster and more reliable
 // also we can use OkIO for better performance
 fun unpackZip(input: ReadableByteChannel, output: FileChannel): Boolean {
     ZipInputStream(Channels.newInputStream(input)).use { zis ->
         try {
             val ze: ZipEntry = zis.nextEntry
             val filename: String = ze.name
-
 
             val buffer = ByteArray(1024 * 4)
             var count: Int
@@ -254,7 +252,7 @@ fun unpackZip(input: ReadableByteChannel, output: FileChannel): Boolean {
 
             output.force(false)
             zis.closeEntry()
-        }finally {
+        } finally {
             output.close()
             input.close()
         }

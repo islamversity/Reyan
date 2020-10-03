@@ -1,6 +1,5 @@
 package com.islamversity.daggercore.modules.domain
 
-
 import com.islamversity.core.Mapper
 import com.islamversity.db.datasource.AyaLocalDataSource
 import com.islamversity.db.model.JuzEntity
@@ -21,7 +20,7 @@ object JuzListModule {
     fun bindJuzListUsecase(
         juzListRepo: JuzListRepo,
         settingRepo: SettingRepo,
-    ) : JuzListUsecase = JuzListUsecaseImpl(juzListRepo, settingRepo)
+    ): JuzListUsecase = JuzListUsecaseImpl(juzListRepo, settingRepo)
 
     @JvmStatic
     @Provides

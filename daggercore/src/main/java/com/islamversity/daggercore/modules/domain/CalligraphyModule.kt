@@ -14,8 +14,8 @@ object CalligraphyModule {
     @Provides
     @JvmStatic
     fun provideCalligraphyRepoImpl(
-        ds : CalligraphyLocalDataSource,
+        ds: CalligraphyLocalDataSource,
         mapper: Mapper<Calligraphy, com.islamversity.domain.model.Calligraphy>
-    ) : CalligraphyRepo =
-        CalligraphyRepoImpl(ds,mapper)
+    ): CalligraphyRepo =
+        CalligraphyRepoImpl(ds, mapper)
 }

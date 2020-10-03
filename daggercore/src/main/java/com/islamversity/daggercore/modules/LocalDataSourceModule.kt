@@ -10,7 +10,7 @@ object LocalDataSourceModule {
 
     @JvmStatic
     @Provides
-    fun provideCalligraphyDS(queries : CalligraphyQueries) : CalligraphyLocalDataSource =
+    fun provideCalligraphyDS(queries: CalligraphyQueries): CalligraphyLocalDataSource =
         CalligraphyLocalDataSourceImpl(queries)
 
     @JvmStatic
@@ -33,14 +33,13 @@ object LocalDataSourceModule {
     @Provides
     fun provideBismillah(
         bismillahQueries: BismillahQueries
-    ) : BismillahLocalDataSource =
+    ): BismillahLocalDataSource =
         BismillahLocalDataSourceImpl(bismillahQueries)
 
     @JvmStatic
     @Provides
     fun provideSettings(
         bismillahQueries: SettingsQueries
-    ) : SettingsDataSource =
+    ): SettingsDataSource =
         SettingsDataSourceImpl(bismillahQueries)
-
 }

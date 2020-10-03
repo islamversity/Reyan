@@ -12,6 +12,6 @@ object NavigatorModule {
 
     @JvmStatic
     @Provides
-    fun provideNavigator(app : Application, router: Router): Navigator =
+    fun provideNavigator(app: Application, router: Router): Navigator =
         ControllerNavigator(app, router)
 }

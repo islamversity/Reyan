@@ -29,5 +29,4 @@ abstract class ViewBindingController<T : ViewBinding> @JvmOverloads constructor(
         _binding = null
         super.onDestroyView(view)
     }
-
 }

@@ -25,7 +25,7 @@ object MappersModule {
     @Provides
     @JvmStatic
     fun provideJuzEntityRepoMapper(
-        hizbMapper : Mapper<HizbEntity, HizbRepoModel>
+        hizbMapper: Mapper<HizbEntity, HizbRepoModel>
     ): Mapper<JuzEntity, JuzRepoModel> = JuzDBRepoMapper(hizbMapper)
 
     @Provides

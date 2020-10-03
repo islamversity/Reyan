@@ -37,10 +37,11 @@ abstract class BaseApp : Application(), CoreComponentProvider {
         Fresco.initialize(this, frescoConfig)
 
         FLog.setMinimumLoggingLevel(
-            if (DEBUG)
+            if (DEBUG) {
                 Log.VERBOSE
-            else
+} else {
                 Log.ERROR
+}
         )
     }
 }
