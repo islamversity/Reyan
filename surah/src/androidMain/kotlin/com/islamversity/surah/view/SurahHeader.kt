@@ -3,7 +3,6 @@ package com.islamversity.surah.view
 import android.content.Context
 import android.view.LayoutInflater
 import android.widget.LinearLayout
-import androidx.core.content.ContextCompat
 import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
 import com.islamversity.base.getColorCompat
@@ -27,7 +26,7 @@ class SurahHeader(
             tvSurahNumber.txtOrder.setTextColor(root.context getColorCompat android.R.color.white)
 
             tvSurahName.text = surahHeaderUIModel.name
-            tvSurahNameTranslate.text = surahHeaderUIModel.nameTranslate
+            tvSurahNameTranslate.text = surahHeaderUIModel.nameTranslated
 
             tvSurahOrigin.text = surahHeaderUIModel.origin
             tvSurahVerses.text = surahHeaderUIModel.verses.toString()

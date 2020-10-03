@@ -8,6 +8,7 @@ import android.widget.LinearLayout
 import com.airbnb.epoxy.CallbackProp
 import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
+import com.islamversity.base.visible
 import com.islamversity.surah.databinding.RowAyaBinding
 import com.islamversity.surah.model.AyaUIModel
 
@@ -34,7 +35,8 @@ class AyaView @JvmOverloads constructor(
         binding.tvAyaContent.textSize = surah.fontSize.toFloat()
         binding.tvAyaTranslate1.textSize = surah.fontSize.toFloat()
         binding.tvAyaTranslate2.textSize = surah.fontSize.toFloat()
-//        binding.ayaNumber.txtOrder.textSize = surah.fontSize.toFloat()
+
+        binding.ayaToolbar visible surah.toolbarVisible
     }
 
     @CallbackProp

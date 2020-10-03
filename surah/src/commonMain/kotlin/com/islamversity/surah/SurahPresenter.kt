@@ -38,26 +38,9 @@ class SurahPresenter(
                 preState.copy(
                     base = BaseState.loading()
                 )
-            is SurahResult.MainAyasLoaded ->
+            is SurahResult.Items ->
                 preState.copy(
-                    ayas = result.ayas,
-                    mainAyaFontSize = result.fontSize
-                )
-            SurahResult.Bismillah.Hide ->
-                preState.copy(
-                    showBismillah = false
-                )
-            SurahResult.Bismillah.Show ->
-                preState.copy(
-                    showBismillah = true
-                )
-            is SurahResult.Bismillah.Content ->
-                preState.copy(
-                    bismillah = result.value
-                )
-            SurahResult.SurahNotFound ->
-                preState.copy(
-                    closeScreen = true
+                    items = result.items
                 )
         }
 }
