@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/large_margin"
-    android:layout_marginRight="@dimen/large_margin">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/large_margin"
+                android:layout_marginRight="@dimen/large_margin">
 
     <include
         android:id="@+id/ayaNumber"
@@ -16,7 +16,7 @@
         android:layout_alignBottom="@+id/ayaToolbar"
         android:gravity="center"
         android:layout_marginBottom="@dimen/min_padding"
-        tools:ignore="RtlHardcoded" />
+        tools:ignore="RtlHardcoded"/>
 
     <LinearLayout
         android:id="@+id/ayaToolbar"
@@ -25,6 +25,7 @@
         android:layout_alignParentRight="true"
         android:layout_toRightOf="@+id/ayaNumber"
         android:orientation="vertical"
+        android:visibility="visible"
         tools:ignore="RtlHardcoded">
 
         <LinearLayout
@@ -43,11 +44,11 @@
                 android:layout_gravity="center_vertical"
                 android:contentDescription="@string/play_button"
                 android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ic_play" />
+                app:srcCompat="@drawable/ic_play"/>
 
             <Space
                 android:layout_width="@dimen/medium_margin"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"/>
 
             <ImageView
                 android:id="@+id/ivAyaShare"
@@ -56,11 +57,11 @@
                 android:layout_gravity="center_vertical"
                 android:contentDescription="@string/aya_share_button"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_share" />
+                android:src="@drawable/ic_share"/>
 
             <Space
                 android:layout_width="@dimen/medium_margin"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"/>
 
             <ImageView
                 android:id="@+id/ivAyaBookmark"
@@ -69,11 +70,11 @@
                 android:layout_gravity="center_vertical"
                 android:contentDescription="@string/aya_bookmark_button"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_bookmark" />
+                android:src="@drawable/ic_bookmark"/>
 
             <Space
                 android:layout_width="@dimen/min_margin"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"/>
 
         </LinearLayout>
 
@@ -95,7 +96,7 @@
         android:textColor="@color/green_dark"
         android:textSize="18dp"
         tools:ignore="RtlHardcoded,SpUsage"
-        tools:text="بسم الله الرحمن الرحیم" />
+        tools:text="بسم الله الرحمن الرحیم"/>
 
     <TextView
         android:id="@+id/tvAyaTranslate1"
@@ -110,7 +111,7 @@
         android:textSize="@dimen/large_text"
         android:visibility="visible"
         tools:ignore="RtlHardcoded,SpUsage"
-        tools:text="بسم الله الرحمن الرحیم" />
+        tools:text="بسم الله الرحمن الرحیم"/>
 
     <TextView
         android:id="@+id/tvAyaTranslate2"
@@ -125,7 +126,7 @@
         android:textSize="@dimen/large_text"
         android:visibility="visible"
         tools:ignore="RtlHardcoded,SpUsage"
-        tools:text="بسم الله الرحمن الرحیم" />
+        tools:text="بسم الله الرحمن الرحیم"/>
 
     <View
         style="@style/Divider"

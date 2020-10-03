@@ -2,14 +2,13 @@ package com.islamversity.surah
 
 import com.islamversity.core.mvi.BaseState
 import com.islamversity.core.mvi.BaseViewState
-import com.islamversity.surah.model.AyaUIModel
+import com.islamversity.surah.model.UIItem
 
 data class SurahState(
     override val base: BaseState,
     val showBismillah : Boolean,
     val bismillah : String,
-    val ayas : List<AyaUIModel>,
-    val mainAyaFontSize : Int,
+    val items : List<UIItem>,
     val startFrom : Int,
     val closeScreen : Boolean,
 ) : BaseViewState {
@@ -17,8 +16,7 @@ data class SurahState(
         fun idle() =
             SurahState(
                 base = BaseState.stable(),
-                ayas = emptyList(),
-                mainAyaFontSize = 0,
+                items = emptyList(),
                 startFrom = 0,
                 showBismillah = false,
                 bismillah = "",

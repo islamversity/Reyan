@@ -3,23 +3,15 @@ package com.islamversity.surah
 import com.islamversity.core.mvi.BaseState
 import com.islamversity.core.mvi.MviResult
 import com.islamversity.surah.model.AyaUIModel
+import com.islamversity.surah.model.UIItem
 
 sealed class SurahResult : MviResult {
     object LastStable : SurahResult()
     object Loading : SurahResult()
 
-    object SurahNotFound : SurahResult()
-
     data class Error(val err: BaseState.ErrorState) : SurahResult()
 
-    data class MainAyasLoaded(
-        val ayas: List<AyaUIModel>,
-        val fontSize: Int
+    data class Items(
+        val items : List<UIItem>
     ) : SurahResult()
-
-    sealed class Bismillah : SurahResult(){
-        object Hide : Bismillah()
-        object Show : Bismillah()
-        data class Content(val value : String) : Bismillah()
-    }
 }

@@ -12,7 +12,6 @@ import com.islamversity.domain.repo.surah.SurahSearchRepo
 import com.islamversity.domain.repo.CalligraphyRepo
 import com.islamversity.domain.repo.aya.AyaListRepo
 import com.islamversity.domain.repo.aya.GetAyaUseCase
-import com.islamversity.domain.repo.bismillah.BismillahUsecase
 import com.islamversity.domain.repo.juz.JuzListUsecase
 import dagger.BindsInstance
 import io.ktor.client.engine.HttpClientEngine
@@ -40,8 +39,6 @@ interface BaseComponent {
 
     fun ayaListRepo(): AyaListRepo
     fun getAyaUsecase(): GetAyaUseCase
-
-    fun getBismillahUsecase(): BismillahUsecase
 
     interface Builder {
 
