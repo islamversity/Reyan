@@ -54,7 +54,7 @@ class SettingsPresenter(
                 preState.copy(
                     selectedSurahNameCalligraphy = result.calligraphy
                 )
-            is SettingsResult.AyaCalligraphy ->
+            is SettingsResult.FirstAyaTranslationCalligraphy ->
                 preState.copy(
                     selectedAyaCalligraphy = result.calligraphy
                 )

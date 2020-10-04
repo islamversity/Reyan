@@ -76,7 +76,7 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
         }
         binding.mainFontSizeSeekBar.min = fontRange.first.toFloat()
         binding.mainFontSizeSeekBar.max = fontRange.last.toFloat()
-        binding.mainFontSizeSeekBar.onSeekChangeListener = object : OnSeekChangeListener{
+        binding.mainFontSizeSeekBar.onSeekChangeListener = object : OnSeekChangeListener {
             override fun onSeeking(seekParams: SeekParams) {
                 defaultQuranSize = seekParams.progress
                 binding.mainFontSizeSubtitle.textSize = defaultQuranSize.toFloat()
@@ -93,7 +93,7 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
 
         binding.translateFontSizeSeekBar.min = fontRange.first.toFloat()
         binding.translateFontSizeSeekBar.max = fontRange.last.toFloat()
-        binding.translateFontSizeSeekBar.onSeekChangeListener = object : OnSeekChangeListener{
+        binding.translateFontSizeSeekBar.onSeekChangeListener = object : OnSeekChangeListener {
             override fun onSeeking(seekParams: SeekParams) {
                 defaultTranslateSize = seekParams.progress
                 binding.translateFontSizeSubtitle.textSize = defaultTranslateSize.toFloat()
@@ -115,7 +115,8 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
         renderError(state.base)
 
         binding.surahCalligraphySubtitle.text = state.selectedSurahNameCalligraphy?.name
-        binding.ayaCalligraphySubtitle.text = state.selectedAyaCalligraphy?.name
+        binding.ayaCalligraphySubtitle.text =
+            state.selectedAyaCalligraphy?.name ?: binding.root.context.getString(R.string.aya_translation_not_chosen)
 
         defaultQuranSize = state.quranTextFontSize
         binding.mainFontSizeSeekBar.setProgress(state.quranTextFontSize.toFloat())

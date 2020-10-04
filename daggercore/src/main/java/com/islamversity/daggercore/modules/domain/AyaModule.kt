@@ -4,6 +4,7 @@ import com.islamversity.core.Mapper
 import com.islamversity.db.datasource.AyaLocalDataSource
 import com.islamversity.db.model.Aya
 import com.islamversity.domain.model.aya.AyaRepoModel
+import com.islamversity.domain.repo.CalligraphyRepo
 import com.islamversity.domain.repo.SettingRepo
 import com.islamversity.domain.repo.aya.AyaListRepo
 import com.islamversity.domain.repo.aya.AyaListRepoImpl
@@ -29,7 +30,8 @@ object AyaModule {
     @Provides
     fun provideGetAyaUseCase(
         repo: AyaListRepo,
-        settingsRepo: SettingRepo
+        settingsRepo: SettingRepo,
+        calligraphyRepo: CalligraphyRepo,
     ): GetAyaUseCase =
-        GetAyaUseCaseImpl(repo, settingsRepo)
+        GetAyaUseCaseImpl(repo, settingsRepo, calligraphyRepo)
 }

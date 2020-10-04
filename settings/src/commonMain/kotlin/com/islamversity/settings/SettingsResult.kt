@@ -15,5 +15,5 @@ sealed class SettingsResult : MviResult {
     data class TranslateFontSize(val fontSize : Int) : SettingsResult()
 
     data class SurahCalligraphy(val calligraphy : CalligraphyUIModel) : SettingsResult()
-    data class AyaCalligraphy(val calligraphy : CalligraphyUIModel) : SettingsResult()
+    data class FirstAyaTranslationCalligraphy(val calligraphy : CalligraphyUIModel?) : SettingsResult()
 }
