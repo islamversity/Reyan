@@ -8,7 +8,6 @@ import com.islamversity.domain.repo.SettingRepo
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combineTransform
 import kotlinx.coroutines.flow.flatMapMerge
-import kotlinx.coroutines.flow.flow
 
 interface GetSurahUsecase {
     fun getSurahs(): Flow<List<SurahRepoModel>>
@@ -22,7 +21,7 @@ class GetSurahUsecaseImpl(
     private val calligraphyDS: CalligraphyLocalDataSource,
 ) : GetSurahUsecase {
     override fun getSurahs() =
-        calligraphyDS.getArabicSurahCalligraphy().combineTransform(settingRepo.getCurrentSurahCalligraphy()) { arabic, main ->
+        calligraphyDS.getArabicSurahCalligraphy().combineTransform(settingRepo.getSecondarySurahNameCalligraphy()) { arabic, main ->
             emit(arabic to main)
         }
             .flatMapMerge {
@@ -30,7 +29,7 @@ class GetSurahUsecaseImpl(
             }
 
     override fun getSurah(id: SurahID): Flow<SurahRepoModel?> =
-        calligraphyDS.getArabicSurahCalligraphy().combineTransform(settingRepo.getCurrentSurahCalligraphy()) { arabic, main ->
+        calligraphyDS.getArabicSurahCalligraphy().combineTransform(settingRepo.getSecondarySurahNameCalligraphy()) { arabic, main ->
             emit(arabic to main)
         }
             .flatMapMerge {

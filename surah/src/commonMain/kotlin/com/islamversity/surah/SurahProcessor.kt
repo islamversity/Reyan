@@ -82,7 +82,7 @@ class SurahProcessor(
     private fun getSurahAyas(id: SurahID): Flow<List<AyaUIModel>> =
         getAyaUseCase.observeAyaMain(id)
             .mapListWith(ayaMapper)
-            .combine(settingRepo.getQuranFontSize().map { it.size }) { uiModel, font ->
+            .combine(settingRepo.getAyaMainFontSize().map { it.size }) { uiModel, font ->
                 uiModel.map {
                     it.copy(fontSize = font)
                 }

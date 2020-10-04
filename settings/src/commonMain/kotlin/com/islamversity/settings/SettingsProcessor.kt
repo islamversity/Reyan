@@ -8,6 +8,7 @@ import com.islamversity.core.ofType
 import com.islamversity.domain.model.Calligraphy
 import com.islamversity.domain.model.CalligraphyId
 import com.islamversity.domain.model.QuranReadFontSize
+import com.islamversity.domain.model.SettingsCalligraphy
 import com.islamversity.domain.model.TranslateReadFontSize
 import com.islamversity.domain.repo.CalligraphyRepo
 import com.islamversity.domain.repo.SettingRepo
@@ -68,7 +69,7 @@ class SettingsProcessor(
     private val getQuranFontSize: FlowBlock<SettingsIntent, SettingsResult> = {
         ofType<SettingsIntent.Initial>()
             .flatMapMerge {
-                settingsRepo.getQuranFontSize()
+                settingsRepo.getAyaMainFontSize()
             }
             .map {
                 SettingsResult.QuranFontSize(it.size)
@@ -79,7 +80,7 @@ class SettingsProcessor(
     private val getTranslateFontSize: FlowBlock<SettingsIntent, SettingsResult> = {
         ofType<SettingsIntent.Initial>()
             .flatMapMerge {
-                settingsRepo.getTranslateFontSize()
+                settingsRepo.getAyaTranslateFontSize()
             }
             .map {
                 SettingsResult.TranslateFontSize(it.size)
@@ -89,7 +90,7 @@ class SettingsProcessor(
     private val getCurrentSurahNameCalligraphy: FlowBlock<SettingsIntent, SettingsResult> = {
         ofType<SettingsIntent.Initial>()
             .flatMapMerge {
-                settingsRepo.getCurrentSurahCalligraphy()
+                settingsRepo.getSecondarySurahNameCalligraphy()
             }
             .map {
                 SettingsResult.SurahCalligraphy(
@@ -101,11 +102,15 @@ class SettingsProcessor(
     private val getCurrentAyaCalligraphy: FlowBlock<SettingsIntent, SettingsResult> = {
         ofType<SettingsIntent.Initial>()
             .flatMapMerge {
-                settingsRepo.getCurrentQuranReadCalligraphy()
+                settingsRepo.getFirstAyaTranslationCalligraphy()
             }
             .map {
-                SettingsResult.AyaCalligraphy(
-                    uiMapper.map(it)
+                SettingsResult.FirstAyaTranslationCalligraphy(
+                    if (it is SettingsCalligraphy.Selected) {
+                        uiMapper.map(it.cal)
+                    } else {
+                        null
+                    }
                 )
             }
     }
@@ -119,8 +124,8 @@ class SettingsProcessor(
                     }
             }
             .transform {
-                settingsRepo.setQuranReadCalligraphy(it)
-                emit(SettingsResult.AyaCalligraphy(uiMapper.map(it)))
+                settingsRepo.setFirstAyaTranslationCalligraphy(it)
+                emit(SettingsResult.FirstAyaTranslationCalligraphy(uiMapper.map(it)))
             }
     }
 
@@ -133,7 +138,7 @@ class SettingsProcessor(
                     }
             }
             .transform {
-                settingsRepo.setSurahCalligraphy(it)
+                settingsRepo.setSecondarySurahNameCalligraphy(it)
                 emit(SettingsResult.SurahCalligraphy(uiMapper.map(it)))
             }
     }
@@ -141,7 +146,7 @@ class SettingsProcessor(
     private val setQuranFontSize: Flow<SettingsIntent>.() -> Flow<SettingsResult> = {
         ofType<SettingsIntent.ChangeQuranFontSize>()
             .transform {
-                settingsRepo.setQuranReadFont(QuranReadFontSize(it.size))
+                settingsRepo.setAyaMainFontSize(QuranReadFontSize(it.size))
                 emit(SettingsResult.QuranFontSize(it.size))
             }
     }
@@ -149,7 +154,7 @@ class SettingsProcessor(
     private val setTranslateFontSize: Flow<SettingsIntent>.() -> Flow<SettingsResult> = {
         ofType<SettingsIntent.ChangeTranslateFontSize>()
             .transform {
-                settingsRepo.setTranslateReadFont(TranslateReadFontSize(it.size))
+                settingsRepo.setAyaTranslateFontSize(TranslateReadFontSize(it.size))
                 emit(SettingsResult.TranslateFontSize(it.size))
             }
     }

@@ -10,6 +10,8 @@
     <string name="translate_text_size">Translate text size</string>
     <string name="main_text_size">Main text size</string>
 
+    <string name="aya_translation_not_chosen">None</string>
+
 
     <string-array name="font_size">
         <item>Small</item>

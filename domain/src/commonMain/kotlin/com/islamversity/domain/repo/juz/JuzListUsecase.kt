@@ -16,7 +16,7 @@ class JuzListUsecaseImpl(
 ) : JuzListUsecase {
 
     override fun getAllJuz(): Flow<List<JuzRepoModel>> =
-        settingRepo.getCurrentSurahCalligraphy()
+        settingRepo.getSecondarySurahNameCalligraphy()
             .flatMapLatest {
                 juzListRepo.getAllJuz(it.id)
             }

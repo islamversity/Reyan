@@ -1,6 +1,8 @@
 package com.islamversity.domain.repo
 
 import com.islamversity.core.Mapper
+import com.islamversity.core.mapWith
+import com.islamversity.core.mapWithNullable
 import com.islamversity.db.datasource.CalligraphyLocalDataSource
 import com.islamversity.domain.model.Calligraphy
 import com.islamversity.domain.model.CalligraphyId
@@ -13,6 +15,8 @@ interface CalligraphyRepo {
     fun getAllAyaCalligraphies(): Flow<List<Calligraphy>>
 
     fun getCalligraphy(id: CalligraphyId): Flow<Calligraphy?>
+
+    fun getMainAyaCalligraphy(): Flow<Calligraphy>
 }
 
 class CalligraphyRepoImpl(
@@ -37,9 +41,10 @@ class CalligraphyRepoImpl(
 
     override fun getCalligraphy(id: CalligraphyId): Flow<Calligraphy?> =
         ds.getCalligraphyById(com.islamversity.db.model.CalligraphyId(id.id))
-            .map {
-                it?.let {
-                    mapper.map(it)
-                }
-            }
+            .mapWithNullable(mapper)
+
+    override fun getMainAyaCalligraphy(): Flow<Calligraphy> =
+        ds.getArabicSimpleAyaCalligraphy()
+            .mapWith(mapper)
+
 }
