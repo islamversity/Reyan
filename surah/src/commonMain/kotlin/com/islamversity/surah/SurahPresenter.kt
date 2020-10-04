@@ -28,7 +28,8 @@ class SurahPresenter(
         when (result) {
             SurahResult.LastStable ->
                 preState.copy(
-                    base = BaseState.stable()
+                    base = BaseState.stable(),
+                    scrollToAya = null
                 )
             is SurahResult.Error ->
                 preState.copy(
@@ -41,6 +42,10 @@ class SurahPresenter(
             is SurahResult.Items ->
                 preState.copy(
                     items = result.items
+                )
+            is SurahResult.ShowAyaNumber ->
+                preState.copy(
+                    scrollToAya = ScrollToAya(result.id, result.orderID, result.position)
                 )
         }
 }
