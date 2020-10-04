@@ -11,6 +11,8 @@ import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.islamversity.domain.bus.FlowBus
+import com.islamversity.reyan.MainActivity
+import com.islamversity.reyan.R
 import timber.log.Timber
 
 
@@ -21,61 +23,51 @@ class MyFirebaseMessagingService: FirebaseMessagingService() {
         sendFCMTokenToServer(token)
     }
 
-    override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        Timber.d("Notification : From: ${remoteMessage.from}")
-
-        val dsf  = remoteMessage.data
-        // Check if message contains a data payload.
-        remoteMessage.data.isNotEmpty().let {
-            Timber.d("Notification : Message data payload: ${remoteMessage.data}")
-            FlowBus.publish(remoteMessage)
-        }
-
-        // Check if message contains a notification payload.
-        remoteMessage.notification?.let {
-            Timber.d("Notification : 2-Message Notification Body: ${it.body}")
-        }
-    }
-
     private fun sendFCMTokenToServer(token: String) {
         // Cache.set(CacheKeys.Firebase.FCM_TOKEN_FIREBASE, token)
         Timber.d("Notification : sendRegistrationTokenToServer($token)")
     }
 
+    override fun onMessageReceived(remoteMessage: RemoteMessage) {
+        Timber.d("Notification : From: ${remoteMessage.from}")
 
+        val data  = remoteMessage.data
 
+        // Check if message contains a data payload.
+        data.isNotEmpty().let {
+            Timber.d("Notification : Message data payload: $data")
 
+            showNotification(
+                data["title"],
+                data["body"]
+            )
+        }
 
+        // Check if message contains a notification payload.
+        remoteMessage.notification?.let { notification ->
+            Timber.d("Notification : 2-Message Notification Body: ${notification.body}")
+        }
+    }
 
+    private fun showNotification(title : String?, body: String?) {
 
-
-
-
-
-
-
-
-    /**
-     * Create and show a simple notification containing the received FCM message.
-     *
-     * @param messageBody FCM message body received.
-     */
-    private fun sendNotification(messageBody: String) {
-
-        val intent = Intent(this, MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-        val pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
-            PendingIntent.FLAG_ONE_SHOT)
+        val intent = Intent(this, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
 
         val channelId = getString(R.string.default_notification_channel_id)
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
-            .setSmallIcon(R.drawable.app_logo)
-            .setContentTitle(getString(R.string.fcm_message))
-            .setContentText(messageBody)
-            .setAutoCancel(true)
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setContentTitle(title)
+            .setContentText(body)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(body))
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
             .setSound(defaultSoundUri)
             .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
 
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
