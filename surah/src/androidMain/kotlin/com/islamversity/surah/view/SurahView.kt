@@ -3,6 +3,10 @@ package com.islamversity.surah.view
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.epoxy.DiffResult
+import com.airbnb.epoxy.EpoxyController
+import com.airbnb.epoxy.OnModelBuildFinishedListener
 import com.islamversity.base.CoroutineView
 import com.islamversity.core.mvi.MviPresenter
 import com.islamversity.daggercore.CoreComponent
@@ -82,6 +86,23 @@ class SurahView(
                     }
                 }
             }
+
+            if (state.scrollToAya != null) {
+                addModelBuildListener(BuildFinishedScroller(state.scrollToAya.position, this, binding.ayaList))
+            }
         }
     }
+}
+
+class BuildFinishedScroller(
+    private val scrollTo: Int,
+    private val controller: EpoxyController,
+    private val view: RecyclerView,
+) : OnModelBuildFinishedListener {
+
+    override fun onModelBuildFinished(result: DiffResult) {
+        view.scrollToPosition(scrollTo)
+        controller.removeModelBuildListener(this)
+    }
+
 }

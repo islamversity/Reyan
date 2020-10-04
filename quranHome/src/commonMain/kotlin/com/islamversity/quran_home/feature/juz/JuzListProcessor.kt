@@ -11,6 +11,7 @@ import com.islamversity.domain.repo.juz.JuzListUsecase
 import com.islamversity.navigation.Navigator
 import com.islamversity.navigation.Screens
 import com.islamversity.navigation.model.SearchLocalModel
+import com.islamversity.navigation.model.SurahLocalModel
 import com.islamversity.navigation.navigateTo
 import com.islamversity.quran_home.feature.juz.model.JozUIModel
 import kotlinx.coroutines.flow.flatMapMerge
@@ -45,7 +46,11 @@ class JuzListProcessor(
                 it.action.juz
             }
             .map {
-                Screens.Search(SearchLocalModel())
+                Screens.Surah(SurahLocalModel(
+                    it.startingSurahId,
+                    it.startingSurahName,
+                    it.startingAyaOrder,
+                ))
             }
             .navigateTo(navigator)
     }
