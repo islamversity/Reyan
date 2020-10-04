@@ -1,38 +1,25 @@
 package com.islamversity.domain.bus
 
-import com.islamversity.core.ofType
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.receiveAsFlow
-
-//object FlowBusss {
-//
-//    private val publisher = Channel<Any>()
-//
-//    suspend fun publish(data: Any) {
-//        publisher.send(data)
-//    }
-//
-//    fun<T> listen(dataType : Class<T>) : Flow<T> = publisher.ofType(eventType)
-//}
-
+import kotlinx.coroutines.flow.*
 
 
 object FlowBus {
 
-    private val publisher = Channel<Any>()
+    val publisher = Channel<Any>()
 
-    fun postEvent(event: Any) {
+    suspend fun postEvent(event: Any) {
         publisher.send(event)
     }
 
-    fun<T> observeEvents(dataType : Class<T>): Flow<T> = publisher.receiveAsFlow
+    inline fun <reified T> observeEvents(): Flow<T> = publisher.receiveAsFlow()
+        .filter { it is T }
+        .map { it as T }
 
 
-    override fun observeEventsOnUiThread(): Flow<Any> {
-        return observeEvents()
-            .flowOn(MainScope())
-    }
+    inline fun <reified T> observeEventsOnUiThread(): Flow<T> = observeEvents<T>()
+            .flowOn(Dispatchers.Main)
+
 }
