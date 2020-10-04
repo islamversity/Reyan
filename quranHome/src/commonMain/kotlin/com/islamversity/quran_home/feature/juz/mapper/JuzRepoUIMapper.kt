@@ -10,7 +10,10 @@ class JuzRepoUIMapper : Mapper<JuzRepoModel, JozUIModel> {
         JozUIModel(
             item.juz,
             "${item.startingSurahName}: ${item.startingAyaOrder}",
-            "${item.endingSurahName}: ${item.endingAyaOrder}"
+            "${item.endingSurahName}: ${item.endingAyaOrder}",
+            item.startingAyaOrder,
+            item.startingSurahId,
+            item.startingSurahName,
         )
 
 }
