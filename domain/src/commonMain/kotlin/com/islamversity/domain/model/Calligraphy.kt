@@ -27,3 +27,8 @@ data class Calligraphy(
 fun Calligraphy.toEntity() = com.islamversity.db.model.Calligraphy(code.code)
 fun CalligraphyId.toEntity() = com.islamversity.db.model.CalligraphyId(id)
 
+sealed class SettingsCalligraphy{
+    object None : SettingsCalligraphy()
+    data class Selected(val cal : Calligraphy) : SettingsCalligraphy()
+}
+
