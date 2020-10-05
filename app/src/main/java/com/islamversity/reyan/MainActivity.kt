@@ -1,5 +1,7 @@
 package com.islamversity.reyan
 
+import android.app.Notification
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
@@ -23,9 +25,13 @@ import com.islamversity.daggercore.lifecycle.PermissionsResult
 import com.islamversity.quran_home.feature.home.QuranHomeView
 import com.islamversity.reyan.di.ActivityComponent
 import com.islamversity.reyan.di.DaggerActivityComponent
+import com.islamversity.reyan.service.NotificationDataType
+import com.islamversity.reyan.service.NotificationDataType.Companion.NOTIFICATION_DATA_KEY
+import com.islamversity.reyan.service.NotificationDataType.Companion.notificationTypeMap
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.channels.Channel
 import java.util.*
+import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity : LocalizationActivity(),
@@ -68,6 +74,51 @@ class MainActivity : LocalizationActivity(),
         val view = QuranHomeView()
         if (!router.hasRootController()) {
             router.setRoot(RouterTransaction.with(view))
+        }
+
+        handleIntents(intent)
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+
+        intent?.also {
+            handleIntents(it)
+        }
+    }
+
+    private fun handleIntents(intent: Intent) {
+
+        val intentExtra = intent.extras
+        val notifData = intentExtra?.getBundle(NOTIFICATION_DATA_KEY)
+
+        if (notifData != null ) {
+
+            val notifType = notifData.get("type")
+
+            if (notifType != null) {
+
+                val nType = notificationTypeMap[notifType.toString()] ?: NotificationDataType.NONE
+
+                handlePushNotifications(nType, notifData)
+            }
+        }
+    }
+
+    private fun handlePushNotifications(
+        notifType: NotificationDataType,
+        notifBundle: Bundle
+    ){
+
+        when(notifType) {
+            NotificationDataType.NEW_VERSION -> {
+                val googleStoreUrl = notifBundle["url"]
+                Timber.d("Notification : googleStoreUrl = $googleStoreUrl")
+            }
+            NotificationDataType.FORCE_UPDATE -> {}
+            NotificationDataType.NONE -> {
+                Timber.d("Notification : unknown notification Type string")
+            }
         }
     }
 
