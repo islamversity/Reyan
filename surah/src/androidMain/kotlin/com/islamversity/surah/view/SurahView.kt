@@ -1,5 +1,6 @@
 package com.islamversity.surah.view
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import com.airbnb.epoxy.DiffResult
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.OnModelBuildFinishedListener
 import com.islamversity.base.CoroutineView
+import com.islamversity.base.ext.setHidable
 import com.islamversity.core.mvi.MviPresenter
 import com.islamversity.daggercore.CoreComponent
 import com.islamversity.navigation.model.SurahLocalModel
@@ -18,6 +20,7 @@ import com.islamversity.surah.databinding.ViewSurahBinding
 import com.islamversity.surah.di.DaggerSurahComponent
 import com.islamversity.surah.model.AyaUIModel
 import com.islamversity.surah.model.SurahHeaderUIModel
+import com.islamversity.surah.view.settings.SurahSettingsView
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
@@ -50,6 +53,15 @@ class SurahView(
 
     override fun beforeBindingView(binding: ViewSurahBinding) {
         binding.ivBack.setOnClickListener { router.handleBack() }
+        binding.fabUp.setOnClickListener { binding.ayaList.smoothScrollToPosition(0) }
+        binding.ayaList.setHidable(binding.fabUp, binding.tvSurahName,)
+        binding.settings.setOnClickListener { openSettingsDialog(it.context) }
+        binding.tvSurahName.text = surahLocal.surahName
+    }
+
+    private fun openSettingsDialog(context: Context) {
+        val dialog = SurahSettingsView(context)
+        dialog.show()
     }
 
     override fun intents(): Flow<SurahIntent> =
@@ -88,7 +100,13 @@ class SurahView(
             }
 
             if (state.scrollToAya != null) {
-                addModelBuildListener(BuildFinishedScroller(state.scrollToAya.position, this, binding.ayaList))
+                addModelBuildListener(
+                    BuildFinishedScroller(
+                        state.scrollToAya.position,
+                        this,
+                        binding.ayaList
+                    )
+                )
             }
         }
     }

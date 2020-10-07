@@ -13,7 +13,6 @@ import com.facebook.flipper.plugins.sharedpreferences.SharedPreferencesFlipperPl
 import com.facebook.soloader.SoLoader
 import com.facebook.stetho.Stetho
 import com.islamversity.reyan.BuildConfig.DEBUG
-import timber.log.Timber
 
 class ReyanApp : BaseApp() {
 
@@ -22,10 +21,6 @@ class ReyanApp : BaseApp() {
     override fun onCreate() {
         super.onCreate()
         networkFlipperPlugin = coreComponent.networkFlipperPlugin()
-
-        if (DEBUG) {
-            Timber.plant(HyperlinkedDebugTree())
-        }
 
         initFlipper()
 

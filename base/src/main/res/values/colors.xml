@@ -15,4 +15,5 @@
     <color name="highlighted">#1A30B4AC</color>
 
     <color name="accentWhite">#F1FFFF</color>
+    <color name="transparent">#00000000</color>
 </resources>

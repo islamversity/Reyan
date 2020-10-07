@@ -36,7 +36,6 @@ dependencies {
 
     implementation javaxAnnotation
     implementation findBugs
-    implementation timber
 
     implementation androidSerialization
     implementation (okhttpEngine) {
