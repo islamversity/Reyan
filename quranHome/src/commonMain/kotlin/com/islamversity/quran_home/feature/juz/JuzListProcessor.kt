@@ -6,11 +6,9 @@ import com.islamversity.core.listMap
 import com.islamversity.core.mvi.BaseProcessor
 import com.islamversity.core.ofType
 import com.islamversity.domain.model.JuzRepoModel
-import com.islamversity.domain.repo.juz.JuzListRepo
 import com.islamversity.domain.repo.juz.JuzListUsecase
 import com.islamversity.navigation.Navigator
 import com.islamversity.navigation.Screens
-import com.islamversity.navigation.model.SearchLocalModel
 import com.islamversity.navigation.model.SurahLocalModel
 import com.islamversity.navigation.navigateTo
 import com.islamversity.quran_home.feature.juz.model.JozUIModel
@@ -46,11 +44,13 @@ class JuzListProcessor(
                 it.action.juz
             }
             .map {
-                Screens.Surah(SurahLocalModel(
-                    it.startingSurahId,
+                Screens.Surah(
+                    SurahLocalModel(
+                    it.startingSurahID,
                     it.startingSurahName,
                     it.startingAyaOrder,
-                ))
+                )
+                )
             }
             .navigateTo(navigator)
     }

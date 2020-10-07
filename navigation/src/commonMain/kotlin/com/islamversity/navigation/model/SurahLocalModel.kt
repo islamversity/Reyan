@@ -26,15 +26,3 @@ data class SurahLocalModel(
         }
     }
 }
-
-enum class BismillahType{
-    NEEDED,
-    FIRST_AYA,
-    NONE,
-    ;
-
-    companion object{
-        fun fromName(name : String) : BismillahType =
-            values().find { it.name == name } ?: error("typeName= $name is not supported")
-    }
-}

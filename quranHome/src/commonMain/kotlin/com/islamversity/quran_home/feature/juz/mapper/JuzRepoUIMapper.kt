@@ -9,11 +9,11 @@ class JuzRepoUIMapper : Mapper<JuzRepoModel, JozUIModel> {
     override fun map(item: JuzRepoModel) =
         JozUIModel(
             item.juz,
-            "${item.startingSurahName}: ${item.startingAyaOrder}",
-            "${item.endingSurahName}: ${item.endingAyaOrder}",
-            item.startingAyaOrder,
             item.startingSurahId,
             item.startingSurahName,
+            item.endingSurahName,
+            item.startingAyaOrder,
+            item.endingAyaOrder
         )
 
 }
