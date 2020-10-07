@@ -47,7 +47,6 @@ kotlin {
 
         implementation(Deps.Android.Tools.conductor)
         implementation(Deps.Android.Tools.conductorViewPager)
-        implementation(Deps.Android.Tools.timber)
         implementation(Deps.Android.Tools.fresco)
         implementation(Deps.Android.Tools.slider)
         implementation(Deps.Android.Tools.epoxy)

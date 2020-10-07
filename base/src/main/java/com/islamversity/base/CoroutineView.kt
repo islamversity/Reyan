@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
+import com.islamversity.core.Logger
+import com.islamversity.core.Severity
 import com.islamversity.core.mvi.BaseState
 import com.islamversity.core.mvi.MviIntent
 import com.islamversity.core.mvi.MviPresenter
@@ -19,8 +21,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import timber.log.Timber
-import javax.inject.Inject
 
 @Suppress("UNUSED_PARAMETER")
 abstract class CoroutineView<
@@ -85,7 +85,7 @@ abstract class CoroutineView<
         presenter
             .states()
             .catch {
-                Timber.e("presenter state flow exception caught")
+                Logger.log(Severity.Error, "PublishingState", it, "presenter state flow exception caught: ${it.localizedMessage}")
             }
             .onEach {
                 render(it)
@@ -96,7 +96,7 @@ abstract class CoroutineView<
     @Suppress("MemberVisibilityCanBePrivate")
     protected fun Flow<I>.newIntents() =
         catch {
-            Timber.e("view intents flow exception caught")
+            Logger.log(Severity.Error, "ReceivingIntents", it, "receiving intents faced exception, caught: ${it.localizedMessage}")
         }.onEach {
             presenter.processIntents(it)
         }.launchIn(this@CoroutineView)

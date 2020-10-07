@@ -1,13 +1,14 @@
 package com.islamversity.daggercore.modules.network
 
 import android.app.Application
+import com.islamversity.core.Logger
+import com.islamversity.core.Severity
 import com.islamversity.daggercore.BuildConfig.DEBUG
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import timber.log.Timber
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -19,7 +20,7 @@ object InnerOkHttpModule {
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val httpLoggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
             override fun log(message: String) {
-                Timber.d(message)
+                Logger.log(Severity.Info, tag= "OkHttpRequest", message= message)
             }
         })
 

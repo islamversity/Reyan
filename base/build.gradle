@@ -26,8 +26,6 @@ dependencies {
     implementation coroutines
     implementation coroutinesAndroid
 
-    implementation timber
-
     debugImplementation leakCanary
 
     implementation epoxy

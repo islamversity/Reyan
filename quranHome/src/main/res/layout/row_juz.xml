@@ -67,6 +67,7 @@
             style="@style/greySubtitle"
             android:layout_below="@+id/juzLine"
             android:layout_alignParentEnd="true"
+            android:layout_marginStart="@dimen/low_margin"
             android:layout_marginTop="@dimen/min_margin"
             tools:text="Start Name"
             tools:ignore="SpUsage" />

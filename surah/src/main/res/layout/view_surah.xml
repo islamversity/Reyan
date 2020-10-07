@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,54 +7,83 @@
     android:background="@drawable/immersive_background"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/ivBack"
-        style="@style/ToolbarIcon.MediumMargin"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_round_arrow_back"
-        tools:ignore="ContentDescription,RtlHardcoded" />
-
-    <TextView
-        android:id="@+id/tvSurahName"
-        android:layout_width="wrap_content"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/ivBack"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/ivBack"
-        tools:text="Alrahman" />
+        android:background="@color/accentWhite">
 
-    <ImageView
-        android:id="@+id/ivSearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/ic_outline_search"
-        android:padding="6dp"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription,MissingPrefix,RtlHardcoded" />
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:contentInsetEnd="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetRight="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_scrollFlags="scroll|snap|enterAlways">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/ivBack"
+                    style="@style/ToolbarIcon.MediumMargin"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_round_arrow_back"
+                    tools:ignore="ContentDescription,RtlHardcoded" />
+
+                <TextView
+                    android:id="@+id/tvSurahName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:alpha="0"
+                    android:gravity="center"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    tools:alpha="1"
+                    tools:text="Alrahman" />
+
+                <ImageView
+                    android:id="@+id/settings"
+                    style="@style/ToolbarIcon.MediumMargin"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@drawable/ic_outline_settings"
+                    app:tint="@color/green_dark"
+                    tools:ignore="ContentDescription,RtlHardcoded" />
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <com.islamversity.base.epoxyhelper.EpoxyAsyncRecyclerView
         android:id="@+id/ayaList"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/medium_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:fadingEdge="none"
+        android:orientation="vertical"
         android:overScrollMode="never"
-        android:paddingTop="@dimen/low_padding"
-        android:requiresFadingEdge="none"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvSurahName"
-        tools:itemCount="2" />
+        android:paddingTop="@dimen/large_margin"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:itemCount="5"
+        tools:listitem="@layout/row_aya" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabUp"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_margin="@dimen/large_margin"
+        android:src="@drawable/ic_arrow_up"
+        android:visibility="invisible"
+        app:backgroundTint="@color/accentWhite"
+        app:fabSize="normal"
+        app:layout_behavior="com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior"
+        app:tint="@color/green_dark" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
