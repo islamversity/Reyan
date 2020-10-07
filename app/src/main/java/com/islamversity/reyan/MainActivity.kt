@@ -3,6 +3,7 @@ package com.islamversity.reyan
 import android.app.Notification
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -37,6 +38,8 @@ import javax.inject.Inject
 class MainActivity : LocalizationActivity(),
     LifecycleComponentProvider,
     LanguageConfigure {
+
+    private val LOGTAG = "MainActivity"
 
     @Inject
     lateinit var events: Channel<LifecycleEvent>
@@ -113,11 +116,11 @@ class MainActivity : LocalizationActivity(),
         when(notifType) {
             NotificationDataType.NEW_VERSION -> {
                 val googleStoreUrl = notifBundle["url"]
-                Timber.d("Notification : googleStoreUrl = $googleStoreUrl")
+                Log.d(LOGTAG,"Notification : googleStoreUrl = $googleStoreUrl")
             }
             NotificationDataType.FORCE_UPDATE -> {}
             NotificationDataType.NONE -> {
-                Timber.d("Notification : unknown notification Type string")
+                Log.d(LOGTAG,"Notification : unknown notification Type string")
             }
         }
     }

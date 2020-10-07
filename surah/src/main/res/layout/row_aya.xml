@@ -1,137 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/large_margin"
-                android:layout_marginRight="@dimen/large_margin">
-
-    <include
-        android:id="@+id/ayaNumber"
-        layout="@layout/aya_number_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/ayaToolbar"
-        android:layout_alignBottom="@+id/ayaToolbar"
-        android:gravity="center"
-        android:layout_marginBottom="@dimen/min_padding"
-        tools:ignore="RtlHardcoded"/>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/min_margin"
+    android:layout_marginLeft="@dimen/medium_margin"
+    android:layout_marginRight="@dimen/medium_margin">
 
     <LinearLayout
-        android:id="@+id/ayaToolbar"
+        android:id="@+id/aya_signs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_toRightOf="@+id/ayaNumber"
+        android:layout_marginTop="@dimen/low_margin"
         android:orientation="vertical"
-        android:visibility="visible"
-        tools:ignore="RtlHardcoded">
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        >
+        <include
+            android:id="@+id/ayaOrder"
+            layout="@layout/aya_number_view"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/min_margin"
-            android:background="@drawable/ic_toolbar_white_rect"
-            android:gravity="right"
-            android:paddingVertical="@dimen/low_padding"
-            tools:ignore="RtlHardcoded">
-
-            <ImageView
-                android:id="@+id/ivAyaPlay"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:contentDescription="@string/play_button"
-                android:scaleType="fitCenter"
-                app:srcCompat="@drawable/ic_play"/>
-
-            <Space
-                android:layout_width="@dimen/medium_margin"
-                android:layout_height="match_parent"/>
-
-            <ImageView
-                android:id="@+id/ivAyaShare"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:contentDescription="@string/aya_share_button"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_share"/>
-
-            <Space
-                android:layout_width="@dimen/medium_margin"
-                android:layout_height="match_parent"/>
-
-            <ImageView
-                android:id="@+id/ivAyaBookmark"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:contentDescription="@string/aya_bookmark_button"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_bookmark"/>
-
-            <Space
-                android:layout_width="@dimen/min_margin"
-                android:layout_height="match_parent"/>
-
-        </LinearLayout>
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/min_margin"/>
+            android:gravity="center"
+            />
+        <TextView
+            android:id="@+id/juzOrder"
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/low_margin"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="@dimen/small_text"
+            android:background="@drawable/ic_surah_order"
+            tools:text="30"
+            android:visibility="gone"
+            tools:visibility="visible"
+            />
+        <TextView
+            android:id="@+id/hizbOrder"
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/low_margin"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            android:background="@drawable/ic_hizb_order"
+            tools:text="3/4"
+            android:visibility="gone"
+            tools:visibility="visible"
+            />
+        <TextView
+            android:id="@+id/sajdah_icon"
+            android:layout_width="20dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginTop="@dimen/low_margin"
+            android:background="@drawable/ic_sajdah"
+            android:visibility="gone"
+            tools:visibility="visible"
+            />
+        <TextView
+            android:id="@+id/sajdah_obg"
+            android:layout_width="28dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="10sp"
+            tools:text="واجب"
+            android:visibility="gone"
+            tools:visibility="visible"
+            />
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/tvAyaContent"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/ayaToolbar"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="@dimen/min_margin"
-        android:layout_toRightOf="@id/ayaNumber"
-        android:fontFamily="@font/arabic_regular"
-        android:textColor="@color/green_dark"
-        android:textSize="18dp"
-        tools:ignore="RtlHardcoded,SpUsage"
-        tools:text="بسم الله الرحمن الرحیم"/>
+        android:orientation="vertical"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/aya_signs"
+        android:layout_marginStart="@dimen/min_margin"
+        >
+        <LinearLayout
+            android:id="@+id/ayaToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone"
+            tools:visibility="visible"
+            >
 
-    <TextView
-        android:id="@+id/tvAyaTranslate1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvAyaContent"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="@dimen/min_margin"
-        android:layout_marginTop="@dimen/medium_margin"
-        android:layout_toRightOf="@id/ayaNumber"
-        android:textColor="@color/green_dark"
-        android:textSize="@dimen/large_text"
-        android:visibility="visible"
-        tools:ignore="RtlHardcoded,SpUsage"
-        tools:text="بسم الله الرحمن الرحیم"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_toolbar_white_rect"
+                android:gravity="end"
+                android:paddingVertical="@dimen/min_padding"
+                >
 
-    <TextView
-        android:id="@+id/tvAyaTranslate2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tvAyaTranslate1"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="@dimen/min_margin"
-        android:layout_marginTop="@dimen/medium_margin"
-        android:layout_toRightOf="@id/ayaNumber"
-        android:textColor="@color/green_dark"
-        android:textSize="@dimen/large_text"
-        android:visibility="visible"
-        tools:ignore="RtlHardcoded,SpUsage"
-        tools:text="بسم الله الرحمن الرحیم"/>
+                <ImageView
+                    android:id="@+id/ivAyaPlay"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@string/play_button"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_play" />
 
-    <View
-        style="@style/Divider"
-        android:layout_below="@id/tvAyaTranslate2"
-        android:layout_marginTop="@dimen/medium_margin"
-        android:layout_marginBottom="@dimen/medium_margin"/>
+                <Space
+                    android:layout_width="@dimen/medium_margin"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/ivAyaShare"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@string/aya_share_button"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_share" />
+
+                <Space
+                    android:layout_width="@dimen/medium_margin"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/ivAyaBookmark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:contentDescription="@string/aya_bookmark_button"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_bookmark" />
+
+                <Space
+                    android:layout_width="@dimen/medium_margin"
+                    android:layout_height="match_parent" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvAyaContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/low_margin"
+            android:fontFamily="@font/arabic_regular"
+            android:textColor="@color/green_dark"
+            android:textSize="@dimen/huge_text"
+            android:textStyle="bold"
+            tools:text="بسم الله الرحمن الرحیم بسم الله الرحمن الرحیم بسم الله الرحمن الرحیم بسم الله الرحمن الرحیم بسم الله الرحمن الرحیم بسم الله الرحمن الرحیم بسم الله الرحمن الرحیم " />
+
+        <TextView
+            android:id="@+id/tvAyaTranslate1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/min_margin"
+            android:textColor="@color/black"
+            android:textSize="@dimen/large_text"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:text="ترجمه فارسی آیه با فونت تنظیم شده در تنظیمات و قابلیت حذف  ترجمه که باز در تنظیمات هست"
+            />
+
+        <TextView
+            android:id="@+id/tvAyaTranslate2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/min_margin"
+            android:textColor="@color/black"
+            android:textSize="@dimen/large_text"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:text="englis translation  of verse or Aya that  can be visible or unvisible" />
+
+        <View
+            style="@style/Divider"
+            android:layout_marginTop="@dimen/min_margin"
+            />
+    </LinearLayout>
 
 </RelativeLayout>

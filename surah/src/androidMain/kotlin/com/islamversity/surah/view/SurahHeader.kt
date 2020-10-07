@@ -21,9 +21,9 @@ class SurahHeader(
     fun model(surahHeaderUIModel: SurahHeaderUIModel) {
 
         binding.apply {
-            tvSurahNumber.txtOrder.text = surahHeaderUIModel.number
-            tvSurahNumber.ivSurahOrderShape.setColorFilter(root.context getColorCompat android.R.color.white)
-            tvSurahNumber.txtOrder.setTextColor(root.context getColorCompat android.R.color.white)
+            tvSurahNumber.text = surahHeaderUIModel.number
+//            tvSurahNumber.ivSurahOrderShape.setColorFilter(root.context getColorCompat android.R.color.white)
+//            tvSurahNumber.txtOrder.setTextColor(root.context getColorCompat android.R.color.white)
 
             tvSurahName.text = surahHeaderUIModel.name
             tvSurahNameTranslate.text = surahHeaderUIModel.nameTranslated

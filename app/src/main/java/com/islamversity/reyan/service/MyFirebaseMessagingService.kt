@@ -8,36 +8,38 @@ import android.content.Intent
 import android.media.RingtoneManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.islamversity.reyan.MainActivity
 import com.islamversity.reyan.R
 import com.islamversity.reyan.service.NotificationDataType.Companion.NOTIFICATION_DATA_KEY
-import timber.log.Timber
+import kotlin.random.Random
 
 
 class MyFirebaseMessagingService: FirebaseMessagingService() {
 
+    private val LOGTAG = "FirebaseMessaging"
 
     override fun onNewToken(token: String) {
-        Timber.d("Notification : Refreshed token: $token")
+        Log.d(LOGTAG,"Notification : Refreshed token: $token")
         sendFCMTokenToServer(token)
     }
 
     private fun sendFCMTokenToServer(token: String) {
         // Cache.set(CacheKeys.Firebase.FCM_TOKEN_FIREBASE, token)
-        Timber.d("Notification : sendRegistrationTokenToServer($token)")
+        Log.d(LOGTAG,"Notification : sendRegistrationTokenToServer($token)")
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        Timber.d("Notification : From: ${remoteMessage.from}")
+        Log.d(LOGTAG,"Notification : From: ${remoteMessage.from}")
 
         val data  = remoteMessage.data
 
         // Check if message contains a data payload.
         if (data.isNotEmpty()) {
-            Timber.d("Notification : Message data payload: $data")
+            Log.d(LOGTAG,"Notification : Message data payload: $data")
 
             val bundle = Bundle()
             for ((key, value) in data.entries) {
@@ -53,7 +55,7 @@ class MyFirebaseMessagingService: FirebaseMessagingService() {
 
         // Check if message contains a notification payload.
         remoteMessage.notification?.let { notification ->
-            Timber.d("Notification : 2-Message Notification Body: ${notification.body}")
+            Log.d(LOGTAG,"Notification : 2-Message Notification Body: ${notification.body}")
         }
     }
 
@@ -95,7 +97,7 @@ class MyFirebaseMessagingService: FirebaseMessagingService() {
             notificationManager.createNotificationChannel(channel)
         }
 
-        notificationManager.notify(0 /* ID of notification */, notificationBuilder.build())
+        notificationManager.notify(Random.nextInt() /* ID of notification */, notificationBuilder.build())
     }
 
 }

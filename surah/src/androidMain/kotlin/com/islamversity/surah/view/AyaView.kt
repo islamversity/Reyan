@@ -27,7 +27,7 @@ class AyaView @JvmOverloads constructor(
     @ModelProp
     fun model(surah: AyaUIModel) {
 
-        binding.ayaNumber.txtOrder.text = surah.order.toString()
+        binding.ayaOrder.txtOrder.text = surah.order.toString()
         binding.tvAyaContent.text = surah.content
         binding.tvAyaTranslate1.text = surah.content
         binding.tvAyaTranslate2.text = surah.content
