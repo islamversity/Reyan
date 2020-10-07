@@ -10,8 +10,7 @@
 
 
     <style name="ToolbarIcon.MediumMargin">
-        <item name="android:layout_marginVertical" tools:ignore="NewApi">@dimen/medium_margin</item>
-        <item name="android:layout_marginLeft">@dimen/medium_margin</item>
+        <item name="android:layout_margin">@dimen/medium_margin</item>
     </style>
 
     <style name="Divider">

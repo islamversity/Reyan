@@ -156,8 +156,6 @@ dependencies {
 
     implementation conductor
 
-    implementation timber
-
     implementation fresco
     implementation soLoader
     implementation frescoOkHttp

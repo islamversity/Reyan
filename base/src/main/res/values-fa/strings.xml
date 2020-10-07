@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Base</string>
+
+    <string name="aya_font_size">اندازه آیه</string>
+    <string name="translate_font_size">اندازه ترجمه</string>
+
+</resources>

@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/startCircle"
-        android:layout_width="14dp"
-        android:layout_height="14dp"
+        android:layout_width="@dimen/juz_bullet_size"
+        android:layout_height="@dimen/juz_bullet_size"
         android:layout_gravity="left"
         app:srcCompat="@drawable/ic_bg_juz_circle"
         tools:ignore="ContentDescription" />
@@ -17,16 +17,16 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginLeft="14dp"
+        android:layout_marginLeft="@dimen/juz_bullet_size"
         android:layout_marginTop="7dp"
-        android:layout_marginRight="14dp"
+        android:layout_marginRight="@dimen/juz_bullet_size"
         android:background="@drawable/ic_bg_juz_line"
         tools:ignore="ContentDescription" />
 
     <ImageView
         android:id="@+id/endCircle"
-        android:layout_width="14dp"
-        android:layout_height="14dp"
+        android:layout_width="@dimen/juz_bullet_size"
+        android:layout_height="@dimen/juz_bullet_size"
         android:layout_gravity="right"
         app:srcCompat="@drawable/ic_bg_juz_circle"
         app:tint="@color/colorPrimary"
