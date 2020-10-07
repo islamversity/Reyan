@@ -2,26 +2,22 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="28dp"
-    android:layout_height="28dp">
-
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="center"
-        app:srcCompat="@drawable/ic_number_circle"
-        tools:ignore="ContentDescription" />
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/ic_number_circle"
+    >
 
     <TextView
         android:id="@+id/txt_order"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
         android:maxLines="1"
         android:textColor="@android:color/white"
         android:textSize="@dimen/small_text"
-        tools:ignore="SpUsage"
-        tools:text="286" />
+        android:textStyle="bold"
+        tools:text="286"
+        />
 
 </FrameLayout>
