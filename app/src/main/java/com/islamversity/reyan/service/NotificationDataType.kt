@@ -2,6 +2,7 @@ package com.islamversity.reyan.service
 
 enum class NotificationDataType {
 
+//    val NEW_VERSION = "new_version"
     NONE, NEW_VERSION, FORCE_UPDATE;
 
     companion object {
