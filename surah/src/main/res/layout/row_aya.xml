@@ -7,7 +7,9 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/min_margin"
     android:layout_marginLeft="@dimen/medium_margin"
-    android:layout_marginRight="@dimen/medium_margin">
+    android:layout_marginRight="@dimen/medium_margin"
+    tools:background="@color/white"
+    >
 
     <LinearLayout
         android:id="@+id/aya_signs"
@@ -47,7 +49,7 @@
             android:layout_marginTop="@dimen/low_margin"
             android:maxLines="1"
             android:textColor="@color/black"
-            android:textSize="10sp"
+            android:textSize="10dp"
             android:background="@drawable/ic_hizb_order"
             tools:text="3/4"
             android:visibility="gone"
@@ -72,7 +74,7 @@
             android:gravity="center"
             android:maxLines="1"
             android:textColor="@color/black"
-            android:textSize="10sp"
+            android:textSize="10dp"
             tools:text="واجب"
             android:visibility="gone"
             tools:visibility="visible"
@@ -182,10 +184,11 @@
             tools:visibility="visible"
             tools:text="englis translation  of verse or Aya that  can be visible or unvisible" />
 
-        <View
-            style="@style/Divider"
-            android:layout_marginTop="@dimen/min_margin"
-            />
     </LinearLayout>
+
+    <View
+        style="@style/Divider"
+        android:layout_marginTop="@dimen/min_margin"
+        />
 
 </RelativeLayout>

@@ -1,17 +1,16 @@
 package com.islamversity.reyan.service
 
-enum class NotificationDataType {
+import java.lang.reflect.GenericArrayType
 
-//    val NEW_VERSION = "new_version"
-    NONE, NEW_VERSION, FORCE_UPDATE;
+enum class NotificationDataType(val raw : String) {
+
+    GENERIC("none"),
+    NEW_VERSION("new_version"),
+    FORCE_UPDATE("force_update");
 
     companion object {
-
-        val notificationTypeMap = hashMapOf(
-            "new_version" to NEW_VERSION,
-            "force_update" to FORCE_UPDATE
-        )
-
+        operator fun invoke(raw: String) :NotificationDataType =
+            values().find { it.raw == raw } ?: GENERIC
 
         val NOTIFICATION_DATA_KEY = "NOTIFICATION_DATA_KEY"
     }
