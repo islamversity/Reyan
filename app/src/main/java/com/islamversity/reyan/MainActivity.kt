@@ -1,9 +1,9 @@
 package com.islamversity.reyan
 
-import android.app.Notification
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +13,8 @@ import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
 import com.facebook.drawee.drawable.ScalingUtils
 import com.facebook.drawee.view.DraweeTransition
+import com.islamversity.core.Logger
+import com.islamversity.core.Severity
 import com.islamversity.daggercore.coreComponent
 import com.islamversity.daggercore.helpers.ARABIC_LOCALE
 import com.islamversity.daggercore.helpers.ENGLISH_LOCALE
@@ -28,7 +30,6 @@ import com.islamversity.reyan.di.ActivityComponent
 import com.islamversity.reyan.di.DaggerActivityComponent
 import com.islamversity.reyan.service.NotificationDataType
 import com.islamversity.reyan.service.NotificationDataType.Companion.NOTIFICATION_DATA_KEY
-import com.islamversity.reyan.service.NotificationDataType.Companion.notificationTypeMap
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.channels.Channel
 import java.util.*
@@ -101,7 +102,7 @@ class MainActivity : LocalizationActivity(),
 
             if (notifType != null) {
 
-                val nType = notificationTypeMap[notifType.toString()] ?: NotificationDataType.NONE
+                val nType = NotificationDataType(notifType.toString())
 
                 handlePushNotifications(nType, notifData)
             }
@@ -112,17 +113,42 @@ class MainActivity : LocalizationActivity(),
         notifType: NotificationDataType,
         notifBundle: Bundle
     ){
-
         when(notifType) {
             NotificationDataType.NEW_VERSION -> {
-                val googleStoreUrl = notifBundle["url"]
-                Log.d(LOGTAG,"Notification : googleStoreUrl = $googleStoreUrl")
+                val appUrl = notifBundle["url"]
+                Logger.log (Severity.Debug, LOGTAG, null, "Notification : googleStoreUrl = $appUrl")
+
+                if (isPackageInstalled("com.android.vending", packageManager)) {
+                    showAppOnGoogleStore()
+                } else {
+                    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(appUrl.toString()))
+                    startActivity(browserIntent)
+                }
             }
-            NotificationDataType.FORCE_UPDATE -> {}
-            NotificationDataType.NONE -> {
-                Log.d(LOGTAG,"Notification : unknown notification Type string")
+            NotificationDataType.FORCE_UPDATE -> {
+            }
+            NotificationDataType.GENERIC -> {
+                Logger.log (Severity.Debug, LOGTAG, null, "Notification : unknown notification Type string")
             }
         }
+    }
+
+    private fun isPackageInstalled(packageName: String, packageManager: PackageManager): Boolean {
+        return try {
+            packageManager.getApplicationInfo(packageName, 0).enabled
+        } catch (e: PackageManager.NameNotFoundException) {
+            false
+        }
+    }
+    private fun showAppOnGoogleStore() {
+
+        val intent = Intent(Intent.ACTION_VIEW).apply {
+            data = Uri.parse(
+                "https://play.google.com/store/apps/details?id=$packageName"
+            )
+            setPackage("com.android.vending")
+        }
+        startActivity(intent)
     }
 
     override fun onBackPressed() {
