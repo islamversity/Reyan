@@ -33,7 +33,6 @@ import com.islamversity.reyan.service.NotificationDataType.Companion.NOTIFICATIO
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.channels.Channel
 import java.util.*
-import timber.log.Timber
 import javax.inject.Inject
 
 class MainActivity : LocalizationActivity(),
