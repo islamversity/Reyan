@@ -137,6 +137,7 @@ object Deps {
                 )
 
             val seekBar = "com.github.warkiz.widget:indicatorseekbar:2.1.2"
+            val localization = "com.akexorcist:localization:1.2.6"
         }
 
         object Test {
