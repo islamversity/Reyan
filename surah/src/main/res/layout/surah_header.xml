@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -13,12 +14,12 @@
         android:layout_marginHorizontal="@dimen/large_margin"
         android:scaleType="fitXY"
         android:src="@drawable/ic_aya_prop_rect"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"/>
 
     <Space
         android:id="@+id/sTopMargin"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/medium_margin" />
+        android:layout_height="@dimen/medium_margin"/>
 
     <TextView
         android:id="@+id/tvSurahNumber"
@@ -29,11 +30,12 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:maxLines="1"
-        android:textColor="@color/white"
+        android:textColor="@android:color/white"
         android:textSize="@dimen/small_text"
         android:background="@drawable/ic_surah_order"
-        android:backgroundTint="@color/white"
-        tools:text="114" />
+        android:backgroundTint="@android:color/white"
+        tools:text="114"
+        tools:ignore="SpUsage"/>
 
     <TextView
         android:id="@+id/tvSurahName"
@@ -45,7 +47,7 @@
         android:textAlignment="center"
         android:textColor="@android:color/white"
         android:textStyle="bold"
-        tools:text="Al-Rahman" />
+        tools:text="Al-Rahman"/>
 
     <TextView
         android:id="@+id/tvSurahNameTranslate"
@@ -56,7 +58,7 @@
         android:layout_marginTop="8dp"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        tools:text="Al-Rahman Translate" />
+        tools:text="Al-Rahman Translate"/>
 
     <LinearLayout
         android:id="@+id/detailsContainer"
@@ -71,7 +73,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            tools:text="Medinian" />
+            tools:text="Medinian"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -79,21 +81,21 @@
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:textColor="@android:color/white"
-            tools:text="-" />
+            tools:text="-"/>
 
         <TextView
             android:id="@+id/tvSurahVerses"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            tools:text="77 verses" />
+            tools:text="77 verses"/>
     </LinearLayout>
 
     <Space
         android:id="@+id/sBottomMargin"
         android:layout_width="match_parent"
         android:layout_height="@dimen/medium_margin"
-        android:layout_below="@id/detailsContainer" />
+        android:layout_below="@id/detailsContainer"/>
 
     <ImageView
         android:id="@+id/ivBismillah"
@@ -108,6 +110,12 @@
         android:adjustViewBounds="true"
         android:src="@drawable/ic_bismillah"
         android:visibility="visible"
-        tools:ignore="ContentDescription,RtlHardcoded" />
+        tools:ignore="ContentDescription,RtlHardcoded"/>
+
+    <Space
+        android:id="@+id/sHeaderBottomMargin"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/medium_margin"
+        android:layout_below="@id/ivBismillah"/>
 
 </RelativeLayout>
