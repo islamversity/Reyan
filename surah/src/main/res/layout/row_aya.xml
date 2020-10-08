@@ -187,8 +187,9 @@
     </LinearLayout>
 
     <View
+        android:layout_alignParentBottom="true"
         style="@style/Divider"
-        android:layout_marginTop="@dimen/min_margin"
+        android:layout_marginTop="@dimen/medium_margin"
         />
 
 </RelativeLayout>

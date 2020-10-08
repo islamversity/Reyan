@@ -12,6 +12,8 @@ import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.islamversity.core.Logger
+import com.islamversity.core.Severity
 import com.islamversity.reyan.MainActivity
 import com.islamversity.reyan.R
 import com.islamversity.reyan.service.NotificationDataType.Companion.NOTIFICATION_DATA_KEY
@@ -23,23 +25,23 @@ class MyFirebaseMessagingService: FirebaseMessagingService() {
     private val LOGTAG = "FirebaseMessaging"
 
     override fun onNewToken(token: String) {
-        Log.d(LOGTAG,"Notification : Refreshed token: $token")
+        Logger.log(Severity.Debug,LOGTAG,null,"Notification : Refreshed token: $token")
         sendFCMTokenToServer(token)
     }
 
     private fun sendFCMTokenToServer(token: String) {
         // Cache.set(CacheKeys.Firebase.FCM_TOKEN_FIREBASE, token)
-        Log.d(LOGTAG,"Notification : sendRegistrationTokenToServer($token)")
+        Logger.log(Severity.Debug,LOGTAG,null,"Notification : sendRegistrationTokenToServer($token)")
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        Log.d(LOGTAG,"Notification : From: ${remoteMessage.from}")
+        Logger.log(Severity.Debug,LOGTAG,null,"Notification : From: ${remoteMessage.from}")
 
         val data  = remoteMessage.data
 
         // Check if message contains a data payload.
         if (data.isNotEmpty()) {
-            Log.d(LOGTAG,"Notification : Message data payload: $data")
+            Logger.log(Severity.Debug,LOGTAG,null,"Notification : Message data payload: $data")
 
             val bundle = Bundle()
             for ((key, value) in data.entries) {
@@ -55,7 +57,7 @@ class MyFirebaseMessagingService: FirebaseMessagingService() {
 
         // Check if message contains a notification payload.
         remoteMessage.notification?.let { notification ->
-            Log.d(LOGTAG,"Notification : 2-Message Notification Body: ${notification.body}")
+            Logger.log(Severity.Debug,LOGTAG,null,"Notification : 2-Message Notification Body: ${notification.body}")
         }
     }
 
