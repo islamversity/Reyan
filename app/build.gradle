@@ -163,6 +163,8 @@ dependencies {
     implementation frescoOkHttp
     implementation slider
 
+    implementation localization
+
     implementation firebaseAnalytics
     implementation firebaseCrashlyticsSDK
     implementation firebaseMessaging

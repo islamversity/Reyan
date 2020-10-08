@@ -72,6 +72,7 @@ kotlin {
         )
 
         implementation(Deps.Android.Tools.seekBar)
+        implementation(Deps.Android.Tools.localization)
 
         implementation(Deps.Coroutines.jdk)
         implementation(Deps.Coroutines.flowBinding)

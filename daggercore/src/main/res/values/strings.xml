@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">daggercore</string>
+
+
+    <!--order is super important-->
+    <string-array name="app_languages">
+        <item>English</item>
+        <item>عربی</item>
+        <item>فارسی</item>
+    </string-array>
 </resources>

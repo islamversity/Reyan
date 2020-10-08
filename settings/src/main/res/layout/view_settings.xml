@@ -40,6 +40,45 @@
         </FrameLayout>
 
         <LinearLayout
+            android:id="@+id/appLanguageContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvAppLanguageTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingTop="@dimen/medium_padding"
+                android:paddingRight="@dimen/medium_padding"
+                android:paddingBottom="@dimen/low_padding"
+                android:text="@string/app_language"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/medium_text"
+                tools:ignore="RtlHardcoded,SpUsage" />
+
+            <TextView
+                android:id="@+id/tvAppLanguageSubTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arabic_regular"
+                android:gravity="left"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingRight="@dimen/large_padding"
+                android:paddingBottom="@dimen/medium_padding"
+                android:textColor="@color/blackLight"
+                android:textSize="@dimen/large_text"
+                tools:ignore="RtlHardcoded,SpUsage"
+                tools:text="@string/app_language" />
+
+        </LinearLayout>
+
+        <View style="@style/Divider.LargeMargin" />
+
+        <LinearLayout
             android:id="@+id/surahCalligraphy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
