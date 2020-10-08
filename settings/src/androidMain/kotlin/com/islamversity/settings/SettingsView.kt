@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import com.islamversity.base.CoroutineView
 import com.islamversity.core.mvi.MviPresenter
 import com.islamversity.daggercore.CoreComponent
+import com.islamversity.daggercore.helpers.languageConfigure
 import com.islamversity.domain.model.QuranReadFontSize
 import com.islamversity.domain.model.TranslateReadFontSize
 import com.islamversity.settings.databinding.ViewSettingsBinding
@@ -38,6 +39,8 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
     private var ayaCalligraphies: List<CalligraphyUIModel> = emptyList()
     private var surahNameCalligraphies: List<CalligraphyUIModel> = emptyList()
 
+    lateinit var appLanguages: List<String>
+
     override fun bindView(inflater: LayoutInflater, container: ViewGroup): ViewSettingsBinding =
         ViewSettingsBinding.inflate(inflater, container, false)
 
@@ -47,7 +50,21 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
 
     override fun beforeBindingView(binding: ViewSettingsBinding) {
         super.beforeBindingView(binding)
+        appLanguages = binding.root.context.resources.getStringArray(R.array.app_languages).toList()
+
         binding.backButton.setOnClickListener { router.handleBack() }
+
+        binding.appLanguageContainer.setOnClickListener {
+            OptionSelector(binding.surahCalligraphy.context)
+                .options(languageConfigure.getSupportedLanguages().map { it.localeName })
+                .dismissListener(object : DismissListener {
+                    override fun dismissSheet(position: Int) {
+                        languageConfigure.setNewLanguage(languageConfigure.getSupportedLanguages()[position].locale)
+                    }
+                })
+                .show()
+        }
+        binding.tvAppLanguageSubTitle.text = languageConfigure.getCurrentLocale().localeName
 
         binding.surahCalligraphy.setOnClickListener {
             OptionSelector(binding.surahCalligraphy.context)
