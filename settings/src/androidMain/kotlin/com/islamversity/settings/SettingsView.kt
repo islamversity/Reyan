@@ -3,6 +3,8 @@ package com.islamversity.settings
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.islamversity.base.CoroutineView
+import com.islamversity.base.widgets.AppFontSizeStore
+import com.islamversity.base.widgets.FontSizeScale
 import com.islamversity.core.mvi.MviPresenter
 import com.islamversity.daggercore.CoreComponent
 import com.islamversity.daggercore.helpers.languageConfigure
@@ -65,6 +67,18 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
                 .show()
         }
         binding.tvAppLanguageSubTitle.text = languageConfigure.getCurrentLocale().localeName
+
+        binding.appFontSizeContainer.setOnClickListener { clickedView ->
+            OptionSelector(binding.surahCalligraphy.context)
+                .options(FontSizeScale.values().map { clickedView.context.getString(it.label) })
+                .dismissListener(object : DismissListener {
+                    override fun dismissSheet(position: Int) {
+                        AppFontSizeStore.setScale(FontSizeScale.values()[position])
+                    }
+                })
+                .show()
+        }
+        binding.tvAppFontSizeSubTitle.setText(AppFontSizeStore.getCurrentScale().label)
 
         binding.surahCalligraphy.setOnClickListener {
             OptionSelector(binding.surahCalligraphy.context)

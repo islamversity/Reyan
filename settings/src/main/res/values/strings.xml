@@ -12,6 +12,7 @@
 
     <string name="aya_translation_not_chosen">None</string>
     <string name="app_language">App Language</string>
+    <string name="app_font_size">App Font Size</string>
 
     <string-array name="font_size">
         <item>Small</item>
