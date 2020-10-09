@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/immersive_background"
-    android:fadingEdge="none"
-    android:overScrollMode="never"
-    android:requiresFadingEdge="none">
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/immersive_background"
+            android:fadingEdge="none"
+            android:overScrollMode="never"
+            android:requiresFadingEdge="none">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -26,7 +26,7 @@
                 android:layout_marginLeft="@dimen/medium_margin"
                 android:src="@drawable/ic_round_arrow_back"
                 app:tint="@color/green_dark"
-                tools:ignore="ContentDescription,RtlHardcoded" />
+                tools:ignore="ContentDescription,RtlHardcoded"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -36,7 +36,7 @@
                 android:textColor="@color/green_dark"
                 android:textSize="@dimen/extra_large_text"
                 android:textStyle="bold"
-                tools:ignore="SpUsage" />
+                tools:ignore="SpUsage"/>
         </FrameLayout>
 
         <LinearLayout
@@ -46,7 +46,7 @@
             android:background="?selectableItemBackground"
             android:orientation="vertical">
 
-            <TextView
+            <com.islamversity.base.widgets.ScalableTextView
                 android:id="@+id/tvAppLanguageTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -58,9 +58,9 @@
                 android:text="@string/app_language"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/medium_text"
-                tools:ignore="RtlHardcoded,SpUsage" />
+                tools:ignore="RtlHardcoded,SpUsage"/>
 
-            <TextView
+            <com.islamversity.base.widgets.ScalableTextView
                 android:id="@+id/tvAppLanguageSubTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,11 +72,51 @@
                 android:textColor="@color/blackLight"
                 android:textSize="@dimen/large_text"
                 tools:ignore="RtlHardcoded,SpUsage"
-                tools:text="@string/app_language" />
+                tools:text="@string/app_language"/>
 
         </LinearLayout>
 
-        <View style="@style/Divider.LargeMargin" />
+        <View style="@style/Divider.LargeMargin"/>
+
+        <LinearLayout
+            android:id="@+id/appFontSizeContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvAppFontSizeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingTop="@dimen/medium_padding"
+                android:paddingRight="@dimen/medium_padding"
+                android:paddingBottom="@dimen/low_padding"
+                android:text="@string/app_font_size"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/medium_text"
+                tools:ignore="RtlHardcoded,SpUsage"/>
+
+            <TextView
+                android:id="@+id/tvAppFontSizeSubTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arabic_regular"
+                android:gravity="left"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingRight="@dimen/large_padding"
+                android:paddingBottom="@dimen/medium_padding"
+                android:textColor="@color/blackLight"
+                android:textSize="@dimen/large_text"
+                tools:ignore="RtlHardcoded,SpUsage"
+                tools:text="@string/app_language"/>
+
+        </LinearLayout>
+
+        <View style="@style/Divider.LargeMargin"/>
 
         <LinearLayout
             android:id="@+id/surahCalligraphy"
@@ -97,7 +137,7 @@
                 android:text="@string/surah_calligraphy"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/medium_text"
-                tools:ignore="RtlHardcoded,SpUsage" />
+                tools:ignore="RtlHardcoded,SpUsage"/>
 
             <TextView
                 android:id="@+id/surahCalligraphySubtitle"
@@ -111,11 +151,11 @@
                 android:textColor="@color/blackLight"
                 android:textSize="@dimen/large_text"
                 tools:ignore="RtlHardcoded,SpUsage"
-                tools:text="@string/surah_calligraphy" />
+                tools:text="@string/surah_calligraphy"/>
 
         </LinearLayout>
 
-        <View style="@style/Divider.LargeMargin" />
+        <View style="@style/Divider.LargeMargin"/>
 
         <LinearLayout
             android:id="@+id/ayaCalligraphy"
@@ -136,7 +176,7 @@
                 android:text="@string/aya_calligraphy"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/medium_text"
-                tools:ignore="SpUsage" />
+                tools:ignore="SpUsage"/>
 
             <TextView
                 android:id="@+id/ayaCalligraphySubtitle"
@@ -150,10 +190,10 @@
                 android:textColor="@color/blackLight"
                 android:textSize="@dimen/large_text"
                 tools:ignore="RtlHardcoded,SpUsage"
-                tools:text="@string/aya_calligraphy" />
+                tools:text="@string/aya_calligraphy"/>
         </LinearLayout>
 
-        <View style="@style/Divider.LargeMargin" />
+        <View style="@style/Divider.LargeMargin"/>
 
         <LinearLayout
             android:id="@+id/mainFontSize"
@@ -173,7 +213,7 @@
                 android:text="@string/main_text_size"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/medium_text"
-                tools:ignore="RtlHardcoded,SpUsage" />
+                tools:ignore="RtlHardcoded,SpUsage"/>
 
             <TextView
                 android:id="@+id/mainFontSizeSubtitle"
@@ -186,7 +226,7 @@
                 android:text="@string/bismillah"
                 android:textColor="@color/blackLight"
                 android:textSize="@dimen/large_text"
-                tools:ignore="SpUsage" />
+                tools:ignore="SpUsage"/>
 
             <com.warkiz.widget.IndicatorSeekBar
                 android:id="@+id/mainFontSizeSeekBar"
@@ -200,15 +240,15 @@
                 app:isb_thumb_color="@color/green_dark"
                 app:isb_tick_texts_color="@color/green_dark"
                 app:isb_track_background_color="@color/colorAccent"
-                app:isb_track_progress_color="@color/green_dark" />
+                app:isb_track_progress_color="@color/green_dark"/>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/medium_margin" />
+                android:layout_height="@dimen/medium_margin"/>
 
         </LinearLayout>
 
-        <View style="@style/Divider.LargeMargin" />
+        <View style="@style/Divider.LargeMargin"/>
 
         <LinearLayout
             android:id="@+id/translateFontSize"
@@ -228,7 +268,7 @@
                 android:text="@string/translate_text_size"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/medium_text"
-                tools:ignore="RtlHardcoded,SpUsage" />
+                tools:ignore="RtlHardcoded,SpUsage"/>
 
             <TextView
                 android:id="@+id/translateFontSizeSubtitle"
@@ -241,7 +281,7 @@
                 android:text="@string/bismillah_translate"
                 android:textColor="@color/blackLight"
                 android:textSize="@dimen/large_text"
-                tools:ignore="SpUsage" />
+                tools:ignore="SpUsage"/>
 
             <com.warkiz.widget.IndicatorSeekBar
                 android:id="@+id/translateFontSizeSeekBar"
@@ -255,11 +295,11 @@
                 app:isb_thumb_color="@color/green_dark"
                 app:isb_tick_texts_color="@color/green_dark"
                 app:isb_track_background_color="@color/colorAccent"
-                app:isb_track_progress_color="@color/green_dark" />
+                app:isb_track_progress_color="@color/green_dark"/>
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/medium_margin" />
+                android:layout_height="@dimen/medium_margin"/>
 
         </LinearLayout>
 
