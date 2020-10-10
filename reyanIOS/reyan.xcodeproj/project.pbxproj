@@ -1,0 +1,635 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4F514E01CF4ECB27A11FCABC /* libPods-reyan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 198FC48022D3BC63BE68DB16 /* libPods-reyan.a */; };
+		F9275E142532160B0021FE0E /* reyanApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9275E132532160B0021FE0E /* reyanApp.swift */; };
+		F9275E162532160B0021FE0E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9275E152532160B0021FE0E /* ContentView.swift */; };
+		F9275E182532160D0021FE0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9275E172532160D0021FE0E /* Assets.xcassets */; };
+		F9275E1B2532160D0021FE0E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9275E1A2532160D0021FE0E /* Preview Assets.xcassets */; };
+		F9275E262532160D0021FE0E /* reyanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9275E252532160D0021FE0E /* reyanTests.swift */; };
+		F9275E312532160D0021FE0E /* reyanUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9275E302532160D0021FE0E /* reyanUITests.swift */; };
+		F9275E7E25323C0F0021FE0E /* Asghar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9275E7D25323C0F0021FE0E /* Asghar.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F9275E222532160D0021FE0E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F9275E082532160B0021FE0E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F9275E0F2532160B0021FE0E;
+			remoteInfo = reyan;
+		};
+		F9275E2D2532160D0021FE0E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F9275E082532160B0021FE0E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F9275E0F2532160B0021FE0E;
+			remoteInfo = reyan;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		08745F589F42937201EAD41C /* Pods-reyan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reyan.debug.xcconfig"; path = "Target Support Files/Pods-reyan/Pods-reyan.debug.xcconfig"; sourceTree = "<group>"; };
+		198FC48022D3BC63BE68DB16 /* libPods-reyan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-reyan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9275E102532160B0021FE0E /* reyan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = reyan.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9275E132532160B0021FE0E /* reyanApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reyanApp.swift; sourceTree = "<group>"; };
+		F9275E152532160B0021FE0E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F9275E172532160D0021FE0E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F9275E1A2532160D0021FE0E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		F9275E1C2532160D0021FE0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F9275E212532160D0021FE0E /* reyanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = reyanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9275E252532160D0021FE0E /* reyanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reyanTests.swift; sourceTree = "<group>"; };
+		F9275E272532160D0021FE0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F9275E2C2532160D0021FE0E /* reyanUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = reyanUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F9275E302532160D0021FE0E /* reyanUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reyanUITests.swift; sourceTree = "<group>"; };
+		F9275E322532160D0021FE0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F9275E7D25323C0F0021FE0E /* Asghar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asghar.swift; sourceTree = "<group>"; };
+		FF37CD3337C4F5708B61F685 /* Pods-reyan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reyan.release.xcconfig"; path = "Target Support Files/Pods-reyan/Pods-reyan.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F9275E0D2532160B0021FE0E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F514E01CF4ECB27A11FCABC /* libPods-reyan.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9275E1E2532160D0021FE0E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9275E292532160D0021FE0E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		18D0A90FA6FDDABE7F37BB4B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				08745F589F42937201EAD41C /* Pods-reyan.debug.xcconfig */,
+				FF37CD3337C4F5708B61F685 /* Pods-reyan.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		BA56EEA130CA14FF5817DCED /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				198FC48022D3BC63BE68DB16 /* libPods-reyan.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F9275E072532160B0021FE0E = {
+			isa = PBXGroup;
+			children = (
+				F9275E122532160B0021FE0E /* reyan */,
+				F9275E242532160D0021FE0E /* reyanTests */,
+				F9275E2F2532160D0021FE0E /* reyanUITests */,
+				F9275E112532160B0021FE0E /* Products */,
+				18D0A90FA6FDDABE7F37BB4B /* Pods */,
+				BA56EEA130CA14FF5817DCED /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F9275E112532160B0021FE0E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F9275E102532160B0021FE0E /* reyan.app */,
+				F9275E212532160D0021FE0E /* reyanTests.xctest */,
+				F9275E2C2532160D0021FE0E /* reyanUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F9275E122532160B0021FE0E /* reyan */ = {
+			isa = PBXGroup;
+			children = (
+				F9275E132532160B0021FE0E /* reyanApp.swift */,
+				F9275E152532160B0021FE0E /* ContentView.swift */,
+				F9275E172532160D0021FE0E /* Assets.xcassets */,
+				F9275E1C2532160D0021FE0E /* Info.plist */,
+				F9275E7D25323C0F0021FE0E /* Asghar.swift */,
+				F9275E192532160D0021FE0E /* Preview Content */,
+			);
+			path = reyan;
+			sourceTree = "<group>";
+		};
+		F9275E192532160D0021FE0E /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				F9275E1A2532160D0021FE0E /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F9275E242532160D0021FE0E /* reyanTests */ = {
+			isa = PBXGroup;
+			children = (
+				F9275E252532160D0021FE0E /* reyanTests.swift */,
+				F9275E272532160D0021FE0E /* Info.plist */,
+			);
+			path = reyanTests;
+			sourceTree = "<group>";
+		};
+		F9275E2F2532160D0021FE0E /* reyanUITests */ = {
+			isa = PBXGroup;
+			children = (
+				F9275E302532160D0021FE0E /* reyanUITests.swift */,
+				F9275E322532160D0021FE0E /* Info.plist */,
+			);
+			path = reyanUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F9275E0F2532160B0021FE0E /* reyan */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F9275E352532160D0021FE0E /* Build configuration list for PBXNativeTarget "reyan" */;
+			buildPhases = (
+				D4318394339F08CFF132A47B /* [CP] Check Pods Manifest.lock */,
+				F9275E0C2532160B0021FE0E /* Sources */,
+				F9275E0D2532160B0021FE0E /* Frameworks */,
+				F9275E0E2532160B0021FE0E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = reyan;
+			productName = reyan;
+			productReference = F9275E102532160B0021FE0E /* reyan.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F9275E202532160D0021FE0E /* reyanTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F9275E382532160D0021FE0E /* Build configuration list for PBXNativeTarget "reyanTests" */;
+			buildPhases = (
+				F9275E1D2532160D0021FE0E /* Sources */,
+				F9275E1E2532160D0021FE0E /* Frameworks */,
+				F9275E1F2532160D0021FE0E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F9275E232532160D0021FE0E /* PBXTargetDependency */,
+			);
+			name = reyanTests;
+			productName = reyanTests;
+			productReference = F9275E212532160D0021FE0E /* reyanTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		F9275E2B2532160D0021FE0E /* reyanUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F9275E3B2532160D0021FE0E /* Build configuration list for PBXNativeTarget "reyanUITests" */;
+			buildPhases = (
+				F9275E282532160D0021FE0E /* Sources */,
+				F9275E292532160D0021FE0E /* Frameworks */,
+				F9275E2A2532160D0021FE0E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F9275E2E2532160D0021FE0E /* PBXTargetDependency */,
+			);
+			name = reyanUITests;
+			productName = reyanUITests;
+			productReference = F9275E2C2532160D0021FE0E /* reyanUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F9275E082532160B0021FE0E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1200;
+				LastUpgradeCheck = 1200;
+				TargetAttributes = {
+					F9275E0F2532160B0021FE0E = {
+						CreatedOnToolsVersion = 12.0.1;
+					};
+					F9275E202532160D0021FE0E = {
+						CreatedOnToolsVersion = 12.0.1;
+						TestTargetID = F9275E0F2532160B0021FE0E;
+					};
+					F9275E2B2532160D0021FE0E = {
+						CreatedOnToolsVersion = 12.0.1;
+						TestTargetID = F9275E0F2532160B0021FE0E;
+					};
+				};
+			};
+			buildConfigurationList = F9275E0B2532160B0021FE0E /* Build configuration list for PBXProject "reyan" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F9275E072532160B0021FE0E;
+			productRefGroup = F9275E112532160B0021FE0E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F9275E0F2532160B0021FE0E /* reyan */,
+				F9275E202532160D0021FE0E /* reyanTests */,
+				F9275E2B2532160D0021FE0E /* reyanUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F9275E0E2532160B0021FE0E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9275E1B2532160D0021FE0E /* Preview Assets.xcassets in Resources */,
+				F9275E182532160D0021FE0E /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9275E1F2532160D0021FE0E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9275E2A2532160D0021FE0E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D4318394339F08CFF132A47B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-reyan-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F9275E0C2532160B0021FE0E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9275E162532160B0021FE0E /* ContentView.swift in Sources */,
+				F9275E142532160B0021FE0E /* reyanApp.swift in Sources */,
+				F9275E7E25323C0F0021FE0E /* Asghar.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9275E1D2532160D0021FE0E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9275E262532160D0021FE0E /* reyanTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F9275E282532160D0021FE0E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F9275E312532160D0021FE0E /* reyanUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F9275E232532160D0021FE0E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F9275E0F2532160B0021FE0E /* reyan */;
+			targetProxy = F9275E222532160D0021FE0E /* PBXContainerItemProxy */;
+		};
+		F9275E2E2532160D0021FE0E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F9275E0F2532160B0021FE0E /* reyan */;
+			targetProxy = F9275E2D2532160D0021FE0E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		F9275E332532160D0021FE0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F9275E342532160D0021FE0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F9275E362532160D0021FE0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 08745F589F42937201EAD41C /* Pods-reyan.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"reyan/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = reyan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.islamversity.reyan;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F9275E372532160D0021FE0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF37CD3337C4F5708B61F685 /* Pods-reyan.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_ASSET_PATHS = "\"reyan/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = reyan/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.islamversity.reyan;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F9275E392532160D0021FE0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = reyanTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.islamversity.reyanTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/reyan.app/reyan";
+			};
+			name = Debug;
+		};
+		F9275E3A2532160D0021FE0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = reyanTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.islamversity.reyanTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/reyan.app/reyan";
+			};
+			name = Release;
+		};
+		F9275E3C2532160D0021FE0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = reyanUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.islamversity.reyanUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = reyan;
+			};
+			name = Debug;
+		};
+		F9275E3D2532160D0021FE0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = reyanUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.islamversity.reyanUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = reyan;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F9275E0B2532160B0021FE0E /* Build configuration list for PBXProject "reyan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F9275E332532160D0021FE0E /* Debug */,
+				F9275E342532160D0021FE0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F9275E352532160D0021FE0E /* Build configuration list for PBXNativeTarget "reyan" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F9275E362532160D0021FE0E /* Debug */,
+				F9275E372532160D0021FE0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F9275E382532160D0021FE0E /* Build configuration list for PBXNativeTarget "reyanTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F9275E392532160D0021FE0E /* Debug */,
+				F9275E3A2532160D0021FE0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F9275E3B2532160D0021FE0E /* Build configuration list for PBXNativeTarget "reyanUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F9275E3C2532160D0021FE0E /* Debug */,
+				F9275E3D2532160D0021FE0E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F9275E082532160B0021FE0E /* Project object */;
+}

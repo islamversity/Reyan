@@ -39,7 +39,7 @@ object Versions {
     val ktor = "1.4.0"
     val serialization = "1.0.0-RC"
     val stately = "1.1.0"
-    val coroutines = "1.3.9"
+    val coroutines = "1.3.9-native-mt"
     val flowBinding = "1.3.2"
     val koin = "3.0.0-alpha-9"
     val cocoapodsext = "0.6"
@@ -176,6 +176,7 @@ object Deps {
         val db = ":db"
         val viewComponent = ":view-component"
         val surah = ":surah"
+        val search = ":search"
     }
 
     object Dagger {
@@ -204,7 +205,6 @@ object Deps {
     object Coroutines {
         val common = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
         val jdk = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
-        val native = "org.jetbrains.kotlinx:kotlinx-coroutines-core-native:${Versions.coroutines}"
         val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
         val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
         val flowBinding = "ru.ldralighieri.corbind:corbind:${Versions.flowBinding}"
@@ -262,6 +262,8 @@ object Deps {
 
     object Tools {
         val stately = "co.touchlab:stately-common:${Versions.stately}"
+        val statelyIso = "co.touchlab:stately-isolate:${Versions.stately}"
+        val statelyConcurrency = "co.touchlab:stately-concurrency:${Versions.stately}"
         val koinCore = "org.koin:koin-core:${Versions.koin}"
         val cocoapodsext = "co.touchlab:kotlinnativecocoapods:${Versions.cocoapodsext}"
         val okio = "com.squareup.okio:okio:2.8.0"

@@ -11,6 +11,7 @@ include ':db-test',
         ':navigation',
         ':kotlintesthelpers',
         ':surah',
-        ':view-component'
+        ':view-component',
+        ':nativeShared'
 
 enableFeaturePreview("GRADLE_METADATA")
