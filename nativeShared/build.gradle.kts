@@ -1,6 +1,5 @@
 plugins {
     kotlin("multiplatform")
-    id("co.touchlab.native.cocoapods")
 }
 
 kotlin {
@@ -8,23 +7,23 @@ kotlin {
         implementation(kotlin(Deps.Kotlin.common))
         implementation(Deps.Coroutines.common)
         implementation(Deps.Tools.logger)
-        implementation(Deps.Tools.statelyConcurrency)
+
+//        implementation(project(Deps.Modules.core))
+//        implementation(project(Deps.Modules.db))
+//        implementation(project(Deps.Modules.domain))
+//        implementation(project(Deps.Modules.navigation))
+//
+//        features
+//        implementation(project(Deps.Modules.quranHome))
+//        implementation(project(Deps.Modules.settings))
+//        implementation(project(Deps.Modules.surah))
+//        implementation(project(Deps.Modules.search))
     }
     sourceSets["commonTest"].dependencies {
         implementation(kotlin(Deps.Kotlin.common))
         implementation(Deps.KotlinTest.common)
         implementation(Deps.Coroutines.turbine)
     }
-
-    js {
-        nodejs()
-    }
-
-    sourceSets["jsTest"].dependencies {
-
-    }
-
-    jvm()
 
     iosArm32()
     iosArm64()
@@ -38,14 +37,6 @@ kotlin {
     watchosArm64()
     watchosX86()
 
-    sourceSets["jvmTest"].dependencies {
-        implementation(Deps.Coroutines.test)
-        implementation(Deps.Android.Test.junit)
-        implementation(Deps.Android.Test.truth)
-    }
-    sourceSets["jvmMain"].dependencies {
-        implementation(kotlin("stdlib", Versions.kotlin))
-    }
     sourceSets.create("nativeMain").dependencies {
     }
     sourceSets.create("nativeTest").dependencies {
@@ -75,16 +66,6 @@ kotlin {
                 useExperimentalAnnotation("kotlinx.serialization.InternalSerializationApi")
                 useExperimentalAnnotation("kotlin.time.ExperimentalTime")
             }
-        }
-    }
-
-    cocoapodsext {
-        summary = "shared core module"
-        framework {
-            isStatic = true
-            transitiveExport = true
-            homepage = "core home"
-            setVersion("1.1")
         }
     }
 }
