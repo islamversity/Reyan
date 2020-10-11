@@ -38,7 +38,7 @@ object ControllerFactory {
 
                 val extra = Bundle().apply {
                     if (extras != null) {
-                        putByteArray(extras.first, extras.second)
+                        putString(extras.first, extras.second)
                     }
                 }
 
@@ -56,7 +56,7 @@ object ControllerFactory {
 
 
         val extra = Bundle().apply {
-            putByteArray(extras.first, extras.second)
+            putString(extras.first, extras.second)
         }
 
         return try {

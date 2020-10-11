@@ -13,6 +13,10 @@ class ControllerNavigator(
     private val app: Application,
     private val router: Router
 ) : Navigator {
+
+    fun <T : Screens> goto(screen: T){
+
+    }
     override fun goTo(screen: Screens) {
         val to = ControllerFactory.createController(screen, app)
         router.pushController(

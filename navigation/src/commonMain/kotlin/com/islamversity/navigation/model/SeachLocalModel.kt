@@ -1,25 +1,18 @@
 package com.islamversity.navigation.model
 
-import com.islamversity.navigation.SinkSerializer
-import okio.BufferedSink
-import okio.BufferedSource
+import com.islamversity.navigation.jsonParser
+import kotlinx.serialization.Serializable
+import kotlinx.serialization.decodeFromString
 
+@Serializable
 data class SearchLocalModel(
     val backTransitionName : String = "",
     val textTransitionName : String = ""
 ){
-    companion object Sinker : SinkSerializer<SearchLocalModel>{
+    companion object{
         const val EXTRA_SEARCH = "extra_search"
-
-        override fun BufferedSource.readFromSink(): SearchLocalModel =
-            SearchLocalModel(
-                readUtf8(),
-                readUtf8()
-            )
-
-        override fun BufferedSink.writeToSink(obj: SearchLocalModel) {
-            writeUtf8(obj.backTransitionName)
-            writeUtf8(obj.textTransitionName)
-        }
     }
 }
+
+fun SearchLocalModel.Companion.fromData(data: String): SearchLocalModel =
+    jsonParser.decodeFromString(data)

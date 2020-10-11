@@ -3,5 +3,5 @@
 platform :ios, '13.0'
 
 target 'reyan' do
-    pod 'core', :path => '../core'
+    pod 'nativeShared', :path => '../nativeShared'
 end

@@ -1,13 +1,21 @@
 package com.islamversity.navigation
 
 import com.islamversity.navigation.model.SearchLocalModel
-import com.islamversity.navigation.model.SearchLocalModel.Sinker.EXTRA_SEARCH
+import com.islamversity.navigation.model.SearchLocalModel.Companion.EXTRA_SEARCH
 import com.islamversity.navigation.model.SurahLocalModel
-import com.islamversity.navigation.model.SurahLocalModel.Sinker.EXTRA_SURAH_DETAIL
+import com.islamversity.navigation.model.SurahLocalModel.Companion.EXTRA_SURAH_DETAIL
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+
+internal val jsonParser = Json {
+    prettyPrint = false
+    encodeDefaults = false
+    coerceInputValues = true
+}
 
 sealed class Screens(
     val name: String,
-    val extras: Pair<String, ByteArray>? = null,
+    val extras: Pair<String, String>? = null,
     val pushAnimation: NavigationAnimation? = null,
     val popAnimation: NavigationAnimation? = null
 ) {
@@ -29,7 +37,7 @@ sealed class Screens(
         popAnimation: NavigationAnimation? = null
     ) : Screens(
         "com.islamversity.search.view.SearchView",
-        EXTRA_SEARCH to SearchLocalModel.toByteArray(model),
+        EXTRA_SEARCH to jsonParser.encodeToString(model),
         pushAnimation,
         popAnimation
     )
@@ -40,7 +48,7 @@ sealed class Screens(
         popAnimation: NavigationAnimation? = null
     ) : Screens(
         "com.islamversity.surah.view.SurahView",
-        EXTRA_SURAH_DETAIL to SurahLocalModel.toByteArray(model),
+        EXTRA_SURAH_DETAIL to jsonParser.encodeToString(model),
         pushAnimation,
         popAnimation
     )

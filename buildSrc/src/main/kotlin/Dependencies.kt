@@ -2,7 +2,7 @@ import org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDepen
 
 object Versions {
 
-    val kotlin = "1.4.0"
+    val kotlin = "1.4.10"
     val detekt = "1.10.0"
     val androidXTest = "1.1.0"
     val supportJunitExt = "1.0.0"
@@ -36,8 +36,8 @@ object Versions {
 
 
     val sqlDelight = "1.4.3"
-    val ktor = "1.4.0"
-    val serialization = "1.0.0-RC"
+    val ktor = "1.4.1"
+    val serialization = "1.0.0"
     val stately = "1.1.0"
     val coroutines = "1.3.9-native-mt"
     val flowBinding = "1.3.2"
@@ -215,15 +215,15 @@ object Deps {
         val gradle = "com.squareup.sqldelight:gradle-plugin:${Versions.sqlDelight}"
         val runtime = "com.squareup.sqldelight:runtime:${Versions.sqlDelight}"
         val jvmTest = "com.squareup.sqldelight:sqlite-driver:${Versions.sqlDelight}"
-        val runtimeJdk = "com.squareup.sqldelight:runtime-jvm:${Versions.sqlDelight}"
-        val driverIos = "com.squareup.sqldelight:native-driver:${Versions.sqlDelight}"
+        val driverNative = "com.squareup.sqldelight:native-driver:${Versions.sqlDelight}"
+        val driverMacOS = "com.squareup.sqldelight:native-driver-macosx64:${Versions.sqlDelight}"
         val driverAndroid = "com.squareup.sqldelight:android-driver:${Versions.sqlDelight}"
         val coroutines = "com.squareup.sqldelight:coroutines-extensions:${Versions.sqlDelight}"
     }
 
 
     object Serialization {
-        val core = "org.jetbrains.kotlinx:kotlinx-serialization-core:${Versions.serialization}"
+        val core = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.serialization}"
     }
 
     object ktor {
@@ -266,7 +266,7 @@ object Deps {
         val statelyConcurrency = "co.touchlab:stately-concurrency:${Versions.stately}"
         val koinCore = "org.koin:koin-core:${Versions.koin}"
         val cocoapodsext = "co.touchlab:kotlinnativecocoapods:${Versions.cocoapodsext}"
-        val okio = "com.squareup.okio:okio:2.8.0"
+        val okio = "com.squareup.okio:okio:2.9.0"
         val uuid = "com.benasher44:uuid:0.2.2"
         val logger = "co.touchlab:kermit:0.1.8"
     }
