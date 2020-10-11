@@ -1,5 +1,6 @@
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization")
     id("com.android.library")
 }
 
@@ -24,8 +25,8 @@ kotlin {
     }
     sourceSets["commonMain"].dependencies {
         implementation(kotlin("stdlib", Versions.kotlin))
-        implementation(Deps.Tools.okio)
         implementation(Deps.Coroutines.common)
+        implementation(Deps.Serialization.core)
     }
     android()
     sourceSets["androidMain"].dependencies {
@@ -33,11 +34,45 @@ kotlin {
         implementation(Deps.Android.Tools.conductor)
         implementation(Deps.Android.Support.compat)
         implementation(Deps.Coroutines.android)
-        implementation(Deps.Tools.okio)
     }
     sourceSets["androidTest"].dependencies {
         implementation(kotlin("stdlib", Versions.kotlin))
         implementation(Deps.Android.Test.junit)
         implementation(Deps.Android.Test.truth)
+    }
+
+    ios()
+    sourceSets["iosMain"].dependencies {
+    }
+
+    watchos()
+    tvos()
+
+    linuxX64()
+    macosX64("macos")
+    mingwX64()
+
+    sourceSets.create("nativeMain")
+    sourceSets.create("nativeTest")
+
+    configure(
+        listOf(
+            targets["iosArm64"],
+            targets["iosX64"],
+
+            targets["watchosArm32"],
+            targets["watchosArm64"],
+            targets["watchosX86"],
+
+            targets["tvosArm64"],
+            targets["tvosX64"],
+
+            targets["linuxX64"],
+            targets["macos"],
+            targets["mingwX64"]
+        )
+    ) {
+        compilations["main"].source(sourceSets["nativeMain"])
+        compilations["test"].source(sourceSets["nativeTest"])
     }
 }

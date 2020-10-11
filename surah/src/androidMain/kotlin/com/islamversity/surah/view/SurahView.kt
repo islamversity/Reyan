@@ -10,8 +10,8 @@ import com.airbnb.epoxy.OnModelBuildFinishedListener
 import com.islamversity.base.CoroutineView
 import com.islamversity.core.mvi.MviPresenter
 import com.islamversity.daggercore.CoreComponent
-import com.islamversity.navigation.fromByteArray
 import com.islamversity.navigation.model.SurahLocalModel
+import com.islamversity.navigation.model.fromData
 import com.islamversity.surah.SurahIntent
 import com.islamversity.surah.SurahState
 import com.islamversity.surah.databinding.ViewSurahBinding
@@ -28,9 +28,9 @@ class SurahView(
 
     private val surahLocal: SurahLocalModel =
         bundle
-            .getByteArray(SurahLocalModel.EXTRA_SURAH_DETAIL)!!
+            .getString(SurahLocalModel.EXTRA_SURAH_DETAIL)!!
             .let {
-                SurahLocalModel.fromByteArray(it)
+                SurahLocalModel.fromData(it)
             }
 
     @Inject

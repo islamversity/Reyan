@@ -1,16 +1,16 @@
 PODS:
-  - core (1.0)
+  - nativeShared (1.0)
 
 DEPENDENCIES:
-  - core (from `../core`)
+  - nativeShared (from `../nativeShared`)
 
 EXTERNAL SOURCES:
-  core:
-    :path: "../core"
+  nativeShared:
+    :path: "../nativeShared"
 
 SPEC CHECKSUMS:
-  core: c949f19c22c9aace75855e944cc8304198c4009c
+  nativeShared: c5ea10b07a9c4088da7fd78770249cd7f410e52e
 
-PODFILE CHECKSUM: 2dad0ec7aa3727bfcc7f4218da07638fb8ae2229
+PODFILE CHECKSUM: 67734e0520bb420b314e337732b99a5d5e633f43
 
 COCOAPODS: 1.9.3
