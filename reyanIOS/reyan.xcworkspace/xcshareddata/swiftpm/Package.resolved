@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "NavigationRouter",
+        "repositoryURL": "https://github.com/corteggo/NavigationRouter.git",
+        "state": {
+          "branch": "main",
+          "revision": "82839cf153d87096dcf94ecc58d777caebb3f80e",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
