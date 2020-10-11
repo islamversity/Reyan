@@ -105,8 +105,39 @@ kotlin {
         implementation(Deps.Android.Test.jsonTest)
         implementation(project(Deps.Modules.kotlinTestHelper))
     }
-}
 
-//dependencies{
-//    coreLibraryDesugaring(Deps.Android.Tools.coreDesugaringLib)
-//}
+    ios()
+    sourceSets["iosMain"].dependencies {
+    }
+
+    watchos()
+    tvos()
+
+    linuxX64()
+    macosX64("macos")
+    mingwX64()
+
+    sourceSets.create("nativeMain")
+    sourceSets.create("nativeTest")
+
+    configure(
+        listOf(
+            targets["iosArm64"],
+            targets["iosX64"],
+
+            targets["watchosArm32"],
+            targets["watchosArm64"],
+            targets["watchosX86"],
+
+            targets["tvosArm64"],
+            targets["tvosX64"],
+
+            targets["linuxX64"],
+            targets["macos"],
+            targets["mingwX64"]
+        )
+    ) {
+        compilations["main"].source(sourceSets["nativeMain"])
+        compilations["test"].source(sourceSets["nativeTest"])
+    }
+}

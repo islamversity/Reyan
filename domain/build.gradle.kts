@@ -3,7 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")
-//    id("com.codingfeline.buildkonfig")
+    id("co.touchlab.native.cocoapods")
+
 }
 
 kotlin {
@@ -53,5 +54,57 @@ kotlin {
         implementation(Deps.ktor.Core.jvm)
         implementation(Deps.ktor.Json.jvm)
         implementation(Deps.ktor.Serialization.jvm)
+    }
+
+    js {
+        nodejs()
+    }
+
+    ios()
+    watchos()
+    tvos()
+
+    linuxX64()
+    macosX64("macos")
+    mingwX64()
+
+
+    sourceSets.create("nativeTest")
+    sourceSets.create("nativeMain")
+
+    configure(
+        listOf(
+            targets["iosArm64"],
+            targets["iosX64"],
+
+            targets["watchosArm32"],
+            targets["watchosArm64"],
+            targets["watchosX86"],
+
+            targets["tvosArm64"],
+            targets["tvosX64"],
+
+            targets["linuxX64"],
+            targets["macos"],
+            targets["mingwX64"]
+        )
+    ) {
+        compilations["main"].source(sourceSets["nativeMain"])
+        compilations["test"].source(sourceSets["nativeTest"])
+    }
+
+    sourceSets {
+        all {
+            languageSettings.enableLanguageFeature("InlineClasses")
+        }
+    }
+
+    cocoapodsext {
+        summary = "shared $name module"
+        framework {
+            transitiveExport = true
+            homepage = "$name home"
+            setVersion("1.0")
+        }
     }
 }

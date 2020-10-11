@@ -16,53 +16,43 @@ kotlin {
         implementation(Deps.Coroutines.turbine)
     }
 
-    js {
-        nodejs()
-    }
-
-    sourceSets["jsTest"].dependencies {
-
-    }
-
     jvm()
-
-    iosArm32()
-    iosArm64()
-    iosX64()
-    linuxX64()
-    macosX64()
-    mingwX64()
-    tvosArm64()
-    tvosX64()
-    watchosArm32()
-    watchosArm64()
-    watchosX86()
-
     sourceSets["jvmTest"].dependencies {
         implementation(Deps.Coroutines.test)
         implementation(Deps.Android.Test.junit)
         implementation(Deps.Android.Test.truth)
     }
-    sourceSets["jvmMain"].dependencies {
-        implementation(kotlin("stdlib", Versions.kotlin))
-    }
-    sourceSets.create("nativeMain").dependencies {
-    }
-    sourceSets.create("nativeTest").dependencies {
+
+    js {
+        nodejs()
     }
 
+
+    ios()
+    watchos()
+    tvos()
+
+    linuxX64()
+    macosX64("macos")
+    mingwX64()
+
+    sourceSets.create("nativeMain")
+    sourceSets.create("nativeTest")
+
     configure(listOf(
-        targets["iosArm32"],
         targets["iosArm64"],
         targets["iosX64"],
-        targets["linuxX64"],
-        targets["macosX64"],
-        targets["mingwX64"],
-        targets["tvosArm64"],
-        targets["tvosX64"],
+
         targets["watchosArm32"],
         targets["watchosArm64"],
-        targets["watchosX86"]
+        targets["watchosX86"],
+
+        targets["tvosArm64"],
+        targets["tvosX64"],
+
+        targets["linuxX64"],
+        targets["macos"],
+        targets["mingwX64"]
         )) {
         compilations["main"].source(sourceSets["nativeMain"])
         compilations["test"].source(sourceSets["nativeTest"])
@@ -79,12 +69,11 @@ kotlin {
     }
 
     cocoapodsext {
-        summary = "shared core module"
+        summary = "shared $name module"
         framework {
-            isStatic = true
             transitiveExport = true
-            homepage = "core home"
-            setVersion("1.1")
+            homepage = "$name home"
+            setVersion("1.0")
         }
     }
 }

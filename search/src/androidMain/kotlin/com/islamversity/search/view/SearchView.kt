@@ -13,8 +13,8 @@ import com.islamversity.core.Mapper
 import com.islamversity.core.mvi.MviPresenter
 import com.islamversity.core.throttleFirst
 import com.islamversity.daggercore.CoreComponent
-import com.islamversity.navigation.fromByteArray
 import com.islamversity.navigation.model.SearchLocalModel
+import com.islamversity.navigation.model.fromData
 import com.islamversity.search.SearchIntent
 import com.islamversity.search.SearchState
 import com.islamversity.search.databinding.ViewSearchBinding
@@ -38,9 +38,9 @@ class SearchView(
 
     private val searchLocal: SearchLocalModel? =
         bundle
-            ?.getByteArray(SearchLocalModel.EXTRA_SEARCH)
+            ?.getString(SearchLocalModel.EXTRA_SEARCH)
             ?.let {
-                SearchLocalModel.fromByteArray(it)
+                SearchLocalModel.fromData(it)
             }
 
     @Inject
