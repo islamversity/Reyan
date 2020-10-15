@@ -37,7 +37,7 @@ object Versions {
     val truth = "1.0.1"
 
 
-    val sqlDelight = "1.4.3"
+    val sqlDelight = "1.4.4"
     val ktor = "1.4.1"
     val serialization = "1.0.0"
     val stately = "1.1.0"
