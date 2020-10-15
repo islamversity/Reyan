@@ -58,5 +58,13 @@ class SettingsPresenter(
                 preState.copy(
                     selectedAyaCalligraphy = result.calligraphy
                 )
+            is SettingsResult.SecondTranslationCalligraphy ->
+                preState.copy(
+                    selectedSecondTranslationCalligraphy = result.calligraphy
+                )
+            is SettingsResult.SecondTranslationCalligraphies ->
+                preState.copy(
+                    secondTranslationCalligraphies = result.list
+                )
         }
 }

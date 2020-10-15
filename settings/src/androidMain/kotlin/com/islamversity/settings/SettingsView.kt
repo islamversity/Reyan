@@ -39,6 +39,7 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
     private val intentChannel = BroadcastChannel<SettingsIntent>(Channel.BUFFERED)
 
     private var ayaCalligraphies: List<CalligraphyUIModel> = emptyList()
+    private var secondTranslationCalligraphy: List<CalligraphyUIModel> = emptyList()
     private var surahNameCalligraphies: List<CalligraphyUIModel> = emptyList()
 
     lateinit var appLanguages: List<String>
@@ -105,6 +106,19 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
                 })
                 .show()
         }
+
+        binding.secondTranslationCalligraphy.setOnClickListener {
+            OptionSelector(binding.surahCalligraphy.context)
+                .options(secondTranslationCalligraphy.map { it.name })
+                .dismissListener(object : DismissListener {
+                    override fun dismissSheet(position: Int) {
+                        intentChannel.offer(
+                            SettingsIntent.NewSecondTranslation(secondTranslationCalligraphy[position])
+                        )
+                    }
+                }).show()
+
+        }
         binding.mainFontSizeSeekBar.min = fontRange.first.toFloat()
         binding.mainFontSizeSeekBar.max = fontRange.last.toFloat()
         binding.mainFontSizeSeekBar.onSeekChangeListener = object : OnSeekChangeListener {
@@ -147,7 +161,8 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
 
         binding.surahCalligraphySubtitle.text = state.selectedSurahNameCalligraphy?.name
         binding.ayaCalligraphySubtitle.text =
-            state.selectedAyaCalligraphy?.name ?: binding.root.context.getString(R.string.aya_translation_not_chosen)
+            state.selectedAyaCalligraphy?.name
+                ?: binding.root.context.getString(R.string.aya_translation_not_chosen)
 
         defaultQuranSize = state.quranTextFontSize
         binding.mainFontSizeSeekBar.setProgress(state.quranTextFontSize.toFloat())
@@ -157,6 +172,8 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
 
         ayaCalligraphies = state.ayaCalligraphies
         surahNameCalligraphies = state.surahNameCalligraphies
+        secondTranslationCalligraphy = state.secondTranslationCalligraphies
+        binding.secondTranslationCalligraphySubtitle.text = state.selectedSecondTranslationCalligraphy?.name
     }
 
     override fun intents(): Flow<SettingsIntent> =
