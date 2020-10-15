@@ -22,6 +22,12 @@
 		E78EFDA72533598400886039 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78EFDA52533598400886039 /* SearchViewModel.swift */; };
 		E78EFDA82533598400886039 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78EFDA62533598400886039 /* SearchView.swift */; };
 		E78EFDF12533680200886039 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E78EFDEF2533680200886039 /* LaunchScreen.storyboard */; };
+		E796EC2625376ACC0025072F /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = E796EC2525376ACC0025072F /* Resolver */; };
+		E796EC2C253794970025072F /* DITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC2B253794970025072F /* DITest.swift */; };
+		E796EC34253833340025072F /* Example2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC33253833340025072F /* Example2.swift */; };
+		E796EC39253836720025072F /* DICore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC38253836720025072F /* DICore.swift */; };
+		E796EC3E253837260025072F /* NetworkDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC3D253837260025072F /* NetworkDI.swift */; };
+		E796EC4325388B0E0025072F /* Injections.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC4225388B0E0025072F /* Injections.swift */; };
 		F9275E162532160B0021FE0E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9275E152532160B0021FE0E /* ContentView.swift */; };
 		F9275E182532160D0021FE0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9275E172532160D0021FE0E /* Assets.xcassets */; };
 		F9275E1B2532160D0021FE0E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9275E1A2532160D0021FE0E /* Preview Assets.xcassets */; };
@@ -63,6 +69,11 @@
 		E78EFDA52533598400886039 /* SearchViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		E78EFDA62533598400886039 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		E78EFDF02533680200886039 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E796EC2B253794970025072F /* DITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DITest.swift; sourceTree = "<group>"; };
+		E796EC33253833340025072F /* Example2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example2.swift; sourceTree = "<group>"; };
+		E796EC38253836720025072F /* DICore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DICore.swift; sourceTree = "<group>"; };
+		E796EC3D253837260025072F /* NetworkDI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDI.swift; sourceTree = "<group>"; };
+		E796EC4225388B0E0025072F /* Injections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injections.swift; sourceTree = "<group>"; };
 		F9275E102532160B0021FE0E /* reyan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = reyan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9275E152532160B0021FE0E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F9275E172532160D0021FE0E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -83,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E796EC2625376ACC0025072F /* Resolver in Frameworks */,
 				E78EFD3225330F4F00886039 /* NavigationRouter in Frameworks */,
 				8F4A329D52DC68C3178A6601 /* libPods-reyan.a in Frameworks */,
 			);
@@ -153,6 +165,18 @@
 			path = reyan/Search;
 			sourceTree = SOURCE_ROOT;
 		};
+		E796EC2A253794180025072F /* Resolver */ = {
+			isa = PBXGroup;
+			children = (
+				E796EC2B253794970025072F /* DITest.swift */,
+				E796EC33253833340025072F /* Example2.swift */,
+				E796EC38253836720025072F /* DICore.swift */,
+				E796EC3D253837260025072F /* NetworkDI.swift */,
+				E796EC4225388B0E0025072F /* Injections.swift */,
+			);
+			path = Resolver;
+			sourceTree = "<group>";
+		};
 		F9275E072532160B0021FE0E = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +202,7 @@
 		F9275E122532160B0021FE0E /* reyan */ = {
 			isa = PBXGroup;
 			children = (
+				E796EC2A253794180025072F /* Resolver */,
 				E78EFD9C2533588C00886039 /* ReyanModule.swift */,
 				E78EFD5D2533509900886039 /* AppDelegate.swift */,
 				E78EFD5E2533509A00886039 /* SceneDelegate.swift */,
@@ -239,6 +264,7 @@
 			name = reyan;
 			packageProductDependencies = (
 				E78EFD3125330F4F00886039 /* NavigationRouter */,
+				E796EC2525376ACC0025072F /* Resolver */,
 			);
 			productName = reyan;
 			productReference = F9275E102532160B0021FE0E /* reyan.app */;
@@ -313,6 +339,7 @@
 			mainGroup = F9275E072532160B0021FE0E;
 			packageReferences = (
 				E78EFD3025330F4F00886039 /* XCRemoteSwiftPackageReference "NavigationRouter" */,
+				E796EC2425376ACC0025072F /* XCRemoteSwiftPackageReference "Resolver" */,
 			);
 			productRefGroup = F9275E112532160B0021FE0E /* Products */;
 			projectDirPath = "";
@@ -387,8 +414,12 @@
 				E78EFD9D2533588C00886039 /* ReyanModule.swift in Sources */,
 				E78EFD6E253351C000886039 /* Navigation.swift in Sources */,
 				E78EFD8D253355E500886039 /* QuranHomeUseCase.swift in Sources */,
+				E796EC39253836720025072F /* DICore.swift in Sources */,
+				E796EC4325388B0E0025072F /* Injections.swift in Sources */,
 				E78EFDA82533598400886039 /* SearchView.swift in Sources */,
+				E796EC3E253837260025072F /* NetworkDI.swift in Sources */,
 				E78EFD70253351C000886039 /* ScreenURL.swift in Sources */,
+				E796EC34253833340025072F /* Example2.swift in Sources */,
 				E78EFD71253351C000886039 /* Screens.swift in Sources */,
 				F9275E162532160B0021FE0E /* ContentView.swift in Sources */,
 				E78EFDA72533598400886039 /* SearchViewModel.swift in Sources */,
@@ -396,6 +427,7 @@
 				E78EFD7E2533541100886039 /* QuranHomeViewModel.swift in Sources */,
 				E78EFD7F2533541100886039 /* QuranHomeView.swift in Sources */,
 				E78EFD952533563700886039 /* QuranHomeState.swift in Sources */,
+				E796EC2C253794970025072F /* DITest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -744,6 +776,14 @@
 				kind = branch;
 			};
 		};
+		E796EC2425376ACC0025072F /* XCRemoteSwiftPackageReference "Resolver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hmlongco/Resolver.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -751,6 +791,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = E78EFD3025330F4F00886039 /* XCRemoteSwiftPackageReference "NavigationRouter" */;
 			productName = NavigationRouter;
+		};
+		E796EC2525376ACC0025072F /* Resolver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E796EC2425376ACC0025072F /* XCRemoteSwiftPackageReference "Resolver" */;
+			productName = Resolver;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
