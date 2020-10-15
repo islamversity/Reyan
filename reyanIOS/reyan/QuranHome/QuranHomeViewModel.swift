@@ -20,6 +20,7 @@ struct QuranHomeViewModel: RoutableViewModel {
 
     /// View body
     var routedView: AnyView {
+        
         QuranHomeView(viewModel: self)
             .eraseToAnyView()
     }
