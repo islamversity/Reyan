@@ -1,5 +1,6 @@
 
 import Resolver
+import reyan
 
 extension Resolver: ResolverRegistering {
     public static func registerAllServices() {
