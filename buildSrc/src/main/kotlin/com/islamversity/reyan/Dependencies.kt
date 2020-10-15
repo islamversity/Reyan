@@ -221,7 +221,6 @@ object Deps {
         val coroutines = "com.squareup.sqldelight:coroutines-extensions:${Versions.sqlDelight}"
     }
 
-
     object Serialization {
         val core = "org.jetbrains.kotlinx:kotlinx-serialization-json:${Versions.serialization}"
     }
