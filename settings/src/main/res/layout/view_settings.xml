@@ -158,14 +158,14 @@
         <View style="@style/Divider.LargeMargin" />
 
         <LinearLayout
-            android:id="@+id/ayaCalligraphy"
+            android:id="@+id/firstTranslationCalligraphy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?selectableItemBackground"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/ayaCalligraphyTitle"
+                android:id="@+id/firstTranslationCalligraphyTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="start"
@@ -173,13 +173,13 @@
                 android:paddingTop="@dimen/medium_padding"
                 android:paddingRight="@dimen/large_padding"
                 android:paddingBottom="@dimen/low_padding"
-                android:text="@string/aya_calligraphy"
+                android:text="@string/firstTranslationCalligraphy"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/medium_text"
                 tools:ignore="SpUsage" />
 
             <TextView
-                android:id="@+id/ayaCalligraphySubtitle"
+                android:id="@+id/firstTranslationCalligraphySubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/arabic_regular"
@@ -190,7 +190,7 @@
                 android:textColor="@color/blackLight"
                 android:textSize="@dimen/large_text"
                 tools:ignore="RtlHardcoded,SpUsage"
-                tools:text="@string/aya_calligraphy" />
+                tools:text="@string/firstTranslationCalligraphy" />
         </LinearLayout>
 
         <View style="@style/Divider.LargeMargin" />

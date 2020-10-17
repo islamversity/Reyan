@@ -94,13 +94,13 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
                 .show()
         }
 
-        binding.ayaCalligraphy.setOnClickListener {
+        binding.firstTranslationCalligraphy.setOnClickListener {
             OptionSelector(binding.surahCalligraphy.context)
                 .options(ayaCalligraphies.map { it.name })
                 .dismissListener(object : DismissListener {
                     override fun dismissSheet(position: Int) {
                         intentChannel.offer(
-                            SettingsIntent.NewAyaCalligraphy(ayaCalligraphies[position])
+                            SettingsIntent.NewFirstTranslation(ayaCalligraphies[position])
                         )
                     }
                 })
@@ -160,8 +160,8 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
         renderError(state.base)
 
         binding.surahCalligraphySubtitle.text = state.selectedSurahNameCalligraphy?.name
-        binding.ayaCalligraphySubtitle.text =
-            state.selectedAyaCalligraphy?.name
+        binding.firstTranslationCalligraphySubtitle.text =
+            state.selectedFirstTranslationCalligraphy?.name
                 ?: binding.root.context.getString(R.string.aya_translation_not_chosen)
 
         defaultQuranSize = state.quranTextFontSize
@@ -170,13 +170,13 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
         defaultTranslateSize = state.translateTextFontSize
         binding.translateFontSizeSeekBar.setProgress(state.translateTextFontSize.toFloat())
 
-        ayaCalligraphies = state.ayaCalligraphies
+        ayaCalligraphies = state.firstTranslationCalligraphies
         surahNameCalligraphies = state.surahNameCalligraphies
         secondTranslationCalligraphy = state.secondTranslationCalligraphies
         binding.secondTranslationCalligraphySubtitle.text =
             state.selectedSecondTranslationCalligraphy?.name
         binding.secondTranslationCalligraphySubtitle.text =
-            state.selectedAyaCalligraphy?.name
+            state.selectedSecondTranslationCalligraphy?.name
                 ?: binding.root.context.getString(R.string.aya_translation_not_chosen)
     }
 

@@ -23,14 +23,14 @@ class SettingsProcessor(
 
     override fun transformers(): List<FlowBlock<SettingsIntent, SettingsResult>> = listOf(
         getSurahNameCalligraphies,
-        getAllAyaCalligraphies,
+        getAllFirstTranslationCalligraphy,
         getAllSecondTranslationCalligraphies,
         getQuranFontSize,
         getTranslateFontSize,
 
         getCurrentSurahNameCalligraphy,
         getSecondTranslationCalligraphy,
-        getCurrentAyaCalligraphy,
+        getFirstTranslationCalligraphy,
 
         changeSurahNameCalligraphy,
         changeAyaCalligraphy,
@@ -53,19 +53,21 @@ class SettingsProcessor(
             }
     }
 
-    private val getAllAyaCalligraphies: FlowBlock<SettingsIntent, SettingsResult> = {
+    private val getAllFirstTranslationCalligraphy: FlowBlock<SettingsIntent, SettingsResult> = {
         ofType<SettingsIntent.Initial>()
             .flatMapMerge {
                 calligraphyRepo.getAllAyaCalligraphies()
             }
             .map {
-                SettingsResult.AyaCalligraphies(
+                SettingsResult.FirstTranslationCalligraphies(
                     uiMapper.listMap(it)
                 )
             }
     }
     private val getAllSecondTranslationCalligraphies: FlowBlock<SettingsIntent, SettingsResult> = {
-        ofType<SettingsIntent.Initial>().flatMapMerge { calligraphyRepo.getAllAyaCalligraphies() }
+        ofType<SettingsIntent.Initial>().flatMapMerge {
+            calligraphyRepo.getAllAyaCalligraphies()
+        }
             .map {
                 SettingsResult.SecondTranslationCalligraphies(
                     it.map {
@@ -75,7 +77,9 @@ class SettingsProcessor(
             }
     }
     private val getSecondTranslationCalligraphy: FlowBlock<SettingsIntent, SettingsResult> = {
-        ofType<SettingsIntent.Initial>().flatMapMerge { settingsRepo.getSecondAyaTranslationCalligraphy() }
+        ofType<SettingsIntent.Initial>().flatMapMerge {
+            settingsRepo.getSecondAyaTranslationCalligraphy()
+        }
             .map {
                 SettingsResult.SecondTranslationCalligraphy(
                     if (it is SettingsCalligraphy.Selected) {
@@ -120,13 +124,13 @@ class SettingsProcessor(
             }
     }
 
-    private val getCurrentAyaCalligraphy: FlowBlock<SettingsIntent, SettingsResult> = {
+    private val getFirstTranslationCalligraphy: FlowBlock<SettingsIntent, SettingsResult> = {
         ofType<SettingsIntent.Initial>()
             .flatMapMerge {
                 settingsRepo.getFirstAyaTranslationCalligraphy()
             }
             .map {
-                SettingsResult.FirstAyaTranslationCalligraphy(
+                SettingsResult.FirstTranslationCalligraphy(
                     if (it is SettingsCalligraphy.Selected) {
                         uiMapper.map(it.cal)
                     } else {
@@ -137,7 +141,7 @@ class SettingsProcessor(
     }
 
     private val changeAyaCalligraphy: Flow<SettingsIntent>.() -> Flow<SettingsResult> = {
-        ofType<SettingsIntent.NewAyaCalligraphy>()
+        ofType<SettingsIntent.NewFirstTranslation>()
             .flatMapMerge {
                 calligraphyRepo.getCalligraphy(CalligraphyId(it.language.id))
                     .map {
@@ -146,7 +150,7 @@ class SettingsProcessor(
             }
             .transform {
                 settingsRepo.setFirstAyaTranslationCalligraphy(it)
-                emit(SettingsResult.FirstAyaTranslationCalligraphy(uiMapper.map(it)))
+                emit(SettingsResult.FirstTranslationCalligraphy(uiMapper.map(it)))
             }
     }
 

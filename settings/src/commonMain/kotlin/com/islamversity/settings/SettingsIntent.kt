@@ -9,7 +9,7 @@ sealed class SettingsIntent : MviIntent {
         val calligraphy: CalligraphyUIModel
     ) : SettingsIntent()
 
-    class NewAyaCalligraphy(
+    class NewFirstTranslation(
         val language: CalligraphyUIModel
     ) : SettingsIntent()
 
