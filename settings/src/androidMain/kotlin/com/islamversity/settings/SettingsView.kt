@@ -173,7 +173,11 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
         ayaCalligraphies = state.ayaCalligraphies
         surahNameCalligraphies = state.surahNameCalligraphies
         secondTranslationCalligraphy = state.secondTranslationCalligraphies
-        binding.secondTranslationCalligraphySubtitle.text = state.selectedSecondTranslationCalligraphy?.name
+        binding.secondTranslationCalligraphySubtitle.text =
+            state.selectedSecondTranslationCalligraphy?.name
+        binding.secondTranslationCalligraphySubtitle.text =
+            state.selectedAyaCalligraphy?.name
+                ?: binding.root.context.getString(R.string.aya_translation_not_chosen)
     }
 
     override fun intents(): Flow<SettingsIntent> =
