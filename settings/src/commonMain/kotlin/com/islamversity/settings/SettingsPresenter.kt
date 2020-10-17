@@ -38,9 +38,9 @@ class SettingsPresenter(
                 preState.copy(
                     surahNameCalligraphies = result.list
                 )
-            is SettingsResult.AyaCalligraphies ->
+            is SettingsResult.FirstTranslationCalligraphies ->
                 preState.copy(
-                    ayaCalligraphies = result.list
+                    firstTranslationCalligraphies = result.list
                 )
             is SettingsResult.QuranFontSize ->
                 preState.copy(
@@ -54,9 +54,17 @@ class SettingsPresenter(
                 preState.copy(
                     selectedSurahNameCalligraphy = result.calligraphy
                 )
-            is SettingsResult.FirstAyaTranslationCalligraphy ->
+            is SettingsResult.FirstTranslationCalligraphy ->
                 preState.copy(
-                    selectedAyaCalligraphy = result.calligraphy
+                    selectedFirstTranslationCalligraphy = result.calligraphy
+                )
+            is SettingsResult.SecondTranslationCalligraphy ->
+                preState.copy(
+                    selectedSecondTranslationCalligraphy = result.calligraphy
+                )
+            is SettingsResult.SecondTranslationCalligraphies ->
+                preState.copy(
+                    secondTranslationCalligraphies = result.list
                 )
         }
 }
