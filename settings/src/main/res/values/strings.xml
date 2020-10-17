@@ -2,7 +2,8 @@
 <resources>
     <string name="settings">Settings</string>
     <string name="surah_calligraphy">Surah Calligraphy</string>
-    <string name="aya_calligraphy">Aya Calligraphy</string>
+    <string name="firstTranslationCalligraphy">First Translation Calligraphy</string>
+    <string name="second_translation_calligraphy">Second Translation Calligraphy</string>
     <string name="calligraphy">Calligraphy</string>
     <string name="font_size">Font size</string>
     <string name="bismillah">In the Name of Allah, the Beneficent, the Merciful</string>

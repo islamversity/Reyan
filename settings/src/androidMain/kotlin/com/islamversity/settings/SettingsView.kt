@@ -39,6 +39,7 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
     private val intentChannel = BroadcastChannel<SettingsIntent>(Channel.BUFFERED)
 
     private var ayaCalligraphies: List<CalligraphyUIModel> = emptyList()
+    private var secondTranslationCalligraphy: List<CalligraphyUIModel> = emptyList()
     private var surahNameCalligraphies: List<CalligraphyUIModel> = emptyList()
 
     lateinit var appLanguages: List<String>
@@ -93,17 +94,30 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
                 .show()
         }
 
-        binding.ayaCalligraphy.setOnClickListener {
+        binding.firstTranslationCalligraphy.setOnClickListener {
             OptionSelector(binding.surahCalligraphy.context)
                 .options(ayaCalligraphies.map { it.name })
                 .dismissListener(object : DismissListener {
                     override fun dismissSheet(position: Int) {
                         intentChannel.offer(
-                            SettingsIntent.NewAyaCalligraphy(ayaCalligraphies[position])
+                            SettingsIntent.NewFirstTranslation(ayaCalligraphies[position])
                         )
                     }
                 })
                 .show()
+        }
+
+        binding.secondTranslationCalligraphy.setOnClickListener {
+            OptionSelector(binding.surahCalligraphy.context)
+                .options(secondTranslationCalligraphy.map { it.name })
+                .dismissListener(object : DismissListener {
+                    override fun dismissSheet(position: Int) {
+                        intentChannel.offer(
+                            SettingsIntent.NewSecondTranslation(secondTranslationCalligraphy[position])
+                        )
+                    }
+                }).show()
+
         }
         binding.mainFontSizeSeekBar.min = fontRange.first.toFloat()
         binding.mainFontSizeSeekBar.max = fontRange.last.toFloat()
@@ -146,8 +160,9 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
         renderError(state.base)
 
         binding.surahCalligraphySubtitle.text = state.selectedSurahNameCalligraphy?.name
-        binding.ayaCalligraphySubtitle.text =
-            state.selectedAyaCalligraphy?.name ?: binding.root.context.getString(R.string.aya_translation_not_chosen)
+        binding.firstTranslationCalligraphySubtitle.text =
+            state.selectedFirstTranslationCalligraphy?.name
+                ?: binding.root.context.getString(R.string.aya_translation_not_chosen)
 
         defaultQuranSize = state.quranTextFontSize
         binding.mainFontSizeSeekBar.setProgress(state.quranTextFontSize.toFloat())
@@ -155,8 +170,14 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
         defaultTranslateSize = state.translateTextFontSize
         binding.translateFontSizeSeekBar.setProgress(state.translateTextFontSize.toFloat())
 
-        ayaCalligraphies = state.ayaCalligraphies
+        ayaCalligraphies = state.firstTranslationCalligraphies
         surahNameCalligraphies = state.surahNameCalligraphies
+        secondTranslationCalligraphy = state.secondTranslationCalligraphies
+        binding.secondTranslationCalligraphySubtitle.text =
+            state.selectedSecondTranslationCalligraphy?.name
+        binding.secondTranslationCalligraphySubtitle.text =
+            state.selectedSecondTranslationCalligraphy?.name
+                ?: binding.root.context.getString(R.string.aya_translation_not_chosen)
     }
 
     override fun intents(): Flow<SettingsIntent> =

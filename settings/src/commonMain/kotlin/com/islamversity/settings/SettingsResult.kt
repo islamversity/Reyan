@@ -9,11 +9,13 @@ sealed class SettingsResult : MviResult {
     class Error(val err: BaseState.ErrorState) : SettingsResult()
 
     data class SurahNameCalligraphies(val list: List<CalligraphyUIModel>) : SettingsResult()
-    data class AyaCalligraphies(val list: List<CalligraphyUIModel>) : SettingsResult()
+    data class FirstTranslationCalligraphies(val list: List<CalligraphyUIModel>) : SettingsResult()
+    data class SecondTranslationCalligraphies(val list: List<CalligraphyUIModel>) : SettingsResult()
 
     data class QuranFontSize(val fontSize : Int) : SettingsResult()
     data class TranslateFontSize(val fontSize : Int) : SettingsResult()
 
     data class SurahCalligraphy(val calligraphy : CalligraphyUIModel) : SettingsResult()
-    data class FirstAyaTranslationCalligraphy(val calligraphy : CalligraphyUIModel?) : SettingsResult()
+    data class FirstTranslationCalligraphy(val calligraphy : CalligraphyUIModel?) : SettingsResult()
+    data class SecondTranslationCalligraphy(val calligraphy : CalligraphyUIModel?) : SettingsResult()
 }
