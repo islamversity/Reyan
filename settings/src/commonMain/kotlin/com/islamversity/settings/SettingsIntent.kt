@@ -5,7 +5,7 @@ import com.islamversity.settings.models.CalligraphyUIModel
 
 sealed class SettingsIntent : MviIntent {
     object Initial : SettingsIntent()
-    data class NewSurahNameCalligraphySelected(
+    data class NewSecondSurahNameCalligraphySelected(
         val calligraphy: CalligraphyUIModel
     ) : SettingsIntent()
 
