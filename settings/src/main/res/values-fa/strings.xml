@@ -6,8 +6,11 @@
     <string name="second_translation_calligraphy">رسم الخط ترجمه دوم آیه</string>
     <string name="calligraphy">رسم الخط</string>
     <string name="font_size">اندازه متن</string>
-    <string name="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</string>
+    <string name="bismillah">به نام خدای مهربان بخشاینده</string>
     <string name="bismillah_translate">به نام خدای مهربان بخشاینده</string>
     <string name="translate_text_size">اندازه متن ترجمه</string>
-    <string name="main_text_size">اندازه متن قران</string>
+    <string name="main_text_size">اندازه متن اصلی</string>
+    <string name="aya_translation_not_chosen">هیچ</string>
+    <string name="app_language">زبان برنامه</string>
+    <string name="app_font_size">اندازه قلم برنامه</string>
 </resources>

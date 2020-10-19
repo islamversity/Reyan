@@ -45,7 +45,7 @@ class SettingsProcessor(
                 calligraphyRepo.getAllSurahNameCalligraphies()
             }
             .map {
-                SettingsResult.SurahNameCalligraphies(
+                SettingsResult.SecondSurahNameCalligraphies(
                     it.map {
                         uiMapper.map(it)
                     }
@@ -118,7 +118,7 @@ class SettingsProcessor(
                 settingsRepo.getSecondarySurahNameCalligraphy()
             }
             .map {
-                SettingsResult.SurahCalligraphy(
+                SettingsResult.SecondSurahCalligraphy(
                     uiMapper.map(it)
                 )
             }
@@ -167,7 +167,7 @@ class SettingsProcessor(
         }
 
     private val changeSurahNameCalligraphy: Flow<SettingsIntent>.() -> Flow<SettingsResult> = {
-        ofType<SettingsIntent.NewSurahNameCalligraphySelected>()
+        ofType<SettingsIntent.NewSecondSurahNameCalligraphySelected>()
             .flatMapMerge {
                 calligraphyRepo.getCalligraphy(CalligraphyId(it.calligraphy.id))
                     .map {
@@ -176,7 +176,7 @@ class SettingsProcessor(
             }
             .transform {
                 settingsRepo.setSecondarySurahNameCalligraphy(it)
-                emit(SettingsResult.SurahCalligraphy(uiMapper.map(it)))
+                emit(SettingsResult.SecondSurahCalligraphy(uiMapper.map(it)))
                 Logger.log { it.toString() }
             }
     }

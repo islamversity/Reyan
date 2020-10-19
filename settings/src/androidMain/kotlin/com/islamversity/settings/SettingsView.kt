@@ -58,7 +58,7 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
         binding.backButton.setOnClickListener { router.handleBack() }
 
         binding.appLanguageContainer.setOnClickListener {
-            OptionSelector(binding.surahCalligraphy.context)
+            OptionSelector(binding.appLanguageContainer.context)
                 .options(languageConfigure.getSupportedLanguages().map { it.localeName })
                 .dismissListener(object : DismissListener {
                     override fun dismissSheet(position: Int) {
@@ -70,7 +70,7 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
         binding.tvAppLanguageSubTitle.text = languageConfigure.getCurrentLocale().localeName
 
         binding.appFontSizeContainer.setOnClickListener { clickedView ->
-            OptionSelector(binding.surahCalligraphy.context)
+            OptionSelector(binding.secondSurahCalligraphy.context)
                 .options(FontSizeScale.values().map { clickedView.context.getString(it.label) })
                 .dismissListener(object : DismissListener {
                     override fun dismissSheet(position: Int) {
@@ -81,13 +81,13 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
         }
         binding.tvAppFontSizeSubTitle.setText(AppFontSizeStore.getCurrentScale().label)
 
-        binding.surahCalligraphy.setOnClickListener {
-            OptionSelector(binding.surahCalligraphy.context)
+        binding.secondSurahCalligraphy.setOnClickListener {
+            OptionSelector(binding.secondSurahCalligraphy.context)
                 .options(surahNameCalligraphies.map { it.name })
                 .dismissListener(object : DismissListener {
                     override fun dismissSheet(position: Int) {
                         intentChannel.offer(
-                            SettingsIntent.NewSurahNameCalligraphySelected(surahNameCalligraphies[position])
+                            SettingsIntent.NewSecondSurahNameCalligraphySelected(surahNameCalligraphies[position])
                         )
                     }
                 })
@@ -95,7 +95,7 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
         }
 
         binding.firstTranslationCalligraphy.setOnClickListener {
-            OptionSelector(binding.surahCalligraphy.context)
+            OptionSelector(binding.secondSurahCalligraphy.context)
                 .options(ayaCalligraphies.map { it.name })
                 .dismissListener(object : DismissListener {
                     override fun dismissSheet(position: Int) {
@@ -108,7 +108,7 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
         }
 
         binding.secondTranslationCalligraphy.setOnClickListener {
-            OptionSelector(binding.surahCalligraphy.context)
+            OptionSelector(binding.secondSurahCalligraphy.context)
                 .options(secondTranslationCalligraphy.map { it.name })
                 .dismissListener(object : DismissListener {
                     override fun dismissSheet(position: Int) {
@@ -159,7 +159,7 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
         renderLoading(state.base)
         renderError(state.base)
 
-        binding.surahCalligraphySubtitle.text = state.selectedSurahNameCalligraphy?.name
+        binding.secondSurahCalligraphySubtitle.text = state.selectedSecondSurahNameCalligraphy?.name
         binding.firstTranslationCalligraphySubtitle.text =
             state.selectedFirstTranslationCalligraphy?.name
                 ?: binding.root.context.getString(R.string.aya_translation_not_chosen)
@@ -171,7 +171,7 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
         binding.translateFontSizeSeekBar.setProgress(state.translateTextFontSize.toFloat())
 
         ayaCalligraphies = state.firstTranslationCalligraphies
-        surahNameCalligraphies = state.surahNameCalligraphies
+        surahNameCalligraphies = state.secondSurahNameCalligraphies
         secondTranslationCalligraphy = state.secondTranslationCalligraphies
         binding.secondTranslationCalligraphySubtitle.text =
             state.selectedSecondTranslationCalligraphy?.name

@@ -119,14 +119,14 @@
         <View style="@style/Divider.LargeMargin" />
 
         <LinearLayout
-            android:id="@+id/surahCalligraphy"
+            android:id="@+id/secondSurahCalligraphy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?selectableItemBackground"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/surahCalligraphyTitle"
+                android:id="@+id/secondSurahCalligraphyTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
@@ -140,7 +140,7 @@
                 tools:ignore="RtlHardcoded,SpUsage" />
 
             <TextView
-                android:id="@+id/surahCalligraphySubtitle"
+                android:id="@+id/secondSurahCalligraphySubtitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/arabic_regular"

@@ -34,9 +34,9 @@ class SettingsPresenter(
                 preState.copy(
                     base = BaseState.withError(result.err)
                 )
-            is SettingsResult.SurahNameCalligraphies ->
+            is SettingsResult.SecondSurahNameCalligraphies ->
                 preState.copy(
-                    surahNameCalligraphies = result.list
+                    secondSurahNameCalligraphies = result.list
                 )
             is SettingsResult.FirstTranslationCalligraphies ->
                 preState.copy(
@@ -50,9 +50,9 @@ class SettingsPresenter(
                 preState.copy(
                     translateTextFontSize = result.fontSize
                 )
-            is SettingsResult.SurahCalligraphy ->
+            is SettingsResult.SecondSurahCalligraphy ->
                 preState.copy(
-                    selectedSurahNameCalligraphy = result.calligraphy
+                    selectedSecondSurahNameCalligraphy = result.calligraphy
                 )
             is SettingsResult.FirstTranslationCalligraphy ->
                 preState.copy(

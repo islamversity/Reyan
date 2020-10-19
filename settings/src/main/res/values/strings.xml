@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="settings">Settings</string>
-    <string name="surah_calligraphy">Surah Calligraphy</string>
+    <string name="surah_calligraphy">Second Surah Calligraphy</string>
     <string name="firstTranslationCalligraphy">First Translation Calligraphy</string>
     <string name="second_translation_calligraphy">Second Translation Calligraphy</string>
     <string name="calligraphy">Calligraphy</string>
