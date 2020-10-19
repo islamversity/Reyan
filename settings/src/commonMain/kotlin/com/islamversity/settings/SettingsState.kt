@@ -7,10 +7,10 @@ import com.islamversity.settings.models.CalligraphyUIModel
 
 data class SettingsState(
     override val base: BaseState,
-    val surahNameCalligraphies: List<CalligraphyUIModel>,
+    val secondSurahNameCalligraphies: List<CalligraphyUIModel>,
     val firstTranslationCalligraphies: List<CalligraphyUIModel>,
     val secondTranslationCalligraphies: List<CalligraphyUIModel>,
-    val selectedSurahNameCalligraphy: CalligraphyUIModel?,
+    val selectedSecondSurahNameCalligraphy: CalligraphyUIModel?,
     val selectedFirstTranslationCalligraphy: CalligraphyUIModel?,
     val selectedSecondTranslationCalligraphy: CalligraphyUIModel?,
     val quranTextFontSize: Int,
@@ -20,10 +20,10 @@ data class SettingsState(
         fun idle() =
             SettingsState(
                 base = BaseState.stable(),
-                surahNameCalligraphies = emptyList(),
+                secondSurahNameCalligraphies = emptyList(),
                 firstTranslationCalligraphies = emptyList(),
                 secondTranslationCalligraphies = emptyList(),
-                selectedSurahNameCalligraphy = null,
+                selectedSecondSurahNameCalligraphy = null,
                 selectedFirstTranslationCalligraphy = null,
                 selectedSecondTranslationCalligraphy = null,
                 quranTextFontSize = QuranReadFontSize.DEFAULT.size,
