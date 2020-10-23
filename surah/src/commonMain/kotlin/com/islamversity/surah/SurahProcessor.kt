@@ -2,6 +2,7 @@ package com.islamversity.surah
 
 import com.islamversity.core.*
 import com.islamversity.core.mvi.BaseProcessor
+import com.islamversity.core.mvi.MviProcessor
 import com.islamversity.domain.model.aya.AyaRepoModel
 import com.islamversity.domain.model.surah.SurahID
 import com.islamversity.domain.model.surah.SurahRepoModel
@@ -12,6 +13,7 @@ import com.islamversity.navigation.Navigator
 import com.islamversity.surah.model.AyaUIModel
 import com.islamversity.surah.model.SurahHeaderUIModel
 import com.islamversity.surah.model.UIItem
+import com.islamversity.surah.settings.SurahSettingsProcessor
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 
@@ -22,12 +24,13 @@ class SurahProcessor(
     private val surahRepoHeaderMapper: Mapper<SurahRepoModel, SurahHeaderUIModel>,
     private val settingRepo: SettingRepo,
     private val surahUsecase: GetSurahUsecase,
+    private val settingsProcessor: MviProcessor<SurahIntent, SurahResult>
 ) : BaseProcessor<SurahIntent, SurahResult>() {
 
     override fun transformers(): List<FlowBlock<SurahIntent, SurahResult>> = listOf(
-        processInitialFetch
+        processInitialFetch,
+        settingsProcessor.actionProcessor,
     )
-
     private val processInitialFetch: FlowBlock<SurahIntent, SurahResult> = {
         ofType<SurahIntent.Initial>()
             .flatMapLatest { initial ->

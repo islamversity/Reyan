@@ -3,6 +3,7 @@ package com.islamversity.surah
 import com.islamversity.core.mvi.BaseState
 import com.islamversity.core.mvi.BaseViewState
 import com.islamversity.surah.model.UIItem
+import com.islamversity.surah.settings.SurahSettingsState
 
 data class SurahState(
     override val base: BaseState,
@@ -11,7 +12,8 @@ data class SurahState(
     val items: List<UIItem>,
     val startFrom: Int,
     val closeScreen: Boolean,
-    val scrollToAya: ScrollToAya?
+    val scrollToAya: ScrollToAya?,
+    val settingsState: SurahSettingsState
 ) : BaseViewState {
     companion object {
         fun idle() =
@@ -22,7 +24,8 @@ data class SurahState(
                 showBismillah = false,
                 bismillah = "",
                 closeScreen = false,
-                scrollToAya = null
+                scrollToAya = null,
+                settingsState = SurahSettingsState()
             )
     }
 }

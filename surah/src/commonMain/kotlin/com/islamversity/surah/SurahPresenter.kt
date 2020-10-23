@@ -6,6 +6,9 @@ import com.islamversity.core.mvi.BaseState
 import com.islamversity.core.mvi.MviProcessor
 import com.islamversity.core.notOfType
 import com.islamversity.core.ofType
+import com.islamversity.surah.settings.SurahSettingsIntent
+import com.islamversity.surah.settings.SurahSettingsResult
+import com.islamversity.surah.settings.SurahSettingsState
 import kotlinx.coroutines.flow.take
 
 class SurahPresenter(
@@ -21,7 +24,7 @@ class SurahPresenter(
         },
         {
             notOfType(SurahIntent.Initial::class)
-        }
+        },
     )
 
     override fun reduce(preState: SurahState, result: SurahResult): SurahState =
@@ -47,5 +50,24 @@ class SurahPresenter(
                 preState.copy(
                     scrollToAya = ScrollToAya(result.id, result.orderID, result.position)
                 )
+
+            is SurahResult.Settings ->
+                preState.copy(settingsState = settingsReducer(preState.settingsState, result))
         }
+
+    private val settingsReducer : (SurahSettingsState, SurahResult.Settings) -> SurahSettingsState = { preState, result ->
+        when (result) {
+            is SurahResult.Settings.TranslationCalligraphies ->
+                preState.copy(ayaCalligraphies = result.list)
+            is SurahResult.Settings.QuranFontSize ->
+                preState.copy(quranTextFontSize = result.fontSize)
+            is SurahResult.Settings.TranslateFontSize ->
+                preState.copy(translateTextFontSize = result.fontSize)
+            is SurahResult.Settings.FirstAyaTranslationCalligraphy ->
+                preState.copy(selectedFirstTranslationAyaCalligraphy = result.calligraphy)
+            is SurahResult.Settings.SecondAyaTranslationCalligraphy ->
+                preState.copy(selectedSecondTranslationAyaCalligraphy = result.calligraphy)
+        }
+
+    }
 }

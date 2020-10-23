@@ -16,4 +16,5 @@ sealed class SurahSettingsResult : MviResult {
 
     data class SurahCalligraphy(val calligraphy : CalligraphyUIModel) : SurahSettingsResult()
     data class FirstAyaTranslationCalligraphy(val calligraphy : CalligraphyUIModel?) : SurahSettingsResult()
+    object SettingsOpen : SurahSettingsResult()
 }
