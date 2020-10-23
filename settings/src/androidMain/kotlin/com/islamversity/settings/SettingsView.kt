@@ -31,8 +31,6 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
 
     private var defaultQuranSize = QuranReadFontSize.DEFAULT.size
     private var defaultTranslateSize = TranslateReadFontSize.DEFAULT.size
-    private val fontRange = 20..50
-    private val translationFontRange = 10..50
 
     @Inject
     override lateinit var presenter: MviPresenter<SettingsIntent, SettingsState>
@@ -120,8 +118,8 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
                 }).show()
 
         }
-        binding.mainFontSizeSeekBar.min = fontRange.first.toFloat()
-        binding.mainFontSizeSeekBar.max = fontRange.last.toFloat()
+        binding.mainFontSizeSeekBar.min = QuranReadFontSize.MAIN_AYA_MIN.size.toFloat()
+        binding.mainFontSizeSeekBar.max = QuranReadFontSize.MAX.size.toFloat()
         binding.mainFontSizeSeekBar.onSeekChangeListener = object : OnSeekChangeListener {
             override fun onSeeking(seekParams: SeekParams) {
                 defaultQuranSize = seekParams.progress
@@ -137,8 +135,8 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
 
         }
 
-        binding.translateFontSizeSeekBar.min = translationFontRange.first.toFloat()
-        binding.translateFontSizeSeekBar.max = translationFontRange.last.toFloat()
+        binding.translateFontSizeSeekBar.min = QuranReadFontSize.TRANSLATION_MIN.size.toFloat()
+        binding.translateFontSizeSeekBar.max = QuranReadFontSize.MAX.size.toFloat()
         binding.translateFontSizeSeekBar.onSeekChangeListener = object : OnSeekChangeListener {
             override fun onSeeking(seekParams: SeekParams) {
                 defaultTranslateSize = seekParams.progress

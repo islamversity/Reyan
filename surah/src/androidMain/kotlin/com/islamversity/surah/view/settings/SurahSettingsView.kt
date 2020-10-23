@@ -6,35 +6,22 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
-import com.islamversity.core.Logger
-import com.islamversity.core.Severity
-import com.islamversity.daggercore.CoreComponent
-import com.islamversity.daggercore.coreComponent
 import com.islamversity.domain.model.QuranReadFontSize
+import com.islamversity.surah.SurahIntent
 import com.islamversity.surah.databinding.DialogSettingsBinding
-import com.islamversity.surah.di.settings.DaggerSurahSettingsComponent
-import com.islamversity.surah.settings.SurahSettingsIntent
-import com.islamversity.surah.settings.SurahSettingsPresenter
 import com.islamversity.surah.settings.SurahSettingsState
 import com.warkiz.widget.IndicatorSeekBar
 import com.warkiz.widget.OnSeekChangeListener
 import com.warkiz.widget.SeekParams
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.channels.BroadcastChannel
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.flow.*
-import javax.inject.Inject
 
-class SurahSettingsView(context: Context) : Dialog(context), CoroutineScope by MainScope() {
+typealias OnSettings = (SurahIntent.ChangeSettings) -> Unit
+
+class SurahSettingsView(
+    context: Context,
+    private val initialState: SurahSettingsState
+) : Dialog(context) {
     private var binding: DialogSettingsBinding? = null
-    private val intentChannel = BroadcastChannel<SurahSettingsIntent>(Channel.BUFFERED)
-    private var ayaInit = false
-    private var translateInit = false
-
-    @Inject
-    lateinit var presenter: SurahSettingsPresenter
-    private lateinit var coreComponent: CoreComponent
+    var onSettings: OnSettings? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,16 +29,9 @@ class SurahSettingsView(context: Context) : Dialog(context), CoroutineScope by M
         setContentView(binding!!.root)
         window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        if (!::coreComponent.isInitialized) {
-            coreComponent = context.applicationContext!!.coreComponent()
-        }
-        DaggerSurahSettingsComponent.factory().create(coreComponent).inject(this)
-
-        bind()
-
         binding!!.ayaFontSizeSeekBar.onSeekChangeListener = object : OnSeekChangeListener {
             override fun onSeeking(seekParams: SeekParams) {
-                intentChannel.offer(SurahSettingsIntent.ChangeQuranFontSize(seekParams.progress))
+                onSettings?.invoke(SurahIntent.ChangeSettings.QuranFontSize(seekParams.progress))
             }
 
             override fun onStartTrackingTouch(seekBar: IndicatorSeekBar?) {
@@ -72,10 +52,9 @@ class SurahSettingsView(context: Context) : Dialog(context), CoroutineScope by M
                 dismiss()
             }
         }
-
         binding!!.transLateFontSizeSeekBar.onSeekChangeListener = object : OnSeekChangeListener {
             override fun onSeeking(seekParams: SeekParams) {
-                intentChannel.offer(SurahSettingsIntent.ChangeTranslateFontSize(seekParams.progress))
+                onSettings?.invoke(SurahIntent.ChangeSettings.TranslateFontSize(seekParams.progress))
             }
 
             override fun onStartTrackingTouch(seekBar: IndicatorSeekBar?) {
@@ -97,53 +76,17 @@ class SurahSettingsView(context: Context) : Dialog(context), CoroutineScope by M
             }
         }
 
-    }
-
-    private fun bind() {
-        intents()
-            .newIntents()
-
-        presenter
-            .states()
-            .catch {
-                Logger.log(Severity.Error, "SurahSettings", it, "presenter state flow exception caught: ${it.localizedMessage}")
-            }
-            .onEach {
-                render(it)
-            }
-            .launchIn(this)
+        render(initialState)
     }
 
     private fun render(state: SurahSettingsState) {
-        if (state.quranTextFontSize != QuranReadFontSize.DEFAULT.size && !ayaInit) {
-            ayaInit = true
-            binding!!.ayaFontSizeSeekBar.setProgress(state.quranTextFontSize.toFloat())
-        }
-        if (state.quranTextFontSize != QuranReadFontSize.DEFAULT.size && !translateInit) {
-            translateInit = true
-            binding!!.transLateFontSizeSeekBar.setProgress(state.translateTextFontSize.toFloat())
-        }
+        binding!!.ayaFontSizeSeekBar.min = QuranReadFontSize.MAIN_AYA_MIN.size.toFloat()
+        binding!!.ayaFontSizeSeekBar.max = QuranReadFontSize.MAX.size.toFloat()
+
+        binding!!.transLateFontSizeSeekBar.min = QuranReadFontSize.TRANSLATION_MIN.size.toFloat()
+        binding!!.transLateFontSizeSeekBar.max = QuranReadFontSize.MAX.size.toFloat()
+
+        binding!!.ayaFontSizeSeekBar.setProgress(state.quranTextFontSize.toFloat())
+        binding!!.transLateFontSizeSeekBar.setProgress(state.translateTextFontSize.toFloat())
     }
-
-    private fun Flow<SurahSettingsIntent>.newIntents() =
-        catch {
-            Logger.log(Severity.Error, "SurahSettings", it, "view intents flow exception caught: ${it.localizedMessage}")
-        }.onEach {
-            presenter.processIntents(it)
-        }.launchIn(this@SurahSettingsView)
-
-
-    override fun onDetachedFromWindow() {
-        super.onDetachedFromWindow()
-        presenter.close()
-        binding = null
-    }
-
-    private fun intents(): Flow<SurahSettingsIntent> =
-        listOf(
-            flowOf(SurahSettingsIntent.Initial),
-            intentChannel.asFlow()
-        ).merge()
-
-
 }
