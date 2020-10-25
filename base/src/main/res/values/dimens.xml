@@ -11,6 +11,7 @@
     <dimen name="min_corner_radius">10dp</dimen>
 
 
+    <dimen name="tiny_text">10dp</dimen>
     <dimen name="small_text">12dp</dimen>
     <dimen name="medium_text">14dp</dimen>
     <dimen name="large_text">16dp</dimen>

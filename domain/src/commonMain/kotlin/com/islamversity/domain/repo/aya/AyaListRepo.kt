@@ -13,18 +13,54 @@ import kotlinx.coroutines.flow.Flow
 
 interface AyaListRepo {
 
-    fun observeAllAyas(id : SurahID, calligraphyId: CalligraphyId) : Flow<List<AyaRepoModel>>
+    fun observeAllAyas(id: SurahID, calligraphyId: CalligraphyId): Flow<List<AyaRepoModel>>
+    fun observeWithTranslationAllAyas(
+        id: SurahID, mainAyaCalligraphy: CalligraphyId, translationCalligraphy: CalligraphyId,
+    ): Flow<List<AyaRepoModel>>
+
+    fun observeWith2TranslationAllAyas(
+        id: SurahID,
+        mainAyaCalligraphy: CalligraphyId,
+        translationCalligraphy: CalligraphyId,
+        translation2Calligraphy: CalligraphyId,
+    ): Flow<List<AyaRepoModel>>
 }
 
 class AyaListRepoImpl(
     private val dataSource: AyaLocalDataSource,
-    private val ayaMapper : Mapper<Aya, AyaRepoModel>
-) : AyaListRepo{
+    private val ayaMapper: Mapper<Aya, AyaRepoModel>
+) : AyaListRepo {
 
     override fun observeAllAyas(
         id: SurahID,
         calligraphyId: CalligraphyId
     ): Flow<List<AyaRepoModel>> =
         dataSource.observeAllAyasForSora(id.toEntity(), calligraphyId.toEntity())
+            .mapListWith(ayaMapper)
+
+    override fun observeWithTranslationAllAyas(
+        id: SurahID,
+        mainAyaCalligraphy: CalligraphyId,
+        translationCalligraphy: CalligraphyId,
+    ): Flow<List<AyaRepoModel>> =
+        dataSource.observeAllAyasWithTranslationForSora(
+            id.toEntity(),
+            mainAyaCalligraphy.toEntity(),
+            translationCalligraphy.toEntity()
+        )
+            .mapListWith(ayaMapper)
+
+    override fun observeWith2TranslationAllAyas(
+        id: SurahID,
+        mainAyaCalligraphy: CalligraphyId,
+        translationCalligraphy: CalligraphyId,
+        translation2Calligraphy: CalligraphyId
+    ): Flow<List<AyaRepoModel>> =
+        dataSource.observeAllAyasWith2TranslationForSora(
+            id.toEntity(),
+            mainAyaCalligraphy.toEntity(),
+            translationCalligraphy.toEntity(),
+            translation2Calligraphy.toEntity(),
+        )
             .mapListWith(ayaMapper)
 }

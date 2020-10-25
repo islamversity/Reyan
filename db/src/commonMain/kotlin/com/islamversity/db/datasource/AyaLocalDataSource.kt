@@ -27,9 +27,18 @@ interface AyaLocalDataSource {
         context: CoroutineContext = Dispatchers.Default
     ): Flow<List<Aya>>
 
-    fun observeAllAyasForSora(
-        soraOrder: SurahOrderId,
+    fun observeAllAyasWithTranslationForSora(
+        surahId: SurahId,
         calligraphy: CalligraphyId,
+        translationCalligraphy: CalligraphyId,
+        context: CoroutineContext = Dispatchers.Default
+    ): Flow<List<Aya>>
+
+    fun observeAllAyasWith2TranslationForSora(
+        surahId: SurahId,
+        calligraphy: CalligraphyId,
+        translationCalligraphy: CalligraphyId,
+        translation2Calligraphy: CalligraphyId,
         context: CoroutineContext = Dispatchers.Default
     ): Flow<List<Aya>>
 
@@ -81,25 +90,45 @@ class AyaLocalDataSourceImpl(
         calligraphy: CalligraphyId,
         context: CoroutineContext
     ): Flow<List<Aya>> =
-        ayaQueries.getAllAyaBySoraId(calligraphy, surahId, ayaMapper)
+        ayaQueries.getAllAyaBySoraId(calligraphy, surahId){rowIndex, id, orderIndex, surahId, ayaText, sajdahType, juzOrderIndex, hizbQuarterOrderIndex ->
+            ayaMapper(rowIndex,id, orderIndex, surahId, ayaText, null, null, sajdahType, juzOrderIndex, hizbQuarterOrderIndex)
+        }
             .asFlow()
             .mapToList(context)
 
-    override fun observeAllAyasForSora(
-        soraOrder: SurahOrderId,
+    override fun observeAllAyasWithTranslationForSora(
+        surahId: SurahId,
         calligraphy: CalligraphyId,
+        translationCalligraphy: CalligraphyId,
         context: CoroutineContext
     ): Flow<List<Aya>> =
-        ayaQueries.getAllAyaBySoraOrder(calligraphy, soraOrder, ayaMapper)
+        ayaQueries.getAllAyaWithTranslationBySoraId(calligraphy,translationCalligraphy, surahId){rowIndex, id, orderIndex, surahId, ayaText, translation, sajdahType, juzOrderIndex, hizbQuarterOrderIndex ->
+            ayaMapper(rowIndex,id, orderIndex, surahId, ayaText, translation, null, sajdahType, juzOrderIndex, hizbQuarterOrderIndex)
+        }
             .asFlow()
-            .mapToList()
+            .mapToList(context)
+
+    override fun observeAllAyasWith2TranslationForSora(
+        surahId: SurahId,
+        calligraphy: CalligraphyId,
+        translationCalligraphy: CalligraphyId,
+        translation2Calligraphy: CalligraphyId,
+        context: CoroutineContext
+    ): Flow<List<Aya>> =
+        ayaQueries.getAllAyaWith2TranslationBySoraId(calligraphy,translationCalligraphy, translation2Calligraphy,  surahId){rowIndex, id, orderIndex, surahId, ayaText, translation, translation2, sajdahType, juzOrderIndex, hizbQuarterOrderIndex ->
+            ayaMapper(rowIndex,id, orderIndex, surahId, ayaText, translation, translation2, sajdahType, juzOrderIndex, hizbQuarterOrderIndex)
+        }
+            .asFlow()
+            .mapToList(context)
 
     override fun getAyaWithId(
         entityId: AyaId,
         calligraphy: Calligraphy,
         context: CoroutineContext
     ): Flow<Aya?> =
-        ayaQueries.getAyaById(calligraphy, entityId, ayaMapper)
+        ayaQueries.getAyaById(calligraphy, entityId){rowIndex, id, orderIndex, surahId, ayaText, sajdahType, juzOrderIndex, hizbQuarterOrderIndex ->
+            ayaMapper(rowIndex,id, orderIndex, surahId, ayaText, null, null, sajdahType, juzOrderIndex, hizbQuarterOrderIndex)
+        }
             .asFlow()
             .mapToOneOrNull(context)
 
@@ -174,16 +203,20 @@ class AyaLocalDataSourceImpl(
         orderIndex: AyaOrderId,
         surahId: SurahId,
         ayaText: String?,
+        ayaTranslation1 : String?,
+        ayaTranslation2 : String?,
         sajdahTypeFlag: SajdahTypeFlag,
         juzOrderIndex: Juz,
         hizbOrderIndex: HizbQuarter
-    ) -> Aya = { rowIndex, id, orderIndex, surahId, ayaText, sajdahType, juzOrderIndex, hizbOrderIndex ->
+    ) -> Aya = { rowIndex, id, orderIndex, surahId, ayaText, translation1, translation2,sajdahType, juzOrderIndex, hizbOrderIndex ->
         Aya(
             rowIndex,
             id,
             orderIndex,
             surahId,
             ayaText!!,
+            translation1,
+            translation2,
             sajdahType,
             juzOrderIndex,
             hizbOrderIndex

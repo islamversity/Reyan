@@ -30,7 +30,7 @@ class SurahProcessor(
 
     private val processInitialFetch: FlowBlock<SurahIntent, SurahResult> = {
         ofType<SurahIntent.Initial>()
-            .flatMapMerge { initial ->
+            .flatMapLatest { initial ->
                 val id = SurahID(initial.surahId)
                 combine(
                     getSurahDetail(id),
@@ -46,9 +46,11 @@ class SurahProcessor(
             }
             .publish(
                 {
+                    //perform showing the chosen aya only the first time
                     take(1).transform {
                         emit(it.first)
                         if (it.second.startingAyaPosition == 0L) {
+                            //Screen starts from the top not any number
                             return@transform
                         }
 
@@ -56,16 +58,19 @@ class SurahProcessor(
                             item is AyaUIModel && item.order == it.second.startingAyaPosition
                         } ?: error("The surah does not contain aya with order= ${it.second.startingAyaPosition}")
 
-                        emit(SurahResult.ShowAyaNumber(
-                            position = it.first.items.indexOf(aya),
-                            id = aya.rowId,
-                            orderID = it.second.startingAyaPosition,
-                        ))
+                        emit(
+                            SurahResult.ShowAyaNumber(
+                                position = it.first.items.indexOf(aya),
+                                id = aya.rowId,
+                                orderID = it.second.startingAyaPosition,
+                            )
+                        )
                         delay(300)
                         emit(SurahResult.LastStable)
                     }
                 },
                 {
+                    //after the first data load we don't need to care about startingAyaPosition
                     drop(1).map { it.first }
                 }
             )
@@ -80,11 +85,15 @@ class SurahProcessor(
     //we need to get app fontSize and add it to the header
 
     private fun getSurahAyas(id: SurahID): Flow<List<AyaUIModel>> =
-        getAyaUseCase.observeAyaMain(id)
-            .mapListWith(ayaMapper)
-            .combine(settingRepo.getAyaMainFontSize().map { it.size }) { uiModel, font ->
-                uiModel.map {
-                    it.copy(fontSize = font)
-                }
+        combine(
+            getAyaUseCase.observeAyaMain(id)
+                .mapListWith(ayaMapper),
+            settingRepo.getAyaMainFontSize().map { it.size },
+            settingRepo.getAyaTranslateFontSize().map { it.size }
+        ) { uiModel, mainFont, translationFont ->
+            uiModel.map {
+                it.copy(fontSize = mainFont, translationFontSize = translationFont)
             }
+        }
+
 }

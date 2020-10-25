@@ -53,7 +53,7 @@ class SurahView(
 
     override fun beforeBindingView(binding: ViewSurahBinding) {
         binding.ivBack.setOnClickListener { router.handleBack() }
-        binding.fabUp.setOnClickListener { binding.ayaList.smoothScrollToPosition(0) }
+        binding.fabUp.setOnClickListener { binding.ayaList.scrollToPosition(0) }
         binding.ayaList.setHidable(binding.fabUp, binding.tvSurahName,)
         binding.settings.setOnClickListener { openSettingsDialog(it.context) }
         binding.tvSurahName.text = surahLocal.surahName

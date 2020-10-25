@@ -57,6 +57,69 @@ ORDER BY aya.orderIndex ASC;
 
 
 
+getAllAyaWithTranslationBySoraId:
+SELECT
+aya.rowIndex,
+aya.id,
+aya.orderIndex,
+aya.surahId,
+ayaContent.content AS ayaText,
+translation.content AS translationText,
+aya.sajdahType,
+aya.juzOrderIndex,
+aya.hizbQuarterOrderIndex FROM aya
+
+LEFT JOIN aya_content ayaContent ON
+ayaContent.ayaId = aya.id
+AND
+ayaContent.calligraphy = :calligraphy
+
+LEFT JOIN aya_content translation ON
+translation.ayaId = aya.id
+AND
+translation.calligraphy = :translationCalligraphy
+
+WHERE aya.surahId = :surahId
+
+ORDER BY aya.orderIndex ASC;
+
+
+
+
+getAllAyaWith2TranslationBySoraId:
+SELECT
+aya.rowIndex,
+aya.id,
+aya.orderIndex,
+aya.surahId,
+ayaContent.content AS ayaText,
+translation.content AS translationText,
+translation2.content AS translation2Text,
+aya.sajdahType,
+aya.juzOrderIndex,
+aya.hizbQuarterOrderIndex FROM aya
+
+LEFT JOIN aya_content ayaContent ON
+ayaContent.ayaId = aya.id
+AND
+ayaContent.calligraphy = :calligraphy
+
+LEFT JOIN aya_content translation ON
+translation.ayaId = aya.id
+AND
+translation.calligraphy = :translationCalligraphy
+
+LEFT JOIN aya_content translation2 ON
+translation2.ayaId = aya.id
+AND
+translation2.calligraphy = :translation2Calligraphy
+
+WHERE aya.surahId = :surahId
+
+ORDER BY aya.orderIndex ASC;
+
+
+
 
 
 
