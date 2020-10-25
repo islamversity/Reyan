@@ -10,7 +10,7 @@
     <string name="bismillah_translate">به نام خدای مهربان بخشاینده</string>
     <string name="translate_text_size">اندازه متن ترجمه</string>
     <string name="main_text_size">اندازه متن اصلی</string>
-    <string name="aya_translation_not_chosen">هیچ</string>
+    <string name="aya_translation_not_chosen">هیچکدام</string>
     <string name="app_language">زبان برنامه</string>
     <string name="app_font_size">اندازه قلم برنامه</string>
 </resources>
