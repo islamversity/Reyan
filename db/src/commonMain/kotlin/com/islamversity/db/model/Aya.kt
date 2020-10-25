@@ -9,6 +9,8 @@ data class Aya(
     val order: AyaOrderId,
     val surahId: SurahId,
     val content: String,
+    val translation1 : String? = null,
+    val translation2: String? = null,
     val sajdahType : SajdahTypeFlag,
     val juz: Juz,
     val hizb: HizbQuarter

@@ -3,4 +3,7 @@
     <string name="play_button">Aya Play Button</string>
     <string name="aya_bookmark_button">Aya Bookmark Button</string>
     <string name="aya_share_button">Aya Share Button</string>
+
+    <string name="sajdah_type_obligatory">Obligatory</string>
+    <string name="sajdah_type_recommended">Recommended</string>
 </resources>

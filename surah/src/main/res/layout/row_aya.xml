@@ -8,15 +8,17 @@
     android:layout_marginBottom="@dimen/min_margin"
     android:layout_marginLeft="@dimen/medium_margin"
     android:layout_marginRight="@dimen/medium_margin"
-    tools:background="@color/white"
+    tools:background="@android:color/white"
     >
 
     <LinearLayout
         android:id="@+id/aya_signs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/low_margin"
+        android:layout_marginTop="@dimen/min_margin"
         android:orientation="vertical"
+        android:layout_marginBottom="@dimen/medium_margin"
+
         >
         <include
             android:id="@+id/ayaOrder"
@@ -39,7 +41,7 @@
             tools:text="30"
             android:visibility="gone"
             tools:visibility="visible"
-            />
+            tools:ignore="SpUsage"/>
         <TextView
             android:id="@+id/hizbOrder"
             android:layout_width="28dp"
@@ -67,18 +69,18 @@
             tools:visibility="visible"
             />
         <TextView
-            android:id="@+id/sajdah_obg"
+            android:id="@+id/sajdah_title"
             android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
             android:maxLines="1"
             android:textColor="@color/black"
-            android:textSize="10dp"
+            android:textSize="@dimen/tiny_text"
             tools:text="واجب"
             android:visibility="gone"
             tools:visibility="visible"
-            />
+            tools:ignore="SpUsage"/>
 
     </LinearLayout>
 
@@ -89,6 +91,7 @@
         android:layout_alignParentEnd="true"
         android:layout_toEndOf="@+id/aya_signs"
         android:layout_marginStart="@dimen/min_margin"
+        android:layout_marginBottom="@dimen/medium_margin"
         >
         <LinearLayout
             android:id="@+id/ayaToolbar"

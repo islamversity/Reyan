@@ -46,7 +46,7 @@ class SearchProcessor(
                 SurahLocalModel(
                     surahID = it.id.id,
                     surahName = it.arabicName,
-                    startingAyaOrder = 1,
+                    startingAyaOrder = 0,
                 )
             }
             .map {
