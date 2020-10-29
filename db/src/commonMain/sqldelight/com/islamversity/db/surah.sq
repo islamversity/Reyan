@@ -1,18 +1,14 @@
 import com.islamversity.db.model.SurahId;
-import com.islamversity.db.model.RevealTypeId;
 import com.islamversity.db.model.RevealTypeFlag;
 import com.islamversity.db.model.SurahOrderId;
-import com.islamversity.db.model.BismillahId;
 import com.islamversity.db.model.BismillahTypeFlag;
 
 CREATE TABLE IF NOT EXISTS surah (
     rowIndex INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     id TEXT AS SurahId NOT NULL,
     orderIndex INTEGER AS SurahOrderId NOT NULL,
-    revealType TEXT AS RevealTypeId NOT NULL,
     revealFlag TEXT AS RevealTypeFlag NOT NULL,
-    bismillahFlag TEXT AS BismillahTypeFlag NOT NULL,
-    FOREIGN KEY(revealType) REFERENCES surahRevealType(id)
+    bismillahFlag TEXT AS BismillahTypeFlag DEFAULT NULL
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS surah_id
@@ -158,15 +154,12 @@ ORDER BY surah.orderIndex ASC;
 
 
 
-
-
 insertSurah:
 INSERT OR REPLACE INTO surah
-(id, orderIndex, revealType, revealFlag, bismillahFlag)
+(id, orderIndex, revealFlag, bismillahFlag)
 SELECT
 :id,
 :orderIndex,
-?,
 ?,
 ?
 WHERE NOT EXISTS (SELECT * FROM surah WHERE orderIndex = :orderIndex);

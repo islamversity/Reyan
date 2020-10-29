@@ -1,7 +1,6 @@
 import com.islamversity.db.model.AyaId;
 import com.islamversity.db.model.SurahId;
 import com.islamversity.db.model.AyaOrderId;
-import com.islamversity.db.model.SajdahId;
 import com.islamversity.db.model.SajdahTypeFlag;
 import com.islamversity.db.model.Juz;
 import com.islamversity.db.model.HizbQuarter;
@@ -11,12 +10,12 @@ CREATE TABLE IF NOT EXISTS aya (
     id TEXT AS AyaId NOT NULL,
     orderIndex INTEGER AS AyaOrderId NOT NULL,
     surahId TEXT AS SurahId NOT NULL,
-    sajdahId TEXT AS SajdahId NOT NULL,
-    sajdahType TEXT AS SajdahTypeFlag NOT NULL,
+    sajdahType TEXT AS SajdahTypeFlag DEFAULT NULL,
     juzOrderIndex INTEGER AS Juz NOT NULL,
     hizbQuarterOrderIndex INTEGER AS HizbQuarter NOT NULL,
-    FOREIGN KEY(surahId) REFERENCES surah(id),
-    FOREIGN KEY(sajdahId) REFERENCES sajdah(id)
+    hizbStart INTEGER AS Boolean,
+    hizbEnding INTEGER AS Boolean,
+    FOREIGN KEY(surahId) REFERENCES surah(id)
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS aya_id
@@ -44,7 +43,11 @@ aya.surahId,
 ayaContent.content AS ayaText,
 aya.sajdahType,
 aya.juzOrderIndex,
-aya.hizbQuarterOrderIndex FROM aya
+aya.hizbQuarterOrderIndex,
+aya.hizbStart,
+aya.hizbEnding
+FROM aya
+
 
 LEFT JOIN aya_content ayaContent ON
 ayaContent.ayaId = aya.id
@@ -67,7 +70,10 @@ ayaContent.content AS ayaText,
 translation.content AS translationText,
 aya.sajdahType,
 aya.juzOrderIndex,
-aya.hizbQuarterOrderIndex FROM aya
+aya.hizbQuarterOrderIndex,
+aya.hizbStart,
+aya.hizbEnding
+FROM aya
 
 LEFT JOIN aya_content ayaContent ON
 ayaContent.ayaId = aya.id
@@ -97,7 +103,10 @@ translation.content AS translationText,
 translation2.content AS translation2Text,
 aya.sajdahType,
 aya.juzOrderIndex,
-aya.hizbQuarterOrderIndex FROM aya
+aya.hizbQuarterOrderIndex,
+aya.hizbStart,
+aya.hizbEnding
+FROM aya
 
 LEFT JOIN aya_content ayaContent ON
 ayaContent.ayaId = aya.id
@@ -175,7 +184,10 @@ aya.surahId,
 ayaContent.content AS ayaText,
 aya.sajdahType,
 aya.juzOrderIndex,
-aya.hizbQuarterOrderIndex FROM aya
+aya.hizbQuarterOrderIndex,
+aya.hizbStart,
+aya.hizbEnding
+FROM aya
 
 LEFT JOIN aya_content ayaContent ON
 ayaContent.ayaId = aya.id
@@ -190,22 +202,15 @@ WHERE aya.id = :id;
 
 getJuzs:
 SELECT hizbs.id, hizbs.surahId, hizbs.orderIndex, hizbs.juzOrderIndex, hizbs.hizbQuarterOrderIndex, name.content
-FROM (
-SELECT * FROM aya
-GROUP BY hizbQuarterOrderIndex
-HAVING min(rowIndex)
-
-
-UNION
-
-SELECT * FROM aya
-GROUP BY hizbQuarterOrderIndex
-HAVING max(rowIndex)
-) hizbs
+FROM aya hizbs
 
 LEFT JOIN name
 ON name.rowId = hizbs.surahId
-AND name.calligraphy = :calligraphy;
+AND name.calligraphy = :calligraphy
+
+WHERE hizbEnding = 1 OR hizbStart = 1
+ORDER BY juzOrderIndex
+;
 
 
 
@@ -213,6 +218,5 @@ AND name.calligraphy = :calligraphy;
 
 insertAya:
 INSERT OR REPLACE INTO aya
-(id, orderIndex, surahId, sajdahId, sajdahType, juzOrderIndex, hizbQuarterOrderIndex)
-SELECT ?, :orderIndex, :surahId, ?, ?, ?, ?
-WHERE NOT EXISTS (SELECT * FROM aya WHERE surahId = :surahId AND orderIndex = :orderIndex);
+(id, orderIndex, surahId, sajdahType, juzOrderIndex, hizbQuarterOrderIndex, hizbStart, hizbEnding)
+SELECT ?, :orderIndex, :surahId, ?, ?, ?, ?, ?;

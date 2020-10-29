@@ -11,9 +11,11 @@ data class Aya(
     val content: String,
     val translation1 : String? = null,
     val translation2: String? = null,
-    val sajdahType : SajdahTypeFlag,
+    val sajdahType : SajdahTypeFlag?,
     val juz: Juz,
-    val hizb: HizbQuarter
+    val hizb: HizbQuarter,
+    val startOfHizb: Boolean?,
+    val endingOfHizb: Boolean?,
 ){
     init{
         juz.validated()
@@ -26,10 +28,11 @@ data class AyaWithFullContent(
     val surahId: SurahId,
     val order: AyaOrderId,
     val content: No_rowId_aya_content,
-    val sajdahId: SajdahId,
     val sajdahTypeFlag: SajdahTypeFlag,
     val juz: Juz,
-    val hizb: HizbQuarter
+    val hizb: HizbQuarter,
+    val startOfHizb : Boolean? = null,
+    val endingOfHizb : Boolean? = null,
 ){
     init {
         juz.validated()

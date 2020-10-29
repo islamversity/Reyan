@@ -1,7 +1,7 @@
 package com.islamversity.domain.usecase
 
-import com.benasher44.uuid.bytes
-import com.benasher44.uuid.uuid4
+import com.islamversity.core.Logger
+import com.islamversity.core.Severity
 import com.islamversity.db.AyaContentQueries
 import com.islamversity.db.AyaQueries
 import com.islamversity.db.Calligraphy
@@ -12,7 +12,6 @@ import com.islamversity.db.SurahQueries
 import com.islamversity.db.model.AyaContentId
 import com.islamversity.db.model.AyaId
 import com.islamversity.db.model.AyaOrderId
-import com.islamversity.db.model.BismillahId
 import com.islamversity.db.model.BismillahTypeFlag
 import com.islamversity.db.model.CalligraphyId
 import com.islamversity.db.model.CalligraphyName
@@ -22,8 +21,6 @@ import com.islamversity.db.model.LanguageCode
 import com.islamversity.db.model.NameId
 import com.islamversity.db.model.RawId
 import com.islamversity.db.model.RevealTypeFlag
-import com.islamversity.db.model.RevealTypeId
-import com.islamversity.db.model.SajdahId
 import com.islamversity.db.model.SajdahTypeFlag
 import com.islamversity.db.model.SurahId
 import com.islamversity.db.model.SurahOrderId
@@ -46,6 +43,7 @@ import kotlinx.serialization.json.long
 import com.islamversity.db.model.Calligraphy as CalligraphyCode
 
 private const val SETTINGS_KEY_DATA_BASE_CREATION_VERSION = "SETTINGS_KEY_DATA_BASE_CREATION_VERSION"
+private const val SURAH_INDEX_TUBAH = 9L
 
 interface DatabaseFillerUseCase {
     suspend fun needsFilling(): Boolean
@@ -58,6 +56,8 @@ interface DatabaseFillerUseCase {
 interface DatabaseFileConfig {
 
     val assetVersion: Int
+
+    fun generateRandomUUID(): String
 
     fun getQuranExtraData(): ByteArray
 
@@ -82,9 +82,13 @@ class DatabaseFillerUseCaseImpl(
 
     override suspend fun needsFilling(): Boolean {
         val persistedVersion =
-            db.settingsQueries.getWithKey(SETTINGS_KEY_DATA_BASE_CREATION_VERSION).executeAsOneOrNull() ?: return true
+            db
+                .settingsQueries
+                .getWithKey(SETTINGS_KEY_DATA_BASE_CREATION_VERSION)
+                .executeAsOneOrNull()
+                ?.value ?: return true
 
-        if (persistedVersion.value.toInt() < config.assetVersion) {
+        if (persistedVersion.toInt() < config.assetVersion) {
             return true
         }
 
@@ -100,14 +104,13 @@ class DatabaseFillerUseCaseImpl(
             broadCaster.asFlow()
         }
 
-    private fun randomUUID() = uuid4().bytes.decodeToString()
+    private fun randomUUID() = config.generateRandomUUID()
 
     private data class Surah(
         val id: SurahId,
         val orderIndex: SurahOrderId,
-        val revealType: RevealTypeId,
         val revealFlag: RevealTypeFlag,
-        val bismillahTypeFlag: BismillahTypeFlag,
+        val bismillahTypeFlag: BismillahTypeFlag?,
         val names: List<Name>
     )
 
@@ -122,11 +125,12 @@ class DatabaseFillerUseCaseImpl(
         val id: AyaId,
         val orderIndex: AyaOrderId,
         val surahId: SurahId,
-        val sajdahId: SajdahId,
-        val sajdahType: SajdahTypeFlag,
+        val sajdahType: SajdahTypeFlag?,
         val juzOrderIndex: Juz,
         val hizbOrderIndex: HizbQuarter,
-        val contents: List<AyaContent>
+        val contents: List<AyaContent>,
+        val startOfHizb: Boolean?,
+        val endOfHizb: Boolean?
     )
 
     private data class AyaContent(
@@ -148,11 +152,8 @@ class DatabaseFillerUseCaseImpl(
             }
 
             val calligraphyQueries = db.calligraphyQueries
-            val revealTypeQueries = db.suraRevealTypeQueries
-            val sajdahQueries = db.sajdahQueries
             val surahQueries = db.surahQueries
             val nameQueries = db.nameQueries
-            val bismillahQueries = db.bismillahQueries
             val ayaQueries = db.ayaQueries
             val ayaContentQueries = db.ayaContentQueries
 
@@ -172,46 +173,13 @@ class DatabaseFillerUseCaseImpl(
             }
             broadCaster.offer(FillingStatus.Filling.CalligraphiesFilled)
 
-            val meccaRevealId = RevealTypeId(randomUUID())
-            val medinanRevealId = RevealTypeId(randomUUID())
-            revealTypeQueries.transaction {
-                revealTypeQueries.insertType(meccaRevealId, RevealTypeFlag.MECCAN)
-                revealTypeQueries.insertType(medinanRevealId, RevealTypeFlag.MEDINAN)
-            }
-
-            broadCaster.offer(FillingStatus.Filling.Filled(15))
-
-            val sajdahObligatoryId = SajdahId(randomUUID())
-            val sajdahRecommendedId = SajdahId(randomUUID())
-            val sajdahNoneId = SajdahId(randomUUID())
-            sajdahQueries.transaction {
-                sajdahQueries.insertSajdah(sajdahObligatoryId, SajdahTypeFlag.OBLIGATORY)
-                sajdahQueries.insertSajdah(sajdahRecommendedId, SajdahTypeFlag.RECOMMENDED)
-                sajdahQueries.insertSajdah(sajdahNoneId, SajdahTypeFlag.NONE)
-            }
-
-            broadCaster.offer(FillingStatus.Filling.Filled(20))
-            val bismillahId = BismillahId(randomUUID())
-            bismillahQueries.insertBismillah(bismillahId, BismillahTypeFlag.NEEDED)
-
-            nameQueries.insertRevealAndSajdahTypeAndBismillahNames(
-                meccaRevealId,
-                arabicCalligraphy.id,
-                medinanRevealId,
-                sajdahObligatoryId,
-                sajdahRecommendedId,
-                sajdahNoneId,
-                englishCalligraphy.id,
-                englishTranslatedCalligraphy.id,
-                bismillahId,
-            )
 
             broadCaster.offer(FillingStatus.Filling.Filled(30))
             val revealMap = mapOf(
                 RevealTypeFlag.MECCAN.raw.toLowerCase()
-                    .capitalize() to (meccaRevealId to RevealTypeFlag.MECCAN),
+                    .capitalize() to RevealTypeFlag.MECCAN,
                 RevealTypeFlag.MEDINAN.raw.toLowerCase()
-                    .capitalize() to (medinanRevealId to RevealTypeFlag.MEDINAN)
+                    .capitalize() to RevealTypeFlag.MEDINAN
             )
 
             var quranDataObject: JsonObject? = quranDataObjectDeferred!!.await()
@@ -226,15 +194,9 @@ class DatabaseFillerUseCaseImpl(
 
             broadCaster.offer(FillingStatus.Filling.Filled(40))
 
-            val sajdaIdMap = mapOf(
-                SajdahTypeFlag.RECOMMENDED to sajdahRecommendedId,
-                SajdahTypeFlag.OBLIGATORY to sajdahObligatoryId,
-                SajdahTypeFlag.NONE to sajdahNoneId
-            )
-
             val surahOrderIdMap = insertSurahAndGetIdMap(surahs, surahQueries, nameQueries)
 
-            val sajdaMap = getSajdaMap(quranDataObject, sajdaIdMap)
+            val sajdaMap = getSajdaMap(quranDataObject)
 
             val juzMap = getJuzMap(quranDataObject)
 
@@ -259,7 +221,6 @@ class DatabaseFillerUseCaseImpl(
                 quranEnglishJson,
                 quranFarsiJson,
                 sajdaMap,
-                sajdahNoneId,
             )
 
             broadCaster.offer(FillingStatus.Filling.Filled(80))
@@ -283,10 +244,11 @@ class DatabaseFillerUseCaseImpl(
                     a.id,
                     a.orderIndex,
                     a.surahId,
-                    a.sajdahId,
                     a.sajdahType,
                     a.juzOrderIndex,
-                    a.hizbOrderIndex
+                    a.hizbOrderIndex,
+                    a.startOfHizb,
+                    a.endOfHizb,
                 )
 
                 a.contents.forEach { ac ->
@@ -382,139 +344,10 @@ class DatabaseFillerUseCaseImpl(
         )
     }
 
-    private fun NameQueries.insertRevealAndSajdahTypeAndBismillahNames(
-        meccaRevealId: RevealTypeId,
-        calligraphyArId: CalligraphyId,
-        medinanRevealId: RevealTypeId,
-        sajdahObligatoryId: SajdahId,
-        sajdahRecommendedId: SajdahId,
-        sajdahNoneId: SajdahId,
-        calligraphyEnId: CalligraphyId,
-        calligraphyEnTranslatedId: CalligraphyId,
-        bismillahId: BismillahId,
-    ) {
-        transaction {
-            val meccaArId = NameId(randomUUID())
-            val medinanArId = NameId(randomUUID())
-            insertName(meccaArId, meccaRevealId.raw, calligraphyArId, "مكية")
-            insertName(medinanArId, medinanRevealId.raw, calligraphyArId, "مدنية")
-
-            val obligatoryArId = NameId(randomUUID())
-            val recommendedArId = NameId(randomUUID())
-            val noneArId = NameId(randomUUID())
-            insertName(
-                obligatoryArId,
-                sajdahObligatoryId.raw,
-                calligraphyArId,
-                "الواجبة"
-            )
-            insertName(recommendedArId, sajdahRecommendedId.raw, calligraphyArId, "أوصت")
-            insertName(noneArId, sajdahNoneId.raw, calligraphyArId, "لا حاجة")
-
-            //english-Anglicized
-            val meccaEnAngId = NameId(randomUUID())
-            val medinanEnAngId = NameId(randomUUID())
-            insertName(
-                meccaEnAngId,
-                meccaRevealId.raw,
-                calligraphyEnId,
-                RevealTypeFlag.MECCAN.raw.toLowerCase().capitalize()
-            )
-            insertName(
-                medinanEnAngId,
-                medinanRevealId.raw,
-                calligraphyEnId,
-                RevealTypeFlag.MEDINAN.raw.toLowerCase().capitalize()
-            )
-
-            val obligatoryEnAngId = NameId(randomUUID())
-            val recommendedEnAngId = NameId(randomUUID())
-            val noneEnAngId = NameId(randomUUID())
-            insertName(
-                obligatoryEnAngId,
-                sajdahObligatoryId.raw,
-                calligraphyEnId,
-                SajdahTypeFlag.OBLIGATORY.raw.toLowerCase().capitalize()
-            )
-            insertName(
-                recommendedEnAngId,
-                sajdahRecommendedId.raw,
-                calligraphyEnId,
-                SajdahTypeFlag.RECOMMENDED.raw.toLowerCase().capitalize()
-            )
-            insertName(
-                noneEnAngId,
-                sajdahNoneId.raw,
-                calligraphyEnId,
-                SajdahTypeFlag.NONE.raw.toLowerCase().capitalize()
-            )
-
-
-            //english
-            val meccaEnId = NameId(randomUUID())
-            val medinanEnId = NameId(randomUUID())
-            insertName(
-                meccaEnId,
-                meccaRevealId.raw,
-                calligraphyEnTranslatedId,
-                RevealTypeFlag.MECCAN.raw.toLowerCase().capitalize()
-            )
-            insertName(
-                medinanEnId,
-                medinanRevealId.raw,
-                calligraphyEnTranslatedId,
-                RevealTypeFlag.MEDINAN.raw.toLowerCase().capitalize()
-            )
-
-            val obligatoryEnId = NameId(randomUUID())
-            val recommendedEnId = NameId(randomUUID())
-            val noneEnId = NameId(randomUUID())
-            insertName(
-                obligatoryEnId,
-                sajdahObligatoryId.raw,
-                calligraphyEnTranslatedId,
-                SajdahTypeFlag.OBLIGATORY.raw.toLowerCase().capitalize()
-            )
-            insertName(
-                recommendedEnId,
-                sajdahRecommendedId.raw,
-                calligraphyEnTranslatedId,
-                SajdahTypeFlag.RECOMMENDED.raw.toLowerCase().capitalize()
-            )
-            insertName(
-                noneEnId,
-                sajdahNoneId.raw,
-                calligraphyArId,
-                SajdahTypeFlag.NONE.raw.toLowerCase().capitalize()
-            )
-
-
-            //bismillah
-            insertName(
-                NameId(randomUUID()),
-                bismillahId.raw,
-                config.arabicTextCalligraphy.id,
-                "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ"
-            )
-            insertName(
-                NameId(randomUUID()),
-                bismillahId.raw,
-                config.farsiTextCalligraphy.id,
-                "به نام خداوند بخشنده بخشایشگر"
-            )
-            insertName(
-                NameId(randomUUID()),
-                bismillahId.raw,
-                config.englishTextCalligraphy.id,
-                "In the name of Allah, Most Gracious, Most Merciful."
-            )
-        }
-    }
-
 
     private fun parseSurah(
         quranDataObject: JsonObject,
-        revealMap: Map<String, Pair<RevealTypeId, RevealTypeFlag>>,
+        revealMap: Map<String, RevealTypeFlag>,
         calligraphyArId: CalligraphyId,
         calligraphyEnTranslatedId: CalligraphyId,
         calligraphyEnId: CalligraphyId
@@ -553,8 +386,8 @@ class DatabaseFillerUseCaseImpl(
 
                 val bismillahFlag = if (surahIndex == 1L) {
                     BismillahTypeFlag.FIRST_AYA
-                } else if (surahIndex == 9L) {
-                    BismillahTypeFlag.NONE
+                } else if (surahIndex == SURAH_INDEX_TUBAH) {
+                    null
                 } else {
                     BismillahTypeFlag.NEEDED
                 }
@@ -562,8 +395,7 @@ class DatabaseFillerUseCaseImpl(
                 Surah(
                     surahId,
                     SurahOrderId(surahIndex),
-                    r.first,
-                    r.second,
+                    r,
                     bismillahFlag,
                     names
                 )
@@ -584,7 +416,6 @@ class DatabaseFillerUseCaseImpl(
                 surahQueries.insertSurah(
                     it.id,
                     it.orderIndex,
-                    it.revealType,
                     it.revealFlag,
                     it.bismillahTypeFlag
                 )
@@ -599,9 +430,8 @@ class DatabaseFillerUseCaseImpl(
 
 
     private fun getSajdaMap(
-        quranDataObject: JsonObject,
-        sajdaIdMap: Map<SajdahTypeFlag, SajdahId>
-    ): Map<Pair<Long, Long>, Pair<SajdahId, SajdahTypeFlag>> {
+        quranDataObject: JsonObject
+    ): Map<Pair<Long, Long>, SajdahTypeFlag?> {
         return mapOf(
             *quranDataObject
                 .getValue("sajdas")
@@ -616,8 +446,7 @@ class DatabaseFillerUseCaseImpl(
 
                     val flag = SajdahTypeFlag(sajda.getValue("_type").jsonPrimitive.content.toUpperCase())
 
-                    val value = sajdaIdMap[flag]!! to flag
-                    key to value
+                    key to flag
                 }
                 .toTypedArray()
         )
@@ -671,8 +500,7 @@ class DatabaseFillerUseCaseImpl(
         surahOrderIdMap: Map<SurahOrderId, SurahId>,
         quranEnglishJson: JsonArray,
         quranFarsiJson: JsonArray,
-        sajdaMap: Map<Pair<Long, Long>, Pair<SajdahId, SajdahTypeFlag>>,
-        sajdahNoneId: SajdahId,
+        sajdaMap: Map<Pair<Long, Long>, SajdahTypeFlag?>,
     ): List<Aya> {
         val arSimpleCall: CalligraphyId = config.arabicTextCalligraphy.id
         val enAYACall: CalligraphyId = config.englishTextCalligraphy.id
@@ -684,7 +512,8 @@ class DatabaseFillerUseCaseImpl(
 
         val ayaList = ArrayList<Aya>()
 
-        for (i in 0 until quranArabicJson.size) {
+        val surahSize = quranArabicJson.size
+        for (i in 0 until surahSize) {
             val arSurah = quranArabicJson[i].jsonObject
             val surahIndex = arSurah["index"]!!.jsonPrimitive.content.toLong()
             val surahId = surahIndex.let { surahOrderIdMap[SurahOrderId(it)] }!!
@@ -699,22 +528,51 @@ class DatabaseFillerUseCaseImpl(
 
             val faSurahAya = faSurah["aya"]!!.jsonArray
 
-            for (j in 0 until arSurah["aya"]!!.jsonArray.size) {
-                val arabicAya = quranArabicJson[i].jsonObject["aya"]!!.jsonArray[j].jsonObject
+            val ayaSize = arSurah["aya"]!!.jsonArray.size
+            for (j in 0 until ayaSize) {
+                val arabicAya = arSurah["aya"]!!.jsonArray[j].jsonObject
 
                 val ayaId = AyaId(randomUUID())
                 val orderIndex = AyaOrderId(arabicAya.getValue("index").jsonPrimitive.content.toLong())
 
                 val surahOrderAyaOrderPair = surahIndex to orderIndex.order
 
-                val sajdahIdType =
-                    sajdaMap[surahOrderAyaOrderPair] ?: sajdahNoneId to SajdahTypeFlag.NONE
+                val sajdahIdType = sajdaMap[surahOrderAyaOrderPair]
 
                 juz = juzMap[surahOrderAyaOrderPair] ?: juz
 
-                hizb = hizbMap[surahOrderAyaOrderPair] ?: hizb
+                val newHizb = hizbMap[surahOrderAyaOrderPair]
+                val startOfHizb = if (newHizb != null) {
+                    true
+                } else {
+                    null
+                }
+                hizb = newHizb ?: hizb
 
+                val endOfHizb: Boolean?
 
+                Logger.log(Severity.Error, "DatabaseFiller", null, "ayaOrder= $surahOrderAyaOrderPair, ayaSize=$ayaSize, surahSize=$surahSize, startOfHizb=$startOfHizb")
+                if (startOfHizb == null) {
+
+                    if (surahOrderAyaOrderPair.second.toInt() < ayaSize) {
+                        val nextAyaOrder = surahIndex to (surahOrderAyaOrderPair.second + 1)
+                        Logger.log(Severity.Error, "DatabaseFiller", null, "nextAya= $nextAyaOrder")
+                        endOfHizb = hizbMap[nextAyaOrder]?.let { true }
+                    } else if (surahOrderAyaOrderPair.first.toInt() < surahSize) {
+                        val nextSurahOrder = (surahIndex + 1) to 1L
+                        Logger.log(Severity.Error, "DatabaseFiller", null, "nextSurah= $nextSurahOrder")
+                        endOfHizb = hizbMap[nextSurahOrder]?.let { true }
+                    } else {
+                        Logger.log(Severity.Error, "DatabaseFiller", null, "LastAYA")
+                        //we are in last aya
+                        endOfHizb = true
+                    }
+
+                } else {
+                    endOfHizb = null
+                }
+
+                Logger.log(Severity.Error, "DatabaseFiller", null, "endOfHizb=$endOfHizb")
                 val arAyaContentId = AyaContentId(randomUUID())
 
                 val arabicC = AyaContent(
@@ -751,14 +609,16 @@ class DatabaseFillerUseCaseImpl(
                     ayaId,
                     orderIndex,
                     surahId,
-                    sajdahIdType.first,
-                    sajdahIdType.second,
+                    sajdahIdType,
                     juz,
                     hizb,
                     listOf(
-                        arabicC, englishC,
+                        arabicC,
+                        englishC,
                         farsiC
-                    )
+                    ),
+                    startOfHizb,
+                    endOfHizb
                 )
 
                 ayaList.add(aya)
