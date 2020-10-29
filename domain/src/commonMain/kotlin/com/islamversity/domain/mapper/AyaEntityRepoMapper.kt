@@ -20,9 +20,9 @@ class AyaEntityRepoMapper : Mapper<Aya, AyaRepoModel> {
             mapSajdahType(item.sajdahType)
         )
 
-    private fun mapSajdahType(sajdahTypeFlag: SajdahTypeFlag) : SajdahTypeRepoModel =
+    private fun mapSajdahType(sajdahTypeFlag: SajdahTypeFlag?) : SajdahTypeRepoModel =
         when(sajdahTypeFlag){
-            SajdahTypeFlag.NONE -> SajdahTypeRepoModel.NONE
+            null -> SajdahTypeRepoModel.NONE
             SajdahTypeFlag.RECOMMENDED -> SajdahTypeRepoModel.RECOMMENDED
             SajdahTypeFlag.OBLIGATORY -> SajdahTypeRepoModel.OBLIGATORY
         }

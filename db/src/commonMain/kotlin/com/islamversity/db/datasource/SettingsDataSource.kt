@@ -10,7 +10,7 @@ import kotlin.coroutines.CoroutineContext
 
 interface SettingsDataSource {
 
-    suspend fun put(key: String, value: String, context: CoroutineContext = Dispatchers.Default)
+    suspend fun put(key: String, value: String?, context: CoroutineContext = Dispatchers.Default)
 
     fun observeKey(key: String, context: CoroutineContext = Dispatchers.Default): Flow<String?>
 
@@ -30,7 +30,7 @@ interface SettingsDataSource {
 class SettingsDataSourceImpl(
     private val queries: SettingsQueries
 ) : SettingsDataSource {
-    override suspend fun put(key: String, value: String, context: CoroutineContext) {
+    override suspend fun put(key: String, value: String?, context: CoroutineContext) {
         withContext(context) {
             queries.upsert(key, value)
         }
@@ -54,5 +54,4 @@ class SettingsDataSourceImpl(
             .map {
                 it ?: defaultValue()
             }
-
 }

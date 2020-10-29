@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS settings (
     rowIndex INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     key TEXT NOT NULL,
-    value TEXT NOT NULL
+    value TEXT
 );
 
 
