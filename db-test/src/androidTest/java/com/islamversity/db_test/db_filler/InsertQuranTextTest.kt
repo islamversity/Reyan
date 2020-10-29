@@ -20,7 +20,7 @@ import org.junit.runner.RunWith
 import java.io.File
 import java.util.*
 
-
+/*
 data class S(
     val id: SurahId,
     val orderIndex: SurahOrderId,
@@ -721,3 +721,4 @@ class InsertQuranTextTest {
 
     private fun getRandomUUID() = UUID.randomUUID().toString()
 }
+*/

@@ -65,10 +65,6 @@ class DatabaseModule {
         db.nameQueries
 
     @Provides
-    fun provideBismillahQueries(db : Main) : BismillahQueries =
-        db.bismillahQueries
-
-    @Provides
     fun provideSettingsQueries(db : Main) : SettingsQueries =
         db.settingsQueries
 }

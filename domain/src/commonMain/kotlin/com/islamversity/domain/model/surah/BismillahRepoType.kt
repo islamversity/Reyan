@@ -13,12 +13,12 @@ fun BismillahRepoType.toEntity() =
     when (this) {
         BismillahRepoType.FIRST_AYA -> BismillahTypeFlag.FIRST_AYA
         BismillahRepoType.NEEDED -> BismillahTypeFlag.NEEDED
-        BismillahRepoType.NONE -> BismillahTypeFlag.NONE
+        BismillahRepoType.NONE -> null
     }
 
-fun BismillahTypeFlag.toRepo() =
+fun BismillahTypeFlag?.toRepo() =
     when (this) {
         BismillahTypeFlag.FIRST_AYA -> BismillahRepoType.FIRST_AYA
         BismillahTypeFlag.NEEDED -> BismillahRepoType.NEEDED
-        BismillahTypeFlag.NONE -> BismillahRepoType.NONE
+        null -> BismillahRepoType.NONE
     }

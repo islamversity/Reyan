@@ -10,12 +10,9 @@ fun createMainDB(
         driver,
         provideAyaAdapter(),
         provideAyaContentAdapter(),
-        provideBismillahAdapter(),
         provideCalligraphyAdapter(),
         provideNameAdapter(),
-        provideSajdahAdapter(),
         provideSurahAdapter(),
-        provideSurahRevealTypeAdapter()
     )
 
 
@@ -32,16 +29,13 @@ private val languageCodeAdapter = LanguageCodeAdapter()
 private val calligraphyNameAdapter = CalligraphyNameAdapter()
 private val calligraphyAdapter = CalligraphyAdapter()
 
-private val sajdahIdAdapter = SajdaIdAdapter()
 private val sajdahTypeFlagAdapter = SajdahTypeFlagAdapter()
 
 private val nameIdAdapter = NameIdAdapter()
 private val rawIdAdapter = RawIdAdapter()
 
-private val surahRevealTypeIdAdapter = SurahRevealTypeIdAdapter()
 private val surahFlagAdapter = RevealTypeFlagAdapter()
 
-private val bismillahTypeIdAdapter = BismillahIdAdapter()
 private val bismillahFlagAdapter = BismillahTypeFlagAdapter()
 
 private val juzOrderAdapter = JuzAdapter()
@@ -53,7 +47,6 @@ private fun provideAyaAdapter() =
         ayaIdAdapter,
         ayaOrderIdAdapter,
         surahIdAdapter,
-        sajdahIdAdapter,
         sajdahTypeFlagAdapter,
         juzOrderAdapter,
         hizbOrderAdapter
@@ -70,23 +63,13 @@ private fun provideCalligraphyAdapter(): Calligraphy.Adapter =
         calligraphyAdapter
     )
 
-private fun provideSajdahAdapter(): Sajdah.Adapter =
-    Sajdah.Adapter(sajdahIdAdapter, sajdahTypeFlagAdapter)
-
 private fun provideNameAdapter(): Name.Adapter =
     Name.Adapter(nameIdAdapter, rawIdAdapter, calligraphyIdAdapter)
-
-private fun provideSurahRevealTypeAdapter(): SurahRevealType.Adapter =
-    SurahRevealType.Adapter(surahRevealTypeIdAdapter, surahFlagAdapter)
-
-private fun provideBismillahAdapter() : Bismillah.Adapter =
-    Bismillah.Adapter(bismillahTypeIdAdapter, bismillahFlagAdapter)
 
 private fun provideSurahAdapter(): Surah.Adapter =
     Surah.Adapter(
         surahIdAdapter,
         surahOrderIdAdapter,
-        surahRevealTypeIdAdapter,
         surahFlagAdapter,
         bismillahFlagAdapter
     )

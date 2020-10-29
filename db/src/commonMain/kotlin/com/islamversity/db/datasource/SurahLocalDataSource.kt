@@ -1,12 +1,22 @@
 package com.islamversity.db.datasource
 
-import com.islamversity.db.*
-import com.islamversity.db.model.*
-import com.islamversity.db.model.Calligraphy
+import com.islamversity.db.NameQueries
+import com.islamversity.db.No_rowId_name
+import com.islamversity.db.SurahQueries
+import com.islamversity.db.asFlow
+import com.islamversity.db.mapToList
+import com.islamversity.db.mapToOneOrNull
+import com.islamversity.db.model.AyaOrderId
+import com.islamversity.db.model.BismillahTypeFlag
+import com.islamversity.db.model.CalligraphyId
+import com.islamversity.db.model.RevealTypeFlag
 import com.islamversity.db.model.Surah
+import com.islamversity.db.model.SurahId
+import com.islamversity.db.model.SurahOrderId
+import com.islamversity.db.model.SurahWithFullName
+import com.islamversity.db.model.SurahWithTwoName
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
@@ -59,7 +69,6 @@ class SurahLocalDataSourceImpl(
             surahQueries.insertSurah(
                 surah.id,
                 surah.order,
-                surah.revealTypeId,
                 surah.revealTypeFlag,
                 surah.bismillahTypeFlag
             )
@@ -78,7 +87,6 @@ class SurahLocalDataSourceImpl(
                     surahQueries.insertSurah(
                         it.id,
                         it.order,
-                        it.revealTypeId,
                         it.revealTypeFlag,
                         it.bismillahTypeFlag
                     )
@@ -146,7 +154,7 @@ class SurahLocalDataSourceImpl(
           arabicName: String?,
           mainName: String?,
           revealFlag: RevealTypeFlag,
-          bismillahFlag: BismillahTypeFlag,
+          bismillahFlag: BismillahTypeFlag?,
           ayaCount: AyaOrderId ->
             SurahWithTwoName(
                 rowIndex,
@@ -166,7 +174,7 @@ class SurahLocalDataSourceImpl(
         orderIndex: SurahOrderId,
         name: String?,
         revealFlag: RevealTypeFlag,
-        bismillahFlag: BismillahTypeFlag
+        bismillahFlag: BismillahTypeFlag?
     ) -> Surah = { index, id, orderIndex, name, revealFlag, bismillahFlag ->
         Surah(
             index,

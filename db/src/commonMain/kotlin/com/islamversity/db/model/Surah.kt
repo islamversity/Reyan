@@ -9,7 +9,7 @@ data class SurahWithTwoName(
     val arabicName : String,
     val mainName : String,
     val revealedType : RevealTypeFlag,
-    val bismillahType: BismillahTypeFlag,
+    val bismillahType: BismillahTypeFlag?,
     val ayaCount : Long
 )
 
@@ -20,15 +20,13 @@ data class Surah(
     val order : SurahOrderId,
     val name : String,
     val revealedType : RevealTypeFlag,
-    val bismillahType: BismillahTypeFlag
+    val bismillahType: BismillahTypeFlag?
 )
 
 data class SurahWithFullName(
     val id : SurahId,
     val order : SurahOrderId,
     val name : No_rowId_name,
-    val revealTypeId: RevealTypeId,
     val revealTypeFlag : RevealTypeFlag,
-    val bismillahId: BismillahId,
     val bismillahTypeFlag: BismillahTypeFlag
 )
