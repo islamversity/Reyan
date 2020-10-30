@@ -6,6 +6,9 @@ import com.islamversity.db.model.SajdahTypeFlag
 import com.islamversity.domain.model.aya.AyaID
 import com.islamversity.domain.model.aya.AyaRepoModel
 import com.islamversity.domain.model.aya.SajdahTypeRepoModel
+import com.islamversity.domain.model.aya.StartPartition
+
+const val NUMBER_OF_HIZB_IN_JUZ = 8
 
 class AyaEntityRepoMapper : Mapper<Aya, AyaRepoModel> {
     override fun map(item: Aya): AyaRepoModel =
@@ -17,13 +20,26 @@ class AyaEntityRepoMapper : Mapper<Aya, AyaRepoModel> {
             item.order.order,
             item.juz.value,
             item.hizb.value,
-            mapSajdahType(item.sajdahType)
+            mapSajdahType(item.sajdahType),
+            item.startPartition()
         )
 
-    private fun mapSajdahType(sajdahTypeFlag: SajdahTypeFlag?) : SajdahTypeRepoModel =
-        when(sajdahTypeFlag){
+    private fun mapSajdahType(sajdahTypeFlag: SajdahTypeFlag?): SajdahTypeRepoModel =
+        when (sajdahTypeFlag) {
             null -> SajdahTypeRepoModel.NONE
             SajdahTypeFlag.RECOMMENDED -> SajdahTypeRepoModel.RECOMMENDED
             SajdahTypeFlag.OBLIGATORY -> SajdahTypeRepoModel.OBLIGATORY
         }
+
+    private fun Aya.startPartition(): StartPartition? {
+        if (startOfHizb == null || !startOfHizb!!) {
+            return null
+        }
+
+        return if (((hizb.value - 1) % NUMBER_OF_HIZB_IN_JUZ) == 0L) {
+            StartPartition.JUZ
+        } else {
+            StartPartition.HIZB
+        }
+    }
 }

@@ -9,4 +9,11 @@ data class AyaRepoModel(
     val juz: Long,
     val hizb : Long,
     val sajdahType : SajdahTypeRepoModel,
+    val start : StartPartition?
 )
+
+enum class StartPartition{
+    HIZB,
+    JUZ,
+
+}

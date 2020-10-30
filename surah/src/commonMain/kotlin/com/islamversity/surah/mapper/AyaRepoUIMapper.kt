@@ -3,6 +3,7 @@ package com.islamversity.surah.mapper
 import com.islamversity.core.Mapper
 import com.islamversity.domain.model.aya.AyaRepoModel
 import com.islamversity.domain.model.aya.SajdahTypeRepoModel
+import com.islamversity.domain.model.aya.StartPartition
 import com.islamversity.surah.model.AyaUIModel
 import com.islamversity.surah.model.SajdahTypeUIModel
 
@@ -17,8 +18,8 @@ class AyaRepoUIMapper : Mapper<AyaRepoModel, AyaUIModel>{
             0,
             0,
             false,
-            item.hizb,
-            item.juz,
+            if(item.start == StartPartition.HIZB) item.hizb else null,
+            if(item.start == StartPartition.JUZ) item.juz else null,
             mapSajdahType(item.sajdahType)
         )
 
