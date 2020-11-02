@@ -46,7 +46,7 @@
             android:background="?selectableItemBackground"
             android:orientation="vertical">
 
-            <com.islamversity.base.widgets.ScalableTextView
+            <TextView
                 android:id="@+id/tvAppLanguageTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
                 android:textSize="@dimen/medium_text"
                 tools:ignore="RtlHardcoded,SpUsage" />
 
-            <com.islamversity.base.widgets.ScalableTextView
+            <TextView
                 android:id="@+id/tvAppLanguageSubTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
