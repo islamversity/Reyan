@@ -76,6 +76,18 @@ class SurahSettingsView(
             }
         }
 
+        binding!!.showFirstTranslate.setOnCheckedChangeListener{ view ,isChecked ->
+            onSettings?.invoke(SurahIntent.ChangeSettings.ShowFirstTranslate(isChecked))
+        }
+
+        binding!!.showSecondTranslate.setOnCheckedChangeListener{ view ,isChecked ->
+            onSettings?.invoke(SurahIntent.ChangeSettings.ShowSecondTranslate(isChecked))
+        }
+
+        binding!!.showAyaToolbar.setOnCheckedChangeListener{ view ,isChecked ->
+            onSettings?.invoke(SurahIntent.ChangeSettings.ShowAyaTollbar(isChecked))
+        }
+
         render(initialState)
     }
 
