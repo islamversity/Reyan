@@ -2,6 +2,7 @@
 import SwiftUI
 import NavigationRouter
 
+
 struct QuranHomeView: RoutableView {
     
     var viewModel: QuranHomeViewModel
