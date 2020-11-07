@@ -4,6 +4,9 @@ import NavigationRouter
 
 /// Routable view model
 struct QuranHomeViewModel: RoutableViewModel {
+    
+//    lazy var mapper: Mapper = resolver.resolve(name : "ahmad_2")
+
     // MARK: - Routing
 
     /// Required navigation parameters (if any)

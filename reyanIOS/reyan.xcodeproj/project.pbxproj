@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8F4A329D52DC68C3178A6601 /* libPods-reyan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 230047422AF75AA1A9BDD882 /* libPods-reyan.a */; };
+		E74E028C2555890300F15DB1 /* Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74E028B2555890300F15DB1 /* Sample.swift */; };
 		E78EFD3225330F4F00886039 /* NavigationRouter in Frameworks */ = {isa = PBXBuildFile; productRef = E78EFD3125330F4F00886039 /* NavigationRouter */; };
 		E78EFD5F2533509A00886039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78EFD5D2533509900886039 /* AppDelegate.swift */; };
 		E78EFD602533509A00886039 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78EFD5E2533509A00886039 /* SceneDelegate.swift */; };
@@ -25,13 +25,12 @@
 		E796EC2625376ACC0025072F /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = E796EC2525376ACC0025072F /* Resolver */; };
 		E796EC2C253794970025072F /* DITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC2B253794970025072F /* DITest.swift */; };
 		E796EC34253833340025072F /* Example2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC33253833340025072F /* Example2.swift */; };
-		E796EC39253836720025072F /* DICore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC38253836720025072F /* DICore.swift */; };
-		E796EC3E253837260025072F /* NetworkDI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC3D253837260025072F /* NetworkDI.swift */; };
+		E796EC39253836720025072F /* AppDelegate+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC38253836720025072F /* AppDelegate+Injection.swift */; };
+		E796EC3E253837260025072F /* DIRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC3D253837260025072F /* DIRegister.swift */; };
 		E796EC4325388B0E0025072F /* Injections.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC4225388B0E0025072F /* Injections.swift */; };
 		F9275E162532160B0021FE0E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9275E152532160B0021FE0E /* ContentView.swift */; };
 		F9275E182532160D0021FE0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9275E172532160D0021FE0E /* Assets.xcassets */; };
 		F9275E1B2532160D0021FE0E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9275E1A2532160D0021FE0E /* Preview Assets.xcassets */; };
-		F9275E262532160D0021FE0E /* reyanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9275E252532160D0021FE0E /* reyanTests.swift */; };
 		F9275E312532160D0021FE0E /* reyanUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9275E302532160D0021FE0E /* reyanUITests.swift */; };
 		F9275E7E25323C0F0021FE0E /* Asghar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9275E7D25323C0F0021FE0E /* Asghar.swift */; };
 /* End PBXBuildFile section */
@@ -56,6 +55,7 @@
 /* Begin PBXFileReference section */
 		08745F589F42937201EAD41C /* Pods-reyan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reyan.debug.xcconfig"; path = "Target Support Files/Pods-reyan/Pods-reyan.debug.xcconfig"; sourceTree = "<group>"; };
 		230047422AF75AA1A9BDD882 /* libPods-reyan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-reyan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E74E028B2555890300F15DB1 /* Sample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sample.swift; sourceTree = "<group>"; };
 		E78EFD5D2533509900886039 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E78EFD5E2533509A00886039 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E78EFD69253351C000886039 /* Navigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
@@ -71,8 +71,8 @@
 		E78EFDF02533680200886039 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E796EC2B253794970025072F /* DITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DITest.swift; sourceTree = "<group>"; };
 		E796EC33253833340025072F /* Example2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example2.swift; sourceTree = "<group>"; };
-		E796EC38253836720025072F /* DICore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DICore.swift; sourceTree = "<group>"; };
-		E796EC3D253837260025072F /* NetworkDI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDI.swift; sourceTree = "<group>"; };
+		E796EC38253836720025072F /* AppDelegate+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Injection.swift"; sourceTree = "<group>"; };
+		E796EC3D253837260025072F /* DIRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIRegister.swift; sourceTree = "<group>"; };
 		E796EC4225388B0E0025072F /* Injections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injections.swift; sourceTree = "<group>"; };
 		F9275E102532160B0021FE0E /* reyan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = reyan.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9275E152532160B0021FE0E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -80,8 +80,6 @@
 		F9275E1A2532160D0021FE0E /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F9275E1C2532160D0021FE0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9275E212532160D0021FE0E /* reyanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = reyanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F9275E252532160D0021FE0E /* reyanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reyanTests.swift; sourceTree = "<group>"; };
-		F9275E272532160D0021FE0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F9275E2C2532160D0021FE0E /* reyanUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = reyanUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9275E302532160D0021FE0E /* reyanUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reyanUITests.swift; sourceTree = "<group>"; };
 		F9275E322532160D0021FE0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -96,7 +94,6 @@
 			files = (
 				E796EC2625376ACC0025072F /* Resolver in Frameworks */,
 				E78EFD3225330F4F00886039 /* NavigationRouter in Frameworks */,
-				8F4A329D52DC68C3178A6601 /* libPods-reyan.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -165,23 +162,23 @@
 			path = reyan/Search;
 			sourceTree = SOURCE_ROOT;
 		};
-		E796EC2A253794180025072F /* Resolver */ = {
+		E796EC2A253794180025072F /* DI */ = {
 			isa = PBXGroup;
 			children = (
+				E796EC38253836720025072F /* AppDelegate+Injection.swift */,
+				E796EC3D253837260025072F /* DIRegister.swift */,
 				E796EC2B253794970025072F /* DITest.swift */,
 				E796EC33253833340025072F /* Example2.swift */,
-				E796EC38253836720025072F /* DICore.swift */,
-				E796EC3D253837260025072F /* NetworkDI.swift */,
 				E796EC4225388B0E0025072F /* Injections.swift */,
+				E74E028B2555890300F15DB1 /* Sample.swift */,
 			);
-			path = Resolver;
+			path = DI;
 			sourceTree = "<group>";
 		};
 		F9275E072532160B0021FE0E = {
 			isa = PBXGroup;
 			children = (
 				F9275E122532160B0021FE0E /* reyan */,
-				F9275E242532160D0021FE0E /* reyanTests */,
 				F9275E2F2532160D0021FE0E /* reyanUITests */,
 				F9275E112532160B0021FE0E /* Products */,
 				18D0A90FA6FDDABE7F37BB4B /* Pods */,
@@ -202,7 +199,6 @@
 		F9275E122532160B0021FE0E /* reyan */ = {
 			isa = PBXGroup;
 			children = (
-				E796EC2A253794180025072F /* Resolver */,
 				E78EFD9C2533588C00886039 /* ReyanModule.swift */,
 				E78EFD5D2533509900886039 /* AppDelegate.swift */,
 				E78EFD5E2533509A00886039 /* SceneDelegate.swift */,
@@ -211,6 +207,7 @@
 				F9275E172532160D0021FE0E /* Assets.xcassets */,
 				F9275E1C2532160D0021FE0E /* Info.plist */,
 				F9275E7D25323C0F0021FE0E /* Asghar.swift */,
+				E796EC2A253794180025072F /* DI */,
 				E78EFD7B2533541100886039 /* QuranHome */,
 				E78EFDA42533598400886039 /* Search */,
 				E78EFD67253351C000886039 /* Navigation */,
@@ -225,15 +222,6 @@
 				F9275E1A2532160D0021FE0E /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		F9275E242532160D0021FE0E /* reyanTests */ = {
-			isa = PBXGroup;
-			children = (
-				F9275E252532160D0021FE0E /* reyanTests.swift */,
-				F9275E272532160D0021FE0E /* Info.plist */,
-			);
-			path = reyanTests;
 			sourceTree = "<group>";
 		};
 		F9275E2F2532160D0021FE0E /* reyanUITests */ = {
@@ -414,10 +402,11 @@
 				E78EFD9D2533588C00886039 /* ReyanModule.swift in Sources */,
 				E78EFD6E253351C000886039 /* Navigation.swift in Sources */,
 				E78EFD8D253355E500886039 /* QuranHomeUseCase.swift in Sources */,
-				E796EC39253836720025072F /* DICore.swift in Sources */,
+				E74E028C2555890300F15DB1 /* Sample.swift in Sources */,
+				E796EC39253836720025072F /* AppDelegate+Injection.swift in Sources */,
 				E796EC4325388B0E0025072F /* Injections.swift in Sources */,
 				E78EFDA82533598400886039 /* SearchView.swift in Sources */,
-				E796EC3E253837260025072F /* NetworkDI.swift in Sources */,
+				E796EC3E253837260025072F /* DIRegister.swift in Sources */,
 				E78EFD70253351C000886039 /* ScreenURL.swift in Sources */,
 				E796EC34253833340025072F /* Example2.swift in Sources */,
 				E78EFD71253351C000886039 /* Screens.swift in Sources */,
@@ -435,7 +424,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F9275E262532160D0021FE0E /* reyanTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -596,8 +584,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"reyan/Preview Content\"";
+				DEVELOPMENT_TEAM = 5X85QV25G8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = reyan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -612,6 +602,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.islamversity.reyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
@@ -624,8 +615,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"reyan/Preview Content\"";
+				DEVELOPMENT_TEAM = 5X85QV25G8;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = reyan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -640,6 +633,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.islamversity.reyan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TVOS_DEPLOYMENT_TARGET = 14.0;
