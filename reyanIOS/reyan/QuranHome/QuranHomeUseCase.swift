@@ -1,5 +1,6 @@
 
 import Foundation
+import nativeShared
 
 public class QuranHomeUseCase : ObservableObject {
     
@@ -14,6 +15,7 @@ public class QuranHomeUseCase : ObservableObject {
     }
     
     func goSearch() {
-        navigator.goTo(screen: SearchScreen())
+        
+        iOSNavigator.goTo(screen: Screens.Search(model: SearchLocalModel(backTransitionName: "", textTransitionName: ""), pushAnimation: nil, popAnimation: nil))
     }
 }
