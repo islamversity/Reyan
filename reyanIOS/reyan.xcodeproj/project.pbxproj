@@ -25,7 +25,7 @@
 		E796EC2625376ACC0025072F /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = E796EC2525376ACC0025072F /* Resolver */; };
 		E796EC2C253794970025072F /* DITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC2B253794970025072F /* DITest.swift */; };
 		E796EC34253833340025072F /* Example2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC33253833340025072F /* Example2.swift */; };
-		E796EC39253836720025072F /* AppDelegate+Injection.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC38253836720025072F /* AppDelegate+Injection.swift */; };
+		E796EC39253836720025072F /* DICore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC38253836720025072F /* DICore.swift */; };
 		E796EC3E253837260025072F /* DIRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC3D253837260025072F /* DIRegister.swift */; };
 		E796EC4325388B0E0025072F /* Injections.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC4225388B0E0025072F /* Injections.swift */; };
 		F9275E162532160B0021FE0E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9275E152532160B0021FE0E /* ContentView.swift */; };
@@ -71,7 +71,7 @@
 		E78EFDF02533680200886039 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E796EC2B253794970025072F /* DITest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DITest.swift; sourceTree = "<group>"; };
 		E796EC33253833340025072F /* Example2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Example2.swift; sourceTree = "<group>"; };
-		E796EC38253836720025072F /* AppDelegate+Injection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Injection.swift"; sourceTree = "<group>"; };
+		E796EC38253836720025072F /* DICore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DICore.swift; sourceTree = "<group>"; };
 		E796EC3D253837260025072F /* DIRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIRegister.swift; sourceTree = "<group>"; };
 		E796EC4225388B0E0025072F /* Injections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Injections.swift; sourceTree = "<group>"; };
 		F9275E102532160B0021FE0E /* reyan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = reyan.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -165,7 +165,7 @@
 		E796EC2A253794180025072F /* DI */ = {
 			isa = PBXGroup;
 			children = (
-				E796EC38253836720025072F /* AppDelegate+Injection.swift */,
+				E796EC38253836720025072F /* DICore.swift */,
 				E796EC3D253837260025072F /* DIRegister.swift */,
 				E796EC2B253794970025072F /* DITest.swift */,
 				E796EC33253833340025072F /* Example2.swift */,
@@ -403,7 +403,7 @@
 				E78EFD6E253351C000886039 /* Navigation.swift in Sources */,
 				E78EFD8D253355E500886039 /* QuranHomeUseCase.swift in Sources */,
 				E74E028C2555890300F15DB1 /* Sample.swift in Sources */,
-				E796EC39253836720025072F /* AppDelegate+Injection.swift in Sources */,
+				E796EC39253836720025072F /* DICore.swift in Sources */,
 				E796EC4325388B0E0025072F /* Injections.swift in Sources */,
 				E78EFDA82533598400886039 /* SearchView.swift in Sources */,
 				E796EC3E253837260025072F /* DIRegister.swift in Sources */,

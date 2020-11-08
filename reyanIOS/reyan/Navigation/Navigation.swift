@@ -1,18 +1,25 @@
 import UIKit
 import SwiftUI
 import NavigationRouter
+import nativeShared
 
 
-public let navigator : Navigator = Navigation()
+public let iOSNavigator : IOSNavigator = IOSNavigation()
 
 
-public protocol Navigator {
+public protocol IOSNavigator : Navigator{
     func loadRoutableModules()
     func getRouter() -> NavigationRouter
-    func goTo(screen: Screen)
 }
 
-public class Navigation : Navigator{
+public class IOSNavigation : IOSNavigator{
+   
+    public func goTo(screen: Screens) {
+        
+        print("path or screen.name = \(screen.name)")
+        
+        NavigationRouter.main.navigate(toPath: screen.name)
+    }
     
     public func loadRoutableModules () {
 //        print("loadRoutableModules")
@@ -21,11 +28,6 @@ public class Navigation : Navigator{
     
     public func getRouter() -> NavigationRouter {
         NavigationRouter.main
-    }
-    
-    public func goTo(screen: Screen) {
-        
-        NavigationRouter.main.navigate(toPath: screen.path.urlString)
     }
 }
 
