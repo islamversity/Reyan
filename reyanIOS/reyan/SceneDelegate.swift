@@ -1,6 +1,7 @@
 
 import UIKit
 import SwiftUI
+import nativeShared
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -12,7 +13,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions) {
        
         // Create the SwiftUI view that provides the window contents.
-        guard let contentView: UIViewController = navigator.getRouter().viewControllerFor(path: QuranHomeScreen().path.urlString) else {
+        guard let contentView: UIViewController = iOSNavigator.getRouter().viewControllerFor(path: Screens.Home().name) else {
             return
         }
         

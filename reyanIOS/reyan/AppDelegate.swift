@@ -9,7 +9,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         print("AppDelegate")
         // Register modules
-        navigator.loadRoutableModules()
+        iOSNavigator.loadRoutableModules()
         
         return true
     }
