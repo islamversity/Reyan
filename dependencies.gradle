@@ -52,7 +52,7 @@ ext {
             archComponent = [
                     //architecture comps
                     lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.androidArchComponent}",
-                    viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.androidArchComponent}",
+                    viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0-beta01",
                     liveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.androidArchComponent}"
             ],
 
