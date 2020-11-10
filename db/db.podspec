@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'db'
     spec.version                  = '1.0'
-    spec.homepage                 = 'db home'
+    spec.homepage                 = 'releaseFramework home'
     spec.source                   = { :git => "Not Published", :tag => "Cocoapods/#{spec.name}/#{spec.version}" }
     spec.authors                  = ''
     spec.license                  = ''
