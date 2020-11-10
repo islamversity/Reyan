@@ -16,6 +16,6 @@ public class QuranHomeUseCase : ObservableObject {
     
     func goSearch() {
         
-        iOSNavigator.goTo(screen: Screens.Search(model: SearchLocalModel(backTransitionName: "", textTransitionName: ""), pushAnimation: nil, popAnimation: nil))
+        iOSNavigator.goTo(screen: Screens.Search (model: SearchLocalModel(backTransitionName: "", textTransitionName: ""), pushAnimation: nil, popAnimation: nil))
     }
 }

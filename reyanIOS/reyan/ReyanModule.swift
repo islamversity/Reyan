@@ -19,14 +19,12 @@ public final class ReyanModule: RoutableModule {
         // Define routes
                 
         let quranHomeRoute: NavigationRoute = NavigationRoute(
-            path: Screens.Home().name,
+            path: Screens.HomeCompanion().url,
             type: QuranHomeViewModel.self,
             requiresAuthentication: false)
         
-        let screenName = Screens.Search(model: SearchLocalModel(backTransitionName: "", textTransitionName: ""), pushAnimation: nil, popAnimation: nil).name
-        print("registerRoutes : screenName = \(screenName)")
         let searchRoute: NavigationRoute = NavigationRoute(
-            path: screenName,
+            path: Screens.SearchCompanion().url,
             type: SearchViewModel.self,
             requiresAuthentication: false)
         
