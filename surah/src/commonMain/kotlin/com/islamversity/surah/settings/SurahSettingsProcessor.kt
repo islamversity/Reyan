@@ -33,8 +33,7 @@ class SurahSettingsProcessor(
 
         getSecondTranslationCalligraphy,
         changeSecondTranslationCalligraphy,
-
-        )
+    )
 
     private val getAllTranslationCalligraphies: FlowBlock<SurahIntent, SurahResult> = {
         ofType<SurahIntent.Initial>()
@@ -142,7 +141,6 @@ class SurahSettingsProcessor(
                 )
             }
     }
-
 
     private val changeSecondTranslationCalligraphy: Flow<SurahIntent>.() -> Flow<SurahResult> = {
         ofType<SurahIntent.ChangeSettings.NewSecondTranslation>()
