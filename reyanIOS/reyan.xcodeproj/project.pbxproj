@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D588B2044C49CDABEB6E19EB /* libPods-reyan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 230047422AF75AA1A9BDD882 /* libPods-reyan.a */; };
 		E74E028C2555890300F15DB1 /* Sample.swift in Sources */ = {isa = PBXBuildFile; fileRef = E74E028B2555890300F15DB1 /* Sample.swift */; };
-		E78EFD3225330F4F00886039 /* NavigationRouter in Frameworks */ = {isa = PBXBuildFile; productRef = E78EFD3125330F4F00886039 /* NavigationRouter */; };
+		E78EFD3225330F4F00886039 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = E78EFD3125330F4F00886039 /* SwiftPackageProductDependency */; };
 		E78EFD5F2533509A00886039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78EFD5D2533509900886039 /* AppDelegate.swift */; };
 		E78EFD602533509A00886039 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78EFD5E2533509A00886039 /* SceneDelegate.swift */; };
 		E78EFD6E253351C000886039 /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78EFD69253351C000886039 /* Navigation.swift */; };
@@ -22,7 +23,7 @@
 		E78EFDA72533598400886039 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78EFDA52533598400886039 /* SearchViewModel.swift */; };
 		E78EFDA82533598400886039 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78EFDA62533598400886039 /* SearchView.swift */; };
 		E78EFDF12533680200886039 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E78EFDEF2533680200886039 /* LaunchScreen.storyboard */; };
-		E796EC2625376ACC0025072F /* Resolver in Frameworks */ = {isa = PBXBuildFile; productRef = E796EC2525376ACC0025072F /* Resolver */; };
+		E796EC2625376ACC0025072F /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = E796EC2525376ACC0025072F /* SwiftPackageProductDependency */; };
 		E796EC2C253794970025072F /* DITest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC2B253794970025072F /* DITest.swift */; };
 		E796EC34253833340025072F /* Example2.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC33253833340025072F /* Example2.swift */; };
 		E796EC39253836720025072F /* DICore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC38253836720025072F /* DICore.swift */; };
@@ -92,8 +93,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E796EC2625376ACC0025072F /* Resolver in Frameworks */,
-				E78EFD3225330F4F00886039 /* NavigationRouter in Frameworks */,
+				E796EC2625376ACC0025072F /* BuildFile in Frameworks */,
+				E78EFD3225330F4F00886039 /* BuildFile in Frameworks */,
+				D588B2044C49CDABEB6E19EB /* libPods-reyan.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -251,8 +253,8 @@
 			);
 			name = reyan;
 			packageProductDependencies = (
-				E78EFD3125330F4F00886039 /* NavigationRouter */,
-				E796EC2525376ACC0025072F /* Resolver */,
+				E78EFD3125330F4F00886039 /* SwiftPackageProductDependency */,
+				E796EC2525376ACC0025072F /* SwiftPackageProductDependency */,
 			);
 			productName = reyan;
 			productReference = F9275E102532160B0021FE0E /* reyan.app */;
@@ -326,8 +328,8 @@
 			);
 			mainGroup = F9275E072532160B0021FE0E;
 			packageReferences = (
-				E78EFD3025330F4F00886039 /* XCRemoteSwiftPackageReference "NavigationRouter" */,
-				E796EC2425376ACC0025072F /* XCRemoteSwiftPackageReference "Resolver" */,
+				E78EFD3025330F4F00886039 /* RemoteSwiftPackageReference */,
+				E796EC2425376ACC0025072F /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = F9275E112532160B0021FE0E /* Products */;
 			projectDirPath = "";
@@ -762,7 +764,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		E78EFD3025330F4F00886039 /* XCRemoteSwiftPackageReference "NavigationRouter" */ = {
+		E78EFD3025330F4F00886039 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/corteggo/NavigationRouter.git";
 			requirement = {
@@ -770,7 +772,7 @@
 				kind = branch;
 			};
 		};
-		E796EC2425376ACC0025072F /* XCRemoteSwiftPackageReference "Resolver" */ = {
+		E796EC2425376ACC0025072F /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmlongco/Resolver.git";
 			requirement = {
@@ -781,14 +783,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		E78EFD3125330F4F00886039 /* NavigationRouter */ = {
+		E78EFD3125330F4F00886039 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E78EFD3025330F4F00886039 /* XCRemoteSwiftPackageReference "NavigationRouter" */;
+			package = E78EFD3025330F4F00886039 /* RemoteSwiftPackageReference */;
 			productName = NavigationRouter;
 		};
-		E796EC2525376ACC0025072F /* Resolver */ = {
+		E796EC2525376ACC0025072F /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = E796EC2425376ACC0025072F /* XCRemoteSwiftPackageReference "Resolver" */;
+			package = E796EC2425376ACC0025072F /* RemoteSwiftPackageReference */;
 			productName = Resolver;
 		};
 /* End XCSwiftPackageProductDependency section */

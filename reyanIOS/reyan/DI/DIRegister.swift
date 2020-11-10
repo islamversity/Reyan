@@ -38,16 +38,6 @@ extension Resolver {
             SearchProcessor(searchUsecase : resolve(), navigator: resolve(), mapper : resolve(name : "SurahRepoUIMapper"))
         }
         
-        // SettingsModule
-        // 1
-        register{
-            SettingsPresenter(processor: resolve(name : "SettingsProcessor"))
-        }
-        // 2
-        register(MviProcessor.self, name: "SettingsProcessor") {
-            SettingsProcessor(settingsRepo: resolve(), calligraphyRepo: resolve(), uiMapper: resolve(name : "CalligraphyDomainUIMapper"))
-        }
-        
         // SurahModule
         register{
             SurahPresenter(processor: resolve(name : "SurahProcessor"))
@@ -58,8 +48,21 @@ extension Resolver {
                            ayaMapper : resolve(name : "AyaRepoUIMapper"),
                            surahRepoHeaderMapper : resolve(name : "SurahRepoHeaderMapper"),
                            settingRepo : resolve(),
-                           surahUsecase : resolve()
+                           surahUsecase : resolve(), settingsProcessor: resolve(name : "SurahSettingsProcessor")
             )
+        }
+        register(MviProcessor.self, name: "SurahSettingsProcessor") {
+            SurahSettingsProcessor(settingsRepo: resolve(), calligraphyRepo: resolve(), uiMapper: resolve(name : "CalligraphyDomainUIMapper"))
+        }
+        
+        // SettingsModule
+        // 1
+        register{
+            SettingsPresenter(processor: resolve(name : "SettingsProcessor"))
+        }
+        // 2
+        register(MviProcessor.self, name: "SettingsProcessor") {
+            SettingsProcessor(settingsRepo: resolve(), calligraphyRepo: resolve(), uiMapper: resolve(name : "CalligraphyDomainUIMapper"))
         }
     }
     
@@ -156,9 +159,7 @@ extension Resolver {
         register(NameQueries.self) {
             return mainDB.nameQueries
         }
-        register(BismillahQueries.self) {
-            return mainDB.bismillahQueries
-        }
+       
         
         // 2-1-1-1
         register(SettingsQueries.self) {
@@ -204,11 +205,6 @@ extension Resolver {
         // Mapper<CalligraphyEntity, Calligraphy>
         register(Mapper.self, name: "CalligraphyEntityRepoMapper") {
             CalligraphyEntityRepoMapper()
-        }
-        
-        // Mapper<Bismillah, BismillahRepoModel>
-        register(Mapper.self, name: "BismillahEntityRepoMapper"){
-            BismillahEntityRepoMapper()
         }
         
         /*
