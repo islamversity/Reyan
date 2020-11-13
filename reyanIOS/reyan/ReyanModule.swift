@@ -17,15 +17,17 @@ public final class ReyanModule: RoutableModule {
     public func registerRoutes() {
         
         // Define routes
-                
+        
+//        print("QuranHomeViewParent url = \(Screens.HomeCompanion().url)")
+
         let quranHomeRoute: NavigationRoute = NavigationRoute(
             path: Screens.HomeCompanion().url,
-            type: QuranHomeViewModel.self,
+            type: QuranHomeViewParent.self,
             requiresAuthentication: false)
         
         let searchRoute: NavigationRoute = NavigationRoute(
             path: Screens.SearchCompanion().url,
-            type: SearchViewModel.self,
+            type: SearchViewParent.self,
             requiresAuthentication: false)
         
 //        let surahRoute: NavigationRoute = NavigationRoute(
