@@ -27,7 +27,6 @@
 		F9275E182532160D0021FE0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9275E172532160D0021FE0E /* Assets.xcassets */; };
 		F9275E1B2532160D0021FE0E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9275E1A2532160D0021FE0E /* Preview Assets.xcassets */; };
 		F9275E312532160D0021FE0E /* reyanUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9275E302532160D0021FE0E /* reyanUITests.swift */; };
-		F9275E7E25323C0F0021FE0E /* Asghar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9275E7D25323C0F0021FE0E /* Asghar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,7 +71,6 @@
 		F9275E2C2532160D0021FE0E /* reyanUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = reyanUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9275E302532160D0021FE0E /* reyanUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reyanUITests.swift; sourceTree = "<group>"; };
 		F9275E322532160D0021FE0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F9275E7D25323C0F0021FE0E /* Asghar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Asghar.swift; sourceTree = "<group>"; };
 		FF37CD3337C4F5708B61F685 /* Pods-reyan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reyan.release.xcconfig"; path = "Target Support Files/Pods-reyan/Pods-reyan.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -188,7 +186,6 @@
 				E78EFD5E2533509A00886039 /* SceneDelegate.swift */,
 				E78EFDEF2533680200886039 /* LaunchScreen.storyboard */,
 				F9275E152532160B0021FE0E /* ContentView.swift */,
-				F9275E7D25323C0F0021FE0E /* Asghar.swift */,
 				F9275E172532160D0021FE0E /* Assets.xcassets */,
 				F9275E1C2532160D0021FE0E /* Info.plist */,
 				E796EC2A253794180025072F /* DI */,
@@ -392,7 +389,6 @@
 				E796EC3E253837260025072F /* DIRegister.swift in Sources */,
 				F9275E162532160B0021FE0E /* ContentView.swift in Sources */,
 				E78EFDA72533598400886039 /* SearchViewParent.swift in Sources */,
-				F9275E7E25323C0F0021FE0E /* Asghar.swift in Sources */,
 				E78EFD7E2533541100886039 /* QuranHomeViewParent.swift in Sources */,
 				E78EFD7F2533541100886039 /* QuranHomeView.swift in Sources */,
 			);

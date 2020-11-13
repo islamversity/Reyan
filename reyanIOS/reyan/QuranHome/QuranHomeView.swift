@@ -23,11 +23,9 @@ struct QuranHomeView: View {
             
             Text("Success RUN")
                 .foregroundColor(.black)
-            
-            Button(action: {
-               
-                presenter.processIntents(intents: QuranHomeIntent.SearchClicked.init())
                 
+            Button(action: {
+                presenter.processIntents(intents: QuranHomeIntent.SearchClicked.init())
             })
             {
                 Text("send intent")

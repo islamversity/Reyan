@@ -8,6 +8,7 @@ class QuranHomeStateCollector : FlowCollector, ObservableObject {
     @Published var uiState: QuranHomeState?
     
     func emit(value: Any?, completionHandler: @escaping (KotlinUnit?, Error?) -> Void) {
+        
         print("states : value = \(String(describing: value))")
         print("states : completionHandler = \(String(describing: completionHandler))")
 
