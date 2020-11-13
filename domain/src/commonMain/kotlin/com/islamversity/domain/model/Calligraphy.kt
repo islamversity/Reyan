@@ -20,7 +20,12 @@ data class Calligraphy(
         }
 
     companion object{
-        val DEFAULT = Calligraphy
+        val EMPTY = Calligraphy(
+            CalligraphyId(""),
+            Language(""),
+            null,
+            "",
+        )
     }
 }
 

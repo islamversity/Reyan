@@ -19,4 +19,6 @@
     <string name="title_font_size_normal">Normal</string>
     <string name="title_font_size_Large">Large</string>
     <string name="title_font_size_x_Large">X-Large</string>
+
+    <string name="setting_none_calligraphy_selected">None</string>
 </resources>

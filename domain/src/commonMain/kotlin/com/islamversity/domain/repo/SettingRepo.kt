@@ -29,10 +29,20 @@ interface SettingRepo {
     fun getAyaMainFontSize(context: CoroutineContext = Dispatchers.Default): Flow<QuranReadFontSize>
     fun getAyaTranslateFontSize(context: CoroutineContext = Dispatchers.Default): Flow<TranslateReadFontSize>
 
-    suspend fun setSecondarySurahNameCalligraphy(calligraphy: Calligraphy, context: CoroutineContext = Dispatchers.Default)
+    suspend fun setSecondarySurahNameCalligraphy(
+        calligraphy: Calligraphy,
+        context: CoroutineContext = Dispatchers.Default
+    )
 
-    suspend fun setFirstAyaTranslationCalligraphy(calligraphy: Calligraphy, context: CoroutineContext = Dispatchers.Default)
-    suspend fun setSecondAyaTranslationCalligraphy(calligraphy: Calligraphy, context: CoroutineContext = Dispatchers.Default)
+    suspend fun setFirstAyaTranslationCalligraphy(
+        calligraphy: SettingsCalligraphy,
+        context: CoroutineContext = Dispatchers.Default
+    )
+
+    suspend fun setSecondAyaTranslationCalligraphy(
+        calligraphy: SettingsCalligraphy,
+        context: CoroutineContext = Dispatchers.Default
+    )
 
     suspend fun setAyaMainFontSize(font: QuranReadFontSize, context: CoroutineContext = Dispatchers.Default)
     suspend fun setAyaTranslateFontSize(font: TranslateReadFontSize, context: CoroutineContext = Dispatchers.Default)
@@ -146,14 +156,23 @@ class SettingRepoImpl(
     }
 
     override suspend fun setFirstAyaTranslationCalligraphy(
-        calligraphy: Calligraphy,
+        calligraphy: SettingsCalligraphy,
         context: CoroutineContext
     ) {
-        settingsDataSource.put(KEY_CALLIGRAPHY_AYA_TRANSLATION_FIRST, calligraphy.id.id, context)
+        if (calligraphy is SettingsCalligraphy.Selected)
+            settingsDataSource.put(KEY_CALLIGRAPHY_AYA_TRANSLATION_FIRST, calligraphy.cal.id.id, context)
+        else
+            settingsDataSource.put(KEY_CALLIGRAPHY_AYA_TRANSLATION_FIRST, null, context)
     }
 
-    override suspend fun setSecondAyaTranslationCalligraphy(calligraphy: Calligraphy, context: CoroutineContext) {
-        settingsDataSource.put(KEY_CALLIGRAPHY_AYA_TRANSLATION_SECOND, calligraphy.id.id, context)
+    override suspend fun setSecondAyaTranslationCalligraphy(
+        calligraphy: SettingsCalligraphy,
+        context: CoroutineContext
+    ) {
+        if (calligraphy is SettingsCalligraphy.Selected)
+            settingsDataSource.put(KEY_CALLIGRAPHY_AYA_TRANSLATION_SECOND, calligraphy.cal.id.id, context)
+        else
+            settingsDataSource.put(KEY_CALLIGRAPHY_AYA_TRANSLATION_SECOND, null, context)
     }
 
     override suspend fun setAyaMainFontSize(font: QuranReadFontSize, context: CoroutineContext) {

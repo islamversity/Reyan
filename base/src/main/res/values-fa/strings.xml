@@ -4,4 +4,5 @@
     <string name="aya_font_size">اندازه آیه</string>
     <string name="translate_font_size">اندازه ترجمه</string>
 
+    <string name="setting_none_calligraphy_selected">هیچ کدام</string>
 </resources>
