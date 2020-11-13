@@ -2,13 +2,9 @@
 import SwiftUI
 import NavigationRouter
 
-struct SearchView: RoutableView {
+struct SearchView: View {
     
-    var viewModel: SearchViewModel
-        
-    init(viewModel: SearchViewModel) {
-           self.viewModel = viewModel
-       }
+    init() {}
     
     var body: some View {
         Text("Search View")
@@ -17,7 +13,7 @@ struct SearchView: RoutableView {
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchView(viewModel: SearchViewModel(parameters: nil))
+        SearchView()
     }
 }
 

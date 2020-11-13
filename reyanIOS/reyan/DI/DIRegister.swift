@@ -4,6 +4,21 @@ import nativeShared
 
 extension Resolver {
     
+    
+    public static func registerHome () {
+        register{
+            QuranHomePresenter(processor: resolve(name : "QuranHomeProcessor"))
+        }
+        register(MviProcessor.self, name: "QuranHomeProcessor") {
+            QuranHomeProcessor(navigator: resolve())
+        }
+    }
+    
+    
+    
+    
+    
+    
     public static func registerScreens() {
         
         //  QuranHomeModule
@@ -160,7 +175,6 @@ extension Resolver {
             return mainDB.nameQueries
         }
        
-        
         // 2-1-1-1
         register(SettingsQueries.self) {
             return mainDB.settingsQueries
@@ -219,6 +233,7 @@ extension Resolver {
         register(Mapper.self, name: "SurahRepoUIMapper"){
             SurahRepoUIMapper()
         }
+        
         // Mapper<SurahUIModel, SurahItemModel>
 //        register(Mapper.self, name: "SurahUIItemMapper"){
 //            SurahUIItemMapper()
