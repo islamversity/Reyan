@@ -15,7 +15,7 @@ public protocol IOSNavigator : Navigator{
 public class IOSNavigation : IOSNavigator{
    
     public func goTo(screen: Screens) {
-        NavigationRouter.main.navigate(toPath: screen.name)
+        NavigationRouter.main.navigate(toPath: screen.url)
     }
     
     public func loadRoutableModules () {

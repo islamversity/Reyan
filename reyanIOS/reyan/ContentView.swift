@@ -2,7 +2,7 @@ import SwiftUI
 //
 struct ContentView: View {
     var body: some View {
-        Text(Asghar().first()!)
+        Text("first")
             .padding()
     }
 }
