@@ -15,6 +15,7 @@ internal val jsonParser = Json {
 
 sealed class Screens(
     val name: String,
+    val url : String,
     val extras: Pair<String, String>? = null,
     val pushAnimation: NavigationAnimation? = null,
     val popAnimation: NavigationAnimation? = null
@@ -27,10 +28,10 @@ sealed class Screens(
         val module: String
     }
 
-    internal object Test : Screens("com.islamversity.navigation.TestController")
+    internal object Test : Screens("com.islamversity.navigation.TestController", "")
 
-    object OnBoarding : Screens("com.islamversity.quran_home.feature.onboarding.OnBoardingView")
-    class Home : Screens(name) {
+    object OnBoarding : Screens("com.islamversity.quran_home.feature.onboarding.OnBoardingView", "onboarding")
+    class Home : Screens(name, url) {
         companion object{
             const val name = "com.islamversity.quran_home.feature.home.QuranHomeView" //"com.islamversity.quran_home.view.HomeView"
             const val url = "/home"
@@ -43,6 +44,7 @@ sealed class Screens(
         popAnimation: NavigationAnimation? = null
     ) : Screens(
         name,
+        url,
         EXTRA_SEARCH to jsonParser.encodeToString(model),
         pushAnimation,
         popAnimation
@@ -59,6 +61,7 @@ sealed class Screens(
         popAnimation: NavigationAnimation? = null
     ) : Screens(
         name,
+        url,
         EXTRA_SURAH_DETAIL to jsonParser.encodeToString(model),
         pushAnimation,
         popAnimation
@@ -70,7 +73,7 @@ sealed class Screens(
     }
 
     class Settings
-        : Screens(name)
+        : Screens(name, url)
     {
         companion object{
             const val name ="com.islamversity.settings.SettingsView"
