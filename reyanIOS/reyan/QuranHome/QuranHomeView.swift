@@ -1,56 +1,56 @@
 
 import SwiftUI
 import NavigationRouter
+import nativeShared
 
 
-struct QuranHomeView: RoutableView {
+struct QuranHomeView: View {
     
-    var viewModel: QuranHomeViewModel
-    @ObservedObject public var uc: QuranHomeUseCase
+    @ObservedObject public var flowCollector: QuranHomeStateCollector = QuranHomeStateCollector()
+    var presenter : QuranHomePresenter
     
-    init(viewModel: QuranHomeViewModel) {
-        self.viewModel = viewModel
-        self.uc = QuranHomeUseCase()
+    init(presenter : QuranHomePresenter) {
         
-        uc.initialize()
+        self.presenter = presenter
+        presenter.states().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
+        
+        print("isLoading = \(String(describing: flowCollector.uiState?.base.showLoading))")
     }
     
     var body: some View {
         
         VStack(spacing: 30) {
             
-            Group { () -> AnyView in
+            Text("Success RUN")
+                .foregroundColor(.black)
+            
+            Button(action: {
+               
+                presenter.processIntents(intents: QuranHomeIntent.SearchClicked.init())
                 
-                switch uc.uiState {
-                    
-                case .Loading(let message):
-                    return AnyView(
-                        Text(message)
-                    )
-                    
-                case .SuccessfullyFetched:
-
-                    return AnyView(
-                        VStack(spacing: 30) {
-                            Text("SuccessfullyFetched")
-                            
-                            Button(action: self.uc.goSearch) {
-                                Text("Go Search")
-                                    .fontWeight(.semibold)
-                                    .font(.title)
-                            }
-                        }
-                    )
-                }
+            })
+            {
+                Text("send intent")
+                    .fontWeight(.bold)
+                    .foregroundColor(.white)
+                    .multilineTextAlignment(.center)
+                    .lineLimit(1)
+                    .padding(20.0)
+                    .font(.custom("Vazir", size: 20.0))
+                    .cornerRadius(10.0)
+                    .background(Color.black)
             }
-            .navigationBarTitle("Navigation")
+
+            Text("state = \(String(describing: flowCollector.uiState))")
+                .foregroundColor(.black)
+            
         }
+        .navigationBarTitle("MVI")
     }
 }
-
-struct QuranView_Previews: PreviewProvider {
-    static var previews: some View {
-        QuranHomeView(viewModel: QuranHomeViewModel(parameters: nil))
-    }
-}
-
+//
+//struct QuranView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        QuranHomeView()
+//    }
+//}

@@ -3,7 +3,7 @@ import SwiftUI
 import NavigationRouter
 
 /// Routable view model
-struct SearchViewModel: RoutableViewModel {
+struct SearchViewParent: RoutableViewParent {
     // MARK: - Routing
 
     /// Required navigation parameters (if any)
@@ -20,7 +20,7 @@ struct SearchViewModel: RoutableViewModel {
 
     /// View body
     var routedView: AnyView {
-        SearchView(viewModel: self)
+        SearchView()
             .eraseToAnyView()
     }
     

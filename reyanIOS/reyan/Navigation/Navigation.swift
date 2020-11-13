@@ -15,14 +15,10 @@ public protocol IOSNavigator : Navigator{
 public class IOSNavigation : IOSNavigator{
    
     public func goTo(screen: Screens) {
-        
-        print("path or screen.name = \(screen.name)")
-        
         NavigationRouter.main.navigate(toPath: screen.name)
     }
     
     public func loadRoutableModules () {
-//        print("loadRoutableModules")
         RoutableModulesFactory.loadRoutableModules()
     }
     

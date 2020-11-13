@@ -1,9 +1,10 @@
 
 import SwiftUI
 import NavigationRouter
+import Resolver
 
 /// Routable view model
-struct QuranHomeViewModel: RoutableViewModel {
+struct QuranHomeViewParent: RoutableViewParent, Resolving{
     
 //    lazy var mapper: Mapper = resolver.resolve(name : "ahmad_2")
 
@@ -23,8 +24,7 @@ struct QuranHomeViewModel: RoutableViewModel {
 
     /// View body
     var routedView: AnyView {
-        
-        QuranHomeView(viewModel: self)
+        QuranHomeView(presenter: resolver.resolve())
             .eraseToAnyView()
     }
     
