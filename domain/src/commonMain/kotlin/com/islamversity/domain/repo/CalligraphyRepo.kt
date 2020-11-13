@@ -6,8 +6,11 @@ import com.islamversity.core.mapWithNullable
 import com.islamversity.db.datasource.CalligraphyLocalDataSource
 import com.islamversity.domain.model.Calligraphy
 import com.islamversity.domain.model.CalligraphyId
+import com.islamversity.domain.model.SettingsCalligraphy
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.transform
 import com.islamversity.db.Calligraphy as CalligraphyEntity
 
 interface CalligraphyRepo {
@@ -40,8 +43,9 @@ class CalligraphyRepoImpl(
             }
 
     override fun getCalligraphy(id: CalligraphyId): Flow<Calligraphy?> =
-        ds.getCalligraphyById(com.islamversity.db.model.CalligraphyId(id.id))
+      ds.getCalligraphyById(com.islamversity.db.model.CalligraphyId(id.id))
             .mapWithNullable(mapper)
+
 
     override fun getMainAyaCalligraphy(): Flow<Calligraphy> =
         ds.getArabicSimpleAyaCalligraphy()

@@ -37,8 +37,8 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
 
     private val intentChannel = BroadcastChannel<SettingsIntent>(Channel.BUFFERED)
 
-    private var ayaCalligraphies: List<CalligraphyUIModel> = emptyList()
-    private var secondTranslationCalligraphy: List<CalligraphyUIModel> = emptyList()
+    private var firstTranslationCalligraphies: List<CalligraphyUIModel> = emptyList()
+    private var secondTranslationCalligraphies: List<CalligraphyUIModel> = emptyList()
     private var surahNameCalligraphies: List<CalligraphyUIModel> = emptyList()
 
     lateinit var appLanguages: List<String>
@@ -95,25 +95,20 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
 
         binding.firstTranslationCalligraphy.setOnClickListener {
             OptionSelector(binding.secondSurahCalligraphy.context)
-                .options(ayaCalligraphies.map { it.name })
+                .options(firstTranslationCalligraphies.map { it.name.takeIf { it.isNotBlank() } ?: binding.root.context.getString(R.string.setting_none_calligraphy_selected)})
                 .dismissListener(object : DismissListener {
                     override fun dismissSheet(position: Int) {
-                        intentChannel.offer(
-                            SettingsIntent.NewFirstTranslation(ayaCalligraphies[position])
-                        )
+                        intentChannel.offer( SettingsIntent.NewFirstTranslation(firstTranslationCalligraphies[position]))
                     }
-                })
-                .show()
+                }).show()
         }
 
         binding.secondTranslationCalligraphy.setOnClickListener {
             OptionSelector(binding.secondSurahCalligraphy.context)
-                .options(secondTranslationCalligraphy.map { it.name })
+                .options(secondTranslationCalligraphies.map { it.name.takeIf { it.isNotBlank() } ?: binding.root.context.getString(R.string.setting_none_calligraphy_selected) })
                 .dismissListener(object : DismissListener {
                     override fun dismissSheet(position: Int) {
-                        intentChannel.offer(
-                            SettingsIntent.NewSecondTranslation(secondTranslationCalligraphy[position])
-                        )
+                        intentChannel.offer(SettingsIntent.NewSecondTranslation(secondTranslationCalligraphies[position]))
                     }
                 }).show()
 
@@ -169,9 +164,9 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
         defaultTranslateSize = state.translateTextFontSize
         binding.translateFontSizeSeekBar.setProgress(state.translateTextFontSize.toFloat())
 
-        ayaCalligraphies = state.firstTranslationCalligraphies
+        firstTranslationCalligraphies = state.firstTranslationCalligraphies
         surahNameCalligraphies = state.secondSurahNameCalligraphies
-        secondTranslationCalligraphy = state.secondTranslationCalligraphies
+        secondTranslationCalligraphies = state.secondTranslationCalligraphies
         binding.secondTranslationCalligraphySubtitle.text =
             state.selectedSecondTranslationCalligraphy?.name
         binding.secondTranslationCalligraphySubtitle.text =
