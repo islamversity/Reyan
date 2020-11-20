@@ -28,4 +28,9 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
+    <style name="OptionsSelectorTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BaseBottomSheetStyle</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
 </resources>

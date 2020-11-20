@@ -6,8 +6,6 @@ import com.islamversity.core.mvi.BaseState
 import com.islamversity.core.mvi.MviProcessor
 import com.islamversity.core.notOfType
 import com.islamversity.core.ofType
-import com.islamversity.surah.settings.SurahSettingsIntent
-import com.islamversity.surah.settings.SurahSettingsResult
 import com.islamversity.surah.settings.SurahSettingsState
 import kotlinx.coroutines.flow.take
 
@@ -67,6 +65,8 @@ class SurahPresenter(
                 preState.copy(selectedFirstTranslationAyaCalligraphy = result.calligraphy)
             is SurahResult.Settings.SecondAyaTranslationCalligraphy ->
                 preState.copy(selectedSecondTranslationAyaCalligraphy = result.calligraphy)
+            is SurahResult.Settings.EnableToolbarForAya ->
+                preState.copy(toolbarForAyaOption = result.option)
         }
 
     }

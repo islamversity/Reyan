@@ -27,6 +27,7 @@ dependencies {
 
     implementation kotlinStd8
 
+    implementation design
     implementation recyclerView
     implementation epoxy
     kapt epoxyCompiler

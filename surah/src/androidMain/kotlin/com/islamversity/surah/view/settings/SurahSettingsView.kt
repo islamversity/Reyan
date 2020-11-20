@@ -6,10 +6,14 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
+import com.islamversity.view_component.sheet.DismissListener
+import com.islamversity.view_component.sheet.OptionSelector
 import com.islamversity.domain.model.QuranReadFontSize
 import com.islamversity.surah.SurahIntent
 import com.islamversity.surah.databinding.DialogSettingsBinding
+import com.islamversity.surah.model.CalligraphyUIModel
 import com.islamversity.surah.settings.SurahSettingsState
+import com.islamversity.view_component.ext.hide
 import com.warkiz.widget.IndicatorSeekBar
 import com.warkiz.widget.OnSeekChangeListener
 import com.warkiz.widget.SeekParams
@@ -20,6 +24,7 @@ class SurahSettingsView(
     context: Context,
     private val initialState: SurahSettingsState
 ) : Dialog(context) {
+    private lateinit var ayaCalligraphies: List<CalligraphyUIModel>
     private var binding: DialogSettingsBinding? = null
     var onSettings: OnSettings? = null
 
@@ -42,9 +47,9 @@ class SurahSettingsView(
 
             private fun hideView() {
                 binding?.apply {
-                    ayaFontSizeTitle.visibility = View.INVISIBLE
-                    transLateFontSizeTitle.visibility = View.INVISIBLE
-                    transLateFontSizeSeekBar.visibility = View.INVISIBLE
+                    ayaFontSizeTitle.hide()
+                    transLateFontSizeTitle.hide()
+                    transLateFontSizeSeekBar..hide()
                 }
             }
 
@@ -65,9 +70,12 @@ class SurahSettingsView(
 
             private fun hideView() {
                 binding?.apply {
-                    ayaFontSizeTitle.visibility = View.INVISIBLE
-                    ayaFontSizeSeekBar.visibility = View.INVISIBLE
-                    transLateFontSizeTitle.visibility = View.INVISIBLE
+                    ayaFontSizeTitle.hide()
+                    changeFirstTranslate.hide()
+                    changeSecondTranslate.hide()
+                    showAyaToolbarSwitch.hide()
+                    ayaFontSizeSeekBar.hide()
+                    transLateFontSizeTitle.hide()
                 }
             }
 
@@ -76,29 +84,58 @@ class SurahSettingsView(
             }
         }
 
-        binding!!.showFirstTranslate.setOnCheckedChangeListener{ view ,isChecked ->
-            onSettings?.invoke(SurahIntent.ChangeSettings.ShowFirstTranslate(isChecked))
-        }
-
-        binding!!.showSecondTranslate.setOnCheckedChangeListener{ view ,isChecked ->
-            onSettings?.invoke(SurahIntent.ChangeSettings.ShowSecondTranslate(isChecked))
-        }
-
-        binding!!.showAyaToolbar.setOnCheckedChangeListener{ view ,isChecked ->
+        binding!!.showAyaToolbarSwitch.setOnCheckedChangeListener { view, isChecked ->
             onSettings?.invoke(SurahIntent.ChangeSettings.ShowAyaTollbar(isChecked))
+        }
+
+        binding!!.changeFirstTranslate.setOnClickListener {
+            dismiss()
+            OptionSelector(it.context)
+                .options(ayaCalligraphies.map { it.name })
+                .dismissListener(object : DismissListener {
+                    override fun dismissSheet(position: Int) {
+                        onSettings!!.invoke(SurahIntent
+                            .ChangeSettings
+                            .NewFirstTranslation(ayaCalligraphies[position]))
+                        dismiss()
+                    }
+                })
+                .show()
+        }
+
+        binding!!.changeSecondTranslate.setOnClickListener {
+            dismiss()
+            OptionSelector(it.context)
+                .options(ayaCalligraphies.map { it.name })
+                .dismissListener(object : DismissListener {
+                    override fun dismissSheet(position: Int) {
+                        onSettings!!.invoke(SurahIntent
+                            .ChangeSettings
+                            .NewSecondTranslation(ayaCalligraphies[position]))
+                        dismiss()
+                    }
+                }).show()
+
         }
 
         render(initialState)
     }
 
     private fun render(state: SurahSettingsState) {
-        binding!!.ayaFontSizeSeekBar.min = QuranReadFontSize.MAIN_AYA_MIN.size.toFloat()
-        binding!!.ayaFontSizeSeekBar.max = QuranReadFontSize.MAX.size.toFloat()
+        binding!!.apply {
+            ayaFontSizeSeekBar.min = QuranReadFontSize.MAIN_AYA_MIN.size.toFloat()
+            ayaFontSizeSeekBar.max = QuranReadFontSize.MAX.size.toFloat()
 
-        binding!!.transLateFontSizeSeekBar.min = QuranReadFontSize.TRANSLATION_MIN.size.toFloat()
-        binding!!.transLateFontSizeSeekBar.max = QuranReadFontSize.MAX.size.toFloat()
+            transLateFontSizeSeekBar.min = QuranReadFontSize.TRANSLATION_MIN.size.toFloat()
+            transLateFontSizeSeekBar.max = QuranReadFontSize.MAX.size.toFloat()
 
-        binding!!.ayaFontSizeSeekBar.setProgress(state.quranTextFontSize.toFloat())
-        binding!!.transLateFontSizeSeekBar.setProgress(state.translateTextFontSize.toFloat())
+            ayaFontSizeSeekBar.setProgress(state.quranTextFontSize.toFloat())
+            transLateFontSizeSeekBar.setProgress(state.translateTextFontSize.toFloat())
+
+            showAyaToolbarSwitch.isChecked = state.toolbarForAyaOption
+
+            ayaCalligraphies = state.ayaCalligraphies
+        }
+
     }
 }

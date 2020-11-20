@@ -118,6 +118,7 @@ class SurahView(
                 }
 
                 if (it is AyaUIModel) {
+                    it.toolbarVisible = state.settingsState.toolbarForAyaOption
                     ayaView {
                         id(it.rowId)
                         model(it)

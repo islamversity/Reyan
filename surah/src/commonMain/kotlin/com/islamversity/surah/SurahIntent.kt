@@ -26,16 +26,8 @@ sealed class SurahIntent : MviIntent {
             val language: CalligraphyUIModel
         ) : ChangeSettings()
 
-        data class ShowFirstTranslate(
-            val isEnabled: Boolean
-        ) : ChangeSettings()
-
-        data class ShowSecondTranslate(
-            val isEnabled: Boolean
-        ) : ChangeSettings()
-
         data class ShowAyaTollbar(
-            val isEnabled: Boolean
+            val enable: Boolean
         ) : ChangeSettings()
     }
 }

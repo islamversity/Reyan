@@ -5,6 +5,7 @@ import com.islamversity.core.Mapper
 import com.islamversity.db.datasource.CalligraphyLocalDataSource
 import com.islamversity.db.datasource.SettingsDataSource
 import com.islamversity.db.model.CalligraphyId
+import com.islamversity.domain.AyaOption
 import com.islamversity.domain.model.Calligraphy
 import com.islamversity.domain.model.QuranReadFontSize
 import com.islamversity.domain.model.SettingsCalligraphy
@@ -46,12 +47,17 @@ interface SettingRepo {
 
     suspend fun setAyaMainFontSize(font: QuranReadFontSize, context: CoroutineContext = Dispatchers.Default)
     suspend fun setAyaTranslateFontSize(font: TranslateReadFontSize, context: CoroutineContext = Dispatchers.Default)
+
+    suspend fun enableToolbarForAya(enable: Boolean, context: CoroutineContext = Dispatchers.Default)
+    fun getToolbarForAyaOption(context: CoroutineContext = Dispatchers.Default): Flow<AyaOption>
+
 }
 
 private const val KEY_CALLIGRAPHY_SURAH_NAME_SECONDARY = "KEY_CALLIGRAPHY_SURAH_NAME_SECONDARY"
 private const val KEY_CALLIGRAPHY_AYA_TRANSLATION_FIRST = "KEY_CALLIGRAPHY_AYA_TRANSLATION_FIRST"
 private const val KEY_CALLIGRAPHY_AYA_TRANSLATION_SECOND = "KEY_CALLIGRAPHY_AYA_TRANSLATION_SECOND"
 
+private const val KEY_OPTION_AYA_TOOLBAR = "KEY_OPTION_AYA_TOOLBAR"
 private const val KEY_FONT_SIZE_AYA_MAIN = "KEY_FONT_SIZE_AYA_MAIN"
 private const val KEY_FONT_SIZE_AYA_TRANSLATION = "KEY_FONT_SIZE_AYA_TRANSLATION"
 
@@ -182,4 +188,18 @@ class SettingRepoImpl(
     override suspend fun setAyaTranslateFontSize(font: TranslateReadFontSize, context: CoroutineContext) {
         settingsDataSource.put(KEY_FONT_SIZE_AYA_TRANSLATION, font.size.toString(), context)
     }
+
+    override suspend fun enableToolbarForAya(enable: Boolean, context: CoroutineContext) {
+        settingsDataSource.put(KEY_OPTION_AYA_TOOLBAR, enable.toString(), context)
+    }
+
+    override fun getToolbarForAyaOption(context: CoroutineContext): Flow<AyaOption> =
+        settingsDataSource.observeKey(
+            KEY_OPTION_AYA_TOOLBAR, { AyaOption.DEFAULT.enable.toString() },
+            context
+        ).map { AyaOption(it.toBoolean()) }
+            .onEach {
+                Logger.log { "SettingRepo change the visibility of toolbar = $it" }
+            }
+
 }

@@ -1,9 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="OptionsSelectorTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/BaseBottomSheetStyle</item>
-        <item name="android:windowIsFloating">false</item>
-    </style>
-
 </resources>

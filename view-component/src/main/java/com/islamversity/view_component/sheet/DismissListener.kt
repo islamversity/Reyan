@@ -1,4 +1,4 @@
-package com.islamversity.settings.sheet
+package com.islamversity.view_component.sheet
 
 interface DismissListener {
     fun dismissSheet(position: Int)

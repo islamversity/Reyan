@@ -1,4 +1,4 @@
-package com.islamversity.settings.sheet
+package com.islamversity.view_component.sheet
 
 import android.content.Context
 import android.os.Bundle
@@ -6,8 +6,8 @@ import android.view.WindowManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.islamversity.settings.R
-import com.islamversity.settings.databinding.SheetOptionBinding
+import com.islamversity.base.R
+import com.islamversity.view_component.databinding.SheetOptionBinding
 
 class OptionSelector(context: Context) : BottomSheetDialog(context, R.style.OptionsSelectorTheme) {
 

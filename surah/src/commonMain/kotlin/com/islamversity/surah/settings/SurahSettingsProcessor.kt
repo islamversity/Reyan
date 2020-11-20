@@ -34,7 +34,10 @@ class SurahSettingsProcessor(
         getSecondTranslationCalligraphy,
         changeSecondTranslationCalligraphy,
 
-        )
+        getToolbarForAyaOption,
+        setToolbarForAyaOption,
+
+    )
 
     private val getAllTranslationCalligraphies: FlowBlock<SurahIntent, SurahResult> = {
         ofType<SurahIntent.Initial>()
@@ -166,4 +169,23 @@ class SurahSettingsProcessor(
                 }
             }
     }
+
+    private val getToolbarForAyaOption: FlowBlock<SurahIntent, SurahResult> = {
+        ofType<SurahIntent.ChangeSettings.ShowAyaTollbar>()
+            .flatMapLatest {
+                settingsRepo.getToolbarForAyaOption()
+            }
+            .map {
+                SurahResult.Settings.EnableToolbarForAya(it.enable)
+            }
+    }
+
+    private val setToolbarForAyaOption: Flow<SurahIntent>.() -> Flow<SurahResult> = {
+        ofType<SurahIntent.ChangeSettings.ShowAyaTollbar>()
+            .transform {
+                settingsRepo.enableToolbarForAya(it.enable)
+                emit(SurahResult.Settings.EnableToolbarForAya(it.enable))
+            }
+    }
+
 }

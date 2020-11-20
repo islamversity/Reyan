@@ -28,6 +28,8 @@ sealed class SurahResult : MviResult {
         data class QuranFontSize(val fontSize: Int) : Settings()
         data class TranslateFontSize(val fontSize: Int) : Settings()
 
+        data class EnableToolbarForAya(val option: Boolean) : Settings()
+
         data class FirstAyaTranslationCalligraphy(val calligraphy: CalligraphyUIModel?) : Settings()
         data class SecondAyaTranslationCalligraphy(val calligraphy: CalligraphyUIModel?) : Settings()
     }

@@ -3,6 +3,7 @@
 
     <string name="overview">Overview</string>
     <string name="recommendation">Recommendation</string>
+    <string name="calligraphy">Calligraphy</string>
 
     <string name="error_server">Server Error</string>
     <string name="transition_img_1_id">transition_img_1_%d</string>
@@ -15,7 +16,7 @@
     <string name="translate_font_size">Translate size</string>
     <string name="first_translate">First Translate</string>
     <string name="second_translate">Second Translate</string>
-    <string name="show_aya_toolbar">Show Aya Toolbar</string>
+    <string name="show_aya_toolbar">Aya Toolbar</string>
 
     <string name="title_font_size_small">Small</string>
     <string name="title_font_size_medium">Medium</string>
