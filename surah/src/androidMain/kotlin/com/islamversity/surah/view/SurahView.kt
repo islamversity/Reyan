@@ -111,14 +111,11 @@ class SurahView(
                 if (it is SurahHeaderUIModel) {
                     surahHeader {
                         id(it.rowId)
-                        model(
-                            it
-                        )
+                        model(it)
                     }
                 }
 
                 if (it is AyaUIModel) {
-                    it.toolbarVisible = state.settingsState.toolbarForAyaOption
                     ayaView {
                         id(it.rowId)
                         model(it)

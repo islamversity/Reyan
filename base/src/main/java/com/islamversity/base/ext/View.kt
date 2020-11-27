@@ -1,4 +1,4 @@
-package com.islamversity.view_component.ext
+package com.islamversity.base.ext
 
 import android.view.View
 
@@ -11,3 +11,4 @@ fun View.show(){
 fun View.gone(){
     visibility = View.GONE
 }
+fun View.getString(id : Int) = context.getString(id)

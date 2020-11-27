@@ -80,7 +80,7 @@
             android:layout_marginLeft="@dimen/medium_margin"
             android:layout_marginTop="@dimen/medium_margin"
             android:layout_marginRight="@dimen/medium_margin"
-            android:text="@string/first_translate"/>
+            android:text="@string/first_translation"/>
 
     <com.google.android.material.button.MaterialButton
             android:id="@+id/changeSecondTranslate"
@@ -91,7 +91,7 @@
             android:layout_marginLeft="@dimen/medium_margin"
             android:layout_marginTop="@dimen/medium_margin"
             android:layout_marginRight="@dimen/medium_margin"
-            android:text="@string/second_translate"/>
+            android:text="@string/second_translation"/>
 
     <com.google.android.material.switchmaterial.SwitchMaterial
             android:id="@+id/showAyaToolbarSwitch"

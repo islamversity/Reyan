@@ -12,7 +12,6 @@ data class AyaUIModel(
     val order: Long,
     val fontSize: Int,
     val translationFontSize: Int = 0,
-    var toolbarVisible: Boolean,
     val hizb: Long?,
     val juz: Long?,
     val sajdah: SajdahTypeUIModel,

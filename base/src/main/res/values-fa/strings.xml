@@ -3,8 +3,8 @@
 
     <string name="aya_font_size">اندازه آیه</string>
     <string name="translate_font_size">اندازه ترجمه</string>
-    <string name="first_translate">ترجمه اول</string>
-    <string name="second_translate">ترجمه دوم</string>
+    <string name="first_translation">ترجمه اول</string>
+    <string name="second_translation">ترجمه دوم</string>
     <string name="show_aya_toolbar">نوار ابزار آیه</string>
 
     <string name="setting_none_calligraphy_selected">هیچ کدام</string>

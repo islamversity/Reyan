@@ -8,6 +8,8 @@ import android.widget.LinearLayout
 import com.airbnb.epoxy.CallbackProp
 import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
+import com.airbnb.epoxy.TextProp
+import com.islamversity.base.ext.getString
 import com.islamversity.base.visible
 import com.islamversity.surah.R
 import com.islamversity.surah.databinding.RowAyaBinding
@@ -25,7 +27,6 @@ class AyaView @JvmOverloads constructor(
 
     private val binding = RowAyaBinding.inflate(LayoutInflater.from(context), this, true)
 
-    @SuppressLint("SetTextI18n")
     @ModelProp
     fun model(surah: AyaUIModel) {
 
@@ -46,15 +47,18 @@ class AyaView @JvmOverloads constructor(
         binding.hizbOrder visible (surah.hizb != null)
         binding.juzOrder visible (surah.juz != null)
 
-        binding.ayaToolbar visible surah.toolbarVisible
-
         binding.sajdahIcon visible (surah.sajdah is SajdahTypeUIModel.VISIBLE)
         binding.sajdahTitle visible (surah.sajdah is SajdahTypeUIModel.VISIBLE)
         binding.sajdahTitle.text = when (surah.sajdah) {
-            SajdahTypeUIModel.VISIBLE.RECOMMENDED -> context.resources.getString(R.string.sajdah_type_recommended)
-            SajdahTypeUIModel.VISIBLE.OBLIGATORY -> context.resources.getString(R.string.sajdah_type_obligatory)
+            SajdahTypeUIModel.VISIBLE.RECOMMENDED -> getString(R.string.sajdah_type_recommended)
+            SajdahTypeUIModel.VISIBLE.OBLIGATORY -> getString(R.string.sajdah_type_obligatory)
             SajdahTypeUIModel.NONE -> null
         }
+    }
+
+    @ModelProp
+    fun toolbar(toolbarIsVisible : Boolean){
+        binding.ayaToolbar visible toolbarIsVisible
     }
 
     @CallbackProp

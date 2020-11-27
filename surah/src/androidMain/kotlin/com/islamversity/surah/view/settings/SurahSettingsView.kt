@@ -5,7 +5,6 @@ import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.View
 import com.islamversity.view_component.sheet.DismissListener
 import com.islamversity.view_component.sheet.OptionSelector
 import com.islamversity.domain.model.QuranReadFontSize
@@ -13,7 +12,7 @@ import com.islamversity.surah.SurahIntent
 import com.islamversity.surah.databinding.DialogSettingsBinding
 import com.islamversity.surah.model.CalligraphyUIModel
 import com.islamversity.surah.settings.SurahSettingsState
-import com.islamversity.view_component.ext.hide
+import com.islamversity.base.ext.hide
 import com.warkiz.widget.IndicatorSeekBar
 import com.warkiz.widget.OnSeekChangeListener
 import com.warkiz.widget.SeekParams
@@ -49,7 +48,7 @@ class SurahSettingsView(
                 binding?.apply {
                     ayaFontSizeTitle.hide()
                     transLateFontSizeTitle.hide()
-                    transLateFontSizeSeekBar..hide()
+                    transLateFontSizeSeekBar.hide()
                 }
             }
 

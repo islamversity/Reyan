@@ -14,8 +14,8 @@
 
     <string name="aya_font_size">Aya size</string>
     <string name="translate_font_size">Translate size</string>
-    <string name="first_translate">First Translate</string>
-    <string name="second_translate">Second Translate</string>
+    <string name="first_translation">First Translation</string>
+    <string name="second_translation">Second Translation</string>
     <string name="show_aya_toolbar">Aya Toolbar</string>
 
     <string name="title_font_size_small">Small</string>
