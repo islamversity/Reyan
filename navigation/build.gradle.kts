@@ -1,3 +1,5 @@
+import com.islamversity.reyan.Deps
+
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization")

@@ -325,6 +325,9 @@
 -keep class * extends com.bluelinelabs.conductor.changehandler.ControllerChangeHandler {
     public <init>(...);
 }
+-keep class * extends com.islamversity.base.CoroutineView {
+    public <init>(...);
+}
 
 ##Kotlinx.serialization
 -keepattributes *Annotation*, InnerClasses
@@ -339,10 +342,16 @@
 }
 
 # Change here com.yourcompany.yourpackage
--keep,includedescriptorclasses class com.yourcompany.yourpackage.**$$serializer { *; } # <-- change package name to your app's
--keepclassmembers class com.yourcompany.yourpackage.** { # <-- change package name to your app's
+-keep,includedescriptorclasses class com.islamversity.navigation.**$$serializer { *; } # <-- change package name to your app's
+-keepclassmembers class com.islamversity.navigation.** { # <-- change package name to your app's
     *** Companion;
 }
--keepclasseswithmembers class com.yourcompany.yourpackage.** { # <-- change package name to your app's
+-keepclasseswithmembers class com.islamversity.navigation.** { # <-- change package name to your app's
     kotlinx.serialization.KSerializer serializer(...);
+}
+
+
+# Material Desing rules
+-keep public class * extends androidx.coordinatorlayout.widget.CoordinatorLayout$Behavior {
+    public <init>(android.content.Context, android.util.AttributeSet);
 }

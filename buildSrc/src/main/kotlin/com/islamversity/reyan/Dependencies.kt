@@ -1,3 +1,5 @@
+package com.islamversity.reyan
+
 import org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDependency
 
 object Versions {
@@ -61,6 +63,7 @@ object Deps {
             "com.android.tools.build:gradle:${Versions.android_gradle_plugin}"
 
         object Support {
+            val coreKts = "androidx.core:core-ktx:${Versions.androidKotlinExt}"
             val compat = "androidx.appcompat:appcompat:${Versions.androidSupport}"
             val supportLegacy = "androidx.legacy:legacy-support-v4:${Versions.androidSupport}"
             val androidxCore = "androidx.core:core:${Versions.androidSupport}"
@@ -73,12 +76,8 @@ object Deps {
             val constraintLayout =
                 "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
             val sqlite = "androidx.sqlite:sqlite-framework:2.1.0"
-        }
-
-        object Jetpack {
-            val lifecycleRuntime =
-                "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.androidArchComponent}"
-            val coreKts = "androidx.core:core-ktx:${Versions.androidKotlinExt}"
+            val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.androidArchComponent}"
+            val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.androidArchComponent}"
         }
 
         object Firebase {
@@ -93,13 +92,6 @@ object Deps {
             val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
             val okHttpLogging = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
             val mockWebServer = "com.squareup.okhttp3:mockwebserver:4.0.1"
-        }
-
-        object Coroutines {
-            val coroutinesAndroid =
-                "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
-            val coroutinesRx2 =
-                "org.jetbrains.kotlinx:kotlinx-coroutines-rx2:${Versions.coroutines}"
         }
 
         object Tools {
@@ -177,6 +169,13 @@ object Deps {
         val viewComponent = ":view-component"
         val surah = ":surah"
         val search = ":search"
+    }
+
+    object Firebase {
+        val analytics = "com.google.firebase:firebase-analytics-ktx:18.0.0"
+        val crashlyticsSDK = "com.google.firebase:firebase-crashlytics-ktx:17.3.0"
+        val messaging = "com.google.firebase:firebase-messaging-ktx:21.0.0"
+        val remoteConfig = "com.google.firebase:firebase-config-ktx:20.0.1"
     }
 
     object Dagger {

@@ -1,3 +1,5 @@
+import com.islamversity.reyan.Deps
+
 plugins {
     id("com.android.library")
     kotlin("android")

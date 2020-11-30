@@ -1,7 +1,6 @@
 package com.islamversity.daggercore
 
 import android.app.Application
-import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.islamversity.daggercore.modules.DatabaseModule
 import com.islamversity.domain.repo.CalligraphyRepo
 import com.islamversity.domain.repo.SettingRepo
@@ -23,7 +22,6 @@ interface BaseComponent {
 
     fun okHttp(): OkHttpClient
     fun httpClient(): HttpClientEngine
-    fun frescoConfig(): ImagePipelineConfig
 
     fun provideCalligraphyRepo(): CalligraphyRepo
 
