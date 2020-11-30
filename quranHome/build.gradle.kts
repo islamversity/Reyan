@@ -1,3 +1,5 @@
+import com.islamversity.reyan.Deps
+
 plugins {
     kotlin("multiplatform")
     id("com.android.library")
@@ -43,12 +45,10 @@ kotlin {
         implementation(Deps.Android.Support.constraintLayout)
         implementation(Deps.Android.Support.design)
 
-        implementation(Deps.Android.Jetpack.coreKts)
+        implementation(Deps.Android.Support.coreKts)
 
         implementation(Deps.Android.Tools.conductor)
         implementation(Deps.Android.Tools.conductorViewPager)
-        implementation(Deps.Android.Tools.fresco)
-        implementation(Deps.Android.Tools.slider)
         implementation(Deps.Android.Tools.epoxy)
         configurations.get("kapt").dependencies.add(
                 Deps.Android.Tools.epoxyCompilerDep

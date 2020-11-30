@@ -46,7 +46,6 @@ import java.util.concurrent.locks.ReentrantLock
  *
  * @hide
  */
-@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP_PREFIX)
 class CopyLock(name: String, lockDir: File, processLock: Boolean) {
     private val mCopyLockFile: File = File(lockDir, "$name.lck")
     private val mThreadLock: Lock

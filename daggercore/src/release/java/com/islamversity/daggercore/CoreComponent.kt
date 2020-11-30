@@ -1,7 +1,6 @@
 package com.islamversity.daggercore
 
 import com.islamversity.daggercore.modules.DatabaseModule
-import com.islamversity.daggercore.helpers.HelperModule
 import com.islamversity.daggercore.modules.domain.DomainModule
 import com.islamversity.daggercore.modules.network.NetworkModule
 import com.islamversity.daggercore.scope.AppScope
@@ -15,8 +14,7 @@ import javax.inject.Singleton
         NetworkModule::class,
         DomainModule::class,
         DatabaseModule::class,
-        FrescoModule::class,
-        HelperModule::class,]
+    ]
 )
 interface CoreComponent : BaseComponent{
 

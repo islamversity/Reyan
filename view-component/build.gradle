@@ -30,6 +30,4 @@ dependencies {
     implementation recyclerView
     implementation epoxy
     kapt epoxyCompiler
-
-    implementation fresco
 }

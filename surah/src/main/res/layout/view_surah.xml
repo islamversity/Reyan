@@ -68,8 +68,8 @@
         android:orientation="vertical"
         android:overScrollMode="never"
         android:paddingTop="@dimen/large_margin"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:itemCount="5"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/row_aya" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -82,8 +82,9 @@
         android:src="@drawable/ic_arrow_up"
         android:visibility="invisible"
         app:backgroundTint="@color/accentWhite"
-        app:fabSize="normal"
+        app:fabSize="mini"
+        app:tint="@color/green_dark"
         app:layout_behavior="com.google.android.material.floatingactionbutton.FloatingActionButton$Behavior"
-        app:tint="@color/green_dark" />
+        tools:ignore="ContentDescription" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
