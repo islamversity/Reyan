@@ -17,7 +17,7 @@ import javax.inject.Singleton
         DomainModule::class,
         CalligraphyModule::class,
         DatabaseModule::class,
-        FrescoModule::class,]
+        ]
 )
 interface CoreComponent : BaseComponent{
 

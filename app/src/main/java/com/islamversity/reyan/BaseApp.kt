@@ -5,9 +5,6 @@ import android.content.Context
 import android.util.Log
 import co.touchlab.kermit.LogcatLogger
 import com.akexorcist.localizationactivity.core.LocalizationApplicationDelegate
-import com.facebook.common.logging.FLog
-import com.facebook.drawee.backends.pipeline.Fresco
-import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.islamversity.base.widgets.AppFontSizeStore
 import com.islamversity.core.Logger
 import com.islamversity.reyan.BuildConfig.DEBUG
@@ -18,8 +15,6 @@ import com.islamversity.daggercore.helpers.DEFAULT_LANGUAGE_LOCALE
 import com.islamversity.daggercore.modules.DatabaseModule
 
 abstract class BaseApp : Application(), CoreComponentProvider {
-
-    private lateinit var frescoConfig: ImagePipelineConfig
 
     private val localizationDelegate = LocalizationApplicationDelegate()
 
@@ -41,19 +36,8 @@ abstract class BaseApp : Application(), CoreComponentProvider {
 
     override fun onCreate() {
         super.onCreate()
-        frescoConfig = coreComponent.frescoConfig()
-
         Logger.init(listOf(LogcatLogger()))
 
-        Fresco.initialize(this, frescoConfig)
-
         AppFontSizeStore.init(this)
-
-        FLog.setMinimumLoggingLevel(
-            if (DEBUG)
-                Log.VERBOSE
-            else
-                Log.ERROR
-        )
     }
 }

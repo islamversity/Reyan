@@ -11,8 +11,6 @@ import com.akexorcist.localizationactivity.ui.LocalizationActivity
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
-import com.facebook.drawee.drawable.ScalingUtils
-import com.facebook.drawee.view.DraweeTransition
 import com.islamversity.core.Logger
 import com.islamversity.core.Severity
 import com.islamversity.daggercore.coreComponent
@@ -62,13 +60,6 @@ class MainActivity : LocalizationActivity(),
                 else -> error("other languages are not supported please remove unintentional= $s at $index")
             }
         }
-
-        window.sharedElementEnterTransition = DraweeTransition.createTransitionSet(
-            ScalingUtils.ScaleType.CENTER_CROP, ScalingUtils.ScaleType.CENTER_CROP
-        )
-        window.sharedElementEnterTransition = DraweeTransition.createTransitionSet(
-            ScalingUtils.ScaleType.CENTER_CROP, ScalingUtils.ScaleType.CENTER_CROP
-        )
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

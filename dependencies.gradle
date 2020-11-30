@@ -62,10 +62,10 @@ ext {
             ],
 
             firebase = [
-                    firebaseAnalytics = "com.google.firebase:firebase-analytics-ktx:17.4.4",
-                    firebaseCrashlyticsSDK = "com.google.firebase:firebase-crashlytics:17.1.1",
-                    firebaseMessaging = "com.google.firebase:firebase-messaging:20.2.3",
-                    firebaseRemoteConfig = "com.google.firebase:firebase-config-ktx:19.2.0"
+                    firebaseAnalytics = "com.google.firebase:firebase-analytics-ktx:18.0.0",
+                    firebaseCrashlyticsSDK = "com.google.firebase:firebase-crashlytics-ktx:17.3.0",
+                    firebaseMessaging = "com.google.firebase:firebase-messaging-ktx:21.0.0",
+                    firebaseRemoteConfig = "com.google.firebase:firebase-config-ktx:20.0.1"
             ],
 
             network = [

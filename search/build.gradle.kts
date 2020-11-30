@@ -1,3 +1,5 @@
+import com.islamversity.reyan.Deps
+
 plugins {
     kotlin("multiplatform")
 //    id("com.android.dynamic-feature")
@@ -51,10 +53,9 @@ kotlin {
         implementation(Deps.Android.Support.constraintLayout)
         implementation(Deps.Android.Support.design)
 
-        implementation(Deps.Android.Jetpack.coreKts)
+        implementation(Deps.Android.Support.coreKts)
 
         implementation(Deps.Android.Tools.conductor)
-        implementation(Deps.Android.Tools.fresco)
 
         implementation(Deps.Dagger.dagger)
         implementation(Deps.Dagger.jsrAnnotation)
