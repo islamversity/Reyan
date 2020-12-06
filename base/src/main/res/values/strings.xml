@@ -1,24 +1,14 @@
 <resources>
     <string name="app_name">Base</string>
 
-    <string name="overview">Overview</string>
-    <string name="recommendation">Recommendation</string>
-
-    <string name="error_server">Server Error</string>
-    <string name="transition_img_1_id">transition_img_1_%d</string>
-    <string name="transition_img_2_id">transition_img_2_%d</string>
-    <string name="transition_txt_1_id">transition_txt_1_%d</string>
-    <string name="transition_txt_2_id">transition_txt_2_%d</string>
-    <string name="fab_dialog_transition_name">transition.fab</string>
-
     <string name="aya_font_size">Aya size</string>
     <string name="translate_font_size">Translate size</string>
+
+    <string name="setting_none_calligraphy_selected">None</string>
 
     <string name="title_font_size_small">Small</string>
     <string name="title_font_size_medium">Medium</string>
     <string name="title_font_size_normal">Normal</string>
     <string name="title_font_size_Large">Large</string>
     <string name="title_font_size_x_Large">X-Large</string>
-
-    <string name="setting_none_calligraphy_selected">None</string>
 </resources>

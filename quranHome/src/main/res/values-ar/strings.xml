@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home">منزل</string>
+    <string name="home_tab_parts">جزء</string>
+    <string name="home_tab_surahs">سورة</string>
+    <string name="search">بحث</string>
+</resources>

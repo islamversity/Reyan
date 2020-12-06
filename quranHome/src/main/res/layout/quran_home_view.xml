@@ -5,7 +5,6 @@
     android:id="@+id/motionLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layoutDirection="ltr"
     android:background="@drawable/immersive_background"
     app:layoutDescription="@xml/home_motion"
     app:motionProgress="1.0"
