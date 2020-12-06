@@ -1,3 +1,5 @@
+@file:Suppress("EXPERIMENTAL_API_USAGE")
+
 package com.islamversity.base
 
 import android.content.Context
@@ -17,10 +19,8 @@ import com.islamversity.core.mvi.MviViewState
 import com.islamversity.daggercore.CoreComponent
 import com.islamversity.daggercore.coreComponent
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.*
 
 @Suppress("UNUSED_PARAMETER")
 abstract class CoroutineView<
@@ -34,6 +34,8 @@ abstract class CoroutineView<
     lateinit var coreComponent: CoreComponent
 
     abstract var presenter: MviPresenter<I, S>
+
+    protected val intents = MutableSharedFlow<I>(extraBufferCapacity = 10, onBufferOverflow = BufferOverflow.DROP_OLDEST)
 
     var loadingView: View? = null
     var errorSnack: Snackbar? = null
@@ -79,7 +81,7 @@ abstract class CoroutineView<
     }
 
     private fun bind() {
-        intents()
+        merge(intents(), intents)
             .newIntents()
 
         presenter

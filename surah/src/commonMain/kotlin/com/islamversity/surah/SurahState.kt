@@ -2,6 +2,7 @@ package com.islamversity.surah
 
 import com.islamversity.core.mvi.BaseState
 import com.islamversity.core.mvi.BaseViewState
+import com.islamversity.domain.model.QuranReadFontSize
 import com.islamversity.surah.model.UIItem
 import com.islamversity.surah.settings.SurahSettingsState
 
@@ -9,6 +10,8 @@ data class SurahState(
     override val base: BaseState,
     val showBismillah: Boolean,
     val bismillah: String,
+    val mainAyaFontSize : Int,
+    val translationFontSize : Int,
     val items: List<UIItem>,
     val startFrom: Int,
     val closeScreen: Boolean,
@@ -25,7 +28,9 @@ data class SurahState(
                 bismillah = "",
                 closeScreen = false,
                 scrollToAya = null,
-                settingsState = SurahSettingsState()
+                settingsState = SurahSettingsState(),
+                mainAyaFontSize = QuranReadFontSize.DEFAULT.size,
+                translationFontSize = QuranReadFontSize.DEFAULT.size,
             )
     }
 }

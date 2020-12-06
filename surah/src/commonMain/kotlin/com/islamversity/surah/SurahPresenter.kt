@@ -53,6 +53,10 @@ class SurahPresenter(
 
             is SurahResult.Settings ->
                 preState.copy(settingsState = settingsReducer(preState.settingsState, result))
+            is SurahResult.MainAyaFontSize ->
+                preState.copy(mainAyaFontSize = result.size)
+            is SurahResult.TranslationFontSize ->
+                preState.copy(translationFontSize = result.size)
         }
 
     private val settingsReducer : (SurahSettingsState, SurahResult.Settings) -> SurahSettingsState = { preState, result ->
