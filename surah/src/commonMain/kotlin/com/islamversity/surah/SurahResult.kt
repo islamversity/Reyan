@@ -21,6 +21,14 @@ sealed class SurahResult : MviResult {
         val orderID: Long,
     ) : SurahResult()
 
+    data class MainAyaFontSize(
+        val size: Int
+    ) : SurahResult()
+
+    data class TranslationFontSize(
+        val size: Int
+    ) : SurahResult()
+
     sealed class Settings : SurahResult() {
 
         data class TranslationCalligraphies(val list: List<CalligraphyUIModel>) : Settings()

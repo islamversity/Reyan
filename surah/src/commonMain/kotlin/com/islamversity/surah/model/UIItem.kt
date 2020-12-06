@@ -10,8 +10,6 @@ data class AyaUIModel(
     val translation1: String? = null,
     val translation2: String? = null,
     val order: Long,
-    val fontSize: Int,
-    val translationFontSize: Int = 0,
     val toolbarVisible: Boolean,
     val hizb: Long?,
     val juz: Long?,

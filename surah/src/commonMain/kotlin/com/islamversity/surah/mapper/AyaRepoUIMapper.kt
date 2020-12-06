@@ -15,8 +15,6 @@ class AyaRepoUIMapper : Mapper<AyaRepoModel, AyaUIModel>{
             item.translation1,
             item.translation2,
             item.order,
-            0,
-            0,
             false,
             if(item.start == StartPartition.HIZB) item.hizb else null,
             if(item.start == StartPartition.JUZ) item.juz else null,
