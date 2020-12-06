@@ -1,5 +1,4 @@
 buildscript {
-    apply from: "dependencies.gradle"
     apply from: "extras.gradle"
     repositories {
         google()
@@ -12,7 +11,7 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
         classpath 'com.google.gms:google-services:4.3.4'
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.4.1'
-        classpath "com.github.ben-manes:gradle-versions-plugin:0.27.0"
+        classpath "com.github.ben-manes:gradle-versions-plugin:0.36.0"
         classpath "com.squareup.sqldelight:gradle-plugin:${Versions.sqlDelight}"
         classpath "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
         classpath "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin:0.5.1"
