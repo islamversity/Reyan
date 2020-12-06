@@ -11,7 +11,6 @@ import com.islamversity.quran_home.feature.surah.SurahListView
 class HomePagerAdapter(private val controller: Controller) : RouterPagerAdapter(controller) {
 
     override fun configureRouter(router: Router, position: Int) {
-        getRouter(position)
         if (!router.hasRootController()) {
             when (position) {
                 0 -> router.setRoot(RouterTransaction.with(SurahListView()))
