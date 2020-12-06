@@ -1,32 +1,34 @@
+import com.islamversity.reyan.Deps
+
 apply from: androidLib
 
 dependencies {
 
-    implementation(project(core))
-    implementation(project(daggerCore))
+    implementation(project(Deps.Modules.core))
+    implementation(project(Deps.Modules.daggerCore))
 
-    testImplementation junit
-    androidTestImplementation supportTestRunner
-    androidTestImplementation espressoCore
+    testImplementation Deps.Android.Test.junit
+    androidTestImplementation Deps.Android.Test.runner
+    androidTestImplementation Deps.Android.Test.espressoCore
 
-    implementation kotlinStd8
+    implementation Deps.Kotlin.jvmStd8
 
-    implementation compat
-    implementation design
-    implementation constraintLayout
+    implementation Deps.Android.Support.compat
+    implementation Deps.Android.Support.design
+    implementation Deps.Android.Support.constraintLayout
 
 
-    implementation conductor
+    implementation Deps.Android.Tools.conductor
 
-    implementation dagger
-    implementation findBugs
-    kapt daggerCompiler
+    implementation Deps.Dagger.dagger
+    implementation Deps.Dagger.findBugs
+    kapt Deps.Dagger.daggerCompiler
 
-    implementation coreKts
-    implementation coroutines
-    implementation coroutinesAndroid
+    implementation Deps.Android.Support.coreKts
+    implementation Deps.Coroutines.common
+    implementation Deps.Coroutines.android
 
-    debugImplementation leakCanary
+    debugImplementation Deps.Android.Tools.leakCanary
 
-    implementation epoxy
+    implementation Deps.Android.Tools.epoxy
 }

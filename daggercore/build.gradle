@@ -1,3 +1,5 @@
+import com.islamversity.reyan.Deps
+
 apply from: androidLib
 apply plugin: 'kotlinx-serialization'
 
@@ -5,44 +7,42 @@ android{
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    testImplementation Deps.Android.Test.junit
+    androidTestImplementation Deps.Android.Test.runner
+    androidTestImplementation Deps.Android.Test.espressoCore
 
-    testImplementation junit
-    androidTestImplementation supportTestRunner
-    androidTestImplementation espressoCore
+    implementation Deps.Kotlin.jvmStd8
 
-    implementation(project(domain))
-    implementation(project(core))
-    implementation(project(navigation))
-    implementation(project(db))
+    implementation(project(Deps.Modules.domain))
+    implementation(project(Deps.Modules.core))
+    implementation(project(Deps.Modules.navigation))
+    implementation(project(Deps.Modules.db))
 
-    implementation conductor
-    implementation compat
-    implementation sqlite
+    implementation Deps.Android.Tools.conductor
+    implementation Deps.Android.Support.compat
+    implementation Deps.Android.Support.sqlite
 
-    implementation kotlinStd8
+    implementation Deps.Dagger.dagger
+    implementation Deps.Dagger.jsrAnnotation
+    implementation Deps.Dagger.findBugs
+    kapt Deps.Dagger.daggerCompiler
 
-    implementation dagger
-    kapt daggerCompiler
+    implementation Deps.Android.Networking.okHttp
+    implementation Deps.Android.Networking.okHttpLogging
+    implementation Deps.SqlDelight.driverAndroid
 
-    implementation okHttp
-    implementation okHttpLogging
-    implementation sqlDelightAndroidAdapter
+    implementation Deps.Coroutines.common
 
-    implementation coroutines
-
-    implementation javaxAnnotation
-    implementation findBugs
-
-    implementation androidSerialization
-    implementation (okhttpEngine) {
+    implementation Deps.Serialization.core
+    implementation Deps.ktor.Core.common
+    implementation (Deps.ktor.Engines.okHttp) {
         transitive false
     }
 
-    debugImplementation flipper
-    releaseImplementation flipperNoOp
-    debugImplementation flipperNetworkPlugin
+    debugImplementation Deps.Android.Tools.flipper
+    releaseImplementation Deps.Android.Tools.flipperNoOp
+    debugImplementation Deps.Android.Tools.flipperNetworkPlugin
 
-    debugImplementation chucker
-    releaseImplementation chuckerNoop
+    debugImplementation Deps.Android.Tools.chucker
+    releaseImplementation Deps.Android.Tools.chuckerNoop
 }

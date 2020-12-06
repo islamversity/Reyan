@@ -3,7 +3,7 @@ package com.islamversity.quran_home.feature.home
 import com.bluelinelabs.conductor.Controller
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
-import com.bluelinelabs.conductor.support.RouterPagerAdapter
+import com.bluelinelabs.conductor.viewpager.RouterPagerAdapter
 import com.islamversity.quran_home.R
 import com.islamversity.quran_home.feature.juz.JuzListView
 import com.islamversity.quran_home.feature.surah.SurahListView

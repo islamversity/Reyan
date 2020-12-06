@@ -22,8 +22,8 @@ import kotlin.time.ExperimentalTime
 class QuranHomeView : CoroutineView<QuranHomeViewBinding, QuranHomeState, QuranHomeIntent>() {
 
     private val intentChannel = Channel<QuranHomeIntent>(Channel.UNLIMITED)
-    private val pagerAdapter: HomePagerAdapter =
-        HomePagerAdapter(this)
+//    private val pagerAdapter: HomePagerAdapter =
+//        HomePagerAdapter(this)
 
     @Inject
     override lateinit var presenter: MviPresenter<QuranHomeIntent, QuranHomeState>
@@ -50,7 +50,7 @@ class QuranHomeView : CoroutineView<QuranHomeViewBinding, QuranHomeState, QuranH
             }.start()
         }
 
-        binding.viewPager.adapter = pagerAdapter
+        binding.viewPager.adapter = HomePagerAdapter(this)
         binding.tabLayout.setupWithViewPager(binding.viewPager)
     }
 

@@ -1,16 +1,34 @@
 package com.islamversity.navigation.changehandler
 
+import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.Keep
-import com.bluelinelabs.conductor.changehandler.FadeChangeHandler
-import com.bluelinelabs.conductor.changehandler.TransitionChangeHandlerCompat
+import androidx.transition.Transition
+import com.bluelinelabs.conductor.changehandler.androidxtransition.SharedElementTransitionChangeHandler
 
-class ArcFadeMoveChangeHandlerCompat : TransitionChangeHandlerCompat {
+class ArcFadeMoveChangeHandlerCompat : SharedElementTransitionChangeHandler {
     @Keep
     constructor() : super() {
     }
 
-    constructor(vararg transitionNames: String) : super(
-        ArcFadeMoveChangeHandler(*transitionNames),
-        FadeChangeHandler()
-    )
+    override fun configureSharedElements(container: ViewGroup, from: View?, to: View?, isPush: Boolean) {
+        TODO("Not yet implemented")
+    }
+
+    override fun getExitTransition(container: ViewGroup, from: View?, to: View?, isPush: Boolean): Transition? {
+        TODO("Not yet implemented")
+    }
+
+    override fun getSharedElementTransition(
+        container: ViewGroup,
+        from: View?,
+        to: View?,
+        isPush: Boolean
+    ): Transition? {
+        TODO("Not yet implemented")
+    }
+
+    override fun getEnterTransition(container: ViewGroup, from: View?, to: View?, isPush: Boolean): Transition? {
+        TODO("Not yet implemented")
+    }
 }

@@ -17,7 +17,7 @@ abstract class ViewBindingController<T : ViewBinding> @JvmOverloads constructor(
 
     abstract fun bindView(inflater: LayoutInflater, container: ViewGroup): T
 
-    final override fun onCreateView(inflater: LayoutInflater, container: ViewGroup): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedViewState: Bundle?): View {
         _binding = bindView(inflater, container)
         onViewBound(binding)
         return binding.root
