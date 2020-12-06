@@ -1,4 +1,5 @@
 import com.islamversity.reyan.Deps
+import com.islamversity.reyan.GlobalVars
 
 apply plugin: 'com.android.application'
 
@@ -17,14 +18,14 @@ apply from: "$rootDir/projectDependencyGraph.gradle"
 //check.dependsOn detekt
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion GlobalVars.projectCompileSdkVersion
     defaultConfig {
         archivesBaseName = "Reyan"
         applicationId "com.islamversity.reyan"
-        minSdkVersion projectMinSdkVersion
-        targetSdkVersion projectTargetSdkVersion
-        versionCode 21000001
-        versionName "0.0.1"
+        minSdkVersion GlobalVars.projectMinSdkVersion
+        targetSdkVersion GlobalVars.projectTargetSdkVersion
+        versionCode 21000002
+        versionName "0.0.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -44,20 +45,20 @@ android {
     }
     buildTypes {
         release {
-            debuggable isReleaseDebuggable
-            minifyEnabled isReleaseMinify
-            multiDexEnabled isReleaseMultiDex
+            debuggable GlobalVars.isReleaseDebuggable
+            minifyEnabled GlobalVars.isReleaseMinify
+            multiDexEnabled GlobalVars.isReleaseMultiDex
             proguardFiles(getDefaultProguardFile("proguard-android.txt"),
-                    "$proguardFileAddress")
+                    GlobalVars.proguardFileAddress)
             signingConfig signingConfigs.release
         }
         debug {
             applicationIdSuffix ".debug"
-            debuggable isDebugDebuggable
-            minifyEnabled isDebugMinify
-            multiDexEnabled isDebugMultiDex
+            debuggable GlobalVars.isDebugDebuggable
+            minifyEnabled GlobalVars.isDebugMinify
+            multiDexEnabled GlobalVars.isDebugMultiDex
             proguardFiles(getDefaultProguardFile("proguard-android.txt"),
-                    "$proguardFileAddress")
+                    GlobalVars.proguardFileAddress)
 //            testCoverageEnabled true
         }
     }

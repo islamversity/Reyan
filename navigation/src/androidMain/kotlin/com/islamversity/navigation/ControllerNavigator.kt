@@ -33,9 +33,7 @@ class ControllerNavigator(
 
         return when (anim) {
             is NavigationAnimation.ArcFadeMove ->
-                ArcFadeMoveChangeHandlerCompat(
-                    *anim.transitionNames
-                )
+                ArcFadeMoveChangeHandlerCompat()
             is NavigationAnimation.CircularReveal ->
                 if (anim.duration == -1L) {
                     CircularRevealChangeHandlerCompat(

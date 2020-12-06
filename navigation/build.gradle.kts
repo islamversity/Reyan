@@ -34,6 +34,7 @@ kotlin {
     sourceSets["androidMain"].dependencies {
         implementation(kotlin("stdlib", Versions.kotlin))
         implementation(Deps.Android.Tools.conductor)
+        implementation(Deps.Android.Tools.conductorAndroidxTransitions)
         implementation(Deps.Android.Support.compat)
         implementation(Deps.Coroutines.android)
     }

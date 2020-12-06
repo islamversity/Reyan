@@ -42,12 +42,13 @@ fun <T, U> Flow<T>.publish(vararg blocks: FlowBlock<T, U>): Flow<U> =
 fun <T, U> Flow<T>.publish(blocks: List<FlowBlock<T, U>>): Flow<U> =
     flow {
         coroutineScope {
-            val broadCaster = this@publish.broadcastIn(this)
+            val broadCaster = this@publish
+                .shareIn(this, SharingStarted.Eagerly, 0)
 
             val mergedFlow = broadCaster
                 .let {
                     blocks.map { block ->
-                        block(it.asFlow())
+                        block(it)
                     }
                 }
                 .merge()

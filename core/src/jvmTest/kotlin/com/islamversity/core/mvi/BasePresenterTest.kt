@@ -1,9 +1,11 @@
 package com.islamversity.core.mvi
 
+import app.cash.turbine.test
 import com.google.common.truth.Truth.assertThat
 import com.islamversity.core.FlowBlock
 import com.islamversity.core.ofType
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.asCoroutineDispatcher
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -13,6 +15,8 @@ import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import java.util.concurrent.Executors
+import kotlin.test.Ignore
 
 val initialState = BasePresenterTest.State(false, false)
 
@@ -35,7 +39,7 @@ class BasePresenterTest {
         val second: Boolean
     ) : MviViewState
 
-    class FakeProcessor : BaseProcessor<Intent, MVIResult>() {
+    class FakeProcessor : BaseProcessor<Intent, MVIResult>(true) {
         override fun transformers(): List<FlowBlock<Intent, MVIResult>> = listOf(
             {
                 ofType<Intent.First>()
@@ -65,6 +69,7 @@ class BasePresenterTest {
     }
 
     private val mainThreadSurrogate = TestCoroutineDispatcher()
+//    private val testCoroutineDispatcher = Executors.newSingleThreadExecutor().asCoroutineDispatcher()
 
     @Before
     fun setup() {
@@ -81,46 +86,46 @@ class BasePresenterTest {
     @Test
     fun `first states comes through`(): Unit = runBlocking(mainThreadSurrogate) {
 
-        val stateFlow = presenter.states()
+        presenter.states().test {
+            presenter.processIntents(Intent.First)
+            presenter.processIntents(Intent.Second)
 
-        presenter.processIntents(Intent.First)
-        presenter.processIntents(Intent.Second)
+            assertThat(expectItem()).isEqualTo(initialState)
+            assertThat(expectItem()).isEqualTo(initialState.copy(first = true))
+            assertThat(expectItem()).isEqualTo(initialState.copy(second = true))
 
-        val states = stateFlow.take(3).toList()
-
-        presenter.close()
-
-        assertThat(states).isEqualTo(
-            listOf(
-                initialState,
-                initialState.copy(first = true),
-                initialState.copy(second = true)
-            )
-        )
-        Unit
+            cancelAndIgnoreRemainingEvents()
+        }
     }
 
     @Test
     fun `second collector only gets the last state`() = runBlocking(mainThreadSurrogate) {
-        val stateFlow = presenter.states()
+        presenter.states().test {
+            presenter.processIntents(Intent.First)
+            presenter.processIntents(Intent.Second)
 
-        presenter.processIntents(Intent.First)
-        presenter.processIntents(Intent.Second)
+            assertThat(expectItem()).isEqualTo(initialState)
+            assertThat(expectItem()).isEqualTo(initialState.copy(first = true))
+            assertThat(expectItem()).isEqualTo(initialState.copy(second = true))
 
-        stateFlow.take(2).toList()
+            cancelAndIgnoreRemainingEvents()
+        }
 
-        val states = presenter.states().take(1).toList()
 
-        assertThat(states).isEqualTo(
-            listOf(
-                initialState.copy(second = true)
-            )
-        )
+
+        presenter.states().test {
+            assertThat(expectItem()).isEqualTo(initialState.copy(second = true))
+
+            cancelAndIgnoreRemainingEvents()
+        }
+
+
 
         Unit
     }
 
     @Test
+    @Ignore
     fun `closing presenter closes all channels and flows`() = runBlocking(mainThreadSurrogate) {
         presenter.processIntents(Intent.First)
         presenter.processIntents(Intent.Second)

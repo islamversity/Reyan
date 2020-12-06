@@ -1,21 +1,4 @@
 ext{
-    isReleaseDebuggable = false
-    isDebugDebuggable = true
-    isDebugMinify = false
-    isReleaseMinify = true
-    isReleaseMultiDex = true
-    isDebugMultiDex = true
-    isDebugShrinkResources = false
-    isReleaseShrinkResources = false
-
-    isDebugTestCoverage = true
-
-    proguardFileAddress = "${rootProject.rootDir.absolutePath}\\proguard-rules.pro"
-    projectMinSdkVersion = 21
-    projectTargetSdkVersion = 29
-    prjectCompileSdkVersion = 29
-
     kotlinLib = "$rootDir/kotlinLib.gradle"
     androidLib = "$rootDir/androidLib.gradle"
-    dynamicFeature = "$rootDir/dynamicFeature.gradle"
 }

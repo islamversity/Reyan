@@ -15,7 +15,7 @@ class SurahListPresenter(
     SurahListState.idle()
 ) {
     override fun filterIntent(): List<FlowBlock<SurahListIntent, SurahListIntent>> =
-        listOf<FlowBlock<SurahListIntent, SurahListIntent>>(
+        listOf(
             {
                 this.ofType<SurahListIntent.Initial>().take(1)
             },
