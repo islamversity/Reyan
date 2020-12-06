@@ -38,7 +38,7 @@ allprojects {
             url 'http://storage.googleapis.com/r8-releases/raw'
         }
         maven { url "https://dl.bintray.com/arrow-kt/arrow-kt/" }
-        maven{ url  "https://kotlin.bintray.com/kotlinx/"}
+        maven { url "https://kotlin.bintray.com/kotlinx/" }
     }
     apply plugin: 'io.gitlab.arturbosch.detekt'
     dependencies {
@@ -87,16 +87,18 @@ def loadValues() {
         return localProperties
     }
 
-    //otherwise there should a local.properties file with debug values already set
-    String releaseKeyStoreAddress = localProperties.getProperty('debugKeyStoreAddress')
-    String releaseKeyStorePass = localProperties.getProperty('debugKeyStorePass')
-    String releaseKeyAlias = localProperties.getProperty('debugKeyAlias')
-    String releaseKeyPass = localProperties.getProperty('debugKeyPass')
+    if (localProperties.getProperty("releaseKeyStorePass") == null) {
+        //otherwise there should a local.properties file with debug values already set
+        String releaseKeyStoreAddress = localProperties.getProperty('debugKeyStoreAddress')
+        String releaseKeyStorePass = localProperties.getProperty('debugKeyStorePass')
+        String releaseKeyAlias = localProperties.getProperty('debugKeyAlias')
+        String releaseKeyPass = localProperties.getProperty('debugKeyPass')
 
-    localProperties.setProperty('releaseKeyStoreAddress', releaseKeyStoreAddress)
-    localProperties.setProperty('releaseKeyStorePass', releaseKeyStorePass)
-    localProperties.setProperty('releaseKeyAlias', releaseKeyAlias)
-    localProperties.setProperty('releaseKeyPass', releaseKeyPass)
+        localProperties.setProperty('releaseKeyStoreAddress', releaseKeyStoreAddress)
+        localProperties.setProperty('releaseKeyStorePass', releaseKeyStorePass)
+        localProperties.setProperty('releaseKeyAlias', releaseKeyAlias)
+        localProperties.setProperty('releaseKeyPass', releaseKeyPass)
+    }
 
     return localProperties
 }
