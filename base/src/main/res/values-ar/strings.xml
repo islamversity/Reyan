@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Base</string>
+
+    <string name="aya_font_size">ترجمة آية</string>
+    <string name="translate_font_size">حجم الترجمة</string>
+
+    <string name="setting_none_calligraphy_selected">لا شيء</string>
+
+    <string name="title_font_size_small">صغير</string>
+    <string name="title_font_size_medium">متوسط</string>
+    <string name="title_font_size_normal">إفتراضي</string>
+    <string name="title_font_size_Large">كبير</string>
+    <string name="title_font_size_x_Large">أكبر</string>
+</resources>
