@@ -2,6 +2,8 @@ package com.islamversity.quran_home.feature.startupView
 
 import android.app.Application
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,13 +18,23 @@ import kotlinx.coroutines.*
 
 class StartUpView : Controller(), CoroutineScope by MainScope() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedViewState: Bundle?): View =
-        View(container.context)
+    override fun onContextAvailable(context: Context) {
+        super.onContextAvailable(context)
+        checkDatabase(context.applicationContext!! as Application)
+    }
 
-    private fun checkDatabase(context: Context) {
-        val app = context.applicationContext!! as Application
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedViewState: Bundle?): View =
+        View(container.context).also {
+            it.background = ColorDrawable(Color.TRANSPARENT)
+        }
+
+    private fun checkDatabase(app : Application) {
         launch {
-            val needs = app.coreComponent().databaseFillerUsecase().needsFilling()
+            val needs = withContext(Dispatchers.IO){
+                //maybe sharedPrefs are faster
+                //for now we can stick to database
+                app.coreComponent().databaseFillerUsecase().needsFilling()
+            }
             Logger.log(tag = "StartupView") { "database needs filling= $needs" }
             if (isActive) {
                 router.setRoot(RouterTransaction.with(ControllerFactory.createController(Screens.Home, app)))
