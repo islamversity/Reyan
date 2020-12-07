@@ -21,10 +21,6 @@ import kotlin.time.ExperimentalTime
 
 class QuranHomeView : CoroutineView<QuranHomeViewBinding, QuranHomeState, QuranHomeIntent>() {
 
-    private val intentChannel = Channel<QuranHomeIntent>(Channel.UNLIMITED)
-//    private val pagerAdapter: HomePagerAdapter =
-//        HomePagerAdapter(this)
-
     @Inject
     override lateinit var presenter: MviPresenter<QuranHomeIntent, QuranHomeState>
 
@@ -36,7 +32,7 @@ class QuranHomeView : CoroutineView<QuranHomeViewBinding, QuranHomeState, QuranH
     override fun beforeBindingView(binding: QuranHomeViewBinding) {
         super.beforeBindingView(binding)
         binding.settings.setOnClickListener {
-            intentChannel.offer(QuranHomeIntent.SettingsClicked)
+            intents.tryEmit(QuranHomeIntent.SettingsClicked)
         }
         binding.inputCard.setOnClickListener {
             ValueAnimator.ofFloat(binding.motionLayout.progress, 0F).apply {
@@ -45,7 +41,7 @@ class QuranHomeView : CoroutineView<QuranHomeViewBinding, QuranHomeState, QuranH
                     binding.motionLayout.progress = it.animatedValue as Float
                 }
                 addListener(onEnd = {
-                    intentChannel.offer(QuranHomeIntent.SearchClicked)
+                    intents.tryEmit(QuranHomeIntent.SearchClicked)
                 })
             }.start()
         }
@@ -77,8 +73,6 @@ class QuranHomeView : CoroutineView<QuranHomeViewBinding, QuranHomeState, QuranH
 
     @ExperimentalTime
     override fun intents(): Flow<QuranHomeIntent> =
-        listOf(
-            flowOf(QuranHomeIntent.Initial),
-            intentChannel.receiveAsFlow()
-        ).merge()
+        flowOf(QuranHomeIntent.Initial)
+
 }
