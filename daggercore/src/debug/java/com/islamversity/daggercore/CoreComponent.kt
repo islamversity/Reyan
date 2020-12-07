@@ -1,6 +1,7 @@
 package com.islamversity.daggercore
 
 import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
+import com.islamversity.daggercore.modules.DatabaseFillerConfigModule
 import com.islamversity.daggercore.modules.DatabaseModule
 import com.islamversity.daggercore.modules.domain.CalligraphyModule
 import com.islamversity.daggercore.modules.network.NetworkModule
@@ -17,9 +18,10 @@ import javax.inject.Singleton
         DomainModule::class,
         CalligraphyModule::class,
         DatabaseModule::class,
-        ]
+        DatabaseFillerConfigModule::class
+    ]
 )
-interface CoreComponent : BaseComponent{
+interface CoreComponent : BaseComponent {
 
     fun networkFlipperPlugin(): NetworkFlipperPlugin
 
