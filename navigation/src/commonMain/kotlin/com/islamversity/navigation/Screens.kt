@@ -29,7 +29,7 @@ sealed class Screens(
 
     internal object Test : Screens("com.islamversity.navigation.TestController")
 
-    object Home : Screens("com.islamversity.quran_home.view.HomeView")
+    object Home : Screens("com.islamversity.quran_home.feature.home.QuranHomeView")
 
     class Search(
         model: SearchLocalModel,
