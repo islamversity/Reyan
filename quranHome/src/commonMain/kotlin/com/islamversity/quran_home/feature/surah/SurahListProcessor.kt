@@ -26,9 +26,16 @@ class SurahListProcessor(
     private val loadSurahs: FlowBlock<SurahListIntent, SurahListResult> = {
         ofType<SurahListIntent.Initial>()
             .flatMapMerge {
+                Logger.log {
+                    "GetSurah" + it.toString()
+                }
                 surahUsecase.getSurahs()
+
             }
             .map {
+                Logger.log {
+                    "GetSurah" + it.toString()
+                }
                 SurahListResult.SurahsSuccess(
                     surahMapper.listMap(it)
                 )

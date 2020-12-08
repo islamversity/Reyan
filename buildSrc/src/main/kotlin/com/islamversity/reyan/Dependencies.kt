@@ -41,7 +41,11 @@ object Versions {
     val ktor = "1.4.1"
     val serialization = "1.0.0"
     val stately = "1.1.0"
+<<<<<<< HEAD:buildSrc/src/main/kotlin/com/islamversity/reyan/Dependencies.kt
     val coroutines = "1.4.2-native-mt"
+=======
+    val coroutines = "1.4.2-native-mt"//"1.3.9-native-mt"
+>>>>>>> start ios juz  list view impelementation:buildSrc/src/main/kotlin/Dependencies.kt
     val flowBinding = "1.3.2"
     val koin = "3.0.0-alpha-9"
     val cocoapodsext = "0.6"

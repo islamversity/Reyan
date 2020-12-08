@@ -10,16 +10,14 @@ extension Resolver: ResolverRegistering {
 
         // define  custom cached  scope
         // static let session = ResolverScopeCache()
-
-        registerHome()
         
-//        registerScreens() // presenter and proccessor
-//        registerUseCases()
-//        registerRepos()
-//        registerDataSources()
-//        registerQueries()
-//        registerMappers() // Repo and UI Mappers
-//        registerNativeDatabase()
+        registerScreens() // presenter and proccessor
+        registerUseCases()
+        registerRepos()
+        registerDataSources()
+        registerQueries()
+        registerMappers() // Repo and UI Mappers
+        registerNativeDatabase()
         registerNavigator()
     }
 }

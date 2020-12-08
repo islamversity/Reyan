@@ -27,6 +27,4 @@ struct QuranHomeViewParent: RoutableViewParent, Resolving{
         QuranHomeView(presenter: resolver.resolve())
             .eraseToAnyView()
     }
-    
-    
 }

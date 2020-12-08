@@ -1,0 +1,76 @@
+//
+//  SurahRowView.swift
+//  reyan
+//
+//  Created by meghdad on 11/29/20.
+//
+
+import SwiftUI
+import nativeShared
+
+struct SurahRowView : View{
+    
+    let surahUIItem : SurahUIModel
+    
+    var body: some View {
+     
+        VStack {
+            HStack {
+                
+                ZStack {
+                    Image("ic_surah")
+                        .resizable()
+                        .frame(width: 48, height: 48, alignment: .center)
+                    
+                    Text(String(surahUIItem.order))
+                        .font(.custom("Vazir", size: 14.0))
+                        .fontWeight(.bold)
+                }
+                
+                VStack(alignment:.leading) {
+                    Text(surahUIItem.mainName)
+                        .font(.custom("Vazir", size: 18.0))
+
+                    HStack {
+                        Text(surahUIItem.revealedType.rawName)
+                            .font(.custom("Vazir", size: 14.0))
+
+                        Text("-")
+                        
+                        Text("\(surahUIItem.ayaCount) Aya")
+                            .font(.custom("Vazir", size: 14.0))
+
+                    }
+                    .foregroundColor(.gray)
+                }
+                .padding(.leading)
+                
+                Spacer()
+                
+                Text(surahUIItem.arabicName)
+                    .font(.custom("Vazir", size: 26.0))
+                    .foregroundColor(.green)
+
+            }
+            
+//            Divider()
+//                .frame(width: .infinity, height: 2, alignment: .center)
+//                .background(Color.green)
+
+        }
+        .padding(.vertical)
+    }
+    
+    
+}
+//
+//struct SurahRowView_preview : PreviewProvider {
+//    
+//    static var previews: some View {
+//        
+////        SurahRowView(
+////            surahUIItem: SurahUIModel(id: SurahID(id: "1"), order: 1, arabicName: "المومنون", mainName:  "Al-Moemenoon", revealedType: RevealedType.meccan, ayaCount: 23)
+////        )
+//    }
+//    
+//}
