@@ -1,6 +1,7 @@
 
 import UIKit
 import NavigationRouter
+import nativeShared
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -9,6 +10,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Register modules
         iOSNavigator.loadRoutableModules()
+        
+        DatabaseFillerUsecase().fillDB()
+        
+//        Logger().log(severity: Severity_.error, message: "AppDelegate", tag: "AppDelegate", throwable: nil)
                 
         return true
     }
@@ -28,5 +33,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 
+   
 }
 

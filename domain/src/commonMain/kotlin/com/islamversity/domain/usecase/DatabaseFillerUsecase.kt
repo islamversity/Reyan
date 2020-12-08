@@ -553,19 +553,19 @@ class DatabaseFillerUseCaseImpl(
 
                 val endOfHizb: Boolean?
 
-                Logger.log(Severity.Error, "DatabaseFiller", null, "ayaOrder= $surahOrderAyaOrderPair, ayaSize=$ayaSize, surahSize=$surahSize, startOfHizb=$startOfHizb")
+//                Logger.log(Severity.Error, "DatabaseFiller", null, "ayaOrder= $surahOrderAyaOrderPair, ayaSize=$ayaSize, surahSize=$surahSize, startOfHizb=$startOfHizb")
                 if (startOfHizb == null) {
 
                     if (surahOrderAyaOrderPair.second.toInt() < ayaSize) {
                         val nextAyaOrder = surahIndex to (surahOrderAyaOrderPair.second + 1)
-                        Logger.log(Severity.Error, "DatabaseFiller", null, "nextAya= $nextAyaOrder")
+//                        Logger.log(Severity.Error, "DatabaseFiller", null, "nextAya= $nextAyaOrder")
                         endOfHizb = hizbMap[nextAyaOrder]?.let { true }
                     } else if (surahOrderAyaOrderPair.first.toInt() < surahSize) {
                         val nextSurahOrder = (surahIndex + 1) to 1L
-                        Logger.log(Severity.Error, "DatabaseFiller", null, "nextSurah= $nextSurahOrder")
+//                        Logger.log(Severity.Error, "DatabaseFiller", null, "nextSurah= $nextSurahOrder")
                         endOfHizb = hizbMap[nextSurahOrder]?.let { true }
                     } else {
-                        Logger.log(Severity.Error, "DatabaseFiller", null, "LastAYA")
+//                        Logger.log(Severity.Error, "DatabaseFiller", null, "LastAYA")
                         //we are in last aya
                         endOfHizb = true
                     }
@@ -574,7 +574,7 @@ class DatabaseFillerUseCaseImpl(
                     endOfHizb = null
                 }
 
-                Logger.log(Severity.Error, "DatabaseFiller", null, "endOfHizb=$endOfHizb")
+//                Logger.log(Severity.Error, "DatabaseFiller", null, "endOfHizb=$endOfHizb")
                 val arAyaContentId = AyaContentId(randomUUID())
 
                 val arabicC = AyaContent(

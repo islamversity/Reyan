@@ -5,6 +5,7 @@ import com.islamversity.db.model.*
 import com.islamversity.db.Calligraphy as CalligraphyEntity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
 
@@ -69,6 +70,11 @@ class CalligraphyLocalDataSourceImpl(
         queries.getCalligraphyCode(id)
             .asFlow()
             .mapToOneOrNull(context)
+            .onEach {
+//                Logger.log {
+//                    "GetSurah :  getSecondarySurahNameCalligraphy : calligraphy = "  + it.toString()
+//                }
+            }
 
     override fun observeAllCallygraphies(context: CoroutineContext): Flow<List<CalligraphyEntity>> =
         queries.getAllCalligraphies()
