@@ -70,6 +70,18 @@ abstract class BasePresenter<I : MviIntent, S : MviViewState, R : MviResult>(
         Logger.log(severity = Severity.Info, tag = this@BasePresenter::class.simpleName ?: "BasePresenter") {
             "NewState: $newState"
         }
+    override fun states(): Flow<S> = holder.receiveStates()
+        .onEach {
+//            Logger.log {
+//                "BasePresenter : logNewState : newState = "  + it.toString()
+//            }
+        }
+
+    protected open suspend fun logNewState(newState: S) {
+
+//        Logger.log {
+//            "BasePresenter : logNewState : newState = "  + newState.toString()
+//        }
     }
 
     protected open fun filterIntent(): List<FlowBlock<I, I>> =
@@ -82,4 +94,65 @@ abstract class BasePresenter<I : MviIntent, S : MviViewState, R : MviResult>(
     override fun close() {
         presenterJob.cancel()
     }
+
+
+    class StatePublisher<S : MviViewState>(
+        private var latestState: S,
+        private val scope: CoroutineScope
+    ) {
+
+        private val lock = Mutex()
+        private val channelList = mutableListOf<Channel<S>>()
+
+        fun start(states: Flow<S>) {
+            states
+                .onEach {
+                    Logger.log {
+                        "BasePresenter : StatePublisher : state : $it"
+                    }
+                    lock.withLock {
+                        latestState = it
+                        signalListeners()
+                    }
+                }
+                .onCompletion {
+                    closeAllChannels()
+                }
+                .launchIn(scope)
+        }
+
+        private fun closeAllChannels() {
+            channelList.toList().forEach { channel ->
+                channelList.remove(channel)
+                channel.cancel()
+            }
+        }
+
+        private fun signalListeners() {
+            channelList.forEach { it.offer(latestState) }
+        }
+
+        fun receiveStates(): Flow<S> {
+            val newChannel = Channel<S>(Channel.UNLIMITED)
+            channelList += newChannel
+
+            return newChannel.receiveAsFlow()
+                .onCompletion {
+                    if (channelList.remove(newChannel)) {
+                        newChannel.cancel()
+                    }
+                    Logger.log {
+                        "BasePresenter : StatePublisher : checked closed : $newChannel"
+                    }
+                    println("checked closed $newChannel")
+                }.also {
+                    newChannel.offer(latestState)
+                }
+        }
+
+        fun close() {
+            closeAllChannels()
+        }
+    }
+
 }

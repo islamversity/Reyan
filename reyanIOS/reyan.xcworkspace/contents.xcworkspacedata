@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <Group
+      location = "container:"
+      name = "KotlinCode">
+      <FileRef
+         location = "group:../db/src/commonMain">
+      </FileRef>
+      <FileRef
+         location = "group:../domain/src/commonMain">
+      </FileRef>
+      <FileRef
+         location = "group:../db/src/iosMain">
+      </FileRef>
+      <FileRef
+         location = "group:../nativeShared/src/commonMain">
+      </FileRef>
+      <FileRef
+         location = "group:../nativeShared/src/iosMain">
+      </FileRef>
+   </Group>
    <FileRef
       location = "group:reyan.xcodeproj">
    </FileRef>

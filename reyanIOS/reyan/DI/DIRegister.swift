@@ -4,21 +4,6 @@ import nativeShared
 
 extension Resolver {
     
-    
-    public static func registerHome () {
-        register{
-            QuranHomePresenter(processor: resolve(name : "QuranHomeProcessor"))
-        }
-        register(MviProcessor.self, name: "QuranHomeProcessor") {
-            QuranHomeProcessor(navigator: resolve())
-        }
-    }
-    
-    
-    
-    
-    
-    
     public static func registerScreens() {
         
         //  QuranHomeModule
@@ -38,6 +23,9 @@ extension Resolver {
         }
         
         // SurahListModule
+//        register{
+//            SurahListView(presenter: resolve())
+//        }
         register{
             SurahListPresenter(processor: resolve(name : "SurahListProcessor"))
         }
@@ -159,30 +147,33 @@ extension Resolver {
     
     public static func registerQueries() {
         
-        let mainDB : Main = resolve()
-
         register(SurahQueries.self) {
+            let mainDB : Main = resolve()
             return mainDB.surahQueries
         }
-        
         register(AyaQueries.self) {
+            let mainDB : Main = resolve()
             return mainDB.ayaQueries
         }
         register(AyaContentQueries.self) {
+            let mainDB : Main = resolve()
             return mainDB.ayaContentQueries
         }
         register(NameQueries.self) {
+            let mainDB : Main = resolve()
             return mainDB.nameQueries
         }
        
         // 2-1-1-1
         register(SettingsQueries.self) {
+            let mainDB : Main = resolve()
             return mainDB.settingsQueries
         }
        
         // 2-1-2-1
         // 2-2-1-1
         register(CalligraphyQueries.self) {
+            let mainDB : Main = resolve()
             return mainDB.calligraphyQueries
         }
     }
@@ -261,6 +252,7 @@ extension Resolver {
         register(Main.self){
             NativeDatabaseFactory().create()
         }
+        .scope(application)
     }
     
     public static func registerNavigator() {

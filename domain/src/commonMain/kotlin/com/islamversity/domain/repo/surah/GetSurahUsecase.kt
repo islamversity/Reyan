@@ -1,5 +1,6 @@
 package com.islamversity.domain.repo.surah
 
+import com.islamversity.core.Logger
 import com.islamversity.db.datasource.CalligraphyLocalDataSource
 import com.islamversity.domain.model.CalligraphyId
 import com.islamversity.domain.model.surah.SurahID
@@ -23,6 +24,9 @@ class GetSurahUsecaseImpl(
     override fun getSurahs() =
         calligraphyDS.getArabicSurahCalligraphy().combineTransform(settingRepo.getSecondarySurahNameCalligraphy()) { arabic, main ->
             emit(arabic to main)
+            Logger.log {
+                "GetSurah" + arabic.toString() + " - " + main.toString()
+            }
         }
             .flatMapMerge {
                 surahRepo.getAllSurah(arabicCalligraphy = CalligraphyId(it.first.id.id), mainCalligraphy = it.second.id)

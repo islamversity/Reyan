@@ -70,9 +70,15 @@ class SettingRepoImpl(
             context
         )
             .flatMapMerge {
+                Logger.log {
+                    "GetSurah : getSecondarySurahNameCalligraphy : id = "  + it.toString()
+                }
                 calligraphyDS.getCalligraphyById(CalligraphyId(it))
             }
             .map {
+                Logger.log {
+                    "GetSurah :  getSecondarySurahNameCalligraphy : calligraphy = "  + it.toString()
+                }
                 mapper.map(it!!)
             }
 
