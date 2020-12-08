@@ -77,7 +77,9 @@ class DatabaseFillerUseCaseImpl(
     private val config: DatabaseFileConfig
 ) : DatabaseFillerUseCase {
     private val broadCaster by lazy {
-        BroadcastChannel<FillingStatus>(Channel.CONFLATED)
+        BroadcastChannel<FillingStatus>(Channel.CONFLATED).also {
+            it.offer(FillingStatus.Idle)
+        }
     }
 
     override suspend fun needsFilling(): Boolean {

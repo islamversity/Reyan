@@ -28,16 +28,20 @@ class StartUpView : Controller(), CoroutineScope by MainScope() {
             it.background = ColorDrawable(Color.TRANSPARENT)
         }
 
-    private fun checkDatabase(app : Application) {
+    private fun checkDatabase(app: Application) {
         launch {
-            val needs = withContext(Dispatchers.IO){
+            val needs = withContext(Dispatchers.IO) {
                 //maybe sharedPrefs are faster
                 //for now we can stick to database
                 app.coreComponent().databaseFillerUsecase().needsFilling()
             }
             Logger.log(tag = "StartupView") { "database needs filling= $needs" }
             if (isActive) {
-                router.setRoot(RouterTransaction.with(ControllerFactory.createController(Screens.Home, app)))
+//                if (needs) {
+//                    router.setRoot(RouterTransaction.with(ControllerFactory.createController(Screens.OnBoarding, app)))
+//                }else{
+                    router.setRoot(RouterTransaction.with(ControllerFactory.createController(Screens.Home, app)))
+//                }
             }
         }
     }
