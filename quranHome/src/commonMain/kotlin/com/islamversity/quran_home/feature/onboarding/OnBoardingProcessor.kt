@@ -20,9 +20,9 @@ class OnBoardingProcessor(
     private val fillerUseCase: DatabaseFillerUseCase
 ) : BaseProcessor<OnBoardingIntent, OnBoardingResult>() {
     override fun transformers(): List<FlowBlock<OnBoardingIntent, OnBoardingResult>> =
-        listOf(loadJoz)
+        listOf(startFilling, continueProcessor)
 
-    private val loadJoz: FlowBlock<OnBoardingIntent, OnBoardingResult> = {
+    private val startFilling: FlowBlock<OnBoardingIntent, OnBoardingResult> = {
         ofType<OnBoardingIntent.Initial>()
             .filter {
                 fillerUseCase.status().first() == FillingStatus.Idle
@@ -34,6 +34,7 @@ class OnBoardingProcessor(
                 {
                     flatMapLatest {
                         listenToUpdates()
+//                        fillingSimulator()
                     }
                 })
     }
@@ -52,9 +53,28 @@ class OnBoardingProcessor(
                 }
             }
 
+
+    private fun fillingSimulator() = flow {
+        repeat(5){
+            emit(OnBoardingResult.Loading(it  * 20))
+            kotlinx.coroutines.delay(1000)
+        }
+
+        emit(OnBoardingResult.InitializingDone)
+    }
+
     private fun <T, R> Flow<T>.startFilling(): Flow<R> =
         transform {
             fillerUseCase.fill()
         }
 
+
+    private val continueProcessor: FlowBlock<OnBoardingIntent, OnBoardingResult> = {
+        ofType<OnBoardingIntent.Continue>()
+            .map {
+                Screens.Home
+            }
+            .navigateTo(navigator)
+
+    }
 }
