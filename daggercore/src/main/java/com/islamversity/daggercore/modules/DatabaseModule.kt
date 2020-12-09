@@ -27,12 +27,16 @@ class DatabaseModule {
                 .callback(callback)
                 .build()
 
-        val openHelper = SQLiteCopyOpenHelperFactory(
-            "Main.db.zip",
-            null,
-            null,
-            frameworkFactory
-        ).create(config)
+        val openHelper =
+//            SQLiteCopyOpenHelperFactory(
+//            "Main.db.zip",
+//            null,
+//            null,
+//            frameworkFactory
+//        )
+                    FrameworkSQLiteOpenHelperFactory()
+                .create(config)
+
 
         return AndroidSqliteDriver(
             openHelper = openHelper

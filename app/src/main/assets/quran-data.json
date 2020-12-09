@@ -1,0 +1,2721 @@
+{
+	"quran": {
+		"suras": {
+			"sura": [
+				{
+					"_index": "1",
+					"_ayas": "7",
+					"_start": "0",
+					"_name": "الفاتحة",
+					"_tname": "Al-Faatiha",
+					"_ename": "The Opening",
+					"_type": "Meccan",
+					"_order": "5",
+					"_rukus": "1"
+				},
+				{
+					"_index": "2",
+					"_ayas": "286",
+					"_start": "7",
+					"_name": "البقرة",
+					"_tname": "Al-Baqara",
+					"_ename": "The Cow",
+					"_type": "Medinan",
+					"_order": "87",
+					"_rukus": "40"
+				},
+				{
+					"_index": "3",
+					"_ayas": "200",
+					"_start": "293",
+					"_name": "آل عمران",
+					"_tname": "Aal-i-Imraan",
+					"_ename": "The Family of Imraan",
+					"_type": "Medinan",
+					"_order": "89",
+					"_rukus": "20"
+				},
+				{
+					"_index": "4",
+					"_ayas": "176",
+					"_start": "493",
+					"_name": "النساء",
+					"_tname": "An-Nisaa",
+					"_ename": "The Women",
+					"_type": "Medinan",
+					"_order": "92",
+					"_rukus": "24"
+				},
+				{
+					"_index": "5",
+					"_ayas": "120",
+					"_start": "669",
+					"_name": "المائدة",
+					"_tname": "Al-Maaida",
+					"_ename": "The Table",
+					"_type": "Medinan",
+					"_order": "112",
+					"_rukus": "16"
+				},
+				{
+					"_index": "6",
+					"_ayas": "165",
+					"_start": "789",
+					"_name": "الأنعام",
+					"_tname": "Al-An'aam",
+					"_ename": "The Cattle",
+					"_type": "Meccan",
+					"_order": "55",
+					"_rukus": "20"
+				},
+				{
+					"_index": "7",
+					"_ayas": "206",
+					"_start": "954",
+					"_name": "الأعراف",
+					"_tname": "Al-A'raaf",
+					"_ename": "The Heights",
+					"_type": "Meccan",
+					"_order": "39",
+					"_rukus": "24"
+				},
+				{
+					"_index": "8",
+					"_ayas": "75",
+					"_start": "1160",
+					"_name": "الأنفال",
+					"_tname": "Al-Anfaal",
+					"_ename": "The Spoils of War",
+					"_type": "Medinan",
+					"_order": "88",
+					"_rukus": "10"
+				},
+				{
+					"_index": "9",
+					"_ayas": "129",
+					"_start": "1235",
+					"_name": "التوبة",
+					"_tname": "At-Tawba",
+					"_ename": "The Repentance",
+					"_type": "Medinan",
+					"_order": "113",
+					"_rukus": "16"
+				},
+				{
+					"_index": "10",
+					"_ayas": "109",
+					"_start": "1364",
+					"_name": "يونس",
+					"_tname": "Yunus",
+					"_ename": "Jonas",
+					"_type": "Meccan",
+					"_order": "51",
+					"_rukus": "11"
+				},
+				{
+					"_index": "11",
+					"_ayas": "123",
+					"_start": "1473",
+					"_name": "هود",
+					"_tname": "Hud",
+					"_ename": "Hud",
+					"_type": "Meccan",
+					"_order": "52",
+					"_rukus": "10"
+				},
+				{
+					"_index": "12",
+					"_ayas": "111",
+					"_start": "1596",
+					"_name": "يوسف",
+					"_tname": "Yusuf",
+					"_ename": "Joseph",
+					"_type": "Meccan",
+					"_order": "53",
+					"_rukus": "12"
+				},
+				{
+					"_index": "13",
+					"_ayas": "43",
+					"_start": "1707",
+					"_name": "الرعد",
+					"_tname": "Ar-Ra'd",
+					"_ename": "The Thunder",
+					"_type": "Medinan",
+					"_order": "96",
+					"_rukus": "6"
+				},
+				{
+					"_index": "14",
+					"_ayas": "52",
+					"_start": "1750",
+					"_name": "ابراهيم",
+					"_tname": "Ibrahim",
+					"_ename": "Abraham",
+					"_type": "Meccan",
+					"_order": "72",
+					"_rukus": "7"
+				},
+				{
+					"_index": "15",
+					"_ayas": "99",
+					"_start": "1802",
+					"_name": "الحجر",
+					"_tname": "Al-Hijr",
+					"_ename": "The Rock",
+					"_type": "Meccan",
+					"_order": "54",
+					"_rukus": "6"
+				},
+				{
+					"_index": "16",
+					"_ayas": "128",
+					"_start": "1901",
+					"_name": "النحل",
+					"_tname": "An-Nahl",
+					"_ename": "The Bee",
+					"_type": "Meccan",
+					"_order": "70",
+					"_rukus": "16"
+				},
+				{
+					"_index": "17",
+					"_ayas": "111",
+					"_start": "2029",
+					"_name": "الإسراء",
+					"_tname": "Al-Israa",
+					"_ename": "The Night Journey",
+					"_type": "Meccan",
+					"_order": "50",
+					"_rukus": "12"
+				},
+				{
+					"_index": "18",
+					"_ayas": "110",
+					"_start": "2140",
+					"_name": "الكهف",
+					"_tname": "Al-Kahf",
+					"_ename": "The Cave",
+					"_type": "Meccan",
+					"_order": "69",
+					"_rukus": "12"
+				},
+				{
+					"_index": "19",
+					"_ayas": "98",
+					"_start": "2250",
+					"_name": "مريم",
+					"_tname": "Maryam",
+					"_ename": "Mary",
+					"_type": "Meccan",
+					"_order": "44",
+					"_rukus": "6"
+				},
+				{
+					"_index": "20",
+					"_ayas": "135",
+					"_start": "2348",
+					"_name": "طه",
+					"_tname": "Taa-Haa",
+					"_ename": "Taa-Haa",
+					"_type": "Meccan",
+					"_order": "45",
+					"_rukus": "8"
+				},
+				{
+					"_index": "21",
+					"_ayas": "112",
+					"_start": "2483",
+					"_name": "الأنبياء",
+					"_tname": "Al-Anbiyaa",
+					"_ename": "The Prophets",
+					"_type": "Meccan",
+					"_order": "73",
+					"_rukus": "7"
+				},
+				{
+					"_index": "22",
+					"_ayas": "78",
+					"_start": "2595",
+					"_name": "الحج",
+					"_tname": "Al-Hajj",
+					"_ename": "The Pilgrimage",
+					"_type": "Medinan",
+					"_order": "103",
+					"_rukus": "10"
+				},
+				{
+					"_index": "23",
+					"_ayas": "118",
+					"_start": "2673",
+					"_name": "المؤمنون",
+					"_tname": "Al-Muminoon",
+					"_ename": "The Believers",
+					"_type": "Meccan",
+					"_order": "74",
+					"_rukus": "6"
+				},
+				{
+					"_index": "24",
+					"_ayas": "64",
+					"_start": "2791",
+					"_name": "النور",
+					"_tname": "An-Noor",
+					"_ename": "The Light",
+					"_type": "Medinan",
+					"_order": "102",
+					"_rukus": "9"
+				},
+				{
+					"_index": "25",
+					"_ayas": "77",
+					"_start": "2855",
+					"_name": "الفرقان",
+					"_tname": "Al-Furqaan",
+					"_ename": "The Criterion",
+					"_type": "Meccan",
+					"_order": "42",
+					"_rukus": "6"
+				},
+				{
+					"_index": "26",
+					"_ayas": "227",
+					"_start": "2932",
+					"_name": "الشعراء",
+					"_tname": "Ash-Shu'araa",
+					"_ename": "The Poets",
+					"_type": "Meccan",
+					"_order": "47",
+					"_rukus": "11"
+				},
+				{
+					"_index": "27",
+					"_ayas": "93",
+					"_start": "3159",
+					"_name": "النمل",
+					"_tname": "An-Naml",
+					"_ename": "The Ant",
+					"_type": "Meccan",
+					"_order": "48",
+					"_rukus": "7"
+				},
+				{
+					"_index": "28",
+					"_ayas": "88",
+					"_start": "3252",
+					"_name": "القصص",
+					"_tname": "Al-Qasas",
+					"_ename": "The Stories",
+					"_type": "Meccan",
+					"_order": "49",
+					"_rukus": "8"
+				},
+				{
+					"_index": "29",
+					"_ayas": "69",
+					"_start": "3340",
+					"_name": "العنكبوت",
+					"_tname": "Al-Ankaboot",
+					"_ename": "The Spider",
+					"_type": "Meccan",
+					"_order": "85",
+					"_rukus": "7"
+				},
+				{
+					"_index": "30",
+					"_ayas": "60",
+					"_start": "3409",
+					"_name": "الروم",
+					"_tname": "Ar-Room",
+					"_ename": "The Romans",
+					"_type": "Meccan",
+					"_order": "84",
+					"_rukus": "6"
+				},
+				{
+					"_index": "31",
+					"_ayas": "34",
+					"_start": "3469",
+					"_name": "لقمان",
+					"_tname": "Luqman",
+					"_ename": "Luqman",
+					"_type": "Meccan",
+					"_order": "57",
+					"_rukus": "3"
+				},
+				{
+					"_index": "32",
+					"_ayas": "30",
+					"_start": "3503",
+					"_name": "السجدة",
+					"_tname": "As-Sajda",
+					"_ename": "The Prostration",
+					"_type": "Meccan",
+					"_order": "75",
+					"_rukus": "3"
+				},
+				{
+					"_index": "33",
+					"_ayas": "73",
+					"_start": "3533",
+					"_name": "الأحزاب",
+					"_tname": "Al-Ahzaab",
+					"_ename": "The Clans",
+					"_type": "Medinan",
+					"_order": "90",
+					"_rukus": "9"
+				},
+				{
+					"_index": "34",
+					"_ayas": "54",
+					"_start": "3606",
+					"_name": "سبإ",
+					"_tname": "Saba",
+					"_ename": "Sheba",
+					"_type": "Meccan",
+					"_order": "58",
+					"_rukus": "6"
+				},
+				{
+					"_index": "35",
+					"_ayas": "45",
+					"_start": "3660",
+					"_name": "فاطر",
+					"_tname": "Faatir",
+					"_ename": "The Originator",
+					"_type": "Meccan",
+					"_order": "43",
+					"_rukus": "5"
+				},
+				{
+					"_index": "36",
+					"_ayas": "83",
+					"_start": "3705",
+					"_name": "يس",
+					"_tname": "Yaseen",
+					"_ename": "Yaseen",
+					"_type": "Meccan",
+					"_order": "41",
+					"_rukus": "5"
+				},
+				{
+					"_index": "37",
+					"_ayas": "182",
+					"_start": "3788",
+					"_name": "الصافات",
+					"_tname": "As-Saaffaat",
+					"_ename": "Those drawn up in Ranks",
+					"_type": "Meccan",
+					"_order": "56",
+					"_rukus": "5"
+				},
+				{
+					"_index": "38",
+					"_ayas": "88",
+					"_start": "3970",
+					"_name": "ص",
+					"_tname": "Saad",
+					"_ename": "The letter Saad",
+					"_type": "Meccan",
+					"_order": "38",
+					"_rukus": "5"
+				},
+				{
+					"_index": "39",
+					"_ayas": "75",
+					"_start": "4058",
+					"_name": "الزمر",
+					"_tname": "Az-Zumar",
+					"_ename": "The Groups",
+					"_type": "Meccan",
+					"_order": "59",
+					"_rukus": "8"
+				},
+				{
+					"_index": "40",
+					"_ayas": "85",
+					"_start": "4133",
+					"_name": "غافر",
+					"_tname": "Al-Ghaafir",
+					"_ename": "The Forgiver",
+					"_type": "Meccan",
+					"_order": "60",
+					"_rukus": "9"
+				},
+				{
+					"_index": "41",
+					"_ayas": "54",
+					"_start": "4218",
+					"_name": "فصلت",
+					"_tname": "Fussilat",
+					"_ename": "Explained in detail",
+					"_type": "Meccan",
+					"_order": "61",
+					"_rukus": "6"
+				},
+				{
+					"_index": "42",
+					"_ayas": "53",
+					"_start": "4272",
+					"_name": "الشورى",
+					"_tname": "Ash-Shura",
+					"_ename": "Consultation",
+					"_type": "Meccan",
+					"_order": "62",
+					"_rukus": "5"
+				},
+				{
+					"_index": "43",
+					"_ayas": "89",
+					"_start": "4325",
+					"_name": "الزخرف",
+					"_tname": "Az-Zukhruf",
+					"_ename": "Ornaments of gold",
+					"_type": "Meccan",
+					"_order": "63",
+					"_rukus": "7"
+				},
+				{
+					"_index": "44",
+					"_ayas": "59",
+					"_start": "4414",
+					"_name": "الدخان",
+					"_tname": "Ad-Dukhaan",
+					"_ename": "The Smoke",
+					"_type": "Meccan",
+					"_order": "64",
+					"_rukus": "3"
+				},
+				{
+					"_index": "45",
+					"_ayas": "37",
+					"_start": "4473",
+					"_name": "الجاثية",
+					"_tname": "Al-Jaathiya",
+					"_ename": "Crouching",
+					"_type": "Meccan",
+					"_order": "65",
+					"_rukus": "4"
+				},
+				{
+					"_index": "46",
+					"_ayas": "35",
+					"_start": "4510",
+					"_name": "الأحقاف",
+					"_tname": "Al-Ahqaf",
+					"_ename": "The Dunes",
+					"_type": "Meccan",
+					"_order": "66",
+					"_rukus": "4"
+				},
+				{
+					"_index": "47",
+					"_ayas": "38",
+					"_start": "4545",
+					"_name": "محمد",
+					"_tname": "Muhammad",
+					"_ename": "Muhammad",
+					"_type": "Medinan",
+					"_order": "95",
+					"_rukus": "4"
+				},
+				{
+					"_index": "48",
+					"_ayas": "29",
+					"_start": "4583",
+					"_name": "الفتح",
+					"_tname": "Al-Fath",
+					"_ename": "The Victory",
+					"_type": "Medinan",
+					"_order": "111",
+					"_rukus": "4"
+				},
+				{
+					"_index": "49",
+					"_ayas": "18",
+					"_start": "4612",
+					"_name": "الحجرات",
+					"_tname": "Al-Hujuraat",
+					"_ename": "The Inner Apartments",
+					"_type": "Medinan",
+					"_order": "106",
+					"_rukus": "2"
+				},
+				{
+					"_index": "50",
+					"_ayas": "45",
+					"_start": "4630",
+					"_name": "ق",
+					"_tname": "Qaaf",
+					"_ename": "The letter Qaaf",
+					"_type": "Meccan",
+					"_order": "34",
+					"_rukus": "3"
+				},
+				{
+					"_index": "51",
+					"_ayas": "60",
+					"_start": "4675",
+					"_name": "الذاريات",
+					"_tname": "Adh-Dhaariyat",
+					"_ename": "The Winnowing Winds",
+					"_type": "Meccan",
+					"_order": "67",
+					"_rukus": "3"
+				},
+				{
+					"_index": "52",
+					"_ayas": "49",
+					"_start": "4735",
+					"_name": "الطور",
+					"_tname": "At-Tur",
+					"_ename": "The Mount",
+					"_type": "Meccan",
+					"_order": "76",
+					"_rukus": "2"
+				},
+				{
+					"_index": "53",
+					"_ayas": "62",
+					"_start": "4784",
+					"_name": "النجم",
+					"_tname": "An-Najm",
+					"_ename": "The Star",
+					"_type": "Meccan",
+					"_order": "23",
+					"_rukus": "3"
+				},
+				{
+					"_index": "54",
+					"_ayas": "55",
+					"_start": "4846",
+					"_name": "القمر",
+					"_tname": "Al-Qamar",
+					"_ename": "The Moon",
+					"_type": "Meccan",
+					"_order": "37",
+					"_rukus": "3"
+				},
+				{
+					"_index": "55",
+					"_ayas": "78",
+					"_start": "4901",
+					"_name": "الرحمن",
+					"_tname": "Ar-Rahmaan",
+					"_ename": "The Beneficent",
+					"_type": "Medinan",
+					"_order": "97",
+					"_rukus": "3"
+				},
+				{
+					"_index": "56",
+					"_ayas": "96",
+					"_start": "4979",
+					"_name": "الواقعة",
+					"_tname": "Al-Waaqia",
+					"_ename": "The Inevitable",
+					"_type": "Meccan",
+					"_order": "46",
+					"_rukus": "3"
+				},
+				{
+					"_index": "57",
+					"_ayas": "29",
+					"_start": "5075",
+					"_name": "الحديد",
+					"_tname": "Al-Hadid",
+					"_ename": "The Iron",
+					"_type": "Medinan",
+					"_order": "94",
+					"_rukus": "4"
+				},
+				{
+					"_index": "58",
+					"_ayas": "22",
+					"_start": "5104",
+					"_name": "المجادلة",
+					"_tname": "Al-Mujaadila",
+					"_ename": "The Pleading Woman",
+					"_type": "Medinan",
+					"_order": "105",
+					"_rukus": "3"
+				},
+				{
+					"_index": "59",
+					"_ayas": "24",
+					"_start": "5126",
+					"_name": "الحشر",
+					"_tname": "Al-Hashr",
+					"_ename": "The Exile",
+					"_type": "Medinan",
+					"_order": "101",
+					"_rukus": "3"
+				},
+				{
+					"_index": "60",
+					"_ayas": "13",
+					"_start": "5150",
+					"_name": "الممتحنة",
+					"_tname": "Al-Mumtahana",
+					"_ename": "She that is to be examined",
+					"_type": "Medinan",
+					"_order": "91",
+					"_rukus": "2"
+				},
+				{
+					"_index": "61",
+					"_ayas": "14",
+					"_start": "5163",
+					"_name": "الصف",
+					"_tname": "As-Saff",
+					"_ename": "The Ranks",
+					"_type": "Medinan",
+					"_order": "109",
+					"_rukus": "2"
+				},
+				{
+					"_index": "62",
+					"_ayas": "11",
+					"_start": "5177",
+					"_name": "الجمعة",
+					"_tname": "Al-Jumu'a",
+					"_ename": "Friday",
+					"_type": "Medinan",
+					"_order": "110",
+					"_rukus": "2"
+				},
+				{
+					"_index": "63",
+					"_ayas": "11",
+					"_start": "5188",
+					"_name": "المنافقون",
+					"_tname": "Al-Munaafiqoon",
+					"_ename": "The Hypocrites",
+					"_type": "Medinan",
+					"_order": "104",
+					"_rukus": "2"
+				},
+				{
+					"_index": "64",
+					"_ayas": "18",
+					"_start": "5199",
+					"_name": "التغابن",
+					"_tname": "At-Taghaabun",
+					"_ename": "Mutual Disillusion",
+					"_type": "Medinan",
+					"_order": "108",
+					"_rukus": "2"
+				},
+				{
+					"_index": "65",
+					"_ayas": "12",
+					"_start": "5217",
+					"_name": "الطلاق",
+					"_tname": "At-Talaaq",
+					"_ename": "Divorce",
+					"_type": "Medinan",
+					"_order": "99",
+					"_rukus": "2"
+				},
+				{
+					"_index": "66",
+					"_ayas": "12",
+					"_start": "5229",
+					"_name": "التحريم",
+					"_tname": "At-Tahrim",
+					"_ename": "The Prohibition",
+					"_type": "Medinan",
+					"_order": "107",
+					"_rukus": "2"
+				},
+				{
+					"_index": "67",
+					"_ayas": "30",
+					"_start": "5241",
+					"_name": "الملك",
+					"_tname": "Al-Mulk",
+					"_ename": "The Sovereignty",
+					"_type": "Meccan",
+					"_order": "77",
+					"_rukus": "2"
+				},
+				{
+					"_index": "68",
+					"_ayas": "52",
+					"_start": "5271",
+					"_name": "القلم",
+					"_tname": "Al-Qalam",
+					"_ename": "The Pen",
+					"_type": "Meccan",
+					"_order": "2",
+					"_rukus": "2"
+				},
+				{
+					"_index": "69",
+					"_ayas": "52",
+					"_start": "5323",
+					"_name": "الحاقة",
+					"_tname": "Al-Haaqqa",
+					"_ename": "The Reality",
+					"_type": "Meccan",
+					"_order": "78",
+					"_rukus": "2"
+				},
+				{
+					"_index": "70",
+					"_ayas": "44",
+					"_start": "5375",
+					"_name": "المعارج",
+					"_tname": "Al-Ma'aarij",
+					"_ename": "The Ascending Stairways",
+					"_type": "Meccan",
+					"_order": "79",
+					"_rukus": "2"
+				},
+				{
+					"_index": "71",
+					"_ayas": "28",
+					"_start": "5419",
+					"_name": "نوح",
+					"_tname": "Nooh",
+					"_ename": "Noah",
+					"_type": "Meccan",
+					"_order": "71",
+					"_rukus": "2"
+				},
+				{
+					"_index": "72",
+					"_ayas": "28",
+					"_start": "5447",
+					"_name": "الجن",
+					"_tname": "Al-Jinn",
+					"_ename": "The Jinn",
+					"_type": "Meccan",
+					"_order": "40",
+					"_rukus": "2"
+				},
+				{
+					"_index": "73",
+					"_ayas": "20",
+					"_start": "5475",
+					"_name": "المزمل",
+					"_tname": "Al-Muzzammil",
+					"_ename": "The Enshrouded One",
+					"_type": "Meccan",
+					"_order": "3",
+					"_rukus": "2"
+				},
+				{
+					"_index": "74",
+					"_ayas": "56",
+					"_start": "5495",
+					"_name": "المدثر",
+					"_tname": "Al-Muddaththir",
+					"_ename": "The Cloaked One",
+					"_type": "Meccan",
+					"_order": "4",
+					"_rukus": "2"
+				},
+				{
+					"_index": "75",
+					"_ayas": "40",
+					"_start": "5551",
+					"_name": "القيامة",
+					"_tname": "Al-Qiyaama",
+					"_ename": "The Resurrection",
+					"_type": "Meccan",
+					"_order": "31",
+					"_rukus": "2"
+				},
+				{
+					"_index": "76",
+					"_ayas": "31",
+					"_start": "5591",
+					"_name": "الانسان",
+					"_tname": "Al-Insaan",
+					"_ename": "Man",
+					"_type": "Medinan",
+					"_order": "98",
+					"_rukus": "2"
+				},
+				{
+					"_index": "77",
+					"_ayas": "50",
+					"_start": "5622",
+					"_name": "المرسلات",
+					"_tname": "Al-Mursalaat",
+					"_ename": "The Emissaries",
+					"_type": "Meccan",
+					"_order": "33",
+					"_rukus": "2"
+				},
+				{
+					"_index": "78",
+					"_ayas": "40",
+					"_start": "5672",
+					"_name": "النبإ",
+					"_tname": "An-Naba",
+					"_ename": "The Announcement",
+					"_type": "Meccan",
+					"_order": "80",
+					"_rukus": "2"
+				},
+				{
+					"_index": "79",
+					"_ayas": "46",
+					"_start": "5712",
+					"_name": "النازعات",
+					"_tname": "An-Naazi'aat",
+					"_ename": "Those who drag forth",
+					"_type": "Meccan",
+					"_order": "81",
+					"_rukus": "2"
+				},
+				{
+					"_index": "80",
+					"_ayas": "42",
+					"_start": "5758",
+					"_name": "عبس",
+					"_tname": "Abasa",
+					"_ename": "He frowned",
+					"_type": "Meccan",
+					"_order": "24",
+					"_rukus": "1"
+				},
+				{
+					"_index": "81",
+					"_ayas": "29",
+					"_start": "5800",
+					"_name": "التكوير",
+					"_tname": "At-Takwir",
+					"_ename": "The Overthrowing",
+					"_type": "Meccan",
+					"_order": "7",
+					"_rukus": "1"
+				},
+				{
+					"_index": "82",
+					"_ayas": "19",
+					"_start": "5829",
+					"_name": "الإنفطار",
+					"_tname": "Al-Infitaar",
+					"_ename": "The Cleaving",
+					"_type": "Meccan",
+					"_order": "82",
+					"_rukus": "1"
+				},
+				{
+					"_index": "83",
+					"_ayas": "36",
+					"_start": "5848",
+					"_name": "المطففين",
+					"_tname": "Al-Mutaffifin",
+					"_ename": "Defrauding",
+					"_type": "Meccan",
+					"_order": "86",
+					"_rukus": "1"
+				},
+				{
+					"_index": "84",
+					"_ayas": "25",
+					"_start": "5884",
+					"_name": "الإنشقاق",
+					"_tname": "Al-Inshiqaaq",
+					"_ename": "The Splitting Open",
+					"_type": "Meccan",
+					"_order": "83",
+					"_rukus": "1"
+				},
+				{
+					"_index": "85",
+					"_ayas": "22",
+					"_start": "5909",
+					"_name": "البروج",
+					"_tname": "Al-Burooj",
+					"_ename": "The Constellations",
+					"_type": "Meccan",
+					"_order": "27",
+					"_rukus": "1"
+				},
+				{
+					"_index": "86",
+					"_ayas": "17",
+					"_start": "5931",
+					"_name": "الطارق",
+					"_tname": "At-Taariq",
+					"_ename": "The Morning Star",
+					"_type": "Meccan",
+					"_order": "36",
+					"_rukus": "1"
+				},
+				{
+					"_index": "87",
+					"_ayas": "19",
+					"_start": "5948",
+					"_name": "الأعلى",
+					"_tname": "Al-A'laa",
+					"_ename": "The Most High",
+					"_type": "Meccan",
+					"_order": "8",
+					"_rukus": "1"
+				},
+				{
+					"_index": "88",
+					"_ayas": "26",
+					"_start": "5967",
+					"_name": "الغاشية",
+					"_tname": "Al-Ghaashiya",
+					"_ename": "The Overwhelming",
+					"_type": "Meccan",
+					"_order": "68",
+					"_rukus": "1"
+				},
+				{
+					"_index": "89",
+					"_ayas": "30",
+					"_start": "5993",
+					"_name": "الفجر",
+					"_tname": "Al-Fajr",
+					"_ename": "The Dawn",
+					"_type": "Meccan",
+					"_order": "10",
+					"_rukus": "1"
+				},
+				{
+					"_index": "90",
+					"_ayas": "20",
+					"_start": "6023",
+					"_name": "البلد",
+					"_tname": "Al-Balad",
+					"_ename": "The City",
+					"_type": "Meccan",
+					"_order": "35",
+					"_rukus": "1"
+				},
+				{
+					"_index": "91",
+					"_ayas": "15",
+					"_start": "6043",
+					"_name": "الشمس",
+					"_tname": "Ash-Shams",
+					"_ename": "The Sun",
+					"_type": "Meccan",
+					"_order": "26",
+					"_rukus": "1"
+				},
+				{
+					"_index": "92",
+					"_ayas": "21",
+					"_start": "6058",
+					"_name": "الليل",
+					"_tname": "Al-Lail",
+					"_ename": "The Night",
+					"_type": "Meccan",
+					"_order": "9",
+					"_rukus": "1"
+				},
+				{
+					"_index": "93",
+					"_ayas": "11",
+					"_start": "6079",
+					"_name": "الضحى",
+					"_tname": "Ad-Dhuhaa",
+					"_ename": "The Morning Hours",
+					"_type": "Meccan",
+					"_order": "11",
+					"_rukus": "1"
+				},
+				{
+					"_index": "94",
+					"_ayas": "8",
+					"_start": "6090",
+					"_name": "الشرح",
+					"_tname": "Ash-Sharh",
+					"_ename": "The Consolation",
+					"_type": "Meccan",
+					"_order": "12",
+					"_rukus": "1"
+				},
+				{
+					"_index": "95",
+					"_ayas": "8",
+					"_start": "6098",
+					"_name": "التين",
+					"_tname": "At-Tin",
+					"_ename": "The Fig",
+					"_type": "Meccan",
+					"_order": "28",
+					"_rukus": "1"
+				},
+				{
+					"_index": "96",
+					"_ayas": "19",
+					"_start": "6106",
+					"_name": "العلق",
+					"_tname": "Al-Alaq",
+					"_ename": "The Clot",
+					"_type": "Meccan",
+					"_order": "1",
+					"_rukus": "1"
+				},
+				{
+					"_index": "97",
+					"_ayas": "5",
+					"_start": "6125",
+					"_name": "القدر",
+					"_tname": "Al-Qadr",
+					"_ename": "The Power, Fate",
+					"_type": "Meccan",
+					"_order": "25",
+					"_rukus": "1"
+				},
+				{
+					"_index": "98",
+					"_ayas": "8",
+					"_start": "6130",
+					"_name": "البينة",
+					"_tname": "Al-Bayyina",
+					"_ename": "The Evidence",
+					"_type": "Medinan",
+					"_order": "100",
+					"_rukus": "1"
+				},
+				{
+					"_index": "99",
+					"_ayas": "8",
+					"_start": "6138",
+					"_name": "الزلزلة",
+					"_tname": "Az-Zalzala",
+					"_ename": "The Earthquake",
+					"_type": "Medinan",
+					"_order": "93",
+					"_rukus": "1"
+				},
+				{
+					"_index": "100",
+					"_ayas": "11",
+					"_start": "6146",
+					"_name": "العاديات",
+					"_tname": "Al-Aadiyaat",
+					"_ename": "The Chargers",
+					"_type": "Meccan",
+					"_order": "14",
+					"_rukus": "1"
+				},
+				{
+					"_index": "101",
+					"_ayas": "11",
+					"_start": "6157",
+					"_name": "القارعة",
+					"_tname": "Al-Qaari'a",
+					"_ename": "The Calamity",
+					"_type": "Meccan",
+					"_order": "30",
+					"_rukus": "1"
+				},
+				{
+					"_index": "102",
+					"_ayas": "8",
+					"_start": "6168",
+					"_name": "التكاثر",
+					"_tname": "At-Takaathur",
+					"_ename": "Competition",
+					"_type": "Meccan",
+					"_order": "16",
+					"_rukus": "1"
+				},
+				{
+					"_index": "103",
+					"_ayas": "3",
+					"_start": "6176",
+					"_name": "العصر",
+					"_tname": "Al-Asr",
+					"_ename": "The Declining Day, Epoch",
+					"_type": "Meccan",
+					"_order": "13",
+					"_rukus": "1"
+				},
+				{
+					"_index": "104",
+					"_ayas": "9",
+					"_start": "6179",
+					"_name": "الهمزة",
+					"_tname": "Al-Humaza",
+					"_ename": "The Traducer",
+					"_type": "Meccan",
+					"_order": "32",
+					"_rukus": "1"
+				},
+				{
+					"_index": "105",
+					"_ayas": "5",
+					"_start": "6188",
+					"_name": "الفيل",
+					"_tname": "Al-Fil",
+					"_ename": "The Elephant",
+					"_type": "Meccan",
+					"_order": "19",
+					"_rukus": "1"
+				},
+				{
+					"_index": "106",
+					"_ayas": "4",
+					"_start": "6193",
+					"_name": "قريش",
+					"_tname": "Quraish",
+					"_ename": "Quraysh",
+					"_type": "Meccan",
+					"_order": "29",
+					"_rukus": "1"
+				},
+				{
+					"_index": "107",
+					"_ayas": "7",
+					"_start": "6197",
+					"_name": "الماعون",
+					"_tname": "Al-Maa'un",
+					"_ename": "Almsgiving",
+					"_type": "Meccan",
+					"_order": "17",
+					"_rukus": "1"
+				},
+				{
+					"_index": "108",
+					"_ayas": "3",
+					"_start": "6204",
+					"_name": "الكوثر",
+					"_tname": "Al-Kawthar",
+					"_ename": "Abundance",
+					"_type": "Meccan",
+					"_order": "15",
+					"_rukus": "1"
+				},
+				{
+					"_index": "109",
+					"_ayas": "6",
+					"_start": "6207",
+					"_name": "الكافرون",
+					"_tname": "Al-Kaafiroon",
+					"_ename": "The Disbelievers",
+					"_type": "Meccan",
+					"_order": "18",
+					"_rukus": "1"
+				},
+				{
+					"_index": "110",
+					"_ayas": "3",
+					"_start": "6213",
+					"_name": "النصر",
+					"_tname": "An-Nasr",
+					"_ename": "Divine Support",
+					"_type": "Medinan",
+					"_order": "114",
+					"_rukus": "1"
+				},
+				{
+					"_index": "111",
+					"_ayas": "5",
+					"_start": "6216",
+					"_name": "المسد",
+					"_tname": "Al-Masad",
+					"_ename": "The Palm Fibre",
+					"_type": "Meccan",
+					"_order": "6",
+					"_rukus": "1"
+				},
+				{
+					"_index": "112",
+					"_ayas": "4",
+					"_start": "6221",
+					"_name": "الإخلاص",
+					"_tname": "Al-Ikhlaas",
+					"_ename": "Sincerity",
+					"_type": "Meccan",
+					"_order": "22",
+					"_rukus": "1"
+				},
+				{
+					"_index": "113",
+					"_ayas": "5",
+					"_start": "6225",
+					"_name": "الفلق",
+					"_tname": "Al-Falaq",
+					"_ename": "The Dawn",
+					"_type": "Meccan",
+					"_order": "20",
+					"_rukus": "1"
+				},
+				{
+					"_index": "114",
+					"_ayas": "6",
+					"_start": "6230",
+					"_name": "الناس",
+					"_tname": "An-Naas",
+					"_ename": "Mankind",
+					"_type": "Meccan",
+					"_order": "21",
+					"_rukus": "1"
+				}
+			],
+			"_alias": "chapters"
+		},
+		"juzs": {
+			"juz": [
+				{
+					"_index": "1",
+					"_sura": "1",
+					"_aya": "1"
+				},
+				{
+					"_index": "2",
+					"_sura": "2",
+					"_aya": "142"
+				},
+				{
+					"_index": "3",
+					"_sura": "2",
+					"_aya": "253"
+				},
+				{
+					"_index": "4",
+					"_sura": "3",
+					"_aya": "93"
+				},
+				{
+					"_index": "5",
+					"_sura": "4",
+					"_aya": "24"
+				},
+				{
+					"_index": "6",
+					"_sura": "4",
+					"_aya": "148"
+				},
+				{
+					"_index": "7",
+					"_sura": "5",
+					"_aya": "82"
+				},
+				{
+					"_index": "8",
+					"_sura": "6",
+					"_aya": "111"
+				},
+				{
+					"_index": "9",
+					"_sura": "7",
+					"_aya": "88"
+				},
+				{
+					"_index": "10",
+					"_sura": "8",
+					"_aya": "41"
+				},
+				{
+					"_index": "11",
+					"_sura": "9",
+					"_aya": "93"
+				},
+				{
+					"_index": "12",
+					"_sura": "11",
+					"_aya": "6"
+				},
+				{
+					"_index": "13",
+					"_sura": "12",
+					"_aya": "53"
+				},
+				{
+					"_index": "14",
+					"_sura": "15",
+					"_aya": "1"
+				},
+				{
+					"_index": "15",
+					"_sura": "17",
+					"_aya": "1"
+				},
+				{
+					"_index": "16",
+					"_sura": "18",
+					"_aya": "75"
+				},
+				{
+					"_index": "17",
+					"_sura": "21",
+					"_aya": "1"
+				},
+				{
+					"_index": "18",
+					"_sura": "23",
+					"_aya": "1"
+				},
+				{
+					"_index": "19",
+					"_sura": "25",
+					"_aya": "21"
+				},
+				{
+					"_index": "20",
+					"_sura": "27",
+					"_aya": "56"
+				},
+				{
+					"_index": "21",
+					"_sura": "29",
+					"_aya": "46"
+				},
+				{
+					"_index": "22",
+					"_sura": "33",
+					"_aya": "31"
+				},
+				{
+					"_index": "23",
+					"_sura": "36",
+					"_aya": "28"
+				},
+				{
+					"_index": "24",
+					"_sura": "39",
+					"_aya": "32"
+				},
+				{
+					"_index": "25",
+					"_sura": "41",
+					"_aya": "47"
+				},
+				{
+					"_index": "26",
+					"_sura": "46",
+					"_aya": "1"
+				},
+				{
+					"_index": "27",
+					"_sura": "51",
+					"_aya": "31"
+				},
+				{
+					"_index": "28",
+					"_sura": "58",
+					"_aya": "1"
+				},
+				{
+					"_index": "29",
+					"_sura": "67",
+					"_aya": "1"
+				},
+				{
+					"_index": "30",
+					"_sura": "78",
+					"_aya": "1"
+				}
+			],
+			"_alias": "parts"
+		},
+		"hizbs": {
+			"quarter": [
+				{
+					"_index": "1",
+					"_sura": "1",
+					"_aya": "1"
+				},
+				{
+					"_index": "2",
+					"_sura": "2",
+					"_aya": "26"
+				},
+				{
+					"_index": "3",
+					"_sura": "2",
+					"_aya": "44"
+				},
+				{
+					"_index": "4",
+					"_sura": "2",
+					"_aya": "60"
+				},
+				{
+					"_index": "5",
+					"_sura": "2",
+					"_aya": "75"
+				},
+				{
+					"_index": "6",
+					"_sura": "2",
+					"_aya": "92"
+				},
+				{
+					"_index": "7",
+					"_sura": "2",
+					"_aya": "106"
+				},
+				{
+					"_index": "8",
+					"_sura": "2",
+					"_aya": "124"
+				},
+				{
+					"_index": "9",
+					"_sura": "2",
+					"_aya": "142"
+				},
+				{
+					"_index": "10",
+					"_sura": "2",
+					"_aya": "158"
+				},
+				{
+					"_index": "11",
+					"_sura": "2",
+					"_aya": "177"
+				},
+				{
+					"_index": "12",
+					"_sura": "2",
+					"_aya": "189"
+				},
+				{
+					"_index": "13",
+					"_sura": "2",
+					"_aya": "203"
+				},
+				{
+					"_index": "14",
+					"_sura": "2",
+					"_aya": "219"
+				},
+				{
+					"_index": "15",
+					"_sura": "2",
+					"_aya": "233"
+				},
+				{
+					"_index": "16",
+					"_sura": "2",
+					"_aya": "243"
+				},
+				{
+					"_index": "17",
+					"_sura": "2",
+					"_aya": "253"
+				},
+				{
+					"_index": "18",
+					"_sura": "2",
+					"_aya": "263"
+				},
+				{
+					"_index": "19",
+					"_sura": "2",
+					"_aya": "272"
+				},
+				{
+					"_index": "20",
+					"_sura": "2",
+					"_aya": "283"
+				},
+				{
+					"_index": "21",
+					"_sura": "3",
+					"_aya": "15"
+				},
+				{
+					"_index": "22",
+					"_sura": "3",
+					"_aya": "33"
+				},
+				{
+					"_index": "23",
+					"_sura": "3",
+					"_aya": "52"
+				},
+				{
+					"_index": "24",
+					"_sura": "3",
+					"_aya": "75"
+				},
+				{
+					"_index": "25",
+					"_sura": "3",
+					"_aya": "93"
+				},
+				{
+					"_index": "26",
+					"_sura": "3",
+					"_aya": "113"
+				},
+				{
+					"_index": "27",
+					"_sura": "3",
+					"_aya": "133"
+				},
+				{
+					"_index": "28",
+					"_sura": "3",
+					"_aya": "153"
+				},
+				{
+					"_index": "29",
+					"_sura": "3",
+					"_aya": "171"
+				},
+				{
+					"_index": "30",
+					"_sura": "3",
+					"_aya": "186"
+				},
+				{
+					"_index": "31",
+					"_sura": "4",
+					"_aya": "1"
+				},
+				{
+					"_index": "32",
+					"_sura": "4",
+					"_aya": "12"
+				},
+				{
+					"_index": "33",
+					"_sura": "4",
+					"_aya": "24"
+				},
+				{
+					"_index": "34",
+					"_sura": "4",
+					"_aya": "36"
+				},
+				{
+					"_index": "35",
+					"_sura": "4",
+					"_aya": "58"
+				},
+				{
+					"_index": "36",
+					"_sura": "4",
+					"_aya": "74"
+				},
+				{
+					"_index": "37",
+					"_sura": "4",
+					"_aya": "88"
+				},
+				{
+					"_index": "38",
+					"_sura": "4",
+					"_aya": "100"
+				},
+				{
+					"_index": "39",
+					"_sura": "4",
+					"_aya": "114"
+				},
+				{
+					"_index": "40",
+					"_sura": "4",
+					"_aya": "135"
+				},
+				{
+					"_index": "41",
+					"_sura": "4",
+					"_aya": "148"
+				},
+				{
+					"_index": "42",
+					"_sura": "4",
+					"_aya": "163"
+				},
+				{
+					"_index": "43",
+					"_sura": "5",
+					"_aya": "1"
+				},
+				{
+					"_index": "44",
+					"_sura": "5",
+					"_aya": "12"
+				},
+				{
+					"_index": "45",
+					"_sura": "5",
+					"_aya": "27"
+				},
+				{
+					"_index": "46",
+					"_sura": "5",
+					"_aya": "41"
+				},
+				{
+					"_index": "47",
+					"_sura": "5",
+					"_aya": "51"
+				},
+				{
+					"_index": "48",
+					"_sura": "5",
+					"_aya": "67"
+				},
+				{
+					"_index": "49",
+					"_sura": "5",
+					"_aya": "82"
+				},
+				{
+					"_index": "50",
+					"_sura": "5",
+					"_aya": "97"
+				},
+				{
+					"_index": "51",
+					"_sura": "5",
+					"_aya": "109"
+				},
+				{
+					"_index": "52",
+					"_sura": "6",
+					"_aya": "13"
+				},
+				{
+					"_index": "53",
+					"_sura": "6",
+					"_aya": "36"
+				},
+				{
+					"_index": "54",
+					"_sura": "6",
+					"_aya": "59"
+				},
+				{
+					"_index": "55",
+					"_sura": "6",
+					"_aya": "74"
+				},
+				{
+					"_index": "56",
+					"_sura": "6",
+					"_aya": "95"
+				},
+				{
+					"_index": "57",
+					"_sura": "6",
+					"_aya": "111"
+				},
+				{
+					"_index": "58",
+					"_sura": "6",
+					"_aya": "127"
+				},
+				{
+					"_index": "59",
+					"_sura": "6",
+					"_aya": "141"
+				},
+				{
+					"_index": "60",
+					"_sura": "6",
+					"_aya": "151"
+				},
+				{
+					"_index": "61",
+					"_sura": "7",
+					"_aya": "1"
+				},
+				{
+					"_index": "62",
+					"_sura": "7",
+					"_aya": "31"
+				},
+				{
+					"_index": "63",
+					"_sura": "7",
+					"_aya": "47"
+				},
+				{
+					"_index": "64",
+					"_sura": "7",
+					"_aya": "65"
+				},
+				{
+					"_index": "65",
+					"_sura": "7",
+					"_aya": "88"
+				},
+				{
+					"_index": "66",
+					"_sura": "7",
+					"_aya": "117"
+				},
+				{
+					"_index": "67",
+					"_sura": "7",
+					"_aya": "142"
+				},
+				{
+					"_index": "68",
+					"_sura": "7",
+					"_aya": "156"
+				},
+				{
+					"_index": "69",
+					"_sura": "7",
+					"_aya": "171"
+				},
+				{
+					"_index": "70",
+					"_sura": "7",
+					"_aya": "189"
+				},
+				{
+					"_index": "71",
+					"_sura": "8",
+					"_aya": "1"
+				},
+				{
+					"_index": "72",
+					"_sura": "8",
+					"_aya": "22"
+				},
+				{
+					"_index": "73",
+					"_sura": "8",
+					"_aya": "41"
+				},
+				{
+					"_index": "74",
+					"_sura": "8",
+					"_aya": "61"
+				},
+				{
+					"_index": "75",
+					"_sura": "9",
+					"_aya": "1"
+				},
+				{
+					"_index": "76",
+					"_sura": "9",
+					"_aya": "19"
+				},
+				{
+					"_index": "77",
+					"_sura": "9",
+					"_aya": "34"
+				},
+				{
+					"_index": "78",
+					"_sura": "9",
+					"_aya": "46"
+				},
+				{
+					"_index": "79",
+					"_sura": "9",
+					"_aya": "60"
+				},
+				{
+					"_index": "80",
+					"_sura": "9",
+					"_aya": "75"
+				},
+				{
+					"_index": "81",
+					"_sura": "9",
+					"_aya": "93"
+				},
+				{
+					"_index": "82",
+					"_sura": "9",
+					"_aya": "111"
+				},
+				{
+					"_index": "83",
+					"_sura": "9",
+					"_aya": "122"
+				},
+				{
+					"_index": "84",
+					"_sura": "10",
+					"_aya": "11"
+				},
+				{
+					"_index": "85",
+					"_sura": "10",
+					"_aya": "26"
+				},
+				{
+					"_index": "86",
+					"_sura": "10",
+					"_aya": "53"
+				},
+				{
+					"_index": "87",
+					"_sura": "10",
+					"_aya": "71"
+				},
+				{
+					"_index": "88",
+					"_sura": "10",
+					"_aya": "90"
+				},
+				{
+					"_index": "89",
+					"_sura": "11",
+					"_aya": "6"
+				},
+				{
+					"_index": "90",
+					"_sura": "11",
+					"_aya": "24"
+				},
+				{
+					"_index": "91",
+					"_sura": "11",
+					"_aya": "41"
+				},
+				{
+					"_index": "92",
+					"_sura": "11",
+					"_aya": "61"
+				},
+				{
+					"_index": "93",
+					"_sura": "11",
+					"_aya": "84"
+				},
+				{
+					"_index": "94",
+					"_sura": "11",
+					"_aya": "108"
+				},
+				{
+					"_index": "95",
+					"_sura": "12",
+					"_aya": "7"
+				},
+				{
+					"_index": "96",
+					"_sura": "12",
+					"_aya": "30"
+				},
+				{
+					"_index": "97",
+					"_sura": "12",
+					"_aya": "53"
+				},
+				{
+					"_index": "98",
+					"_sura": "12",
+					"_aya": "77"
+				},
+				{
+					"_index": "99",
+					"_sura": "12",
+					"_aya": "101"
+				},
+				{
+					"_index": "100",
+					"_sura": "13",
+					"_aya": "5"
+				},
+				{
+					"_index": "101",
+					"_sura": "13",
+					"_aya": "19"
+				},
+				{
+					"_index": "102",
+					"_sura": "13",
+					"_aya": "35"
+				},
+				{
+					"_index": "103",
+					"_sura": "14",
+					"_aya": "10"
+				},
+				{
+					"_index": "104",
+					"_sura": "14",
+					"_aya": "28"
+				},
+				{
+					"_index": "105",
+					"_sura": "15",
+					"_aya": "1"
+				},
+				{
+					"_index": "106",
+					"_sura": "15",
+					"_aya": "50"
+				},
+				{
+					"_index": "107",
+					"_sura": "16",
+					"_aya": "1"
+				},
+				{
+					"_index": "108",
+					"_sura": "16",
+					"_aya": "30"
+				},
+				{
+					"_index": "109",
+					"_sura": "16",
+					"_aya": "51"
+				},
+				{
+					"_index": "110",
+					"_sura": "16",
+					"_aya": "75"
+				},
+				{
+					"_index": "111",
+					"_sura": "16",
+					"_aya": "90"
+				},
+				{
+					"_index": "112",
+					"_sura": "16",
+					"_aya": "111"
+				},
+				{
+					"_index": "113",
+					"_sura": "17",
+					"_aya": "1"
+				},
+				{
+					"_index": "114",
+					"_sura": "17",
+					"_aya": "23"
+				},
+				{
+					"_index": "115",
+					"_sura": "17",
+					"_aya": "50"
+				},
+				{
+					"_index": "116",
+					"_sura": "17",
+					"_aya": "70"
+				},
+				{
+					"_index": "117",
+					"_sura": "17",
+					"_aya": "99"
+				},
+				{
+					"_index": "118",
+					"_sura": "18",
+					"_aya": "17"
+				},
+				{
+					"_index": "119",
+					"_sura": "18",
+					"_aya": "32"
+				},
+				{
+					"_index": "120",
+					"_sura": "18",
+					"_aya": "51"
+				},
+				{
+					"_index": "121",
+					"_sura": "18",
+					"_aya": "75"
+				},
+				{
+					"_index": "122",
+					"_sura": "18",
+					"_aya": "99"
+				},
+				{
+					"_index": "123",
+					"_sura": "19",
+					"_aya": "22"
+				},
+				{
+					"_index": "124",
+					"_sura": "19",
+					"_aya": "59"
+				},
+				{
+					"_index": "125",
+					"_sura": "20",
+					"_aya": "1"
+				},
+				{
+					"_index": "126",
+					"_sura": "20",
+					"_aya": "55"
+				},
+				{
+					"_index": "127",
+					"_sura": "20",
+					"_aya": "83"
+				},
+				{
+					"_index": "128",
+					"_sura": "20",
+					"_aya": "111"
+				},
+				{
+					"_index": "129",
+					"_sura": "21",
+					"_aya": "1"
+				},
+				{
+					"_index": "130",
+					"_sura": "21",
+					"_aya": "29"
+				},
+				{
+					"_index": "131",
+					"_sura": "21",
+					"_aya": "51"
+				},
+				{
+					"_index": "132",
+					"_sura": "21",
+					"_aya": "83"
+				},
+				{
+					"_index": "133",
+					"_sura": "22",
+					"_aya": "1"
+				},
+				{
+					"_index": "134",
+					"_sura": "22",
+					"_aya": "19"
+				},
+				{
+					"_index": "135",
+					"_sura": "22",
+					"_aya": "38"
+				},
+				{
+					"_index": "136",
+					"_sura": "22",
+					"_aya": "60"
+				},
+				{
+					"_index": "137",
+					"_sura": "23",
+					"_aya": "1"
+				},
+				{
+					"_index": "138",
+					"_sura": "23",
+					"_aya": "36"
+				},
+				{
+					"_index": "139",
+					"_sura": "23",
+					"_aya": "75"
+				},
+				{
+					"_index": "140",
+					"_sura": "24",
+					"_aya": "1"
+				},
+				{
+					"_index": "141",
+					"_sura": "24",
+					"_aya": "21"
+				},
+				{
+					"_index": "142",
+					"_sura": "24",
+					"_aya": "35"
+				},
+				{
+					"_index": "143",
+					"_sura": "24",
+					"_aya": "53"
+				},
+				{
+					"_index": "144",
+					"_sura": "25",
+					"_aya": "1"
+				},
+				{
+					"_index": "145",
+					"_sura": "25",
+					"_aya": "21"
+				},
+				{
+					"_index": "146",
+					"_sura": "25",
+					"_aya": "53"
+				},
+				{
+					"_index": "147",
+					"_sura": "26",
+					"_aya": "1"
+				},
+				{
+					"_index": "148",
+					"_sura": "26",
+					"_aya": "52"
+				},
+				{
+					"_index": "149",
+					"_sura": "26",
+					"_aya": "111"
+				},
+				{
+					"_index": "150",
+					"_sura": "26",
+					"_aya": "181"
+				},
+				{
+					"_index": "151",
+					"_sura": "27",
+					"_aya": "1"
+				},
+				{
+					"_index": "152",
+					"_sura": "27",
+					"_aya": "27"
+				},
+				{
+					"_index": "153",
+					"_sura": "27",
+					"_aya": "56"
+				},
+				{
+					"_index": "154",
+					"_sura": "27",
+					"_aya": "82"
+				},
+				{
+					"_index": "155",
+					"_sura": "28",
+					"_aya": "12"
+				},
+				{
+					"_index": "156",
+					"_sura": "28",
+					"_aya": "29"
+				},
+				{
+					"_index": "157",
+					"_sura": "28",
+					"_aya": "51"
+				},
+				{
+					"_index": "158",
+					"_sura": "28",
+					"_aya": "76"
+				},
+				{
+					"_index": "159",
+					"_sura": "29",
+					"_aya": "1"
+				},
+				{
+					"_index": "160",
+					"_sura": "29",
+					"_aya": "26"
+				},
+				{
+					"_index": "161",
+					"_sura": "29",
+					"_aya": "46"
+				},
+				{
+					"_index": "162",
+					"_sura": "30",
+					"_aya": "1"
+				},
+				{
+					"_index": "163",
+					"_sura": "30",
+					"_aya": "31"
+				},
+				{
+					"_index": "164",
+					"_sura": "30",
+					"_aya": "54"
+				},
+				{
+					"_index": "165",
+					"_sura": "31",
+					"_aya": "22"
+				},
+				{
+					"_index": "166",
+					"_sura": "32",
+					"_aya": "11"
+				},
+				{
+					"_index": "167",
+					"_sura": "33",
+					"_aya": "1"
+				},
+				{
+					"_index": "168",
+					"_sura": "33",
+					"_aya": "18"
+				},
+				{
+					"_index": "169",
+					"_sura": "33",
+					"_aya": "31"
+				},
+				{
+					"_index": "170",
+					"_sura": "33",
+					"_aya": "51"
+				},
+				{
+					"_index": "171",
+					"_sura": "33",
+					"_aya": "60"
+				},
+				{
+					"_index": "172",
+					"_sura": "34",
+					"_aya": "10"
+				},
+				{
+					"_index": "173",
+					"_sura": "34",
+					"_aya": "24"
+				},
+				{
+					"_index": "174",
+					"_sura": "34",
+					"_aya": "46"
+				},
+				{
+					"_index": "175",
+					"_sura": "35",
+					"_aya": "15"
+				},
+				{
+					"_index": "176",
+					"_sura": "35",
+					"_aya": "41"
+				},
+				{
+					"_index": "177",
+					"_sura": "36",
+					"_aya": "28"
+				},
+				{
+					"_index": "178",
+					"_sura": "36",
+					"_aya": "60"
+				},
+				{
+					"_index": "179",
+					"_sura": "37",
+					"_aya": "22"
+				},
+				{
+					"_index": "180",
+					"_sura": "37",
+					"_aya": "83"
+				},
+				{
+					"_index": "181",
+					"_sura": "37",
+					"_aya": "145"
+				},
+				{
+					"_index": "182",
+					"_sura": "38",
+					"_aya": "21"
+				},
+				{
+					"_index": "183",
+					"_sura": "38",
+					"_aya": "52"
+				},
+				{
+					"_index": "184",
+					"_sura": "39",
+					"_aya": "8"
+				},
+				{
+					"_index": "185",
+					"_sura": "39",
+					"_aya": "32"
+				},
+				{
+					"_index": "186",
+					"_sura": "39",
+					"_aya": "53"
+				},
+				{
+					"_index": "187",
+					"_sura": "40",
+					"_aya": "1"
+				},
+				{
+					"_index": "188",
+					"_sura": "40",
+					"_aya": "21"
+				},
+				{
+					"_index": "189",
+					"_sura": "40",
+					"_aya": "41"
+				},
+				{
+					"_index": "190",
+					"_sura": "40",
+					"_aya": "66"
+				},
+				{
+					"_index": "191",
+					"_sura": "41",
+					"_aya": "9"
+				},
+				{
+					"_index": "192",
+					"_sura": "41",
+					"_aya": "25"
+				},
+				{
+					"_index": "193",
+					"_sura": "41",
+					"_aya": "47"
+				},
+				{
+					"_index": "194",
+					"_sura": "42",
+					"_aya": "13"
+				},
+				{
+					"_index": "195",
+					"_sura": "42",
+					"_aya": "27"
+				},
+				{
+					"_index": "196",
+					"_sura": "42",
+					"_aya": "51"
+				},
+				{
+					"_index": "197",
+					"_sura": "43",
+					"_aya": "24"
+				},
+				{
+					"_index": "198",
+					"_sura": "43",
+					"_aya": "57"
+				},
+				{
+					"_index": "199",
+					"_sura": "44",
+					"_aya": "17"
+				},
+				{
+					"_index": "200",
+					"_sura": "45",
+					"_aya": "12"
+				},
+				{
+					"_index": "201",
+					"_sura": "46",
+					"_aya": "1"
+				},
+				{
+					"_index": "202",
+					"_sura": "46",
+					"_aya": "21"
+				},
+				{
+					"_index": "203",
+					"_sura": "47",
+					"_aya": "10"
+				},
+				{
+					"_index": "204",
+					"_sura": "47",
+					"_aya": "33"
+				},
+				{
+					"_index": "205",
+					"_sura": "48",
+					"_aya": "18"
+				},
+				{
+					"_index": "206",
+					"_sura": "49",
+					"_aya": "1"
+				},
+				{
+					"_index": "207",
+					"_sura": "49",
+					"_aya": "14"
+				},
+				{
+					"_index": "208",
+					"_sura": "50",
+					"_aya": "27"
+				},
+				{
+					"_index": "209",
+					"_sura": "51",
+					"_aya": "31"
+				},
+				{
+					"_index": "210",
+					"_sura": "52",
+					"_aya": "24"
+				},
+				{
+					"_index": "211",
+					"_sura": "53",
+					"_aya": "26"
+				},
+				{
+					"_index": "212",
+					"_sura": "54",
+					"_aya": "9"
+				},
+				{
+					"_index": "213",
+					"_sura": "55",
+					"_aya": "1"
+				},
+				{
+					"_index": "214",
+					"_sura": "56",
+					"_aya": "1"
+				},
+				{
+					"_index": "215",
+					"_sura": "56",
+					"_aya": "75"
+				},
+				{
+					"_index": "216",
+					"_sura": "57",
+					"_aya": "16"
+				},
+				{
+					"_index": "217",
+					"_sura": "58",
+					"_aya": "1"
+				},
+				{
+					"_index": "218",
+					"_sura": "58",
+					"_aya": "14"
+				},
+				{
+					"_index": "219",
+					"_sura": "59",
+					"_aya": "11"
+				},
+				{
+					"_index": "220",
+					"_sura": "60",
+					"_aya": "7"
+				},
+				{
+					"_index": "221",
+					"_sura": "62",
+					"_aya": "1"
+				},
+				{
+					"_index": "222",
+					"_sura": "63",
+					"_aya": "4"
+				},
+				{
+					"_index": "223",
+					"_sura": "65",
+					"_aya": "1"
+				},
+				{
+					"_index": "224",
+					"_sura": "66",
+					"_aya": "1"
+				},
+				{
+					"_index": "225",
+					"_sura": "67",
+					"_aya": "1"
+				},
+				{
+					"_index": "226",
+					"_sura": "68",
+					"_aya": "1"
+				},
+				{
+					"_index": "227",
+					"_sura": "69",
+					"_aya": "1"
+				},
+				{
+					"_index": "228",
+					"_sura": "70",
+					"_aya": "19"
+				},
+				{
+					"_index": "229",
+					"_sura": "72",
+					"_aya": "1"
+				},
+				{
+					"_index": "230",
+					"_sura": "73",
+					"_aya": "20"
+				},
+				{
+					"_index": "231",
+					"_sura": "75",
+					"_aya": "1"
+				},
+				{
+					"_index": "232",
+					"_sura": "76",
+					"_aya": "19"
+				},
+				{
+					"_index": "233",
+					"_sura": "78",
+					"_aya": "1"
+				},
+				{
+					"_index": "234",
+					"_sura": "80",
+					"_aya": "1"
+				},
+				{
+					"_index": "235",
+					"_sura": "82",
+					"_aya": "1"
+				},
+				{
+					"_index": "236",
+					"_sura": "84",
+					"_aya": "1"
+				},
+				{
+					"_index": "237",
+					"_sura": "87",
+					"_aya": "1"
+				},
+				{
+					"_index": "238",
+					"_sura": "90",
+					"_aya": "1"
+				},
+				{
+					"_index": "239",
+					"_sura": "94",
+					"_aya": "1"
+				},
+				{
+					"_index": "240",
+					"_sura": "100",
+					"_aya": "9"
+				}
+			],
+			"_alias": "groups"
+		},
+		"sajdas": {
+			"sajda": [
+				{
+					"_index": "1",
+					"_sura": "7",
+					"_aya": "206",
+					"_type": "recommended"
+				},
+				{
+					"_index": "2",
+					"_sura": "13",
+					"_aya": "15",
+					"_type": "recommended"
+				},
+				{
+					"_index": "3",
+					"_sura": "16",
+					"_aya": "50",
+					"_type": "recommended"
+				},
+				{
+					"_index": "4",
+					"_sura": "17",
+					"_aya": "109",
+					"_type": "recommended"
+				},
+				{
+					"_index": "5",
+					"_sura": "19",
+					"_aya": "58",
+					"_type": "recommended"
+				},
+				{
+					"_index": "6",
+					"_sura": "22",
+					"_aya": "18",
+					"_type": "recommended"
+				},
+				{
+					"_index": "7",
+					"_sura": "22",
+					"_aya": "77",
+					"_type": "recommended"
+				},
+				{
+					"_index": "8",
+					"_sura": "25",
+					"_aya": "60",
+					"_type": "recommended"
+				},
+				{
+					"_index": "9",
+					"_sura": "27",
+					"_aya": "26",
+					"_type": "recommended"
+				},
+				{
+					"_index": "10",
+					"_sura": "32",
+					"_aya": "15",
+					"_type": "obligatory"
+				},
+				{
+					"_index": "11",
+					"_sura": "38",
+					"_aya": "24",
+					"_type": "recommended"
+				},
+				{
+					"_index": "12",
+					"_sura": "41",
+					"_aya": "38",
+					"_type": "obligatory"
+				},
+				{
+					"_index": "13",
+					"_sura": "53",
+					"_aya": "62",
+					"_type": "obligatory"
+				},
+				{
+					"_index": "14",
+					"_sura": "84",
+					"_aya": "21",
+					"_type": "recommended"
+				},
+				{
+					"_index": "15",
+					"_sura": "96",
+					"_aya": "19",
+					"_type": "obligatory"
+				}
+			]
+		},
+		"_type": "metadata",
+		"_version": "1.0",
+		"_copyright": "(C) 2008-2009 Tanzil.info",
+		"_license": "cc-by"
+	}
+}

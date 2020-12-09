@@ -37,11 +37,11 @@ class StartUpView : Controller(), CoroutineScope by MainScope() {
             }
             Logger.log(tag = "StartupView") { "database needs filling= $needs" }
             if (isActive) {
-//                if (needs) {
-//                    router.setRoot(RouterTransaction.with(ControllerFactory.createController(Screens.OnBoarding, app)))
-//                }else{
-                    router.setRoot(RouterTransaction.with(ControllerFactory.createController(Screens.Home(), app)))
-//                }
+                if (needs) {
+                    router.setRoot(RouterTransaction.with(ControllerFactory.createController(Screens.OnBoarding, app)))
+                }else{
+                    router.setRoot(RouterTransaction.with(ControllerFactory.createController(Screens.Home, app)))
+                }
             }
         }
     }
