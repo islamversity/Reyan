@@ -36,10 +36,6 @@ class AyaView @JvmOverloads constructor(
         binding.hizbOrder.text = (surah.hizb ?: 0).toString()
         binding.juzOrder.text = (surah.juz ?: 0).toString()
 
-        binding.tvAyaContent.textSize = surah.fontSize.toFloat()
-        binding.tvAyaTranslate1.textSize = surah.translationFontSize.toFloat()
-        binding.tvAyaTranslate2.textSize = surah.translationFontSize.toFloat()
-
         binding.tvAyaTranslate1 visible (surah.translation1 != null)
         binding.tvAyaTranslate2 visible (surah.translation2 != null)
 
@@ -55,6 +51,17 @@ class AyaView @JvmOverloads constructor(
             SajdahTypeUIModel.VISIBLE.OBLIGATORY -> context.resources.getString(R.string.sajdah_type_obligatory)
             SajdahTypeUIModel.NONE -> null
         }
+    }
+
+    @ModelProp
+    fun mainAyaFontSize(size : Int){
+        binding.tvAyaContent.textSize = size.toFloat()
+    }
+
+    @ModelProp
+    fun translationFontSize(size : Int){
+        binding.tvAyaTranslate1.textSize = size.toFloat()
+        binding.tvAyaTranslate2.textSize = size.toFloat()
     }
 
     @CallbackProp

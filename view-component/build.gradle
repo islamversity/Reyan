@@ -1,35 +1,31 @@
+import com.islamversity.reyan.Deps
+
 apply from: androidLib
 
 dependencies {
-    testImplementation junit
-    testImplementation truth
-    testImplementation mockkUnit
-    testImplementation robolectric
-    testImplementation supportTestRunner
-    testImplementation supportTestCore
-    testImplementation supportTestRule
-    testImplementation supportJunitExt
-    testImplementation espressoCore
+    testImplementation Deps.Android.Test.junit
+    testImplementation Deps.Android.Test.truth
+    testImplementation Deps.Android.Test.mockkUnit
+    testImplementation Deps.Android.Test.robolectric
+    testImplementation Deps.Android.Test.runner
+    testImplementation Deps.Android.Test.core
+    testImplementation Deps.Android.Test.rules
+    testImplementation Deps.Android.Test.junitExt
+    testImplementation Deps.Android.Test.espressoCore
 
-    androidTestImplementation supportTestRunner
-    androidTestImplementation supportTestCore
-    androidTestImplementation supportTestRule
-    androidTestImplementation supportJunitExt
-    androidTestImplementation espressoCore
-    androidTestImplementation espressoIntents
+    androidTestImplementation Deps.Android.Test.runner
+    androidTestImplementation Deps.Android.Test.core
+    androidTestImplementation Deps.Android.Test.rules
+    androidTestImplementation Deps.Android.Test.junitExt
+    androidTestImplementation Deps.Android.Test.espressoCore
+    androidTestImplementation Deps.Android.Test.espressoIntents
 
-    testImplementation junit
-    androidTestImplementation supportTestRunner
-    androidTestImplementation espressoCore
+    implementation(project(Deps.Modules.base))
+    implementation(project(Deps.Modules.domain))
 
-    implementation(project(base))
-    implementation(project(domain))
+    implementation Deps.Kotlin.jvmStd8
 
-    implementation kotlinStd8
-
-    implementation recyclerView
-    implementation epoxy
-    kapt epoxyCompiler
-
-    implementation fresco
+    implementation Deps.Android.Support.recyclerView
+    implementation Deps.Android.Tools.epoxy
+    kapt Deps.Android.Tools.epoxyCompiler
 }

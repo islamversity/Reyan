@@ -33,7 +33,6 @@ class SurahSettingsProcessor(
 
         getSecondTranslationCalligraphy,
         changeSecondTranslationCalligraphy,
-
     )
 
     private val getAllTranslationCalligraphies: FlowBlock<SurahIntent, SurahResult> = {
@@ -42,8 +41,11 @@ class SurahSettingsProcessor(
                 calligraphyRepo.getAllAyaCalligraphies()
             }
             .map {
+                val noneOption = it.toMutableList()
+                noneOption.add(0, Calligraphy.EMPTY)
+
                 SurahResult.Settings.TranslationCalligraphies(
-                    uiMapper.listMap(it)
+                    uiMapper.listMap(noneOption)
                 )
             }
     }
@@ -103,14 +105,24 @@ class SurahSettingsProcessor(
     private val changeFirstTranslationCalligraphy: Flow<SurahIntent>.() -> Flow<SurahResult> = {
         ofType<SurahIntent.ChangeSettings.NewFirstTranslation>()
             .flatMapLatest {
-                calligraphyRepo.getCalligraphy(CalligraphyId(it.language.id))
-                    .map {
-                        it!!
-                    }
+                if (it.language.id == Calligraphy.EMPTY.id.id) {
+                    return@flatMapLatest flowOf(SettingsCalligraphy.None)
+                }
+
+                calligraphyRepo.getCalligraphy(
+                    CalligraphyId(it.language.id)
+                ).map {
+                    SettingsCalligraphy.Selected(it!!)
+                }
             }
             .transform {
                 settingsRepo.setFirstAyaTranslationCalligraphy(it)
-                emit(SurahResult.Settings.FirstAyaTranslationCalligraphy(uiMapper.map(it)))
+
+                if (it is SettingsCalligraphy.Selected) {
+                    emit(SurahResult.Settings.FirstAyaTranslationCalligraphy(uiMapper.map(it.cal)))
+                } else {
+                    emit(SurahResult.Settings.FirstAyaTranslationCalligraphy(uiMapper.map(Calligraphy.EMPTY)))
+                }
             }
     }
 
@@ -130,18 +142,26 @@ class SurahSettingsProcessor(
             }
     }
 
-
     private val changeSecondTranslationCalligraphy: Flow<SurahIntent>.() -> Flow<SurahResult> = {
         ofType<SurahIntent.ChangeSettings.NewSecondTranslation>()
             .flatMapLatest {
-                calligraphyRepo.getCalligraphy(CalligraphyId(it.language.id))
-                    .map {
-                        it!!
-                    }
-            }
-            .transform {
+                if (it.language.id == Calligraphy.EMPTY.id.id) {
+                    return@flatMapLatest flowOf(SettingsCalligraphy.None)
+                }
+
+                calligraphyRepo.getCalligraphy(
+                    CalligraphyId(it.language.id)
+                ).map {
+                    SettingsCalligraphy.Selected(it!!)
+                }
+            }.transform {
                 settingsRepo.setSecondAyaTranslationCalligraphy(it)
-                emit(SurahResult.Settings.SecondAyaTranslationCalligraphy(uiMapper.map(it)))
+
+                if (it is SettingsCalligraphy.Selected) {
+                    emit(SurahResult.Settings.SecondAyaTranslationCalligraphy(uiMapper.map(it.cal)))
+                } else {
+                    emit(SurahResult.Settings.SecondAyaTranslationCalligraphy(uiMapper.map(Calligraphy.EMPTY)))
+                }
             }
     }
 }

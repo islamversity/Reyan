@@ -33,11 +33,10 @@ class SurahView(
     bundle: Bundle
 ) : CoroutineView<ViewSurahBinding, SurahState, SurahIntent>(bundle) {
 
-    private val intentChannel = BroadcastChannel<SurahIntent>(Channel.BUFFERED)
     private var settingsDialog: SurahSettingsView? = null
-    private var settingsState : SurahSettingsState = SurahSettingsState()
+    private var settingsState: SurahSettingsState = SurahSettingsState()
     private val onSettings: OnSettings = { setting ->
-        intentChannel.offer(setting)
+        intents.tryEmit(setting)
     }
 
     private val surahLocal: SurahLocalModel =
@@ -70,16 +69,16 @@ class SurahView(
         binding.tvSurahName.text = surahLocal.surahName
     }
 
-    override fun onDestroyView(view: View) {
-        clearSettings()
-        super.onDestroyView(view)
-    }
-
     private fun openSettingsDialog(context: Context) {
         settingsDialog = SurahSettingsView(context, settingsState)
         settingsDialog!!.onSettings = onSettings
         settingsDialog!!.setOnCancelListener { clearSettings() }
         settingsDialog!!.show()
+    }
+
+    override fun onDestroyView(view: View) {
+        binding.ayaList.clearOnScrollListeners()
+        super.onDestroyView(view)
     }
 
     private fun clearSettings() {
@@ -89,12 +88,9 @@ class SurahView(
     }
 
     override fun intents(): Flow<SurahIntent> =
-        listOf(
-            flowOf(
-                SurahIntent.Initial(surahLocal.surahID, surahLocal.startingAyaOrder)
-            ),
-            intentChannel.asFlow()
-        ).merge()
+        flowOf(
+            SurahIntent.Initial(surahLocal.surahID, surahLocal.startingAyaOrder)
+        )
 
     override fun render(state: SurahState) {
         renderLoading(state.base)
@@ -121,6 +117,8 @@ class SurahView(
                     ayaView {
                         id(it.rowId)
                         model(it)
+                        mainAyaFontSize(state.mainAyaFontSize)
+                        translationFontSize(state.translationFontSize)
                     }
                 }
             }
@@ -137,5 +135,4 @@ class SurahView(
         }
     }
 }
-
 

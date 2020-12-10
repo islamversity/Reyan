@@ -20,7 +20,8 @@ class FlowPublishTest {
             ).test {
                 assertEquals(expectItem(), "1")
                 assertEquals(expectItem(), "2")
-                expectComplete()
+
+                cancelAndIgnoreRemainingEvents()
             }
     }
 
@@ -42,7 +43,7 @@ class FlowPublishTest {
                 }
             ).test {
                 assertEquals(expectItem(), 2)
-                expectComplete()
+                cancelAndIgnoreRemainingEvents()
             }
     }
 

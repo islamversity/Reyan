@@ -1,5 +1,4 @@
 buildscript {
-    apply from: "dependencies.gradle"
     apply from: "extras.gradle"
     repositories {
         google()
@@ -8,11 +7,11 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.1'
+        classpath 'com.android.tools.build:gradle:4.0.2'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
-        classpath 'com.google.gms:google-services:4.3.3'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.3.0'
-        classpath "com.github.ben-manes:gradle-versions-plugin:0.27.0"
+        classpath 'com.google.gms:google-services:4.3.4'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.4.1'
+        classpath "com.github.ben-manes:gradle-versions-plugin:0.36.0"
         classpath "com.squareup.sqldelight:gradle-plugin:${Versions.sqlDelight}"
         classpath "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
         classpath "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin:0.5.1"
@@ -39,7 +38,7 @@ allprojects {
             url 'http://storage.googleapis.com/r8-releases/raw'
         }
         maven { url "https://dl.bintray.com/arrow-kt/arrow-kt/" }
-        maven{ url  "https://kotlin.bintray.com/kotlinx/"}
+        maven { url "https://kotlin.bintray.com/kotlinx/" }
     }
     apply plugin: 'io.gitlab.arturbosch.detekt'
     dependencies {
@@ -88,16 +87,18 @@ def loadValues() {
         return localProperties
     }
 
-    //otherwise there should a local.properties file with debug values already set
-    String releaseKeyStoreAddress = localProperties.getProperty('debugKeyStoreAddress')
-    String releaseKeyStorePass = localProperties.getProperty('debugKeyStorePass')
-    String releaseKeyAlias = localProperties.getProperty('debugKeyAlias')
-    String releaseKeyPass = localProperties.getProperty('debugKeyPass')
+    if (localProperties.getProperty("releaseKeyStorePass") == null) {
+        //otherwise there should a local.properties file with debug values already set
+        String releaseKeyStoreAddress = localProperties.getProperty('debugKeyStoreAddress')
+        String releaseKeyStorePass = localProperties.getProperty('debugKeyStorePass')
+        String releaseKeyAlias = localProperties.getProperty('debugKeyAlias')
+        String releaseKeyPass = localProperties.getProperty('debugKeyPass')
 
-    localProperties.setProperty('releaseKeyStoreAddress', releaseKeyStoreAddress)
-    localProperties.setProperty('releaseKeyStorePass', releaseKeyStorePass)
-    localProperties.setProperty('releaseKeyAlias', releaseKeyAlias)
-    localProperties.setProperty('releaseKeyPass', releaseKeyPass)
+        localProperties.setProperty('releaseKeyStoreAddress', releaseKeyStoreAddress)
+        localProperties.setProperty('releaseKeyStorePass', releaseKeyStorePass)
+        localProperties.setProperty('releaseKeyAlias', releaseKeyAlias)
+        localProperties.setProperty('releaseKeyPass', releaseKeyPass)
+    }
 
     return localProperties
 }

@@ -1,7 +1,6 @@
 package com.islamversity.daggercore
 
 import android.app.Application
-import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.islamversity.daggercore.modules.DatabaseModule
 import com.islamversity.domain.repo.CalligraphyRepo
 import com.islamversity.domain.repo.SettingRepo
@@ -13,6 +12,8 @@ import com.islamversity.domain.repo.surah.GetSurahUsecase
 import com.islamversity.domain.repo.surah.SearchSurahNameUseCase
 import com.islamversity.domain.repo.surah.SurahRepo
 import com.islamversity.domain.repo.surah.SurahSearchRepo
+import com.islamversity.domain.usecase.DatabaseFileConfig
+import com.islamversity.domain.usecase.DatabaseFillerUseCase
 import dagger.BindsInstance
 import io.ktor.client.engine.HttpClientEngine
 import okhttp3.OkHttpClient
@@ -23,7 +24,6 @@ interface BaseComponent {
 
     fun okHttp(): OkHttpClient
     fun httpClient(): HttpClientEngine
-    fun frescoConfig(): ImagePipelineConfig
 
     fun provideCalligraphyRepo(): CalligraphyRepo
 
@@ -39,6 +39,8 @@ interface BaseComponent {
 
     fun ayaListRepo(): AyaListRepo
     fun getAyaUsecase(): GetAyaUseCase
+
+    fun databaseFillerUsecase() : DatabaseFillerUseCase
 
     interface Builder {
 

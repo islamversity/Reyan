@@ -27,16 +27,14 @@ enum class Severity {
     }
 }
 
-private val initLogger = init(listOf(CommonLogger()))
-
 object Logger {
 
-    private val logger = AtomicReference<Kermit?>(null)
+    private val logger = AtomicReference(Kermit(listOf(CommonLogger())))
 
     private const val defaultTag = "KLog"
 
     fun init(loggers: List<Logger>) {
-        logger.compareAndSet(null, Kermit(loggers))
+        logger.set(Kermit(loggers))
     }
 
     fun log(
@@ -45,7 +43,7 @@ object Logger {
         throwable: Throwable? = null,
         message: () -> String
     ) {
-        logger.get()!!.log(
+        logger.get().log(
             severity = severity.toKermit(),
             tag = tag ?: defaultTag,
             throwable = throwable,

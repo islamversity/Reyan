@@ -21,7 +21,6 @@ object OkHttpModule {
     fun provideChucker(app: Application) =
         ChuckerInterceptor(app)
 
-
     @JvmStatic
     @Provides
     @Singleton

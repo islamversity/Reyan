@@ -4,4 +4,11 @@
     <string name="aya_font_size">اندازه آیه</string>
     <string name="translate_font_size">اندازه ترجمه</string>
 
+    <string name="setting_none_calligraphy_selected">هیچ کدام</string>
+
+    <string name="title_font_size_small">کوچک</string>
+    <string name="title_font_size_medium">متوسط</string>
+    <string name="title_font_size_normal">پیشفرض</string>
+    <string name="title_font_size_Large">بزرگ</string>
+    <string name="title_font_size_x_Large">خیلی بزرگ</string>
 </resources>

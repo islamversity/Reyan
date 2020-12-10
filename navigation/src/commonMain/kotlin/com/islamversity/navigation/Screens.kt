@@ -15,6 +15,7 @@ internal val jsonParser = Json {
 
 sealed class Screens(
     val name: String,
+    val url : String,
     val extras: Pair<String, String>? = null,
     val pushAnimation: NavigationAnimation? = null,
     val popAnimation: NavigationAnimation? = null
@@ -27,34 +28,56 @@ sealed class Screens(
         val module: String
     }
 
-    internal object Test : Screens("com.islamversity.navigation.TestController")
+    internal object Test : Screens("com.islamversity.navigation.TestController", "")
 
-    object Home : Screens("com.islamversity.quran_home.view.HomeView")
+    object OnBoarding : Screens("com.islamversity.quran_home.feature.onboarding.OnBoardingView", "onboarding")
+    class Home : Screens(name, url) {
+        companion object{
+            const val name = "com.islamversity.quran_home.feature.home.QuranHomeView" //"com.islamversity.quran_home.view.HomeView"
+            const val url = "/home"
+        }
+    }
 
     class Search(
         model: SearchLocalModel,
         pushAnimation: NavigationAnimation? = null,
         popAnimation: NavigationAnimation? = null
     ) : Screens(
-        "com.islamversity.search.view.SearchView",
+        name,
+        url,
         EXTRA_SEARCH to jsonParser.encodeToString(model),
         pushAnimation,
         popAnimation
-    )
+    ){
+        companion object{
+            const val name = "com.islamversity.search.view.SearchView"
+            const val url = "/search"
+        }
+    }
 
     class Surah(
         model: SurahLocalModel,
         pushAnimation: NavigationAnimation? = null,
         popAnimation: NavigationAnimation? = null
     ) : Screens(
-        "com.islamversity.surah.view.SurahView",
+        name,
+        url,
         EXTRA_SURAH_DETAIL to jsonParser.encodeToString(model),
         pushAnimation,
         popAnimation
-    )
+    ){
+        companion object{
+            const val name = "com.islamversity.surah.view.SurahView"
+            const val url = "/surah"
+        }
+    }
 
-    class Settings(
-    ) : Screens(
-        "com.islamversity.settings.SettingsView"
-    )
+    class Settings
+        : Screens(name, url)
+    {
+        companion object{
+            const val name ="com.islamversity.settings.SettingsView"
+            const val url = "/settings"
+        }
+    }
 }

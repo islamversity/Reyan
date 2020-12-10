@@ -1,3 +1,5 @@
+import com.islamversity.reyan.GlobalVars
+
 apply plugin: 'com.android.library'
 apply plugin: "kotlin-android"
 apply plugin: 'kotlin-android-extensions'
@@ -6,11 +8,11 @@ apply plugin: "kotlin-kapt"
 check.dependsOn detekt
 
 android {
-    compileSdkVersion prjectCompileSdkVersion
+    compileSdkVersion GlobalVars.projectCompileSdkVersion
 
     defaultConfig {
-        minSdkVersion projectMinSdkVersion
-        targetSdkVersion projectTargetSdkVersion
+        minSdkVersion GlobalVars.projectMinSdkVersion
+        targetSdkVersion GlobalVars.projectTargetSdkVersion
         versionCode 1
         versionName "1.0"
 
@@ -20,21 +22,21 @@ android {
 
     buildTypes {
         release {
-            debuggable isReleaseDebuggable
-            minifyEnabled isReleaseMinify
-            shrinkResources isReleaseShrinkResources
-            multiDexEnabled isReleaseMultiDex
+            debuggable GlobalVars.isReleaseDebuggable
+            minifyEnabled GlobalVars.isReleaseMinify
+            shrinkResources GlobalVars.isReleaseShrinkResources
+            multiDexEnabled GlobalVars.isReleaseMultiDex
             proguardFiles(getDefaultProguardFile("proguard-android.txt"),
-                    "$proguardFileAddress")
+                    GlobalVars.proguardFileAddress)
         }
         debug {
             ext.alwaysUpdateBuildId = false
-            shrinkResources isDebugShrinkResources
-            debuggable isDebugDebuggable
-            minifyEnabled isDebugMinify
-            multiDexEnabled isDebugMultiDex
+            shrinkResources GlobalVars.isDebugShrinkResources
+            debuggable GlobalVars.isDebugDebuggable
+            minifyEnabled GlobalVars.isDebugMinify
+            multiDexEnabled GlobalVars.isDebugMultiDex
             proguardFiles(getDefaultProguardFile("proguard-android.txt"),
-                    "$proguardFileAddress")
+                    GlobalVars.proguardFileAddress)
 //            testCoverageEnabled isDebugTestCoverage
         }
     }
@@ -49,8 +51,4 @@ android {
     viewBinding{
         enabled = true
     }
-}
-
-dependencies{
-    implementation kotlinStd8
 }

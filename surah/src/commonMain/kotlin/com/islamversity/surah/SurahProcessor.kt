@@ -29,6 +29,8 @@ class SurahProcessor(
 
     override fun transformers(): List<FlowBlock<SurahIntent, SurahResult>> = listOf(
         processInitialFetch,
+        mainAyaFontSizeProcessor,
+        translationFontSizeProcessor,
         settingsProcessor.actionProcessor,
     )
     private val processInitialFetch: FlowBlock<SurahIntent, SurahResult> = {
@@ -85,18 +87,26 @@ class SurahProcessor(
                 repoModel ?: error("this screen can not be opened with wrong surahId= $id")
             }
             .mapWith(surahRepoHeaderMapper)
-    //we need to get app fontSize and add it to the header
 
     private fun getSurahAyas(id: SurahID): Flow<List<AyaUIModel>> =
-        combine(
-            getAyaUseCase.observeAyaMain(id)
-                .mapListWith(ayaMapper),
-            settingRepo.getAyaMainFontSize().map { it.size },
-            settingRepo.getAyaTranslateFontSize().map { it.size }
-        ) { uiModel, mainFont, translationFont ->
-            uiModel.map {
-                it.copy(fontSize = mainFont, translationFontSize = translationFont)
-            }
-        }
+        getAyaUseCase.observeAyaMain(id)
+            .mapListWith(ayaMapper)
 
+    private val mainAyaFontSizeProcessor : FlowBlock<SurahIntent, SurahResult> = {
+        ofType<SurahIntent.Initial>()
+            .flatMapLatest {
+                settingRepo.getAyaMainFontSize().map {
+                    SurahResult.MainAyaFontSize(it.size)
+                }
+            }
+    }
+
+    private val translationFontSizeProcessor : FlowBlock<SurahIntent, SurahResult> = {
+        ofType<SurahIntent.Initial>()
+            .flatMapLatest {
+                settingRepo.getAyaTranslateFontSize().map {
+                    SurahResult.TranslationFontSize(it.size)
+                }
+            }
+    }
 }

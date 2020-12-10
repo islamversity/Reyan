@@ -11,8 +11,6 @@ import com.akexorcist.localizationactivity.ui.LocalizationActivity
 import com.bluelinelabs.conductor.Conductor
 import com.bluelinelabs.conductor.Router
 import com.bluelinelabs.conductor.RouterTransaction
-import com.facebook.drawee.drawable.ScalingUtils
-import com.facebook.drawee.view.DraweeTransition
 import com.islamversity.core.Logger
 import com.islamversity.core.Severity
 import com.islamversity.daggercore.coreComponent
@@ -25,7 +23,7 @@ import com.islamversity.daggercore.lifecycle.LifecycleComponentProvider
 import com.islamversity.daggercore.lifecycle.LifecycleEvent
 import com.islamversity.daggercore.lifecycle.Permissions
 import com.islamversity.daggercore.lifecycle.PermissionsResult
-import com.islamversity.quran_home.feature.home.QuranHomeView
+import com.islamversity.quran_home.feature.startupView.StartUpView
 import com.islamversity.reyan.di.ActivityComponent
 import com.islamversity.reyan.di.DaggerActivityComponent
 import com.islamversity.reyan.service.NotificationDataType
@@ -63,18 +61,11 @@ class MainActivity : LocalizationActivity(),
             }
         }
 
-        window.sharedElementEnterTransition = DraweeTransition.createTransitionSet(
-            ScalingUtils.ScaleType.CENTER_CROP, ScalingUtils.ScaleType.CENTER_CROP
-        )
-        window.sharedElementEnterTransition = DraweeTransition.createTransitionSet(
-            ScalingUtils.ScaleType.CENTER_CROP, ScalingUtils.ScaleType.CENTER_CROP
-        )
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         router = Conductor.attachRouter(this, root, savedInstanceState)
-        val view = QuranHomeView()
+        val view = StartUpView()
         if (!router.hasRootController()) {
             router.setRoot(RouterTransaction.with(view))
         }

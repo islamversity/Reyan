@@ -1,3 +1,6 @@
+import com.islamversity.reyan.Deps
+import com.islamversity.reyan.GlobalVars
+
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
@@ -15,14 +18,14 @@ apply from: "$rootDir/projectDependencyGraph.gradle"
 //check.dependsOn detekt
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion GlobalVars.projectCompileSdkVersion
     defaultConfig {
         archivesBaseName = "Reyan"
         applicationId "com.islamversity.reyan"
-        minSdkVersion projectMinSdkVersion
-        targetSdkVersion projectTargetSdkVersion
-        versionCode 21000001
-        versionName "0.0.1"
+        minSdkVersion GlobalVars.projectMinSdkVersion
+        targetSdkVersion GlobalVars.projectTargetSdkVersion
+        versionCode 21000004
+        versionName "0.0.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -42,20 +45,20 @@ android {
     }
     buildTypes {
         release {
-            debuggable isReleaseDebuggable
-            minifyEnabled isReleaseMinify
-            multiDexEnabled isReleaseMultiDex
+            debuggable GlobalVars.isReleaseDebuggable
+            minifyEnabled GlobalVars.isReleaseMinify
+            multiDexEnabled GlobalVars.isReleaseMultiDex
             proguardFiles(getDefaultProguardFile("proguard-android.txt"),
-                    "$proguardFileAddress")
+                    GlobalVars.proguardFileAddress)
             signingConfig signingConfigs.release
         }
         debug {
             applicationIdSuffix ".debug"
-            debuggable isDebugDebuggable
-            minifyEnabled isDebugMinify
-            multiDexEnabled isDebugMultiDex
+            debuggable GlobalVars.isDebugDebuggable
+            minifyEnabled GlobalVars.isDebugMinify
+            multiDexEnabled GlobalVars.isDebugMultiDex
             proguardFiles(getDefaultProguardFile("proguard-android.txt"),
-                    "$proguardFileAddress")
+                    GlobalVars.proguardFileAddress)
 //            testCoverageEnabled true
         }
     }
@@ -103,84 +106,89 @@ android {
             java.srcDirs += sharedTestDir
         }
     }
+    bundle {
+        language {
+            // Specifies that the app bundle should not support
+            // configuration APKs for language resources. These
+            // resources are instead packaged with each base and
+            // dynamic feature APK.
+            enableSplit = false
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation kotlinStd8
+    implementation Deps.Kotlin.jvmStd8
 
-    testImplementation junit
-    testImplementation truth
-    testImplementation mockkUnit
-    testImplementation robolectric
-    testImplementation supportTestRunner
-    testImplementation supportTestCore
-    testImplementation supportTestRule
-    testImplementation supportJunitExt
-    testImplementation espressoCore
+    testImplementation Deps.Android.Test.junit
+    testImplementation Deps.Android.Test.truth
+    testImplementation Deps.Android.Test.mockkUnit
+    testImplementation Deps.Android.Test.robolectric
+    testImplementation Deps.Android.Test.runner
+    testImplementation Deps.Android.Test.core
+    testImplementation Deps.Android.Test.rules
+    testImplementation Deps.Android.Test.junitExt
+    testImplementation Deps.Android.Test.espressoCore
 
-    androidTestImplementation supportTestRunner
-    androidTestImplementation supportTestCore
-    androidTestImplementation supportTestRule
-    androidTestImplementation supportJunitExt
-    androidTestImplementation espressoCore
-    androidTestImplementation espressoIntents
+    androidTestImplementation Deps.Android.Test.runner
+    androidTestImplementation Deps.Android.Test.core
+    androidTestImplementation Deps.Android.Test.rules
+    androidTestImplementation Deps.Android.Test.junitExt
+    androidTestImplementation Deps.Android.Test.espressoCore
+    androidTestImplementation Deps.Android.Test.espressoIntents
 
-    implementation(project(viewComponent))
-    implementation(project(core))
-    implementation(project(domain))
-    implementation(project(base))
-    implementation(project(daggerCore))
-    implementation(project(quranHome))
-    implementation(project(navigation))
-    implementation(project(search))
-    implementation(project(settings))
-    implementation(project(surah))
+    implementation(project(Deps.Modules.viewComponent))
+    implementation(project(Deps.Modules.core))
+    implementation(project(Deps.Modules.domain))
+    implementation(project(Deps.Modules.base))
+    implementation(project(Deps.Modules.daggerCore))
+    implementation(project(Deps.Modules.quranHome))
+    implementation(project(Deps.Modules.navigation))
+    implementation(project(Deps.Modules.search))
+    implementation(project(Deps.Modules.settings))
+    implementation(project(Deps.Modules.surah))
 
-    implementation design
+    implementation Deps.Android.Support.design
 
-    implementation viewModel
+    implementation Deps.Android.Support.viewModel
 
-    implementation dagger
-    kapt daggerCompiler
-    implementation jetbrainsAnnotation
+    implementation Deps.Dagger.dagger
+    kapt Deps.Dagger.daggerCompiler
+    implementation Deps.Dagger.jetbrainsAnnotation
 
-    implementation okHttpLogging
-    implementation okHttp
+    implementation Deps.Android.Networking.okHttpLogging
+    implementation Deps.Android.Networking.okHttp
 
-    implementation compat
-    implementation coreKts
+    implementation Deps.Android.Support.compat
+    implementation Deps.Android.Support.coreKts
 
-    implementation coroutines
-    implementation coroutinesAndroid
+    implementation Deps.Coroutines.common
+    implementation Deps.Coroutines.android
 
-    implementation conductor
+    implementation Deps.Android.Tools.conductor
 
-    implementation fresco
-    implementation soLoader
-    implementation frescoOkHttp
-    implementation slider
+    implementation Deps.Android.Tools.localization
 
-    implementation localization
+    implementation Deps.Firebase.analytics
+    implementation Deps.Firebase.crashlyticsSDK
+    implementation Deps.Firebase.messaging
 
-    implementation firebaseAnalytics
-    implementation firebaseCrashlyticsSDK
-    implementation firebaseMessaging
+    debugImplementation Deps.Android.Tools.leakCanary
 
-    debugImplementation leakCanary
+    implementation Deps.Android.Tools.epoxy
+    kapt Deps.Android.Tools.epoxyCompiler
 
-    implementation epoxy
-    kapt epoxyCompiler
+    debugImplementation Deps.Android.Tools.soLoader
+    debugImplementation Deps.Android.Tools.flipper
+    releaseImplementation Deps.Android.Tools.flipperNoOp
+    debugImplementation Deps.Android.Tools.flipperNetworkPlugin
+    debugImplementation Deps.Android.Tools.flipperFrescoPlugin
 
-    debugImplementation flipper
-    releaseImplementation flipperNoOp
-    debugImplementation flipperNetworkPlugin
-    debugImplementation flipperFrescoPlugin
+    debugImplementation Deps.Android.Tools.stetho
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.1'
 
-    debugImplementation stetho
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.0.10'
-
-    implementation klogger
+    implementation Deps.Tools.logger
 }
 
 
