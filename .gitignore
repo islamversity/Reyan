@@ -84,3 +84,4 @@ src/androidTest/
 src/main/java/com/islamversity/reyan/home/
 src/test/
 /.idea/
+/.gradle/buildOutputCleanup/buildOutputCleanup.lock
