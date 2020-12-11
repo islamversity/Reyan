@@ -14,11 +14,12 @@ struct SurahListView : View {
     init(presenter : SurahListPresenter) {
         
         self.presenter = presenter
-        presenter.states().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
+//        presenter.states().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
         
+        IntropExtensionsKt.consume(presenter) { (MviViewState) in
+            print("SurahListStateCollector : states : value(as uiState) = \(String(describing: MviViewState))")
+        }
 //        presenter.states().collect(collector: <#T##FlowCollector#>, completionHandler: <#T##(KotlinUnit?, Error?) -> Void#>)
-
-        // presenter.processIntents(intents: SurahListIntent.Initial.init())
         
         UITableView.appearance().backgroundColor = UIColor.clear
         UITableViewCell.appearance().backgroundColor = UIColor.clear

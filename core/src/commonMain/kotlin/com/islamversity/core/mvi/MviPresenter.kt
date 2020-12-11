@@ -22,7 +22,11 @@ interface MviPresenter<I : MviIntent, S : MviViewState> {
 
     fun processIntents(intents: I)
 
-    fun states(): Flow<S>
+    //can be collected multipleTimes
+    fun receiveStates(): Flow<S>
+
+    //can be collected only once
+    fun consumeStates() : Flow<S>
 
     fun close() {
     }
@@ -41,9 +45,12 @@ abstract class BasePresenter<I : MviIntent, S : MviViewState, R : MviResult>(
     }
 
     private val intents = MutableSharedFlow<I>(0, 10)
-    private val states: SharedFlow<S> = compose()
+    private val states : Flow<S> = compose()
+    private val receiveStates: SharedFlow<S> by lazy {
+        compose().shareIn(uiScope, SharingStarted.Eagerly, 1)
+    }
 
-    private fun compose(): SharedFlow<S> =
+    private fun compose(): Flow<S> =
         intents
             .onEach {
                 Logger.log(severity = Severity.Info, tag = this@BasePresenter::class.simpleName ?: "BasePresenter") {
@@ -59,13 +66,15 @@ abstract class BasePresenter<I : MviIntent, S : MviViewState, R : MviResult>(
             .onEach {
                 logNewState(it)
             }
-            .shareIn(uiScope, SharingStarted.Eagerly, 1)
 
     override fun processIntents(intents: I) {
         this.intents.tryEmit(intents)
     }
 
-    override fun states(): Flow<S> = states
+    override fun receiveStates(): Flow<S> = receiveStates
+
+    override fun consumeStates(): Flow<S> =
+        states
 
     protected open suspend fun logNewState(newState: S) {
         Logger.log(severity = Severity.Info, tag = this@BasePresenter::class.simpleName ?: "BasePresenter") {

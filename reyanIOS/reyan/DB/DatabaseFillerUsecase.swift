@@ -15,6 +15,9 @@ struct DatabaseFillerUsecase : Resolving {
         let config : DatabaseFileConfig = DatabaseFileConfiger()
         
         let useCase = DatabaseFillerUseCaseImpl(db: resolver.resolve(), config: config)
+        FlowUtilsKt.wrap(useCase.status()).watch { (status: AnyObject?) in
+            print("database status update= \(String(describing: status))")
+        }
         
         useCase.needsFilling { (kbool, error) in
             if let doseNeed = kbool {
@@ -47,38 +50,38 @@ class DatabaseFileConfiger : DatabaseFileConfig {
     
     var assetVersion: Int32 = 1
 
-    var arabicTextCalligraphy: Calligraphy_
-    var englishTextCalligraphy: Calligraphy_
-    var farsiTextCalligraphy: Calligraphy_
+    func arabicTextCalligraphy() -> Calligraphy_ {
+        return Calligraphy_(
+            rowIndex: 0,
+            id: generateRandomUUID(),
+            languageCode: "ar",
+            name: "simple",
+            friendlyName: "عربی-بسیط", code: Calligraphy__(languageCode: "ar", calligraphyName: "simple")
+        )
+    }
+    func englishTextCalligraphy() -> Calligraphy_ {
+        return Calligraphy_(
+            rowIndex: 0,
+            id: generateRandomUUID(),
+            languageCode: "en",
+            name: "Abdullah Yusuf Ali",
+            friendlyName: "English-Yusuf Ali", code: Calligraphy__(languageCode: "en", calligraphyName: "Abdullah Yusuf Ali")
+        )
+    }
+    func farsiTextCalligraphy() -> Calligraphy_ {
+        return Calligraphy_(
+            rowIndex: 0,
+            id: generateRandomUUID(),
+            languageCode: "fa",
+            name: "Makarem Shirazi",
+            friendlyName: "فارسی-مکرام شیرازی", code: Calligraphy__(languageCode: "fa", calligraphyName: "Makarem Shirazi")
+        )
+    }
     
 
     init() {
         
         let generator = UUIDGenerator()
-
-        arabicTextCalligraphy = Calligraphy_(
-            rowIndex: 0,
-            id: generator.generateRandomUUID(),
-            languageCode: "ar",
-            name: "simple",
-            friendlyName: "عربی-بسیط", code: Calligraphy__(languageCode: "ar", calligraphyName: "simple")
-        )
-        
-        englishTextCalligraphy = Calligraphy_(
-            rowIndex: 0,
-            id: generator.generateRandomUUID(),
-            languageCode: "en",
-            name: "Abdullah Yusuf Ali",
-            friendlyName: "English-Yusuf Ali", code: Calligraphy__(languageCode: "en", calligraphyName: "Abdullah Yusuf Ali")
-        )
-        
-        farsiTextCalligraphy = Calligraphy_(
-            rowIndex: 0,
-            id: generator.generateRandomUUID(),
-            languageCode: "fa",
-            name: "Makarem Shirazi",
-            friendlyName: "فارسی-مکرام شیرازی", code: Calligraphy__(languageCode: "fa", calligraphyName: "Makarem Shirazi")
-        )
     }
     
     func getQuranArabicText() -> KotlinByteArray {

@@ -209,6 +209,7 @@ object Deps {
         val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
         val flowBinding = "ru.ldralighieri.corbind:corbind:${Versions.flowBinding}"
         val turbine = "app.cash.turbine:turbine:0.2.1"
+        val coroutinesWorker = "com.autodesk:coroutineworker:0.6.2"
     }
 
     object SqlDelight {

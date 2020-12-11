@@ -24,7 +24,7 @@ class SurahListPresenter(
                         "GetSurah : filterIntent : ofType"  + it.toString()
                     }
                 }
-                .ofType<SurahListIntent.Initial>().take( 6)
+                .ofType<SurahListIntent.Initial>().take( 1)
             },
             {
                 notOfType(SurahListIntent.Initial::class)

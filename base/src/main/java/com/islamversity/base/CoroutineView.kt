@@ -85,7 +85,7 @@ abstract class CoroutineView<
             .newIntents()
 
         presenter
-            .states()
+            .receiveStates()
             .catch {
                 Logger.log(Severity.Error, "PublishingState", it, "presenter state flow exception caught: ${it.localizedMessage}")
             }
