@@ -30,7 +30,12 @@ sealed class Screens(
 
     internal object Test : Screens("com.islamversity.navigation.TestController", "")
 
-    object OnBoarding : Screens("com.islamversity.quran_home.feature.onboarding.OnBoardingView", "onboarding")
+    class OnBoarding : Screens(name, url){
+        companion object{
+            const val name = "com.islamversity.quran_home.feature.onboarding.OnBoardingView"
+            const val url = "/onBoarding"
+        }
+    }
     class Home : Screens(name, url) {
         companion object{
             const val name = "com.islamversity.quran_home.feature.home.QuranHomeView" //"com.islamversity.quran_home.view.HomeView"

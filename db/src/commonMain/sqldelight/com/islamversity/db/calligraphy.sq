@@ -84,3 +84,7 @@ WHERE code == 'ar';
 getSimpleArabicSurahContentCalligraphy:
 SELECT * FROM calligraphy
 WHERE code == 'ar_simple';
+
+
+deleteAll:
+DELETE FROM calligraphy;

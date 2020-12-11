@@ -220,3 +220,7 @@ insertAya:
 INSERT OR REPLACE INTO aya
 (id, orderIndex, surahId, sajdahType, juzOrderIndex, hizbQuarterOrderIndex, hizbStart, hizbEnding)
 SELECT ?, :orderIndex, :surahId, ?, ?, ?, ?, ?;
+
+
+deleteAll:
+DELETE FROM aya;
