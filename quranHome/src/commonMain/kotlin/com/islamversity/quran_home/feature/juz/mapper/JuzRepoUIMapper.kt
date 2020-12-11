@@ -15,5 +15,4 @@ class JuzRepoUIMapper : Mapper<JuzRepoModel, JozUIModel> {
             item.startingSurahId,
             item.startingSurahName,
         )
-
 }
