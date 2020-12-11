@@ -163,3 +163,7 @@ SELECT
 ?,
 ?
 WHERE NOT EXISTS (SELECT * FROM surah WHERE orderIndex = :orderIndex);
+
+
+deleteAll:
+DELETE FROM surah;

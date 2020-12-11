@@ -1,5 +1,8 @@
 package com.islamversity.domain.usecase
 
+import co.touchlab.stately.concurrency.AtomicReference
+import co.touchlab.stately.concurrency.value
+import com.autodesk.coroutineworker.CoroutineWorker
 import com.islamversity.core.Logger
 import com.islamversity.core.Severity
 import com.islamversity.db.AyaContentQueries
@@ -62,13 +65,13 @@ interface DatabaseFileConfig {
     fun getQuranExtraData(): ByteArray
 
     fun getQuranArabicText(): ByteArray
-    val arabicTextCalligraphy: Calligraphy
+    fun arabicTextCalligraphy(): Calligraphy
 
     fun getQuranEnglishText(): ByteArray
-    val englishTextCalligraphy: Calligraphy
+    fun englishTextCalligraphy(): Calligraphy
 
     fun getQuranFarsiText(): ByteArray
-    val farsiTextCalligraphy: Calligraphy
+    fun farsiTextCalligraphy(): Calligraphy
 }
 
 
@@ -76,11 +79,9 @@ class DatabaseFillerUseCaseImpl(
     private val db: Main,
     private val config: DatabaseFileConfig
 ) : DatabaseFillerUseCase {
-    private val broadCaster by lazy {
-        BroadcastChannel<FillingStatus>(Channel.CONFLATED).also {
-            it.offer(FillingStatus.Idle)
-        }
-    }
+    private val broadCaster = AtomicReference(BroadcastChannel<FillingStatus>(Channel.CONFLATED).also {
+        it.offer(FillingStatus.Idle)
+    })
 
     override suspend fun needsFilling(): Boolean {
         val persistedVersion =
@@ -94,16 +95,16 @@ class DatabaseFillerUseCaseImpl(
             return true
         }
 
-        broadCaster.close()
+        broadCaster.value?.close()
 
         return false
     }
 
     override fun status(): Flow<FillingStatus> =
-        if (broadCaster.isClosedForSend) {
+        if (broadCaster.value.isClosedForSend) {
             flowOf(FillingStatus.Done)
         } else {
-            broadCaster.asFlow()
+            broadCaster.value.asFlow()
         }
 
     private fun randomUUID() = config.generateRandomUUID()
@@ -144,9 +145,19 @@ class DatabaseFillerUseCaseImpl(
 
 
     override suspend fun fill() {
-        coroutineScope {
+        internalFill(db, config, broadCaster)
+    }
 
-            broadCaster.offer(FillingStatus.Started)
+    private suspend fun internalFill(
+        db: Main,
+        config: DatabaseFileConfig,
+        broadCaster: AtomicReference<BroadcastChannel<FillingStatus>>
+    ) {
+        CoroutineWorker.execute {
+            val arabicTextCalligraphy = config.arabicTextCalligraphy()
+            val englishTextCalligraphy = config.englishTextCalligraphy()
+            val farsiTextCalligraphy = config.farsiTextCalligraphy()
+            broadCaster.value.offer(FillingStatus.Started)
             var quranDataObjectDeferred: Deferred<JsonObject>? = async {
                 Json.parseToJsonElement(config.getQuranExtraData().decodeToString())
                     .jsonObject["quran"]!!
@@ -159,24 +170,35 @@ class DatabaseFillerUseCaseImpl(
             val ayaQueries = db.ayaQueries
             val ayaContentQueries = db.ayaContentQueries
 
+
+
             val arabicCalligraphy = createSurahArabicNameCalligraphy()
             val englishCalligraphy = createSurahEnglishNameCalligraphy()
             val englishTranslatedCalligraphy = createSurahEnglishTranslatedNameCalligraphy()
 
             calligraphyQueries.transaction {
-                calligraphyQueries.insertCalligraphy(config.arabicTextCalligraphy)
-                calligraphyQueries.insertCalligraphy(config.englishTextCalligraphy)
-                calligraphyQueries.insertCalligraphy(config.farsiTextCalligraphy)
+                //clean the db before we start filling
+                calligraphyQueries.deleteAll()
+                surahQueries.deleteAll()
+                nameQueries.deleteAll()
+                ayaQueries.deleteAll()
+                ayaContentQueries.deleteAllContents()
+//                db.utilsQueries.vacuum()
+
+
+                calligraphyQueries.insertCalligraphy(arabicTextCalligraphy)
+                calligraphyQueries.insertCalligraphy(englishTextCalligraphy)
+                calligraphyQueries.insertCalligraphy(farsiTextCalligraphy)
 
 
                 calligraphyQueries.insertCalligraphy(arabicCalligraphy)
                 calligraphyQueries.insertCalligraphy(englishCalligraphy)
                 calligraphyQueries.insertCalligraphy(englishTranslatedCalligraphy)
             }
-            broadCaster.offer(FillingStatus.Filling.CalligraphiesFilled)
+            broadCaster.value.offer(FillingStatus.Filling.CalligraphiesFilled)
 
 
-            broadCaster.offer(FillingStatus.Filling.Filled(30))
+            broadCaster.value.offer(FillingStatus.Filling.Filled(30))
             val revealMap = mapOf(
                 RevealTypeFlag.MECCAN.raw.toLowerCase()
                     .capitalize() to RevealTypeFlag.MECCAN,
@@ -194,7 +216,7 @@ class DatabaseFillerUseCaseImpl(
                 englishCalligraphy.id
             )
 
-            broadCaster.offer(FillingStatus.Filling.Filled(40))
+            broadCaster.value.offer(FillingStatus.Filling.Filled(40))
 
             val surahOrderIdMap = insertSurahAndGetIdMap(surahs, surahQueries, nameQueries)
 
@@ -207,15 +229,20 @@ class DatabaseFillerUseCaseImpl(
             quranDataObjectDeferred = null
             quranDataObject = null
 
-            broadCaster.offer(FillingStatus.Filling.Filled(50))
+            broadCaster.value.offer(FillingStatus.Filling.Filled(50))
 
-            val quranArabicJson = getQuranArabicJson()
+            val quranArabicJson = getQuranArabicJson(config)
 
-            val quranEnglishJson = getQuranEnglishJson()
+            val quranEnglishJson = getQuranEnglishJson(config)
 
-            val quranFarsiJson = getQuranFarsiJson()
+            val quranFarsiJson = getQuranFarsiJson(config)
+
+            broadCaster.value.offer(FillingStatus.Filling.Filled(70))
 
             val ayaList = parseAya(
+                arabicTextCalligraphy,
+                englishTextCalligraphy,
+                farsiTextCalligraphy,
                 juzMap,
                 hizbMap,
                 quranArabicJson,
@@ -225,13 +252,13 @@ class DatabaseFillerUseCaseImpl(
                 sajdaMap,
             )
 
-            broadCaster.offer(FillingStatus.Filling.Filled(80))
+            broadCaster.value.offer(FillingStatus.Filling.Filled(80))
 
             insertAyas(ayaQueries, ayaList, ayaContentQueries)
 
             db.settingsQueries.upsert(SETTINGS_KEY_DATA_BASE_CREATION_VERSION, config.assetVersion.toString())
 
-            broadCaster.offer(FillingStatus.Done)
+            broadCaster.value.offer(FillingStatus.Done)
         }
     }
 
@@ -265,7 +292,7 @@ class DatabaseFillerUseCaseImpl(
         }
     }
 
-    private fun getQuranArabicJson(): JsonArray {
+    private suspend fun getQuranArabicJson(config : DatabaseFileConfig): JsonArray {
         return config
             .getQuranArabicText()
             .decodeToString().let {
@@ -276,7 +303,7 @@ class DatabaseFillerUseCaseImpl(
             .jsonArray
     }
 
-    private fun getQuranFarsiJson(): JsonArray {
+    private fun getQuranFarsiJson(config : DatabaseFileConfig): JsonArray {
         return config
             .getQuranFarsiText()
             .decodeToString()
@@ -286,7 +313,7 @@ class DatabaseFillerUseCaseImpl(
             .jsonArray
     }
 
-    private fun getQuranEnglishJson(): JsonArray {
+    private fun getQuranEnglishJson(config : DatabaseFileConfig): JsonArray {
         return config
             .getQuranEnglishText()
             .decodeToString()
@@ -496,6 +523,9 @@ class DatabaseFillerUseCaseImpl(
 
 
     private fun parseAya(
+        arabicTextCalligraphy : Calligraphy,
+        englishTextCalligraphy: Calligraphy,
+        farsiTextCalligraphy : Calligraphy,
         juzMap: Map<Pair<Long, Long>, Juz>,
         hizbMap: Map<Pair<Long, Long>, HizbQuarter>,
         quranArabicJson: JsonArray,
@@ -504,9 +534,9 @@ class DatabaseFillerUseCaseImpl(
         quranFarsiJson: JsonArray,
         sajdaMap: Map<Pair<Long, Long>, SajdahTypeFlag?>,
     ): List<Aya> {
-        val arSimpleCall: CalligraphyId = config.arabicTextCalligraphy.id
-        val enAYACall: CalligraphyId = config.englishTextCalligraphy.id
-        val faAyaCall: CalligraphyId = config.farsiTextCalligraphy.id
+        val arSimpleCall: CalligraphyId = arabicTextCalligraphy.id
+        val enAYACall: CalligraphyId = englishTextCalligraphy.id
+        val faAyaCall: CalligraphyId = farsiTextCalligraphy.id
 
         //juz and hizb has to begin with 1 not zero
         var juz = juzMap[1L to 1L]!!

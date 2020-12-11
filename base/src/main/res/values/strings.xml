@@ -11,4 +11,7 @@
     <string name="title_font_size_normal">Normal</string>
     <string name="title_font_size_Large">Large</string>
     <string name="title_font_size_x_Large">X-Large</string>
+
+    <string name="app_language">App Language</string>
+
 </resources>
