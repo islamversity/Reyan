@@ -63,3 +63,9 @@ WHERE NOT EXISTS (SELECT * FROM name WHERE rowId = :rowId AND calligraphy = :cal
 
 getNameLastId:
 SELECT last_insert_rowid();
+
+
+
+deleteAll:
+DELETE FROM name;
+

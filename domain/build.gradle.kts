@@ -40,11 +40,11 @@ kotlin {
         implementation(Deps.ktor.Serialization.common)
 
         implementation(Deps.Tools.stately)
+        implementation(Deps.Tools.statelyConcurrency)
 
         implementation(Deps.Kotlin.dateTime)
         implementation(Deps.Tools.logger)
-
-        implementation(Deps.Tools.uuid)
+        implementation(Deps.Coroutines.coroutinesWorker)
     }
 
     jvm()

@@ -56,7 +56,7 @@ struct QuranHomeView: View, Resolving {
             
         }
         .onAppear(){
-            surahListView.presenter.processIntents(intents: SurahListIntent.Initial.init())
+//            surahListView.presenter.processIntents(intents: SurahListIntent.Initial.init())
         }
     }
     

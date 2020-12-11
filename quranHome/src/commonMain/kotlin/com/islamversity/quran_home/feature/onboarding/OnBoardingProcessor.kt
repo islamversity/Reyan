@@ -72,9 +72,8 @@ class OnBoardingProcessor(
     private val continueProcessor: FlowBlock<OnBoardingIntent, OnBoardingResult> = {
         ofType<OnBoardingIntent.Continue>()
             .map {
-                Screens.Home
+                Screens.Home()
             }
             .navigateTo(navigator)
-
     }
 }
