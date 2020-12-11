@@ -16,6 +16,9 @@ extension Resolver {
         
         // JuzListModule
         register{
+            JuzListView(presenter: resolve())
+        }
+        register{
             JuzListPresenter(processor: resolve(name : "JuzListProcessor"))
         }
         register(MviProcessor.self, name: "JuzListProcessor") {
@@ -23,9 +26,9 @@ extension Resolver {
         }
         
         // SurahListModule
-//        register{
-//            SurahListView(presenter: resolve())
-//        }
+        register{
+            SurahListView(presenter: resolve())
+        }
         register{
             SurahListPresenter(processor: resolve(name : "SurahListProcessor"))
         }

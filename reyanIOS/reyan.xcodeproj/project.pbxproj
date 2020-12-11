@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		D588B2044C49CDABEB6E19EB /* libPods-reyan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 230047422AF75AA1A9BDD882 /* libPods-reyan.a */; };
+		E77AD38825827FFD004FD632 /* JuzLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77AD38725827FFD004FD632 /* JuzLineView.swift */; };
+		E77AD38D258291F5004FD632 /* JuzListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77AD38C258291F5004FD632 /* JuzListView.swift */; };
+		E77AD39525829F86004FD632 /* JuzListStateCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77AD39425829F86004FD632 /* JuzListStateCollector.swift */; };
+		E77AD39A2582A282004FD632 /* JuzTitleArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77AD3992582A282004FD632 /* JuzTitleArray.swift */; };
 		E78EFD3225330F4F00886039 /* NavigationRouter in Frameworks */ = {isa = PBXBuildFile; productRef = E78EFD3125330F4F00886039 /* NavigationRouter */; };
 		E78EFD5F2533509A00886039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78EFD5D2533509900886039 /* AppDelegate.swift */; };
 		E78EFD602533509A00886039 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78EFD5E2533509A00886039 /* SceneDelegate.swift */; };
@@ -61,6 +65,10 @@
 /* Begin PBXFileReference section */
 		08745F589F42937201EAD41C /* Pods-reyan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reyan.debug.xcconfig"; path = "Target Support Files/Pods-reyan/Pods-reyan.debug.xcconfig"; sourceTree = "<group>"; };
 		230047422AF75AA1A9BDD882 /* libPods-reyan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-reyan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E77AD38725827FFD004FD632 /* JuzLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuzLineView.swift; sourceTree = "<group>"; };
+		E77AD38C258291F5004FD632 /* JuzListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuzListView.swift; sourceTree = "<group>"; };
+		E77AD39425829F86004FD632 /* JuzListStateCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuzListStateCollector.swift; sourceTree = "<group>"; };
+		E77AD3992582A282004FD632 /* JuzTitleArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuzTitleArray.swift; sourceTree = "<group>"; };
 		E78EFD5D2533509900886039 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E78EFD5E2533509A00886039 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		E78EFD69253351C000886039 /* Navigation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
@@ -185,6 +193,9 @@
 			isa = PBXGroup;
 			children = (
 				E7B512972580102900B88771 /* JuzRowView.swift */,
+				E77AD38C258291F5004FD632 /* JuzListView.swift */,
+				E77AD39425829F86004FD632 /* JuzListStateCollector.swift */,
+				E77AD3992582A282004FD632 /* JuzTitleArray.swift */,
 			);
 			path = juzList;
 			sourceTree = "<group>";
@@ -193,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				E7CAB2922570EB3B00E6D753 /* SearchBarView.swift */,
+				E77AD38725827FFD004FD632 /* JuzLineView.swift */,
 			);
 			path = CommonUI;
 			sourceTree = "<group>";
@@ -460,6 +472,7 @@
 			files = (
 				E7CAB2B825741F3900E6D753 /* RemoveSeperateLinesInList.swift in Sources */,
 				E7CAB2A92574100D00E6D753 /* SurahRowView.swift in Sources */,
+				E77AD38825827FFD004FD632 /* JuzLineView.swift in Sources */,
 				E78EFD5F2533509A00886039 /* AppDelegate.swift in Sources */,
 				E78EFD602533509A00886039 /* SceneDelegate.swift in Sources */,
 				E78EFD9D2533588C00886039 /* ReyanModule.swift in Sources */,
@@ -472,10 +485,13 @@
 				E796EC39253836720025072F /* DICore.swift in Sources */,
 				E7CAB2A425740EC700E6D753 /* SurahListView.swift in Sources */,
 				E78EFDA82533598400886039 /* SearchView.swift in Sources */,
+				E77AD39A2582A282004FD632 /* JuzTitleArray.swift in Sources */,
 				E7CAB2B325741F1E00E6D753 /* Utils.swift in Sources */,
 				E796EC3E253837260025072F /* DIRegister.swift in Sources */,
 				E7CAB2932570EB3B00E6D753 /* SearchBarView.swift in Sources */,
 				F9275E162532160B0021FE0E /* TestView.swift in Sources */,
+				E77AD39525829F86004FD632 /* JuzListStateCollector.swift in Sources */,
+				E77AD38D258291F5004FD632 /* JuzListView.swift in Sources */,
 				E78EFDA72533598400886039 /* SearchViewParent.swift in Sources */,
 				E78EFD7E2533541100886039 /* QuranHomeViewParent.swift in Sources */,
 				E78EFD7F2533541100886039 /* QuranHomeView.swift in Sources */,

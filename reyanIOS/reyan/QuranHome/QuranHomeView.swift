@@ -8,12 +8,14 @@ struct QuranHomeView: View, Resolving {
     @ObservedObject public var flowCollector: QuranHomeStateCollector = QuranHomeStateCollector()
     var presenter : QuranHomePresenter
     var surahListView : SurahListView
-    
+    var juzListView : JuzListView
+
     init(presenter : QuranHomePresenter) {
         
         self.presenter = presenter
         self.surahListView = SurahListView(presenter: Resolver.resolve())
-        
+        self.juzListView = JuzListView(presenter: Resolver.resolve())
+
         presenter.states().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
         
         let db : Main = resolver.resolve()
@@ -43,12 +45,13 @@ struct QuranHomeView: View, Resolving {
                 SearchBarView()
                     .padding(.top, 50)
                 
-                
-                surahListView
-
+                if flowCollector.uiState?.tabPosition == 0 {
+                    surahListView
+                } else if flowCollector.uiState?.tabPosition == 1 {
+                    juzListView
+                }
                 
                 Spacer()
-                
             }
             .padding(.horizontal, 20.0)
             .edgesIgnoringSafeArea(.all)
