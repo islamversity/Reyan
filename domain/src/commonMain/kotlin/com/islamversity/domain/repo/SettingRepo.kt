@@ -46,6 +46,9 @@ interface SettingRepo {
 
     suspend fun setAyaMainFontSize(font: QuranReadFontSize, context: CoroutineContext = Dispatchers.Default)
     suspend fun setAyaTranslateFontSize(font: TranslateReadFontSize, context: CoroutineContext = Dispatchers.Default)
+
+    suspend fun setAyaToolbarVisibility(visible : Boolean, context: CoroutineContext = Dispatchers.Default)
+    fun getAyaToolbarVisibility(context: CoroutineContext = Dispatchers.Default) : Flow<Boolean>
 }
 
 private const val KEY_CALLIGRAPHY_SURAH_NAME_SECONDARY = "KEY_CALLIGRAPHY_SURAH_NAME_SECONDARY"
@@ -54,6 +57,8 @@ private const val KEY_CALLIGRAPHY_AYA_TRANSLATION_SECOND = "KEY_CALLIGRAPHY_AYA_
 
 private const val KEY_FONT_SIZE_AYA_MAIN = "KEY_FONT_SIZE_AYA_MAIN"
 private const val KEY_FONT_SIZE_AYA_TRANSLATION = "KEY_FONT_SIZE_AYA_TRANSLATION"
+
+private const val KEY_AYA_TOOLBAR_VISIBLE = "KEY_AYA_TOOLBAR_VISIBLE"
 
 class SettingRepoImpl(
     private val settingsDataSource: SettingsDataSource,
@@ -188,4 +193,15 @@ class SettingRepoImpl(
     override suspend fun setAyaTranslateFontSize(font: TranslateReadFontSize, context: CoroutineContext) {
         settingsDataSource.put(KEY_FONT_SIZE_AYA_TRANSLATION, font.size.toString(), context)
     }
+
+    override suspend fun setAyaToolbarVisibility(visible: Boolean, context: CoroutineContext) {
+        settingsDataSource.put(KEY_AYA_TOOLBAR_VISIBLE, visible.toString(), context)
+    }
+
+    override fun getAyaToolbarVisibility(context: CoroutineContext): Flow<Boolean> =
+        settingsDataSource.observeKey(KEY_AYA_TOOLBAR_VISIBLE, false.toString(), context)
+                .map {
+                    it.toBoolean()
+                }
+
 }

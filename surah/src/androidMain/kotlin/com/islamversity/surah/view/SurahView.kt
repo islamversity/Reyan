@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ShareCompat
 import com.islamversity.base.CoroutineView
 import com.islamversity.base.ext.setHidable
 import com.islamversity.core.mvi.MviPresenter
 import com.islamversity.daggercore.CoreComponent
+import com.islamversity.daggercore.helpers.LanguageConfigure
+import com.islamversity.daggercore.helpers.languageConfigure
 import com.islamversity.navigation.model.SurahLocalModel
 import com.islamversity.navigation.model.fromData
 import com.islamversity.surah.SurahIntent
@@ -27,10 +30,11 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.merge
+import java.text.NumberFormat
 import javax.inject.Inject
 
 class SurahView(
-    bundle: Bundle
+        bundle: Bundle
 ) : CoroutineView<ViewSurahBinding, SurahState, SurahIntent>(bundle) {
 
     private var settingsDialog: SurahSettingsView? = null
@@ -40,25 +44,25 @@ class SurahView(
     }
 
     private val surahLocal: SurahLocalModel =
-        bundle
-            .getString(SurahLocalModel.EXTRA_SURAH_DETAIL)!!
-            .let {
-                SurahLocalModel.fromData(it)
-            }
+            bundle
+                    .getString(SurahLocalModel.EXTRA_SURAH_DETAIL)!!
+                    .let {
+                        SurahLocalModel.fromData(it)
+                    }
 
     @Inject
     override lateinit var presenter: MviPresenter<SurahIntent, SurahState>
 
     override fun bindView(inflater: LayoutInflater, container: ViewGroup): ViewSurahBinding =
-        ViewSurahBinding.inflate(inflater, container, false)
+            ViewSurahBinding.inflate(inflater, container, false)
 
     override fun injectDependencies(core: CoreComponent) {
         DaggerSurahComponent
-            .builder()
-            .bindRouter(router)
-            .coreComponent(core)
-            .build()
-            .inject(this)
+                .builder()
+                .bindRouter(router)
+                .coreComponent(core)
+                .build()
+                .inject(this)
     }
 
     override fun beforeBindingView(binding: ViewSurahBinding) {
@@ -88,9 +92,9 @@ class SurahView(
     }
 
     override fun intents(): Flow<SurahIntent> =
-        flowOf(
-            SurahIntent.Initial(surahLocal.surahID, surahLocal.startingAyaOrder)
-        )
+            flowOf(
+                    SurahIntent.Initial(surahLocal.surahID, surahLocal.startingAyaOrder)
+            )
 
     override fun render(state: SurahState) {
         renderLoading(state.base)
@@ -108,7 +112,7 @@ class SurahView(
                     surahHeader {
                         id(it.rowId)
                         model(
-                            it
+                                it
                         )
                     }
                 }
@@ -119,19 +123,56 @@ class SurahView(
                         model(it)
                         mainAyaFontSize(state.mainAyaFontSize)
                         translationFontSize(state.translationFontSize)
+                        toolbarVisible(state.settingsState.ayaToolbarVisible)
+                        listener(::ayaClicks)
                     }
                 }
             }
 
             if (state.scrollToAya != null) {
                 addModelBuildListener(
-                    BuildFinishedScroller(
-                        state.scrollToAya.position,
-                        this,
-                        binding.ayaList
-                    )
+                        BuildFinishedScroller(
+                                state.scrollToAya.position,
+                                this,
+                                binding.ayaList
+                        )
                 )
             }
+        }
+    }
+
+    private fun ayaClicks(actions: SurahIntent.AyaActions) {
+        when (actions) {
+            is SurahIntent.AyaActions.Share -> {
+                shareAya(actions)
+            }
+        }
+    }
+
+    private fun shareAya(actions: SurahIntent.AyaActions.Share) {
+        ShareCompat.IntentBuilder.from(activity!!)
+                .setType("text/plain")
+                .setText(ayaToSharedMessage(actions.aya))
+                .startChooser()
+    }
+
+    private fun ayaToSharedMessage(model: AyaUIModel): String = buildString {
+        append(surahLocal.surahName)
+        append(" (")
+        append(NumberFormat.getInstance(languageConfigure.getCurrentLocale().locale).format(model.order))
+        append(") :")
+        appendLine()
+        appendLine()
+        append(model.content)
+        appendLine()
+
+        if (model.translation1 != null) {
+            appendLine()
+            append(model.translation1)
+        }
+        if (model.translation2 != null) {
+            appendLine()
+            append(model.translation2)
         }
     }
 }

@@ -14,5 +14,7 @@
 
   <string name="app_language">زبان برنامه</string>
 
+  <string name="title_aya_toolbar">نوار ابزار آیه</string>
+
   <string name="on_boarding_initialize_message">بارگذاری اولیه برنامه. لطفا صبور باشید.</string>
 </resources>

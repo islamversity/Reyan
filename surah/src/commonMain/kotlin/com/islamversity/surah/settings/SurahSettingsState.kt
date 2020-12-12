@@ -10,4 +10,5 @@ data class SurahSettingsState(
     val selectedSecondTranslationAyaCalligraphy : CalligraphyUIModel? = null,
     val quranTextFontSize : Int = QuranReadFontSize.DEFAULT.size,
     val translateTextFontSize : Int = QuranReadFontSize.DEFAULT.size,
+    val ayaToolbarVisible : Boolean = false
 )

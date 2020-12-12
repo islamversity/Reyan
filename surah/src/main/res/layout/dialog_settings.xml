@@ -1,31 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/dialog_container"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    android:layout_marginLeft="16dp"
-    android:layout_marginTop="8dp"
-    android:layout_marginRight="16dp"
-    android:layout_marginBottom="8dp"
+    android:paddingTop="@dimen/min_padding"
+    android:paddingBottom="@dimen/min_padding"
+    android:layout_marginHorizontal="@dimen/medium_margin"
     android:elevation="@dimen/dialog_elevation"
-    android:background="@drawable/dialog_bg"
-    android:minWidth="280dp"
-    android:orientation="vertical">
+    android:layout_gravity="center"
+    android:clipToPadding="false">
+
+  <LinearLayout
+      android:id="@+id/dialog_container"
+      android:layout_height="wrap_content"
+      android:layout_width="match_parent"
+      android:orientation="vertical">
 
 
-    <TextView
-        android:id="@+id/ayaFontSizeTitle"
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/ayaToolbarTitle"
         style="@style/Base.DialogWindowTitle.AppCompat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="14dp"
         android:layout_marginTop="14dp"
         android:layout_marginRight="24dp"
+        android:gravity="center_vertical"
+        android:text="@string/title_aya_toolbar"/>
+
+    <TextView
+        android:id="@+id/ayaFontSizeTitle"
+        style="@style/Base.DialogWindowTitle.AppCompat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginRight="24dp"
         android:layout_marginBottom="20dp"
         android:gravity="center_vertical"
-        android:text="@string/aya_font_size" />
+        android:text="@string/aya_font_size"/>
 
     <com.warkiz.widget.IndicatorSeekBar
         android:id="@+id/ayaFontSizeSeekBar"
@@ -41,19 +56,19 @@
         app:isb_thumb_color="@color/green_dark"
         app:isb_tick_texts_color="@color/green_dark"
         app:isb_track_background_color="@color/colorAccent"
-        app:isb_track_progress_color="@color/green_dark" />
+        app:isb_track_progress_color="@color/green_dark"/>
 
     <TextView
         android:id="@+id/transLateFontSizeTitle"
         style="@style/Base.DialogWindowTitle.AppCompat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="14dp"
+        android:layout_marginLeft="21dp"
         android:layout_marginTop="14dp"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="20dp"
         android:gravity="center_vertical"
-        android:text="@string/translate_font_size" />
+        android:text="@string/translate_font_size"/>
 
     <com.warkiz.widget.IndicatorSeekBar
         android:id="@+id/transLateFontSizeSeekBar"
@@ -69,7 +84,7 @@
         app:isb_thumb_color="@color/green_dark"
         app:isb_tick_texts_color="@color/green_dark"
         app:isb_track_background_color="@color/colorAccent"
-        app:isb_track_progress_color="@color/green_dark" />
+        app:isb_track_progress_color="@color/green_dark"/>
 
     <Space
         android:id="@+id/dismiss"
@@ -83,4 +98,6 @@
         android:layout_marginBottom="8dp"
         android:minWidth="64dp"/>
 
-</LinearLayout>
+  </LinearLayout>
+
+</ScrollView>

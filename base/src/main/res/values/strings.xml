@@ -14,6 +14,8 @@
 
   <string name="app_language">App Language</string>
 
+  <string name="title_aya_toolbar">Aya Toolbar</string>
+
   <string name="on_boarding_initialize_message">Initial loading of the program. Please be
     patient.</string>
 
