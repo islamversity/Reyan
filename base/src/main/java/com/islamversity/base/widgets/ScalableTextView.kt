@@ -7,6 +7,7 @@ import android.util.TypedValue
 import android.util.TypedValue.COMPLEX_UNIT_PX
 import androidx.annotation.StringRes
 import androidx.appcompat.widget.AppCompatTextView
+import com.google.android.material.textview.MaterialTextView
 import com.islamversity.base.R
 
 enum class FontSizeScale(
@@ -50,7 +51,7 @@ class ScalableTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     style: Int = 0
-) : AppCompatTextView(context, attrs, style) {
+) : MaterialTextView(context, attrs, style) {
 
     private val attrFontSize : Float = textSize
 
