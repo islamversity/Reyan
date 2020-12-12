@@ -10,6 +10,7 @@ import com.airbnb.epoxy.ModelProp
 import com.airbnb.epoxy.ModelView
 import com.islamversity.base.visible
 import com.islamversity.surah.R
+import com.islamversity.surah.SurahIntent
 import com.islamversity.surah.databinding.RowAyaBinding
 import com.islamversity.surah.model.AyaUIModel
 import com.islamversity.surah.model.SajdahTypeUIModel
@@ -24,11 +25,12 @@ class AyaView @JvmOverloads constructor(
 ) : LinearLayout(context, attributeSet) {
 
     private val binding = RowAyaBinding.inflate(LayoutInflater.from(context), this, true)
+    private lateinit var model : AyaUIModel
 
     @SuppressLint("SetTextI18n")
     @ModelProp
     fun model(surah: AyaUIModel) {
-
+        model = surah
         binding.ayaOrder.txtOrder.text = surah.order.toString()
         binding.tvAyaContent.text = surah.content
         binding.tvAyaTranslate1.text = surah.translation1
@@ -64,13 +66,18 @@ class AyaView @JvmOverloads constructor(
         binding.tvAyaTranslate2.textSize = size.toFloat()
     }
 
+    @ModelProp
+    fun toolbarVisible(visible : Boolean){
+        binding.ayaToolbar visible visible
+    }
+
     @CallbackProp
-    fun listener(listener: (() -> Unit)?) {
-        if (listener == null) {
-            binding.root.setOnClickListener(null)
+    fun listener(call: ((SurahIntent.AyaActions) -> Unit)?) {
+        if (call == null) {
+            binding.ivAyaShare.setOnClickListener(null)
         } else {
-            binding.root.setOnClickListener {
-                listener()
+            binding.ivAyaShare.setOnClickListener {
+                call(SurahIntent.AyaActions.Share(model))
             }
         }
     }
