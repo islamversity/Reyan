@@ -29,11 +29,7 @@ class TextSelectionView @JvmOverloads constructor(
 
     private val binding = ViewSelectionTextBinding.inflate(LayoutInflater.from(context), this, true)
     init {
-//     binding.root.setBackgroundColor(Color.RED)
-//        setBackgroundColor(Color.BLACK)
-//        layoutParams = ViewGroup.LayoutParams(50, WRAP_CONTENT)
         gravity = Gravity.CENTER
-
     }
 
     @TextProp
