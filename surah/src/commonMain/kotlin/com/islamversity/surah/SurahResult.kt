@@ -12,21 +12,25 @@ sealed class SurahResult : MviResult {
     data class Error(val err: BaseState.ErrorState) : SurahResult()
 
     data class Items(
-        val items: List<UIItem>
+            val items: List<UIItem>
     ) : SurahResult()
 
     data class ShowAyaNumber(
-        val position: Int,
-        val id: String,
-        val orderID: Long,
+            val position: Int,
+            val id: String,
+            val orderID: Long,
     ) : SurahResult()
 
     data class MainAyaFontSize(
-        val size: Int
+            val size: Int
     ) : SurahResult()
 
     data class TranslationFontSize(
-        val size: Int
+            val size: Int
+    ) : SurahResult()
+
+    data class AyaToolbarVisible(
+            val visible: Boolean
     ) : SurahResult()
 
     sealed class Settings : SurahResult() {

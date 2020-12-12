@@ -14,5 +14,6 @@
 
   <string name="app_language">لغة التطبيق</string>
 
+  <string name="title_aya_toolbar">شريط أدوات آية</string>
   <string name="on_boarding_initialize_message">التحميل الأولي للبرنامج. يرجى التحلي بالصبر.</string>
 </resources>

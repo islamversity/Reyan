@@ -12,54 +12,56 @@ import com.islamversity.surah.settings.SurahSettingsState
 import kotlinx.coroutines.flow.take
 
 class SurahPresenter(
-    processor: MviProcessor<SurahIntent, SurahResult>
+        processor: MviProcessor<SurahIntent, SurahResult>
 ) : BasePresenter<SurahIntent, SurahState, SurahResult>(
-    processor,
-    SurahState.idle()
+        processor,
+        SurahState.idle()
 ) {
 
     override fun filterIntent(): List<FlowBlock<SurahIntent, SurahIntent>> = listOf(
-        {
-            ofType<SurahIntent.Initial>().take(1)
-        },
-        {
-            notOfType(SurahIntent.Initial::class)
-        },
+            {
+                ofType<SurahIntent.Initial>().take(1)
+            },
+            {
+                notOfType(SurahIntent.Initial::class)
+            },
     )
 
     override fun reduce(preState: SurahState, result: SurahResult): SurahState =
-        when (result) {
-            SurahResult.LastStable ->
-                preState.copy(
-                    base = BaseState.stable(),
-                    scrollToAya = null
-                )
-            is SurahResult.Error ->
-                preState.copy(
-                    base = BaseState.withError(result.err)
-                )
-            SurahResult.Loading ->
-                preState.copy(
-                    base = BaseState.loading()
-                )
-            is SurahResult.Items ->
-                preState.copy(
-                    items = result.items
-                )
-            is SurahResult.ShowAyaNumber ->
-                preState.copy(
-                    scrollToAya = ScrollToAya(result.id, result.orderID, result.position)
-                )
+            when (result) {
+                SurahResult.LastStable ->
+                    preState.copy(
+                            base = BaseState.stable(),
+                            scrollToAya = null
+                    )
+                is SurahResult.Error ->
+                    preState.copy(
+                            base = BaseState.withError(result.err)
+                    )
+                SurahResult.Loading ->
+                    preState.copy(
+                            base = BaseState.loading()
+                    )
+                is SurahResult.Items ->
+                    preState.copy(
+                            items = result.items
+                    )
+                is SurahResult.ShowAyaNumber ->
+                    preState.copy(
+                            scrollToAya = ScrollToAya(result.id, result.orderID, result.position)
+                    )
 
-            is SurahResult.Settings ->
-                preState.copy(settingsState = settingsReducer(preState.settingsState, result))
-            is SurahResult.MainAyaFontSize ->
-                preState.copy(mainAyaFontSize = result.size)
-            is SurahResult.TranslationFontSize ->
-                preState.copy(translationFontSize = result.size)
-        }
+                is SurahResult.Settings ->
+                    preState.copy(settingsState = settingsReducer(preState.settingsState, result))
+                is SurahResult.MainAyaFontSize ->
+                    preState.copy(mainAyaFontSize = result.size)
+                is SurahResult.TranslationFontSize ->
+                    preState.copy(translationFontSize = result.size)
+                is SurahResult.AyaToolbarVisible ->
+                    preState.copy(settingsState = preState.settingsState.copy(ayaToolbarVisible = result.visible))
+            }
 
-    private val settingsReducer : (SurahSettingsState, SurahResult.Settings) -> SurahSettingsState = { preState, result ->
+    private val settingsReducer: (SurahSettingsState, SurahResult.Settings) -> SurahSettingsState = { preState, result ->
         when (result) {
             is SurahResult.Settings.TranslationCalligraphies ->
                 preState.copy(ayaCalligraphies = result.list)
