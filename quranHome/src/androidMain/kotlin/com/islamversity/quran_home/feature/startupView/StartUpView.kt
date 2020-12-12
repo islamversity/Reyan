@@ -42,7 +42,7 @@ class StartUpView : Controller(), CoroutineScope by MainScope() {
                 if (needs) {
                     router.setRoot(RouterTransaction.with(ControllerFactory.createController(Screens.OnBoarding(), app)))
                 }else{
-                    router.setRoot(RouterTransaction.with(ControllerFactory.createController(Screens.OnBoarding(), app)))
+                    router.setRoot(RouterTransaction.with(ControllerFactory.createController(Screens.Home(), app)))
                 }
             }
         }
