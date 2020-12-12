@@ -67,8 +67,13 @@ class OnBoardingView : CoroutineView<OnboardingViewBinding, OnBoardingState, OnB
         renderError(state.base)
         renderLoading(state.base)
 
-        binding.btnContinue.visibility = if (state.showContinueBtn) View.VISIBLE else View.INVISIBLE
         binding.pbLoadingBar.progress = state.loadingPercent
+        binding.progressPercentTextView.text = "${state.loadingPercent} %"
+        val isCompleted = state.loadingPercent == 100
+        binding.btnContinue.isEnabled = isCompleted
+        if (isCompleted){
+            binding.progressTitleTextView.text = applicationContext!!.getString(R.string.completed)
+        }
     }
 
     override fun intents(): Flow<OnBoardingIntent> =

@@ -4,4 +4,6 @@
     <string name="home_tab_surahs">Surah</string>
     <string name="home_tab_parts">Parts</string>
     <string name="lets_get_started">Continue</string>
+    <string name="loading">Loading...</string>
+    <string name="completed">Completed</string>
 </resources>
