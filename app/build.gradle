@@ -24,8 +24,8 @@ android {
         applicationId "com.islamversity.reyan"
         minSdkVersion GlobalVars.projectMinSdkVersion
         targetSdkVersion GlobalVars.projectTargetSdkVersion
-        versionCode 21000004
-        versionName "0.0.4"
+        versionCode 21010000
+        versionName "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

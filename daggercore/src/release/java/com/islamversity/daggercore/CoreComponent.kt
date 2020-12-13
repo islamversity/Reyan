@@ -1,5 +1,6 @@
 package com.islamversity.daggercore
 
+import com.islamversity.daggercore.modules.DatabaseFillerConfigModule
 import com.islamversity.daggercore.modules.DatabaseModule
 import com.islamversity.daggercore.modules.domain.DomainModule
 import com.islamversity.daggercore.modules.network.NetworkModule
@@ -14,6 +15,7 @@ import javax.inject.Singleton
         NetworkModule::class,
         DomainModule::class,
         DatabaseModule::class,
+        DatabaseFillerConfigModule::class,
     ]
 )
 interface CoreComponent : BaseComponent{
