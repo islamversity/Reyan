@@ -27,16 +27,8 @@ class DatabaseModule {
                 .callback(callback)
                 .build()
 
-        val openHelper =
-//            SQLiteCopyOpenHelperFactory(
-//            "Main.db.zip",
-//            null,
-//            null,
-//            frameworkFactory
-//        )
-                    FrameworkSQLiteOpenHelperFactory()
-                .create(config)
-
+        val openHelper = FrameworkSQLiteOpenHelperFactory()
+            .create(config)
 
         return AndroidSqliteDriver(
             openHelper = openHelper
@@ -45,30 +37,30 @@ class DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideDatabase(driver : SqlDriver) : Main =
+    fun provideDatabase(driver: SqlDriver): Main =
         createMainDB(driver)
 
     @Provides
-    fun provideSurahQueries(db : Main) : SurahQueries =
+    fun provideSurahQueries(db: Main): SurahQueries =
         db.surahQueries
 
     @Provides
-    fun provideAyaQueries(db : Main) : AyaQueries =
+    fun provideAyaQueries(db: Main): AyaQueries =
         db.ayaQueries
 
     @Provides
-    fun provideAyaContentQueries(db : Main) : AyaContentQueries =
+    fun provideAyaContentQueries(db: Main): AyaContentQueries =
         db.ayaContentQueries
 
     @Provides
-    fun provideCalligraphyQueries(db : Main) : CalligraphyQueries =
+    fun provideCalligraphyQueries(db: Main): CalligraphyQueries =
         db.calligraphyQueries
 
     @Provides
-    fun provideNameQueries(db : Main) : NameQueries =
+    fun provideNameQueries(db: Main): NameQueries =
         db.nameQueries
 
     @Provides
-    fun provideSettingsQueries(db : Main) : SettingsQueries =
+    fun provideSettingsQueries(db: Main): SettingsQueries =
         db.settingsQueries
 }
