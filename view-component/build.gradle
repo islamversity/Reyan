@@ -24,6 +24,8 @@ dependencies {
     implementation(project(Deps.Modules.domain))
 
     implementation Deps.Kotlin.jvmStd8
+    implementation Deps.Android.Support.design
+
 
     implementation Deps.Android.Support.recyclerView
     implementation Deps.Android.Tools.epoxy
