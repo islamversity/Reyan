@@ -4,7 +4,7 @@ import org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDepen
 
 object Versions {
 
-    val kotlin = "1.4.10"
+    val kotlin = "1.4.20"
     val detekt = "1.10.0"
     val androidXTest = "1.1.0"
     val supportJunitExt = "1.0.0"
@@ -216,7 +216,7 @@ object Deps {
         val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
         val flowBinding = "ru.ldralighieri.corbind:corbind:${Versions.flowBinding}"
         val turbine = "app.cash.turbine:turbine:0.2.1"
-        val coroutinesWorker = "com.autodesk:coroutineworker:0.6.2"
+        val coroutinesWorker = "com.autodesk:coroutineworker:0.6.3"
     }
 
     object SqlDelight {
