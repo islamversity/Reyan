@@ -25,8 +25,8 @@ android {
     applicationId "com.islamversity.reyan"
     minSdkVersion GlobalVars.projectMinSdkVersion
     targetSdkVersion GlobalVars.projectTargetSdkVersion
-    versionCode 21010000
-    versionName "1.0.0"
+    versionCode 21010001
+    versionName "1.0.1"
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables.useSupportLibrary = true
     buildConfigField "String", "YandexAPIKey", "\"${yandexAPIKey}\""
@@ -123,7 +123,6 @@ android {
 
 appmetrica {
   postApiKey = { applicationVariant -> yandexPostKey }
-  // or postApiKey = "Post Api key"
   enable = { applicationVariant -> true }    // Optional.
   mappingBuildTypes = ['release']
   offline = yandexPostKey.length() == 0
