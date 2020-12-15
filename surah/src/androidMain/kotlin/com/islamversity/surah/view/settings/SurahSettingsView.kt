@@ -16,6 +16,8 @@ import com.islamversity.surah.R
 import com.islamversity.surah.SurahIntent
 import com.islamversity.surah.databinding.DialogSettingsBinding
 import com.islamversity.surah.settings.SurahSettingsState
+import com.islamversity.view_component.optionselector.DismissListener
+import com.islamversity.view_component.optionselector.OptionSelector
 import com.warkiz.widget.IndicatorSeekBar
 import com.warkiz.widget.OnSeekChangeListener
 import com.warkiz.widget.SeekParams
@@ -23,26 +25,29 @@ import com.warkiz.widget.SeekParams
 typealias OnSettings = (SurahIntent.ChangeSettings) -> Unit
 
 class SurahSettingsView(
-        context: Context,
-        private val initialState: SurahSettingsState
+    context: Context,
+    private val initialState: SurahSettingsState
 ) {
 
-
-    private var binding: DialogSettingsBinding = DialogSettingsBinding.inflate(LayoutInflater
-            .from(context))
+    private var binding: DialogSettingsBinding = DialogSettingsBinding.inflate(
+        LayoutInflater
+            .from(context)
+    )
 
     val dialog = MaterialAlertDialogBuilder(context)
-            .setView(binding.root)
-            .setBackground(ContextCompat.getDrawable(context, R.drawable.dialog_bg))
-            .create()
-            .apply {
-                bindViews()
-            }
+        .setView(binding.root)
+        .setBackground(ContextCompat.getDrawable(context, R.drawable.dialog_bg))
+        .create()
+        .apply {
+            bindViews()
+        }
 
 
     var onSettings: OnSettings? = null
 
     private fun bindViews() {
+        val context = binding.root.context
+
         render(initialState)
 
         binding.ayaFontSizeSeekBar.onSeekChangeListener = object : OnSeekChangeListener {
@@ -97,9 +102,37 @@ class SurahSettingsView(
         binding.ayaToolbarTitle.setOnCheckedChangeListener { buttonView, isChecked ->
             onSettings?.invoke(SurahIntent.ChangeSettings.AyaToolbarVisibility(isChecked))
         }
+
+        binding.firstTranslationCalligraphy.setOnClickListener {
+            dismiss()
+            OptionSelector(context)
+                .options(initialState.ayaCalligraphies.map {
+                    it.name.takeIf { it.isNotBlank() }
+                        ?: binding.root.context.getString(R.string.setting_none_calligraphy_selected)
+                })
+                .dismissListener(object : DismissListener {
+                    override fun dismissSheet(position: Int) {
+                        onSettings?.invoke(SurahIntent.ChangeSettings.NewFirstTranslation(initialState.ayaCalligraphies[position]))
+                    }
+                }).show()
+        }
+
+        binding.secondTranslationCalligraphy.setOnClickListener {
+            dismiss()
+            OptionSelector(context)
+                .options(initialState.ayaCalligraphies.map {
+                    it.name.takeIf { it.isNotBlank() }
+                        ?: binding.root.context.getString(R.string.setting_none_calligraphy_selected)
+                })
+                .dismissListener(object : DismissListener {
+                    override fun dismissSheet(position: Int) {
+                        onSettings?.invoke(SurahIntent.ChangeSettings.NewSecondTranslation(initialState.ayaCalligraphies[position]))
+                    }
+                }).show()
+        }
     }
 
-    private fun hideSiblings(view : View){
+    private fun hideSiblings(view: View) {
         binding.dialogContainer.children.filter {
             it.id != view.id
         }.forEach {
@@ -111,14 +144,13 @@ class SurahSettingsView(
         dialog.show()
     }
 
-    fun setOnCancelListener(listener : DialogInterface.OnCancelListener){
+    fun setOnCancelListener(listener: DialogInterface.OnCancelListener) {
         dialog.setOnCancelListener(listener)
     }
 
-    fun dismiss(){
+    fun dismiss() {
         dialog.dismiss()
     }
-
 
 
     private fun render(state: SurahSettingsState) {
@@ -132,5 +164,13 @@ class SurahSettingsView(
         binding.transLateFontSizeSeekBar.setProgress(state.translateTextFontSize.toFloat())
 
         binding.ayaToolbarTitle.isChecked = state.ayaToolbarVisible
+
+        binding.firstTranslationCalligraphySubtitle.text =
+            state.selectedFirstTranslationAyaCalligraphy?.name
+                ?: binding.root.context.getString(R.string.aya_translation_not_chosen)
+
+        binding.secondTranslationCalligraphySubtitle.text =
+            state.selectedSecondTranslationAyaCalligraphy?.name
+                ?: binding.root.context.getString(R.string.aya_translation_not_chosen)
     }
 }

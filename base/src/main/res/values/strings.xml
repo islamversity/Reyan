@@ -19,4 +19,10 @@
   <string name="on_boarding_initialize_message">Initial loading of the program. Please be
     patient.</string>
 
+
+  <string name="firstTranslationCalligraphy">First Translation Calligraphy</string>
+  <string name="second_translation_calligraphy">Second Translation Calligraphy</string>
+
+  <string name="aya_translation_not_chosen">None</string>
+
 </resources>
