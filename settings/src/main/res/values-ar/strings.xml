@@ -2,15 +2,12 @@
 <resources>
     <string name="settings">إعدادات</string>
     <string name="surah_calligraphy">سورة الخط</string>
-    <string name="firstTranslationCalligraphy">أول خط ترجمة</string>
-    <string name="second_translation_calligraphy">ثانيا الخط الترجمة</string>
     <string name="calligraphy">فن الخط</string>
     <string name="font_size">حجم الخط</string>
     <string name="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</string>
     <string name="bismillah_translate">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</string>
     <string name="translate_text_size">حجم نص الترجمة</string>
     <string name="main_text_size">حجم النص الرئيسي</string>
-    <string name="aya_translation_not_chosen">لا شيئ</string>
     <string name="app_font_size">حجم خط التطبيق</string>
 
 </resources>

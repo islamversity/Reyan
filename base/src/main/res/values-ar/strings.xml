@@ -16,4 +16,9 @@
 
   <string name="title_aya_toolbar">شريط أدوات آية</string>
   <string name="on_boarding_initialize_message">التحميل الأولي للبرنامج. يرجى التحلي بالصبر.</string>
+
+  <string name="firstTranslationCalligraphy">أول خط ترجمة</string>
+  <string name="second_translation_calligraphy">ثانيا الخط الترجمة</string>
+
+  <string name="aya_translation_not_chosen">لا شيئ</string>
 </resources>
