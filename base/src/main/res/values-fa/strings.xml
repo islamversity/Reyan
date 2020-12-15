@@ -17,4 +17,10 @@
   <string name="title_aya_toolbar">نوار ابزار آیه</string>
 
   <string name="on_boarding_initialize_message">بارگذاری اولیه برنامه. لطفا صبور باشید.</string>
+
+  <string name="firstTranslationCalligraphy">رسم الخط ترجمه اول آیه</string>
+  <string name="second_translation_calligraphy">رسم الخط ترجمه دوم آیه</string>
+
+  <string name="aya_translation_not_chosen">هیچکدام</string>
+
 </resources>

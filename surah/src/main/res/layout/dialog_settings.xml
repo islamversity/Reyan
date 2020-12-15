@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:paddingTop="@dimen/min_padding"
     android:paddingBottom="@dimen/min_padding"
     android:layout_marginHorizontal="@dimen/medium_margin"
@@ -11,93 +11,161 @@
     android:layout_gravity="center"
     android:clipToPadding="false">
 
-  <LinearLayout
-      android:id="@+id/dialog_container"
-      android:layout_height="wrap_content"
-      android:layout_width="match_parent"
-      android:orientation="vertical">
-
-
-
-    <com.google.android.material.checkbox.MaterialCheckBox
-        android:id="@+id/ayaToolbarTitle"
-        style="@style/Base.DialogWindowTitle.AppCompat"
-        android:layout_width="match_parent"
+    <LinearLayout
+        android:id="@+id/dialog_container"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="14dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginRight="24dp"
-        android:gravity="center_vertical"
-        android:text="@string/title_aya_toolbar"/>
-
-    <TextView
-        android:id="@+id/ayaFontSizeTitle"
-        style="@style/Base.DialogWindowTitle.AppCompat"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="21dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="20dp"
-        android:gravity="center_vertical"
-        android:text="@string/aya_font_size"/>
+        android:orientation="vertical">
 
-    <com.warkiz.widget.IndicatorSeekBar
-        android:id="@+id/ayaFontSizeSeekBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="@dimen/medium_margin"
-        android:layout_marginRight="@dimen/medium_margin"
-        android:background="@drawable/dialog_bg"
-        app:isb_indicator_color="@color/green_dark"
-        app:isb_indicator_text_color="@android:color/white"
-        app:isb_show_indicator="circular_bubble"
-        app:isb_thumb_color="@color/green_dark"
-        app:isb_tick_texts_color="@color/green_dark"
-        app:isb_track_background_color="@color/colorAccent"
-        app:isb_track_progress_color="@color/green_dark"/>
+        <com.google.android.material.checkbox.MaterialCheckBox
+            android:id="@+id/ayaToolbarTitle"
+            style="@style/Base.DialogWindowTitle.AppCompat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="24dp"
+            android:gravity="center_vertical"
+            android:text="@string/title_aya_toolbar" />
 
-    <TextView
-        android:id="@+id/transLateFontSizeTitle"
-        style="@style/Base.DialogWindowTitle.AppCompat"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="21dp"
-        android:layout_marginTop="14dp"
-        android:layout_marginRight="24dp"
-        android:layout_marginBottom="20dp"
-        android:gravity="center_vertical"
-        android:text="@string/translate_font_size"/>
+        <TextView
+            android:id="@+id/ayaFontSizeTitle"
+            style="@style/Base.DialogWindowTitle.AppCompat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="21dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_vertical"
+            android:text="@string/aya_font_size" />
 
-    <com.warkiz.widget.IndicatorSeekBar
-        android:id="@+id/transLateFontSizeSeekBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginLeft="@dimen/medium_margin"
-        android:layout_marginRight="@dimen/medium_margin"
-        android:background="@drawable/dialog_bg"
-        app:isb_indicator_color="@color/green_dark"
-        app:isb_indicator_text_color="@android:color/white"
-        app:isb_show_indicator="circular_bubble"
-        app:isb_thumb_color="@color/green_dark"
-        app:isb_tick_texts_color="@color/green_dark"
-        app:isb_track_background_color="@color/colorAccent"
-        app:isb_track_progress_color="@color/green_dark"/>
+        <com.warkiz.widget.IndicatorSeekBar
+            android:id="@+id/ayaFontSizeSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/medium_margin"
+            android:layout_marginRight="@dimen/medium_margin"
+            android:background="@drawable/dialog_bg"
+            app:isb_indicator_color="@color/green_dark"
+            app:isb_indicator_text_color="@android:color/white"
+            app:isb_show_indicator="circular_bubble"
+            app:isb_thumb_color="@color/green_dark"
+            app:isb_tick_texts_color="@color/green_dark"
+            app:isb_track_background_color="@color/colorAccent"
+            app:isb_track_progress_color="@color/green_dark" />
 
-    <Space
-        android:id="@+id/dismiss"
-        android:layout_width="wrap_content"
-        android:layout_height="36dp"
-        android:layout_gravity="end|bottom"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:minWidth="64dp"/>
+        <TextView
+            android:id="@+id/transLateFontSizeTitle"
+            style="@style/Base.DialogWindowTitle.AppCompat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="21dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_vertical"
+            android:text="@string/translate_font_size" />
 
-  </LinearLayout>
+        <com.warkiz.widget.IndicatorSeekBar
+            android:id="@+id/transLateFontSizeSeekBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/medium_margin"
+            android:layout_marginRight="@dimen/medium_margin"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/dialog_bg"
+            app:isb_indicator_color="@color/green_dark"
+            app:isb_indicator_text_color="@android:color/white"
+            app:isb_show_indicator="circular_bubble"
+            app:isb_thumb_color="@color/green_dark"
+            app:isb_tick_texts_color="@color/green_dark"
+            app:isb_track_background_color="@color/colorAccent"
+            app:isb_track_progress_color="@color/green_dark" />
+
+        <LinearLayout
+            android:id="@+id/firstTranslationCalligraphy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:orientation="vertical">
+
+            <com.islamversity.base.widgets.ScalableTextView
+                android:id="@+id/firstTranslationCalligraphyTitle"
+                style="@style/Base.DialogWindowTitle.AppCompat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:layout_marginLeft="21dp"
+                android:layout_marginRight="24dp"
+                android:paddingBottom="@dimen/low_padding"
+                android:text="@string/firstTranslationCalligraphy"
+                tools:ignore="SpUsage" />
+
+            <com.islamversity.base.widgets.ScalableTextView
+                android:id="@+id/firstTranslationCalligraphySubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arabic_regular"
+                android:gravity="left"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingRight="@dimen/large_padding"
+                android:paddingBottom="@dimen/medium_padding"
+                android:textColor="@color/blackLight"
+                android:textSize="@dimen/large_text"
+                tools:ignore="RtlHardcoded,SpUsage"
+                tools:text="@string/firstTranslationCalligraphy" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/secondTranslationCalligraphy"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/secondTranslationCalligraphyTitle"
+                style="@style/Base.DialogWindowTitle.AppCompat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:layout_marginLeft="21dp"
+                android:layout_marginRight="24dp"
+                android:paddingBottom="@dimen/low_padding"
+                android:text="@string/second_translation_calligraphy"
+                tools:ignore="SpUsage" />
+
+            <TextView
+                android:id="@+id/secondTranslationCalligraphySubtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arabic_regular"
+                android:gravity="left"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingRight="@dimen/large_padding"
+                android:textColor="@color/blackLight"
+                android:textSize="@dimen/large_text"
+                tools:ignore="RtlHardcoded,SpUsage"
+                tools:text="@string/second_translation_calligraphy" />
+
+        </LinearLayout>
+
+        <Space
+            android:id="@+id/dismiss"
+            android:layout_width="wrap_content"
+            android:layout_height="36dp"
+            android:layout_gravity="end|bottom"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:minWidth="64dp" />
+
+    </LinearLayout>
 
 </ScrollView>

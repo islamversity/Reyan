@@ -167,8 +167,7 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
         firstTranslationCalligraphies = state.firstTranslationCalligraphies
         surahNameCalligraphies = state.secondSurahNameCalligraphies
         secondTranslationCalligraphies = state.secondTranslationCalligraphies
-        binding.secondTranslationCalligraphySubtitle.text =
-            state.selectedSecondTranslationCalligraphy?.name
+
         binding.secondTranslationCalligraphySubtitle.text =
             state.selectedSecondTranslationCalligraphy?.name
                 ?: binding.root.context.getString(R.string.aya_translation_not_chosen)
