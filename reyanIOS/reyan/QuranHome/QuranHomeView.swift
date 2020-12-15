@@ -14,8 +14,8 @@ struct QuranHomeView: View, Resolving {
         self.presenter = presenter
         self.surahListView = SurahListView(presenter: Resolver.resolve())
         
-        presenter.states().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
-        
+//        presenter.states().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
+//        
         let db : Main = resolver.resolve()
         let surahList = db.nameQueries.getAllNames().executeAsList()
         print("surahList count = \(surahList.count)")
@@ -34,15 +34,14 @@ struct QuranHomeView: View, Resolving {
                     
                     Image("ic_settings")
                         .resizable()
-                        .frame(width: 28, height: 28, alignment: .center)
+                        .frame(width: 24, height: 24, alignment: .center)
                         .position(.init(x: 18, y: 18))
                 }
                 .padding(.top, 40)
                 .fixedSize(horizontal: false, vertical: true)
                 
                 SearchBarView()
-                    .padding(.top, 50)
-                
+                    .padding(.top, 24)
                 
                 surahListView
 

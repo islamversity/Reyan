@@ -10,16 +10,18 @@ struct SurahListView : View {
     
     @ObservedObject public var flowCollector: SurahListStateCollector = SurahListStateCollector()
     var presenter : SurahListPresenter
+//    @State var uiState: SurahListState = SurahListState.Companion.idle(SurahListState.Companion.init())()
+    
     
     init(presenter : SurahListPresenter) {
         
         self.presenter = presenter
-//        presenter.states().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
+
+//        presenter.consumeStates().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
+
+        flowCollector.bindState(presenter: presenter)
         
-        IntropExtensionsKt.consume(presenter) { (MviViewState) in
-            print("SurahListStateCollector : states : value(as uiState) = \(String(describing: MviViewState))")
-        }
-//        presenter.states().collect(collector: <#T##FlowCollector#>, completionHandler: <#T##(KotlinUnit?, Error?) -> Void#>)
+   
         
         UITableView.appearance().backgroundColor = UIColor.clear
         UITableViewCell.appearance().backgroundColor = UIColor.clear
@@ -27,16 +29,19 @@ struct SurahListView : View {
     
     var body: some View {
             
+     
+        let  _ =  presenter.processIntents(intents: SurahListIntent.Initial.init())
+
         ZStack {
             Color.clear
             
             VStack {
                 
-                Button {
-                    presenter.processIntents(intents: SurahListIntent.Initial.init())
-                } label: {
-                    Text("sdfgdfg ")
-                }
+//                Button {
+//                    presenter.processIntents(intents: SurahListIntent.Initial.init())
+//                } label: {
+//                    Text("get Surah list")
+//                }
 
                 List {
                     ForEach(flowCollector.uiState.surahList, id: \.self) { item in
@@ -49,13 +54,12 @@ struct SurahListView : View {
                     .listRow()
                     .listRowBackground(Color.clear)
                 }
-
             }
-           
+        }
+        .onAppear{
+            presenter.processIntents(intents: SurahListIntent.Initial.init())
         }
     }
-    
-    
 }
 
 

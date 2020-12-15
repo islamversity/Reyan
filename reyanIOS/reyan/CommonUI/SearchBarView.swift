@@ -17,12 +17,13 @@ struct SearchBarView : View {
                 TextField("Type your search",text: $searchText)
 //                    .border(Color.blue, width: 0)
                     .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.white, lineWidth: 0))
-                    .padding()
-                    .font(.custom("Vazir", size: 20))
+                    .padding(.vertical, 10.0)
+                    .padding(.horizontal, 20.0)
+                    .font(.custom("Vazir", size: 16))
                 
                 Image("ic_search")
                     .resizable()
-                    .frame(width: 32, height: 32, alignment: .center)
+                    .frame(width: 24, height: 24, alignment: .center)
                     .padding(.trailing, 20)
 
             }
