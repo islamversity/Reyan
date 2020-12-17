@@ -32,7 +32,7 @@ SELECT id, orderIndex, surahId FROM aya;
 
 
 
-
+-- get by juz
 
 getAllAyaBySoraId:
 SELECT
@@ -130,9 +130,8 @@ ORDER BY aya.orderIndex ASC;
 
 
 
-
-
-getAllAyaBySoraOrder:
+-- get by juz
+getAllAyaByJuzOrder:
 SELECT
 aya.rowIndex,
 aya.id,
@@ -141,33 +140,91 @@ aya.surahId,
 ayaContent.content AS ayaText,
 aya.sajdahType,
 aya.juzOrderIndex,
-aya.hizbQuarterOrderIndex FROM aya
+aya.hizbQuarterOrderIndex,
+aya.hizbStart,
+aya.hizbEnding
+FROM aya
+
 
 LEFT JOIN aya_content ayaContent ON
 ayaContent.ayaId = aya.id
 AND
 ayaContent.calligraphy = :calligraphy
 
-WHERE aya.surahId IN (
-SELECT id FROM surah
-WHERE surah.orderIndex = :surahOrder
-)
+WHERE aya.juzOrderIndex = :juz
 
-ORDER BY aya.orderIndex ASC;
+ORDER BY aya.rowIndex ASC;
 
 
 
+getAllAyaWithTranslationByJuzOrder:
+SELECT
+aya.rowIndex,
+aya.id,
+aya.orderIndex,
+aya.surahId,
+ayaContent.content AS ayaText,
+translation.content AS translationText,
+aya.sajdahType,
+aya.juzOrderIndex,
+aya.hizbQuarterOrderIndex,
+aya.hizbStart,
+aya.hizbEnding
+FROM aya
 
-getAllAyaBySoraOrderAndCalligraphy:
-SELECT aya.id, aya.orderIndex, aya_content.content AS aya FROM aya
-LEFT JOIN aya_content ON
-aya_content.ayaId = aya.id
+
+LEFT JOIN aya_content ayaContent ON
+ayaContent.ayaId = aya.id
 AND
-aya_content.calligraphy IN (SELECT id FROM calligraphy WHERE code = :ayaCaligraphyCode)
-WHERE aya.surahId IN (
-SELECT id FROM surah
-WHERE surah.orderIndex = :surahOrder
-);
+ayaContent.calligraphy = :calligraphy
+
+LEFT JOIN aya_content translation ON
+translation.ayaId = aya.id
+AND
+translation.calligraphy = :translationCalligraphy
+
+WHERE aya.juzOrderIndex = :juz
+
+ORDER BY aya.rowIndex ASC;
+
+
+
+
+getAllAyaWith2TranslationByJuzOrder:
+SELECT
+aya.rowIndex,
+aya.id,
+aya.orderIndex,
+aya.surahId,
+ayaContent.content AS ayaText,
+translation.content AS translationText,
+translation2.content AS translation2Text,
+aya.sajdahType,
+aya.juzOrderIndex,
+aya.hizbQuarterOrderIndex,
+aya.hizbStart,
+aya.hizbEnding
+FROM aya
+
+
+LEFT JOIN aya_content ayaContent ON
+ayaContent.ayaId = aya.id
+AND
+ayaContent.calligraphy = :calligraphy
+
+LEFT JOIN aya_content translation ON
+translation.ayaId = aya.id
+AND
+translation.calligraphy = :translationCalligraphy
+
+LEFT JOIN aya_content translation2 ON
+translation2.ayaId = aya.id
+AND
+translation2.calligraphy = :translation2Calligraphy
+
+WHERE aya.juzOrderIndex = :juz
+
+ORDER BY aya.rowIndex ASC;
 
 
 

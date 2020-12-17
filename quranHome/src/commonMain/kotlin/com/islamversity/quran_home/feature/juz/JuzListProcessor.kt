@@ -46,11 +46,11 @@ class JuzListProcessor(
                 it.action.juz
             }
             .map {
-                Screens.Surah(SurahLocalModel(
-                    it.startingSurahId,
-                    it.startingSurahName,
-                    it.startingAyaOrder,
-                ))
+                Screens.Surah(
+                    SurahLocalModel.FullJuz(
+                        juzOrder = it.number
+                    )
+                )
             }
             .navigateTo(navigator)
     }

@@ -6,14 +6,14 @@ import com.islamversity.domain.model.CalligraphyId
 import com.islamversity.domain.model.surah.SurahID
 import com.islamversity.domain.model.surah.SurahRepoModel
 import com.islamversity.domain.repo.SettingRepo
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.combineTransform
-import kotlinx.coroutines.flow.flatMapMerge
+import kotlinx.coroutines.flow.*
 
 interface GetSurahUsecase {
     fun getSurahs(): Flow<List<SurahRepoModel>>
 
     fun getSurah(id: SurahID): Flow<SurahRepoModel?>
+
+    fun getAll(ids: List<SurahID>): Flow<List<SurahRepoModel>>
 }
 
 class GetSurahUsecaseImpl(
@@ -22,21 +22,42 @@ class GetSurahUsecaseImpl(
     private val calligraphyDS: CalligraphyLocalDataSource,
 ) : GetSurahUsecase {
     override fun getSurahs() =
-        calligraphyDS.getArabicSurahCalligraphy().combineTransform(settingRepo.getSecondarySurahNameCalligraphy()) { arabic, main ->
-            emit(arabic to main)
-            Logger.log {
-                "GetSurah" + arabic.toString() + " - " + main.toString()
+        calligraphyDS.getArabicSurahCalligraphy()
+            .combineTransform(settingRepo.getSecondarySurahNameCalligraphy()) { arabic, main ->
+                emit(arabic to main)
             }
-        }
-            .flatMapMerge {
+            .onEach {
+                Logger.log {
+                    "GetSurah" + it.first.toString() + " - " + it.second.toString()
+                }
+            }
+            .flatMapLatest {
                 surahRepo.getAllSurah(arabicCalligraphy = CalligraphyId(it.first.id.id), mainCalligraphy = it.second.id)
             }
 
     override fun getSurah(id: SurahID): Flow<SurahRepoModel?> =
-        calligraphyDS.getArabicSurahCalligraphy().combineTransform(settingRepo.getSecondarySurahNameCalligraphy()) { arabic, main ->
-            emit(arabic to main)
-        }
-            .flatMapMerge {
-                surahRepo.getSurah(id, arabicCalligraphy = CalligraphyId(it.first.id.id), mainCalligraphy = it.second.id)
+        calligraphyDS.getArabicSurahCalligraphy()
+            .combineTransform(settingRepo.getSecondarySurahNameCalligraphy()) { arabic, main ->
+                emit(arabic to main)
+            }
+            .flatMapLatest {
+                surahRepo.getSurah(
+                    id,
+                    arabicCalligraphy = CalligraphyId(it.first.id.id),
+                    mainCalligraphy = it.second.id
+                )
+            }
+
+    override fun getAll(ids: List<SurahID>): Flow<List<SurahRepoModel>> =
+        calligraphyDS.getArabicSurahCalligraphy()
+            .combineTransform(settingRepo.getSecondarySurahNameCalligraphy()) { arabic, main ->
+                emit(arabic to main)
+            }
+            .flatMapLatest {
+                surahRepo.getAll(
+                    ids = ids,
+                    arabicCalligraphy = CalligraphyId(it.first.id.id),
+                    mainCalligraphy = it.second.id
+                )
             }
 }

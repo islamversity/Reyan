@@ -48,7 +48,29 @@ interface AyaLocalDataSource {
         context: CoroutineContext = Dispatchers.Default
     ): Flow<Aya?>
 
-    fun getJuz(surahNameCalligraphy: CalligraphyId, context: CoroutineContext = Dispatchers.Default): Flow<List<JuzEntity>>
+    fun getJuz(
+        surahNameCalligraphy: CalligraphyId,
+        context: CoroutineContext = Dispatchers.Default
+    ): Flow<List<JuzEntity>>
+
+    fun observeAllAyasForJuz(
+        juzOrder: Juz, calligraphy: CalligraphyId, context: CoroutineContext = Dispatchers.Default
+    ): Flow<List<Aya>>
+
+    fun observeAllAyasWithTranslationForJuz(
+        juzOrder: Juz,
+        calligraphy: CalligraphyId,
+        translationCalligraphy: CalligraphyId,
+        context: CoroutineContext = Dispatchers.Default
+    ): Flow<List<Aya>>
+
+    fun observeAllAyasWith2TranslationForJuz(
+        juzOrder: Juz,
+        calligraphy: CalligraphyId,
+        translationCalligraphy: CalligraphyId,
+        translation2Calligraphy: CalligraphyId,
+        context: CoroutineContext = Dispatchers.Default
+    ): Flow<List<Aya>>
 }
 
 const val NUMBER_OF_HIZB_IN_EACH_JUZ_WITH_START_AND_END = 16
@@ -104,12 +126,12 @@ class AyaLocalDataSourceImpl(
         ayaQueries.getAllAyaBySoraId(
             calligraphy,
             surahId
-        ) { rowIndex, id, orderIndex, surahId, ayaText, sajdahType, juzOrderIndex, hizbQuarterOrderIndex, startOfHizb, endingOfHizb ->
+        ) { rowIndex, id, orderIndex, dbSurahId, ayaText, sajdahType, juzOrderIndex, hizbQuarterOrderIndex, startOfHizb, endingOfHizb ->
             ayaMapper(
                 rowIndex,
                 id,
                 orderIndex,
-                surahId,
+                dbSurahId,
                 ayaText,
                 null,
                 null,
@@ -133,12 +155,12 @@ class AyaLocalDataSourceImpl(
             calligraphy,
             translationCalligraphy,
             surahId
-        ) { rowIndex, id, orderIndex, surahId, ayaText, translation, sajdahType, juzOrderIndex, hizbQuarterOrderIndex, startOfHizb, endingOfHizb ->
+        ) { rowIndex, id, orderIndex, dbSurahId, ayaText, translation, sajdahType, juzOrderIndex, hizbQuarterOrderIndex, startOfHizb, endingOfHizb ->
             ayaMapper(
                 rowIndex,
                 id,
                 orderIndex,
-                surahId,
+                dbSurahId,
                 ayaText,
                 translation,
                 null,
@@ -164,6 +186,93 @@ class AyaLocalDataSourceImpl(
             translationCalligraphy,
             translation2Calligraphy,
             surahId
+        ) { rowIndex, id, orderIndex, dbSurahId, ayaText, translation, translation2, sajdahType, juzOrderIndex, hizbQuarterOrderIndex, startOfHizb, endingOfHizb ->
+            ayaMapper(
+                rowIndex,
+                id,
+                orderIndex,
+                dbSurahId,
+                ayaText,
+                translation,
+                translation2,
+                sajdahType,
+                juzOrderIndex,
+                hizbQuarterOrderIndex,
+                startOfHizb,
+                endingOfHizb,
+            )
+        }
+            .asFlow()
+            .mapToList(context)
+
+    override fun observeAllAyasForJuz(
+        juzOrder: Juz,
+        calligraphy: CalligraphyId,
+        context: CoroutineContext
+    ): Flow<List<Aya>> =
+        ayaQueries.getAllAyaByJuzOrder(
+            calligraphy,
+            juzOrder
+        ) { rowIndex, id, orderIndex, surahId, ayaText, sajdahType, juzOrderIndex, hizbQuarterOrderIndex, startOfHizb, endingOfHizb ->
+            ayaMapper(
+                rowIndex,
+                id,
+                orderIndex,
+                surahId,
+                ayaText,
+                null,
+                null,
+                sajdahType,
+                juzOrderIndex,
+                hizbQuarterOrderIndex,
+                startOfHizb,
+                endingOfHizb
+            )
+        }
+            .asFlow()
+            .mapToList(context)
+
+    override fun observeAllAyasWithTranslationForJuz(
+        juzOrder: Juz,
+        calligraphy: CalligraphyId,
+        translationCalligraphy: CalligraphyId,
+        context: CoroutineContext
+    ): Flow<List<Aya>> =
+        ayaQueries.getAllAyaWithTranslationByJuzOrder(
+            calligraphy,
+            translationCalligraphy,
+            juzOrder
+        ) { rowIndex, id, orderIndex, surahId, ayaText, translation, sajdahType, juzOrderIndex, hizbQuarterOrderIndex, startOfHizb, endingOfHizb ->
+            ayaMapper(
+                rowIndex,
+                id,
+                orderIndex,
+                surahId,
+                ayaText,
+                translation,
+                null,
+                sajdahType,
+                juzOrderIndex,
+                hizbQuarterOrderIndex,
+                startOfHizb,
+                endingOfHizb,
+            )
+        }
+            .asFlow()
+            .mapToList(context)
+
+    override fun observeAllAyasWith2TranslationForJuz(
+        juzOrder: Juz,
+        calligraphy: CalligraphyId,
+        translationCalligraphy: CalligraphyId,
+        translation2Calligraphy: CalligraphyId,
+        context: CoroutineContext
+    ): Flow<List<Aya>> =
+        ayaQueries.getAllAyaWith2TranslationByJuzOrder(
+            calligraphy,
+            translationCalligraphy,
+            translation2Calligraphy,
+            juzOrder
         ) { rowIndex, id, orderIndex, surahId, ayaText, translation, translation2, sajdahType, juzOrderIndex, hizbQuarterOrderIndex, startOfHizb, endingOfHizb ->
             ayaMapper(
                 rowIndex,

@@ -16,7 +16,7 @@ struct SurahListView : View {
         self.presenter = presenter
 //        presenter.states().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
         
-        IntropExtensionsKt.int(presenter) { (MviViewState) in
+        IntropExtensionsKt.consume(presenter) { (MviViewState) in
             print("SurahListStateCollector : states : value(as uiState) = \(String(describing: MviViewState))")
         }
 //        presenter.states().collect(collector: <#T##FlowCollector#>, completionHandler: <#T##(KotlinUnit?, Error?) -> Void#>)
