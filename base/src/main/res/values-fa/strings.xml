@@ -23,4 +23,10 @@
 
   <string name="aya_translation_not_chosen">هیچکدام</string>
 
+  <string name="search">جست‌جو</string>
+  <string name="home_tab_surahs">سوره</string>
+  <string name="home_tab_parts">جز</string>
+  <string name="lets_get_started">ادامه</string>
+  <string name="loading">درحال بارگذاری</string>
+  <string name="completed">تمام شد</string>
 </resources>

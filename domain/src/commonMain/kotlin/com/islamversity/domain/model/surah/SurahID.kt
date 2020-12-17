@@ -2,7 +2,10 @@ package com.islamversity.domain.model.surah
 
 import com.islamversity.db.model.SurahId
 
-class SurahID(val id: String)
+data class SurahID(val id: String)
 
 fun SurahID.toEntity() : SurahId =
     SurahId(id)
+
+fun SurahId.toRepo() : SurahID =
+    SurahID(id)

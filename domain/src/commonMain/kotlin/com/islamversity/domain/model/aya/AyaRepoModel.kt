@@ -1,5 +1,8 @@
 package com.islamversity.domain.model.aya
 
+import com.islamversity.domain.model.surah.SurahID
+
+
 data class AyaRepoModel(
     val id : AyaID,
     val content : String,
@@ -9,7 +12,8 @@ data class AyaRepoModel(
     val juz: Long,
     val hizb : Long,
     val sajdahType : SajdahTypeRepoModel,
-    val start : StartPartition?
+    val start : StartPartition?,
+    val surahId: SurahID
 )
 
 enum class StartPartition{

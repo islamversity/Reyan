@@ -43,8 +43,6 @@ abstract class BaseApp : Application(), CoreComponentProvider {
             .build()
         // Initializing the AppMetrica SDK.
         YandexMetrica.activate(applicationContext, config)
-        // Automatic tracking of user activity.
-        YandexMetrica.enableActivityAutoTracking(this)
 
         Logger.init(listOf(LogcatLogger()))
 

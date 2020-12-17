@@ -43,7 +43,7 @@ class SearchProcessor(
                 it.action.selectedItem
             }
             .map {
-                SurahLocalModel(
+                SurahLocalModel.FullSurah(
                     surahID = it.id.id,
                     surahName = it.arabicName,
                     startingAyaOrder = 0,

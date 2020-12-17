@@ -9,6 +9,7 @@ kotlin {
     sourceSets["commonMain"].dependencies {
         implementation(kotlin(Deps.Kotlin.common))
         implementation(Deps.Coroutines.common)
+        implementation(Deps.Coroutines.coroutinesWorker)
         implementation(Deps.Tools.logger)
         implementation(Deps.Tools.statelyConcurrency)
     }

@@ -14,7 +14,7 @@ struct QuranHomeView: View, Resolving {
         self.presenter = presenter
         self.surahListView = SurahListView(presenter: Resolver.resolve())
         
-        presenter.states().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
+//        presenter.states().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
         
         let db : Main = resolver.resolve()
         let surahList = db.nameQueries.getAllNames().executeAsList()
