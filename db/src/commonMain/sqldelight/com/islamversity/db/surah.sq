@@ -52,30 +52,36 @@ AND
 mainName.calligraphy = :mainCalligraphy;
 
 
-
-
-
-
-getSurahWithOrder:
+getAllSurahWithIds:
 SELECT
 surah.rowIndex,
 surah.id,
 surah.orderIndex,
-surahName.content AS name,
+arabicName.content AS arabicName,
+mainName.content AS mainName,
 revealFlag,
-bismillahFlag
+bismillahFlag,
+(
+  SELECT aya.orderIndex
+  FROM aya
+  WHERE aya.surahId = surah.id
+  ORDER BY aya.orderIndex DESC
+  LIMIT 1
+) ayaCount
+
 FROM surah
 
-LEFT JOIN name surahName ON
-surahName.rowId = surah.id
+LEFT JOIN name arabicName ON
+arabicName.rowId = surah.id
 AND
-surahName.calligraphy = :calligraphyId
+arabicName.calligraphy = :arabicCalligraphy
 
-WHERE surah.orderIndex = :soraOrder;
+LEFT JOIN name mainName ON
+mainName.rowId = surah.id
+AND
+mainName.calligraphy = :mainCalligraphy
 
-
-
-
+WHERE surah.id IN :ids;
 
 
 

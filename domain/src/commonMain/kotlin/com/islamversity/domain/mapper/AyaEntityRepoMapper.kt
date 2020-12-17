@@ -7,6 +7,7 @@ import com.islamversity.domain.model.aya.AyaID
 import com.islamversity.domain.model.aya.AyaRepoModel
 import com.islamversity.domain.model.aya.SajdahTypeRepoModel
 import com.islamversity.domain.model.aya.StartPartition
+import com.islamversity.domain.model.surah.toRepo
 
 const val NUMBER_OF_HIZB_IN_JUZ = 8
 
@@ -21,7 +22,8 @@ class AyaEntityRepoMapper : Mapper<Aya, AyaRepoModel> {
             item.juz.value,
             item.hizb.value,
             mapSajdahType(item.sajdahType),
-            item.startPartition()
+            item.startPartition(),
+            item.surahId.toRepo()
         )
 
     private fun mapSajdahType(sajdahTypeFlag: SajdahTypeFlag?): SajdahTypeRepoModel =

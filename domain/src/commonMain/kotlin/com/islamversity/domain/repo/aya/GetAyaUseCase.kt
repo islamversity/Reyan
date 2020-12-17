@@ -14,6 +14,8 @@ import kotlinx.coroutines.flow.flowOf
 
 interface GetAyaUseCase {
     fun observeAyaMain(surahID: SurahID): Flow<List<AyaRepoModel>>
+
+    fun observeAyaForJuz(juz: Long): Flow<List<AyaRepoModel>>
 }
 
 class GetAyaUseCaseImpl(
@@ -49,6 +51,37 @@ class GetAyaUseCaseImpl(
 
                 } else {
                     ayaListRepo.observeAllAyas(surahID, main.id)
+                }
+            }
+
+    override fun observeAyaForJuz(juz: Long): Flow<List<AyaRepoModel>> =
+        combine(
+            settingRepo.getFirstAyaTranslationCalligraphy(),
+            settingRepo.getSecondAyaTranslationCalligraphy(),
+            calligraphyRepo.getMainAyaCalligraphy(),
+        ) { first, second, main ->
+            val firstAndSecond = first to second
+            firstAndSecond to main
+        }
+            .flatMapLatest { firstAndSecondAndMain ->
+                val firstAndSecond = firstAndSecondAndMain.first
+                val main = firstAndSecondAndMain.second
+
+                if (firstAndSecond.first is SettingsCalligraphy.Selected && firstAndSecond.second is SettingsCalligraphy.Selected) {
+                    val firstCall = firstAndSecond.first as SettingsCalligraphy.Selected
+                    val secondCall = firstAndSecond.second as SettingsCalligraphy.Selected
+                    ayaListRepo.observeWith2TranslationAllAyasForJuz(juz, main.id, firstCall.cal.id, secondCall.cal.id)
+
+                } else if (firstAndSecond.first is SettingsCalligraphy.Selected) {
+                    val firstCall = firstAndSecond.first as SettingsCalligraphy.Selected
+                    ayaListRepo.observeWithTranslationAllAyasForJuz(juz, main.id, firstCall.cal.id)
+
+                } else if (firstAndSecond.second is SettingsCalligraphy.Selected) {
+                    val secondCall = firstAndSecond.second as SettingsCalligraphy.Selected
+                    ayaListRepo.observeWithTranslationAllAyasForJuz(juz, main.id, secondCall.cal.id)
+
+                } else {
+                    ayaListRepo.observeAllAyasForJuz(juz, main.id)
                 }
             }
 }

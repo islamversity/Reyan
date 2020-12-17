@@ -1,13 +1,13 @@
 package com.islamversity.surah
 
 import com.islamversity.core.mvi.MviIntent
+import com.islamversity.navigation.model.SurahLocalModel
 import com.islamversity.surah.model.AyaUIModel
 import com.islamversity.surah.model.CalligraphyUIModel
 
 sealed class SurahIntent : MviIntent {
     data class Initial(
-            val surahId: String,
-            val startingAyaPosition: Long,
+            val localModel: SurahLocalModel
     ) : SurahIntent()
 
     sealed class ChangeSettings : SurahIntent() {

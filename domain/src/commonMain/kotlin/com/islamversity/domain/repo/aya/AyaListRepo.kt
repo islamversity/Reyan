@@ -4,6 +4,7 @@ import com.islamversity.core.Mapper
 import com.islamversity.core.mapListWith
 import com.islamversity.db.datasource.AyaLocalDataSource
 import com.islamversity.db.model.Aya
+import com.islamversity.db.model.Juz
 import com.islamversity.domain.model.CalligraphyId
 import com.islamversity.domain.model.aya.AyaRepoModel
 import com.islamversity.domain.model.surah.SurahID
@@ -23,6 +24,21 @@ interface AyaListRepo {
         mainAyaCalligraphy: CalligraphyId,
         translationCalligraphy: CalligraphyId,
         translation2Calligraphy: CalligraphyId,
+    ): Flow<List<AyaRepoModel>>
+
+    fun observeAllAyasForJuz(juz: Long, calligraphyId: CalligraphyId): Flow<List<AyaRepoModel>>
+
+    fun observeWithTranslationAllAyasForJuz(
+        juz: Long,
+        mainAyaCalligraphy: CalligraphyId,
+        translationCalligraphy: CalligraphyId
+    ): Flow<List<AyaRepoModel>>
+
+    fun observeWith2TranslationAllAyasForJuz(
+        juz: Long,
+        mainAyaCalligraphy: CalligraphyId,
+        translationCalligraphy: CalligraphyId,
+        translation2Calligraphy: CalligraphyId
     ): Flow<List<AyaRepoModel>>
 }
 
@@ -58,6 +74,39 @@ class AyaListRepoImpl(
     ): Flow<List<AyaRepoModel>> =
         dataSource.observeAllAyasWith2TranslationForSora(
             id.toEntity(),
+            mainAyaCalligraphy.toEntity(),
+            translationCalligraphy.toEntity(),
+            translation2Calligraphy.toEntity(),
+        )
+            .mapListWith(ayaMapper)
+
+    override fun observeAllAyasForJuz(
+        juz: Long,
+        calligraphyId: CalligraphyId
+    ): Flow<List<AyaRepoModel>> =
+        dataSource.observeAllAyasForJuz(Juz(juz), calligraphyId.toEntity())
+            .mapListWith(ayaMapper)
+
+    override fun observeWithTranslationAllAyasForJuz(
+        juz: Long,
+        mainAyaCalligraphy: CalligraphyId,
+        translationCalligraphy: CalligraphyId,
+    ): Flow<List<AyaRepoModel>> =
+        dataSource.observeAllAyasWithTranslationForJuz(
+            Juz(juz),
+            mainAyaCalligraphy.toEntity(),
+            translationCalligraphy.toEntity()
+        )
+            .mapListWith(ayaMapper)
+
+    override fun observeWith2TranslationAllAyasForJuz(
+        juz: Long,
+        mainAyaCalligraphy: CalligraphyId,
+        translationCalligraphy: CalligraphyId,
+        translation2Calligraphy: CalligraphyId
+    ): Flow<List<AyaRepoModel>> =
+        dataSource.observeAllAyasWith2TranslationForJuz(
+            Juz(juz),
             mainAyaCalligraphy.toEntity(),
             translationCalligraphy.toEntity(),
             translation2Calligraphy.toEntity(),

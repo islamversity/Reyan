@@ -16,7 +16,17 @@ import kotlinx.coroutines.flow.Flow
 interface SurahRepo {
     fun getAllSurah(arabicCalligraphy: CalligraphyId, mainCalligraphy: CalligraphyId): Flow<List<SurahRepoModel>>
 
-    fun getSurah(surahId: SurahID, arabicCalligraphy: CalligraphyId, mainCalligraphy: CalligraphyId): Flow<SurahRepoModel?>
+    fun getAll(
+        ids: List<SurahID>,
+        arabicCalligraphy: CalligraphyId,
+        mainCalligraphy: CalligraphyId
+    ): Flow<List<SurahRepoModel>>
+
+    fun getSurah(
+        surahId: SurahID,
+        arabicCalligraphy: CalligraphyId,
+        mainCalligraphy: CalligraphyId
+    ): Flow<SurahRepoModel?>
 }
 
 class SurahRepoImpl(
@@ -24,11 +34,26 @@ class SurahRepoImpl(
     private val twoNameMapper: Mapper<SurahWithTwoName, SurahRepoModel>,
 ) : SurahRepo {
 
-    override fun getAllSurah(arabicCalligraphy: CalligraphyId, mainCalligraphy: CalligraphyId): Flow<List<SurahRepoModel>> =
+    override fun getAllSurah(
+        arabicCalligraphy: CalligraphyId,
+        mainCalligraphy: CalligraphyId
+    ): Flow<List<SurahRepoModel>> =
         dataSource.observeAllSurahs(arabicCalligraphy.toEntity(), mainCalligraphy.toEntity())
             .mapListWith(twoNameMapper)
 
-    override fun getSurah(surahId: SurahID, arabicCalligraphy: CalligraphyId, mainCalligraphy: CalligraphyId): Flow<SurahRepoModel?> =
+    override fun getAll(
+        ids: List<SurahID>,
+        arabicCalligraphy: CalligraphyId,
+        mainCalligraphy: CalligraphyId
+    ): Flow<List<SurahRepoModel>> =
+        dataSource.observeAllSurahs(ids.map { it.toEntity() }, arabicCalligraphy.toEntity(), mainCalligraphy.toEntity())
+            .mapListWith(twoNameMapper)
+
+    override fun getSurah(
+        surahId: SurahID,
+        arabicCalligraphy: CalligraphyId,
+        mainCalligraphy: CalligraphyId
+    ): Flow<SurahRepoModel?> =
         dataSource.getSurahWithId(surahId.toEntity(), arabicCalligraphy.toEntity(), mainCalligraphy.toEntity())
             .mapWithNullable(twoNameMapper)
 }

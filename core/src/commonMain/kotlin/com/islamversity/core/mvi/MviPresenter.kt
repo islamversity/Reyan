@@ -1,4 +1,3 @@
-
 package com.islamversity.core.mvi
 
 import com.islamversity.core.FlowBlock
@@ -26,7 +25,7 @@ interface MviPresenter<I : MviIntent, S : MviViewState> {
     fun receiveStates(): Flow<S>
 
     //can be collected only once
-    fun consumeStates() : Flow<S>
+    fun consumeStates(): Flow<S>
 
     fun close() {
     }
@@ -45,7 +44,7 @@ abstract class BasePresenter<I : MviIntent, S : MviViewState, R : MviResult>(
     }
 
     private val intents = MutableSharedFlow<I>(0, 10)
-    private val states : Flow<S> = compose()
+    private val states: Flow<S> = compose()
     private val receiveStates: SharedFlow<S> by lazy {
         compose().shareIn(uiScope, SharingStarted.Eagerly, 1)
     }
