@@ -13,7 +13,7 @@ internal class AppDBConfig(
 ) : DatabaseFileConfig {
     override val assetVersion: Int = 1
 
-    override val arabicTextCalligraphy: Calligraphy =
+    override fun arabicTextCalligraphy(): Calligraphy =
         Calligraphy(
             0,
             CalligraphyId(generateRandomUUID()),
@@ -23,7 +23,7 @@ internal class AppDBConfig(
             com.islamversity.db.model.Calligraphy(LanguageCode("ar"), CalligraphyName("simple"))
         )
 
-    override val englishTextCalligraphy: Calligraphy =
+    override fun englishTextCalligraphy(): Calligraphy =
         Calligraphy(
             0,
             CalligraphyId(generateRandomUUID()),
@@ -32,7 +32,7 @@ internal class AppDBConfig(
             "English-Yusuf Ali",
             com.islamversity.db.model.Calligraphy(LanguageCode("en"), CalligraphyName("Abdullah Yusuf Ali"))
         )
-    override val farsiTextCalligraphy: Calligraphy =
+    override fun farsiTextCalligraphy(): Calligraphy =
         Calligraphy(
             0,
             CalligraphyId(generateRandomUUID()),

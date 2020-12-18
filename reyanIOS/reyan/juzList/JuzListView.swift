@@ -15,7 +15,7 @@ struct JuzListView : View {
     init(presenter : JuzListPresenter) {
 
         self.presenter = presenter
-        presenter.states().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
+//        presenter.states().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
 
         // presenter.processIntents(intents: SurahListIntent.Initial.init())
 

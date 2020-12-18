@@ -11,4 +11,7 @@
     <string name="title_font_size_normal">إفتراضي</string>
     <string name="title_font_size_Large">كبير</string>
     <string name="title_font_size_x_Large">أكبر</string>
+
+    <string name="app_language">لغة التطبيق</string>
+
 </resources>

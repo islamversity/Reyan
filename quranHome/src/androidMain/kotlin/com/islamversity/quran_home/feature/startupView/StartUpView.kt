@@ -8,12 +8,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import com.bluelinelabs.conductor.Controller
 import com.bluelinelabs.conductor.RouterTransaction
 import com.islamversity.core.Logger
 import com.islamversity.daggercore.coreComponent
 import com.islamversity.navigation.ControllerFactory
 import com.islamversity.navigation.Screens
+import com.islamversity.quran_home.R
 import kotlinx.coroutines.*
 
 class StartUpView : Controller(), CoroutineScope by MainScope() {
@@ -25,7 +27,7 @@ class StartUpView : Controller(), CoroutineScope by MainScope() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup, savedViewState: Bundle?): View =
         View(container.context).also {
-            it.background = ColorDrawable(Color.TRANSPARENT)
+            it.background = ContextCompat.getDrawable(container.context, R.drawable.immersive_background)
         }
 
     private fun checkDatabase(app: Application) {
@@ -37,11 +39,11 @@ class StartUpView : Controller(), CoroutineScope by MainScope() {
             }
             Logger.log(tag = "StartupView") { "database needs filling= $needs" }
             if (isActive) {
-//                if (needs) {
-//                    router.setRoot(RouterTransaction.with(ControllerFactory.createController(Screens.OnBoarding, app)))
-//                }else{
+                if (needs) {
+                    router.setRoot(RouterTransaction.with(ControllerFactory.createController(Screens.OnBoarding(), app)))
+                }else{
                     router.setRoot(RouterTransaction.with(ControllerFactory.createController(Screens.Home(), app)))
-//                }
+                }
             }
         }
     }

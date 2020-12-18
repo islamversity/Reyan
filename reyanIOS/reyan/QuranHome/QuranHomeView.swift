@@ -16,11 +16,11 @@ struct QuranHomeView: View, Resolving {
         self.surahListView = SurahListView(presenter: Resolver.resolve())
         self.juzListView = JuzListView(presenter: Resolver.resolve())
 
-        presenter.states().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
-        
-        let db : Main = resolver.resolve()
-        let surahList = db.nameQueries.getAllNames().executeAsList()
-        print("surahList count = \(surahList.count)")
+//        presenter.states().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
+
+//        let db : Main = resolver.resolve()
+//        let surahList = db.nameQueries.getAllNames().executeAsList()
+//        print("surahList count = \(surahList.count)")
         
     }
     
@@ -36,7 +36,7 @@ struct QuranHomeView: View, Resolving {
                     
                     Image("ic_settings")
                         .resizable()
-                        .frame(width: 28, height: 28, alignment: .center)
+                        .frame(width: 24, height: 24, alignment: .center)
                         .position(.init(x: 18, y: 18))
                 }
                 .padding(.top, 40)
@@ -59,7 +59,7 @@ struct QuranHomeView: View, Resolving {
             
         }
         .onAppear(){
-            surahListView.presenter.processIntents(intents: SurahListIntent.Initial.init())
+//            surahListView.presenter.processIntents(intents: SurahListIntent.Initial.init())
         }
     }
     

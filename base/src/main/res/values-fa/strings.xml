@@ -11,4 +11,7 @@
     <string name="title_font_size_normal">پیشفرض</string>
     <string name="title_font_size_Large">بزرگ</string>
     <string name="title_font_size_x_Large">خیلی بزرگ</string>
+
+    <string name="app_language">زبان برنامه</string>
+
 </resources>
