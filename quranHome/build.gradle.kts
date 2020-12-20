@@ -40,6 +40,8 @@ kotlin {
     sourceSets["androidMain"].dependencies {
         implementation(project(Deps.Modules.viewComponent))
         implementation(kotlin("stdlib", Versions.kotlin))
+        implementation(Deps.Coroutines.android)
+
 
         implementation(Deps.Android.Support.compat)
         implementation(Deps.Android.Support.constraintLayout)

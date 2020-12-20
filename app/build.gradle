@@ -11,6 +11,7 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'appmetrica-plugin'
 
 apply from: "$rootDir/projectDependencyGraph.gradle"
 
@@ -18,177 +19,189 @@ apply from: "$rootDir/projectDependencyGraph.gradle"
 //check.dependsOn detekt
 
 android {
-    compileSdkVersion GlobalVars.projectCompileSdkVersion
-    defaultConfig {
-        archivesBaseName = "Reyan"
-        applicationId "com.islamversity.reyan"
-        minSdkVersion GlobalVars.projectMinSdkVersion
-        targetSdkVersion GlobalVars.projectTargetSdkVersion
-        versionCode 21000004
-        versionName "0.0.4"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables.useSupportLibrary = true
+  compileSdkVersion GlobalVars.projectCompileSdkVersion
+  defaultConfig {
+    archivesBaseName = "Reyan"
+    applicationId "com.islamversity.reyan"
+    minSdkVersion GlobalVars.projectMinSdkVersion
+    targetSdkVersion GlobalVars.projectTargetSdkVersion
+    versionCode 21010001
+    versionName "1.0.1"
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    vectorDrawables.useSupportLibrary = true
+    buildConfigField "String", "YandexAPIKey", "\"${yandexAPIKey}\""
+  }
+  signingConfigs {
+    release {
+      storeFile file(releaseKeyStoreAddress)
+      storePassword "$releaseKeyStorePass"
+      keyAlias "$releaseKeyAlias"
+      keyPassword "$releaseKeyPass"
     }
-    signingConfigs {
-        release {
-            storeFile file(releaseKeyStoreAddress)
-            storePassword "$releaseKeyStorePass"
-            keyAlias "$releaseKeyAlias"
-            keyPassword "$releaseKeyPass"
-        }
-        debug {
-            storeFile file(debugKeyStoreAddress)
-            storePassword "$debugKeyStorePass"
-            keyAlias "$debugKeyAlias"
-            keyPassword "$debugKeyPass"
-        }
+    debug {
+      storeFile file(debugKeyStoreAddress)
+      storePassword "$debugKeyStorePass"
+      keyAlias "$debugKeyAlias"
+      keyPassword "$debugKeyPass"
     }
-    buildTypes {
-        release {
-            debuggable GlobalVars.isReleaseDebuggable
-            minifyEnabled GlobalVars.isReleaseMinify
-            multiDexEnabled GlobalVars.isReleaseMultiDex
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"),
-                    GlobalVars.proguardFileAddress)
-            signingConfig signingConfigs.release
-        }
-        debug {
-            applicationIdSuffix ".debug"
-            debuggable GlobalVars.isDebugDebuggable
-            minifyEnabled GlobalVars.isDebugMinify
-            multiDexEnabled GlobalVars.isDebugMultiDex
-            proguardFiles(getDefaultProguardFile("proguard-android.txt"),
-                    GlobalVars.proguardFileAddress)
+  }
+
+
+  buildTypes {
+    release {
+      debuggable GlobalVars.isReleaseDebuggable
+      minifyEnabled GlobalVars.isReleaseMinify
+      multiDexEnabled GlobalVars.isReleaseMultiDex
+      proguardFiles(getDefaultProguardFile("proguard-android.txt"),
+          GlobalVars.proguardFileAddress)
+      signingConfig signingConfigs.release
+    }
+    debug {
+      applicationIdSuffix ".debug"
+      debuggable GlobalVars.isDebugDebuggable
+      minifyEnabled GlobalVars.isDebugMinify
+      multiDexEnabled GlobalVars.isDebugMultiDex
+      proguardFiles(getDefaultProguardFile("proguard-android.txt"),
+          GlobalVars.proguardFileAddress)
 //            testCoverageEnabled true
-        }
     }
-    compileOptions {
-        // Flag to enable support for the new language APIs
-        coreLibraryDesugaringEnabled true
-        // Sets Java compatibility to Java 8
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    packagingOptions {
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/services/javax.annotation.processing.Processor'
-        exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
-        exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/slider_release.kotlin_module'
-        exclude 'META-INF/kotlinx-serialization-runtime.kotlin_module'
-        exclude 'META-INF/ktor-http.kotlin_module'
-        exclude 'META-INF/ktor-utils.kotlin_module'
-        exclude 'META-INF/ktor-io.kotlin_module'
-        exclude 'META-INF/ktor-http-cio.kotlin_module'
-        exclude 'META-INF/ktor-client-core.kotlin_module'
-        exclude 'META-INF/ktor-client-serialization.kotlin_module'
-        exclude 'META-INF/ktor-client-json.kotlin_module'
-        exclude 'META-INF/core.kotlin_module'
-        pickFirst("META-INF/kotlinx-coroutines-core.kotlin_module")
-    }
-    androidExtensions {
-        defaultCacheImplementation = "SPARSE_ARRAY"
-        experimental = true
+  }
+  compileOptions {
+    // Flag to enable support for the new language APIs
+    coreLibraryDesugaringEnabled true
+    // Sets Java compatibility to Java 8
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+  packagingOptions {
+    exclude 'META-INF/NOTICE'
+    exclude 'META-INF/NOTICE.txt'
+    exclude 'META-INF/LICENSE'
+    exclude 'META-INF/LICENSE.txt'
+    exclude 'META-INF/services/javax.annotation.processing.Processor'
+    exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
+    exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
+    exclude 'META-INF/DEPENDENCIES'
+    exclude 'META-INF/slider_release.kotlin_module'
+    exclude 'META-INF/kotlinx-serialization-runtime.kotlin_module'
+    exclude 'META-INF/ktor-http.kotlin_module'
+    exclude 'META-INF/ktor-utils.kotlin_module'
+    exclude 'META-INF/ktor-io.kotlin_module'
+    exclude 'META-INF/ktor-http-cio.kotlin_module'
+    exclude 'META-INF/ktor-client-core.kotlin_module'
+    exclude 'META-INF/ktor-client-serialization.kotlin_module'
+    exclude 'META-INF/ktor-client-json.kotlin_module'
+    exclude 'META-INF/core.kotlin_module'
+    pickFirst("META-INF/kotlinx-coroutines-core.kotlin_module")
+  }
+  androidExtensions {
+    defaultCacheImplementation = "SPARSE_ARRAY"
+    experimental = true
+  }
+
+  testOptions.unitTests.includeAndroidResources = true
+  sourceSets {
+    String sharedTestDir = 'src/sharedTest/java'
+    test {
+      java.srcDirs += sharedTestDir
     }
 
-    testOptions.unitTests.includeAndroidResources = true
-    sourceSets {
-        String sharedTestDir = 'src/sharedTest/java'
-        test {
-            java.srcDirs += sharedTestDir
-        }
+    androidTest {
+      java.srcDirs += sharedTestDir
+    }
+  }
+  bundle {
+    language {
+      // Specifies that the app bundle should not support
+      // configuration APKs for language resources. These
+      // resources are instead packaged with each base and
+      // dynamic feature APK.
+      enableSplit = false
+    }
+  }
+}
 
-        androidTest {
-            java.srcDirs += sharedTestDir
-        }
-    }
-    bundle {
-        language {
-            // Specifies that the app bundle should not support
-            // configuration APKs for language resources. These
-            // resources are instead packaged with each base and
-            // dynamic feature APK.
-            enableSplit = false
-        }
-    }
+appmetrica {
+  postApiKey = { applicationVariant -> yandexPostKey }
+  enable = { applicationVariant -> true }    // Optional.
+  mappingBuildTypes = ['release']
+  offline = yandexPostKey.length() == 0
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation Deps.Kotlin.jvmStd8
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+  implementation Deps.Kotlin.jvmStd8
 
-    testImplementation Deps.Android.Test.junit
-    testImplementation Deps.Android.Test.truth
-    testImplementation Deps.Android.Test.mockkUnit
-    testImplementation Deps.Android.Test.robolectric
-    testImplementation Deps.Android.Test.runner
-    testImplementation Deps.Android.Test.core
-    testImplementation Deps.Android.Test.rules
-    testImplementation Deps.Android.Test.junitExt
-    testImplementation Deps.Android.Test.espressoCore
+  testImplementation Deps.Android.Test.junit
+  testImplementation Deps.Android.Test.truth
+  testImplementation Deps.Android.Test.mockkUnit
+  testImplementation Deps.Android.Test.robolectric
+  testImplementation Deps.Android.Test.runner
+  testImplementation Deps.Android.Test.core
+  testImplementation Deps.Android.Test.rules
+  testImplementation Deps.Android.Test.junitExt
+  testImplementation Deps.Android.Test.espressoCore
 
-    androidTestImplementation Deps.Android.Test.runner
-    androidTestImplementation Deps.Android.Test.core
-    androidTestImplementation Deps.Android.Test.rules
-    androidTestImplementation Deps.Android.Test.junitExt
-    androidTestImplementation Deps.Android.Test.espressoCore
-    androidTestImplementation Deps.Android.Test.espressoIntents
+  androidTestImplementation Deps.Android.Test.runner
+  androidTestImplementation Deps.Android.Test.core
+  androidTestImplementation Deps.Android.Test.rules
+  androidTestImplementation Deps.Android.Test.junitExt
+  androidTestImplementation Deps.Android.Test.espressoCore
+  androidTestImplementation Deps.Android.Test.espressoIntents
 
-    implementation(project(Deps.Modules.viewComponent))
-    implementation(project(Deps.Modules.core))
-    implementation(project(Deps.Modules.domain))
-    implementation(project(Deps.Modules.base))
-    implementation(project(Deps.Modules.daggerCore))
-    implementation(project(Deps.Modules.quranHome))
-    implementation(project(Deps.Modules.navigation))
-    implementation(project(Deps.Modules.search))
-    implementation(project(Deps.Modules.settings))
-    implementation(project(Deps.Modules.surah))
+  implementation(project(Deps.Modules.viewComponent))
+  implementation(project(Deps.Modules.core))
+  implementation(project(Deps.Modules.domain))
+  implementation(project(Deps.Modules.base))
+  implementation(project(Deps.Modules.daggerCore))
+  implementation(project(Deps.Modules.quranHome))
+  implementation(project(Deps.Modules.navigation))
+  implementation(project(Deps.Modules.search))
+  implementation(project(Deps.Modules.settings))
+  implementation(project(Deps.Modules.surah))
 
-    implementation Deps.Android.Support.design
+  implementation Deps.Android.Support.design
 
-    implementation Deps.Android.Support.viewModel
+  implementation Deps.Android.Support.viewModel
 
-    implementation Deps.Dagger.dagger
-    kapt Deps.Dagger.daggerCompiler
-    implementation Deps.Dagger.jetbrainsAnnotation
+  implementation Deps.Dagger.dagger
+  kapt Deps.Dagger.daggerCompiler
+  implementation Deps.Dagger.jetbrainsAnnotation
 
-    implementation Deps.Android.Networking.okHttpLogging
-    implementation Deps.Android.Networking.okHttp
+  implementation Deps.Android.Networking.okHttpLogging
+  implementation Deps.Android.Networking.okHttp
 
-    implementation Deps.Android.Support.compat
-    implementation Deps.Android.Support.coreKts
+  implementation Deps.Android.Support.compat
+  implementation Deps.Android.Support.coreKts
 
-    implementation Deps.Coroutines.common
-    implementation Deps.Coroutines.android
+  implementation Deps.Coroutines.common
+  implementation Deps.Coroutines.android
 
-    implementation Deps.Android.Tools.conductor
+  implementation Deps.Android.Tools.conductor
 
-    implementation Deps.Android.Tools.localization
+  implementation Deps.Android.Tools.localization
 
-    implementation Deps.Firebase.analytics
-    implementation Deps.Firebase.crashlyticsSDK
-    implementation Deps.Firebase.messaging
+  implementation Deps.Firebase.analytics
+  implementation Deps.Firebase.crashlyticsSDK
+  implementation Deps.Firebase.messaging
 
-    debugImplementation Deps.Android.Tools.leakCanary
+  implementation Deps.Android.Yandex.core
 
-    implementation Deps.Android.Tools.epoxy
-    kapt Deps.Android.Tools.epoxyCompiler
+  debugImplementation Deps.Android.Tools.leakCanary
 
-    debugImplementation Deps.Android.Tools.soLoader
-    debugImplementation Deps.Android.Tools.flipper
-    releaseImplementation Deps.Android.Tools.flipperNoOp
-    debugImplementation Deps.Android.Tools.flipperNetworkPlugin
-    debugImplementation Deps.Android.Tools.flipperFrescoPlugin
+  implementation Deps.Android.Tools.epoxy
+  kapt Deps.Android.Tools.epoxyCompiler
 
-    debugImplementation Deps.Android.Tools.stetho
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.1'
+  debugImplementation Deps.Android.Tools.soLoader
+  debugImplementation Deps.Android.Tools.flipper
+  releaseImplementation Deps.Android.Tools.flipperNoOp
+  debugImplementation Deps.Android.Tools.flipperNetworkPlugin
+  debugImplementation Deps.Android.Tools.flipperFrescoPlugin
 
-    implementation Deps.Tools.logger
+  debugImplementation Deps.Android.Tools.stetho
+  coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.1'
+
+  implementation Deps.Tools.logger
 }
 
 

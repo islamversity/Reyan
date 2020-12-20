@@ -1,17 +1,32 @@
 <resources>
-    <string name="app_name">Base</string>
+  <string name="app_name">Base</string>
 
-    <string name="aya_font_size">اندازه آیه</string>
-    <string name="translate_font_size">اندازه ترجمه</string>
+  <string name="aya_font_size">اندازه آیه</string>
+  <string name="translate_font_size">اندازه ترجمه</string>
 
-    <string name="setting_none_calligraphy_selected">هیچ کدام</string>
+  <string name="setting_none_calligraphy_selected">هیچ کدام</string>
 
-    <string name="title_font_size_small">کوچک</string>
-    <string name="title_font_size_medium">متوسط</string>
-    <string name="title_font_size_normal">پیشفرض</string>
-    <string name="title_font_size_Large">بزرگ</string>
-    <string name="title_font_size_x_Large">خیلی بزرگ</string>
+  <string name="title_font_size_small">کوچک</string>
+  <string name="title_font_size_medium">متوسط</string>
+  <string name="title_font_size_normal">پیشفرض</string>
+  <string name="title_font_size_Large">بزرگ</string>
+  <string name="title_font_size_x_Large">خیلی بزرگ</string>
 
-    <string name="app_language">زبان برنامه</string>
+  <string name="app_language">زبان برنامه</string>
 
+  <string name="title_aya_toolbar">نوار ابزار آیه</string>
+
+  <string name="on_boarding_initialize_message">بارگذاری اولیه برنامه. لطفا صبور باشید.</string>
+
+  <string name="firstTranslationCalligraphy">رسم الخط ترجمه اول آیه</string>
+  <string name="second_translation_calligraphy">رسم الخط ترجمه دوم آیه</string>
+
+  <string name="aya_translation_not_chosen">هیچکدام</string>
+
+  <string name="search">جست‌جو</string>
+  <string name="home_tab_surahs">سوره</string>
+  <string name="home_tab_parts">جز</string>
+  <string name="lets_get_started">ادامه</string>
+  <string name="loading">درحال بارگذاری</string>
+  <string name="completed">تمام شد</string>
 </resources>

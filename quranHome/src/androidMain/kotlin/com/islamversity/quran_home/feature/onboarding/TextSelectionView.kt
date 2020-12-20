@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
@@ -17,7 +18,7 @@ import com.islamversity.quran_home.R
 import com.islamversity.quran_home.databinding.ViewSelectionTextBinding
 
 @ModelView(
-    autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT,
+    autoLayout = ModelView.Size.WRAP_WIDTH_WRAP_HEIGHT,
     saveViewState = true
 )
 class TextSelectionView @JvmOverloads constructor(
@@ -27,11 +28,9 @@ class TextSelectionView @JvmOverloads constructor(
 ) : LinearLayout(context, attributeSet, defStyleAttr) {
 
     private val binding = ViewSelectionTextBinding.inflate(LayoutInflater.from(context), this, true)
-//    init {
-//     binding.root.setBackgroundColor(Color.RED)
-//        setBackgroundColor(Color.BLACK)
-//        layoutParams = ViewGroup.LayoutParams(50, WRAP_CONTENT)
-//    }
+    init {
+        gravity = Gravity.CENTER
+    }
 
     @TextProp
     fun text(text: CharSequence) {
@@ -45,7 +44,6 @@ class TextSelectionView @JvmOverloads constructor(
         }else{
             binding.selectionTextView.setTextColor(Color.BLACK)
         }
-
 
         binding.selectionTextView.background = background
     }

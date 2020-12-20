@@ -7,6 +7,20 @@ interface Mapper<T, R> {
     fun map(item: T): R
 }
 
+fun <T, R> List<T>.map(mapper: Mapper<T, R>): List<R> =
+    map{
+        mapper.map(it)
+    }
+
+fun <T, R> List<T>.mapNullable(mapper : Mapper<T, R>): List<R?> =
+    map {
+        if (it != null) {
+            mapper.map(it)
+        }else{
+            null
+        }
+    }
+
 fun <T, R> Mapper<T, R>.listMap(items: List<T>): List<R> =
     items.map { this.map(it) }
 

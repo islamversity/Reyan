@@ -8,17 +8,18 @@ struct QuranHomeView: View, Resolving {
     @ObservedObject public var flowCollector: QuranHomeStateCollector = QuranHomeStateCollector()
     var presenter : QuranHomePresenter
     var surahListView : SurahListView
-    
+    var juzListView : SurahListView
+
     init(presenter : QuranHomePresenter) {
         
         self.presenter = presenter
         self.surahListView = SurahListView(presenter: Resolver.resolve())
-        
+        self.juzListView = 
 //        presenter.states().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
-//        
-        let db : Main = resolver.resolve()
-        let surahList = db.nameQueries.getAllNames().executeAsList()
-        print("surahList count = \(surahList.count)")
+
+//        let db : Main = resolver.resolve()
+//        let surahList = db.nameQueries.getAllNames().executeAsList()
+//        print("surahList count = \(surahList.count)")
         
     }
     
@@ -43,7 +44,12 @@ struct QuranHomeView: View, Resolving {
                 SearchBarView()
                     .padding(.top, 24)
                 
-                surahListView
+                if flowCollector.uiState.tabPosition == 0 {
+                    surahListView
+                } else if flowCollector.uiState.tabPosition == 1 {
+                    
+                }
+                
 
                 
                 Spacer()
