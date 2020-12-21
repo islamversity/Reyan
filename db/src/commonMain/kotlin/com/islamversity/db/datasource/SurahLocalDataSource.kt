@@ -37,18 +37,19 @@ interface SurahLocalDataSource {
         context: CoroutineContext = Dispatchers.Default
     ): Flow<List<SurahWithTwoName>>
 
+    fun observeAllSurahs(
+        ids : List<SurahId>,
+        arabicCalligraphy: CalligraphyId,
+        mainCalligraphy: CalligraphyId,
+        context: CoroutineContext = Dispatchers.Default
+    ): Flow<List<SurahWithTwoName>>
+
     fun getSurahWithId(
         entityId: SurahId,
         arabicCalligraphy: CalligraphyId,
         mainCalligraphy: CalligraphyId,
         context: CoroutineContext = Dispatchers.Default
     ): Flow<SurahWithTwoName?>
-
-    fun getSurahWithOrderAndCalligraphy(
-        order: SurahOrderId,
-        calligraphy: CalligraphyId,
-        context: CoroutineContext = Dispatchers.Default
-    ): Flow<Surah?>
 
     fun findSurahByName(
         nameQuery: String,
@@ -109,6 +110,21 @@ class SurahLocalDataSourceImpl(
             .asFlow()
             .mapToList(context)
 
+    override fun observeAllSurahs(
+        ids: List<SurahId>,
+        arabicCalligraphy: CalligraphyId,
+        mainCalligraphy: CalligraphyId,
+        context: CoroutineContext
+    ): Flow<List<SurahWithTwoName>> =
+        surahQueries.getAllSurahWithIds(
+            arabicCalligraphy,
+            mainCalligraphy,
+            ids,
+            surahWithTwoNameMapper
+        )
+            .asFlow()
+            .mapToList(context)
+
     override fun getSurahWithId(
         entityId: SurahId,
         arabicCalligraphy: CalligraphyId,
@@ -116,15 +132,6 @@ class SurahLocalDataSourceImpl(
         context: CoroutineContext
     ): Flow<SurahWithTwoName?> =
         surahQueries.getSurahWithId(arabicCalligraphy, mainCalligraphy, entityId, surahWithTwoNameMapper)
-            .asFlow()
-            .mapToOneOrNull(context)
-
-    override fun getSurahWithOrderAndCalligraphy(
-        order: SurahOrderId,
-        calligraphy: CalligraphyId,
-        context: CoroutineContext
-    ): Flow<Surah?> =
-        surahQueries.getSurahWithOrder(calligraphy, order, surahMapper)
             .asFlow()
             .mapToOneOrNull(context)
 

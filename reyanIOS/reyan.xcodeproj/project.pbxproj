@@ -27,6 +27,7 @@
 		E796EC39253836720025072F /* DICore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC38253836720025072F /* DICore.swift */; };
 		E796EC3E253837260025072F /* DIRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = E796EC3D253837260025072F /* DIRegister.swift */; };
 		E7B512982580102900B88771 /* JuzRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B512972580102900B88771 /* JuzRowView.swift */; };
+		E7BDEBFE2590829600F8504F /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BDEBFD2590829600F8504F /* TabView.swift */; };
 		E7CAB2932570EB3B00E6D753 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CAB2922570EB3B00E6D753 /* SearchBarView.swift */; };
 		E7CAB2A425740EC700E6D753 /* SurahListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CAB2A325740EC700E6D753 /* SurahListView.swift */; };
 		E7CAB2A92574100D00E6D753 /* SurahRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CAB2A82574100D00E6D753 /* SurahRowView.swift */; };
@@ -82,6 +83,7 @@
 		E796EC38253836720025072F /* DICore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DICore.swift; sourceTree = "<group>"; };
 		E796EC3D253837260025072F /* DIRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DIRegister.swift; sourceTree = "<group>"; };
 		E7B512972580102900B88771 /* JuzRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuzRowView.swift; sourceTree = "<group>"; };
+		E7BDEBFD2590829600F8504F /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
 		E7CAB2922570EB3B00E6D753 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		E7CAB2A325740EC700E6D753 /* SurahListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurahListView.swift; sourceTree = "<group>"; };
 		E7CAB2A82574100D00E6D753 /* SurahRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurahRowView.swift; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 				E78EFD7C2533541100886039 /* QuranHomeViewParent.swift */,
 				E78EFD7D2533541100886039 /* QuranHomeView.swift */,
 				E78EFD8C253355E500886039 /* QuranHomeStateCollector.swift */,
+				E7BDEBFD2590829600F8504F /* TabView.swift */,
 			);
 			path = QuranHome;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 			files = (
 				E7CAB2B825741F3900E6D753 /* RemoveSeperateLinesInList.swift in Sources */,
 				E7CAB2A92574100D00E6D753 /* SurahRowView.swift in Sources */,
+				E7BDEBFE2590829600F8504F /* TabView.swift in Sources */,
 				E77AD38825827FFD004FD632 /* JuzLineView.swift in Sources */,
 				E78EFD5F2533509A00886039 /* AppDelegate.swift in Sources */,
 				E78EFD602533509A00886039 /* SceneDelegate.swift in Sources */,

@@ -16,8 +16,16 @@ struct QuranHomeView: View, Resolving {
         self.surahListView = SurahListView(presenter: Resolver.resolve())
         self.juzListView = JuzListView(presenter: Resolver.resolve())
 
+        flowCollector.bindState(presenter: presenter)
+
 //        presenter.states().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
 
+//        let db : Main = resolver.resolve()
+//        let surahList = db.nameQueries.getAllNames().executeAsList()
+//        print("surahList count = \(surahList.count)")
+        
+//        presenter.states().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
+        
 //        let db : Main = resolver.resolve()
 //        let surahList = db.nameQueries.getAllNames().executeAsList()
 //        print("surahList count = \(surahList.count)")
@@ -34,10 +42,15 @@ struct QuranHomeView: View, Resolving {
                 
                 HStack(alignment: .top, spacing: 0.0) {
                     
-                    Image("ic_settings")
-                        .resizable()
-                        .frame(width: 24, height: 24, alignment: .center)
-                        .position(.init(x: 18, y: 18))
+                    Button(action: {
+                        presenter.processIntents(intents: QuranHomeIntent.SettingsClicked.init())
+                    }, label: {
+                        Image("ic_settings")
+                            .resizable()
+                            .frame(width: 24, height: 24, alignment: .center)
+                            .position(.init(x: 18, y: 18))
+                    })
+                    
                 }
                 .padding(.top, 40)
                 .fixedSize(horizontal: false, vertical: true)
@@ -45,9 +58,23 @@ struct QuranHomeView: View, Resolving {
                 SearchBarView()
                     .padding(.top, 50)
                 
-                if flowCollector.uiState?.tabPosition == 0 {
+                HStack{
+                    Button(action: {
+                        presenter.processIntents(intents: QuranHomeIntent.SelectTab.init(position: 0))
+                    }, label: {
+                        TabView(text: "Surah", isSelected: flowCollector.uiState.tabPosition == 0 ? true : false)
+                    })
+                    
+                    Button(action: {
+                        presenter.processIntents(intents: QuranHomeIntent.SelectTab.init(position: 1))
+                    }, label: {
+                        TabView(text: "Parts", isSelected: flowCollector.uiState.tabPosition == 1 ? true : false)
+                    })
+                }
+                
+                if flowCollector.uiState.tabPosition == 0 {
                     surahListView
-                } else if flowCollector.uiState?.tabPosition == 1 {
+                } else if flowCollector.uiState.tabPosition == 1 {
                     juzListView
                 }
                 
@@ -55,8 +82,6 @@ struct QuranHomeView: View, Resolving {
             }
             .padding(.horizontal, 20.0)
             .edgesIgnoringSafeArea(.all)
-
-            
         }
         .onAppear(){
 //            surahListView.presenter.processIntents(intents: SurahListIntent.Initial.init())
@@ -64,49 +89,53 @@ struct QuranHomeView: View, Resolving {
     }
     
     
-    
-    //    var body: some View {
-    //
-    //        VStack(spacing: 30) {
-    //
-    //            Text("Success RUN")
-    //                .foregroundColor(.black)
-    //
-    //            Button(action: {
-    ////                presenter.processIntents(intents: QuranHomeIntent.SearchClicked.init())
-    //
-    //                let db : Main = resolver.resolve()
-    ////                db.calligraphyQueries.insertCalligraphy(id: "2397ry8274r3r-34r-34-r24r24r", languageCode: "en", name: "simple", friendlyName: "english text", code: Calligraphy__(languageCode: "en", calligraphyName: "simple"))
-    //                let calig = db.nameQueries.getAllNames().executeAsList()
-    //                let ayas = db.ayaContentQueries.getAllAyaContents().executeAsList()
-    //
-    //
-    //                print("calig = \(ayas.count)")
-    //            })
-    //            {
-    //                Text("send intent")
-    //                    .fontWeight(.bold)
-    //                    .foregroundColor(.white)
-    //                    .multilineTextAlignment(.center)
-    //                    .lineLimit(1)
-    //                    .padding(20.0)
-    //                    .font(.custom("Vazir", size: 20.0))
-    //                    .cornerRadius(10.0)
-    //                    .background(Color.black)
-    //            }
-    //
-    //            Text("state = \(String(describing: flowCollector.uiState))")
-    //                .foregroundColor(.black)
-    //
-    //        }
-    //        .navigationBarTitle("MVI")
-    //    }
-    
-    
 }
+
+
+
 //
 //struct QuranView_Previews: PreviewProvider {
 //    static var previews: some View {
 //        QuranHomeView()
 //    }
 //}
+
+
+
+//    var body: some View {
+//
+//        VStack(spacing: 30) {
+//
+//            Text("Success RUN")
+//                .foregroundColor(.black)
+//
+//            Button(action: {
+////                presenter.processIntents(intents: QuranHomeIntent.SearchClicked.init())
+//
+//                let db : Main = resolver.resolve()
+////                db.calligraphyQueries.insertCalligraphy(id: "2397ry8274r3r-34r-34-r24r24r", languageCode: "en", name: "simple", friendlyName: "english text", code: Calligraphy__(languageCode: "en", calligraphyName: "simple"))
+//                let calig = db.nameQueries.getAllNames().executeAsList()
+//                let ayas = db.ayaContentQueries.getAllAyaContents().executeAsList()
+//
+//
+//                print("calig = \(ayas.count)")
+//            })
+//            {
+//                Text("send intent")
+//                    .fontWeight(.bold)
+//                    .foregroundColor(.white)
+//                    .multilineTextAlignment(.center)
+//                    .lineLimit(1)
+//                    .padding(20.0)
+//                    .font(.custom("Vazir", size: 20.0))
+//                    .cornerRadius(10.0)
+//                    .background(Color.black)
+//            }
+//
+//            Text("state = \(String(describing: flowCollector.uiState))")
+//                .foregroundColor(.black)
+//
+//        }
+//        .navigationBarTitle("MVI")
+//    }
+

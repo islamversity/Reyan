@@ -10,6 +10,7 @@ import com.islamversity.domain.repo.SettingRepo
 import com.islamversity.domain.repo.aya.GetAyaUseCase
 import com.islamversity.domain.repo.surah.GetSurahUsecase
 import com.islamversity.navigation.Navigator
+import com.islamversity.navigation.model.SurahLocalModel
 import com.islamversity.surah.model.AyaUIModel
 import com.islamversity.surah.model.SurahHeaderUIModel
 import com.islamversity.surah.model.UIItem
@@ -28,15 +29,29 @@ class SurahProcessor(
 ) : BaseProcessor<SurahIntent, SurahResult>() {
 
     override fun transformers(): List<FlowBlock<SurahIntent, SurahResult>> = listOf(
-        processInitialFetch,
+        processInitial,
         mainAyaFontSizeProcessor,
         translationFontSizeProcessor,
+        ayaToolbarVisibleProcessor,
         settingsProcessor.actionProcessor,
     )
-    private val processInitialFetch: FlowBlock<SurahIntent, SurahResult> = {
-        ofType<SurahIntent.Initial>()
+
+    private val processInitial: FlowBlock<SurahIntent, SurahResult> = {
+        ofType<SurahIntent.Initial>().publish(
+            processFullSurah,
+            processFullJuz,
+        )
+    }
+
+    private val processFullSurah: FlowBlock<SurahIntent.Initial, SurahResult> = {
+        filter {
+            it.localModel is SurahLocalModel.FullSurah
+        }
+            .map {
+                it.localModel as SurahLocalModel.FullSurah
+            }
             .flatMapLatest { initial ->
-                val id = SurahID(initial.surahId)
+                val id = SurahID(initial.surahID)
                 combine(
                     getSurahDetail(id),
                     getSurahAyas(id),
@@ -54,20 +69,21 @@ class SurahProcessor(
                     //perform showing the chosen aya only the first time
                     take(1).transform {
                         emit(it.first)
-                        if (it.second.startingAyaPosition == 0L) {
+                        if (it.second.startingAyaOrder == 0L) {
                             //Screen starts from the top not any number
                             return@transform
                         }
 
                         val aya = it.first.items.find { item ->
-                            item is AyaUIModel && item.order == it.second.startingAyaPosition
-                        } ?: error("The surah does not contain aya with order= ${it.second.startingAyaPosition}")
+                            item is AyaUIModel && item.order == it.second.startingAyaOrder
+                        }
+                            ?: error("The surah does not contain aya with order= ${it.second.startingAyaOrder}")
 
                         emit(
                             SurahResult.ShowAyaNumber(
                                 position = it.first.items.indexOf(aya),
                                 id = aya.rowId,
-                                orderID = it.second.startingAyaPosition,
+                                orderID = it.second.startingAyaOrder,
                             )
                         )
                         delay(300)
@@ -81,10 +97,46 @@ class SurahProcessor(
             )
     }
 
+    private val processFullJuz: FlowBlock<SurahIntent.Initial, SurahResult> = {
+        filter {
+            it.localModel is SurahLocalModel.FullJuz
+        }
+            .map {
+                it.localModel as SurahLocalModel.FullJuz
+            }
+            .flatMapLatest {
+                getAyaUseCase.observeAyaForJuz(it.juzOrder)
+            }
+            .flatMapLatest { ayas ->
+                val allSurahIds = ayas.distinctBy { it.surahId.id }.map { it.surahId }
+
+                surahUsecase.getAll(allSurahIds)
+                    .mapListWith(surahRepoHeaderMapper)
+                    .map { headers ->
+                        val uiList = mutableListOf<UIItem>()
+                        var currentHeader = headers.first { it.rowId == ayas.first().surahId.id }
+                        uiList.add(currentHeader)
+
+                        for (aya in ayas) {
+                            if (aya.surahId.id != currentHeader.rowId) {
+                                currentHeader = headers.first { it.rowId == aya.surahId.id }
+                                uiList.add(currentHeader)
+                            }
+
+                            uiList.add(ayaMapper.map(aya))
+                        }
+
+                        SurahResult.Items(
+                            uiList as List<UIItem>
+                        )
+                    }
+            }
+    }
+
     private fun getSurahDetail(id: SurahID): Flow<SurahHeaderUIModel> =
         surahUsecase.getSurah(id)
             .map { repoModel ->
-                repoModel ?: error("this screen can not be opened with wrong surahId= $id")
+                repoModel ?: error("this screen can not be opened with wrong surahId= ${id.id}")
             }
             .mapWith(surahRepoHeaderMapper)
 
@@ -92,7 +144,7 @@ class SurahProcessor(
         getAyaUseCase.observeAyaMain(id)
             .mapListWith(ayaMapper)
 
-    private val mainAyaFontSizeProcessor : FlowBlock<SurahIntent, SurahResult> = {
+    private val mainAyaFontSizeProcessor: FlowBlock<SurahIntent, SurahResult> = {
         ofType<SurahIntent.Initial>()
             .flatMapLatest {
                 settingRepo.getAyaMainFontSize().map {
@@ -101,11 +153,20 @@ class SurahProcessor(
             }
     }
 
-    private val translationFontSizeProcessor : FlowBlock<SurahIntent, SurahResult> = {
+    private val translationFontSizeProcessor: FlowBlock<SurahIntent, SurahResult> = {
         ofType<SurahIntent.Initial>()
             .flatMapLatest {
                 settingRepo.getAyaTranslateFontSize().map {
                     SurahResult.TranslationFontSize(it.size)
+                }
+            }
+    }
+
+    private val ayaToolbarVisibleProcessor: FlowBlock<SurahIntent, SurahResult> = {
+        ofType<SurahIntent.Initial>()
+            .flatMapLatest {
+                settingRepo.getAyaToolbarVisibility().map {
+                    SurahResult.AyaToolbarVisible(it)
                 }
             }
     }

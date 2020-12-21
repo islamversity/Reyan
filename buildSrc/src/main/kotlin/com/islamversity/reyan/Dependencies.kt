@@ -4,7 +4,7 @@ import org.gradle.api.internal.artifacts.dependencies.DefaultExternalModuleDepen
 
 object Versions {
 
-    val kotlin = "1.4.10"
+    val kotlin = "1.4.20"
     val detekt = "1.10.0"
     val androidXTest = "1.1.0"
     val supportJunitExt = "1.0.0"
@@ -76,8 +76,10 @@ object Deps {
             val constraintLayout =
                 "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
             val sqlite = "androidx.sqlite:sqlite-framework:2.1.0"
-            val viewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.androidArchComponent}"
-            val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.androidArchComponent}"
+            val viewModel =
+                "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.androidArchComponent}"
+            val lifecycleRuntime =
+                "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.androidArchComponent}"
         }
 
         object Firebase {
@@ -94,13 +96,18 @@ object Deps {
             val mockWebServer = "com.squareup.okhttp3:mockwebserver:4.0.1"
         }
 
+        object Yandex {
+            val core = "com.yandex.android:mobmetricalib:3.16.1"
+        }
+
         object Tools {
             val timber = "com.jakewharton.timber:timber:4.7.1"
             val fresco = "com.facebook.fresco:fresco:${Versions.fresco}"
             val frescoOkHttp = "com.facebook.fresco:imagepipeline-okhttp3:${Versions.fresco}"
             val conductor = "com.bluelinelabs:conductor:${Versions.conductor}"
             val conductorViewPager = "com.bluelinelabs:conductor-viewpager:${Versions.conductor}"
-            val conductorAndroidxTransitions = "com.bluelinelabs:conductor-androidx-transition:${Versions.conductor}"
+            val conductorAndroidxTransitions =
+                "com.bluelinelabs:conductor-androidx-transition:${Versions.conductor}"
             val leakCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakCanary}"
             val epoxy = "com.airbnb.android:epoxy:${Versions.epoxy}"
             val epoxyCompiler = "com.airbnb.android:epoxy-processor:${Versions.epoxy}"
@@ -209,7 +216,7 @@ object Deps {
         val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
         val flowBinding = "ru.ldralighieri.corbind:corbind:${Versions.flowBinding}"
         val turbine = "app.cash.turbine:turbine:0.2.1"
-        val coroutinesWorker = "com.autodesk:coroutineworker:0.6.2"
+        val coroutinesWorker = "com.autodesk:coroutineworker:0.6.3"
     }
 
     object SqlDelight {

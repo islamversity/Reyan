@@ -86,10 +86,6 @@ extension Resolver {
             JuzListUsecaseImpl(juzListRepo : resolve(), settingRepo: resolve())
         }
         
-        register(JuzListUsecase.self){
-            JuzListUsecaseImpl(juzListRepo : resolve(), settingRepo: resolve())
-        }
-        
         register(SearchSurahNameUseCase.self){
             SearchSurahNameUseCaseImpl(settingRepo : resolve(), searchRepo: resolve(), calligraphyDS: resolve())
         }
@@ -190,7 +186,7 @@ extension Resolver {
         // Mapper<JuzEntity, JuzRepoModel>
         // need HizbEntityRepoMapper
         register(Mapper.self, name: "JuzEntityRepoMapper"){
-            JuzDBRepoMapper(hizbMapper : resolve())
+            JuzDBRepoMapper(hizbMapper : resolve(name : "HizbEntityRepoMapper"))
         }
 
         // Mapper<HizbEntity, HizbRepoModel>

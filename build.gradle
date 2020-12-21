@@ -1,145 +1,161 @@
 buildscript {
-    apply from: "extras.gradle"
-    repositories {
-        google()
-        jcenter()
-        gradlePluginPortal()
-        mavenCentral()
-    }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.2'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
-        classpath 'com.google.gms:google-services:4.3.4'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.4.1'
-        classpath "com.github.ben-manes:gradle-versions-plugin:0.36.0"
-        classpath "com.squareup.sqldelight:gradle-plugin:${Versions.sqlDelight}"
-        classpath "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
-        classpath "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin:0.5.1"
-        classpath 'co.touchlab:kotlinnativecocoapods:0.11'
-    }
+  apply from: "extras.gradle"
+  repositories {
+    google()
+    jcenter()
+    gradlePluginPortal()
+    mavenCentral()
+  }
+  dependencies {
+    classpath 'com.android.tools.build:gradle:4.0.2'
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+    classpath 'com.google.gms:google-services:4.3.4'
+    classpath 'com.google.firebase:firebase-crashlytics-gradle:2.4.1'
+    classpath "com.github.ben-manes:gradle-versions-plugin:0.36.0"
+    classpath "com.squareup.sqldelight:gradle-plugin:${Versions.sqlDelight}"
+    classpath "org.jetbrains.kotlin:kotlin-serialization:${Versions.kotlin}"
+    classpath "com.codingfeline.buildkonfig:buildkonfig-gradle-plugin:0.5.1"
+    classpath 'co.touchlab:kotlinnativecocoapods:0.11'
+    classpath 'com.yandex.android:appmetrica-build-plugin:0.2.1'
+  }
 }
 
 plugins {
-    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC16")
+  id("io.gitlab.arturbosch.detekt").version("1.0.0-RC16")
 }
 
 apply plugin: "com.github.ben-manes.versions"
 
 allprojects {
-    repositories {
-        google()
-        jcenter()
-        mavenCentral()
-        maven { url "https://jitpack.io" }
-        maven {
-            url "https://maven.google.com"
-        }
-        maven {
-            url 'http://storage.googleapis.com/r8-releases/raw'
-        }
-        maven { url "https://dl.bintray.com/arrow-kt/arrow-kt/" }
-        maven { url "https://kotlin.bintray.com/kotlinx/" }
+  repositories {
+    google()
+    jcenter()
+    mavenCentral()
+    maven { url "https://jitpack.io" }
+    maven {
+      url "https://maven.google.com"
     }
-    apply plugin: 'io.gitlab.arturbosch.detekt'
-    dependencies {
-        detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:${Versions.detekt}"
+    maven {
+      url 'http://storage.googleapis.com/r8-releases/raw'
     }
+    maven { url "https://dl.bintray.com/arrow-kt/arrow-kt/" }
+    maven { url "https://kotlin.bintray.com/kotlinx/" }
+  }
+  apply plugin: 'io.gitlab.arturbosch.detekt'
+  dependencies {
+    detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:${Versions.detekt}"
+  }
 }
 
 tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
-    kotlinOptions {
-        jvmTarget "1.8"
-    }
+  kotlinOptions {
+    jvmTarget "1.8"
+  }
 }
 
 detekt {
-    toolVersion = Versions.detekt
-    input = files("src/main/kotlin")
-    filters = ".*/resources/.*,.*/build/.*"
-    config = files("detekt.yml")
+  toolVersion = Versions.detekt
+  input = files("src/main/kotlin")
+  filters = ".*/resources/.*,.*/build/.*"
+  config = files("detekt.yml")
 }
 
 ext {
-    def values = loadValues()
-    releaseKeyStoreAddress = values.getProperty('releaseKeyStoreAddress')
-    releaseKeyStorePass = values.getProperty('releaseKeyStorePass')
-    releaseKeyAlias = values.getProperty('releaseKeyAlias')
-    releaseKeyPass = values.getProperty('releaseKeyPass')
+  def values = loadValues()
+  releaseKeyStoreAddress = values.getProperty('releaseKeyStoreAddress')
+  releaseKeyStorePass = values.getProperty('releaseKeyStorePass')
+  releaseKeyAlias = values.getProperty('releaseKeyAlias')
+  releaseKeyPass = values.getProperty('releaseKeyPass')
+  yandexAPIKey = values.getProperty('yandexAPIKey')
+  yandexPostKey = values.getProperty('yandexPostKey')
 
-    //there must be a local.properties files, at least to fill in the debug values
-    debugKeyStoreAddress = values.getProperty('debugKeyStoreAddress')
-    debugKeyStorePass = values.getProperty('debugKeyStorePass')
-    debugKeyAlias = values.getProperty('debugKeyAlias')
-    debugKeyPass = values.getProperty('debugKeyPass')
-
-
+  //there must be a local.properties files, at least to fill in the debug values
+  debugKeyStoreAddress = values.getProperty('debugKeyStoreAddress')
+  debugKeyStorePass = values.getProperty('debugKeyStorePass')
+  debugKeyAlias = values.getProperty('debugKeyAlias')
+  debugKeyPass = values.getProperty('debugKeyPass')
 }
 
 def loadValues() {
-    Properties localProperties = new Properties()
-    if (project.rootProject.file('local.properties').exists()) {
-        localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
-    }
+  Properties localProperties = new Properties()
+  if (project.rootProject.file('local.properties').exists()) {
+    localProperties.load(project.rootProject.file('local.properties').newDataInputStream())
+  }
 
-    //if running on CI fill the variables using environment
-    if (System.getenv("BITRISE_BUILD_TYPE") != null) {
-        loadPropertiesFromCI(localProperties)
-        return localProperties
-    }
-
-    if (localProperties.getProperty("releaseKeyStorePass") == null) {
-        //otherwise there should a local.properties file with debug values already set
-        String releaseKeyStoreAddress = localProperties.getProperty('debugKeyStoreAddress')
-        String releaseKeyStorePass = localProperties.getProperty('debugKeyStorePass')
-        String releaseKeyAlias = localProperties.getProperty('debugKeyAlias')
-        String releaseKeyPass = localProperties.getProperty('debugKeyPass')
-
-        localProperties.setProperty('releaseKeyStoreAddress', releaseKeyStoreAddress)
-        localProperties.setProperty('releaseKeyStorePass', releaseKeyStorePass)
-        localProperties.setProperty('releaseKeyAlias', releaseKeyAlias)
-        localProperties.setProperty('releaseKeyPass', releaseKeyPass)
-    }
-
+  //if running on CI fill the variables using environment
+  if (System.getenv("BITRISE_BUILD_TYPE") != null) {
+    loadPropertiesFromCI(localProperties)
     return localProperties
+  }
+
+  if (localProperties.getProperty("releaseKeyStorePass") == null) {
+    //otherwise there should a local.properties file with debug values already set
+    String releaseKeyStoreAddress = localProperties.getProperty('debugKeyStoreAddress')
+    String releaseKeyStorePass = localProperties.getProperty('debugKeyStorePass')
+    String releaseKeyAlias = localProperties.getProperty('debugKeyAlias')
+    String releaseKeyPass = localProperties.getProperty('debugKeyPass')
+    String yandexAPIKey = ""
+    String yandexPostKey = ""
+
+    localProperties.setProperty('releaseKeyStoreAddress', releaseKeyStoreAddress)
+    localProperties.setProperty('releaseKeyStorePass', releaseKeyStorePass)
+    localProperties.setProperty('releaseKeyAlias', releaseKeyAlias)
+    localProperties.setProperty('releaseKeyPass', releaseKeyPass)
+    localProperties.setProperty('yandexAPIKey', yandexAPIKey)
+    localProperties.setProperty('yandexPostKey', yandexPostKey)
+  }
+
+  return localProperties
 }
 
 def loadPropertiesFromCI(localProperties) {
-    String buildType = System.getenv("BITRISE_BUILD_TYPE")
+  String buildType = System.getenv("BITRISE_BUILD_TYPE")
 
-    String keyStorePassEnvKey
-    String keyAliasEnvKey
-    String privateKeyPassEnvKey
+  String keyStorePassEnvKey
+  String keyAliasEnvKey
+  String privateKeyPassEnvKey
+  String debugReleaseYandexAPIKey = "yandexAPIKey"
+  String debugReleaseYandexPostKey = "yandexPostKey"
 
-    if (buildType == "DEPLOY") {
-        keyStorePassEnvKey = "BITRISEIO_ANDROID_KEYSTORE_PASSWORD"
-        keyAliasEnvKey = "BITRISEIO_ANDROID_KEYSTORE_ALIAS"
-        privateKeyPassEnvKey = "BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD"
-    } else if (buildType == "PRIMARY") {
-        keyStorePassEnvKey = "DEBUG_KEYSTORE_PASSWORD"
-        keyAliasEnvKey = "DEBUG_KEY_ALIAS"
-        privateKeyPassEnvKey = "DEBUG_PRIVATE_KEY_PASSWORD"
-    } else if (buildType == "PULL_REQUEST") {
-        keyStorePassEnvKey = "PR_KEYSTORE_PASSWORD"
-        keyAliasEnvKey = "PR_KEY_ALIAS"
-        privateKeyPassEnvKey = "PR_PRIVATE_KEY_PASSWORD"
-    } else {
-        throw IllegalArgumentException("buildType is not recognized")
-    }
+  if (buildType == "DEPLOY") {
+    keyStorePassEnvKey = "BITRISEIO_ANDROID_KEYSTORE_PASSWORD"
+    keyAliasEnvKey = "BITRISEIO_ANDROID_KEYSTORE_ALIAS"
+    privateKeyPassEnvKey = "BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD"
 
-    String keyStoreAddress = System.getenv("HOME") + System.getenv("KEY_STORE_ADDRESS")
-    String keyStorePassword = System.getenv(keyStorePassEnvKey)
-    String keyAliasPassword = System.getenv(keyAliasEnvKey)
-    String privateKeyPassword = System.getenv(privateKeyPassEnvKey)
+    localProperties.setProperty('yandexAPIKey', System.getenv(debugReleaseYandexAPIKey))
+    localProperties.setProperty('yandexPostKey', System.getenv(debugReleaseYandexPostKey))
+  } else if (buildType == "PRIMARY") {
+    keyStorePassEnvKey = "DEBUG_KEYSTORE_PASSWORD"
+    keyAliasEnvKey = "DEBUG_KEY_ALIAS"
+    privateKeyPassEnvKey = "DEBUG_PRIVATE_KEY_PASSWORD"
 
-    localProperties.setProperty('releaseKeyStoreAddress', keyStoreAddress)
-    localProperties.setProperty('debugKeyStoreAddress', keyStoreAddress)
+    localProperties.setProperty('yandexAPIKey', System.getenv(debugReleaseYandexAPIKey))
+    localProperties.setProperty('yandexPostKey', System.getenv(debugReleaseYandexPostKey))
+  } else if (buildType == "PULL_REQUEST") {
+    keyStorePassEnvKey = "PR_KEYSTORE_PASSWORD"
+    keyAliasEnvKey = "PR_KEY_ALIAS"
+    privateKeyPassEnvKey = "PR_PRIVATE_KEY_PASSWORD"
 
-    localProperties.setProperty('releaseKeyStorePass', keyStorePassword)
-    localProperties.setProperty('debugKeyStorePass', keyStorePassword)
+    localProperties.setProperty('yandexAPIKey', "")
+    localProperties.setProperty('yandexPostKey', "")
+  } else {
+    throw IllegalArgumentException("buildType is not recognized")
+  }
 
-    localProperties.setProperty('releaseKeyAlias', keyAliasPassword)
-    localProperties.setProperty('debugKeyAlias', keyAliasPassword)
+  String keyStoreAddress = System.getenv("HOME") + System.getenv("KEY_STORE_ADDRESS")
+  String keyStorePassword = System.getenv(keyStorePassEnvKey)
+  String keyAliasPassword = System.getenv(keyAliasEnvKey)
+  String privateKeyPassword = System.getenv(privateKeyPassEnvKey)
 
-    localProperties.setProperty('releaseKeyPass', privateKeyPassword)
-    localProperties.setProperty('debugKeyPass', privateKeyPassword)
+  localProperties.setProperty('releaseKeyStoreAddress', keyStoreAddress)
+  localProperties.setProperty('debugKeyStoreAddress', keyStoreAddress)
+
+  localProperties.setProperty('releaseKeyStorePass', keyStorePassword)
+  localProperties.setProperty('debugKeyStorePass', keyStorePassword)
+
+  localProperties.setProperty('releaseKeyAlias', keyAliasPassword)
+  localProperties.setProperty('debugKeyAlias', keyAliasPassword)
+
+  localProperties.setProperty('releaseKeyPass', privateKeyPassword)
+  localProperties.setProperty('debugKeyPass', privateKeyPassword)
 }

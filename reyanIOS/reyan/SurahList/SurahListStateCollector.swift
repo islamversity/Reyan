@@ -28,7 +28,6 @@ class SurahListStateCollector : ObservableObject {
         print("SurahListStateCollector : error = \(String(describing: error))")
     }
     
-    
     init() {
         let idleState = SurahListState.Companion.idle(SurahListState.Companion.init())()
         uiState = idleState

@@ -355,3 +355,11 @@
 -keep public class * extends androidx.coordinatorlayout.widget.CoordinatorLayout$Behavior {
     public <init>(android.content.Context, android.util.AttributeSet);
 }
+
+#Yandex
+-keep class com.yandex.metrica.** { *; }
+-dontwarn com.yandex.metrica.**
+
+#coroutines
+-keep class kotlinx.coroutines.android.** {*;}
+

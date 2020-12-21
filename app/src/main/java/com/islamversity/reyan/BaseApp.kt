@@ -13,6 +13,8 @@ import com.islamversity.daggercore.CoreComponentProvider
 import com.islamversity.daggercore.DaggerCoreComponent
 import com.islamversity.daggercore.helpers.DEFAULT_LANGUAGE_LOCALE
 import com.islamversity.daggercore.modules.DatabaseModule
+import com.yandex.metrica.YandexMetrica
+import com.yandex.metrica.YandexMetricaConfig
 
 abstract class BaseApp : Application(), CoreComponentProvider {
 
@@ -36,6 +38,12 @@ abstract class BaseApp : Application(), CoreComponentProvider {
 
     override fun onCreate() {
         super.onCreate()
+        val config: YandexMetricaConfig = YandexMetricaConfig
+            .newConfigBuilder(BuildConfig.YandexAPIKey)
+            .build()
+        // Initializing the AppMetrica SDK.
+        YandexMetrica.activate(applicationContext, config)
+
         Logger.init(listOf(LogcatLogger()))
 
         AppFontSizeStore.init(this)

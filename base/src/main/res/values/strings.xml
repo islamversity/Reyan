@@ -1,17 +1,35 @@
 <resources>
-    <string name="app_name">Base</string>
+  <string name="app_name">Base</string>
 
-    <string name="aya_font_size">Aya size</string>
-    <string name="translate_font_size">Translate size</string>
+  <string name="aya_font_size">Aya size</string>
+  <string name="translate_font_size">Translate size</string>
 
-    <string name="setting_none_calligraphy_selected">None</string>
+  <string name="setting_none_calligraphy_selected">None</string>
 
-    <string name="title_font_size_small">Small</string>
-    <string name="title_font_size_medium">Medium</string>
-    <string name="title_font_size_normal">Normal</string>
-    <string name="title_font_size_Large">Large</string>
-    <string name="title_font_size_x_Large">X-Large</string>
+  <string name="title_font_size_small">Small</string>
+  <string name="title_font_size_medium">Medium</string>
+  <string name="title_font_size_normal">Normal</string>
+  <string name="title_font_size_Large">Large</string>
+  <string name="title_font_size_x_Large">X-Large</string>
 
-    <string name="app_language">App Language</string>
+  <string name="app_language">App Language</string>
+
+  <string name="title_aya_toolbar">Aya Toolbar</string>
+
+  <string name="on_boarding_initialize_message">Initial loading of the program. Please be
+    patient.</string>
+
+
+  <string name="firstTranslationCalligraphy">First Translation Calligraphy</string>
+  <string name="second_translation_calligraphy">Second Translation Calligraphy</string>
+
+  <string name="aya_translation_not_chosen">None</string>
+
+  <string name="search">Search</string>
+  <string name="home_tab_surahs">Surah</string>
+  <string name="home_tab_parts">Part</string>
+  <string name="lets_get_started">Continue</string>
+  <string name="loading">Loading...</string>
+  <string name="completed">Completed</string>
 
 </resources>

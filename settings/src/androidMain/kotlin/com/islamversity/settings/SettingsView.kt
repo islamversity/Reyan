@@ -13,8 +13,8 @@ import com.islamversity.domain.model.TranslateReadFontSize
 import com.islamversity.settings.databinding.ViewSettingsBinding
 import com.islamversity.settings.di.DaggerSettingsComponent
 import com.islamversity.settings.models.CalligraphyUIModel
-import com.islamversity.settings.sheet.DismissListener
-import com.islamversity.settings.sheet.OptionSelector
+import com.islamversity.view_component.optionselector.DismissListener
+import com.islamversity.view_component.optionselector.OptionSelector
 import com.warkiz.widget.IndicatorSeekBar
 import com.warkiz.widget.OnSeekChangeListener
 import com.warkiz.widget.SeekParams
@@ -167,8 +167,7 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
         firstTranslationCalligraphies = state.firstTranslationCalligraphies
         surahNameCalligraphies = state.secondSurahNameCalligraphies
         secondTranslationCalligraphies = state.secondTranslationCalligraphies
-        binding.secondTranslationCalligraphySubtitle.text =
-            state.selectedSecondTranslationCalligraphy?.name
+
         binding.secondTranslationCalligraphySubtitle.text =
             state.selectedSecondTranslationCalligraphy?.name
                 ?: binding.root.context.getString(R.string.aya_translation_not_chosen)

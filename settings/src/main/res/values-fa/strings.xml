@@ -2,15 +2,12 @@
 <resources>
     <string name="settings">تنظیمات</string>
     <string name="surah_calligraphy">رسم الخط سوره</string>
-    <string name="firstTranslationCalligraphy">رسم الخط ترجمه اول آیه</string>
-    <string name="second_translation_calligraphy">رسم الخط ترجمه دوم آیه</string>
     <string name="calligraphy">رسم الخط</string>
     <string name="font_size">اندازه متن</string>
     <string name="bismillah">به نام خدای مهربان بخشاینده</string>
     <string name="bismillah_translate">به نام خدای مهربان بخشاینده</string>
     <string name="translate_text_size">اندازه متن ترجمه</string>
     <string name="main_text_size">اندازه متن اصلی</string>
-    <string name="aya_translation_not_chosen">هیچکدام</string>
     <string name="app_font_size">اندازه قلم برنامه</string>
 
 </resources>

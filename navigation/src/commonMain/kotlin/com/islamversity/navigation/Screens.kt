@@ -7,7 +7,7 @@ import com.islamversity.navigation.model.SurahLocalModel.Companion.EXTRA_SURAH_D
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 
-internal val jsonParser = Json {
+val jsonParser = Json {
     prettyPrint = false
     encodeDefaults = false
     coerceInputValues = true
