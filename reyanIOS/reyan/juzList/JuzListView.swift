@@ -6,39 +6,38 @@ import SwiftUI
 import nativeShared
 
 struct JuzListView : View {
-    
-//    let items : [String]
-
+        
     @ObservedObject public var flowCollector: JuzListStateCollector = JuzListStateCollector()
     var presenter : JuzListPresenter
-
+    
     init(presenter : JuzListPresenter) {
-
+        
         self.presenter = presenter
-//        presenter.states().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
+        
         flowCollector.bindState(presenter: presenter)
-
-        // presenter.processIntents(intents: SurahListIntent.Initial.init())
-
+        
         UITableView.appearance().backgroundColor = UIColor.clear
         UITableViewCell.appearance().backgroundColor = UIColor.clear
     }
     
     var body: some View {
-            
+        
         ZStack {
             Color.clear
             
             VStack {
-
+                
                 List {
                     ForEach(flowCollector.uiState.juzList, id: \.self) { item in
                         
-                        JuzRowView(
-                            juzUIItem: item
-                        )
+                        Button(action: {
+                            presenter.processIntents(intents: JuzListIntent.ItemClick.init(action: JozRowActionModel(juz: item)))
+                        }, label: {
+                            JuzRowView(
+                                juzUIItem: item
+                            )
                             .padding(.horizontal)
-                        
+                        })
                     }
                     .listRow()
                     .listRowBackground(Color.clear)

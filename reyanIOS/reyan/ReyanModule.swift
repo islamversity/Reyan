@@ -30,15 +30,20 @@ public final class ReyanModule: RoutableModule {
             type: SearchViewParent.self,
             requiresAuthentication: false)
         
-//        let surahRoute: NavigationRoute = NavigationRoute(
-//            path: Screens.Surah(model: SurahLocalModel(surahID: "", surahName: "", startingAyaOrder: 0), pushAnimation: nil, popAnimation: nil).name,
-//            type: SurahViewModel.self,
-//            requiresAuthentication: false)
-//
+        let homeSettingsRoute: NavigationRoute = NavigationRoute(
+            path: Screens.SettingsCompanion().url,
+            type: HomeSettingsViewParent.self,
+            requiresAuthentication: false)
+        
+        let surahRoute: NavigationRoute = NavigationRoute(
+            path: Screens.SurahCompanion().url,
+            type: SurahViewParent.self,
+            requiresAuthentication: false)
+
         
         // Register routes
         
-        NavigationRouter.bind(routes: [quranHomeRoute, searchRoute])
+        NavigationRouter.bind(routes: [quranHomeRoute, searchRoute, homeSettingsRoute])
 
     }
 }

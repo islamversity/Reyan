@@ -13,6 +13,60 @@ struct JuzLineView : View{
         
     var body: some View {
      
+        
+//        VStack {
+//
+//            HStack {
+//
+//                Button(action: {
+//                    print("settings click")
+//                    //                presenter.processIntents(intents: QuranHomeIntent.SettingsClicked.init())
+//                })
+//                {
+//                    Image("ic_settings")
+//                        .resizable()
+//                        .frame(width: 24, height: 24, alignment: .center)
+//                }
+//
+//                Spacer()
+//            }
+//            .padding(.top, 40)
+//            .fixedSize(horizontal: false, vertical: true)
+//
+//            ZStack {
+//                Color.white
+//
+//                Button(action: {
+//
+//                    //            presenter.processIntents(intents: QuranHomeIntent.SearchClicked.init())
+//
+//                })
+//                {
+//                    HStack {
+//
+//                        Text("Type your search")
+//                            .foregroundColor(.gray)
+//                            .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.white, lineWidth: 0))
+//                            .padding(.vertical, 10.0)
+//                            .padding(.horizontal, 20.0)
+//                            .font(.custom("Vazir", size: 14))
+//
+//                        Spacer()
+//
+//                        Image("ic_search")
+//                            .resizable()
+//                            .frame(width: 24, height: 24, alignment: .center)
+//                            .padding(.trailing, 20)
+//                    }
+//                }
+//            }
+//            .padding(.top, 50)
+//            .cornerRadius(15.0)
+//            .fixedSize(horizontal: false, vertical: true)
+//        }
+//        .padding(.horizontal, 20.0)
+//        .edgesIgnoringSafeArea(.all)
+
        
             HStack {
                 Image("ic_circle_light_green")

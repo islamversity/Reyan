@@ -9,6 +9,7 @@ struct QuranHomeView: View, Resolving {
     var presenter : QuranHomePresenter
     var surahListView : SurahListView
     var juzListView : JuzListView
+    
 
     init(presenter : QuranHomePresenter) {
         
@@ -23,40 +24,65 @@ struct QuranHomeView: View, Resolving {
 //        let db : Main = resolver.resolve()
 //        let surahList = db.nameQueries.getAllNames().executeAsList()
 //        print("surahList count = \(surahList.count)")
-        
-//        presenter.states().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
-        
-//        let db : Main = resolver.resolve()
-//        let surahList = db.nameQueries.getAllNames().executeAsList()
-//        print("surahList count = \(surahList.count)")
-        
     }
     
     var body: some View {
+        
         ZStack {
+            
             Image("background_main")
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
             
             VStack {
                 
-                HStack(alignment: .top, spacing: 0.0) {
-                    
+                HStack {
+                                        
                     Button(action: {
+                        print("settings click")
                         presenter.processIntents(intents: QuranHomeIntent.SettingsClicked.init())
-                    }, label: {
+                    })
+                    {
                         Image("ic_settings")
                             .resizable()
                             .frame(width: 24, height: 24, alignment: .center)
-                            .position(.init(x: 18, y: 18))
-                    })
+                    }
                     
+                    Spacer()
                 }
-                .padding(.top, 40)
+                .padding(.top, 20)
                 .fixedSize(horizontal: false, vertical: true)
                 
-                SearchBarView()
-                    .padding(.top, 50)
+                ZStack {
+                    Color.white
+                    
+                    Button(action: {
+                        
+                        presenter.processIntents(intents: QuranHomeIntent.SearchClicked.init())
+                        
+                    })
+                    {
+                        HStack {
+                            
+                            Text("Type your search")
+                                .foregroundColor(.gray)
+                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.white, lineWidth: 0))
+                                .padding(.vertical, 10.0)
+                                .padding(.horizontal, 20.0)
+                                .font(.custom("Vazir", size: 14))
+                            
+                            Spacer()
+                            
+                            Image("ic_search")
+                                .resizable()
+                                .frame(width: 24, height: 24, alignment: .center)
+                                .padding(.trailing, 20)
+                        }
+                    }
+                }
+                .padding(.top, 30)
+                .cornerRadius(15.0)
+                .fixedSize(horizontal: false, vertical: true)
                 
                 HStack{
                     Button(action: {
@@ -78,14 +104,15 @@ struct QuranHomeView: View, Resolving {
                     juzListView
                 }
                 
-                Spacer()
+//                Spacer()
             }
             .padding(.horizontal, 20.0)
-            .edgesIgnoringSafeArea(.all)
+//            .edgesIgnoringSafeArea(.all)
         }
-        .onAppear(){
-//            surahListView.presenter.processIntents(intents: SurahListIntent.Initial.init())
-        }
+        .navigationBarHidden(true)
+//        .onAppear(){
+////            surahListView.presenter.processIntents(intents: SurahListIntent.Initial.init())
+//        }
     }
     
     

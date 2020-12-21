@@ -17,19 +17,14 @@ struct SurahListView : View {
         
         self.presenter = presenter
 
-//        presenter.consumeStates().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
-
         flowCollector.bindState(presenter: presenter)
-        
-   
-        
+                
         UITableView.appearance().backgroundColor = UIColor.clear
         UITableViewCell.appearance().backgroundColor = UIColor.clear
     }
     
     var body: some View {
             
-     
         let  _ =  presenter.processIntents(intents: SurahListIntent.Initial.init())
 
         ZStack {
@@ -46,10 +41,18 @@ struct SurahListView : View {
                 List {
                     ForEach(flowCollector.uiState.surahList, id: \.self) { item in
                         
-                        SurahRowView(
-                            surahUIItem: item
-                        ).padding(.horizontal)
-                        
+                        Button(action: {
+                            
+                            presenter.processIntents(intents: SurahListIntent.ItemClick.init(action: SurahRowActionModel(surah: item)))
+                            
+                        }, label: {
+                            
+                            SurahRowView(
+                                surahUIItem: item
+                            ).padding(.horizontal)
+                            
+                        })
+                       
                     }
                     .listRow()
                     .listRowBackground(Color.clear)

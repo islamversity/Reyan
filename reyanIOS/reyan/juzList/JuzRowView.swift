@@ -76,22 +76,6 @@ struct JuzRowView : View{
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //
 //        VStack {
 //            HStack {
