@@ -38,14 +38,22 @@ abstract class BaseApp : Application(), CoreComponentProvider {
 
     override fun onCreate() {
         super.onCreate()
-        val config: YandexMetricaConfig = YandexMetricaConfig
-            .newConfigBuilder(BuildConfig.YandexAPIKey)
-            .build()
-        // Initializing the AppMetrica SDK.
-        YandexMetrica.activate(applicationContext, config)
+        if (BuildConfig.YandexAPIKey.isNotEmpty())
+            yandexMetricConfig()
 
         Logger.init(listOf(LogcatLogger()))
 
         AppFontSizeStore.init(this)
+    }
+
+    private fun yandexMetricConfig() {
+
+        val config: YandexMetricaConfig = YandexMetricaConfig
+            .newConfigBuilder(BuildConfig.YandexAPIKey)
+            .build()
+        // Initializing the AppMetrica SDK.
+
+        YandexMetrica.activate(applicationContext, config)
+
     }
 }
