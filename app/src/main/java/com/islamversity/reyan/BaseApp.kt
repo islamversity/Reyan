@@ -39,14 +39,14 @@ abstract class BaseApp : Application(), CoreComponentProvider {
     override fun onCreate() {
         super.onCreate()
         if (BuildConfig.YandexAPIKey.isNotEmpty())
-            yandexMetricConfig()
+            initYandexMetric()
 
         Logger.init(listOf(LogcatLogger()))
 
         AppFontSizeStore.init(this)
     }
 
-    private fun yandexMetricConfig() {
+    private fun initYandexMetric() {
 
         val config: YandexMetricaConfig = YandexMetricaConfig
             .newConfigBuilder(BuildConfig.YandexAPIKey)
