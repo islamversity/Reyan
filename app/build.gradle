@@ -25,8 +25,8 @@ android {
     applicationId "com.islamversity.reyan"
     minSdkVersion GlobalVars.projectMinSdkVersion
     targetSdkVersion GlobalVars.projectTargetSdkVersion
-    versionCode 21010001
-    versionName "1.0.1"
+    versionCode 21010002
+    versionName "1.0.2"
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables.useSupportLibrary = true
     buildConfigField "String", "YandexAPIKey", "\"${yandexAPIKey}\""
