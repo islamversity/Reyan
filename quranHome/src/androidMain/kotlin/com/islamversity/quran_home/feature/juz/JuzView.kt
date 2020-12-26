@@ -10,6 +10,8 @@ import com.airbnb.epoxy.ModelView
 import com.islamversity.quran_home.R
 import com.islamversity.quran_home.databinding.RowJuzBinding
 import com.islamversity.quran_home.feature.juz.model.JozUIModel
+import java.text.NumberFormat
+import java.util.*
 
 @ModelView(
     autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT,
@@ -20,12 +22,14 @@ class JuzView @JvmOverloads constructor(
     attributeSet: AttributeSet? = null
 ) : LinearLayout(context, attributeSet) {
 
+    private val numberFormatter = NumberFormat.getInstance(Locale.getDefault())
     private val binding = RowJuzBinding.inflate(LayoutInflater.from(context), this, true)
     private val juzTitle = context.resources.getStringArray(R.array.juz_title)
 
     @ModelProp
     fun juz(juz: JozUIModel) {
-        binding.juzNumber.text = juz.number.toString()
+
+        binding.juzNumber.text = numberFormatter.format(juz.number)
         binding.juzTitle.text = juzTitle[juz.number.toInt()]
         binding.startJuzTitle.text = juz.startTitle
         binding.endJuzTitle.text = juz.endTitle
