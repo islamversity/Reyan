@@ -20,7 +20,7 @@ object InnerOkHttpModule {
     fun provideLoggingInterceptor(): HttpLoggingInterceptor {
         val httpLoggingInterceptor = HttpLoggingInterceptor(object : HttpLoggingInterceptor.Logger {
             override fun log(message: String) {
-                Logger.log(Severity.Info, tag= "OkHttpRequest", message= message)
+                Logger.log(message, Severity.Info, tag= "OkHttpRequest")
             }
         })
 

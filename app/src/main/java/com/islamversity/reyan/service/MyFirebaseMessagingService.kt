@@ -20,28 +20,28 @@ import com.islamversity.reyan.service.NotificationDataType.Companion.NOTIFICATIO
 import kotlin.random.Random
 
 
-class MyFirebaseMessagingService: FirebaseMessagingService() {
+class MyFirebaseMessagingService : FirebaseMessagingService() {
 
     private val LOGTAG = "FirebaseMessaging"
 
     override fun onNewToken(token: String) {
-        Logger.log(Severity.Debug,LOGTAG,null,"Notification : Refreshed token: $token")
+        Logger.log("Notification : Refreshed token: $token", Severity.Debug, LOGTAG, null)
         sendFCMTokenToServer(token)
     }
 
     private fun sendFCMTokenToServer(token: String) {
         // Cache.set(CacheKeys.Firebase.FCM_TOKEN_FIREBASE, token)
-        Logger.log(Severity.Debug,LOGTAG,null,"Notification : sendRegistrationTokenToServer($token)")
+        Logger.log("Notification : sendRegistrationTokenToServer($token)", Severity.Debug, LOGTAG, null,)
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        Logger.log(Severity.Debug,LOGTAG,null,"Notification : From: ${remoteMessage.from}")
+        Logger.log("Notification : From: ${remoteMessage.from}", Severity.Debug, LOGTAG, null,)
 
-        val data  = remoteMessage.data
+        val data = remoteMessage.data
 
         // Check if message contains a data payload.
         if (data.isNotEmpty()) {
-            Logger.log(Severity.Debug,LOGTAG,null,"Notification : Message data payload: $data")
+            Logger.log("Notification : Message data payload: $data", Severity.Debug, LOGTAG, null,)
 
             val bundle = Bundle()
             for ((key, value) in data.entries) {
@@ -57,7 +57,7 @@ class MyFirebaseMessagingService: FirebaseMessagingService() {
 
         // Check if message contains a notification payload.
         remoteMessage.notification?.let { notification ->
-            Logger.log(Severity.Debug,LOGTAG,null,"Notification : 2-Message Notification Body: ${notification.body}")
+            Logger.log("Notification : 2-Message Notification Body: ${notification.body}", Severity.Debug, LOGTAG, null,)
         }
     }
 
