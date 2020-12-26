@@ -32,4 +32,7 @@
   <string name="loading">Loading...</string>
   <string name="completed">Completed</string>
 
+  <string name="surah_reveal_meccan">meccan</string>
+  <string name="surah_reveal_medinan">medinan</string>
+
 </resources>

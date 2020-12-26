@@ -12,6 +12,6 @@ class SurahUIItemMapper : Mapper<SurahUIModel, SurahItemModel> {
             item.mainName,
             item.order.toString(),
             SurahItemModel.RevealedType(item.revealedType.rawName),
-            item.ayaCount.toString()
+            item.ayaCount
         )
 }

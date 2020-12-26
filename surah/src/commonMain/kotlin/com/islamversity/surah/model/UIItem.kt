@@ -1,5 +1,7 @@
 package com.islamversity.surah.model
 
+import com.islamversity.domain.model.surah.RevealedType
+
 interface UIItem {
     val rowId: String
 }
@@ -31,7 +33,7 @@ data class SurahHeaderUIModel(
     val number: String,
     val name: String,
     val nameTranslated: String,
-    val origin: String,
+    val origin: RevealedType,
     val verses: Int,
     val fontSize: Int,
     val showBismillah: Boolean,
