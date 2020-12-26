@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="juz_title">
+        <item> </item>
+        <item>أول</item>
+        <item>ثانيا</item>
+        <item>سوم</item>
+        <item>الثالث</item>
+        <item>الخامس</item>
+        <item>السادس</item>
+        <item>سابعا</item>
+        <item>ثامن</item>
+        <item>تاسع</item>
+        <item>العاشر</item>
+        <item>الحاديه عشر</item>
+        <item>الثاني عشر</item>
+        <item>الثالث عشر</item>
+        <item>الرابع عشر</item>
+        <item>الخامس عشر</item>
+        <item>السادس عشر</item>
+        <item>السابع عشر</item>
+        <item>الثامن عشر</item>
+        <item>التاسع عشر</item>
+        <item>عشرين</item>
+        <item>الحادي والعشرون</item>
+        <item>عشرين ثانية</item>
+        <item>ثلاثة وعشرون</item>
+        <item>الرابع والعشرون</item>
+        <item>خمسة و عشرون</item>
+        <item>السادس والعشرون</item>
+        <item>السابع والعشرون</item>
+        <item>الثامن والعشرون</item>
+        <item>التاسع والعشرون</item>
+        <item>الثلاثون</item>
+    </array>
+</resources>

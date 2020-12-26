@@ -29,4 +29,7 @@
   <string name="lets_get_started">ادامه</string>
   <string name="loading">درحال بارگذاری</string>
   <string name="completed">تمام شد</string>
+
+  <string name="surah_reveal_meccan">مکی</string>
+  <string name="surah_reveal_medinan">مدنی</string>
 </resources>
