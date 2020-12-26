@@ -52,10 +52,10 @@ object Logger {
     }
 
     fun log(
+        message: String,
         severity: Severity = Severity.Info,
         tag: String? = null,
         throwable: Throwable? = null,
-        message: String
     ) {
         log(severity, tag, throwable) { message }
     }
