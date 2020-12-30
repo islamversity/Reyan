@@ -23,6 +23,14 @@ struct SurahViewParent: RoutableViewParent , Resolving{
         if let params = parameters {
             if let initailDataJson = params[SurahLocalModel.Companion().EXTRA_SURAH_DETAIL] {
                 
+//                let formatted = initailDataJson.base16DecodedString()!
+//                print("after passing= \(formatted)")
+                
+  
+                let formatted = initailDataJson.uppercased().base16DecodedString()!
+                
+//                let formatted = initailDataJson.base16DecodedString()!
+                print("after passing= \(formatted)")
                 let formatted = initailDataJson.base16DecodedString()!
 //                print("after passing= \(formatted)")
                 
@@ -32,8 +40,7 @@ struct SurahViewParent: RoutableViewParent , Resolving{
             }
         }
     }
-    
-    
+  
     // "{\"type\":\"fullsurah\",\"surahname\":\"الفاتحة\",\"surahid\":\"d65733fe-0253-47fc-9593-8a68db0cb5d0\",\"startingayaorder\":0}"
     
     var routedView: AnyView {
