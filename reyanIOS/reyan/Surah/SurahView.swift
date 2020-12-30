@@ -7,9 +7,9 @@ struct SurahView: View {
     
     @ObservedObject public var flowCollector: SurahStateCollector = SurahStateCollector()
     var presenter : SurahPresenter
-    var initialData : SurahLocalModel?
+    var initialData : SurahLocalModel
 
-    init(presenter : SurahPresenter, initialData : SurahLocalModel?) {
+    init(presenter : SurahPresenter, initialData : SurahLocalModel) {
         
         self.presenter = presenter
         self.initialData = initialData
@@ -26,9 +26,9 @@ struct SurahView: View {
         
         Button(action: {
             
-            if let lm = initialData {
-                let _ = presenter.processIntents(intents: SurahIntent.Initial.init(localModel: lm))
-            }
+            presenter
+                .processIntents(
+                    intents: SurahIntent.Initial.init(localModel: initialData))
         })
         {
             Text("Surah View")

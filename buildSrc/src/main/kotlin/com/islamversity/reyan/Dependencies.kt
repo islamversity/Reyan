@@ -39,7 +39,7 @@ object Versions {
 
     val sqlDelight = "1.4.4"
     val ktor = "1.4.1"
-    val serialization = "1.0.0"
+    val serialization = "1.0.1"
     val stately = "1.1.0"
     val coroutines = "1.4.2-native-mt"//"1.3.9-native-mt"
     val flowBinding = "1.3.2"

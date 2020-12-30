@@ -10,7 +10,7 @@ struct SurahViewParent: RoutableViewParent , Resolving{
     
     static var requiredParameters: [String]? {
         return [
-            "initialmodel"
+            SurahLocalModel.Companion().EXTRA_SURAH_DETAIL
         ]
     }
     
@@ -24,20 +24,20 @@ struct SurahViewParent: RoutableViewParent , Resolving{
         print("parameters = \(parameters)")
         
         if let params = parameters {
-            if let initailDataJson = params["initialmodel"] {
+            if let initailDataJson = params[SurahLocalModel.Companion().EXTRA_SURAH_DETAIL] {
                 
-                //                 = SurahLocalModel.Companion().fromData(data: initailDataJson)
+                  initialData = SurahLocalModel.Companion().fromData(data: initailDataJson)
                 
-                let jsonData = initailDataJson.data(using: .utf8)!
-                let decoder = JSONDecoder()
-                
-                let im = try? decoder.decode(SurahInitialModel.self, from: jsonData)
-                
-                print("im = \(im)")
-                
-                if let sim = im {
-                    initialData = SurahLocalModel.FullSurah.init(surahName: sim.name, surahID: sim.id, startingAyaOrder: sim.startAyaOrder)
-                }
+//                let jsonData = initailDataJson.data(using: .utf8)!
+//                let decoder = JSONDecoder()
+//
+//                let im = try? decoder.decode(SurahInitialModel.self, from: jsonData)
+//
+//                print("im = \(im)")
+//
+//                if let sim = im {
+//                    initialData = SurahLocalModel.FullSurah.init(surahName: sim.name, surahID: sim.id, startingAyaOrder: sim.startAyaOrder)
+//                }
                 
                 print("initialData = \(initialData)")
             }
@@ -49,7 +49,7 @@ struct SurahViewParent: RoutableViewParent , Resolving{
     
     /// View body
     var routedView: AnyView {
-        SurahView(presenter: resolver.resolve(), initialData: initialData)
+        SurahView(presenter: resolver.resolve(), initialData: initialData!)
             .eraseToAnyView()
     }
 }

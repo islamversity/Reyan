@@ -3,22 +3,25 @@ package com.islamversity.navigation.model
 import com.islamversity.navigation.jsonParser
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.decodeFromString
 
 @Serializable
 sealed class SurahLocalModel {
 
     @Serializable
-    @SerialName("FullSurah")
+    @SerialName("fullsurah")
     data class FullSurah(
+        @SerialName("surahname")
         val surahName: String,
+        @SerialName("surahid")
         val surahID: String,
+        @SerialName("startingayaorder")
         val startingAyaOrder: Long,
     ) : SurahLocalModel()
 
     @Serializable
-    @SerialName("FullJuz")
+    @SerialName("fulljuz")
     data class FullJuz(
+        @SerialName("juzorder")
         val juzOrder: Long
     ) : SurahLocalModel()
 
