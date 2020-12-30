@@ -67,7 +67,7 @@ sealed class Screens(
     ) : Screens(
         name,
         url,
-        EXTRA_SURAH_DETAIL to jsonParser.encodeToString(model),
+        EXTRA_SURAH_DETAIL to jsonParser.encodeToString(SurahLocalModel.serializer(), model),
         pushAnimation,
         popAnimation
     ){

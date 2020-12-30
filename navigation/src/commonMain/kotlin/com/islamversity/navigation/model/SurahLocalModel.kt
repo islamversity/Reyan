@@ -28,4 +28,4 @@ sealed class SurahLocalModel {
 }
 
 fun SurahLocalModel.Companion.fromData(data: String): SurahLocalModel =
-    jsonParser.decodeFromString(data)
+    jsonParser.decodeFromString(SurahLocalModel.serializer(), data)

@@ -10,6 +10,7 @@ struct QuranHomeView: View, Resolving {
     var surahListView : SurahListView
     var juzListView : JuzListView
     
+    @State var tabPosition : Int = 0
 
     init(presenter : QuranHomePresenter) {
         
@@ -86,21 +87,23 @@ struct QuranHomeView: View, Resolving {
                 
                 HStack{
                     Button(action: {
-                        presenter.processIntents(intents: QuranHomeIntent.SelectTab.init(position: 0))
+                        tabPosition = 0
+//                        presenter.processIntents(intents: QuranHomeIntent.SelectTab.init(position: 0))
                     }, label: {
-                        TabView(text: "Surah", isSelected: flowCollector.uiState.tabPosition == 0 ? true : false)
+                        TabView(text: "Surah", isSelected: tabPosition == 0 ? true : false)
                     })
                     
                     Button(action: {
-                        presenter.processIntents(intents: QuranHomeIntent.SelectTab.init(position: 1))
+                        tabPosition = 1
+//                        presenter.processIntents(intents: QuranHomeIntent.SelectTab.init(position: 1))
                     }, label: {
-                        TabView(text: "Parts", isSelected: flowCollector.uiState.tabPosition == 1 ? true : false)
+                        TabView(text: "Parts", isSelected: tabPosition == 1 ? true : false)
                     })
                 }
                 
-                if flowCollector.uiState.tabPosition == 0 {
+                if tabPosition == 0 {
                     surahListView
-                } else if flowCollector.uiState.tabPosition == 1 {
+                } else if tabPosition == 1 {
                     juzListView
                 }
                 

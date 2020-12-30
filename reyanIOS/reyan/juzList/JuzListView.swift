@@ -22,6 +22,8 @@ struct JuzListView : View {
     
     var body: some View {
         
+        let _ =  presenter.processIntents(intents: JuzListIntent.Initial.init())
+
         ZStack {
             Color.clear
             

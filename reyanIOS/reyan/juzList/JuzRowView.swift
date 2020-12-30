@@ -25,7 +25,7 @@ struct JuzRowView : View{
                         .foregroundColor(Color(red: 0.11, green: 0.4, blue: 0.38, opacity: 1.0))
                 }
                 
-                Text(juzTitleArray[Int(juzUIItem.number)])
+                Text(juzTitleArray[Int(juzUIItem.number) - 1])
                     .foregroundColor(Color(red: 0.24, green: 0.24, blue: 0.24, opacity: 1.0))
             }
             

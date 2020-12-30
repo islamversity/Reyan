@@ -35,15 +35,16 @@ public final class ReyanModule: RoutableModule {
             type: HomeSettingsViewParent.self,
             requiresAuthentication: false)
         
+        print("surahRoute : \(Screens.SurahCompanion().url)")
         let surahRoute: NavigationRoute = NavigationRoute(
-            path: Screens.SurahCompanion().url,
+            path: Screens.SurahCompanion().url + "/:initialmodel",
             type: SurahViewParent.self,
             requiresAuthentication: false)
 
         
         // Register routes
         
-        NavigationRouter.bind(routes: [quranHomeRoute, searchRoute, homeSettingsRoute])
+        NavigationRouter.bind(routes: [quranHomeRoute, searchRoute, homeSettingsRoute, surahRoute])
 
     }
 }
