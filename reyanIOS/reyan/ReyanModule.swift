@@ -35,7 +35,6 @@ public final class ReyanModule: RoutableModule {
             type: HomeSettingsViewParent.self,
             requiresAuthentication: false)
         
-        print("surahRoute : \(Screens.SurahCompanion().url)")
         let surahRoute: NavigationRoute = NavigationRoute(
             path: Screens.SurahCompanion().url + "/:\(SurahLocalModel.Companion().EXTRA_SURAH_DETAIL)",
             type: SurahViewParent.self,

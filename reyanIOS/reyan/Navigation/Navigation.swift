@@ -18,7 +18,7 @@ public class IOSNavigation : IOSNavigator{
         
         let extraData = screen.extras?.second as String?
         
-        print("extraData  :  \(String(describing: extraData))")
+        print("extraData:\(String(describing: extraData))")
         
         if extraData == nil {
             NavigationRouter.main.navigate(toPath: screen.url)

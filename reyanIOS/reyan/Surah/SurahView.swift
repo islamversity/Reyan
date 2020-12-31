@@ -15,17 +15,11 @@ struct SurahView: View {
         self.initialData = initialData
 
         flowCollector.bindState(presenter: presenter)
-        
-        
     }
-    
     
     var body: some View {
         
-        
-        
         Button(action: {
-            
             presenter
                 .processIntents(
                     intents: SurahIntent.Initial.init(localModel: initialData))
