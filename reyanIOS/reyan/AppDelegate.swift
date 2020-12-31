@@ -13,6 +13,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DatabaseFillerUsecase().fillDB()
         
 //        Logger().log(severity: Severity_.error, message: "AppDelegate", tag: "AppDelegate", throwable: nil)
+        
+        whereIsMySQLite()
                 
         return true
     }
@@ -31,7 +33,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
 
+    func whereIsMySQLite() {
+        let path = FileManager
+            .default
+            .urls(for: .applicationSupportDirectory, in: .userDomainMask)
+            .last?
+            .absoluteString
+            .replacingOccurrences(of: "file://", with: "")
+            .removingPercentEncoding
 
+        print("sqlite address")
+        print(path ?? "Not found")
+    }
    
 }
 

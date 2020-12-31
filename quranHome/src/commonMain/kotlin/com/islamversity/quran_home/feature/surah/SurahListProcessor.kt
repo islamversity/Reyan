@@ -47,6 +47,11 @@ class SurahListProcessor(
             .map {
                 it.action.surah
             }
+            .onEach {
+                Logger.log {
+                    "opening surah for id= ${it.id.id}"
+                }
+            }
             .map {
                 Screens.Surah(SurahLocalModel.FullSurah(
                     surahName = it.mainName,

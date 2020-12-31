@@ -26,18 +26,9 @@ struct SurahViewParent: RoutableViewParent , Resolving{
         if let params = parameters {
             if let initailDataJson = params[SurahLocalModel.Companion().EXTRA_SURAH_DETAIL] {
                 
-                  initialData = SurahLocalModel.Companion().fromData(data: initailDataJson)
-                
-//                let jsonData = initailDataJson.data(using: .utf8)!
-//                let decoder = JSONDecoder()
-//
-//                let im = try? decoder.decode(SurahInitialModel.self, from: jsonData)
-//
-//                print("im = \(im)")
-//
-//                if let sim = im {
-//                    initialData = SurahLocalModel.FullSurah.init(surahName: sim.name, surahID: sim.id, startingAyaOrder: sim.startAyaOrder)
-//                }
+                let formatted = initailDataJson.uppercased().base16DecodedString()!
+                print("after passing= \(formatted)")
+                  initialData = SurahLocalModel.Companion().fromData(data: formatted)
                 
                 print("initialData = \(initialData)")
             }
