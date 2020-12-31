@@ -8,20 +8,16 @@ import kotlinx.serialization.Serializable
 sealed class SurahLocalModel {
 
     @Serializable
-    @SerialName("fullsurah")
+    @SerialName("fullSurah")
     data class FullSurah(
-        @SerialName("surahname")
         val surahName: String,
-        @SerialName("surahid")
         val surahID: String,
-        @SerialName("startingayaorder")
         val startingAyaOrder: Long,
     ) : SurahLocalModel()
 
     @Serializable
-    @SerialName("fulljuz")
+    @SerialName("fullJuz")
     data class FullJuz(
-        @SerialName("juzorder")
         val juzOrder: Long
     ) : SurahLocalModel()
 
