@@ -9,15 +9,15 @@ data class Aya(
     val order: AyaOrderId,
     val surahId: SurahId,
     val content: String,
-    val translation1 : String? = null,
+    val translation1: String? = null,
     val translation2: String? = null,
-    val sajdahType : SajdahTypeFlag?,
+    val sajdahType: SajdahTypeFlag?,
     val juz: Juz,
     val hizb: HizbQuarter,
     val startOfHizb: Boolean?,
     val endingOfHizb: Boolean?,
-){
-    init{
+) {
+    init {
         juz.validated()
         hizb.validated()
     }
@@ -31,37 +31,42 @@ data class AyaWithFullContent(
     val sajdahTypeFlag: SajdahTypeFlag,
     val juz: Juz,
     val hizb: HizbQuarter,
-    val startOfHizb : Boolean? = null,
-    val endingOfHizb : Boolean? = null,
-){
+    val startOfHizb: Boolean? = null,
+    val endingOfHizb: Boolean? = null,
+) {
     init {
         juz.validated()
         hizb.validated()
     }
 }
 
-private val juzRange = 1..30
-private val hizbRange = 1..240
-
 inline class Juz(val value: Long) {
-    val isValid: Boolean
+    private val isValid: Boolean
         get() = value in juzRange
 
-    fun validated(){
-        if(!isValid){
+    fun validated() {
+        if (!isValid) {
             error("juz=$value is not a valid juz")
         }
     }
+
+    companion object {
+        private val juzRange = 1..30
+    }
 }
 
-inline class HizbQuarter(val value: Long){
-    val isValid: Boolean
+inline class HizbQuarter(val value: Long) {
+    private val isValid: Boolean
         get() = value in hizbRange
 
-    fun validated(){
-        if(!isValid){
+    fun validated() {
+        if (!isValid) {
             error("hizb=$value is not a valid hizb")
         }
+    }
+
+    companion object {
+        private val hizbRange = 1..240
     }
 }
 

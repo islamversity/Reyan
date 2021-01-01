@@ -31,7 +31,7 @@ struct QuranHomeView: View, Resolving {
         
         ZStack {
             
-            Image("background_main")
+            Image.background_main
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
             
@@ -44,7 +44,7 @@ struct QuranHomeView: View, Resolving {
                         presenter.processIntents(intents: QuranHomeIntent.SettingsClicked.init())
                     })
                     {
-                        Image("ic_settings")
+                        Image.ic_settings
                             .resizable()
                             .frame(width: 24, height: 24, alignment: .center)
                     }
@@ -74,7 +74,7 @@ struct QuranHomeView: View, Resolving {
                             
                             Spacer()
                             
-                            Image("ic_search")
+                            Image.ic_search
                                 .resizable()
                                 .frame(width: 24, height: 24, alignment: .center)
                                 .padding(.trailing, 20)
@@ -107,7 +107,6 @@ struct QuranHomeView: View, Resolving {
                     juzListView
                 }
                 
-//                Spacer()
             }
             .padding(.horizontal, 20.0)
 //            .edgesIgnoringSafeArea(.all)

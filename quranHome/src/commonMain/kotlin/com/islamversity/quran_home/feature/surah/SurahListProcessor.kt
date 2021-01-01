@@ -6,14 +6,12 @@ import com.islamversity.domain.model.surah.SurahRepoModel
 import com.islamversity.domain.repo.surah.GetSurahUsecase
 import com.islamversity.navigation.Navigator
 import com.islamversity.navigation.Screens
-import com.islamversity.navigation.model.SearchLocalModel
 import com.islamversity.navigation.model.SurahLocalModel
 import com.islamversity.navigation.navigateTo
 import com.islamversity.quran_home.feature.surah.model.SurahUIModel
 import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.transform
 
 class SurahListProcessor(
     private val navigator: Navigator,
@@ -27,15 +25,12 @@ class SurahListProcessor(
         ofType<SurahListIntent.Initial>()
             .flatMapMerge {
                 Logger.log {
-                    "GetSurah" + it.toString()
+                    "GetSurah= $it"
                 }
                 surahUsecase.getSurahs()
 
             }
             .map {
-                Logger.log {
-                    "GetSurah" + it.toString()
-                }
                 SurahListResult.SurahsSuccess(
                     surahMapper.listMap(it)
                 )

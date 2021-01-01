@@ -3,7 +3,8 @@ import SwiftUI
 import NavigationRouter
 import nativeShared
 
-struct SurahView: View {
+
+struct QuranView: View {
     
     @ObservedObject public var flowCollector: SurahStateCollector = SurahStateCollector()
     var presenter : SurahPresenter

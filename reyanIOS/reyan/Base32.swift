@@ -26,7 +26,7 @@
 import Foundation
 
 // MARK: - Base16 Data <-> String
-public func base16Encode(_ data: Data, uppercase: Bool = true) -> String {
+public func base16Encode(_ data: Data, uppercase: Bool = false) -> String {
     return data.withUnsafeBytes {
         base16encode($0.baseAddress!, $0.count, uppercase)
     }
@@ -37,7 +37,7 @@ public func base16DecodeToData(_ string: String) -> Data? {
 }
 
 // MARK: - Base16 [UInt8] <-> String
-public func base16Encode(_ array: [UInt8], uppercase: Bool = true) -> String {
+public func base16Encode(_ array: [UInt8], uppercase: Bool = false) -> String {
     return base16encode(array, array.count, uppercase)
 }
 
@@ -81,7 +81,7 @@ extension Data {
 }
 
 // MARK: encode
-private func base16encode(_ data: UnsafeRawPointer, _ length: Int, _ uppercase: Bool = true) -> String {
+private func base16encode(_ data: UnsafeRawPointer, _ length: Int, _ uppercase: Bool = false) -> String {
     let array = UnsafeBufferPointer.init(start: data.bindMemory(to: UInt8.self, capacity: length), count: length)
     return array.map { String(format: uppercase ? "%02X" : "%02x", $0) }.reduce("", +)
 }

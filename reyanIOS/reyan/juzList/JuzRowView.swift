@@ -15,7 +15,7 @@ struct JuzRowView : View{
             HStack {
                 
                 ZStack {
-                    Image("ic_surah")
+                    Image.ic_surah_green
                         .resizable()
                         .frame(width: 48, height: 48, alignment: .center)
                     

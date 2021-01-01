@@ -1,6 +1,7 @@
 {
-  "colors" : [
+  "images" : [
     {
+      "filename" : "ic_hizb_order.pdf",
       "idiom" : "universal"
     }
   ],
