@@ -23,8 +23,9 @@ public class IOSNavigation : IOSNavigator{
         if extraData == nil {
             NavigationRouter.main.navigate(toPath: screen.url)
         }else{
-            print("path=\(screen.url + "/" + extraData!)")
-            NavigationRouter.main.navigate(toPath: screen.url + "/" + extraData!)
+            let baseExtra = extraData!.base16EncodedString
+            print("path=\(screen.url + "/" + baseExtra)")
+            NavigationRouter.main.navigate(toPath: screen.url + "/" + baseExtra)
         }
     }
     

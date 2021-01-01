@@ -49,6 +49,7 @@
 		F9275E182532160D0021FE0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9275E172532160D0021FE0E /* Assets.xcassets */; };
 		F9275E1B2532160D0021FE0E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9275E1A2532160D0021FE0E /* Preview Assets.xcassets */; };
 		F9275E312532160D0021FE0E /* reyanUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9275E302532160D0021FE0E /* reyanUITests.swift */; };
+		F9CC016C259DD30E00E527FE /* Base32.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9CC016B259DD30E00E527FE /* Base32.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +116,7 @@
 		F9275E2C2532160D0021FE0E /* reyanUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = reyanUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9275E302532160D0021FE0E /* reyanUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reyanUITests.swift; sourceTree = "<group>"; };
 		F9275E322532160D0021FE0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F9CC016B259DD30E00E527FE /* Base32.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Base32.swift; sourceTree = "<group>"; };
 		FF37CD3337C4F5708B61F685 /* Pods-reyan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reyan.release.xcconfig"; path = "Target Support Files/Pods-reyan/Pods-reyan.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -315,6 +317,7 @@
 				F9275E192532160D0021FE0E /* Preview Content */,
 				E7CAB2B225741F1E00E6D753 /* Utils.swift */,
 				E7CAB2B725741F3900E6D753 /* RemoveSeperateLinesInList.swift */,
+				F9CC016B259DD30E00E527FE /* Base32.swift */,
 			);
 			path = reyan;
 			sourceTree = "<group>";
@@ -511,6 +514,7 @@
 				E7BDEC0E2590C02500F8504F /* SurahView.swift in Sources */,
 				E7BDEC1D259BF13300F8504F /* SurahStateCollector.swift in Sources */,
 				E77AD38825827FFD004FD632 /* JuzLineView.swift in Sources */,
+				F9CC016C259DD30E00E527FE /* Base32.swift in Sources */,
 				E78EFD5F2533509A00886039 /* AppDelegate.swift in Sources */,
 				E78EFD602533509A00886039 /* SceneDelegate.swift in Sources */,
 				E78EFD9D2533588C00886039 /* ReyanModule.swift in Sources */,
