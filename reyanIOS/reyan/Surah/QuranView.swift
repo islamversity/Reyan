@@ -65,7 +65,8 @@ struct QuranView: View {
                                 name: vm.nameTranslated,
                                 originalName: vm.name,
                                 origin: vm.origin,
-                                verses: String(vm.verses)
+                                verses: String(vm.verses),
+                                showismillah: vm.showBismillah
                             )
                         }else if item is AyaUIModel {
                                                         

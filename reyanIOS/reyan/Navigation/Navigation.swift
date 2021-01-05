@@ -18,13 +18,13 @@ public class IOSNavigation : IOSNavigator{
         
         let extraData = screen.extras?.second as String?
         
-        print("extraData:\(String(describing: extraData))")
+//        print("extraData:\(String(describing: extraData))")
         
         if extraData == nil {
             NavigationRouter.main.navigate(toPath: screen.url)
         }else{
             let baseExtra = extraData!.base16EncodedString
-            print("path=\(screen.url + "/" + baseExtra)")
+//            print("path=\(screen.url + "/" + baseExtra)")
             NavigationRouter.main.navigate(toPath: screen.url + "/" + baseExtra)
         }
     }
