@@ -10,11 +10,11 @@ import SwiftUI
 struct SurahHeaderView : View {
     
     let id : String
-    let order : Int
+    let order : String
     let name : String
     let originalName : String
     let origin : String
-    let verses : Int
+    let verses : String
     
     
     var body: some View {
@@ -32,7 +32,7 @@ struct SurahHeaderView : View {
                         .foregroundColor(.white)
                         .frame(width: 42, height: 42, alignment: .center)
                     
-                    Text(String(order))
+                    Text(order)
                         .foregroundColor(.white)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
@@ -60,7 +60,7 @@ struct SurahHeaderView : View {
                 
                 Spacer()
                 
-                Text(origin + " - " + String(verses) + " verses")
+                Text(origin + " - " + verses + " verses")
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
                     .lineLimit(1)
@@ -78,6 +78,6 @@ struct SurahHeaderView_Preview : PreviewProvider {
     
     static var previews: some View {
         
-        SurahHeaderView(id: "1", order: 114, name: "Ar_Rahman", originalName: "الرحمن", origin: "Medinan", verses: 256)
+        SurahHeaderView(id: "1", order: "114", name: "Ar_Rahman", originalName: "الرحمن", origin: "Medinan", verses: "256")
     }    
 }

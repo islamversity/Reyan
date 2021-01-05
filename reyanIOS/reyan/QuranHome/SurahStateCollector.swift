@@ -18,7 +18,7 @@ class SurahStateCollector : ObservableObject {
     func bindState(presenter : SurahPresenter) {
         
         IntropExtensionsKt.consume(presenter) { viewState in
-            print("SurahStateCollector : states : value(as uiState) = \(String(describing: viewState))")
+//            print("SurahStateCollector : states : value(as uiState) = \(String(describing: viewState))")
             
             self.uiState = viewState as! SurahState
         }

@@ -12,37 +12,36 @@ struct AyaToolbarView : View {
         self.intents = intents
     }
     
-    
     var body : some View {
         
         HStack{
             
             Spacer()
             
+//            Button(action: {
+//                
+//            })
+//            {
+//            Image.ic_play
+//                .resizable()
+//                .frame(width: 10.5, height: 15, alignment: .center)
+//                .padding(10)
+//            }
+//            .buttonStyle(BorderlessButtonStyle())
+//            
+//            Button(action: {
+//                
+//            })
+//            {
+//            Image.ic_share
+//                .resizable()
+//                .frame(width: 12, height: 15, alignment: .center)
+//                .padding(10)
+//            }
+//            .buttonStyle(BorderlessButtonStyle())
+//            
             Button(action: {
                 intents.bookmarkClick = true
-            })
-            {
-            Image.ic_play
-                .resizable()
-                .frame(width: 10.5, height: 15, alignment: .center)
-                .padding(10)
-            }
-            .buttonStyle(BorderlessButtonStyle())
-            
-            Button(action: {
-                
-            })
-            {
-            Image.ic_share
-                .resizable()
-                .frame(width: 12, height: 15, alignment: .center)
-                .padding(10)
-            }
-            .buttonStyle(BorderlessButtonStyle())
-            
-            Button(action: {
-                
             })
             {
             Image.ic_bookmark

@@ -25,9 +25,9 @@ struct SurahListView : View {
     
     var body: some View {
             
-        let  _ =  presenter.processIntents(intents: SurahListIntent.Initial.init())
+        presenter.processIntents(intents: SurahListIntent.Initial.init())
 
-        ZStack {
+        return ZStack {
             Color.clear
             
             VStack {
@@ -59,9 +59,9 @@ struct SurahListView : View {
                 }
             }
         }
-        .onAppear{
-            presenter.processIntents(intents: SurahListIntent.Initial.init())
-        }
+//        .onAppear{
+//            presenter.processIntents(intents: SurahListIntent.Initial.init())
+//        }
     }
 }
 

@@ -6,15 +6,29 @@
 //
 
 import SwiftUI
+import nativeShared
+import Combine
 
 struct AyaRowView : View {
     
-    let ayaText : String
-    let ayaFirstTranslatedText: String
-    let ayaSecondTranslatedText: String
+    let uiModel : AyaUIModel
+    let rowIntents : AyaRowIntents
+    let ayaToolbarIntents = AyaToolbarIntents()
+    var cancellables = Set<AnyCancellable>()
+
+    init(uiModel: AyaUIModel, rowIntents: AyaRowIntents) {
+        self.uiModel = uiModel
+        self.rowIntents = rowIntents
+                
+        ayaToolbarIntents.$bookmarkClick
+            .sink { isClick in
+                rowIntents.action = .BookmarkClick(uiModel)
+            }
+            .store(in: &cancellables)
+    }
+
     
-    
-    var  body: some View {
+    var body: some View {
         
         HStack(alignment : .top) {
                         
@@ -22,105 +36,120 @@ struct AyaRowView : View {
                 
                 ZStack {
                     Circle()
-                        .frame(width: 32, height: 32, alignment: .center)
+                        .frame(width: 24, height: 24, alignment: .center)
                         .foregroundColor(Color.green_600)
-                    
-                    Text("256")
+
+                    Text(String(uiModel.order))
                         .foregroundColor(.white)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
                         .lineLimit(1)
-                        .font(.custom("Vazir", size: 14.0))
+                        .font(.custom("Vazir", size: 12.0))
                 }
                 
-                Text("part")
-                    .foregroundColor(.gold_dark)
-                    .multilineTextAlignment(.center)
-                    .lineLimit(1)
-                    .font(.custom("Vazir", size: 8.0))
-                
-                ZStack {
-                    Image.ic_surah_gold
-                        .resizable()
-                        .frame(width: 32, height: 32, alignment: .center)
-                    
-                    Text("30")
+                if uiModel.juz != nil {
+                    Text("part")
                         .foregroundColor(.gold_dark)
-                        .fontWeight(.bold)
                         .multilineTextAlignment(.center)
                         .lineLimit(1)
-                        .font(.custom("Vazir", size: 12.0))
-                    
-                    
-                }
-                .padding(.top,-7)
-                
-                Text("hizb")
-                    .foregroundColor(.gold_dark)
-                    .multilineTextAlignment(.center)
-                    .lineLimit(1)
-                    .font(.custom("Vazir", size: 8.0))
-                
-                ZStack {
-                    Image.ic_hizb_gold
-                        .resizable()
-                        .frame(width: 32, height: 26, alignment: .center)
-                    
-                    VStack {
-                        
-                        
-                        Text("3/4")
+                        .font(.custom("Vazir", size: 8.0))
+
+                    ZStack {
+                        Image.ic_surah_gold
+                            .resizable()
+                            .frame(width: 24, height: 24, alignment: .center)
+
+                        Text(String(uiModel.juz! as! Int))
                             .foregroundColor(.gold_dark)
                             .fontWeight(.bold)
                             .multilineTextAlignment(.center)
                             .lineLimit(1)
-                            .font(.custom("Vazir", size: 6.0))
-                            .padding(.top, 2)
-                        
-                        Text("60")
-                            .foregroundColor(.gold_dark)
-                            .fontWeight(.bold)
-                            .multilineTextAlignment(.center)
-                            .lineLimit(1)
-                            .font(.custom("Vazir", size: 11.0))
+                            .font(.custom("Vazir", size: 10.0))
                     }
-                    
+                    .padding(.top,-7)
                 }
-                .padding(.top, -8)
                 
-                Spacer()
-                
+                if uiModel.hizb != nil {
+
+                    Text("hizb")
+                        .foregroundColor(.gold_dark)
+                        .multilineTextAlignment(.center)
+                        .lineLimit(1)
+                        .font(.system(size: 6.0))
+
+                    ZStack {
+                        Image.ic_hizb_gold
+                            .resizable()
+                            .frame(width: 26, height: 20, alignment: .center)
+
+                        VStack {
+
+
+//                            Text("3/4")
+//                                .foregroundColor(.gold_dark)
+//                                .fontWeight(.bold)
+//                                .multilineTextAlignment(.center)
+//                                .lineLimit(1)
+//                                .font(.custom("Vazir", size: 6.0))
+//                                .padding(.top, 2)
+
+                            Text(String(uiModel.hizb! as! Int))
+                                .foregroundColor(.gold_dark)
+                                .fontWeight(.bold)
+                                .multilineTextAlignment(.center)
+                                .lineLimit(1)
+                                .font(.custom("Vazir", size: 10.0))
+                        }
+
+                    }
+                    .padding(.top, -8)
+                }
             }
-            .padding(.trailing, 5)
+            .fixedSize(horizontal: true, vertical: true)
+//            .padding(.trailing, 5)
             
+            Spacer(minLength: 10)
             
-            VStack(alignment: .center, spacing: 10) {
+            VStack(alignment: .trailing, spacing: 10) {
                 
-                AyaToolbarView(intents: AyaToolbarIntents())
+                if uiModel.toolbarVisible {
+                    AyaToolbarView(intents: ayaToolbarIntents)
+                }
                 
-                Text(ayaText)
+                Text(uiModel.content)
                     .foregroundColor(.green_800)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.trailing)
-                    .font(.custom("Vazir", size: 20.0))
+                    .font(.system(size: 16))
+                    .lineSpacing(10.0)
+
+//                    .font(.custom("Vazir", size: 20.0))
+                if !(uiModel.translation1?.isEmpty ?? true) {
+                    Text(uiModel.translation1!)
+                        .foregroundColor(.gray_800)
+                        .multilineTextAlignment(.leading)
+                        .font(.caption)
+                        .font(.system(size: 14))
+
+                }
                 
-                Text(ayaFirstTranslatedText)
+//                    .font(.custom("Vazir", size: 14.0))
+                if !(uiModel.translation2?.isEmpty ?? true) {
+
+                    Text(uiModel.translation2!)
                     .foregroundColor(.gray_800)
-                    .fontWeight(.bold)
                     .multilineTextAlignment(.leading)
-                    .font(.custom("Vazir", size: 14.0))
+                    .font(.system(size: 14))
+                }
+//                    .font(.custom("Vazir", size: 14.0))
                 
-                Text(ayaSecondTranslatedText)
-                    .foregroundColor(.gray_800)
-                    .fontWeight(.bold)
-                    .multilineTextAlignment(.leading)
-                    .font(.custom("Vazir", size: 14.0))
-                
-                Spacer()
+//                Spacer()
             }
+            .fixedSize(horizontal: false, vertical: true)
             
         }
         .padding(.horizontal)
+        .padding(.top, 5)
         
     }
 }
@@ -129,10 +158,19 @@ struct AyaRowView_Preview : PreviewProvider {
     
     static var previews: some View {
         AyaRowView (
-            ayaText: "متن عربی آیه بسم الله الرحمن الرحیم و به نستعین . المحدالله رب .ب  سیمب نتیسبن تسیب منسیتب نستیبم نستیب العالمین . الرحمن الرحیم. مالک یوم الدین.",
-            ayaFirstTranslatedText: "The merciful The merciful The merciful The merciful The merciful The mercifulmercifulmercifulmerciful mercifulmercifulmercifulmercifulmercifulmerciful  The merciful The merciful The merciful The merciful",
-            ayaSecondTranslatedText: "ترجمه آیه به زبان فارسی ترجمه آیه به زبان فارسی  ترجمه آیه به زبان فارسی آیه به زبان فارسی ترجمه آیه به زبان فارسی  ترجمه آیه به زبان آیه به زبان فارسی ترجمه آیه به زبان فارسی  ترجمه آیه به زبان"
+            uiModel: AyaUIModel(
+                rowId: "fdfdf",
+                content:  "متن عربی آیه بسم الله الرحمن الرحیم و به نستعین . المحدالله رب .ب  سیمب نتیسبن تسیب منسیتب نستیبم نستیب العالمین . الرحمن الرحیم. مالک یوم الدین.",
+                translation1: "The merciful The merciful The merciful The merciful The merciful The mercifulmercifulmercifulmerciful mercifulmercifulmercifulmercifulmercifulmerciful  The merciful The merciful The merciful The merciful",
+                translation2: "ترجمه آیه به زبان فارسی ترجمه آیه به زبان فارسی  ترجمه آیه به زبان فارسی آیه به زبان فارسی ترجمه آیه به زبان فارسی  ترجمه آیه به زبان آیه به زبان فارسی ترجمه آیه به زبان فارسی  ترجمه آیه به زبان",
+                order: 196,
+                toolbarVisible: true,
+                hizb: nil,
+                juz: nil,
+                sajdah: SajdahTypeUIModel.NONE.init()
+            ),
+            rowIntents: AyaRowIntents()
         )
-            .previewDevice("iPhone 12 Pro Max")
+        .previewDevice("iPhone 12 Pro Max")
     }
 }
