@@ -62,14 +62,15 @@ extension Resolver {
         }
         
         // SettingsModule
-        // 1
         register{
             SettingsPresenter(processor: resolve(name : "SettingsProcessor"))
         }
-        // 2
         register(MviProcessor.self, name: "SettingsProcessor") {
             SettingsProcessor(settingsRepo: resolve(), calligraphyRepo: resolve(), uiMapper: resolve(name : "CalligraphyDomainUIMapper"))
         }
+        
+        // OnBoarding
+        
     }
     
     public static func registerUseCases() {

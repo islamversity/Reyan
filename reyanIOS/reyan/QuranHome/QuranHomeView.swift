@@ -111,12 +111,7 @@ struct QuranHomeView: View, Resolving {
 //            .edgesIgnoringSafeArea(.all)
         }
         .navigationBarHidden(true)
-//        .onAppear(){
-////            surahListView.presenter.processIntents(intents: SurahListIntent.Initial.init())
-//        }
     }
-    
-    
 }
 
 
