@@ -106,7 +106,7 @@ class MainActivity : LocalizationActivity(),
         when(notifType) {
             NotificationDataType.NEW_VERSION -> {
                 val appUrl = notifBundle["url"]
-                Logger.log (Severity.Debug, LOGTAG, null, "Notification : googleStoreUrl = $appUrl")
+                Logger.log ("Notification : googleStoreUrl = $appUrl", Severity.Debug, LOGTAG, null)
 
                 if (isPackageInstalled("com.android.vending", packageManager)) {
                     showAppOnGoogleStore()
@@ -118,7 +118,7 @@ class MainActivity : LocalizationActivity(),
             NotificationDataType.FORCE_UPDATE -> {
             }
             NotificationDataType.GENERIC -> {
-                Logger.log (Severity.Debug, LOGTAG, null, "Notification : unknown notification Type string")
+                Logger.log ("Notification : unknown notification Type string", Severity.Debug, LOGTAG, null,)
             }
         }
     }

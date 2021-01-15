@@ -14,6 +14,8 @@ import com.islamversity.surah.SurahIntent
 import com.islamversity.surah.databinding.RowAyaBinding
 import com.islamversity.surah.model.AyaUIModel
 import com.islamversity.surah.model.SajdahTypeUIModel
+import java.text.NumberFormat
+import java.util.*
 
 @ModelView(
     autoLayout = ModelView.Size.MATCH_WIDTH_WRAP_HEIGHT,
@@ -24,19 +26,20 @@ class AyaView @JvmOverloads constructor(
     attributeSet: AttributeSet? = null
 ) : LinearLayout(context, attributeSet) {
 
+    private val numberFormatter = NumberFormat.getInstance(Locale.getDefault())
     private val binding = RowAyaBinding.inflate(LayoutInflater.from(context), this, true)
-    private lateinit var model : AyaUIModel
+    private lateinit var model: AyaUIModel
 
     @SuppressLint("SetTextI18n")
     @ModelProp
     fun model(surah: AyaUIModel) {
         model = surah
-        binding.ayaOrder.txtOrder.text = surah.order.toString()
+        binding.ayaOrder.txtOrder.text = numberFormatter.format(surah.order)
         binding.tvAyaContent.text = surah.content
         binding.tvAyaTranslate1.text = surah.translation1
         binding.tvAyaTranslate2.text = surah.translation2
-        binding.hizbOrder.text = (surah.hizb ?: 0).toString()
-        binding.juzOrder.text = (surah.juz ?: 0).toString()
+        binding.hizbOrder.text = surah.hizb?.let { numberFormatter.format(it) }
+        binding.juzOrder.text = surah.juz?.let { numberFormatter.format(it) }
 
         binding.tvAyaTranslate1 visible (surah.translation1 != null)
         binding.tvAyaTranslate2 visible (surah.translation2 != null)
@@ -56,18 +59,18 @@ class AyaView @JvmOverloads constructor(
     }
 
     @ModelProp
-    fun mainAyaFontSize(size : Int){
+    fun mainAyaFontSize(size: Int) {
         binding.tvAyaContent.textSize = size.toFloat()
     }
 
     @ModelProp
-    fun translationFontSize(size : Int){
+    fun translationFontSize(size: Int) {
         binding.tvAyaTranslate1.textSize = size.toFloat()
         binding.tvAyaTranslate2.textSize = size.toFloat()
     }
 
     @ModelProp
-    fun toolbarVisible(visible : Boolean){
+    fun toolbarVisible(visible: Boolean) {
         binding.ayaToolbar visible visible
     }
 

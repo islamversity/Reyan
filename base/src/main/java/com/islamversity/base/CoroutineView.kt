@@ -87,7 +87,7 @@ abstract class CoroutineView<
         presenter
             .receiveStates()
             .catch {
-                Logger.log(Severity.Error, "PublishingState", it, "presenter state flow exception caught: ${it.localizedMessage}")
+                Logger.log("presenter state flow exception caught: ${it.localizedMessage}", Severity.Error, "PublishingState", it,)
             }
             .onEach {
                 render(it)
@@ -98,7 +98,7 @@ abstract class CoroutineView<
     @Suppress("MemberVisibilityCanBePrivate")
     protected fun Flow<I>.newIntents() =
         catch {
-            Logger.log(Severity.Error, "ReceivingIntents", it, "receiving intents faced exception, caught: ${it.localizedMessage}")
+            Logger.log("receiving intents faced exception, caught: ${it.localizedMessage}", Severity.Error, "ReceivingIntents", it,)
         }.onEach {
             presenter.processIntents(it)
         }.launchIn(this@CoroutineView)

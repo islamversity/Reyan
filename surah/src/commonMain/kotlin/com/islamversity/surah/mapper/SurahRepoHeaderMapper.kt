@@ -12,7 +12,7 @@ class SurahRepoHeaderMapper : Mapper<SurahRepoModel, SurahHeaderUIModel> {
             number = item.order.toString(),
             name = item.arabicName,
             nameTranslated = item.mainName,
-            origin = item.revealedType.rawName,
+            origin = item.revealedType,
             verses = item.ayaCount.toInt(),
             fontSize = 20,
             showBismillah = item.bismillahType.isVisible(),
