@@ -9,5 +9,5 @@ import nativeShared
 
 enum AyaRowAction {
     case None
-    case BookmarkClick(AyaUIModel)
+    case ShareClick(AyaUIModel)
 }

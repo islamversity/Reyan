@@ -81,10 +81,7 @@ struct SurahHeaderView : View {
                     .frame(width: 150, height: 23, alignment: .center)
                     .padding(.bottom, 15)
             }
-            
         }
-        
-       
     }
 }
 

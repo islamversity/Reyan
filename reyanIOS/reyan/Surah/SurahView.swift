@@ -4,7 +4,7 @@ import NavigationRouter
 import nativeShared
 import Combine
 
-struct QuranView: View {
+struct SurahView: View {
     
     @ObservedObject public var flowCollector: SurahStateCollector = SurahStateCollector()
     
@@ -25,29 +25,30 @@ struct QuranView: View {
                 switch action {
                 case .None :
                     break
-                case .BookmarkClick(let uiModel) :
+                case .ShareClick(let uiModel) :
                     presenter.processIntents(intents: SurahIntent.AyaActionsShare.init(aya: uiModel))
                 }
             }
             .store(in: &cancellables)
+        
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { (t) in
+            presenter.processIntents(intents: SurahIntent.Initial.init(localModel: initialData))
+        }
     }
     
     var body: some View {
         
-        presenter.processIntents(intents: SurahIntent.Initial.init(localModel: initialData))
         let items = flowCollector.uiState.items
         
         return VStack {
-            Button(action: {
-                presenter
-                    .processIntents(
-                        intents: SurahIntent.Initial.init(localModel: initialData))
-            })
-            {
-                Text("init")
-            }
-            
-            
+//            Button(action: {
+//                presenter
+//                    .processIntents(
+//                        intents: SurahIntent.Initial.init(localModel: initialData))
+//            })
+//            {
+//                Text("init")
+//            }
             
             ScrollView {
                 
@@ -69,7 +70,7 @@ struct QuranView: View {
                                 showismillah: vm.showBismillah
                             )
                         }else if item is AyaUIModel {
-                                                        
+                            
                             AyaRowView (uiModel: item as! AyaUIModel, rowIntents: rowIntents)
                             
                             Divider()
@@ -80,9 +81,6 @@ struct QuranView: View {
                 .fixedSize(horizontal: false, vertical: true)
             }
         }
-//        .onAppear(perform: {
-//            presenter.processIntents(intents: SurahIntent.Initial.init(localModel: initialData))
-//        })
     }
 }
 

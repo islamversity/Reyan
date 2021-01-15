@@ -9,8 +9,9 @@ import Combine
 
 class AyaToolbarIntents: ObservableObject {
     
-    @Published var bookmarkClick : Bool = false
-    
+//    @Published var bookmarkClick : Bool = false
+    @Published var shareClick : Bool = false
+
 }
 
 

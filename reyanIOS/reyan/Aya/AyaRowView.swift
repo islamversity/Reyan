@@ -20,9 +20,11 @@ struct AyaRowView : View {
         self.uiModel = uiModel
         self.rowIntents = rowIntents
                 
-        ayaToolbarIntents.$bookmarkClick
+        ayaToolbarIntents.$shareClick
             .sink { isClick in
-                rowIntents.action = .BookmarkClick(uiModel)
+                if isClick {
+                    rowIntents.action = .ShareClick(uiModel)
+                }
             }
             .store(in: &cancellables)
     }

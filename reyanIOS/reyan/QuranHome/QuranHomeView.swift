@@ -40,7 +40,6 @@ struct QuranHomeView: View, Resolving {
                 HStack {
                                         
                     Button(action: {
-                        print("settings click")
                         presenter.processIntents(intents: QuranHomeIntent.SettingsClicked.init())
                     })
                     {

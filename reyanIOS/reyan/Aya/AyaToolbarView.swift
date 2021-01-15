@@ -29,27 +29,27 @@ struct AyaToolbarView : View {
 //            }
 //            .buttonStyle(BorderlessButtonStyle())
 //            
-//            Button(action: {
-//                
-//            })
-//            {
-//            Image.ic_share
-//                .resizable()
-//                .frame(width: 12, height: 15, alignment: .center)
-//                .padding(10)
-//            }
-//            .buttonStyle(BorderlessButtonStyle())
-//            
             Button(action: {
-                intents.bookmarkClick = true
+                intents.shareClick = true
             })
             {
-            Image.ic_bookmark
+            Image.ic_share
                 .resizable()
-                .frame(width: 10.5, height: 15, alignment: .center)
+                .frame(width: 12, height: 15, alignment: .center)
                 .padding(10)
             }
             .buttonStyle(BorderlessButtonStyle())
+            
+//            Button(action: {
+//                intents.bookmarkClick = true
+//            })
+//            {
+//            Image.ic_bookmark
+//                .resizable()
+//                .frame(width: 10.5, height: 15, alignment: .center)
+//                .padding(10)
+//            }
+//            .buttonStyle(BorderlessButtonStyle())
             
         }
         .background(Color.green_50)

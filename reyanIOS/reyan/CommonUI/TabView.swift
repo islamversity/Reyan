@@ -17,7 +17,7 @@ struct TabView : View {
         VStack{
             
             Text(text)
-                .foregroundColor(isSelected ? Color.black : Color.green)
+                .foregroundColor(isSelected ? Color.gray_800 : Color.primary)
             
             Rectangle()
                 .frame(width: 80, height: 3, alignment: .center)

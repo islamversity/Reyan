@@ -37,7 +37,7 @@ public final class ReyanModule: RoutableModule {
         
         let surahRoute: NavigationRoute = NavigationRoute(
             path: Screens.SurahCompanion().url + "/:\(SurahLocalModel.Companion().EXTRA_SURAH_DETAIL)",
-            type: QuranViewParent.self,
+            type: SurahViewParent.self,
             requiresAuthentication: false)
 
         
