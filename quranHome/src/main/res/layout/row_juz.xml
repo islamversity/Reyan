@@ -27,7 +27,8 @@
             android:textColor="@color/green_dark"
             android:textSize="@dimen/medium_text"
             android:textStyle="bold"
-            tools:text="27" />
+            tools:text="27"
+            tools:ignore="SpUsage" />
 
         <TextView
             style="@style/blackTitle"
@@ -67,7 +68,7 @@
             style="@style/greySubtitle"
             android:layout_below="@+id/juzLine"
             android:layout_alignParentEnd="true"
-            android:layout_marginStart="@dimen/low_margin"
+            android:layout_marginStart="@dimen/_juz_bullet_size"
             android:layout_marginTop="@dimen/min_margin"
             tools:text="Start Name"
             tools:ignore="SpUsage" />
