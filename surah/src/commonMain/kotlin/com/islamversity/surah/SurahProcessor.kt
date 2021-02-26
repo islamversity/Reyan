@@ -6,15 +6,16 @@ import com.islamversity.core.mvi.MviProcessor
 import com.islamversity.domain.model.aya.AyaRepoModel
 import com.islamversity.domain.model.surah.SurahID
 import com.islamversity.domain.model.surah.SurahRepoModel
+import com.islamversity.domain.model.surah.SurahStateRepoModel
 import com.islamversity.domain.repo.SettingRepo
 import com.islamversity.domain.repo.aya.GetAyaUseCase
 import com.islamversity.domain.repo.surah.GetSurahUsecase
+import com.islamversity.domain.repo.surah.SaveSurahStateUsecase
 import com.islamversity.navigation.Navigator
 import com.islamversity.navigation.model.SurahLocalModel
 import com.islamversity.surah.model.AyaUIModel
 import com.islamversity.surah.model.SurahHeaderUIModel
 import com.islamversity.surah.model.UIItem
-import com.islamversity.surah.settings.SurahSettingsProcessor
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 
@@ -23,8 +24,10 @@ class SurahProcessor(
     private val getAyaUseCase: GetAyaUseCase,
     private val ayaMapper: Mapper<AyaRepoModel, AyaUIModel>,
     private val surahRepoHeaderMapper: Mapper<SurahRepoModel, SurahHeaderUIModel>,
+    private val surahStateMapper: Mapper<SurahLocalModel.FullSurah, SurahStateRepoModel>,
     private val settingRepo: SettingRepo,
     private val surahUsecase: GetSurahUsecase,
+    private val saveSurahStateUseCase: SaveSurahStateUsecase,
     private val settingsProcessor: MviProcessor<SurahIntent, SurahResult>
 ) : BaseProcessor<SurahIntent, SurahResult>() {
 
@@ -34,6 +37,7 @@ class SurahProcessor(
         translationFontSizeProcessor,
         ayaToolbarVisibleProcessor,
         settingsProcessor.actionProcessor,
+        surahSaveState
     )
 
     private val processInitial: FlowBlock<SurahIntent, SurahResult> = {
@@ -167,6 +171,15 @@ class SurahProcessor(
             .flatMapLatest {
                 settingRepo.getAyaToolbarVisibility().map {
                     SurahResult.AyaToolbarVisible(it)
+                }
+            }
+    }
+
+    private val surahSaveState: FlowBlock<SurahIntent, SurahResult> = {
+        ofType<SurahIntent.SaveState>()
+            .flatMapLatest {
+                saveSurahStateUseCase.saveState(surahStateMapper.map(it.state)).map {isSuccess->
+                    SurahResult.SaveSurahState(isSuccess)
                 }
             }
     }

@@ -30,12 +30,16 @@ sealed class SurahIntent : MviIntent {
         data class NewSecondTranslation(
                 val language: CalligraphyUIModel
         ) : ChangeSettings()
+
     }
 
     sealed class AyaActions(
             val model : AyaUIModel
     ) : SurahIntent(){
         data class Share(val aya : AyaUIModel) : AyaActions(aya)
-
     }
+
+    data class SaveState(
+        val state: SurahLocalModel.FullSurah
+    ) : SurahIntent()
 }
