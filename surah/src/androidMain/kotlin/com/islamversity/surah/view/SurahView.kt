@@ -6,45 +6,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ShareCompat
-import com.airbnb.epoxy.EpoxyVisibilityTracker
-import com.airbnb.epoxy.VisibilityState
+import androidx.recyclerview.widget.RecyclerView
 import com.islamversity.base.CoroutineView
 import com.islamversity.base.ext.setHidable
 import com.islamversity.core.mvi.MviPresenter
 import com.islamversity.daggercore.CoreComponent
-import com.islamversity.daggercore.helpers.LanguageConfigure
 import com.islamversity.daggercore.helpers.languageConfigure
 import com.islamversity.navigation.model.SurahLocalModel
-import com.islamversity.navigation.model.fromData
 import com.islamversity.navigation.requireArgs
 import com.islamversity.surah.R
+import com.islamversity.surah.ScrollToAya
 import com.islamversity.surah.SurahIntent
 import com.islamversity.surah.SurahState
 import com.islamversity.surah.databinding.ViewSurahBinding
 import com.islamversity.surah.di.DaggerSurahComponent
 import com.islamversity.surah.model.AyaUIModel
 import com.islamversity.surah.model.SurahHeaderUIModel
-import com.islamversity.surah.settings.SurahSettingsState
 import com.islamversity.surah.view.settings.OnSettings
 import com.islamversity.surah.view.settings.SurahSettingsView
 import com.islamversity.surah.view.utils.BuildFinishedScroller
-import kotlinx.coroutines.channels.BroadcastChannel
-import kotlinx.coroutines.channels.Channel
+import com.islamversity.view_component.ext.currentPosition
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.merge
 import java.text.NumberFormat
-import java.util.*
 import javax.inject.Inject
 
 class SurahView(
     bundle: Bundle
 ) : CoroutineView<ViewSurahBinding, SurahState, SurahIntent>(bundle) {
 
+    private var state = SurahState.idle()
     private lateinit var numberFormat: NumberFormat
     private var settingsDialog: SurahSettingsView? = null
-    private var settingsState: SurahSettingsState = SurahSettingsState()
     private val onSettings: OnSettings = { setting ->
         intents.tryEmit(setting)
     }
@@ -73,6 +66,23 @@ class SurahView(
         binding.ayaList.setHidable(binding.fabUp, binding.tvSurahName)
         binding.settings.setOnClickListener { openSettingsDialog(it.context) }
         binding.tvSurahName.text = getToolbarName(binding.root.context, extraLocal)
+
+        binding.ayaList.addOnScrollListener(object: RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (newState==RecyclerView.SCROLL_STATE_IDLE){
+                    val ayaPosition = binding.ayaList.currentPosition()
+                    val header = state.items.filter { it is SurahHeaderUIModel }.first() as SurahHeaderUIModel
+                    val item = state.items.get(ayaPosition)
+                    if (item is AyaUIModel) {
+                        intents.tryEmit(
+                            SurahIntent.SaveState(SurahLocalModel.FullSurah(header.name,header.rowId,item.order))
+                        )
+                    }
+                }
+            }
+        })
+
     }
 
     private fun getToolbarName(context: Context, model: SurahLocalModel): String =
@@ -82,7 +92,7 @@ class SurahView(
         }
 
     private fun openSettingsDialog(context: Context) {
-        settingsDialog = SurahSettingsView(context, settingsState)
+        settingsDialog = SurahSettingsView(context, state.settingsState)
         settingsDialog!!.onSettings = onSettings
         settingsDialog!!.setOnCancelListener { clearSettings() }
         settingsDialog!!.show()
@@ -100,11 +110,10 @@ class SurahView(
     }
 
     override fun intents(): Flow<SurahIntent> =
-        flowOf(
-            SurahIntent.Initial(extraLocal)
-        )
+        flowOf(SurahIntent.Initial(extraLocal))
 
     override fun render(state: SurahState) {
+        this.state = state
         renderLoading(state.base)
         renderError(state.base)
 
@@ -112,12 +121,7 @@ class SurahView(
             router.popController(this)
         }
 
-        settingsState = state.settingsState
-
         binding.ayaList.withModelsAsync {
-            addModelBuildListener {
-
-            }
             state.items.forEach {
                 if (it is SurahHeaderUIModel) {
                     surahHeader {

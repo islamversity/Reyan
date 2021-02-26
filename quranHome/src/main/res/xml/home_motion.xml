@@ -58,6 +58,17 @@
             motion:layout_constraintTop_toBottomOf="@id/inputCard" />
 
         <Constraint
+                android:id="@id/surahStateView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:alpha="0.0"
+                android:layout_margin="@dimen/large_margin"
+                android:layout_marginHorizontal="@dimen/large_margin"
+                motion:layout_constraintEnd_toEndOf="parent"
+                motion:layout_constraintBottom_toTopOf="@+id/inputCard"
+                motion:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint
             android:id="@id/inputCard"
             android:layout_width="match_parent"
             android:layout_height="60dp"
@@ -92,6 +103,17 @@
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
             motion:layout_constraintTop_toBottomOf="@id/inputCard" />
+
+        <Constraint
+            android:id="@id/surahStateView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="1.0"
+            android:layout_margin="@dimen/large_margin"
+            android:layout_marginHorizontal="@dimen/large_margin"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintBottom_toTopOf="@+id/inputCard"
+            motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
             android:id="@id/inputCard"

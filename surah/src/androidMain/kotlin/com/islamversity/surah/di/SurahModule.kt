@@ -7,14 +7,18 @@ import com.islamversity.daggercore.scope.FeatureScope
 import com.islamversity.domain.model.Calligraphy
 import com.islamversity.domain.model.aya.AyaRepoModel
 import com.islamversity.domain.model.surah.SurahRepoModel
+import com.islamversity.domain.model.surah.SurahStateRepoModel
 import com.islamversity.domain.repo.CalligraphyRepo
 import com.islamversity.domain.repo.SettingRepo
 import com.islamversity.domain.repo.aya.GetAyaUseCase
 import com.islamversity.domain.repo.surah.GetSurahUsecase
+import com.islamversity.domain.repo.surah.SaveSurahStateUsecase
 import com.islamversity.navigation.Navigator
+import com.islamversity.navigation.model.SurahLocalModel
 import com.islamversity.surah.*
 import com.islamversity.surah.mapper.AyaRepoUIMapper
 import com.islamversity.surah.mapper.SurahRepoHeaderMapper
+import com.islamversity.surah.mapper.SurahStateRepoMapper
 import com.islamversity.surah.model.AyaUIModel
 import com.islamversity.surah.model.CalligraphyDomainUIMapper
 import com.islamversity.surah.model.CalligraphyUIModel
@@ -34,7 +38,9 @@ object SurahModule {
         mapper: Mapper<AyaRepoModel, AyaUIModel>,
         settings: SettingRepo,
         surahUsecase: GetSurahUsecase,
+        saveSurahStateUsecase: SaveSurahStateUsecase,
         surahRepoHeaderMapper: Mapper<SurahRepoModel, SurahHeaderUIModel>,
+        surahStateMapper: Mapper<SurahLocalModel.FullSurah, SurahStateRepoModel>,
         settingsProcessor : SurahSettingsProcessor
     ): MviProcessor<SurahIntent, SurahResult> =
         SurahProcessor(
@@ -43,7 +49,9 @@ object SurahModule {
             ayaMapper = mapper,
             settingRepo = settings,
             surahUsecase = surahUsecase,
+            saveSurahStateUseCase = saveSurahStateUsecase,
             surahRepoHeaderMapper = surahRepoHeaderMapper,
+            surahStateMapper = surahStateMapper,
             settingsProcessor = settingsProcessor
         )
 
@@ -63,6 +71,10 @@ object SurahModule {
     @Provides
     @JvmStatic
     fun provideSurahRepoHeaderMapper(): Mapper<SurahRepoModel, SurahHeaderUIModel> = SurahRepoHeaderMapper()
+
+    @Provides
+    @JvmStatic
+    fun provideSurahStateMapper(): Mapper<SurahLocalModel.FullSurah, SurahStateRepoModel> = SurahStateRepoMapper()
 
     @Provides
     @JvmStatic

@@ -5,21 +5,20 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.animation.addListener
 import com.islamversity.base.CoroutineView
+import com.islamversity.core.Logger
 import com.islamversity.core.mvi.MviPresenter
 import com.islamversity.daggercore.CoreComponent
 import com.islamversity.daggercore.lifecycleComponent
 import com.islamversity.daggercore.navigator.DaggerDefaultNavigationComponent
 import com.islamversity.quran_home.databinding.QuranHomeViewBinding
 import com.islamversity.quran_home.feature.home.di.DaggerQuranHomeComponent
-import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.merge
-import kotlinx.coroutines.flow.receiveAsFlow
 import javax.inject.Inject
-import kotlin.time.ExperimentalTime
 
 class QuranHomeView : CoroutineView<QuranHomeViewBinding, QuranHomeState, QuranHomeIntent>() {
+
+    private lateinit var savedSurahState: SavedSurahState
 
     @Inject
     override lateinit var presenter: MviPresenter<QuranHomeIntent, QuranHomeState>
@@ -46,6 +45,10 @@ class QuranHomeView : CoroutineView<QuranHomeViewBinding, QuranHomeState, QuranH
             }.start()
         }
 
+        binding.surahStateView.setOnClickListener {
+            intents.tryEmit(QuranHomeIntent.LastVisitClicked(savedSurahState))
+        }
+
         binding.viewPager.adapter = HomePagerAdapter(this)
         binding.tabLayout.setupWithViewPager(binding.viewPager)
     }
@@ -64,9 +67,25 @@ class QuranHomeView : CoroutineView<QuranHomeViewBinding, QuranHomeState, QuranH
     override fun render(state: QuranHomeState) {
         renderLoading(state.base)
         renderError(state.base)
+        renderTabPosition(state)
+        renderSavedSurahState(state.savedSurahState)
     }
 
-    @ExperimentalTime
+    private fun renderSavedSurahState(savedSurahState: SavedSurahState?) {
+        Logger.log("SurahState v get, surahName: ${savedSurahState?.surahName}")
+        savedSurahState?.let {
+            this.savedSurahState = savedSurahState
+            binding.surahStateView.show(savedSurahState)
+        }?:run{
+            binding.surahStateView.hide()
+        }
+
+    }
+
+    private fun renderTabPosition(state: QuranHomeState) {
+        binding.viewPager.currentItem = state.tabPosition
+    }
+
     override fun intents(): Flow<QuranHomeIntent> =
         flowOf(QuranHomeIntent.Initial)
 

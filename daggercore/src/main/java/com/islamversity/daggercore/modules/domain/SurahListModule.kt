@@ -2,6 +2,7 @@ package com.islamversity.daggercore.modules.domain
 
 import com.islamversity.core.Mapper
 import com.islamversity.db.datasource.CalligraphyLocalDataSource
+import com.islamversity.db.datasource.SettingsDataSource
 import com.islamversity.db.datasource.SurahLocalDataSource
 import com.islamversity.db.model.SurahWithTwoName
 import com.islamversity.domain.model.surah.SurahRepoModel
@@ -20,10 +21,12 @@ object SurahListModule {
     @Provides
     fun bindSurahListRepo(
         dataSource: SurahLocalDataSource,
+        settingDataSource: SettingsDataSource,
         mapper: Mapper<SurahWithTwoName, SurahRepoModel>
     ): SurahRepo =
         SurahRepoImpl(
             dataSource,
+            settingDataSource,
             mapper
         )
 

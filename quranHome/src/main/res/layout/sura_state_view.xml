@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
+        tools:parentTag="androidx.cardview.widget.CardView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:id="@+id/title"
+                android:padding="@dimen/medium_padding"
+                android:fontFamily="@font/english_regular_medium"
+                android:layout_height="wrap_content"/>
+    </LinearLayout>
+</merge>
