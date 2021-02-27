@@ -43,7 +43,7 @@ struct SearchBarView : View {
                     .padding(.horizontal, 20.0)
                     .font(.custom("Vazir", size: 16))
 
-                Image("ic_search")
+                Image.ic_search
                     .resizable()
                     .frame(width: 24, height: 24, alignment: .center)
                     .padding(.trailing, 20)

@@ -2,18 +2,17 @@
 import UIKit
 import NavigationRouter
 import nativeShared
+import Resolver
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, Resolving {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         // Register modules
         iOSNavigator.loadRoutableModules()
-        DatabaseFillerUsecase().fillDB()
         
-//        Logger().log(severity: Severity_.error, message: "AppDelegate", tag: "AppDelegate", throwable: nil)
-        
+        //
         whereIsMySQLite()
                 
         return true

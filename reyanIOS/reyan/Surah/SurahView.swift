@@ -81,6 +81,10 @@ struct SurahView: View {
                 .fixedSize(horizontal: false, vertical: true)
             }
         }
+        .navigationBarTitle("Holy Quran", displayMode: .inline)
+       
+//        .navigationBarTitle(Text().foregroundColor(.green_800))
+        
     }
 }
 

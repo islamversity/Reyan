@@ -33,5 +33,6 @@ public extension Image {
 
 public extension Image {
     static let bismillah = Image("bismillah")
+    static let logo = Image("logo")
 
 }

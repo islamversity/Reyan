@@ -1,48 +1,10 @@
 
-//  Created by meghdad on 11/15/20.
+//  Created by meghdad on 2/25/21.
 
 import nativeShared
-import Resolver
-import UIKit
 
 
-struct DatabaseFillerUsecase : Resolving {
-    
-    func fillDB() {
-        
-        print("fill DB starts ...\(Date())")
-
-        let config : DatabaseFileConfig = DatabaseFileConfiger()
-        
-        let useCase = DatabaseFillerUseCaseImpl(db: resolver.resolve(), config: config)
-        FlowUtilsKt.wrap(useCase.status()).watch { (status: AnyObject?) in
-            print("database status update= \(String(describing: status))")
-        }
-        
-        useCase.needsFilling { (kbool, error) in
-            if let doseNeed = kbool {
-                if doseNeed as! Bool {
-                    print("need to fill DB")
-                    useCase.fill { (kunuit, error) in
-                        print("fill DB finished ... \(Date())")
-                        print(error ?? "")
-                    }
-                }else{
-                    print("DB already filled")
-                }
-            }
-        }
-    }
-}
-
-class UUIDGenerator {
-    
-    func generateRandomUUID() -> String {
-        UUID().uuidString
-    }
-}
-
-class DatabaseFileConfiger : DatabaseFileConfig {
+class IOSDatabaseFileConfiger : DatabaseFileConfig {
     
     func generateRandomUUID() -> String {
         UUID().uuidString
@@ -77,12 +39,11 @@ class DatabaseFileConfiger : DatabaseFileConfig {
             friendlyName: "فارسی-مکرام شیرازی", code: Calligraphy__(languageCode: "fa", calligraphyName: "Makarem Shirazi")
         )
     }
-    
 
-    init() {
-        
-        let generator = UUIDGenerator()
-    }
+//    init() {
+//
+//        let generator = UUIDGenerator()
+//    }
     
     func getQuranArabicText() -> KotlinByteArray {
         return convertTextFilesToKotlinByteArray(fileName: "quran-simple-one-line", fileType: "json")
@@ -121,27 +82,3 @@ class DatabaseFileConfiger : DatabaseFileConfig {
     }
    
 }
-
-
-extension Data {
-    var bytes : [UInt8]{
-        return [UInt8](self)
-    }
-}
-
-//
-//extension Data {
-//
-//    init<T>(fromArray values: [T]) {
-//        var values = values
-//        self.init(buffer: UnsafeBufferPointer(start: &values, count: values.count))
-//    }
-//
-//    func toArray<T>(type: T.Type) -> [T] {
-//        let value = self.withUnsafeBytes {
-//            $0.baseAddress?.assumingMemoryBound(to: T.self)
-//        }
-//        return [T](UnsafeBufferPointer(start: value, count: self.count / MemoryLayout<T>.stride))
-//    }
-//
-//}

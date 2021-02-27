@@ -70,6 +70,12 @@ extension Resolver {
         }
         
         // OnBoarding
+        register{
+            OnBoardingPresenter(processor: resolve(name : "OnBoardingProcessor"))
+        }
+        register(MviProcessor.self, name: "OnBoardingProcessor") {
+            OnBoardingProcessor(navigator: resolve(), fillerUseCase: resolve())
+        }
         
     }
     
@@ -248,6 +254,18 @@ extension Resolver {
     }
     
     public static func registerNativeDatabase() {
+        
+        register(IOSDatabaseFiller.self){
+            IOSDatabaseFiller(fillerUseCase: resolve())
+        }
+        
+        register(DatabaseFillerUseCase.self) {
+            DatabaseFillerUseCaseImpl(db: resolve(), config: resolve())
+        }
+        
+        register(DatabaseFileConfig.self){
+            IOSDatabaseFileConfiger()
+        }
         
         register(Main.self){
             NativeDatabaseFactory().create()

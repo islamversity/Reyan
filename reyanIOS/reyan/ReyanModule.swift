@@ -19,7 +19,11 @@ public final class ReyanModule: RoutableModule {
         // Define routes
         
 //        print("QuranHomeViewParent url = \(Screens.HomeCompanion().url)")
-
+        let onBoardingRoute: NavigationRoute = NavigationRoute(
+            path: Screens.OnBoarding().url,
+            type: OnBoardingViewParent.self,
+            requiresAuthentication: false)
+        
         let quranHomeRoute: NavigationRoute = NavigationRoute(
             path: Screens.HomeCompanion().url,
             type: QuranHomeViewParent.self,
@@ -43,7 +47,7 @@ public final class ReyanModule: RoutableModule {
         
         // Register routes
         
-        NavigationRouter.bind(routes: [quranHomeRoute, searchRoute, homeSettingsRoute, surahRoute])
+        NavigationRouter.bind(routes: [onBoardingRoute, quranHomeRoute, searchRoute, homeSettingsRoute, surahRoute])
 
     }
 }

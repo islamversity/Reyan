@@ -18,6 +18,10 @@ struct SurahListView : View {
         self.presenter = presenter
 
         flowCollector.bindState(presenter: presenter)
+        
+        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { (t) in
+            presenter.processIntents(intents: SurahListIntent.Initial.init())
+        }
                 
         UITableView.appearance().backgroundColor = UIColor.clear
         UITableViewCell.appearance().backgroundColor = UIColor.clear
@@ -25,7 +29,7 @@ struct SurahListView : View {
     
     var body: some View {
             
-        presenter.processIntents(intents: SurahListIntent.Initial.init())
+//        presenter.processIntents(intents: SurahListIntent.Initial.init())
 
         return ZStack {
             Color.clear
