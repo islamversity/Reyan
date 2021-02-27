@@ -341,6 +341,29 @@
 
         </LinearLayout>
 
+        <LinearLayout
+                android:id="@+id/fossLicenseView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/fossLicenseTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:paddingLeft="@dimen/large_padding"
+                    android:paddingTop="@dimen/medium_padding"
+                    android:paddingRight="@dimen/large_padding"
+                    android:paddingBottom="@dimen/low_padding"
+                    android:text="@string/second_translation_calligraphy"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/medium_text"
+                    tools:ignore="SpUsage" />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </ScrollView>
