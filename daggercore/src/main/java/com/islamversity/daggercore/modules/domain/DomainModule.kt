@@ -8,6 +8,7 @@ import dagger.Module
         SurahListModule::class,
         JuzListModule::class,
         SettingsRepoModule::class,
+        LicensesRepoModule::class,
         MappersModule::class,
         LocalDataSourceModule::class,
         SearchRepoModule::class,

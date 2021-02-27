@@ -2,17 +2,22 @@ package com.islamversity.settings
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.bluelinelabs.conductor.Router
 import com.islamversity.base.CoroutineView
 import com.islamversity.base.widgets.AppFontSizeStore
 import com.islamversity.base.widgets.FontSizeScale
 import com.islamversity.core.mvi.MviPresenter
 import com.islamversity.daggercore.CoreComponent
+import com.islamversity.daggercore.lifecycleComponent
+import com.islamversity.daggercore.navigator.DaggerDefaultNavigationComponent
 import com.islamversity.daggercore.helpers.languageConfigure
 import com.islamversity.domain.model.QuranReadFontSize
 import com.islamversity.domain.model.TranslateReadFontSize
 import com.islamversity.settings.databinding.ViewSettingsBinding
 import com.islamversity.settings.di.DaggerSettingsComponent
 import com.islamversity.settings.models.CalligraphyUIModel
+import com.islamversity.settings.settings.SettingsIntent
+import com.islamversity.settings.settings.SettingsState
 import com.islamversity.view_component.optionselector.DismissListener
 import com.islamversity.view_component.optionselector.OptionSelector
 import com.warkiz.widget.IndicatorSeekBar
@@ -25,7 +30,7 @@ import kotlinx.coroutines.flow.asFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.merge
 import javax.inject.Inject
-
+import android.content.Intent
 
 class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsIntent>() {
 
@@ -37,6 +42,8 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
 
     private val intentChannel = BroadcastChannel<SettingsIntent>(Channel.BUFFERED)
 
+    val sendMail = Intent(Intent.ACTION_SENDTO)
+
     private var firstTranslationCalligraphies: List<CalligraphyUIModel> = emptyList()
     private var secondTranslationCalligraphies: List<CalligraphyUIModel> = emptyList()
     private var surahNameCalligraphies: List<CalligraphyUIModel> = emptyList()
@@ -47,7 +54,14 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
         ViewSettingsBinding.inflate(inflater, container, false)
 
     override fun injectDependencies(core: CoreComponent) {
-        DaggerSettingsComponent.factory().create(core).inject(this)
+        DaggerSettingsComponent.factory()
+            .create(
+                core,
+                router,
+                activity!!.lifecycleComponent,
+                DaggerDefaultNavigationComponent.factory().create(core, router)
+            )
+            .inject(this)
     }
 
     override fun beforeBindingView(binding: ViewSettingsBinding) {
@@ -95,17 +109,23 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
 
         binding.firstTranslationCalligraphy.setOnClickListener {
             OptionSelector(binding.secondSurahCalligraphy.context)
-                .options(firstTranslationCalligraphies.map { it.name.takeIf { it.isNotBlank() } ?: binding.root.context.getString(R.string.setting_none_calligraphy_selected)})
+                .options(firstTranslationCalligraphies.map {
+                    it.name.takeIf { it.isNotBlank() }
+                        ?: binding.root.context.getString(R.string.setting_none_calligraphy_selected)
+                })
                 .dismissListener(object : DismissListener {
                     override fun dismissSheet(position: Int) {
-                        intentChannel.offer( SettingsIntent.NewFirstTranslation(firstTranslationCalligraphies[position]))
+                        intentChannel.offer(SettingsIntent.NewFirstTranslation(firstTranslationCalligraphies[position]))
                     }
                 }).show()
         }
 
         binding.secondTranslationCalligraphy.setOnClickListener {
             OptionSelector(binding.secondSurahCalligraphy.context)
-                .options(secondTranslationCalligraphies.map { it.name.takeIf { it.isNotBlank() } ?: binding.root.context.getString(R.string.setting_none_calligraphy_selected) })
+                .options(secondTranslationCalligraphies.map {
+                    it.name.takeIf { it.isNotBlank() }
+                        ?: binding.root.context.getString(R.string.setting_none_calligraphy_selected)
+                })
                 .dismissListener(object : DismissListener {
                     override fun dismissSheet(position: Int) {
                         intentChannel.offer(SettingsIntent.NewSecondTranslation(secondTranslationCalligraphies[position]))
@@ -128,6 +148,17 @@ class SettingsView : CoroutineView<ViewSettingsBinding, SettingsState, SettingsI
                 intentChannel.offer(SettingsIntent.ChangeQuranFontSize(defaultQuranSize))
             }
 
+        }
+
+        binding.contactUs.setOnClickListener {
+            sendMail.data = android.net.Uri.parse("mailto:"+ resources!!.getString(R.string.contact_us_value))
+            startActivity(sendMail)
+        }
+
+        binding.versionSubtitleTv.text = BuildConfig.VERSION_NAME;
+
+        binding.fossLicenseView.setOnClickListener {
+            intentChannel.offer(SettingsIntent.LicensesClicked())
         }
 
         binding.translateFontSizeSeekBar.min = QuranReadFontSize.TRANSLATION_MIN.size.toFloat()

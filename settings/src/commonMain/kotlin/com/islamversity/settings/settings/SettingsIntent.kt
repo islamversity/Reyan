@@ -1,4 +1,4 @@
-package com.islamversity.settings
+package com.islamversity.settings.settings
 
 import com.islamversity.core.mvi.MviIntent
 import com.islamversity.settings.models.CalligraphyUIModel
@@ -24,4 +24,6 @@ sealed class SettingsIntent : MviIntent {
     class ChangeTranslateFontSize(
         val size: Int
     ) : SettingsIntent()
+
+    class LicensesClicked() : SettingsIntent()
 }

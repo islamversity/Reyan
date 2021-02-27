@@ -50,7 +50,7 @@
                 android:id="@+id/tvAppLanguageTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="start"
                 android:paddingLeft="@dimen/large_padding"
                 android:paddingTop="@dimen/medium_padding"
                 android:paddingRight="@dimen/medium_padding"
@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/arabic_regular"
-                android:gravity="left"
+                android:gravity="start"
                 android:paddingLeft="@dimen/large_padding"
                 android:paddingRight="@dimen/large_padding"
                 android:paddingBottom="@dimen/medium_padding"
@@ -90,7 +90,7 @@
                 android:id="@+id/tvAppFontSizeTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="start"
                 android:paddingLeft="@dimen/large_padding"
                 android:paddingTop="@dimen/medium_padding"
                 android:paddingRight="@dimen/medium_padding"
@@ -105,7 +105,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/arabic_regular"
-                android:gravity="left"
+                android:gravity="start"
                 android:paddingLeft="@dimen/large_padding"
                 android:paddingRight="@dimen/large_padding"
                 android:paddingBottom="@dimen/medium_padding"
@@ -129,7 +129,7 @@
                 android:id="@+id/secondSurahCalligraphyTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="start"
                 android:paddingLeft="@dimen/large_padding"
                 android:paddingTop="@dimen/medium_padding"
                 android:paddingRight="@dimen/medium_padding"
@@ -144,7 +144,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/arabic_regular"
-                android:gravity="left"
+                android:gravity="start"
                 android:paddingLeft="@dimen/large_padding"
                 android:paddingRight="@dimen/large_padding"
                 android:paddingBottom="@dimen/medium_padding"
@@ -183,7 +183,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/arabic_regular"
-                android:gravity="left"
+                android:gravity="start"
                 android:paddingLeft="@dimen/large_padding"
                 android:paddingRight="@dimen/large_padding"
                 android:paddingBottom="@dimen/medium_padding"
@@ -221,7 +221,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/arabic_regular"
-                android:gravity="left"
+                android:gravity="start"
                 android:paddingLeft="@dimen/large_padding"
                 android:paddingRight="@dimen/large_padding"
                 android:paddingBottom="@dimen/medium_padding"
@@ -243,7 +243,7 @@
                 android:id="@+id/mainFontSizeTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="start"
                 android:paddingLeft="@dimen/large_padding"
                 android:paddingTop="@dimen/medium_padding"
                 android:paddingRight="@dimen/large_padding"
@@ -298,7 +298,7 @@
                 android:id="@+id/translateFontSizeTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
+                android:gravity="start"
                 android:paddingLeft="@dimen/large_padding"
                 android:paddingTop="@dimen/medium_padding"
                 android:paddingRight="@dimen/large_padding"
@@ -338,6 +338,107 @@
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/medium_margin" />
+
+        </LinearLayout>
+
+        <View style="@style/Divider.LargeMargin" />
+    <LinearLayout
+            android:id="@+id/contactUs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:orientation="vertical">
+
+        <TextView
+                android:id="@+id/contactUsTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingTop="@dimen/medium_padding"
+                android:paddingRight="@dimen/large_padding"
+                android:paddingBottom="@dimen/low_padding"
+                android:text="@string/contact_us"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/medium_text"
+                tools:ignore="SpUsage" />
+        <TextView
+                android:id="@+id/contactUsSubtitleTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arabic_regular"
+                android:gravity="start"
+                android:paddingHorizontal="@dimen/large_padding"
+                android:paddingVertical="@dimen/min_padding"
+                android:text="@string/contact_us_value"
+                android:textColor="@color/blackLight"
+                android:textSize="@dimen/large_text"
+                tools:ignore="SpUsage" />
+    </LinearLayout>
+
+        <View style="@style/Divider.LargeMargin" />
+
+        <TextView
+                android:id="@+id/versionTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:paddingLeft="@dimen/large_padding"
+                android:paddingTop="@dimen/medium_padding"
+                android:paddingRight="@dimen/large_padding"
+                android:paddingBottom="@dimen/low_padding"
+                android:text="@string/version"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/medium_text"
+                tools:ignore="SpUsage" />
+
+        <TextView
+                android:id="@+id/versionSubtitleTv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/arabic_regular"
+                android:gravity="start"
+                android:paddingHorizontal="@dimen/large_padding"
+                android:paddingVertical="@dimen/min_padding"
+                android:text="@string/version"
+                android:textColor="@color/blackLight"
+                android:textSize="@dimen/large_text"
+                tools:ignore="SpUsage" />
+
+        <View style="@style/Divider.LargeMargin" />
+
+        <LinearLayout
+                android:id="@+id/fossLicenseView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?selectableItemBackground"
+                android:orientation="vertical">
+
+            <TextView
+                    android:id="@+id/fossLicenseTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:paddingLeft="@dimen/large_padding"
+                    android:paddingTop="@dimen/medium_padding"
+                    android:paddingRight="@dimen/large_padding"
+                    android:paddingBottom="@dimen/low_padding"
+                    android:text="@string/foss"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/medium_text"
+                    tools:ignore="SpUsage" />
+            <TextView
+                    android:id="@+id/fossLicenseTextViewSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arabic_regular"
+                    android:gravity="center"
+                    android:paddingHorizontal="@dimen/large_padding"
+                    android:paddingVertical="@dimen/min_padding"
+                    android:text="@string/tap_to_view"
+                    android:textColor="@color/blackLight"
+                    android:textSize="@dimen/large_text"
+                    tools:ignore="SpUsage" />
 
         </LinearLayout>
 

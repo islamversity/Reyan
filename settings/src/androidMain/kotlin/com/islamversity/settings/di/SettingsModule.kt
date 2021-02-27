@@ -7,12 +7,13 @@ import com.islamversity.daggercore.scope.FeatureScope
 import com.islamversity.domain.model.Calligraphy
 import com.islamversity.domain.repo.CalligraphyRepo
 import com.islamversity.domain.repo.SettingRepo
-import com.islamversity.navigation.Navigator
-import com.islamversity.settings.*
 import com.islamversity.settings.models.CalligraphyDomainUIMapper
 import com.islamversity.settings.models.CalligraphyUIModel
+import com.islamversity.settings.settings.*
 import dagger.Module
 import dagger.Provides
+import com.islamversity.navigation.Navigator
+
 
 @Module
 object SettingsModule {
@@ -33,8 +34,9 @@ object SettingsModule {
     fun provideProcessor(
         settingsRepo: SettingRepo,
         calligraphyRepo: CalligraphyRepo,
-        mapper : Mapper<Calligraphy, CalligraphyUIModel>
+        mapper : Mapper<Calligraphy, CalligraphyUIModel>,
+        navigator : Navigator
     ): MviProcessor<SettingsIntent, SettingsResult> =
-        SettingsProcessor(settingsRepo, calligraphyRepo, mapper)
+        SettingsProcessor(settingsRepo, calligraphyRepo, mapper, navigator)
 
 }
