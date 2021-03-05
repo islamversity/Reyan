@@ -9,10 +9,10 @@ import com.islamversity.settings.databinding.ViewFosslicenseBinding
 import kotlinx.coroutines.flow.Flow
 
 
-class FossLicenseView : CoroutineView<ViewFosslicenseBinding,FossLicenseState , FossLicenseIntent>()
+class FossLicenseView : CoroutineView<ViewFosslicenseBinding,LicensesState , LicensesIntent>()
 
 {
-    override var presenter: MviPresenter<FossLicenseIntent, FossLicenseState>
+    override var presenter: MviPresenter<LicensesIntent, LicensesState>
         get() = TODO("Not yet implemented")
         set(value) {}
 
@@ -20,11 +20,11 @@ class FossLicenseView : CoroutineView<ViewFosslicenseBinding,FossLicenseState , 
         TODO("Not yet implemented")
     }
 
-    override fun render(state: FossLicenseState) {
+    override fun render(state: LicensesState) {
         TODO("Not yet implemented")
     }
 
-    override fun intents(): Flow<FossLicenseIntent> {
+    override fun intents(): Flow<LicensesIntent> {
         TODO("Not yet implemented")
     }
 
