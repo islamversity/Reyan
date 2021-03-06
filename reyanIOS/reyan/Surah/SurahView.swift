@@ -65,7 +65,7 @@ struct SurahView: View {
                                 order: vm.number,
                                 name: vm.nameTranslated,
                                 originalName: vm.name,
-                                origin: vm.origin,
+                                origin: vm.origin.name,
                                 verses: String(vm.verses),
                                 showismillah: vm.showBismillah
                             )
