@@ -29,10 +29,10 @@ class QuranHomePresenter(
                 preState.copy(base = BaseState.withError(result.err))
             QuranHomeResult.Loading ->
                 preState.copy(base = BaseState.loading())
-            is QuranHomeResult.Success ->
+            is QuranHomeResult.LastBookmarkAya ->
                 preState.copy(
                     base = BaseState.stable(),
-                    savedSurahState = result.savedSurahState
+                    bookmarkState = result.bookmarkAya
                 )
         }
 }

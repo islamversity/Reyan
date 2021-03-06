@@ -9,7 +9,6 @@ import com.islamversity.domain.repo.aya.GetAyaUseCase
 import com.islamversity.domain.repo.juz.JuzListRepo
 import com.islamversity.domain.repo.juz.JuzListUsecase
 import com.islamversity.domain.repo.surah.*
-import com.islamversity.domain.usecase.DatabaseFileConfig
 import com.islamversity.domain.usecase.DatabaseFillerUseCase
 import dagger.BindsInstance
 import io.ktor.client.engine.HttpClientEngine
@@ -36,8 +35,8 @@ interface BaseComponent {
 
     fun ayaListRepo(): AyaListRepo
     fun getAyaUsecase(): GetAyaUseCase
-    fun saveSurahStateUsecase(): SaveSurahStateUsecase
-    fun getSurahStateUsecase(): GetSurahStateUsecase
+    fun saveSurahStateUsecase(): BookmarkAyaUsecase
+    fun getSurahStateUsecase(): GetBookmarkAyaUsecase
 
     fun databaseFillerUsecase() : DatabaseFillerUseCase
 

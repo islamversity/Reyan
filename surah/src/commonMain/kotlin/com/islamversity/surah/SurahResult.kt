@@ -33,10 +33,6 @@ sealed class SurahResult : MviResult {
             val visible: Boolean
     ) : SurahResult()
 
-    data class SaveSurahState(
-            val isSuccess: Boolean
-    ) : SurahResult()
-
     sealed class Settings : SurahResult() {
 
         data class TranslationCalligraphies(val list: List<CalligraphyUIModel>) : Settings()

@@ -13,7 +13,7 @@
     <com.islamversity.quran_home.feature.home.view.SurahStateView
             android:layout_width="wrap_content"
             android:id="@+id/surahStateView"
-            android:visibility="invisible"
+            android:visibility="gone"
             android:layout_margin="@dimen/large_margin"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/inputCard"

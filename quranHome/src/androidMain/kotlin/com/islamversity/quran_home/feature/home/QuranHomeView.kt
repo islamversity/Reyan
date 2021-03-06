@@ -18,8 +18,6 @@ import javax.inject.Inject
 
 class QuranHomeView : CoroutineView<QuranHomeViewBinding, QuranHomeState, QuranHomeIntent>() {
 
-    private lateinit var savedSurahState: SavedSurahState
-
     @Inject
     override lateinit var presenter: MviPresenter<QuranHomeIntent, QuranHomeState>
 
@@ -45,8 +43,8 @@ class QuranHomeView : CoroutineView<QuranHomeViewBinding, QuranHomeState, QuranH
             }.start()
         }
 
-        binding.surahStateView.setOnClickListener {
-            intents.tryEmit(QuranHomeIntent.LastVisitClicked(savedSurahState))
+        binding.surahStateView.stateClickListener {
+            intents.tryEmit(QuranHomeIntent.LastVisitClicked(it))
         }
 
         binding.viewPager.adapter = HomePagerAdapter(this)
@@ -67,23 +65,11 @@ class QuranHomeView : CoroutineView<QuranHomeViewBinding, QuranHomeState, QuranH
     override fun render(state: QuranHomeState) {
         renderLoading(state.base)
         renderError(state.base)
-        renderTabPosition(state)
-        renderSavedSurahState(state.savedSurahState)
+        renderSavedSurahState(state.bookmarkState)
     }
 
-    private fun renderSavedSurahState(savedSurahState: SavedSurahState?) {
-        Logger.log("SurahState v get, surahName: ${savedSurahState?.surahName}")
-        savedSurahState?.let {
-            this.savedSurahState = savedSurahState
-            binding.surahStateView.show(savedSurahState)
-        }?:run{
-            binding.surahStateView.hide()
-        }
-
-    }
-
-    private fun renderTabPosition(state: QuranHomeState) {
-        binding.viewPager.currentItem = state.tabPosition
+    private fun renderSavedSurahState(bookmarkState: BookmarkState?) {
+        binding.surahStateView.render(bookmarkState)
     }
 
     override fun intents(): Flow<QuranHomeIntent> =

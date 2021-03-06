@@ -51,7 +51,6 @@ class SurahListProcessor(
                 Screens.Surah(SurahLocalModel.FullSurah(
                     surahName = it.mainName,
                     surahID = it.id.id,
-                    startingAyaOrder = 0
                 ))
             }
             .navigateTo(navigator)

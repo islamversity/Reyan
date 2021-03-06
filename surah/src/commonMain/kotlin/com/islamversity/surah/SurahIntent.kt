@@ -4,6 +4,7 @@ import com.islamversity.core.mvi.MviIntent
 import com.islamversity.navigation.model.SurahLocalModel
 import com.islamversity.surah.model.AyaUIModel
 import com.islamversity.surah.model.CalligraphyUIModel
+import com.islamversity.surah.model.UIItem
 
 sealed class SurahIntent : MviIntent {
     data class Initial(
@@ -39,7 +40,9 @@ sealed class SurahIntent : MviIntent {
         data class Share(val aya : AyaUIModel) : AyaActions(aya)
     }
 
-    data class SaveState(
-        val state: SurahLocalModel.FullSurah
+    data class Scrolled(
+        val uiItems : List<UIItem>,
+        val localModel: SurahLocalModel,
+        val position : Int
     ) : SurahIntent()
 }
