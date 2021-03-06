@@ -64,11 +64,6 @@ class QuranHomeView : CoroutineView<QuranHomeViewBinding, QuranHomeState, QuranH
     override fun render(state: QuranHomeState) {
         renderLoading(state.base)
         renderError(state.base)
-        renderTabPosition(state)
-    }
-
-    private fun renderTabPosition(state: QuranHomeState) {
-        binding.viewPager.currentItem = state.tabPosition
     }
 
     @ExperimentalTime
