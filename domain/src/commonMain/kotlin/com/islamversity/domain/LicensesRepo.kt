@@ -9,12 +9,12 @@ import kotlin.coroutines.CoroutineContext
 
 interface LicensesRepo {
 
-    fun getAllLicenses(context: CoroutineContext = Dispatchers.Default): Flow<LicensesRepoModel>
+    fun getAllLicenses(context: CoroutineContext = Dispatchers.Default): Flow<List<LicensesRepoModel>>
 
 }
 
 class LicensesRepoImpl : LicensesRepo {
-    override fun getAllLicenses(context: CoroutineContext): Flow<LicensesRepoModel> {
+    override fun getAllLicenses(context: CoroutineContext): Flow<List<LicensesRepoModel>> {
         return flow {
 
             listOf(LicensesRepoModel("s", "s"))
