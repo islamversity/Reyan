@@ -28,4 +28,7 @@
   <string name="lets_get_started">استمر</string>
   <string name="loading">تحمیل</string>
   <string name="completed">منجز</string>
+
+  <string name="surah_reveal_meccan">مكة</string>
+  <string name="surah_reveal_medinan">مدينة</string>
 </resources>

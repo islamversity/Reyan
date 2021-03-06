@@ -4,14 +4,10 @@ import com.islamversity.core.mvi.BaseState
 import com.islamversity.core.mvi.BaseViewState
 
 data class QuranHomeState(
-    override val base: BaseState,
-    val tabPosition: Int
+    override val base: BaseState
 ) : BaseViewState {
     companion object {
         fun idle() =
-            QuranHomeState(
-                base = BaseState.stable(),
-                tabPosition = 0
-            )
+            QuranHomeState(base = BaseState.stable())
     }
 }

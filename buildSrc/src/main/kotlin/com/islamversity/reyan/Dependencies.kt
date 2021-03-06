@@ -33,7 +33,7 @@ object Versions {
     val robolectric = "4.2"
     val mockk = "1.9.3"
     val android_gradle_plugin = "3.6.2"
-    val junit = "4.12"
+    val junit = "4.13"
     val truth = "1.0.1"
 
 
@@ -142,7 +142,7 @@ object Deps {
 
         object Test {
             val core = "androidx.test:core:${Versions.androidXTest}"
-            val junit = "androidx.test.ext:junit:${Versions.androidXTest}"
+            val junit = "junit:junit:${Versions.junit}"
             val runner = "androidx.test:runner:${Versions.androidXTest}"
             val rules = "androidx.test:rules:${Versions.androidXTest}"
             val junitExt = "androidx.test.ext:junit:1.0.0"
