@@ -25,9 +25,6 @@ class SurahPresenter(
             {
                 notOfType(SurahIntent.Initial::class)
             },
-            {
-                notOfType(SurahIntent.SaveState::class)
-            },
     )
 
     override fun reduce(preState: SurahState, result: SurahResult): SurahState =
@@ -62,8 +59,6 @@ class SurahPresenter(
                     preState.copy(translationFontSize = result.size)
                 is SurahResult.AyaToolbarVisible ->
                     preState.copy(settingsState = preState.settingsState.copy(ayaToolbarVisible = result.visible))
-                is SurahResult.SaveSurahState ->
-                    preState.copy()
             }
 
     private val settingsReducer: (SurahSettingsState, SurahResult.Settings) -> SurahSettingsState = { preState, result ->

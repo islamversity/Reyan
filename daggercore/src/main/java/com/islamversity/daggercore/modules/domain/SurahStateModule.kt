@@ -11,11 +11,11 @@ object SurahStateModule {
     @Provides
     fun bindSaveSurahStateUsecase(
         surahRepo: SurahRepo
-    ): SaveSurahStateUsecase = SaveSurahStateUsecaseImpl(surahRepo)
+    ): BookmarkAyaUsecase = BookmarkAyaUsecaseImpl(surahRepo)
 
     @JvmStatic
     @Provides
     fun bindGetSurahStateUsecase(
         surahRepo: SurahRepo
-    ): GetSurahStateUsecase = GetSurahStateUsecaseImpl(surahRepo)
+    ): GetBookmarkAyaUsecase = GetBookmarkAyaUsecaseImpl(surahRepo)
 }

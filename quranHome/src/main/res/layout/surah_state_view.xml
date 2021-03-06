@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge
-        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
-        tools:parentTag="androidx.cardview.widget.CardView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-
     <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="wrap_content">
@@ -17,4 +12,3 @@
                 android:fontFamily="@font/english_regular_medium"
                 android:layout_height="wrap_content"/>
     </LinearLayout>
-</merge>

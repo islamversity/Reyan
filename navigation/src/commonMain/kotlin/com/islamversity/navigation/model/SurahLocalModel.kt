@@ -12,17 +12,34 @@ sealed class SurahLocalModel {
     data class FullSurah(
         val surahName: String,
         val surahID: String,
-        val startingAyaOrder: Long,
+        val startingFrom: StartingAya = StartingAya.ID.Beginning,
     ) : SurahLocalModel()
 
     @Serializable
     @SerialName("fullJuz")
     data class FullJuz(
-        val juzOrder: Long
+        val juzOrder: Long,
+        val startingFrom: StartingAya.ID = StartingAya.ID.Beginning,
     ) : SurahLocalModel()
 
     companion object {
         const val EXTRA_SURAH_DETAIL = "extra_surah_detail"
+    }
+}
+
+@Serializable
+sealed class StartingAya {
+
+    @Serializable
+    data class Order(val order : Long) : StartingAya()
+
+    @Serializable
+    sealed class ID : StartingAya(){
+        @Serializable
+        object Beginning : ID()
+
+        @Serializable
+        data class AyaId(val id : String) : ID()
     }
 }
 

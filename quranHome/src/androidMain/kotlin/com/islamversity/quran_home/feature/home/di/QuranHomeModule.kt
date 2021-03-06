@@ -4,8 +4,8 @@ import com.islamversity.core.Mapper
 import com.islamversity.core.mvi.MviPresenter
 import com.islamversity.core.mvi.MviProcessor
 import com.islamversity.daggercore.scope.FeatureScope
-import com.islamversity.domain.model.surah.SurahStateRepoModel
-import com.islamversity.domain.repo.surah.GetSurahStateUsecase
+import com.islamversity.domain.model.surah.ReadingBookmarkRepoModel
+import com.islamversity.domain.repo.surah.GetBookmarkAyaUsecase
 import com.islamversity.navigation.Navigator
 import com.islamversity.quran_home.feature.home.*
 import dagger.Module
@@ -25,9 +25,9 @@ object QuranHomeModule {
     @Provides
     fun provideProcessor(
         navigator : Navigator,
-        getSurahStateUsecase: GetSurahStateUsecase,
-        stateMapper: Mapper<SurahStateRepoModel?, SavedSurahState?>
+        getBookmarkAyaUsecase: GetBookmarkAyaUsecase,
+        stateMapper: Mapper<ReadingBookmarkRepoModel, BookmarkState>
     ): MviProcessor<QuranHomeIntent, QuranHomeResult> =
-        QuranHomeProcessor(navigator,getSurahStateUsecase,stateMapper)
+        QuranHomeProcessor(navigator,getBookmarkAyaUsecase,stateMapper)
 
 }

@@ -12,20 +12,21 @@ import com.islamversity.base.ext.setHidable
 import com.islamversity.core.mvi.MviPresenter
 import com.islamversity.daggercore.CoreComponent
 import com.islamversity.daggercore.helpers.languageConfigure
+import com.islamversity.navigation.model.StartingAya
 import com.islamversity.navigation.model.SurahLocalModel
 import com.islamversity.navigation.requireArgs
 import com.islamversity.surah.R
-import com.islamversity.surah.ScrollToAya
 import com.islamversity.surah.SurahIntent
 import com.islamversity.surah.SurahState
 import com.islamversity.surah.databinding.ViewSurahBinding
 import com.islamversity.surah.di.DaggerSurahComponent
 import com.islamversity.surah.model.AyaUIModel
 import com.islamversity.surah.model.SurahHeaderUIModel
+import com.islamversity.surah.model.UIItem
 import com.islamversity.surah.view.settings.OnSettings
 import com.islamversity.surah.view.settings.SurahSettingsView
 import com.islamversity.surah.view.utils.BuildFinishedScroller
-import com.islamversity.view_component.ext.currentPosition
+import com.islamversity.view_component.ext.firstVisiblePosition
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import java.text.NumberFormat
@@ -71,14 +72,9 @@ class SurahView(
             override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
                 super.onScrollStateChanged(recyclerView, newState)
                 if (newState==RecyclerView.SCROLL_STATE_IDLE){
-                    val ayaPosition = binding.ayaList.currentPosition()
-                    val header = state.items.filter { it is SurahHeaderUIModel }.first() as SurahHeaderUIModel
-                    val item = state.items.get(ayaPosition)
-                    if (item is AyaUIModel) {
-                        intents.tryEmit(
-                            SurahIntent.SaveState(SurahLocalModel.FullSurah(header.name,header.rowId,item.order))
-                        )
-                    }
+                    val ayaPosition = binding.ayaList.firstVisiblePosition()
+
+                    intents.tryEmit(SurahIntent.Scrolled(state.items, extraLocal, ayaPosition))
                 }
             }
         })

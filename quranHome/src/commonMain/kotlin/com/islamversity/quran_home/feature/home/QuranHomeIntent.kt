@@ -6,5 +6,5 @@ sealed class QuranHomeIntent : MviIntent {
     object Initial : QuranHomeIntent()
     object SearchClicked : QuranHomeIntent()
     object SettingsClicked : QuranHomeIntent()
-    data class LastVisitClicked(val state: SavedSurahState) : QuranHomeIntent()
+    data class LastVisitClicked(val state: BookmarkState) : QuranHomeIntent()
 }
