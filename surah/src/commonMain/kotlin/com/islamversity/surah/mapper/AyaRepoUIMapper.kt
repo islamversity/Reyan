@@ -7,7 +7,8 @@ import com.islamversity.domain.model.aya.StartPartition
 import com.islamversity.surah.model.AyaUIModel
 import com.islamversity.surah.model.SajdahTypeUIModel
 
-class AyaRepoUIMapper : Mapper<AyaRepoModel, AyaUIModel>{
+class AyaRepoUIMapper : Mapper<AyaRepoModel, AyaUIModel> {
+
     override fun map(item: AyaRepoModel): AyaUIModel =
         AyaUIModel(
             item.id.id,
@@ -17,12 +18,12 @@ class AyaRepoUIMapper : Mapper<AyaRepoModel, AyaUIModel>{
             item.order,
             false,
             mapHizbNumber(item.start, item.hizb),
-            if(item.start == StartPartition.JUZ) item.juz else null,
+            if (item.start == StartPartition.JUZ) item.juz else null,
             mapSajdahType(item.sajdahType)
         )
 
-    private fun mapSajdahType(sajdahTypeRepoModel: SajdahTypeRepoModel) : SajdahTypeUIModel =
-        when(sajdahTypeRepoModel){
+    private fun mapSajdahType(sajdahTypeRepoModel: SajdahTypeRepoModel): SajdahTypeUIModel =
+        when (sajdahTypeRepoModel) {
             SajdahTypeRepoModel.RECOMMENDED -> SajdahTypeUIModel.VISIBLE.RECOMMENDED
             SajdahTypeRepoModel.OBLIGATORY -> SajdahTypeUIModel.VISIBLE.OBLIGATORY
             SajdahTypeRepoModel.NONE -> SajdahTypeUIModel.NONE
@@ -54,14 +55,22 @@ class AyaRepoUIMapper : Mapper<AyaRepoModel, AyaUIModel>{
      * 2   |  16  |      Hizb = 4 or 3/4
      * 3   |  17  |     Juz = 3 or Hizb = 5
      */
-    private fun mapHizbNumber(startPosition : StartPartition?, rawHizb : Long) : Long? {
-        if(startPosition != StartPartition.HIZB) return null
+    private fun mapHizbNumber(startPosition: StartPartition?, rawHizb: Long): AyaUIModel.HizbProgress? {
+        if (startPosition == null) return null
 
         val remainder = rawHizb % NUMBER_OF_HIZB_PARTS
 
-        if(remainder == 0L) return rawHizb / NUMBER_OF_HIZB_PARTS
+        if (remainder == 1L) return AyaUIModel.HizbProgress.Beginning((rawHizb / NUMBER_OF_HIZB_PARTS) + 1)
 
-        return (rawHizb + NUMBER_OF_HIZB_PARTS - remainder) / NUMBER_OF_HIZB_PARTS
+        if (remainder == 0L) return AyaUIModel.HizbProgress.ThreeFourth(rawHizb / NUMBER_OF_HIZB_PARTS)
+
+        val adjustedHizbOrder = (rawHizb + NUMBER_OF_HIZB_PARTS - remainder) / NUMBER_OF_HIZB_PARTS
+
+        if (remainder == 2L) return AyaUIModel.HizbProgress.Quarter(adjustedHizbOrder)
+
+        if (remainder == 3L) return AyaUIModel.HizbProgress.Half(adjustedHizbOrder)
+
+        error("$rawHizb is not divisible by 4")
     }
 }
 

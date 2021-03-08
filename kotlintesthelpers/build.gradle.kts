@@ -34,9 +34,10 @@ kotlin {
     sourceSets["androidMain"].dependencies {
         implementation(kotlin("stdlib", Versions.kotlin))
         implementation(Deps.Android.Tools.conductor)
-        implementation(Deps.Android.Tools.conductorAndroidxTransitions)
+        implementation(Deps.Android.Test.junit)
         implementation(Deps.Android.Support.compat)
         implementation(Deps.Coroutines.android)
+        implementation(Deps.Android.Networking.okHttp)
     }
     sourceSets["androidTest"].dependencies {
         implementation(kotlin("stdlib", Versions.kotlin))
@@ -45,6 +46,9 @@ kotlin {
     }
 
     jvm()
+    sourceSets["jvmMain"].dependencies{
+        implementation(Deps.Android.Test.junit)
+    }
 
     ios()
     sourceSets["iosMain"].dependencies {

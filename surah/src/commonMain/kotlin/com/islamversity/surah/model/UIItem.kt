@@ -13,10 +13,22 @@ data class AyaUIModel(
     val translation2: String? = null,
     val order: Long,
     val toolbarVisible: Boolean,
-    val hizb: Long?,
+    val hizb: HizbProgress?,
     val juz: Long?,
     val sajdah: SajdahTypeUIModel,
-) : UIItem
+) : UIItem {
+
+    sealed class HizbProgress(val hizb : Long){
+
+        data class Beginning(val hizbNumber : Long) : HizbProgress(hizbNumber)
+
+        data class Quarter(val hizbNumber : Long) : HizbProgress(hizbNumber)
+
+        data class Half(val hizbNumber : Long) : HizbProgress(hizbNumber)
+
+        data class ThreeFourth(val hizbNumber : Long) : HizbProgress(hizbNumber)
+    }
+}
 
 sealed class SajdahTypeUIModel {
     sealed class VISIBLE : SajdahTypeUIModel() {

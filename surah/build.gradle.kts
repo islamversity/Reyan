@@ -40,6 +40,12 @@ kotlin {
         implementation(project(Deps.Modules.navigation))
         implementation(Deps.Coroutines.common)
     }
+    sourceSets["commonTest"].dependencies {
+        implementation(kotlin(Deps.Kotlin.common))
+        implementation(Deps.KotlinTest.common)
+        implementation(Deps.Coroutines.turbine)
+    }
+
     android()
     sourceSets["androidMain"].dependencies {
 
