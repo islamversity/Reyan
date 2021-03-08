@@ -31,7 +31,16 @@ struct SurahViewParent: RoutableViewParent , Resolving{
                 
 //                let formatted = initailDataJson.base16DecodedString()!
                 print("after passing= \(formatted)")
+//                let formatted = initailDataJson.base16DecodedString()!
+  
+                let formatted = initailDataJson.uppercased().base16DecodedString()!
+                
+//                let formatted = initailDataJson.base16DecodedString()!
+                print("after passing= \(formatted)")
                 let formatted = initailDataJson.base16DecodedString()!
+//                print("after passing= \(formatted)")
+                
+                
 //                print("after passing= \(formatted)")
                 
                 initialData = SurahLocalModel.Companion().fromData(data: formatted)
