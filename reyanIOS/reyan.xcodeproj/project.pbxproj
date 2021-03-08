@@ -9,29 +9,38 @@
 /* Begin PBXBuildFile section */
 		D588B2044C49CDABEB6E19EB /* libPods-reyan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 230047422AF75AA1A9BDD882 /* libPods-reyan.a */; };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
 >>>>>>> ded
+=======
+>>>>>>> d
 		E71FE05825E906FE00B51D44 /* onboarding_preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71FE05725E906FE00B51D44 /* onboarding_preview.swift */; };
 		E71FE06025E9476800B51D44 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71FE05F25E9476800B51D44 /* ProgressBarView.swift */; };
 		E71FE06525E953DF00B51D44 /* NavigationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71FE06425E953DF00B51D44 /* NavigationConfigurator.swift */; };
 		E7470AC325E7FCCC00C45734 /* IOSDatabaseFileConfiger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7470AC225E7FCCC00C45734 /* IOSDatabaseFileConfiger.swift */; };
 		E7470AC825E7FD2900C45734 /* UUIDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7470AC725E7FD2900C45734 /* UUIDGenerator.swift */; };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 393ba62... Combine 3 into 1
 >>>>>>> ded
+=======
+>>>>>>> d
 		E776A2AD259F04CB00B1EB54 /* SurahHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E776A2AC259F04CB00B1EB54 /* SurahHeaderView.swift */; };
 		E776A2B2259F078600B1EB54 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = E776A2B1259F078600B1EB54 /* Images.swift */; };
 		E776A2B7259F079200B1EB54 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = E776A2B6259F079200B1EB54 /* Colors.swift */; };
 		E776A2BC259F470000B1EB54 /* AyaToolbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E776A2BB259F470000B1EB54 /* AyaToolbarView.swift */; };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 6ae5fd7... use a tricky solution to present surah
 >>>>>>> ded
+=======
+>>>>>>> d
 		E77AD38825827FFD004FD632 /* JuzLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77AD38725827FFD004FD632 /* JuzLineView.swift */; };
 		E77AD38D258291F5004FD632 /* JuzListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77AD38C258291F5004FD632 /* JuzListView.swift */; };
 		E77AD39525829F86004FD632 /* JuzListStateCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77AD39425829F86004FD632 /* JuzListStateCollector.swift */; };
@@ -59,21 +68,23 @@
 		E7BDEBFE2590829600F8504F /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BDEBFD2590829600F8504F /* TabView.swift */; };
 		E7BDEC052590BDAA00F8504F /* HomeSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BDEC032590BDAA00F8504F /* HomeSettingsView.swift */; };
 		E7BDEC062590BDAA00F8504F /* HomeSettingsViewParent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BDEC042590BDAA00F8504F /* HomeSettingsViewParent.swift */; };
-<<<<<<< HEAD
-<<<<<<< HEAD
 		E7BDEC0D2590C02500F8504F /* SurahViewParent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BDEC0B2590C02500F8504F /* SurahViewParent.swift */; };
 		E7BDEC0E2590C02500F8504F /* SurahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BDEC0C2590C02500F8504F /* SurahView.swift */; };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
+=======
+>>>>>>> d
 		E7BDEC0D2590C02500F8504F /* QuranViewParent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BDEC0B2590C02500F8504F /* QuranViewParent.swift */; };
 		E7BDEC0E2590C02500F8504F /* QuranView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BDEC0C2590C02500F8504F /* QuranView.swift */; };
->>>>>>> a680674... develop surah view with Aya Rows and surah header
-=======
 		E7BDEC0D2590C02500F8504F /* SurahViewParent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BDEC0B2590C02500F8504F /* SurahViewParent.swift */; };
 		E7BDEC0E2590C02500F8504F /* SurahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BDEC0C2590C02500F8504F /* SurahView.swift */; };
+<<<<<<< HEAD
 >>>>>>> 6ae5fd7... use a tricky solution to present surah
 >>>>>>> ded
+=======
+>>>>>>> d
 		E7BDEC1D259BF13300F8504F /* SurahStateCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BDEC1C259BF13200F8504F /* SurahStateCollector.swift */; };
 		E7CAB2932570EB3B00E6D753 /* SearchBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CAB2922570EB3B00E6D753 /* SearchBarView.swift */; };
 		E7CAB2A425740EC700E6D753 /* SurahListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7CAB2A325740EC700E6D753 /* SurahListView.swift */; };
@@ -116,29 +127,41 @@
 		08745F589F42937201EAD41C /* Pods-reyan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reyan.debug.xcconfig"; path = "Target Support Files/Pods-reyan/Pods-reyan.debug.xcconfig"; sourceTree = "<group>"; };
 		230047422AF75AA1A9BDD882 /* libPods-reyan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-reyan.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
 =======
 >>>>>>> ded
+=======
+
+>>>>>>> d
 		E71FE05725E906FE00B51D44 /* onboarding_preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = onboarding_preview.swift; sourceTree = "<group>"; };
 		E71FE05F25E9476800B51D44 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		E71FE06425E953DF00B51D44 /* NavigationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurator.swift; sourceTree = "<group>"; };
 		E7470AC225E7FCCC00C45734 /* IOSDatabaseFileConfiger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSDatabaseFileConfiger.swift; sourceTree = "<group>"; };
 		E7470AC725E7FD2900C45734 /* UUIDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDGenerator.swift; sourceTree = "<group>"; };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 393ba62... Combine 3 into 1
 >>>>>>> ded
+=======
+
+>>>>>>> d
 		E776A2AC259F04CB00B1EB54 /* SurahHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SurahHeaderView.swift; path = reyan/QuranHome/SurahHeaderView.swift; sourceTree = SOURCE_ROOT; };
 		E776A2B1259F078600B1EB54 /* Images.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		E776A2B6259F079200B1EB54 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		E776A2BB259F470000B1EB54 /* AyaToolbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AyaToolbarView.swift; path = reyan/Aya/AyaToolbarView.swift; sourceTree = SOURCE_ROOT; };
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 6ae5fd7... use a tricky solution to present surah
 >>>>>>> ded
+=======
+
+>>>>>>> d
 		E77AD38725827FFD004FD632 /* JuzLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuzLineView.swift; sourceTree = "<group>"; };
 		E77AD38C258291F5004FD632 /* JuzListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuzListView.swift; sourceTree = "<group>"; };
 		E77AD39425829F86004FD632 /* JuzListStateCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuzListStateCollector.swift; sourceTree = "<group>"; };
@@ -164,21 +187,19 @@
 		E7BDEBFD2590829600F8504F /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
 		E7BDEC032590BDAA00F8504F /* HomeSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSettingsView.swift; sourceTree = "<group>"; };
 		E7BDEC042590BDAA00F8504F /* HomeSettingsViewParent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSettingsViewParent.swift; sourceTree = "<group>"; };
-<<<<<<< HEAD
-<<<<<<< HEAD
 		E7BDEC0B2590C02500F8504F /* SurahViewParent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SurahViewParent.swift; path = reyan/Surah/SurahViewParent.swift; sourceTree = SOURCE_ROOT; };
 		E7BDEC0C2590C02500F8504F /* SurahView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SurahView.swift; path = reyan/Surah/SurahView.swift; sourceTree = SOURCE_ROOT; };
-=======
 		E7BDEC0B2590C02500F8504F /* QuranViewParent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuranViewParent.swift; path = reyan/Surah/QuranViewParent.swift; sourceTree = SOURCE_ROOT; };
 		E7BDEC0C2590C02500F8504F /* QuranView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = QuranView.swift; path = reyan/Surah/QuranView.swift; sourceTree = SOURCE_ROOT; };
->>>>>>> a680674... develop surah view with Aya Rows and surah header
-=======
 		E7BDEC0B2590C02500F8504F /* SurahViewParent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SurahViewParent.swift; path = reyan/Surah/SurahViewParent.swift; sourceTree = SOURCE_ROOT; };
 		E7BDEC0C2590C02500F8504F /* SurahView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SurahView.swift; path = reyan/Surah/SurahView.swift; sourceTree = SOURCE_ROOT; };
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 >>>>>>> 6ae5fd7... use a tricky solution to present surah
 >>>>>>> ded
+=======
+>>>>>>> d
 		E7BDEC1C259BF13200F8504F /* SurahStateCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SurahStateCollector.swift; path = reyan/QuranHome/SurahStateCollector.swift; sourceTree = SOURCE_ROOT; };
 		E7CAB2922570EB3B00E6D753 /* SearchBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBarView.swift; sourceTree = "<group>"; };
 		E7CAB2A325740EC700E6D753 /* SurahListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SurahListView.swift; sourceTree = "<group>"; };
@@ -252,10 +273,14 @@
 			sourceTree = "<group>";
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 =======
 >>>>>>> ded
+=======
+
+>>>>>>> d
 		E78B223D259F5F5D00530E8D /* Aya */ = {
 			isa = PBXGroup;
 			children = (
@@ -269,9 +294,13 @@
 			sourceTree = "<group>";
 		};
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> a680674... develop surah view with Aya Rows and surah header
 >>>>>>> ded
+=======
+
+>>>>>>> d
 		E78EFD67253351C000886039 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,24 +383,22 @@
 		E7BDEC0A2590BFB200F8504F /*  Surah */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-<<<<<<< HEAD
 				E7BDEC0C2590C02500F8504F /* SurahView.swift */,
 				E7BDEC0B2590C02500F8504F /* SurahViewParent.swift */,
-=======
 				E7BDEC0C2590C02500F8504F /* QuranView.swift */,
 				E7BDEC0B2590C02500F8504F /* QuranViewParent.swift */,
->>>>>>> a680674... develop surah view with Aya Rows and surah header
 				E7BDEC1C259BF13200F8504F /* SurahStateCollector.swift */,
-=======
 				E7BDEC0C2590C02500F8504F /* SurahView.swift */,
 				E7BDEC0B2590C02500F8504F /* SurahViewParent.swift */,
 				E7BDEC1C259BF13200F8504F /* SurahStateCollector.swift */,
 				E776A2AC259F04CB00B1EB54 /* SurahHeaderView.swift */,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 6ae5fd7... use a tricky solution to present surah
 >>>>>>> ded
+=======
+>>>>>>> d
 			);
 			path = " Surah";
 			sourceTree = "<group>";
@@ -467,6 +494,7 @@
 				E7BDEC0A2590BFB200F8504F /*  Surah */,
 				F9275E192532160D0021FE0E /* Preview Content */,
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
 				E7CAB2B225741F1E00E6D753 /* Utils.swift */,
@@ -475,6 +503,12 @@
 =======
 >>>>>>> 6ae5fd7... use a tricky solution to present surah
 >>>>>>> ded
+=======
+				E7CAB2B225741F1E00E6D753 /* Utils.swift */,
+				E7CAB2B725741F3900E6D753 /* RemoveSeperateLinesInList.swift */,
+				F9CC016B259DD30E00E527FE /* Base32.swift */,
+
+>>>>>>> d
 			);
 			path = reyan;
 			sourceTree = "<group>";
@@ -678,9 +712,13 @@
 				E77AD38825827FFD004FD632 /* JuzLineView.swift in Sources */,
 				F9CC016C259DD30E00E527FE /* Base32.swift in Sources */,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				E78B2239259F5CD600530E8D /* AyaToolbarIntents.swift in Sources */,
 =======
 >>>>>>> ded
+=======
+				E78B2239259F5CD600530E8D /* AyaToolbarIntents.swift in Sources */,
+>>>>>>> d
 				E78EFD5F2533509A00886039 /* AppDelegate.swift in Sources */,
 				E78EFD602533509A00886039 /* SceneDelegate.swift in Sources */,
 				E78EFD9D2533588C00886039 /* ReyanModule.swift in Sources */,
@@ -695,24 +733,27 @@
 				E776A2BC259F470000B1EB54 /* AyaToolbarView.swift in Sources */,
 				E7D547EF255D264100F6BC73 /* Router+MVI.swift in Sources */,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				E71FE06525E953DF00B51D44 /* NavigationConfigurator.swift in Sources */,
 				E78B223F259F5F9D00530E8D /* AyaRowView.swift in Sources */,
 =======
 <<<<<<< HEAD
 <<<<<<< HEAD
+=======
+>>>>>>> d
 				E7BDEC0D2590C02500F8504F /* SurahViewParent.swift in Sources */,
-=======
-=======
 				E71FE06525E953DF00B51D44 /* NavigationConfigurator.swift in Sources */,
->>>>>>> 393ba62... Combine 3 into 1
 				E78B223F259F5F9D00530E8D /* AyaRowView.swift in Sources */,
-<<<<<<< HEAD
 				E7BDEC0D2590C02500F8504F /* QuranViewParent.swift in Sources */,
+<<<<<<< HEAD
 >>>>>>> a680674... develop surah view with Aya Rows and surah header
 =======
 >>>>>>> ded
+=======
+				E71FE06525E953DF00B51D44 /* NavigationConfigurator.swift in Sources */,
+				E78B223F259F5F9D00530E8D /* AyaRowView.swift in Sources */,
+>>>>>>> d
 				E7BDEC0D2590C02500F8504F /* SurahViewParent.swift in Sources */,
->>>>>>> 6ae5fd7... use a tricky solution to present surah
 				E796EC39253836720025072F /* DICore.swift in Sources */,
 				E7CAB2A425740EC700E6D753 /* SurahListView.swift in Sources */,
 				E78EFDA82533598400886039 /* SearchView.swift in Sources */,
@@ -721,6 +762,7 @@
 				E776A2AD259F04CB00B1EB54 /* SurahHeaderView.swift in Sources */,
 				E796EC3E253837260025072F /* DIRegister.swift in Sources */,
 <<<<<<< HEAD
+<<<<<<< HEAD
 				E7470AC325E7FCCC00C45734 /* IOSDatabaseFileConfiger.swift in Sources */,
 				E776A2B2259F078600B1EB54 /* Images.swift in Sources */,
 				E7470AC825E7FD2900C45734 /* UUIDGenerator.swift in Sources */,
@@ -732,6 +774,14 @@
 				E7470AC825E7FD2900C45734 /* UUIDGenerator.swift in Sources */,
 >>>>>>> 393ba62... Combine 3 into 1
 >>>>>>> ded
+=======
+				E7470AC325E7FCCC00C45734 /* IOSDatabaseFileConfiger.swift in Sources */,
+				E776A2B2259F078600B1EB54 /* Images.swift in Sources */,
+				E7470AC825E7FD2900C45734 /* UUIDGenerator.swift in Sources */,
+				E7470AC325E7FCCC00C45734 /* IOSDatabaseFileConfiger.swift in Sources */,
+				E776A2B2259F078600B1EB54 /* Images.swift in Sources */,
+				E7470AC825E7FD2900C45734 /* UUIDGenerator.swift in Sources */,
+>>>>>>> d
 				E7CAB2932570EB3B00E6D753 /* SearchBarView.swift in Sources */,
 				F9275E162532160B0021FE0E /* LaunchView.swift in Sources */,
 				E77AD39525829F86004FD632 /* JuzListStateCollector.swift in Sources */,
