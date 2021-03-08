@@ -1,6 +1,7 @@
 {
-  "colors" : [
+  "images" : [
     {
+      "filename" : "ic_circle_dark_green.pdf",
       "idiom" : "universal"
     }
   ],

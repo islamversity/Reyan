@@ -79,6 +79,7 @@ class DatabaseFillerUseCaseImpl(
     private val db: Main,
     private val config: DatabaseFileConfig
 ) : DatabaseFillerUseCase {
+
     private val broadCaster = AtomicReference(BroadcastChannel<FillingStatus>(Channel.CONFLATED).also {
         it.offer(FillingStatus.Idle)
     })

@@ -19,7 +19,11 @@ public final class ReyanModule: RoutableModule {
         // Define routes
         
 //        print("QuranHomeViewParent url = \(Screens.HomeCompanion().url)")
-
+        let onBoardingRoute: NavigationRoute = NavigationRoute(
+            path: Screens.OnBoarding().url,
+            type: OnBoardingViewParent.self,
+            requiresAuthentication: false)
+        
         let quranHomeRoute: NavigationRoute = NavigationRoute(
             path: Screens.HomeCompanion().url,
             type: QuranHomeViewParent.self,
@@ -30,15 +34,20 @@ public final class ReyanModule: RoutableModule {
             type: SearchViewParent.self,
             requiresAuthentication: false)
         
-//        let surahRoute: NavigationRoute = NavigationRoute(
-//            path: Screens.Surah(model: SurahLocalModel(surahID: "", surahName: "", startingAyaOrder: 0), pushAnimation: nil, popAnimation: nil).name,
-//            type: SurahViewModel.self,
-//            requiresAuthentication: false)
-//
+        let homeSettingsRoute: NavigationRoute = NavigationRoute(
+            path: Screens.SettingsCompanion().url,
+            type: HomeSettingsViewParent.self,
+            requiresAuthentication: false)
+        
+        let surahRoute: NavigationRoute = NavigationRoute(
+            path: Screens.SurahCompanion().url + "/:\(SurahLocalModel.Companion().EXTRA_SURAH_DETAIL)",
+            type: SurahViewParent.self,
+            requiresAuthentication: false)
+
         
         // Register routes
         
-        NavigationRouter.bind(routes: [quranHomeRoute, searchRoute])
+        NavigationRouter.bind(routes: [onBoardingRoute, quranHomeRoute, searchRoute, homeSettingsRoute, surahRoute])
 
     }
 }

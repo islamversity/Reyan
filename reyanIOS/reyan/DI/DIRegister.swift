@@ -16,6 +16,9 @@ extension Resolver {
         
         // JuzListModule
         register{
+            JuzListView(presenter: resolve())
+        }
+        register{
             JuzListPresenter(processor: resolve(name : "JuzListProcessor"))
         }
         register(MviProcessor.self, name: "JuzListProcessor") {
@@ -23,9 +26,9 @@ extension Resolver {
         }
         
         // SurahListModule
-//        register{
-//            SurahListView(presenter: resolve())
-//        }
+        register{
+            SurahListView(presenter: resolve())
+        }
         register{
             SurahListPresenter(processor: resolve(name : "SurahListProcessor"))
         }
@@ -59,14 +62,21 @@ extension Resolver {
         }
         
         // SettingsModule
-        // 1
         register{
             SettingsPresenter(processor: resolve(name : "SettingsProcessor"))
         }
-        // 2
         register(MviProcessor.self, name: "SettingsProcessor") {
             SettingsProcessor(settingsRepo: resolve(), calligraphyRepo: resolve(), uiMapper: resolve(name : "CalligraphyDomainUIMapper"))
         }
+        
+        // OnBoarding
+        register{
+            OnBoardingPresenter(processor: resolve(name : "OnBoardingProcessor"))
+        }
+        register(MviProcessor.self, name: "OnBoardingProcessor") {
+            OnBoardingProcessor(navigator: resolve(), fillerUseCase: resolve())
+        }
+        
     }
     
     public static func registerUseCases() {
@@ -77,10 +87,6 @@ extension Resolver {
         
         register(GetSurahUsecase.self){
             GetSurahUsecaseImpl(surahRepo : resolve(), settingRepo: resolve(), calligraphyDS : resolve())
-        }
-        
-        register(JuzListUsecase.self){
-            JuzListUsecaseImpl(juzListRepo : resolve(), settingRepo: resolve())
         }
         
         register(JuzListUsecase.self){
@@ -187,7 +193,7 @@ extension Resolver {
         // Mapper<JuzEntity, JuzRepoModel>
         // need HizbEntityRepoMapper
         register(Mapper.self, name: "JuzEntityRepoMapper"){
-            JuzDBRepoMapper(hizbMapper : resolve())
+            JuzDBRepoMapper(hizbMapper : resolve(name : "HizbEntityRepoMapper"))
         }
 
         // Mapper<HizbEntity, HizbRepoModel>
@@ -248,6 +254,18 @@ extension Resolver {
     }
     
     public static func registerNativeDatabase() {
+        
+        register(IOSDatabaseFiller.self){
+            IOSDatabaseFiller(fillerUseCase: resolve())
+        }
+        
+        register(DatabaseFillerUseCase.self) {
+            DatabaseFillerUseCaseImpl(db: resolve(), config: resolve())
+        }
+        
+        register(DatabaseFileConfig.self){
+            IOSDatabaseFileConfiger()
+        }
         
         register(Main.self){
             NativeDatabaseFactory().create()

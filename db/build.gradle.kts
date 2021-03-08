@@ -23,6 +23,7 @@ kotlin {
         implementation(kotlin("stdlib", Versions.kotlin))
         implementation(Deps.SqlDelight.runtime)
         implementation(Deps.Coroutines.common)
+        implementation(Deps.Coroutines.coroutinesWorker)
     }
 
     jvm()

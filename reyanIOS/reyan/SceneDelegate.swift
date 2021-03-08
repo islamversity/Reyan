@@ -3,8 +3,9 @@ import UIKit
 import nativeShared
 import NavigationRouter
 import SwiftUI
+import Resolver
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate  {
     
     var window: UIWindow?
     
@@ -13,20 +14,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions) {
         
-        // Create the SwiftUI view that provides the window contents. //
-        guard let contentViewController: UIViewController = iOSNavigator.getRouter().viewControllerFor(path: Screens.HomeCompanion().url) else {
-            return
-        }
-        
-//        let contentViewController = UIHostingController(rootView: ContentView())
-        
+        let launchViewController = UIHostingController(rootView: LaunchView())
         
         // Use a UIHostingController as window root view controller.
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
             
-            let navigationController: UINavigationController = UINavigationController(rootViewController: contentViewController)
-            navigationController.navigationBar.prefersLargeTitles = true
+            let navigationController: UINavigationController = UINavigationController(rootViewController: launchViewController)
+            UINavigationBar.appearance().backgroundColor = UIColor.clear
+            UINavigationBar.appearance().tintColor = UIColor.init(named: "green_800")
+            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(named: "green_800") ?? .black]
+
+            //            navigationController.navigationBar.prefersLargeTitles = true
             
             window.rootViewController = navigationController
             self.window = window

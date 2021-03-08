@@ -15,7 +15,18 @@ public protocol IOSNavigator : Navigator{
 public class IOSNavigation : IOSNavigator{
    
     public func goTo(screen: Screens) {
-        NavigationRouter.main.navigate(toPath: screen.url)
+        
+        let extraData = screen.extras?.second as String?
+        
+//        print("extraData:\(String(describing: extraData))")
+        
+        if extraData == nil {
+            NavigationRouter.main.navigate(toPath: screen.url)
+        }else{
+            let baseExtra = extraData!.base16EncodedString
+//            print("path=\(screen.url + "/" + baseExtra)")
+            NavigationRouter.main.navigate(toPath: screen.url + "/" + baseExtra)
+        }
     }
     
     public func loadRoutableModules () {
@@ -27,6 +38,11 @@ public class IOSNavigation : IOSNavigator{
     }
 }
 
+//let encoder = JSONEncoder()
+//       encoder.outputFormatting = .sortedKeys //.prettyPrinted
+//       let payload: Data? = try? encoder.encode(initialModel)
+//       path = ScreenURL(urlString: "/address/upsert/\(String(data: payload ?? Data(), encoding: .utf8)!)")
+//       
 
 
 

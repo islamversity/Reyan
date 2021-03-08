@@ -33,7 +33,7 @@ sealed class Screens(
     class OnBoarding : Screens(name, url){
         companion object{
             const val name = "com.islamversity.quran_home.feature.onboarding.OnBoardingView"
-            const val url = "/onBoarding"
+            const val url = "/onboarding"
         }
     }
     class Home : Screens(name, url) {
@@ -67,7 +67,7 @@ sealed class Screens(
     ) : Screens(
         name,
         url,
-        EXTRA_SURAH_DETAIL to jsonParser.encodeToString(model),
+        EXTRA_SURAH_DETAIL to jsonParser.encodeToString(SurahLocalModel.serializer(), model),
         pushAnimation,
         popAnimation
     ){
