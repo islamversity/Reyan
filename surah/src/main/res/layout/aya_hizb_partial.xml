@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:background="@drawable/ic_hizb_juz_background"
+    android:backgroundTint="@color/colorPrimary">
+
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="@dimen/min_margin" />
+
+    <TextView
+        android:id="@+id/hizb_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/low_margin"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textSize="@dimen/tiny_text"
+        android:text="@string/title_hizb"
+        tools:text="حزب"
+        tools:ignore="SpUsage" />
+
+    <TextView
+        android:id="@+id/hizbOrder"
+        android:layout_width="28dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textSize="@dimen/small_text"
+        tools:text="30"
+        tools:ignore="SpUsage" />
+
+    <TextView
+        android:id="@+id/hizb_partial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="@dimen/low_margin"
+        android:gravity="center"
+        android:maxLines="1"
+        android:textColor="@color/black"
+        android:textSize="@dimen/tiny_text"
+        tools:text="1/2"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:ignore="SpUsage" />
+
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="@dimen/min_margin" />
+</LinearLayout>

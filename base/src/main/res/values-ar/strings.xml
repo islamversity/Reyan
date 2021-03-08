@@ -31,4 +31,11 @@
 
   <string name="surah_reveal_meccan">مكة</string>
   <string name="surah_reveal_medinan">مدينة</string>
+
+  <string name="title_hizb">حزب</string>
+  <string name="title_juz">جزء</string>
+
+  <string name="hizb_quarter">۱/۴</string>
+  <string name="hizb_half">۱/۲</string>
+  <string name="hizb_three_fourth">۳/۴</string>
 </resources>
