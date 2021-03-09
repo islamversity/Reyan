@@ -19,10 +19,10 @@ struct QuranHomeView: View, Resolving {
         self.juzListView = JuzListView(presenter: Resolver.resolve())
 
         flowCollector.bindState(presenter: presenter)
-        
-//        Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { (t) in
-//            presenter.processIntents(intents: QuranHomeIntent.SelectTab.init(position: 0))
-//        }
+//        
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (t) in
+            presenter.processIntents(intents: QuranHomeIntent.Initial.init())
+        }
 
 //        presenter.states().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
 

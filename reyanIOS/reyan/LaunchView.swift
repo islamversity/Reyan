@@ -4,7 +4,7 @@ import nativeShared
 import Resolver
 
 struct LaunchView: View, Resolving {
-    
+        
     init() {
         
         let iOSDatabaseFiller : IOSDatabaseFiller = resolver.resolve()
@@ -30,6 +30,10 @@ struct LaunchView: View, Resolving {
             Image.background_main
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
+            
+            Text("maksdnfguebrgfu")
+
         }
+        
     }
 }

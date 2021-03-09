@@ -19,7 +19,7 @@ struct SurahListView : View {
 
         flowCollector.bindState(presenter: presenter)
         
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { (t) in
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (t) in
             presenter.processIntents(intents: SurahListIntent.Initial.init())
         }
                 

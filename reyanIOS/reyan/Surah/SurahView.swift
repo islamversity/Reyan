@@ -7,6 +7,13 @@ import Combine
 struct SurahView: View {
     
     
+    @ObservedObject public var flowCollector: SurahStateCollector = SurahStateCollector()
+    
+    var presenter : SurahPresenter
+    var initialData : SurahLocalModel
+    let rowIntents = AyaRowIntents()
+    var cancellables = Set<AnyCancellable>()
+    
     init(presenter : SurahPresenter, initialData : SurahLocalModel) {
         
         self.presenter = presenter
@@ -25,7 +32,7 @@ struct SurahView: View {
             }
             .store(in: &cancellables)
         
-        Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) { (t) in
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (t) in
             presenter.processIntents(intents: SurahIntent.Initial.init(localModel: initialData))
         }
     }
