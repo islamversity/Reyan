@@ -6,12 +6,6 @@ import Combine
 
 struct SurahView: View {
     
-    @ObservedObject public var flowCollector: SurahStateCollector = SurahStateCollector()
-    
-    var presenter : SurahPresenter
-    var initialData : SurahLocalModel
-    let rowIntents = AyaRowIntents()
-    var cancellables = Set<AnyCancellable>()
     
     init(presenter : SurahPresenter, initialData : SurahLocalModel) {
         

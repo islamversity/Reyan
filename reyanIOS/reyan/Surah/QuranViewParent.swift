@@ -4,7 +4,7 @@ import NavigationRouter
 import nativeShared
 import Resolver
 
-struct SurahViewParent: RoutableViewParent , Resolving{
+struct QuranViewParent: RoutableViewParent , Resolving{
     
     var initialData : SurahLocalModel?
     
@@ -37,7 +37,7 @@ struct SurahViewParent: RoutableViewParent , Resolving{
                 
 //                let formatted = initailDataJson.base16DecodedString()!
                 print("after passing= \(formatted)")
-                let formatted = initailDataJson.base16DecodedString()!
+//                let formatted = initailDataJson.base16DecodedString()!
 //                print("after passing= \(formatted)")
                 
                 
@@ -53,7 +53,7 @@ struct SurahViewParent: RoutableViewParent , Resolving{
     // "{\"type\":\"fullsurah\",\"surahname\":\"الفاتحة\",\"surahid\":\"d65733fe-0253-47fc-9593-8a68db0cb5d0\",\"startingayaorder\":0}"
     
     var routedView: AnyView {
-        SurahView(presenter: resolver.resolve(), initialData: initialData!)
+        QuranView(presenter: resolver.resolve(), initialData: initialData!)
             .eraseToAnyView()
     }
 }
