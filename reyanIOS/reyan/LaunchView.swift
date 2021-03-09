@@ -5,6 +5,8 @@ import Resolver
 
 struct LaunchView: View, Resolving {
         
+    @State private var showingPaymentAlert = false
+    
     init() {
         
         let iOSDatabaseFiller : IOSDatabaseFiller = resolver.resolve()
@@ -14,12 +16,21 @@ struct LaunchView: View, Resolving {
             if let isNotFilled = kbool {
                 if isNotFilled as! Bool {
                     print("is not Filled")
-
-                    iOSNavigator.goTo(screen: Screens.OnBoarding())
+                    
+//                        alert(isPresented: $showingPaymentAlert) {
+//                            Alert(title: Text("Order confirmed"), message: Text("Your total was, thank you!"), dismissButton: .default(Text("OK")))
+//                        }
+                    
+                    Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (t) in
+                        iOSNavigator.goTo(screen: Screens.OnBoarding())
+                    }
+                    
                 }else {
                     print("isFilled")
                     
-                    iOSNavigator.goTo(screen: Screens.Home())
+                    Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (t) in
+                        iOSNavigator.goTo(screen: Screens.Home())
+                    }
                 }
             }
         })
@@ -31,7 +42,9 @@ struct LaunchView: View, Resolving {
                 .resizable()
                 .edgesIgnoringSafeArea(.all)
             
-            Text("maksdnfguebrgfu")
+            Text("Welcome")
+            
+            
 
         }
         
