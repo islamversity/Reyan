@@ -3,12 +3,14 @@ import UIKit
 import NavigationRouter
 import nativeShared
 import Resolver
+import SwiftyBeaver
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, Resolving {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        setupLogger()
         // Register modules
         iOSNavigator.loadRoutableModules()
         
@@ -43,6 +45,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, Resolving {
 
         print("sqlite address")
         print(path ?? "Not found")
+    }
+    
+    func setupLogger(){
+        let swiftLog = SwiftyBeaver.self
+        let console = ConsoleDestination()  // log to Xcode Console
+        let file = FileDestination()  // log to default swiftybeaver.log file
+
+        // use custom format and set console output to short time, log level & message
+        console.format = "$DHH:mm:ss$d $L $M"
+        // or use this for JSON output: console.format = "$J"
+
+        // add the destinations to SwiftyBeaver
+        swiftLog.addDestination(console)
+        swiftLog.addDestination(file)
+        
+        swiftLog.debug("to see live logs copy and paste command below: \n tail -f \(file.logFileURL!.path)")
+        
+        Printer().doInit(loggers: [IOSLogger(swiftLog: swiftLog)])
     }
    
 }

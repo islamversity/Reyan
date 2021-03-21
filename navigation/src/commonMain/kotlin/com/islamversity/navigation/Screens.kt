@@ -61,7 +61,7 @@ sealed class Screens(
     }
 
     class Surah(
-        model: SurahLocalModel,
+        val model: SurahLocalModel,
         pushAnimation: NavigationAnimation? = null,
         popAnimation: NavigationAnimation? = null
     ) : Screens(

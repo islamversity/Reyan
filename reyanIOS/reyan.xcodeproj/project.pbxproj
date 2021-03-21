@@ -67,6 +67,7 @@
 		F9275E182532160D0021FE0E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9275E172532160D0021FE0E /* Assets.xcassets */; };
 		F9275E1B2532160D0021FE0E /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F9275E1A2532160D0021FE0E /* Preview Assets.xcassets */; };
 		F9275E312532160D0021FE0E /* reyanUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9275E302532160D0021FE0E /* reyanUITests.swift */; };
+		F977BC8426077BEF00388B3B /* IOSLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = F977BC8326077BEF00388B3B /* IOSLogger.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +152,7 @@
 		F9275E2C2532160D0021FE0E /* reyanUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = reyanUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9275E302532160D0021FE0E /* reyanUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = reyanUITests.swift; sourceTree = "<group>"; };
 		F9275E322532160D0021FE0E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F977BC8326077BEF00388B3B /* IOSLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSLogger.swift; sourceTree = "<group>"; };
 		FF37CD3337C4F5708B61F685 /* Pods-reyan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-reyan.release.xcconfig"; path = "Target Support Files/Pods-reyan/Pods-reyan.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -370,6 +372,7 @@
 		F9275E122532160B0021FE0E /* reyan */ = {
 			isa = PBXGroup;
 			children = (
+				F977BC8226077B6700388B3B /* Tools */,
 				E78EFD9C2533588C00886039 /* ReyanModule.swift */,
 				E78EFD5D2533509900886039 /* AppDelegate.swift */,
 				E78EFD5E2533509A00886039 /* SceneDelegate.swift */,
@@ -412,6 +415,14 @@
 				F9275E322532160D0021FE0E /* Info.plist */,
 			);
 			path = reyanUITests;
+			sourceTree = "<group>";
+		};
+		F977BC8226077B6700388B3B /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				F977BC8326077BEF00388B3B /* IOSLogger.swift */,
+			);
+			path = Tools;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -641,6 +652,7 @@
 				E776A2B2259F078600B1EB54 /* Images.swift in Sources */,
 				E7470AC825E7FD2900C45734 /* UUIDGenerator.swift in Sources */,
 				E7CAB2932570EB3B00E6D753 /* SearchBarView.swift in Sources */,
+				F977BC8426077BEF00388B3B /* IOSLogger.swift in Sources */,
 				E7C878FA25F7F048001179ED /* SurahView.swift in Sources */,
 				F9275E162532160B0021FE0E /* LaunchView.swift in Sources */,
 				E77AD39525829F86004FD632 /* JuzListStateCollector.swift in Sources */,
