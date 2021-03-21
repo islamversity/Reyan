@@ -4,11 +4,23 @@ import nativeShared
 import Resolver
 
 struct LaunchView: View, Resolving {
-        
-    @State private var showingPaymentAlert = false
     
     init() {
+    }
+    
+    var body: some View {
+        ZStack {
+            Image.background_main
+                .resizable()
+                .edgesIgnoringSafeArea(.all)
+        }.onAppear(perform: {
+            checkDB()
+        })
         
+    }
+    
+    
+    func checkDB(){
         let iOSDatabaseFiller : IOSDatabaseFiller = resolver.resolve()
         
         iOSDatabaseFiller.fillerUseCase.needsFilling(completionHandler: { (kbool, error) in
@@ -16,10 +28,6 @@ struct LaunchView: View, Resolving {
             if let isNotFilled = kbool {
                 if isNotFilled as! Bool {
                     print("is not Filled")
-                    
-//                        alert(isPresented: $showingPaymentAlert) {
-//                            Alert(title: Text("Order confirmed"), message: Text("Your total was, thank you!"), dismissButton: .default(Text("OK")))
-//                        }
                     
                     Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (t) in
                         iOSNavigator.goTo(screen: Screens.OnBoarding())
@@ -34,19 +42,5 @@ struct LaunchView: View, Resolving {
                 }
             }
         })
-    }
-    
-    var body: some View {
-        ZStack {
-            Image.background_main
-                .resizable()
-                .edgesIgnoringSafeArea(.all)
-            
-            Text("Welcome")
-            
-            
-
-        }
-        
     }
 }
