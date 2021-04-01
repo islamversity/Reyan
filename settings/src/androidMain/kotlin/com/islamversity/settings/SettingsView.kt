@@ -13,6 +13,8 @@ import com.islamversity.domain.model.TranslateReadFontSize
 import com.islamversity.settings.databinding.ViewSettingsBinding
 import com.islamversity.settings.di.DaggerSettingsComponent
 import com.islamversity.settings.models.CalligraphyUIModel
+import com.islamversity.settings.settings.SettingsIntent
+import com.islamversity.settings.settings.SettingsState
 import com.islamversity.view_component.optionselector.DismissListener
 import com.islamversity.view_component.optionselector.OptionSelector
 import com.warkiz.widget.IndicatorSeekBar

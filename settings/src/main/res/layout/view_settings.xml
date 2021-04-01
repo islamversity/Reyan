@@ -357,9 +357,21 @@
                     android:paddingTop="@dimen/medium_padding"
                     android:paddingRight="@dimen/large_padding"
                     android:paddingBottom="@dimen/low_padding"
-                    android:text="@string/second_translation_calligraphy"
+                    android:text="@string/foss"
                     android:textColor="@color/colorPrimary"
                     android:textSize="@dimen/medium_text"
+                    tools:ignore="SpUsage" />
+            <TextView
+                    android:id="@+id/fossLicenseTextViewSubtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/arabic_regular"
+                    android:gravity="center"
+                    android:paddingHorizontal="@dimen/large_padding"
+                    android:paddingVertical="@dimen/min_padding"
+                    android:text="@string/tap_to_view"
+                    android:textColor="@color/blackLight"
+                    android:textSize="@dimen/large_text"
                     tools:ignore="SpUsage" />
 
         </LinearLayout>

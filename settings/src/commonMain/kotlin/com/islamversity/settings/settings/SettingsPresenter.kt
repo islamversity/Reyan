@@ -1,4 +1,4 @@
-package com.islamversity.settings
+package com.islamversity.settings.settings
 
 import com.islamversity.core.FlowBlock
 import com.islamversity.core.mvi.BasePresenter

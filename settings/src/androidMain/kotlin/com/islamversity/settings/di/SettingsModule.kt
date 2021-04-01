@@ -7,10 +7,9 @@ import com.islamversity.daggercore.scope.FeatureScope
 import com.islamversity.domain.model.Calligraphy
 import com.islamversity.domain.repo.CalligraphyRepo
 import com.islamversity.domain.repo.SettingRepo
-import com.islamversity.navigation.Navigator
-import com.islamversity.settings.*
 import com.islamversity.settings.models.CalligraphyDomainUIMapper
 import com.islamversity.settings.models.CalligraphyUIModel
+import com.islamversity.settings.settings.*
 import dagger.Module
 import dagger.Provides
 

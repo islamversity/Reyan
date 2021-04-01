@@ -6,7 +6,7 @@ import com.islamversity.core.mvi.MviProcessor
 import com.islamversity.daggercore.scope.FeatureScope
 import com.islamversity.domain.repo.LicensesRepo
 import com.islamversity.domain.model.LicensesRepoModel
-import com.islamversity.settings.*
+import com.islamversity.settings.licenses.*
 import com.islamversity.settings.models.LicenseDomainUIMapper
 import com.islamversity.settings.models.LicensesUIModel
 import dagger.*
