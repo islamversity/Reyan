@@ -290,7 +290,7 @@
 			path = HomeSettings;
 			sourceTree = "<group>";
 		};
-		E7BDEC0A2590BFB200F8504F /*  Surah */ = {
+		E7BDEC0A2590BFB200F8504F /* Surah */ = {
 			isa = PBXGroup;
 			children = (
 				E7C878F825F7F048001179ED /* SurahView.swift */,
@@ -300,7 +300,7 @@
 				E7BDEC1C259BF13200F8504F /* SurahStateCollector.swift */,
 				E776A2AC259F04CB00B1EB54 /* SurahHeaderView.swift */,
 			);
-			path = " Surah";
+			path = Surah;
 			sourceTree = "<group>";
 		};
 		E7CAB2972570EB4100E6D753 /* CommonUI */ = {
@@ -391,7 +391,7 @@
 				E78EFDA42533598400886039 /* Search */,
 				E7BDEC022590BD3D00F8504F /* HomeSettings */,
 				E78B223D259F5F5D00530E8D /* Aya */,
-				E7BDEC0A2590BFB200F8504F /*  Surah */,
+				E7BDEC0A2590BFB200F8504F /* Surah */,
 				F9275E192532160D0021FE0E /* Preview Content */,
 			);
 			path = reyan;
