@@ -94,8 +94,50 @@ struct AyaRowView : View {
 //                                .lineLimit(1)
 //                                .font(.custom("Vazir", size: 6.0))
 //                                .padding(.top, 2)
+                            
+                            
+//                            private fun bindHizbAndJuz(juz: Long?, hizbProgress: AyaUIModel.HizbProgress?) {
+//                                    if (juz != null) {
+//                                        bindJuz(juz, hizbProgress?.hizb ?: error("beginning of juz hizb can not be null"))
+//                                        binding.layoutJuzHizb.root visible true
+//                                        binding.layoutHizbPartial.root visible false
+//                                        return
+//                                    } else {
+//                                        binding.layoutJuzHizb.root visible false
+//                                    }
+//
+//                                    if (hizbProgress != null) {
+//                                        bindHizb(hizbProgress)
+//                                        binding.layoutHizbPartial.root visible true
+//                                    } else {
+//                                        binding.layoutHizbPartial.root visible false
+//                                    }
+//                                }
+//                            private fun bindJuz(juz: Long, hizb: Long) {
+//                                   binding.layoutJuzHizb.juzOrder.text = numberFormatter.format(juz)
+//                                   binding.layoutJuzHizb.hizbOrder.text = numberFormatter.format(hizb)
+//                               }
+//
+//                               private fun bindHizb(hizbProgress: AyaUIModel.HizbProgress) {
+//                                   binding.layoutHizbPartial.hizbOrder.text = numberFormatter.format(hizbProgress.hizb)
+//
+//                                   if (hizbProgress is AyaUIModel.HizbProgress.Beginning) {
+//                                       binding.layoutHizbPartial.hizbPartial visible false
+//                                   } else {
+//                                       binding.layoutHizbPartial.hizbPartial visible true
+//                                       binding.layoutHizbPartial.hizbPartial.text = hizbProgress.toLocalString()
+//                                   }
+//                               }
+//
+//                               private fun AyaUIModel.HizbProgress.toLocalString() =
+//                                   when (this) {
+//                                       is AyaUIModel.HizbProgress.Beginning -> error("beginning is not supported for fraction strings, other type of view has to be shown, $model")
+//                                       is AyaUIModel.HizbProgress.Half -> context.getString(R.string.hizb_half)
+//                                       is AyaUIModel.HizbProgress.Quarter -> context.getString(R.string.hizb_quarter)
+//                                       is AyaUIModel.HizbProgress.ThreeFourth -> context.getString(R.string.hizb_three_fourth)
+//                                   }
 
-                            Text(String(uiModel.hizb! as! Int))
+                            Text(String(uiModel.hizb?.hizb ?? 0))
                                 .foregroundColor(.gold_dark)
                                 .fontWeight(.bold)
                                 .multilineTextAlignment(.center)

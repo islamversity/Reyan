@@ -11,7 +11,11 @@ extension Resolver {
             QuranHomePresenter(processor: resolve(name : "QuranHomeProcessor"))
         }
         register(MviProcessor.self, name: "QuranHomeProcessor") {
-            QuranHomeProcessor(navigator: resolve())
+            QuranHomeProcessor(
+                navigator: resolve(),
+                getBookmarkAyaUsecase: resolve(),
+                surahStateMapper: resolve(name : "AyaBookmarkRepoStateMapper")
+            )
         }
         
         // JuzListModule
@@ -54,7 +58,9 @@ extension Resolver {
                            ayaMapper : resolve(name : "AyaRepoUIMapper"),
                            surahRepoHeaderMapper : resolve(name : "SurahRepoHeaderMapper"),
                            settingRepo : resolve(),
-                           surahUsecase : resolve(), settingsProcessor: resolve(name : "SurahSettingsProcessor")
+                           surahUsecase : resolve(),
+                           bookmarkAyaUseCase: resolve(),
+                           settingsProcessor: resolve(name : "SurahSettingsProcessor")
             )
         }
         register(MviProcessor.self, name: "SurahSettingsProcessor") {
@@ -96,6 +102,15 @@ extension Resolver {
         register(SearchSurahNameUseCase.self){
             SearchSurahNameUseCaseImpl(settingRepo : resolve(), searchRepo: resolve(), calligraphyDS: resolve())
         }
+        
+        register(BookmarkAyaUsecase.self){
+            BookmarkAyaUsecaseImpl(surahRepo: resolve())
+        }
+        
+        register(GetBookmarkAyaUsecase.self){
+            GetBookmarkAyaUsecaseImpl(surahRepo: resolve())
+        }
+        
     }
     
     public static func registerRepos() {
@@ -123,7 +138,11 @@ extension Resolver {
         }
         
         register(SurahRepo.self){
-            SurahRepoImpl(dataSource: resolve(), twoNameMapper: resolve(name : "SurahWithTwoNameEntityRepoMapper"))
+            SurahRepoImpl(
+                dataSource: resolve(),
+                settingDataSource: resolve(),
+                twoNameMapper: resolve(name : "SurahWithTwoNameEntityRepoMapper")
+            )
         }
         
     }
@@ -139,13 +158,10 @@ extension Resolver {
             AyaLocalDataSourceImpl(ayaQueries: resolve(), ayaContentQueries : resolve())
         }
         
-        // 2-1-1
         register(SettingsDataSource.self) {
             SettingsDataSourceImpl(queries: resolve())
         }
         
-        // 2-1-2
-        // 2-2-1
         register(CalligraphyLocalDataSource.self) {
             CalligraphyLocalDataSourceImpl(queries: resolve())
         }
@@ -250,6 +266,11 @@ extension Resolver {
         // Mapper<SurahRepoModel, SurahHeaderUIModel>
         register(Mapper.self, name: "SurahRepoHeaderMapper"){
             SurahRepoHeaderMapper()
+        }
+        
+        // Mapper<SurahRepoModel, SurahHeaderUIModel>
+        register(Mapper.self, name: "AyaBookmarkRepoStateMapper"){
+            AyaBookmarkRepoStateMapper()
         }
     }
     
