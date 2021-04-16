@@ -11,7 +11,7 @@ apply plugin: 'kotlin-kapt'
 
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
-apply plugin: 'appmetrica-plugin'
+//apply plugin: 'appmetrica-plugin'
 
 apply from: "$rootDir/projectDependencyGraph.gradle"
 
