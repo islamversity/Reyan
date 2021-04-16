@@ -1,6 +1,5 @@
 
 import UIKit
-import NavigationRouter
 import nativeShared
 import Resolver
 import SwiftyBeaver

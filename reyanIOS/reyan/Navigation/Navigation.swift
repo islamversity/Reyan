@@ -1,6 +1,5 @@
 import UIKit
 import SwiftUI
-import NavigationRouter
 import nativeShared
 import Resolver
 
