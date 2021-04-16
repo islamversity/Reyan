@@ -1,6 +1,5 @@
 
 import SwiftUI
-import NavigationRouter
 import nativeShared
 import Combine
 
