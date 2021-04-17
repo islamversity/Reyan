@@ -20,7 +20,7 @@ struct SurahRowView : View{
             HStack {
                 
                 ZStack {
-                    Image("ic_surah")
+                    Image.ic_surah_green
                         .resizable()
                         .frame(width: 32, height: 32, alignment: .center)
                     

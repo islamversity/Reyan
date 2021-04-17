@@ -4,17 +4,19 @@ import com.islamversity.core.*
 import com.islamversity.core.mvi.BaseProcessor
 import com.islamversity.core.mvi.MviProcessor
 import com.islamversity.domain.model.aya.AyaRepoModel
+import com.islamversity.domain.model.surah.ReadingBookmarkRepoModel
 import com.islamversity.domain.model.surah.SurahID
 import com.islamversity.domain.model.surah.SurahRepoModel
 import com.islamversity.domain.repo.SettingRepo
 import com.islamversity.domain.repo.aya.GetAyaUseCase
 import com.islamversity.domain.repo.surah.GetSurahUsecase
+import com.islamversity.domain.repo.surah.BookmarkAyaUsecase
 import com.islamversity.navigation.Navigator
+import com.islamversity.navigation.model.StartingAya
 import com.islamversity.navigation.model.SurahLocalModel
 import com.islamversity.surah.model.AyaUIModel
 import com.islamversity.surah.model.SurahHeaderUIModel
 import com.islamversity.surah.model.UIItem
-import com.islamversity.surah.settings.SurahSettingsProcessor
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 
@@ -25,6 +27,7 @@ class SurahProcessor(
     private val surahRepoHeaderMapper: Mapper<SurahRepoModel, SurahHeaderUIModel>,
     private val settingRepo: SettingRepo,
     private val surahUsecase: GetSurahUsecase,
+    private val bookmarkAyaUseCase: BookmarkAyaUsecase,
     private val settingsProcessor: MviProcessor<SurahIntent, SurahResult>
 ) : BaseProcessor<SurahIntent, SurahResult>() {
 
@@ -34,6 +37,7 @@ class SurahProcessor(
         translationFontSizeProcessor,
         ayaToolbarVisibleProcessor,
         settingsProcessor.actionProcessor,
+        surahSaveState
     )
 
     private val processInitial: FlowBlock<SurahIntent, SurahResult> = {
@@ -61,40 +65,10 @@ class SurahProcessor(
                     }
                 }
                     .map {
-                        SurahResult.Items(it) to initial
+                        SurahResult.Items(it) to initial.startingFrom
                     }
             }
-            .publish(
-                {
-                    //perform showing the chosen aya only the first time
-                    take(1).transform {
-                        emit(it.first)
-                        if (it.second.startingAyaOrder == 0L) {
-                            //Screen starts from the top not any number
-                            return@transform
-                        }
-
-                        val aya = it.first.items.find { item ->
-                            item is AyaUIModel && item.order == it.second.startingAyaOrder
-                        }
-                            ?: error("The surah does not contain aya with order= ${it.second.startingAyaOrder}")
-
-                        emit(
-                            SurahResult.ShowAyaNumber(
-                                position = it.first.items.indexOf(aya),
-                                id = aya.rowId,
-                                orderID = it.second.startingAyaOrder,
-                            )
-                        )
-                        delay(300)
-                        emit(SurahResult.LastStable)
-                    }
-                },
-                {
-                    //after the first data load we don't need to care about startingAyaPosition
-                    drop(1).map { it.first }
-                }
-            )
+            .publishAyaAndScroll()
     }
 
     private val processFullJuz: FlowBlock<SurahIntent.Initial, SurahResult> = {
@@ -106,8 +80,12 @@ class SurahProcessor(
             }
             .flatMapLatest {
                 getAyaUseCase.observeAyaForJuz(it.juzOrder)
+                    .map { ayas ->
+                        ayas to it
+                    }
             }
-            .flatMapLatest { ayas ->
+            .flatMapLatest { ayasAndLocal ->
+                val ayas = ayasAndLocal.first
                 val allSurahIds = ayas.distinctBy { it.surahId.id }.map { it.surahId }
 
                 surahUsecase.getAll(allSurahIds)
@@ -130,7 +108,62 @@ class SurahProcessor(
                             uiList as List<UIItem>
                         )
                     }
+                    .map { items ->
+                        items to ayasAndLocal.second.startingFrom
+                    }
+                    .publishAyaAndScroll()
             }
+    }
+
+    private fun Flow<Pair<SurahResult.Items, StartingAya>>.publishAyaAndScroll(): Flow<SurahResult> = publish(
+        {
+            //perform showing the chosen aya only the first time
+            take(1).showAyasAndScroll()
+        },
+        {
+            //after the first data load we don't need to care about startingAyaPosition
+            drop(1).map {
+                it.first
+            }
+        }
+    )
+
+
+    private fun Flow<Pair<SurahResult.Items, StartingAya>>.showAyasAndScroll(): Flow<SurahResult> = transform {
+        emit(it.first)
+        if (it.second is StartingAya.ID.Beginning) {
+            //Screen starts from the top not any number
+            return@transform
+        }
+
+        val aya = findAya(it.first.items, it.second)
+
+        emit(
+            SurahResult.ShowAyaNumber(
+                position = it.first.items.indexOf(aya),
+                id = aya.rowId,
+                orderID = aya.order,
+            )
+        )
+        delay(300)
+        emit(SurahResult.LastStable)
+    }
+
+    private fun findAya(items: List<UIItem>, startingAya: StartingAya): AyaUIModel {
+        return when (startingAya) {
+            StartingAya.ID.Beginning -> throw IllegalArgumentException("starting from beginning does not need finding")
+            is StartingAya.Order -> {
+                items.find { item ->
+                    item is AyaUIModel && item.order == startingAya.order
+                }
+            }
+            is StartingAya.ID.AyaId -> {
+                items.find { item ->
+                    item is AyaUIModel && item.rowId == startingAya.id
+                }
+            }
+        } as? AyaUIModel
+            ?: throw error("could not find the starting point $startingAya in the list size of ${items.size}")
     }
 
     private fun getSurahDetail(id: SurahID): Flow<SurahHeaderUIModel> =
@@ -169,5 +202,76 @@ class SurahProcessor(
                     SurahResult.AyaToolbarVisible(it)
                 }
             }
+    }
+
+    private val surahSaveState: FlowBlock<SurahIntent, SurahResult> = {
+        ofType<SurahIntent.Scrolled>()
+            .transform {
+
+                val ayaUI = it.uiItems.findFirstAya(it.position) ?: return@transform
+
+                val bookmarkModel = when (it.localModel) {
+                    is SurahLocalModel.FullSurah ->
+                        createBookmarkFromSurah(ayaUI, it.localModel)
+                    is SurahLocalModel.FullJuz -> {
+                        val surahHeader = it.uiItems.findFirstSurahHeader(it.position) ?: return@transform
+
+                        createBookmarkFromJuz(surahHeader, ayaUI, it.localModel)
+                    }
+                }
+
+                bookmarkAyaUseCase.saveBookmark(bookmarkModel)
+            }
+    }
+
+    private fun createBookmarkFromSurah(
+        ayaUIModel: AyaUIModel,
+        localModel: SurahLocalModel.FullSurah
+    ): ReadingBookmarkRepoModel =
+        ReadingBookmarkRepoModel(
+            ReadingBookmarkRepoModel.PageType.SURAH,
+            null,
+
+            localModel.surahName,
+            localModel.surahID,
+
+            ayaUIModel.rowId,
+            ayaUIModel.order
+        )
+
+    private fun createBookmarkFromJuz(
+        surahHeader: SurahHeaderUIModel,
+        ayaUIModel: AyaUIModel,
+        localModel: SurahLocalModel.FullJuz
+    ): ReadingBookmarkRepoModel = ReadingBookmarkRepoModel(
+        ReadingBookmarkRepoModel.PageType.JUZ,
+        localModel.juzOrder,
+        surahHeader.name,
+        surahHeader.rowId,
+        ayaUIModel.rowId,
+        ayaUIModel.order
+    )
+
+    private fun List<UIItem>.findFirstAya(position: Int): AyaUIModel? {
+        if (position < 0 || position >= size) return null
+
+        val current = get(position)
+        if (current is AyaUIModel) {
+            return current
+        }
+
+        return findFirstAya(position + 1)
+    }
+
+    private fun List<UIItem>.findFirstSurahHeader(position: Int): SurahHeaderUIModel? {
+        if (position < 0 || position >= size) return null
+
+
+        val current = get(position)
+        if (current is SurahHeaderUIModel) {
+            return current
+        }
+
+        return findFirstSurahHeader(position - 1)
     }
 }

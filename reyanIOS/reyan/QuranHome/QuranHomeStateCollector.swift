@@ -2,6 +2,7 @@
 import Foundation
 import nativeShared
 
+
 class QuranHomeStateCollector : ObservableObject {
    
     @Published var uiState: QuranHomeState
@@ -12,12 +13,10 @@ class QuranHomeStateCollector : ObservableObject {
             print("QuranHomeStateCollector : states : value(as uiState) = \(String(describing: viewState))")
             
             self.uiState = viewState as! QuranHomeState
-            
         }
     }
     
     func errorHandler(ku : KotlinUnit?, error : Error?) -> Void {
-        
         print("QuranHomeStateCollector : KotlinUnit = \(String(describing: ku))")
         print("QuranHomeStateCollector : error = \(String(describing: error))")
     }

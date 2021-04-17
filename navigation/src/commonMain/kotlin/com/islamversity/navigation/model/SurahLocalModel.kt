@@ -3,23 +3,23 @@ package com.islamversity.navigation.model
 import com.islamversity.navigation.jsonParser
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.decodeFromString
 
 @Serializable
 sealed class SurahLocalModel {
 
     @Serializable
-    @SerialName("FullSurah")
+    @SerialName("fullSurah")
     data class FullSurah(
         val surahName: String,
         val surahID: String,
-        val startingAyaOrder: Long,
+        val startingFrom: StartingAya = StartingAya.ID.Beginning,
     ) : SurahLocalModel()
 
     @Serializable
-    @SerialName("FullJuz")
+    @SerialName("fullJuz")
     data class FullJuz(
-        val juzOrder: Long
+        val juzOrder: Long,
+        val startingFrom: StartingAya.ID = StartingAya.ID.Beginning,
     ) : SurahLocalModel()
 
     companion object {
@@ -27,5 +27,21 @@ sealed class SurahLocalModel {
     }
 }
 
+@Serializable
+sealed class StartingAya {
+
+    @Serializable
+    data class Order(val order : Long) : StartingAya()
+
+    @Serializable
+    sealed class ID : StartingAya(){
+        @Serializable
+        object Beginning : ID()
+
+        @Serializable
+        data class AyaId(val id : String) : ID()
+    }
+}
+
 fun SurahLocalModel.Companion.fromData(data: String): SurahLocalModel =
-    jsonParser.decodeFromString(data)
+    jsonParser.decodeFromString(SurahLocalModel.serializer(), data)

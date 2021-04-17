@@ -17,22 +17,21 @@ struct SurahListView : View {
         
         self.presenter = presenter
 
-//        presenter.consumeStates().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
-
         flowCollector.bindState(presenter: presenter)
         
-   
-        
+        Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (t) in
+            presenter.processIntents(intents: SurahListIntent.Initial.init())
+        }
+                
         UITableView.appearance().backgroundColor = UIColor.clear
         UITableViewCell.appearance().backgroundColor = UIColor.clear
     }
     
     var body: some View {
             
-     
-        let  _ =  presenter.processIntents(intents: SurahListIntent.Initial.init())
+//        presenter.processIntents(intents: SurahListIntent.Initial.init())
 
-        ZStack {
+        return ZStack {
             Color.clear
             
             VStack {
@@ -46,19 +45,27 @@ struct SurahListView : View {
                 List {
                     ForEach(flowCollector.uiState.surahList, id: \.self) { item in
                         
-                        SurahRowView(
-                            surahUIItem: item
-                        ).padding(.horizontal)
-                        
+                        Button(action: {
+                            
+                            presenter.processIntents(intents: SurahListIntent.ItemClick.init(action: SurahRowActionModel(surah: item)))
+                            
+                        }, label: {
+                            
+                            SurahRowView(
+                                surahUIItem: item
+                            ).padding(.horizontal)
+                            
+                        })
+                       
                     }
                     .listRow()
                     .listRowBackground(Color.clear)
                 }
             }
         }
-        .onAppear{
-            presenter.processIntents(intents: SurahListIntent.Initial.init())
-        }
+//        .onAppear{
+//            presenter.processIntents(intents: SurahListIntent.Initial.init())
+//        }
     }
 }
 

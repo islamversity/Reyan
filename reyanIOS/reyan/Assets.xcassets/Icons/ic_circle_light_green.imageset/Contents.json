@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "ic_circle_light_green.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

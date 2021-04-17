@@ -16,7 +16,8 @@ import dagger.Component
         LifecycleComponent::class,
         DefaultNavigationComponent::class],
     modules = [
-        QuranHomeModule::class]
+        QuranHomeModule::class,
+        MapperModule::class]
 )
 interface QuranHomeComponent {
     fun inject(view: QuranHomeView)

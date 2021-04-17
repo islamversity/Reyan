@@ -2,6 +2,7 @@ package com.islamversity.quran_home.feature.home
 
 import com.islamversity.core.FlowBlock
 import com.islamversity.core.mvi.BasePresenter
+import com.islamversity.core.mvi.BaseState
 import com.islamversity.core.mvi.MviProcessor
 import com.islamversity.core.notOfType
 import com.islamversity.core.ofType
@@ -22,5 +23,16 @@ class QuranHomePresenter(
                 notOfType(QuranHomeIntent.Initial::class)
             })
 
-    override fun reduce(preState: QuranHomeState, result: QuranHomeResult)  = TODO()
+    override fun reduce(preState: QuranHomeState, result: QuranHomeResult)  =
+        when (result) {
+            is QuranHomeResult.Error ->
+                preState.copy(base = BaseState.withError(result.err))
+            QuranHomeResult.Loading ->
+                preState.copy(base = BaseState.loading())
+            is QuranHomeResult.LastBookmarkAya ->
+                preState.copy(
+                    base = BaseState.stable(),
+                    bookmarkState = result.bookmarkAya
+                )
+        }
 }

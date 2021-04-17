@@ -35,4 +35,11 @@
   <string name="surah_reveal_meccan">meccan</string>
   <string name="surah_reveal_medinan">medinan</string>
 
+  <string name="title_hizb">Hizb</string>
+  <string name="title_juz">Juz</string>
+
+  <string name="hizb_quarter">1/4</string>
+  <string name="hizb_half">1/2</string>
+  <string name="hizb_three_fourth">3/4</string>
+
 </resources>

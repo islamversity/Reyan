@@ -100,6 +100,7 @@ class SurahSettingsView(
         }
 
         binding.ayaToolbarTitle.setOnCheckedChangeListener { buttonView, isChecked ->
+            dismiss()
             onSettings?.invoke(SurahIntent.ChangeSettings.AyaToolbarVisibility(isChecked))
         }
 

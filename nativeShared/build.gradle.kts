@@ -85,6 +85,10 @@ kotlin {
             export(project(Deps.Modules.settings))
             export(project(Deps.Modules.surah))
             export(project(Deps.Modules.search))
+
+            export(Deps.Tools.logger)
+
+            export(Deps.Serialization.core)
             transitiveExport = true
             homepage = "$name home"
             setVersion("1.0")
