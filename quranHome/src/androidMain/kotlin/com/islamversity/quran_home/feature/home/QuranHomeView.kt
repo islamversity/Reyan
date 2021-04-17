@@ -1,5 +1,6 @@
 package com.islamversity.quran_home.feature.home
 
+import android.animation.Animator
 import android.animation.ValueAnimator
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -37,8 +38,21 @@ class QuranHomeView : CoroutineView<QuranHomeViewBinding, QuranHomeState, QuranH
                 addUpdateListener {
                     binding.motionLayout.progress = it.animatedValue as Float
                 }
-                addListener(onEnd = {
-                    intents.tryEmit(QuranHomeIntent.SearchClicked)
+                addListener(object : Animator.AnimatorListener {
+                    override fun onAnimationStart(animation: Animator?) {
+                    }
+
+                    override fun onAnimationEnd(animation: Animator?) {
+                        intents.tryEmit(QuranHomeIntent.SearchClicked)
+
+                    }
+
+                    override fun onAnimationCancel(animation: Animator?) {
+                    }
+
+                    override fun onAnimationRepeat(animation: Animator?) {
+                    }
+
                 })
             }.start()
         }

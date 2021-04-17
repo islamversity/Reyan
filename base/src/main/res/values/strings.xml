@@ -42,4 +42,12 @@
   <string name="hizb_half">1/2</string>
   <string name="hizb_three_fourth">3/4</string>
 
+  <string name="player_notification_channel_description">This channel is used to show the playback notification only</string>
+  <string name="player_notification_channel_name">Player</string>
+  <string name="player_notification_next_aya">Next</string>
+  <string name="player_notification_previous_aya">Previous</string>
+  <string name="player_notification_stop">Stop</string>
+  <string name="player_notification_play">Play</string>
+  <string name="player_notification_pause">Play</string>
+
 </resources>

@@ -12,6 +12,7 @@ include ':db-test',
         ':kotlintesthelpers',
         ':surah',
         ':view-component',
-        ':nativeShared'
+        ':nativeShared',
+        ':player'
 
 enableFeaturePreview("GRADLE_METADATA")

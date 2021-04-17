@@ -38,8 +38,6 @@ kotlin {
         implementation(project(Deps.Modules.domain))
         implementation(project(Deps.Modules.core))
         implementation(project(Deps.Modules.navigation))
-        implementation(project(Deps.Modules.player))
-
         implementation(Deps.Coroutines.common)
     }
     sourceSets["commonTest"].dependencies {
@@ -48,11 +46,7 @@ kotlin {
         implementation(Deps.Coroutines.turbine)
     }
 
-    android {
-        compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
-        }
-    }
+    android()
     sourceSets["androidMain"].dependencies {
 
         implementation(kotlin("stdlib", Versions.kotlin))
@@ -62,6 +56,9 @@ kotlin {
         implementation(Deps.Android.Support.design)
 
         implementation(Deps.Android.Support.coreKts)
+        implementation(Deps.Android.Support.media)
+
+        implementation(Deps.Android.Exo.core)
 
         implementation(Deps.Android.Tools.conductor)
         implementation(Deps.Android.Tools.seekBar)

@@ -159,6 +159,7 @@ dependencies {
   implementation(project(Deps.Modules.search))
   implementation(project(Deps.Modules.settings))
   implementation(project(Deps.Modules.surah))
+  implementation(project(Deps.Modules.player))
 
   implementation Deps.Android.Support.design
 

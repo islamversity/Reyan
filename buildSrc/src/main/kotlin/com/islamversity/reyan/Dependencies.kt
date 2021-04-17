@@ -28,6 +28,7 @@ object Versions {
     val soLoader = "0.5.1"
     val stetho = "1.5.1"
     val leakCanary = "2.4"
+    val exo = "2.13.2"
 
     val espresso = "3.1.0-alpha3"
     val robolectric = "4.2"
@@ -63,10 +64,9 @@ object Deps {
             "com.android.tools.build:gradle:${Versions.android_gradle_plugin}"
 
         object Support {
-            val coreKts = "androidx.core:core-ktx:${Versions.androidKotlinExt}"
+            val coreKts = "androidx.core:core-ktx:1.3.2"
             val compat = "androidx.appcompat:appcompat:${Versions.androidSupport}"
-            val supportLegacy = "androidx.legacy:legacy-support-v4:${Versions.androidSupport}"
-            val androidxCore = "androidx.core:core:${Versions.androidSupport}"
+            val media = "androidx.media:media:1.3.0"
             val design = "com.google.android.material:material:${Versions.googleMaterial}"
             val cardView = "androidx.cardview:cardview:${Versions.androidSupport}"
             val annotation = "androidx.annotation:annotation:${Versions.androidSupport}"
@@ -140,6 +140,11 @@ object Deps {
             val localization = "com.akexorcist:localization:1.2.6"
         }
 
+        object Exo {
+            val core = "com.google.android.exoplayer:exoplayer-core:${Versions.exo}"
+            val ui = "com.google.android.exoplayer:exoplayer-ui:${Versions.exo}"
+        }
+
         object Test {
             val core = "androidx.test:core:${Versions.androidXTest}"
             val junit = "junit:junit:${Versions.junit}"
@@ -177,6 +182,7 @@ object Deps {
         val viewComponent = ":view-component"
         val surah = ":surah"
         val search = ":search"
+        val player = ":player"
     }
 
     object Firebase {

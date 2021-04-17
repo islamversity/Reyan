@@ -23,6 +23,7 @@ import com.islamversity.daggercore.lifecycle.LifecycleComponentProvider
 import com.islamversity.daggercore.lifecycle.LifecycleEvent
 import com.islamversity.daggercore.lifecycle.Permissions
 import com.islamversity.daggercore.lifecycle.PermissionsResult
+import com.islamversity.player.PlayerService
 import com.islamversity.quran_home.feature.startupView.StartUpView
 import com.islamversity.reyan.di.ActivityComponent
 import com.islamversity.reyan.di.DaggerActivityComponent
@@ -71,6 +72,8 @@ class MainActivity : LocalizationActivity(),
         }
 
         handleIntents(intent)
+
+        startService(Intent(this, PlayerService::class.java))
     }
 
     override fun onNewIntent(intent: Intent?) {
