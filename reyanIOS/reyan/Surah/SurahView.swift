@@ -81,7 +81,8 @@ struct SurahView: View {
                 .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .navigationBarTitle("Holy Quran", displayMode: .inline)
+        .navigationBarTitle(defaultLocalizer.stringForKey(key: "Holy_Quran"))
+//        .navigationBarTitle(, displayMode: .inline)
        
 //        .navigationBarTitle(Text().foregroundColor(.green_800))
         

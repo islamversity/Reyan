@@ -6,9 +6,15 @@ import nativeShared
 
 struct JuzRowView : View{
     
+    @State var updateUI : Bool = false
+
     let juzUIItem : JozUIModel
     
     var body: some View {
+        
+        if updateUI == true {
+           // check updateUI just to refresh swiftui view on Appear
+        }
         
         VStack(alignment: .leading) {
             
@@ -25,7 +31,7 @@ struct JuzRowView : View{
                         .foregroundColor(Color(red: 0.11, green: 0.4, blue: 0.38, opacity: 1.0))
                 }
                 
-                Text(juzTitleArray[Int(juzUIItem.number) - 1])
+                Text(getJuzTitleArray()[Int(juzUIItem.number) - 1])
                     .foregroundColor(Color(red: 0.24, green: 0.24, blue: 0.24, opacity: 1.0))
             }
             
@@ -58,6 +64,9 @@ struct JuzRowView : View{
                 .frame(width: .infinity, height: 2, alignment: .center)
         }
         .padding(.top, 15)
+        .onAppear {
+            updateUI = !updateUI
+        }
     }
 }
 //

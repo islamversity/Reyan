@@ -10,11 +10,17 @@ import nativeShared
 
 struct SurahRowView : View{
     
+    @State var updateUI : Bool = false
+
     let surahUIItem : SurahUIModel
     
     var body: some View {
      
 //        let _ = print("surahUIItem = \(surahUIItem)")
+        
+        if updateUI == true {
+           // check updateUI just to refresh swiftui view on Appear
+        }
         
         VStack {
             HStack {
@@ -49,7 +55,7 @@ struct SurahRowView : View{
                         Spacer()
                             .frame(width:2)
                         
-                        Text("\(surahUIItem.ayaCount) Aya")
+                        Text("\(surahUIItem.ayaCount) \(defaultLocalizer.stringForKey(key: "Aya"))")
                             .font(.custom("Vazir", size: 11.0))
 
                     }
@@ -71,6 +77,9 @@ struct SurahRowView : View{
 
         }
         .padding(.vertical)
+        .onAppear {
+            updateUI = !updateUI
+        }
     }
     
     

@@ -6,7 +6,7 @@
         "repositoryURL": "https://github.com/corteggo/NavigationRouter.git",
         "state": {
           "branch": "main",
-          "revision": "82839cf153d87096dcf94ecc58d777caebb3f80e",
+          "revision": "a91ba4dbfe53382c2bce52bd1f8c1ba29fcfb530",
           "version": null
         }
       },
@@ -15,8 +15,8 @@
         "repositoryURL": "https://github.com/hmlongco/Resolver.git",
         "state": {
           "branch": null,
-          "revision": "cb5b4e1e60046120de87fee14af257e07ad74a62",
-          "version": "1.1.4"
+          "revision": "e0bcbc721818328c192a1eb22c6a6ca48029e550",
+          "version": "1.4.1"
         }
       }
     ]

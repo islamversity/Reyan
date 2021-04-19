@@ -58,7 +58,7 @@ struct AyaRowView : View {
                         
                         VStack {
                             
-                            Text("part")
+                            Text(defaultLocalizer.stringForKey(key: "part"))
                                 .foregroundColor(.gold_dark)
                                 .multilineTextAlignment(.center)
                                 .lineLimit(1)
@@ -72,7 +72,7 @@ struct AyaRowView : View {
                                 .lineLimit(1)
                                 .font(.custom("Vazir", size: 10.0))
                             
-                            Text("hizb")
+                            Text(defaultLocalizer.stringForKey(key: "hizb"))
                                 .foregroundColor(.gold_dark)
                                 .multilineTextAlignment(.center)
                                 .lineLimit(1)
@@ -99,7 +99,7 @@ struct AyaRowView : View {
                             
                             VStack {
                                 
-                                Text("hizb")
+                                Text(defaultLocalizer.stringForKey(key: "hizb"))
                                     .foregroundColor(.gold_dark)
                                     .multilineTextAlignment(.center)
                                     .lineLimit(1)
@@ -145,7 +145,8 @@ struct AyaRowView : View {
                         Image.ic_sajdah
                             .resizable()
                             .frame(width: 25, height: 40, alignment: .center)
-                        Text("Rec")
+
+                        Text(defaultLocalizer.stringForKey(key: "recomended_abr"))
                             .foregroundColor(.black)
                             .multilineTextAlignment(.center)
                             .lineLimit(1)
@@ -159,7 +160,8 @@ struct AyaRowView : View {
                         Image.ic_sajdah
                             .resizable()
                             .frame(width: 25, height: 40, alignment: .center)
-                        Text("Obg")
+                        
+                        Text(defaultLocalizer.stringForKey(key: "obligatory_abr"))
                             .foregroundColor(.black)
                             .multilineTextAlignment(.center)
                             .lineLimit(1)

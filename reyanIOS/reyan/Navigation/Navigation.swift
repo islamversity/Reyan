@@ -20,23 +20,25 @@ public class IOSNavigation : IOSNavigator{
         let extraData = screen.extras?.second as String?
         
         if screen is Screens.Home {
-            
-            root!.pushViewController(UIHostingController(rootView: QuranHomeView(presenter: resolver.resolve())), animated: false)
-            
+            root?.pushViewController(
+                UIHostingController(rootView: QuranHomeView(presenter: resolver.resolve())),
+                animated: false
+            )
         } else if screen is Screens.OnBoarding {
-            
-            root!.pushViewController(UIHostingController(
-                                        rootView: OnBoardingView(
-                                            presenter: resolver.resolve(),
-                                            iOSDatabaseFiller: resolver.resolve())),
-                                     animated: false)
+            root?.pushViewController(
+                UIHostingController(rootView: OnBoardingView(presenter: resolver.resolve(),iOSDatabaseFiller: resolver.resolve())),
+                animated: false
+            )
         } else if let surahScreen = screen as? Screens.Surah {
-            root!.pushViewController(UIHostingController(
-                rootView: SurahView(presenter: resolver.resolve(), initialData: surahScreen.model)
-            ), animated: true)
+            root?.pushViewController(
+                UIHostingController(rootView: SurahView(presenter: resolver.resolve(), initialData: surahScreen.model)),
+                animated: true
+            )
         } else if screen is Screens.Settings {
-            root!.pushViewController(UIHostingController(
-            rootView: HomeSettingsView()), animated: true)
+            root?.pushViewController(
+                UIHostingController(rootView: HomeSettingsView()),
+                animated: true
+            )
         }
     }
 }

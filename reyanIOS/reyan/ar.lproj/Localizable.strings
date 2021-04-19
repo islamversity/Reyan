@@ -1,0 +1,57 @@
+/* 
+  Localizable.strings
+  LanguageSettings
+
+  Created by anoopm on 10/02/17.
+  Copyright © 2017 anoopm. All rights reserved.
+*/
+/* No comment provided by engineer. */
+"Type_your_search" = "اكتب بحثك";
+"English" = "الإنجليزية";
+"Farsi" = "الفارسية";
+"Arabic" = "العربية";
+"Holy_Quran" = "القرآن الكريم";
+"Loading_Content" = "تحميل المحتوى ...";
+"Surah" = "سورة";
+"Parts" = "جزء";
+"Aya" = "آية";
+"part" = "جزء";
+"hizb" = "حزب";
+"recomended_abr" = "مستحب";
+"obligatory_abr" = "واجب";
+"verses" = "آيات";
+
+
+
+
+
+"First" = "أول" ;
+"Second" =  "ثانيا" ;
+"Third" =  "الثالث" ;
+"Forth" =  "الرابع" ;
+"Fifth" =  "الخامس" ;
+"Sixth" =  "السادس" ;
+"Seventh" =  "سابعا" ;
+"Eighth" =  "ثامن" ;
+"Ninth" =  "تاسع" ;
+"Tenth" =  "العاشر" ;
+"Eleventh" =  "الحاديه عشر" ;
+"Twelfth" =  "الثاني عشر" ;
+"Thirteenth" =  "الثالث عشر" ;
+"Fourteenth" =  "الرابع عشر" ;
+"Fifteenth" =  "الخامس عشر" ;
+"Sixteenth" =  "السادس عشر" ;
+"Seventeenth" =  "السابع عشر" ;
+"Eighteenth" =  "الثامن عشر" ;
+"Nineteenth" =  "التاسع عشر" ;
+"Twentieth" =  "عشرين" ;
+"Twenty_first" =  "الحادي والعشرون" ;
+"Twenty_second" =  "عشرين ثانية" ;
+"Twenty_third" =  "ثلاثة وعشرون" ;
+"Twenty_forth" =  "الرابع والعشرون" ;
+"Twenty_fifth" =  "خمسة و عشرون" ;
+"Twenty_sixth" =   "السادس والعشرون" ;
+"Twenty_seventh" =   "السابع والعشرون" ;
+"Twenty_eighth" =   "الثامن والعشرون" ;
+"Twenty_ninth" =   "التاسع والعشرون" ;
+"Thirtieth" =  "الثلاثون" ;

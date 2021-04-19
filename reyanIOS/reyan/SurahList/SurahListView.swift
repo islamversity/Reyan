@@ -7,7 +7,6 @@ import nativeShared
 
 struct SurahListView : View {
     
-    
     @ObservedObject public var flowCollector: SurahListStateCollector = SurahListStateCollector()
     var presenter : SurahListPresenter
 //    @State var uiState: SurahListState = SurahListState.Companion.idle(SurahListState.Companion.init())()

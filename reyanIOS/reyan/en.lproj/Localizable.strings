@@ -1,0 +1,54 @@
+/* 
+  Localizable.strings
+  LanguageSettings
+
+  Created by anoopm on 10/02/17.
+  Copyright © 2017 anoopm. All rights reserved.
+*/
+/* No comment provided by engineer. */
+"Type_your_search" = "Type your search";
+"English" = "English";
+"Farsi" = "Farsi";
+"Arabic" = "Arabic";
+"Holy_Quran" = "Holy Quran";
+"Loading_Content" = "Loading Content ...";
+"Surah" = "Surah";
+"Parts" = "Parts";
+"Aya" = "Aya";
+"part" = "part";
+"hizb" = "hizb";
+"recomended_abr" = "Rec";
+"obligatory_abr" = "Obg";
+"verses" = "verses";
+
+
+"First" = "First" ;
+"Second" =  "Second" ;
+"Third" =  "Third" ;
+"Forth" =  "Forth" ;
+"Fifth" =  "Fifth" ;
+"Sixth" =  "Sixth" ;
+"Seventh" =  "Seventh" ;
+"Eighth" =  "Eighth" ;
+"Ninth" =  "Ninth" ;
+"Tenth" =  "Tenth" ;
+"Eleventh" =  "Eleventh" ;
+"Twelfth" =  "Twelfth" ;
+"Thirteenth" =  "Thirteenth" ;
+"Fourteenth" =  "Fourteenth" ;
+"Fifteenth" =  "Fifteenth" ;
+"Sixteenth" =  "Sixteenth" ;
+"Seventeenth" =  "Seventeenth" ;
+"Eighteenth" =  "Eighteenth" ;
+"Nineteenth" =  "Nineteenth" ;
+"Twentieth" =  "Twentieth" ;
+"Twenty_first" =  "Twenty first" ;
+"Twenty_second" =  "Twenty second" ;
+"Twenty_third" =  "Twenty third" ;
+"Twenty_forth" =  "Twenty forth" ;
+"Twenty_fifth" =  "Twenty fifth" ;
+"Twenty_sixth" =  "Twenty sixth" ;
+"Twenty_seventh" =  "Twenty seventh" ;
+"Twenty_eighth" =  "Twenty eighth" ;
+"Twenty_ninth" =  "Twenty ninth" ;
+"Thirtieth" =  "Thirtieth" ;

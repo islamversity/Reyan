@@ -63,7 +63,7 @@ struct SurahHeaderView : View {
                     
                     Spacer()
                     
-                    Text(origin + " - " + verses + " verses")
+                    Text(origin + " - " + verses + " " + defaultLocalizer.stringForKey(key: "verses"))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                         .lineLimit(1)

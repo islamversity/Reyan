@@ -1,0 +1,54 @@
+/* 
+  Localizable.strings
+  LanguageSettings
+
+  Created by anoopm on 10/02/17.
+  Copyright © 2017 anoopm. All rights reserved.
+*/
+/* No comment provided by engineer. */
+"Type_your_search" = "کلمه مورد نظر خود را جستجو کنید";
+"English" = "انگلیسی";
+"Farsi" = "فارسی";
+"Arabic" = "عربی";
+"Holy_Quran" = "قرآن مجید";
+"Loading_Content" = "در حال بارگذاری محتوی ...";
+"Surah" = "سوره";
+"Parts" = "جزء";
+"Aya" = "آیه";
+"part" = "جزء";
+"hizb" = "حزب";
+"recomended_abr" = "مستحب";
+"obligatory_abr" = "واجب";
+"verses" = "آیات";
+
+
+"First" = "اول" ;
+"Second" =  "دوم" ;
+"Third" =  "سوم" ;
+"Forth" =  "چهارم" ;
+"Fifth" =  "پنجم" ;
+"Sixth" =  "ششم" ;
+"Seventh" =  "هفتم" ;
+"Eighth" =  "هشتم" ;
+"Ninth" =  "نهم" ;
+"Tenth" =  "دهم" ;
+"Eleventh" =  "یازدهم" ;
+"Twelfth" =  "دوازدهم" ;
+"Thirteenth" =  "سیزدهم" ;
+"Fourteenth" =  "چهاردهم" ;
+"Fifteenth" =  "پانزدهم" ;
+"Sixteenth" =  "شانزدهم" ;
+"Seventeenth" =  "هفدهم" ;
+"Eighteenth" =  "هجدهم" ;
+"Nineteenth" =  "نوزدهم" ;
+"Twentieth" =  "بیستم" ;
+"Twenty_first" =  "بیست و یکم" ;
+"Twenty_second" =  "بیست و دوم" ;
+"Twenty_third" =  "بیست و سوم" ;
+"Twenty_forth" =  "بیست و چهارم" ;
+"Twenty_fifth" =  "بیست و پنجم" ;
+"Twenty_sixth" =  "بیست و ششم" ;
+"Twenty_seventh" =  "بیست و هفتم" ;
+"Twenty_eighth" = "بیست و هشتم" ;
+"Twenty_ninth" =  "بیست و نهم" ;
+"Thirtieth" =  "سی ام" ;

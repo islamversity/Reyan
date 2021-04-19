@@ -6,36 +6,73 @@
 //
 
 import UIKit
+//
+//var dddjuzTitleArray : [String] = [
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: ""),
+//    defaultLocalizer.stringForKey(key: "")
+//]
 
-let juzTitleArray : [String] = [
-    NSLocalizedString("First", comment: ""),
-    NSLocalizedString("Second", comment: ""),
-    NSLocalizedString("Third", comment: ""),
-    NSLocalizedString("Forth", comment: ""),
-    NSLocalizedString("Fifth", comment: ""),
-    NSLocalizedString("Sixth", comment: ""),
-    NSLocalizedString("Seventh", comment: ""),
-    NSLocalizedString("Eighth", comment: ""),
-    NSLocalizedString("Ninth", comment: ""),
-    NSLocalizedString("Tenth", comment: ""),
-    NSLocalizedString("Eleventh", comment: ""),
-    NSLocalizedString("Twelfth", comment: ""),
-    NSLocalizedString("Thirteenth", comment: ""),
-    NSLocalizedString("Fourteenth", comment: ""),
-    NSLocalizedString("Fifteenth", comment: ""),
-    NSLocalizedString("Sixteenth", comment: ""),
-    NSLocalizedString("Seventeenth", comment: ""),
-    NSLocalizedString("Eighteenth", comment: ""),
-    NSLocalizedString("Nineteenth", comment: ""),
-    NSLocalizedString("Twentieth", comment: ""),
-    NSLocalizedString("Twenty first", comment: ""),
-    NSLocalizedString("Twenty second", comment: ""),
-    NSLocalizedString("Twenty third", comment: ""),
-    NSLocalizedString("Twenty forth", comment: ""),
-    NSLocalizedString("Twenty fifth", comment: ""),
-    NSLocalizedString("Twenty sixth", comment: ""),
-    NSLocalizedString("Twenty seventh", comment: ""),
-    NSLocalizedString("Twenty eighth", comment: ""),
-    NSLocalizedString("Twenty ninth", comment: ""),
-    NSLocalizedString("Thirtieth", comment: "")
-]
+func getJuzTitleArray() -> [String] {
+    var juzTitleArray : [String] = []
+    
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "First"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Second"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Third"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Forth"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Fifth"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Sixth"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Seventh"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Eighth"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Ninth"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Tenth"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Eleventh"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Twelfth"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Thirteenth"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Fourteenth"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Fifteenth"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Sixteenth"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Seventeenth"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Eighteenth"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Nineteenth"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Twentieth"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Twenty_first"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Twenty_second"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Twenty_third"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Twenty_forth"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Twenty_fifth"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Twenty_sixth"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Twenty_seventh"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Twenty_eighth"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Twenty_ninth"))
+    juzTitleArray.append(defaultLocalizer.stringForKey(key: "Thirtieth"))
+    
+    return juzTitleArray
+}
