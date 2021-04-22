@@ -1,17 +1,24 @@
 
 import SwiftUI
 
+//
+//class UpdateUI: ObservableObject {
+//    @Published var toUpdate = false
+//}
 
-class LanguageSettings: ObservableObject {
-    @Published var lang = "en"
-}
 
 struct HomeSettingsView: View {
     
 //    @EnvironmentObject var language: LanguageSettings
-    @ObservedObject var languageSettings = LanguageSettings()
+//    @State var updating = false
     
     init() {}
+    
+//    func updateUI() {
+//        updating = !updating
+//    }
+    
+    @State var language = Language.getSavedLanguage()
     
     var body: some View {
         
@@ -19,31 +26,45 @@ struct HomeSettingsView: View {
 //            Text("Home Settings : language = \(language.lang)")
             
             Button(action: {
-                defaultLocalizer.setSelectedLanguage(lang: "en")
-                languageSettings.lang = "en"
-                
+                Language.setLanguage(lang: .english)
+//                updateUI()
+                self.language = "en"
+                                
             }, label: {
-                Text(defaultLocalizer.stringForKey(key: "English"))
+//                Text(NSLocalizedString("English", comment: ""))
+                Text("English")
+
             })
             
             Button(action: {
-                defaultLocalizer.setSelectedLanguage(lang: "ar")
-                languageSettings.lang = "ar"
+                Language.setLanguage(lang: .arabic)
+//                updateUI()
+                self.language = "ar"
+
 
             }, label: {
-                Text(defaultLocalizer.stringForKey(key: "Arabic"))
+//                Text(NSLocalizedString("Arabic", comment: ""))
+                Text("Arabic")
+
             })
             
             Button(action: {
-                defaultLocalizer.setSelectedLanguage(lang: "fa")
-                languageSettings.lang = "fa"
+                Language.setLanguage(lang: .farsi)
+//                updateUI()
+                self.language = "fa"
 
             }, label: {
-                Text( defaultLocalizer.stringForKey(key: "Farsi"))
+                Text("Farsi")
+
+//                Text( NSLocalizedString("Farsi", comment: ""))
             })
         }
-        .environmentObject(languageSettings)
-        
+        .environment(\.locale, .init(identifier: language))
+        .navigationBarItems(
+            trailing: Button("Home") {
+                iOSNavigator.root?.setViewControllers([UIHostingController(rootView: LaunchView())], animated: true)
+            }
+        )
     }
 }
 

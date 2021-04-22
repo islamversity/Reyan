@@ -5,7 +5,7 @@ import Resolver
 
 struct QuranHomeView: View, Resolving {
     
-    @State var updateUI : Bool = false
+//    @State var updateUI : Bool = false
     
     @ObservedObject public var flowCollector: QuranHomeStateCollector = QuranHomeStateCollector()
     var presenter : QuranHomePresenter
@@ -73,7 +73,7 @@ struct QuranHomeView: View, Resolving {
                     {
                         HStack {
                             
-                            Text(defaultLocalizer.stringForKey(key: "Type_your_search"))
+                            Text(NSLocalizedString("Type_your_search", comment: ""))
                                 .foregroundColor(.gray)
                                 .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.white, lineWidth: 0))
                                 .padding(.vertical, 10.0)
@@ -98,14 +98,14 @@ struct QuranHomeView: View, Resolving {
                         tabPosition = 0
 //                        presenter.processIntents(intents: QuranHomeIntent.SelectTab.init(position: 0))
                     }, label: {
-                        TabView(text: defaultLocalizer.stringForKey(key: "Surah"), isSelected: tabPosition == 0 ? true : false)
+                        TabView(text: NSLocalizedString("Surah", comment: ""), isSelected: tabPosition == 0 ? true : false)
                     })
                     
                     Button(action: {
                         tabPosition = 1
 //                        presenter.processIntents(intents: QuranHomeIntent.SelectTab.init(position: 1))
                     }, label: {
-                        TabView(text: defaultLocalizer.stringForKey(key: "Parts"), isSelected: tabPosition == 1 ? true : false)
+                        TabView(text: NSLocalizedString("Parts", comment: ""), isSelected: tabPosition == 1 ? true : false)
                     })
                 }
                 
@@ -115,18 +115,20 @@ struct QuranHomeView: View, Resolving {
                     juzListView
                 }
                 
-                if updateUI == true {
-                   // check updateUI just to refresh swiftui view on Appear
-                }
+//                if updateUI == true {
+//                   // check updateUI just to refresh swiftui view on Appear
+//                }
                 
             }
             .padding(.horizontal, 20.0)
 //            .edgesIgnoringSafeArea(.all)
         }
         .navigationBarHidden(true)
-        .onAppear {
-            updateUI = !updateUI
-        }
+//        .onAppear {
+//            updateUI = !updateUI
+//        }
+        .environment(\.locale, Locale(identifier:  Language.currentLanguage))
+
     }
 }
 

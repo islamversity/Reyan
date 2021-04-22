@@ -33,7 +33,7 @@ struct SearchBarView : View {
 //
             HStack {
 
-                TextField(defaultLocalizer.stringForKey(key: "Type_your_search"), text: $searchText, onEditingChanged: { isFocused in
+                TextField(NSLocalizedString("Type_your_search", comment: ""), text: $searchText, onEditingChanged: { isFocused in
                     print(isFocused ? "focused" : "unfocused")
                     self.isFocused = isFocused
                 })

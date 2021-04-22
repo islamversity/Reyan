@@ -6,6 +6,8 @@ import Resolver
 struct LaunchView: View, Resolving {
     
     init() {
+        let savedLang = Language.getSavedLanguage()
+        Language.setLanguage(lang: savedLang)
     }
     
     var body: some View {

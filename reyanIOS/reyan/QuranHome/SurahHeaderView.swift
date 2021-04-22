@@ -63,7 +63,7 @@ struct SurahHeaderView : View {
                     
                     Spacer()
                     
-                    Text(origin + " - " + verses + " " + defaultLocalizer.stringForKey(key: "verses"))
+                    Text(origin + " - " + verses + " " + NSLocalizedString("verses", comment: ""))
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                         .lineLimit(1)

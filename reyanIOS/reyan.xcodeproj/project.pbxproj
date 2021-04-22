@@ -54,7 +54,9 @@
 		E7E686CB262CAC8F0082CCC0 /* fa.lproj in Resources */ = {isa = PBXBuildFile; fileRef = E7E686C7262CAC8F0082CCC0 /* fa.lproj */; };
 		E7E686CC262CAC8F0082CCC0 /* Base.lproj in Resources */ = {isa = PBXBuildFile; fileRef = E7E686C8262CAC8F0082CCC0 /* Base.lproj */; };
 		E7E686CD262CAC8F0082CCC0 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = E7E686C9262CAC8F0082CCC0 /* en.lproj */; };
-		E7E686D2262CB1C10082CCC0 /* LocalizeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E686D1262CB1C10082CCC0 /* LocalizeUtils.swift */; };
+		E7E686D2262CB1C10082CCC0 /* Localizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E686D1262CB1C10082CCC0 /* Localizer.swift */; };
+		E7E687052630AFFF0082CCC0 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E687042630AFFF0082CCC0 /* Language.swift */; };
+		E7E6870A2630B05F0082CCC0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E687092630B05F0082CCC0 /* Constants.swift */; };
 		E7FA3FE62566557D00B8FCE7 /* quran-farsi-makarem.json in Resources */ = {isa = PBXBuildFile; fileRef = E7FA3FE22566557C00B8FCE7 /* quran-farsi-makarem.json */; };
 		E7FA3FE72566557D00B8FCE7 /* quran-simple-one-line.json in Resources */ = {isa = PBXBuildFile; fileRef = E7FA3FE32566557C00B8FCE7 /* quran-simple-one-line.json */; };
 		E7FA3FE82566557D00B8FCE7 /* quran-data.json in Resources */ = {isa = PBXBuildFile; fileRef = E7FA3FE42566557C00B8FCE7 /* quran-data.json */; };
@@ -133,7 +135,9 @@
 		E7E686C7262CAC8F0082CCC0 /* fa.lproj */ = {isa = PBXFileReference; lastKnownFileType = file; name = fa.lproj; path = reyan/fa.lproj; sourceTree = SOURCE_ROOT; };
 		E7E686C8262CAC8F0082CCC0 /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base.lproj; path = reyan/Base.lproj; sourceTree = SOURCE_ROOT; };
 		E7E686C9262CAC8F0082CCC0 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = file; name = en.lproj; path = reyan/en.lproj; sourceTree = SOURCE_ROOT; };
-		E7E686D1262CB1C10082CCC0 /* LocalizeUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalizeUtils.swift; sourceTree = "<group>"; };
+		E7E686D1262CB1C10082CCC0 /* Localizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizer.swift; sourceTree = "<group>"; };
+		E7E687042630AFFF0082CCC0 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		E7E687092630B05F0082CCC0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		E7FA3FE22566557C00B8FCE7 /* quran-farsi-makarem.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "quran-farsi-makarem.json"; sourceTree = "<group>"; };
 		E7FA3FE32566557C00B8FCE7 /* quran-simple-one-line.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "quran-simple-one-line.json"; sourceTree = "<group>"; };
 		E7FA3FE42566557C00B8FCE7 /* quran-data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "quran-data.json"; sourceTree = "<group>"; };
@@ -258,7 +262,9 @@
 				E7C878D625F68D8A001179ED /* Base32.swift */,
 				E7470AC725E7FD2900C45734 /* UUIDGenerator.swift */,
 				E71FE06425E953DF00B51D44 /* NavigationConfigurator.swift */,
-				E7E686D1262CB1C10082CCC0 /* LocalizeUtils.swift */,
+				E7E686D1262CB1C10082CCC0 /* Localizer.swift */,
+				E7E687042630AFFF0082CCC0 /* Language.swift */,
+				E7E687092630B05F0082CCC0 /* Constants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -592,6 +598,7 @@
 				E71FE05825E906FE00B51D44 /* onboarding_preview.swift in Sources */,
 				E7CAB2A92574100D00E6D753 /* SurahRowView.swift in Sources */,
 				E79ADF7425B18D4D00B8C765 /* OnBoardingStateCollector.swift in Sources */,
+				E7E687052630AFFF0082CCC0 /* Language.swift in Sources */,
 				E7BDEC052590BDAA00F8504F /* HomeSettingsView.swift in Sources */,
 				E776A2B7259F079200B1EB54 /* Colors.swift in Sources */,
 				E7BDEBFE2590829600F8504F /* TabView.swift in Sources */,
@@ -606,6 +613,7 @@
 				E7D33F8625A3A4F60046DEAC /* AyaRowAction.swift in Sources */,
 				E7D33F8B25A3A5430046DEAC /* AyaRowIntents.swift in Sources */,
 				E7B512982580102900B88771 /* JuzRowView.swift in Sources */,
+				E7E6870A2630B05F0082CCC0 /* Constants.swift in Sources */,
 				E7CAB2C12578D78C00E6D753 /* SurahListStateCollector.swift in Sources */,
 				E78EFD6E253351C000886039 /* Navigation.swift in Sources */,
 				E7D6F7422561AAE4006C17EB /* IOSDatabaseFiller.swift in Sources */,
@@ -645,7 +653,7 @@
 				E77AD38D258291F5004FD632 /* JuzListView.swift in Sources */,
 				E7C878DC25F68DA0001179ED /* RemoveSeperateLinesInList.swift in Sources */,
 				E78EFD7F2533541100886039 /* QuranHomeView.swift in Sources */,
-				E7E686D2262CB1C10082CCC0 /* LocalizeUtils.swift in Sources */,
+				E7E686D2262CB1C10082CCC0 /* Localizer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

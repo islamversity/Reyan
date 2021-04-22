@@ -58,7 +58,7 @@ struct AyaRowView : View {
                         
                         VStack {
                             
-                            Text(defaultLocalizer.stringForKey(key: "part"))
+                            Text(NSLocalizedString("part", comment: ""))
                                 .foregroundColor(.gold_dark)
                                 .multilineTextAlignment(.center)
                                 .lineLimit(1)
@@ -72,7 +72,7 @@ struct AyaRowView : View {
                                 .lineLimit(1)
                                 .font(.custom("Vazir", size: 10.0))
                             
-                            Text(defaultLocalizer.stringForKey(key: "hizb"))
+                            Text(NSLocalizedString("hizb", comment: ""))
                                 .foregroundColor(.gold_dark)
                                 .multilineTextAlignment(.center)
                                 .lineLimit(1)
@@ -99,7 +99,7 @@ struct AyaRowView : View {
                             
                             VStack {
                                 
-                                Text(defaultLocalizer.stringForKey(key: "hizb"))
+                                Text(NSLocalizedString("hizb", comment: ""))
                                     .foregroundColor(.gold_dark)
                                     .multilineTextAlignment(.center)
                                     .lineLimit(1)
@@ -146,7 +146,7 @@ struct AyaRowView : View {
                             .resizable()
                             .frame(width: 25, height: 40, alignment: .center)
 
-                        Text(defaultLocalizer.stringForKey(key: "recomended_abr"))
+                        Text(NSLocalizedString("recomended_abr", comment: ""))
                             .foregroundColor(.black)
                             .multilineTextAlignment(.center)
                             .lineLimit(1)
@@ -161,7 +161,7 @@ struct AyaRowView : View {
                             .resizable()
                             .frame(width: 25, height: 40, alignment: .center)
                         
-                        Text(defaultLocalizer.stringForKey(key: "obligatory_abr"))
+                        Text(NSLocalizedString("obligatory_abr", comment: ""))
                             .foregroundColor(.black)
                             .multilineTextAlignment(.center)
                             .lineLimit(1)

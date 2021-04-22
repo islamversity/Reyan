@@ -55,7 +55,7 @@ struct SurahRowView : View{
                         Spacer()
                             .frame(width:2)
                         
-                        Text("\(surahUIItem.ayaCount) \(defaultLocalizer.stringForKey(key: "Aya"))")
+                        Text("\(surahUIItem.ayaCount) \(NSLocalizedString("Aya", comment: ""))")
                             .font(.custom("Vazir", size: 11.0))
 
                     }

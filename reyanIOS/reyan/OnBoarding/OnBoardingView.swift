@@ -41,7 +41,7 @@ struct OnBoardingView: View {
                 
                 VStack{
                     HStack{
-                        Text(defaultLocalizer.stringForKey(key: "Loading_Content"))
+                        Text(NSLocalizedString("Loading_Content", comment: ""))
                             .foregroundColor(.green_600)
                             .font(.custom("Vazir", size: 14))
                     
