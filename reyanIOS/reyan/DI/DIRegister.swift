@@ -291,7 +291,7 @@ extension Resolver {
         register(Main.self){
             NativeDatabaseFactory().create()
         }
-        .scope(application)
+        .scope(.application)
     }
     
     public static func registerNavigator() {

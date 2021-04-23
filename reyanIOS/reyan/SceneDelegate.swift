@@ -21,6 +21,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate  {
             
             let navigationController: UINavigationController = UINavigationController(rootViewController: launchViewController)
             //navigationController.navigationBar.prefersLargeTitles = true
+            navigationController.navigationBar.backItem?.backButtonTitle = ""
+            
             setUpNavigationBarAppearance()
 
             iOSNavigator.root = navigationController

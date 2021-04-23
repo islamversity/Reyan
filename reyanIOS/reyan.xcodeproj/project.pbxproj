@@ -57,6 +57,7 @@
 		E7E686D2262CB1C10082CCC0 /* Localizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E686D1262CB1C10082CCC0 /* Localizer.swift */; };
 		E7E687052630AFFF0082CCC0 /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E687042630AFFF0082CCC0 /* Language.swift */; };
 		E7E6870A2630B05F0082CCC0 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E687092630B05F0082CCC0 /* Constants.swift */; };
+		E7E6873A263315140082CCC0 /* SettingsStateCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7E68739263315140082CCC0 /* SettingsStateCollector.swift */; };
 		E7FA3FE62566557D00B8FCE7 /* quran-farsi-makarem.json in Resources */ = {isa = PBXBuildFile; fileRef = E7FA3FE22566557C00B8FCE7 /* quran-farsi-makarem.json */; };
 		E7FA3FE72566557D00B8FCE7 /* quran-simple-one-line.json in Resources */ = {isa = PBXBuildFile; fileRef = E7FA3FE32566557C00B8FCE7 /* quran-simple-one-line.json */; };
 		E7FA3FE82566557D00B8FCE7 /* quran-data.json in Resources */ = {isa = PBXBuildFile; fileRef = E7FA3FE42566557C00B8FCE7 /* quran-data.json */; };
@@ -138,6 +139,7 @@
 		E7E686D1262CB1C10082CCC0 /* Localizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizer.swift; sourceTree = "<group>"; };
 		E7E687042630AFFF0082CCC0 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		E7E687092630B05F0082CCC0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		E7E68739263315140082CCC0 /* SettingsStateCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStateCollector.swift; sourceTree = "<group>"; };
 		E7FA3FE22566557C00B8FCE7 /* quran-farsi-makarem.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "quran-farsi-makarem.json"; sourceTree = "<group>"; };
 		E7FA3FE32566557C00B8FCE7 /* quran-simple-one-line.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "quran-simple-one-line.json"; sourceTree = "<group>"; };
 		E7FA3FE42566557C00B8FCE7 /* quran-data.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "quran-data.json"; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 			isa = PBXGroup;
 			children = (
 				E7BDEC032590BDAA00F8504F /* HomeSettingsView.swift */,
+				E7E68739263315140082CCC0 /* SettingsStateCollector.swift */,
 			);
 			path = HomeSettings;
 			sourceTree = "<group>";
@@ -636,6 +639,7 @@
 				E796EC3E253837260025072F /* DIRegister.swift in Sources */,
 				E7470AC325E7FCCC00C45734 /* IOSDatabaseFileConfiger.swift in Sources */,
 				E776A2B2259F078600B1EB54 /* Images.swift in Sources */,
+				E7E6873A263315140082CCC0 /* SettingsStateCollector.swift in Sources */,
 				E7470AC825E7FD2900C45734 /* UUIDGenerator.swift in Sources */,
 				E7470AC325E7FCCC00C45734 /* IOSDatabaseFileConfiger.swift in Sources */,
 				E776A2B2259F078600B1EB54 /* Images.swift in Sources */,

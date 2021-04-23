@@ -6,15 +6,9 @@ import nativeShared
 
 struct JuzRowView : View{
     
-    @State var updateUI : Bool = false
-
     let juzUIItem : JozUIModel
     
     var body: some View {
-        
-        if updateUI == true {
-           // check updateUI just to refresh swiftui view on Appear
-        }
         
         VStack(alignment: .leading) {
             
@@ -25,14 +19,19 @@ struct JuzRowView : View{
                         .resizable()
                         .frame(width: 48, height: 48, alignment: .center)
                     
-                    Text(String(juzUIItem.number))
+                    Text("\(juzUIItem.number)")
                         .font(.custom("Vazir", size: 16.0))
                         .fontWeight(.bold)
                         .foregroundColor(Color(red: 0.11, green: 0.4, blue: 0.38, opacity: 1.0))
                 }
                 
+                if UIApplication.isRTL()  {
+                    Spacer()
+                }
+                
                 Text(getJuzTitleArray()[Int(juzUIItem.number) - 1])
                     .foregroundColor(Color(red: 0.24, green: 0.24, blue: 0.24, opacity: 1.0))
+                    .font(.custom("Vazir", size: 18.0))
             }
             
             Spacer()
@@ -49,11 +48,15 @@ struct JuzRowView : View{
                     .frame(height: 1)
                 
                 HStack {
-                    Text(juzUIItem.startTitle)
+                    Text("\(juzUIItem.startTitle)")
                         .foregroundColor(Color.init(red: 0.5, green: 0.5, blue: 0.5))
+                        .font(.custom("Vazir", size: 14.0))
+
                     Spacer()
                     Text(juzUIItem.endTitle)
                         .foregroundColor(Color.init(red: 0.5, green: 0.5, blue: 0.5))
+                        .font(.custom("Vazir", size: 14.0))
+
                 }
             }
             .padding(.leading, 58)
@@ -64,9 +67,8 @@ struct JuzRowView : View{
                 .frame(width: .infinity, height: 2, alignment: .center)
         }
         .padding(.top, 15)
-        .onAppear {
-            updateUI = !updateUI
-        }
+        .environment(\.locale, Locale(identifier:  currentLanguage))
+
     }
 }
 //

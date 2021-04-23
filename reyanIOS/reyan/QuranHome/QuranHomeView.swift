@@ -28,6 +28,20 @@ struct QuranHomeView: View, Resolving {
     
     var body: some View {
         
+        let searchTextView =
+            Text(NSLocalizedString("Type_your_search", comment: ""))
+                .foregroundColor(.gray)
+                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.white, lineWidth: 0))
+                .padding(.vertical, 10.0)
+                .padding(.horizontal, 20.0)
+                .font(.custom("Vazir", size: 14))
+        
+        let searchIcon =
+            Image.ic_search
+                .resizable()
+                .frame(width: 24, height: 24, alignment: .center)
+        
+        
         ZStack {
             
             Image.background_main
@@ -64,19 +78,17 @@ struct QuranHomeView: View, Resolving {
                     {
                         HStack {
                             
-                            Text(NSLocalizedString("Type_your_search", comment: ""))
-                                .foregroundColor(.gray)
-                                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.white, lineWidth: 0))
-                                .padding(.vertical, 10.0)
-                                .padding(.horizontal, 20.0)
-                                .font(.custom("Vazir", size: 14))
-                            
-                            Spacer()
-                            
-                            Image.ic_search
-                                .resizable()
-                                .frame(width: 24, height: 24, alignment: .center)
-                                .padding(.trailing, 20)
+                            if UIApplication.isRTL() {
+                                searchIcon
+                                    .padding(.leading, 20)
+                                Spacer()
+                                searchTextView
+                            }else{
+                                searchTextView
+                                Spacer()
+                                searchIcon
+                                    .padding(.trailing, 20)
+                            }
                         }
                     }
                 }

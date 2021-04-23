@@ -41,7 +41,7 @@ struct AyaRowView : View {
                         .frame(width: 24, height: 24, alignment: .center)
                         .foregroundColor(Color.green_600)
 
-                    Text(String(uiModel.order))
+                    Text("\(uiModel.order)")
                         .foregroundColor(.white)
                         .fontWeight(.bold)
                         .multilineTextAlignment(.center)
@@ -65,7 +65,7 @@ struct AyaRowView : View {
                                 .font(.custom("Vazir", size: 8.0))
                                 .padding(.top, 2)
                             
-                            Text(String(uiModel.juz! as! Int))
+                            Text("\(uiModel.juz! as! Int)")
                                 .foregroundColor(.gold_dark)
                                 .fontWeight(.bold)
                                 .multilineTextAlignment(.center)
@@ -78,7 +78,7 @@ struct AyaRowView : View {
                                 .lineLimit(1)
                                 .font(.system(size: 6.0))
                             
-                            Text(String(uiModel.hizb?.hizb ?? 0))
+                            Text("\(uiModel.hizb?.hizb ?? 0)")
                                 .foregroundColor(.gold_dark)
                                 .fontWeight(.bold)
                                 .multilineTextAlignment(.center)
@@ -105,7 +105,7 @@ struct AyaRowView : View {
                                     .lineLimit(1)
                                     .font(.system(size: 6.0))
                                 
-                                Text(String(uiModel.hizb?.hizb ?? 0))
+                                Text("\(uiModel.hizb?.hizb ?? 0)")
                                     .foregroundColor(.gold_dark)
                                     .fontWeight(.bold)
                                     .multilineTextAlignment(.center)
@@ -216,7 +216,8 @@ struct AyaRowView : View {
         }
         .padding(.horizontal)
         .padding(.top, 5)
-        
+        .environment(\.locale, Locale(identifier:  currentLanguage))
+
     }
 }
 

@@ -61,11 +61,11 @@ struct SurahView: View {
                             
                             SurahHeaderView(
                                 id: vm.rowId,
-                                order: vm.number,
+                                order: Int(vm.number) ?? 0,
                                 name: vm.nameTranslated,
                                 originalName: vm.name,
                                 origin: vm.origin.name,
-                                verses: String(vm.verses),
+                                verses: vm.verses,
                                 showismillah: vm.showBismillah
                             )
                         }else if item is AyaUIModel {
@@ -81,7 +81,17 @@ struct SurahView: View {
             }
         }
         .navigationBarTitle(NSLocalizedString("Holy_Quran", comment: ""))
-        
+        .navigationBarBackButtonHidden(true)
+        .navigationBarItems(
+            trailing:
+                Button(action: {
+                    iOSNavigator.root?.popViewController(animated: true)
+                }, label: {
+                    Image(systemName: "chevron.backward")
+                })
+        )
+        .environment(\.locale, Locale(identifier:  currentLanguage))
+
         
     }
 }

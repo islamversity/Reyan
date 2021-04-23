@@ -10,15 +10,24 @@ import SwiftUI
 struct SurahHeaderView : View {
     
     let id : String
-    let order : String
+    let order : Int
     let name : String
     let originalName : String
     let origin : String
-    let verses : String
+    let verses : Int32
     let showismillah : Bool
     
     
     var body: some View {
+        
+        let ayaString =
+            Text( NSLocalizedString("Aya", comment: ""))
+            .font(.custom("Vazir", size: 11.0))
+
+        let acText =
+            Text("\(verses)")
+            .font(.custom("Vazir", size: 11.0))
+        
         
         VStack {
             
@@ -35,7 +44,7 @@ struct SurahHeaderView : View {
                             .foregroundColor(.white)
                             .frame(width: 42, height: 42, alignment: .center)
                         
-                        Text(order)
+                        Text("\(order)")
                             .foregroundColor(.white)
                             .fontWeight(.bold)
                             .multilineTextAlignment(.center)
@@ -63,18 +72,41 @@ struct SurahHeaderView : View {
                     
                     Spacer()
                     
-                    Text(origin + " - " + verses + " " + NSLocalizedString("verses", comment: ""))
-                        .foregroundColor(.white)
+                    HStack {
+                    Text(origin)
                         .multilineTextAlignment(.center)
                         .lineLimit(1)
-                        .padding(.horizontal, 10.0)
                         .font(.custom("Vazir", size: 11.0))
-                        .padding(.bottom, 20)
+                        
+                        Spacer()
+                            .frame(width:2)
+                        
+                        Text("-")
+                            .font(.custom("Vazir", size: 11.0))
+
+                        Spacer()
+                            .frame(width:2)
+                        
+                        if UIApplication.isRTL() {
+                            ayaString
+                            Spacer()
+                                .frame(width:2)
+                            acText
+                        }else{
+                            acText
+                            Spacer()
+                                .frame(width:2)
+                            ayaString
+                        }
+                    }
+                    .foregroundColor(.white)
+                    .padding(.bottom, 20)
+
                 }
                 .padding()
             }
             .fixedSize()
-            
+
             if showismillah {
                 Image.bismillah
                     .resizable()
@@ -82,13 +114,15 @@ struct SurahHeaderView : View {
                     .padding(.bottom, 15)
             }
         }
+        .environment(\.locale, Locale(identifier:  currentLanguage))
+
     }
 }
-
-struct SurahHeaderView_Preview : PreviewProvider {
-    
-    static var previews: some View {
-        
-        SurahHeaderView(id: "1", order: "114", name: "Ar_Rahman", originalName: "الرحمن", origin: "Medinan", verses: "256", showismillah: true)
-    }    
-}
+//
+//struct SurahHeaderView_Preview : PreviewProvider {
+//    
+//    static var previews: some View {
+//        
+//        SurahHeaderView(id: "1", order: "114", name: "Ar_Rahman", originalName: "الرحمن", origin: "Medinan", verses: "256", showismillah: true)
+//    }    
+//}

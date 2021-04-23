@@ -62,9 +62,7 @@ struct SurahListView : View {
                 }
             }
         }
-//        .onAppear{
-//            presenter.processIntents(intents: SurahListIntent.Initial.init())
-//        }
+        .environment(\.locale, Locale(identifier:  currentLanguage))
     }
 }
 
