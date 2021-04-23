@@ -2,31 +2,12 @@
 import UIKit
 import Foundation
 import SwiftUI
-//let defaultLocalizer = LocalizeUtils.defaultLocalizer
-//
-//class LocalizeUtils: NSObject {
-//
-//    static let defaultLocalizer = LocalizeUtils()
-//    var appbundle = Bundle.main
-//
-//    func setSelectedLanguage(lang: String) {
-//        guard let langPath = Bundle.main.path(forResource: lang, ofType: "lproj") else {
-//            appbundle = Bundle.main
-//            return
-//        }
-//        appbundle = Bundle(path: langPath)!
-//    }
-//
-//    func stringForKey(key: String) -> String {
-//        return appbundle.localizedString(forKey: key, value: "", table: nil)
-//    }
-//}
 
 class Localizer: NSObject {
     
     class func DoTheSwizzling() {
         
-        print("Swizzle : DoTheSwizzling  = \(Language.currentLanguage)")
+        print("Swizzle : DoTheSwizzling  = \(currentLanguage)")
 
         
         MethodSwizzleGivenClassName(cls: Bundle.self, originalSelector: #selector(Bundle.localizedString(forKey:value:table:)), overrideSelector: #selector(Bundle.specialLocalizedStringForKey(_:value:table:)))
@@ -65,17 +46,24 @@ extension Bundle {
             
             var bundle = Bundle()
             
-            print("Swizzle Bundle : key = \(key) value = \(String(describing: value)) ,currentLanguage = \(Language.currentLanguage)")
+//            print("Swizzle Bundle : key = \(key) value = \(String(describing: value)) ,currentLanguage = \(currentLanguage)")
             
-            if let _path = Bundle.main.path(forResource: Language.currentLanguage, ofType: "lproj") {
+            
+            if let _path = Bundle.main.path(forResource: currentLanguage, ofType: "lproj") {
                 bundle = Bundle(path: _path)!
             }else {
                 let _path = Bundle.main.path(forResource: "Base", ofType: "lproj")!
                 bundle = Bundle(path: _path)!
             }
+            
+            print("Bundle is main = \(bundle)")
+
+            
             return (bundle.specialLocalizedStringForKey(key, value: value, table: tableName))
         }else {
             
+            print("Bundle not main = \(self)")
+
             return (self.specialLocalizedStringForKey(key, value: value, table: tableName))
         }
     }
@@ -85,7 +73,7 @@ extension UIApplication {
     @objc var cstm_userInterfaceLayoutDirection : UIUserInterfaceLayoutDirection {
         get {
             var direction = UIUserInterfaceLayoutDirection.leftToRight
-            let current = Language.currentLanguage
+            let current = currentLanguage
             if  current == languages.farsi.rawValue || current == languages.arabic.rawValue {
                 direction = .rightToLeft
             }

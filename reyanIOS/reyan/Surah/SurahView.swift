@@ -5,7 +5,6 @@ import Combine
 
 struct SurahView: View {
     
-    
     @ObservedObject public var flowCollector: SurahStateCollector = SurahStateCollector()
     
     var presenter : SurahPresenter
@@ -82,6 +81,8 @@ struct SurahView: View {
             }
         }
         .navigationBarTitle(NSLocalizedString("Holy_Quran", comment: ""))
+        
+        
     }
 }
 

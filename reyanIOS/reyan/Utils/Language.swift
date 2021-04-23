@@ -8,23 +8,18 @@
 import UIKit
 import Foundation
 
+
 enum languages : String {
     case english = "en"
     case farsi = "fa"
     case arabic = "ar"
 }
 
-
-class LanguageSettings: ObservableObject {
-    @Published var language : languages = .english
-}
-
-let languageSettings = LanguageSettings()
+public var currentLanguage : String = languages.english.rawValue
 
 
 class Language {
     
-    static var currentLanguage : String = languages.english.rawValue
     
     class func setLanguage(lang: String) {
         switch lang {
@@ -38,24 +33,21 @@ class Language {
             setLanguage(lang: .english)
         }
     }
+    
     class func setLanguage(lang: languages) {
-        print("Language = \(lang)")
+        print("setLanguage : Language = \(lang)")
         if let localeLang = Locale.current.languageCode {
-            print("local language is : \(localeLang)")
+            print("setLanguage : local language is : \(localeLang)")
         }else{
-            print("local language is empty")
+            print("setLanguage : local language is empty")
         }
 
         currentLanguage = lang.rawValue
-        
-        languageSettings.language = lang
-        
-        saveLanguage(lang: lang.rawValue)
-        
+        saveLanguage(lang: currentLanguage)
+
         // for changing language without restarting
-        Localizer.DoTheSwizzling()
+//        Localizer.DoTheSwizzling()
         
-            
 //        setProperSemantic()
     }
     
@@ -73,16 +65,6 @@ class Language {
         userdef.synchronize()
     }
     
-//    class var isRTL: Bool {
-//        var isRTL = false
-//        let savedLang = Language.getSavedLanguage()
-//        if savedLang == languages.farsi.rawValue || savedLang == Constants.arabicLang {
-//            isRTL = true
-//        }
-//
-//        return isRTL
-//    }
-    
     class func setProperSemantic() {
         let savedLang = Language.getSavedLanguage()
 
@@ -98,12 +80,9 @@ class Language {
         UIButton.appearance().semanticContentAttribute = semantic
         UITextField.appearance().semanticContentAttribute = semantic
         
-        
         UserDefaults.standard.set(UIApplication.isRTL(), forKey: "AppleTextDirection")
         UserDefaults.standard.set(UIApplication.isRTL(), forKey: "NSForceRightToLeftWritingDirection")
         UserDefaults.standard.synchronize()
     }
     
-    
-   
 }

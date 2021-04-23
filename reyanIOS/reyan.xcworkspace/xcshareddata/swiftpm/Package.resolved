@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "LocaleManager",
+        "repositoryURL": "https://github.com/amosavian/LocaleManager.git",
+        "state": {
+          "branch": null,
+          "revision": "37e44b18774b352b6de1ae18f2d5992f0a8c6d8e",
+          "version": "1.4.0"
+        }
+      },
+      {
         "package": "NavigationRouter",
         "repositoryURL": "https://github.com/corteggo/NavigationRouter.git",
         "state": {

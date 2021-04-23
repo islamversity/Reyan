@@ -20,13 +20,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate  {
             let window = UIWindow(windowScene: windowScene)
             
             let navigationController: UINavigationController = UINavigationController(rootViewController: launchViewController)
-            UINavigationBar.appearance().backgroundColor = UIColor.clear
-            UINavigationBar.appearance().tintColor = UIColor.init(named: "green_800")
-            UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(named: "green_800") ?? .black]
+            //navigationController.navigationBar.prefersLargeTitles = true
+            setUpNavigationBarAppearance()
 
-            //            navigationController.navigationBar.prefersLargeTitles = true
-            
             iOSNavigator.root = navigationController
+            
             window.rootViewController = navigationController
             self.window = window
             window.makeKeyAndVisible()
@@ -62,6 +60,17 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate  {
         // to restore the scene back to its current state.
     }
     
-    
+    fileprivate func setUpNavigationBarAppearance() {
+        let nBarAppearance = UINavigationBar.appearance()
+        let nItemsAppearance = UINavigationItem()
+        
+        nBarAppearance.backgroundColor = UIColor.clear
+        nBarAppearance.tintColor = UIColor.init(named: "green_800")
+        nBarAppearance.titleTextAttributes = [
+            .foregroundColor:UIColor(named: "green_800") ?? .black
+        ]
+        
+//        nItemsAppearance.backBarButtonItem?.title =
+    }
 }
 

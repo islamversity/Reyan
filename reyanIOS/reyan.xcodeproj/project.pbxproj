@@ -131,10 +131,10 @@
 		E7D6F7412561AAE4006C17EB /* IOSDatabaseFiller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSDatabaseFiller.swift; sourceTree = "<group>"; };
 		E7E686C1262CAB5D0082CCC0 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		E7E686C5262CAB780082CCC0 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
-		E7E686C6262CAC8F0082CCC0 /* ar.lproj */ = {isa = PBXFileReference; lastKnownFileType = file; name = ar.lproj; path = reyan/ar.lproj; sourceTree = SOURCE_ROOT; };
-		E7E686C7262CAC8F0082CCC0 /* fa.lproj */ = {isa = PBXFileReference; lastKnownFileType = file; name = fa.lproj; path = reyan/fa.lproj; sourceTree = SOURCE_ROOT; };
-		E7E686C8262CAC8F0082CCC0 /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base.lproj; path = reyan/Base.lproj; sourceTree = SOURCE_ROOT; };
-		E7E686C9262CAC8F0082CCC0 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = file; name = en.lproj; path = reyan/en.lproj; sourceTree = SOURCE_ROOT; };
+		E7E686C6262CAC8F0082CCC0 /* ar.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = ar.lproj; path = reyan/ar.lproj; sourceTree = SOURCE_ROOT; };
+		E7E686C7262CAC8F0082CCC0 /* fa.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = fa.lproj; path = reyan/fa.lproj; sourceTree = SOURCE_ROOT; };
+		E7E686C8262CAC8F0082CCC0 /* Base.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Base.lproj; path = reyan/Base.lproj; sourceTree = SOURCE_ROOT; };
+		E7E686C9262CAC8F0082CCC0 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; name = en.lproj; path = reyan/en.lproj; sourceTree = SOURCE_ROOT; };
 		E7E686D1262CB1C10082CCC0 /* Localizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Localizer.swift; sourceTree = "<group>"; };
 		E7E687042630AFFF0082CCC0 /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		E7E687092630B05F0082CCC0 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -518,6 +518,7 @@
 			packageReferences = (
 				E78EFD3025330F4F00886039 /* XCRemoteSwiftPackageReference "NavigationRouter" */,
 				E796EC2425376ACC0025072F /* XCRemoteSwiftPackageReference "Resolver" */,
+				E7E687112631B4D00082CCC0 /* XCRemoteSwiftPackageReference "LocaleManager" */,
 			);
 			productRefGroup = F9275E112532160B0021FE0E /* Products */;
 			projectDirPath = "";
@@ -1017,6 +1018,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 1.1.4;
+			};
+		};
+		E7E687112631B4D00082CCC0 /* XCRemoteSwiftPackageReference "LocaleManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/amosavian/LocaleManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */

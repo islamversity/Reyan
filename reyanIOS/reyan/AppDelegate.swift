@@ -11,7 +11,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         setupLogger()
         whereIsMySQLite()
-                
+        
+        let savedLang = Language.getSavedLanguage()
+        currentLanguage = savedLang
+        Localizer.DoTheSwizzling()
+
         return true
     }
 

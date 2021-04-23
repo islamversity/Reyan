@@ -35,8 +35,8 @@ public class IOSNavigation : IOSNavigator{
                 animated: true
             )
         } else if screen is Screens.Settings {
-            root?.setViewControllers([UIHostingController(rootView: HomeSettingsView())], animated: true) 
-//            pushViewController(
+            root?.setViewControllers([UIHostingController(rootView: HomeSettingsView())], animated: true)
+//            root?.pushViewController(
 //                UIHostingController(rootView: HomeSettingsView()),
 //                animated: true
 //            )

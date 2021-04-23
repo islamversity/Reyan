@@ -4,15 +4,14 @@ import nativeShared
 import Resolver
 
 struct QuranHomeView: View, Resolving {
-    
-//    @State var updateUI : Bool = false
-    
+        
     @ObservedObject public var flowCollector: QuranHomeStateCollector = QuranHomeStateCollector()
     var presenter : QuranHomePresenter
     var surahListView : SurahListView
     var juzListView : JuzListView
     
     @State var tabPosition : Int = 0
+
 
     init(presenter : QuranHomePresenter) {
         
@@ -21,18 +20,10 @@ struct QuranHomeView: View, Resolving {
         self.juzListView = JuzListView(presenter: Resolver.resolve())
 
         flowCollector.bindState(presenter: presenter)
-//        
+
         Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { (t) in
             presenter.processIntents(intents: QuranHomeIntent.Initial.init())
         }
-
-       
-
-        //        presenter.states().collect(collector: flowCollector, completionHandler: flowCollector.errorHandler(ku:error:))
-
-//        let db : Main = resolver.resolve()
-//        let surahList = db.nameQueries.getAllNames().executeAsList()
-//        print("surahList count = \(surahList.count)")
     }
     
     var body: some View {
@@ -96,14 +87,12 @@ struct QuranHomeView: View, Resolving {
                 HStack{
                     Button(action: {
                         tabPosition = 0
-//                        presenter.processIntents(intents: QuranHomeIntent.SelectTab.init(position: 0))
                     }, label: {
                         TabView(text: NSLocalizedString("Surah", comment: ""), isSelected: tabPosition == 0 ? true : false)
                     })
                     
                     Button(action: {
                         tabPosition = 1
-//                        presenter.processIntents(intents: QuranHomeIntent.SelectTab.init(position: 1))
                     }, label: {
                         TabView(text: NSLocalizedString("Parts", comment: ""), isSelected: tabPosition == 1 ? true : false)
                     })
@@ -114,69 +103,12 @@ struct QuranHomeView: View, Resolving {
                 } else if tabPosition == 1 {
                     juzListView
                 }
-                
-//                if updateUI == true {
-//                   // check updateUI just to refresh swiftui view on Appear
-//                }
-                
             }
             .padding(.horizontal, 20.0)
 //            .edgesIgnoringSafeArea(.all)
         }
         .navigationBarHidden(true)
-//        .onAppear {
-//            updateUI = !updateUI
-//        }
-        .environment(\.locale, Locale(identifier:  Language.currentLanguage))
+        .environment(\.locale, Locale(identifier:  currentLanguage))
 
     }
 }
-
-
-
-//
-//struct QuranView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        QuranHomeView()
-//    }
-//}
-
-
-
-//    var body: some View {
-//
-//        VStack(spacing: 30) {
-//
-//            Text("Success RUN")
-//                .foregroundColor(.black)
-//
-//            Button(action: {
-////                presenter.processIntents(intents: QuranHomeIntent.SearchClicked.init())
-//
-//                let db : Main = resolver.resolve()
-////                db.calligraphyQueries.insertCalligraphy(id: "2397ry8274r3r-34r-34-r24r24r", languageCode: "en", name: "simple", friendlyName: "english text", code: Calligraphy__(languageCode: "en", calligraphyName: "simple"))
-//                let calig = db.nameQueries.getAllNames().executeAsList()
-//                let ayas = db.ayaContentQueries.getAllAyaContents().executeAsList()
-//
-//
-//                print("calig = \(ayas.count)")
-//            })
-//            {
-//                Text("send intent")
-//                    .fontWeight(.bold)
-//                    .foregroundColor(.white)
-//                    .multilineTextAlignment(.center)
-//                    .lineLimit(1)
-//                    .padding(20.0)
-//                    .font(.custom("Vazir", size: 20.0))
-//                    .cornerRadius(10.0)
-//                    .background(Color.black)
-//            }
-//
-//            Text("state = \(String(describing: flowCollector.uiState))")
-//                .foregroundColor(.black)
-//
-//        }
-//        .navigationBarTitle("MVI")
-//    }
-
