@@ -11,6 +11,7 @@
 		E71FE05825E906FE00B51D44 /* onboarding_preview.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71FE05725E906FE00B51D44 /* onboarding_preview.swift */; };
 		E71FE06025E9476800B51D44 /* ProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71FE05F25E9476800B51D44 /* ProgressBarView.swift */; };
 		E71FE06525E953DF00B51D44 /* NavigationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E71FE06425E953DF00B51D44 /* NavigationConfigurator.swift */; };
+		E72CECC126373EDB00CFE355 /* SettingsSelectiveRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E72CECC026373EDB00CFE355 /* SettingsSelectiveRow.swift */; };
 		E7470AC325E7FCCC00C45734 /* IOSDatabaseFileConfiger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7470AC225E7FCCC00C45734 /* IOSDatabaseFileConfiger.swift */; };
 		E7470AC825E7FD2900C45734 /* UUIDGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7470AC725E7FD2900C45734 /* UUIDGenerator.swift */; };
 		E776A2AD259F04CB00B1EB54 /* SurahHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E776A2AC259F04CB00B1EB54 /* SurahHeaderView.swift */; };
@@ -21,6 +22,7 @@
 		E77AD38D258291F5004FD632 /* JuzListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77AD38C258291F5004FD632 /* JuzListView.swift */; };
 		E77AD39525829F86004FD632 /* JuzListStateCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77AD39425829F86004FD632 /* JuzListStateCollector.swift */; };
 		E77AD39A2582A282004FD632 /* JuzTitleArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = E77AD3992582A282004FD632 /* JuzTitleArray.swift */; };
+		E785D04A2638C0C500DDF2FF /* SettingsSliderRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = E785D0492638C0C500DDF2FF /* SettingsSliderRow.swift */; };
 		E78B2239259F5CD600530E8D /* AyaToolbarIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78B2238259F5CD600530E8D /* AyaToolbarIntents.swift */; };
 		E78B223F259F5F9D00530E8D /* AyaRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78B223E259F5F9D00530E8D /* AyaRowView.swift */; };
 		E78EFD5F2533509A00886039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E78EFD5D2533509900886039 /* AppDelegate.swift */; };
@@ -36,6 +38,7 @@
 		E79ADF6F25B18D2F00B8C765 /* OnBoardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79ADF6E25B18D2F00B8C765 /* OnBoardingView.swift */; };
 		E79ADF7425B18D4D00B8C765 /* OnBoardingStateCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = E79ADF7325B18D4D00B8C765 /* OnBoardingStateCollector.swift */; };
 		E7B512982580102900B88771 /* JuzRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B512972580102900B88771 /* JuzRowView.swift */; };
+		E7B561612639C7B3006CEA4F /* SettingsSliderIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7B561602639C7B3006CEA4F /* SettingsSliderIntent.swift */; };
 		E7BDEBFE2590829600F8504F /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BDEBFD2590829600F8504F /* TabView.swift */; };
 		E7BDEC052590BDAA00F8504F /* HomeSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BDEC032590BDAA00F8504F /* HomeSettingsView.swift */; };
 		E7BDEC0E2590C02500F8504F /* SurahView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7BDEC0C2590C02500F8504F /* SurahView.swift */; };
@@ -92,6 +95,7 @@
 		E71FE05725E906FE00B51D44 /* onboarding_preview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = onboarding_preview.swift; sourceTree = "<group>"; };
 		E71FE05F25E9476800B51D44 /* ProgressBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarView.swift; sourceTree = "<group>"; };
 		E71FE06425E953DF00B51D44 /* NavigationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationConfigurator.swift; sourceTree = "<group>"; };
+		E72CECC026373EDB00CFE355 /* SettingsSelectiveRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSelectiveRow.swift; sourceTree = "<group>"; };
 		E7470AC225E7FCCC00C45734 /* IOSDatabaseFileConfiger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IOSDatabaseFileConfiger.swift; sourceTree = "<group>"; };
 		E7470AC725E7FD2900C45734 /* UUIDGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDGenerator.swift; sourceTree = "<group>"; };
 		E776A2AC259F04CB00B1EB54 /* SurahHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SurahHeaderView.swift; path = reyan/QuranHome/SurahHeaderView.swift; sourceTree = SOURCE_ROOT; };
@@ -102,6 +106,7 @@
 		E77AD38C258291F5004FD632 /* JuzListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuzListView.swift; sourceTree = "<group>"; };
 		E77AD39425829F86004FD632 /* JuzListStateCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuzListStateCollector.swift; sourceTree = "<group>"; };
 		E77AD3992582A282004FD632 /* JuzTitleArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuzTitleArray.swift; sourceTree = "<group>"; };
+		E785D0492638C0C500DDF2FF /* SettingsSliderRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSliderRow.swift; sourceTree = "<group>"; };
 		E78B2238259F5CD600530E8D /* AyaToolbarIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AyaToolbarIntents.swift; path = reyan/Aya/AyaToolbarIntents.swift; sourceTree = SOURCE_ROOT; };
 		E78B223E259F5F9D00530E8D /* AyaRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AyaRowView.swift; sourceTree = "<group>"; };
 		E78EFD5D2533509900886039 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +121,7 @@
 		E79ADF6E25B18D2F00B8C765 /* OnBoardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingView.swift; sourceTree = "<group>"; };
 		E79ADF7325B18D4D00B8C765 /* OnBoardingStateCollector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingStateCollector.swift; sourceTree = "<group>"; };
 		E7B512972580102900B88771 /* JuzRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JuzRowView.swift; sourceTree = "<group>"; };
+		E7B561602639C7B3006CEA4F /* SettingsSliderIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSliderIntent.swift; sourceTree = "<group>"; };
 		E7BDEBFD2590829600F8504F /* TabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
 		E7BDEC032590BDAA00F8504F /* HomeSettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeSettingsView.swift; sourceTree = "<group>"; };
 		E7BDEC0C2590C02500F8504F /* SurahView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SurahView.swift; path = reyan/Surah/SurahView.swift; sourceTree = SOURCE_ROOT; };
@@ -287,6 +293,9 @@
 			children = (
 				E7BDEC032590BDAA00F8504F /* HomeSettingsView.swift */,
 				E7E68739263315140082CCC0 /* SettingsStateCollector.swift */,
+				E72CECC026373EDB00CFE355 /* SettingsSelectiveRow.swift */,
+				E785D0492638C0C500DDF2FF /* SettingsSliderRow.swift */,
+				E7B561602639C7B3006CEA4F /* SettingsSliderIntent.swift */,
 			);
 			path = HomeSettings;
 			sourceTree = "<group>";
@@ -629,6 +638,7 @@
 				E78B223F259F5F9D00530E8D /* AyaRowView.swift in Sources */,
 				E71FE06525E953DF00B51D44 /* NavigationConfigurator.swift in Sources */,
 				E78B223F259F5F9D00530E8D /* AyaRowView.swift in Sources */,
+				E7B561612639C7B3006CEA4F /* SettingsSliderIntent.swift in Sources */,
 				E7C878D725F68D8A001179ED /* Base32.swift in Sources */,
 				E796EC39253836720025072F /* DICore.swift in Sources */,
 				E7CAB2A425740EC700E6D753 /* SurahListView.swift in Sources */,
@@ -638,6 +648,7 @@
 				E776A2AD259F04CB00B1EB54 /* SurahHeaderView.swift in Sources */,
 				E796EC3E253837260025072F /* DIRegister.swift in Sources */,
 				E7470AC325E7FCCC00C45734 /* IOSDatabaseFileConfiger.swift in Sources */,
+				E72CECC126373EDB00CFE355 /* SettingsSelectiveRow.swift in Sources */,
 				E776A2B2259F078600B1EB54 /* Images.swift in Sources */,
 				E7E6873A263315140082CCC0 /* SettingsStateCollector.swift in Sources */,
 				E7470AC825E7FD2900C45734 /* UUIDGenerator.swift in Sources */,
@@ -646,6 +657,7 @@
 				E7470AC825E7FD2900C45734 /* UUIDGenerator.swift in Sources */,
 				E7470AC325E7FCCC00C45734 /* IOSDatabaseFileConfiger.swift in Sources */,
 				E776A2B2259F078600B1EB54 /* Images.swift in Sources */,
+				E785D04A2638C0C500DDF2FF /* SettingsSliderRow.swift in Sources */,
 				E7470AC825E7FD2900C45734 /* UUIDGenerator.swift in Sources */,
 				E7470AC325E7FCCC00C45734 /* IOSDatabaseFileConfiger.swift in Sources */,
 				E776A2B2259F078600B1EB54 /* Images.swift in Sources */,

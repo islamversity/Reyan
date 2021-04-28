@@ -13,13 +13,19 @@ struct AyaRowView : View {
     
     let uiModel : AyaUIModel
     let rowIntents : AyaRowIntents
+    let mainAyaFontSize : CGFloat
+    let translationFontSize : CGFloat
+    
     let ayaToolbarIntents = AyaToolbarIntents()
     var cancellables = Set<AnyCancellable>()
 
-    init(uiModel: AyaUIModel, rowIntents: AyaRowIntents) {
+    init(uiModel: AyaUIModel, rowIntents: AyaRowIntents, mainAyaFontSize : CGFloat, translationFontSize : CGFloat) {
         self.uiModel = uiModel
         self.rowIntents = rowIntents
-                
+        self.mainAyaFontSize = mainAyaFontSize
+        self.translationFontSize = translationFontSize
+
+        
         ayaToolbarIntents.$shareClick
             .sink { isClick in
                 if isClick {
@@ -186,7 +192,7 @@ struct AyaRowView : View {
                     .foregroundColor(.green_800)
                     .fontWeight(.bold)
                     .multilineTextAlignment(.trailing)
-                    .font(.system(size: 16))
+                    .font(.system(size: mainAyaFontSize))
                     .lineSpacing(10.0)
 
 //                    .font(.custom("Vazir", size: 20.0))
@@ -195,7 +201,7 @@ struct AyaRowView : View {
                         .foregroundColor(.gray_800)
                         .multilineTextAlignment(.leading)
                         .font(.caption)
-                        .font(.system(size: 14))
+                        .font(.system(size: translationFontSize))
 
                 }
                 
@@ -205,7 +211,7 @@ struct AyaRowView : View {
                     Text(uiModel.translation2!)
                     .foregroundColor(.gray_800)
                     .multilineTextAlignment(.leading)
-                    .font(.system(size: 14))
+                    .font(.system(size: translationFontSize))
                 }
 //                    .font(.custom("Vazir", size: 14.0))
                 
@@ -216,7 +222,7 @@ struct AyaRowView : View {
         }
         .padding(.horizontal)
         .padding(.top, 5)
-        .environment(\.locale, Locale(identifier:  currentLanguage))
+        .environment(\.locale, Locale(identifier:  currentLanguage.rawValue))
 
     }
 }
@@ -236,7 +242,9 @@ struct AyaRowView_Preview : PreviewProvider {
                 juz: nil,
                 sajdah: SajdahTypeUIModel.NONE.init()
             ),
-            rowIntents: AyaRowIntents()
+            rowIntents: AyaRowIntents(),
+            mainAyaFontSize: 20.0,
+            translationFontSize: 14.0
         )
         .previewDevice("iPhone 12 Pro Max")
     }

@@ -67,7 +67,7 @@ struct JuzRowView : View{
                 .frame(width: .infinity, height: 2, alignment: .center)
         }
         .padding(.top, 15)
-        .environment(\.locale, Locale(identifier:  currentLanguage))
+        .environment(\.locale, Locale(identifier:  currentLanguage.rawValue))
 
     }
 }

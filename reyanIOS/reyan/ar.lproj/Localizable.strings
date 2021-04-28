@@ -23,6 +23,24 @@
 "Home" = "منزل";
 "Back" = "رجوع";
 "Settings" = "إعدادات";
+"Language" = "لغة";
+"Change Language" = "تغيير اللغة";
+"Cancel" = "إلغاء";
+"meccan" = "مكة";
+"medinan" = "مدينة";
+"MECCAN" = "مكة";
+"MEDINAN" = "مدينة";
+"App Language" = "لغة التطبيق";
+"Surah Caligraphy" = "سورة الخط";
+"Caligraphy of surah name" = "خط اسم السورة";
+"First Translation Caligraphy" = "أول خط ترجمة";
+"Caligraphy of first translation box on each Aya" = "خط أول مربع ترجمة على كل آية";
+"Second Translation Caligraphy" = "الخط الترجمة الثانية";
+"Caligraphy of second translation box on each Aya" = "خط مربع الترجمة الثاني على كل آية";
+"Main Text Size" = "حجم النص الرئيسي";
+"In the name of Allah, The Beneficent, The Merciful" = "بسم الله الرحمن الرحيم";
+"Translate Text Size" = "حجم نص الترجمة";
+"no_option" = "لا أحد";
 
 
 

@@ -12,7 +12,7 @@ class Localizer: NSObject {
         MethodSwizzleGivenClassName(cls: Bundle.self, originalSelector: #selector(Bundle.localizedString(forKey:value:table:)), overrideSelector: #selector(Bundle.specialLocalizedStringForKey(_:value:table:)))
         
         MethodSwizzleGivenClassName(cls: UIApplication.self, originalSelector: #selector(getter: UIApplication.userInterfaceLayoutDirection), overrideSelector: #selector(getter: UIApplication.cstm_userInterfaceLayoutDirection))
-//        
+
         MethodSwizzleGivenClassName(cls: UITextField.self, originalSelector: #selector(UITextField.layoutSubviews), overrideSelector: #selector(UITextField.cstmlayoutSubviews))
         
         MethodSwizzleGivenClassName(cls: UILabel.self, originalSelector: #selector(UILabel.layoutSubviews), overrideSelector: #selector(UILabel.cstmlayoutSubviews))
@@ -48,7 +48,7 @@ extension Bundle {
 //            print("Swizzle Bundle : key = \(key) value = \(String(describing: value)) ,currentLanguage = \(currentLanguage)")
             
             
-            if let _path = Bundle.main.path(forResource: currentLanguage, ofType: "lproj") {
+            if let _path = Bundle.main.path(forResource: currentLanguage.rawValue, ofType: "lproj") {
                 bundle = Bundle(path: _path)!
             }else {
                 let _path = Bundle.main.path(forResource: "Base", ofType: "lproj")!
@@ -67,9 +67,10 @@ extension UIApplication {
     @objc var cstm_userInterfaceLayoutDirection : UIUserInterfaceLayoutDirection {
         get {
             var direction = UIUserInterfaceLayoutDirection.leftToRight
-            let current = currentLanguage
-            if  current == languages.farsi.rawValue || current == languages.arabic.rawValue {
+            if  currentLanguage == languages.farsi || currentLanguage == languages.arabic {
                 direction = .rightToLeft
+            }else{
+                direction = .leftToRight
             }
             return direction
         }
@@ -147,6 +148,7 @@ extension UIButton {
         }
     }
 }
+
 
 extension UIApplication {
     class func isRTL() -> Bool{

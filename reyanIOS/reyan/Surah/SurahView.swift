@@ -37,17 +37,23 @@ struct SurahView: View {
     
     var body: some View {
         
-        let items = flowCollector.uiState.items
-        
-        return VStack {
-//            Button(action: {
-//                presenter
-//                    .processIntents(
-//                        intents: SurahIntent.Initial.init(localModel: initialData))
-//            })
-//            {
-//                Text("init")
-//            }
+        let state = flowCollector.uiState
+        let items = state.items
+       
+        return ZStack {
+            
+            Image.background_main
+                .resizable()
+                .edgesIgnoringSafeArea(.all)
+            
+            //            Button(action: {
+            //                presenter
+            //                    .processIntents(
+            //                        intents: SurahIntent.Initial.init(localModel: initialData))
+            //            })
+            //            {
+            //                Text("init")
+            //            }
             
             ScrollView {
                 
@@ -70,7 +76,7 @@ struct SurahView: View {
                             )
                         }else if item is AyaUIModel {
                             
-                            AyaRowView (uiModel: item as! AyaUIModel, rowIntents: rowIntents)
+                            AyaRowView (uiModel: item as! AyaUIModel, rowIntents: rowIntents, mainAyaFontSize: CGFloat(state.mainAyaFontSize), translationFontSize: CGFloat(state.translationFontSize))
                             
                             Divider()
                                 .padding(.horizontal, 20)
@@ -83,14 +89,16 @@ struct SurahView: View {
         .navigationBarTitle(NSLocalizedString("Holy_Quran", comment: ""))
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(
-            trailing:
+            leading:
                 Button(action: {
                     iOSNavigator.root?.popViewController(animated: true)
                 }, label: {
-                    Image(systemName: "chevron.backward")
+                    Text("Back")
+
+//                    UIApplication.isRTL() ? Image(systemName: "chevron.right") : Image(systemName: "chevron.backward")
                 })
         )
-        .environment(\.locale, Locale(identifier:  currentLanguage))
+        .environment(\.locale, Locale(identifier:  currentLanguage.rawValue))
 
         
     }

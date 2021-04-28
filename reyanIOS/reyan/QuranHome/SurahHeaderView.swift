@@ -24,7 +24,7 @@ struct SurahHeaderView : View {
             Text( NSLocalizedString("Aya", comment: ""))
             .font(.custom("Vazir", size: 11.0))
 
-        let acText =
+        let ayaCountText =
             Text("\(verses)")
             .font(.custom("Vazir", size: 11.0))
         
@@ -73,7 +73,7 @@ struct SurahHeaderView : View {
                     Spacer()
                     
                     HStack {
-                    Text(origin)
+                    Text(NSLocalizedString(origin, comment: ""))
                         .multilineTextAlignment(.center)
                         .lineLimit(1)
                         .font(.custom("Vazir", size: 11.0))
@@ -91,9 +91,9 @@ struct SurahHeaderView : View {
                             ayaString
                             Spacer()
                                 .frame(width:2)
-                            acText
+                            ayaCountText
                         }else{
-                            acText
+                            ayaCountText
                             Spacer()
                                 .frame(width:2)
                             ayaString
@@ -114,7 +114,7 @@ struct SurahHeaderView : View {
                     .padding(.bottom, 15)
             }
         }
-        .environment(\.locale, Locale(identifier:  currentLanguage))
+        .environment(\.locale, Locale(identifier:  currentLanguage.rawValue))
 
     }
 }

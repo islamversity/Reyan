@@ -13,9 +13,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         whereIsMySQLite()
         
         let savedLang = Language.getSavedLanguage()
-        currentLanguage = savedLang
+        currentLanguage = languages.init(rawValue: savedLang) ?? .english
         Localizer.DoTheSwizzling()
 
+        
         return true
     }
 

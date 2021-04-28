@@ -120,7 +120,7 @@ struct QuranHomeView: View, Resolving {
 //            .edgesIgnoringSafeArea(.all)
         }
         .navigationBarHidden(true)
-        .environment(\.locale, Locale(identifier:  currentLanguage))
+        .environment(\.locale, Locale(identifier:  currentLanguage.rawValue))
 
     }
 }

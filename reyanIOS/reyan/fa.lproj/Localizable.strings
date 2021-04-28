@@ -23,6 +23,25 @@
 "Home" = "خانه";
 "Back" = "برگرد";
 "Settings" = "تنظیمات";
+"Language" = "زبان";
+"Change Language" = "تغییر زبان";
+"Cancel" = "انصراف";
+"meccan" = "مکی";
+"medinan" = "مدنی";
+"MECCAN" = "مکی";
+"MEDINAN" = "مدنی";
+"App Language" = "زبان برنامه";
+"Surah Caligraphy" = "رسم الخط سوره";
+"Caligraphy of surah name" = "رسم الخط نام سوره";
+"First Translation Caligraphy" = "رسم الخط متن ترجمه اول";
+"Caligraphy of first translation box on each Aya" = "رسم الخط اولین متن ترجمه برای هر آيه";
+"Second Translation Caligraphy" = "رسم الخط ترجمه دوم آیه";
+"Caligraphy of second translation box on each Aya" = "رسم الخط دومین متن ترجمه برای هر آيه";
+"Main Text Size" = "اندازه متن اصلی هر آیه";
+"In the name of Allah, The Beneficent, The Merciful" = "به نام خداوند بخشاینده مهربان";
+"Translate Text Size" = "اندازه متن ترجمه";
+"no_option" = "هیچ کدام";
+
 
 
 "First" = "اول" ;

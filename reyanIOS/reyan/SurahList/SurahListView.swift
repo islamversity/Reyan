@@ -62,7 +62,7 @@ struct SurahListView : View {
                 }
             }
         }
-        .environment(\.locale, Locale(identifier:  currentLanguage))
+        .environment(\.locale, Locale(identifier:  currentLanguage.rawValue))
     }
 }
 

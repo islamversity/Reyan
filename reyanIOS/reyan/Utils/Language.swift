@@ -9,13 +9,30 @@ import UIKit
 import Foundation
 
 
-enum languages : String {
+public enum languages : String {
     case english = "en"
     case farsi = "fa"
     case arabic = "ar"
 }
 
-public var currentLanguage : String = languages.english.rawValue
+extension languages {
+    
+    func fullText() -> String {
+        switch self {
+       
+        case .english:
+            return NSLocalizedString("English", comment: "")
+        case .farsi:
+            return  NSLocalizedString("Farsi", comment: "")
+        case .arabic:
+            return NSLocalizedString("Arabic", comment: "")
+
+        }
+    }
+}
+
+
+public var currentLanguage : languages = languages.english
 
 
 class Language {
@@ -42,8 +59,8 @@ class Language {
             print("setLanguage : local language is empty")
         }
 
-        currentLanguage = lang.rawValue
-        saveLanguage(lang: currentLanguage)
+        currentLanguage = lang
+        saveLanguage(lang: currentLanguage.rawValue)
 
         // for changing language without restarting
 //        Localizer.DoTheSwizzling()

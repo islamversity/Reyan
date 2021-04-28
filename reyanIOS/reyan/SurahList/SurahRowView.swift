@@ -44,7 +44,7 @@ struct SurahRowView : View{
                         .frame(height: 2, alignment: .center)
                     
                     HStack {
-                        Text(surahUIItem.revealedType.rawName)
+                        Text(NSLocalizedString(surahUIItem.revealedType.rawName, comment: ""))
                             .font(.custom("Vazir", size: 11.0))
                             
                         Spacer()
@@ -86,7 +86,7 @@ struct SurahRowView : View{
 
         }
         .padding(.vertical)
-        .environment(\.locale, Locale(identifier:  currentLanguage))
+        .environment(\.locale, Locale(identifier:  currentLanguage.rawValue))
 
     }
     

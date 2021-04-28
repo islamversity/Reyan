@@ -23,6 +23,39 @@
 "Home" = "Home";
 "Back" = "Back";
 "Settings" = "Settings";
+"Language" = "Language";
+"Change Language" = "Change Language";
+"Cancel" = "Cancel";
+"meccan" = "Meccan";
+"medinan" = "Medinan";
+"MECCAN" = "Meccan";
+"MEDINAN" = "Medinan";
+"App Language" = "App Language";
+"Surah Caligraphy" = "Surah Caligraphy";
+"Caligraphy of surah name" = "Caligraphy of surah name";
+"First Translation Caligraphy" = "First Translation Caligraphy";
+"Caligraphy of first translation box on each Aya" = "Caligraphy of first translation box on each Aya";
+"Second Translation Caligraphy" = "Second Translation Caligraphy";
+"Caligraphy of second translation box on each Aya" = "Caligraphy of second translation box on each Aya";
+"Main Text Size" = "Main Text Size";
+"In the name of Allah, The Beneficent, The Merciful" = "In the name of Allah, The Beneficent, The Merciful";
+"Translate Text Size" = "Translate Text Size";
+"no_option" = "Empty";
+//"" = "";
+//"" = "";
+//"" = "";
+//"" = "";
+//"" = "";
+//"" = "";
+//"" = "";
+//"" = "";
+//"" = "";
+
+
+
+
+
+
 
 "First" = "First" ;
 "Second" =  "Second" ;
