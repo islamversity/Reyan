@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -7,6 +8,7 @@
 
     <TextView
             android:layout_width="match_parent"
+            android:text="First Row"
             android:layout_height="wrap_content"
             android:id="@+id/txtLicenseRow"/>
 
@@ -23,6 +25,8 @@
     <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="Second Row"
+
             android:id="@+id/txtLicenseURLRow"/>
 
     <Space

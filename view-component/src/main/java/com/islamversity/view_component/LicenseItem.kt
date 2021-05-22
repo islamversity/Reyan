@@ -29,9 +29,4 @@ class LicenseItem @JvmOverloads constructor(
     }
 }
 
-
-data class LicenseItemModel(
-    val id: Int,
-    val name: String,
-    val url: String
-)
+data class LicenseItemModel (val id: Int, val name: String, val url: String)

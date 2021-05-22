@@ -29,13 +29,14 @@ class LicensesView : CoroutineView<ViewLicensesBinding, LicensesState, LicensesI
         licensesList = state.licenses
 
         binding.licenseList.withModelsAsync {
-            addModelBuildListener {
-            }
-            state.licenses.forEach {
+
+                state.licenses.forEach {
                 licenseItem {
-                binding.licenseList
+                    id(0)
+                    uiItem(it)
+                    }
                 }
-            }
+
         }
 
     }
