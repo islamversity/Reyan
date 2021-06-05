@@ -7,9 +7,10 @@ import com.islamversity.daggercore.scope.FeatureScope
 import com.islamversity.domain.repo.LicensesRepo
 import com.islamversity.domain.model.LicensesRepoModel
 import com.islamversity.settings.licenses.*
-import com.islamversity.settings.models.LicenseDomainUIMapper
-import com.islamversity.settings.models.LicensesUIModel
 import dagger.*
+import com.islamversity.settings.*
+import com.islamversity.view_component.*
+import com.islamversity.settings.models.*
 
 @Module
 object LicensesModule {
@@ -17,7 +18,7 @@ object LicensesModule {
     @Provides
     @JvmStatic
     @FeatureScope
-    fun providePresenter( processor: MviProcessor<LicensesIntent, LicensesResult>) :
+    fun providePresenter(processor: MviProcessor<LicensesIntent, LicensesResult>):
             MviPresenter<LicensesIntent, LicensesState> = LicensesPresenter(processor)
 
     @Provides
@@ -27,9 +28,14 @@ object LicensesModule {
 
     @Provides
     @JvmStatic
+    fun provideLicensesUIItemMapper(): Mapper<LicensesUIModel, LicenseItemModel> =
+        LicensesUIItemMapper()
+
+    @Provides
+    @JvmStatic
     fun provideProcessor(
         licensesRepo: LicensesRepo,
-        mapper : Mapper<LicensesRepoModel, LicensesUIModel>
+        mapper: Mapper<LicensesRepoModel, LicensesUIModel>
     ): MviProcessor<LicensesIntent, LicensesResult> =
         LicensesProcessor(mapper, licensesRepo)
 }

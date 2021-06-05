@@ -17,7 +17,7 @@ class LicensesRepoImpl : LicensesRepo {
     override fun getAllLicenses(context: CoroutineContext): Flow<List<LicensesRepoModel>> {
         return flow {
 
-            listOf(LicensesRepoModel("s", "s"))
+            listOf(LicensesRepoModel(1,"s", "s"))
 
         }
     }

@@ -19,14 +19,12 @@ class LicenseItem @JvmOverloads constructor(
 
     private val binding = RowLicenseBinding.inflate(LayoutInflater.from(context), this, true)
 
-    private lateinit var uiItem: LicenseItemModel
 
     @ModelProp
     fun uiItem(item: LicenseItemModel) {
-        uiItem = item
-        binding.txtLicenseRow.text = uiItem.name
-        binding.txtLicenseURLRow.text = uiItem.url
+        binding.txtLicenseRow.text = item.name
+        binding.txtLicenseURLRow.text = item.address
     }
 }
 
-data class LicenseItemModel (val id: Int, val name: String, val url: String)
+data class LicenseItemModel (val id: Int, val name: String, val address: String)
