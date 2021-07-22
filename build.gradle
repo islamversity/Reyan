@@ -51,19 +51,18 @@ tasks.withType(KotlinCompile).configureEach {
 }
 
 subprojects {
-    apply plugin: 'io.gitlab.arturbosch.detekt'
+    apply plugin: "io.gitlab.arturbosch.detekt"
     detekt {
         toolVersion = Versions.detekt
         config = files("${rootDir}/detekt.yml")
-        buildUponDefaultConfig = true
-        autoCorrect = true
+        parallel = true
         reports {
+            xml.enabled = false
+            txt.enabled = false
             html {
                 enabled = true
                 destination = file("${rootDir}/build/reports/detekt_${project.name}.html")
             }
-            xml.enabled = false
-            txt.enabled = false
         }
     }
     tasks.withType(io.gitlab.arturbosch.detekt.Detekt) {
@@ -71,7 +70,7 @@ subprojects {
         exclude(".*/build/.*")
     }
     dependencies {
-        detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:${Versions.detekt}"
+        detektPlugins "io.gitlab.arturbosch.detekt:detekt-formatting:$Versions.detekt"
     }
 }
 
