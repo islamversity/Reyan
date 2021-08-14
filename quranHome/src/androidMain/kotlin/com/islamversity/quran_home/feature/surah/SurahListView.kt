@@ -10,7 +10,6 @@ import com.islamversity.daggercore.lifecycleComponent
 import com.islamversity.daggercore.navigator.DaggerDefaultNavigationComponent
 import com.islamversity.quran_home.R
 import com.islamversity.quran_home.databinding.SurahListViewBinding
-import com.islamversity.quran_home.feature.setDivider
 import com.islamversity.quran_home.feature.surah.di.DaggerSurahListComponent
 import com.islamversity.quran_home.feature.surah.model.SurahUIModel
 import com.islamversity.view_component.SurahItemModel

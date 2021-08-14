@@ -40,6 +40,8 @@ interface BaseComponent {
 
     fun ayaListRepo(): AyaListRepo
     fun getAyaUsecase(): GetAyaUseCase
+    fun saveSurahStateUsecase(): BookmarkAyaUsecase
+    fun getSurahStateUsecase(): GetBookmarkAyaUsecase
 
     fun databaseFillerUsecase() : DatabaseFillerUseCase
 

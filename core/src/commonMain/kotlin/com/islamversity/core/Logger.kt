@@ -4,8 +4,9 @@ import co.touchlab.kermit.CommonLogger
 import co.touchlab.kermit.Kermit
 import co.touchlab.kermit.Logger
 import co.touchlab.stately.concurrency.AtomicReference
-import com.islamversity.core.Logger.init
 import co.touchlab.kermit.Severity as KSeverity
+
+typealias Logger = Printer
 
 enum class Severity {
     Verbose,
@@ -27,7 +28,7 @@ enum class Severity {
     }
 }
 
-object Logger {
+object Printer {
 
     private val logger = AtomicReference(Kermit(listOf(CommonLogger())))
 
@@ -35,6 +36,22 @@ object Logger {
 
     fun init(loggers: List<Logger>) {
         logger.set(Kermit(loggers))
+    }
+
+    fun log(message: String) {
+        log(message, Severity.Info, tag = null, throwable = null)
+    }
+
+    fun log(message : String, throwable: Throwable) {
+        log(message, Severity.Info, tag = null, throwable = throwable)
+    }
+
+    fun log(message : String, tag: String) {
+        log(message, Severity.Info, tag = tag, throwable = null)
+    }
+
+    fun log(message : String, severity: Severity) {
+        log(message, severity, tag = null, throwable = null)
     }
 
     fun log(

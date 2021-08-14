@@ -1,6 +1,5 @@
 
 import SwiftUI
-import NavigationRouter
 
 struct SearchView: View {
     

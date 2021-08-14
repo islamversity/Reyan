@@ -11,6 +11,7 @@ import kotlin.coroutines.CoroutineContext
 interface SettingsDataSource {
 
     suspend fun put(key: String, value: String?, context: CoroutineContext = Dispatchers.Default)
+    fun get(key: String, context: CoroutineContext = Dispatchers.Default): String?
 
     fun observeKey(key: String, context: CoroutineContext = Dispatchers.Default): Flow<String?>
 
@@ -35,6 +36,9 @@ class SettingsDataSourceImpl(
             queries.upsert(key, value)
         }
     }
+
+    override fun get(key: String, context: CoroutineContext): String? =
+        queries.getWithKey(key).executeAsOneOrNull()?.value
 
     override fun observeKey(key: String, context: CoroutineContext): Flow<String?> =
         queries.getWithKey(key)

@@ -14,6 +14,7 @@ import dagger.Module
         SearchRepoModule::class,
         AyaModule::class,
         CalligraphyModule::class,
+        SurahStateModule::class,
     ]
 )
 abstract class DomainModule

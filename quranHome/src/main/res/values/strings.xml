@@ -1,3 +1,4 @@
 <resources>
     <string name="home">Home</string>
+    <string name="loading">Loading…</string>
 </resources>

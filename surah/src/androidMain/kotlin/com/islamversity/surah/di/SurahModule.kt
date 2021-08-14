@@ -6,12 +6,15 @@ import com.islamversity.core.mvi.MviProcessor
 import com.islamversity.daggercore.scope.FeatureScope
 import com.islamversity.domain.model.Calligraphy
 import com.islamversity.domain.model.aya.AyaRepoModel
+import com.islamversity.domain.model.surah.ReadingBookmarkRepoModel
 import com.islamversity.domain.model.surah.SurahRepoModel
 import com.islamversity.domain.repo.CalligraphyRepo
 import com.islamversity.domain.repo.SettingRepo
 import com.islamversity.domain.repo.aya.GetAyaUseCase
+import com.islamversity.domain.repo.surah.BookmarkAyaUsecase
 import com.islamversity.domain.repo.surah.GetSurahUsecase
 import com.islamversity.navigation.Navigator
+import com.islamversity.navigation.model.SurahLocalModel
 import com.islamversity.surah.*
 import com.islamversity.surah.mapper.AyaRepoUIMapper
 import com.islamversity.surah.mapper.SurahRepoHeaderMapper
@@ -34,6 +37,7 @@ object SurahModule {
         mapper: Mapper<AyaRepoModel, AyaUIModel>,
         settings: SettingRepo,
         surahUsecase: GetSurahUsecase,
+        bookmarkAyaUsecase: BookmarkAyaUsecase,
         surahRepoHeaderMapper: Mapper<SurahRepoModel, SurahHeaderUIModel>,
         settingsProcessor : SurahSettingsProcessor
     ): MviProcessor<SurahIntent, SurahResult> =
@@ -43,6 +47,7 @@ object SurahModule {
             ayaMapper = mapper,
             settingRepo = settings,
             surahUsecase = surahUsecase,
+            bookmarkAyaUseCase = bookmarkAyaUsecase,
             surahRepoHeaderMapper = surahRepoHeaderMapper,
             settingsProcessor = settingsProcessor
         )

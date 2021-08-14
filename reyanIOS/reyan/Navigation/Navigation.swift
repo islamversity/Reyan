@@ -1,33 +1,42 @@
 import UIKit
 import SwiftUI
-import NavigationRouter
 import nativeShared
+import Resolver
 
+// global navigator
+public let iOSNavigator : IOSNavigation = IOSNavigation()
 
-public let iOSNavigator : IOSNavigator = IOSNavigation()
+// Navigator type
+public protocol IOSNavigator : Navigator, Resolving{}
 
-
-public protocol IOSNavigator : Navigator{
-    func loadRoutableModules()
-    func getRouter() -> NavigationRouter
-}
-
+// Navigation impl
 public class IOSNavigation : IOSNavigator{
+    
+    public var root : UINavigationController? = nil
    
     public func goTo(screen: Screens) {
-        NavigationRouter.main.navigate(toPath: screen.url)
-    }
-    
-    public func loadRoutableModules () {
-        RoutableModulesFactory.loadRoutableModules()
-    }
-    
-    public func getRouter() -> NavigationRouter {
-        NavigationRouter.main
+        Printer().log(message: "going to \(screen.url)")
+        
+        let extraData = screen.extras?.second as String?
+        
+        if screen is Screens.Home {
+            
+            root!.pushViewController(UIHostingController(rootView: QuranHomeView(presenter: resolver.resolve())), animated: false)
+            
+        } else if screen is Screens.OnBoarding {
+            
+            root!.pushViewController(UIHostingController(
+                                        rootView: OnBoardingView(
+                                            presenter: resolver.resolve(),
+                                            iOSDatabaseFiller: resolver.resolve())),
+                                     animated: false)
+        } else if let surahScreen = screen as? Screens.Surah {
+            root!.pushViewController(UIHostingController(
+                rootView: SurahView(presenter: resolver.resolve(), initialData: surahScreen.model)
+            ), animated: true)
+        } else if screen is Screens.Settings {
+            root!.pushViewController(UIHostingController(
+            rootView: HomeSettingsView()), animated: true)
+        }
     }
 }
-
-
-
-
-

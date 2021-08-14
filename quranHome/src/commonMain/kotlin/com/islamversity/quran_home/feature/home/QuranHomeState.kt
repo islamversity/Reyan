@@ -5,13 +5,34 @@ import com.islamversity.core.mvi.BaseViewState
 
 data class QuranHomeState(
     override val base: BaseState,
-    val tabPosition: Int
+    val bookmarkState: BookmarkState? = null,
 ) : BaseViewState {
     companion object {
         fun idle() =
             QuranHomeState(
                 base = BaseState.stable(),
-                tabPosition = 0
+                bookmarkState = null,
             )
+    }
+}
+
+
+data class BookmarkState(
+    val pageType: PageType,
+
+    val juz : Long?,
+
+    val surahId : String,
+    val surahName : String,
+
+    val ayaId : String,
+    val ayaOrder : Long
+
+){
+    enum class PageType{
+        SURAH,
+        JUZ,
+
+        ;
     }
 }

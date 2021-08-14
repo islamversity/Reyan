@@ -44,6 +44,8 @@ kotlin {
         implementation(Deps.Android.Test.truth)
     }
 
+    jvm()
+
     ios()
     sourceSets["iosMain"].dependencies {
     }
