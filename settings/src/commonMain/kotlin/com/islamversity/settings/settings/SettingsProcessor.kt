@@ -1,4 +1,4 @@
-package com.islamversity.settings
+package com.islamversity.settings.settings
 
 import com.islamversity.core.*
 import com.islamversity.core.mvi.BaseProcessor
@@ -7,11 +7,17 @@ import com.islamversity.domain.repo.CalligraphyRepo
 import com.islamversity.domain.repo.SettingRepo
 import com.islamversity.settings.models.CalligraphyUIModel
 import kotlinx.coroutines.flow.*
+import com.islamversity.navigation.Screens
+import com.islamversity.navigation.Navigator
+import com.islamversity.navigation.navigateTo
+
+
 
 class SettingsProcessor(
     settingsRepo: SettingRepo,
     calligraphyRepo: CalligraphyRepo,
-    uiMapper: Mapper<Calligraphy, CalligraphyUIModel>
+    uiMapper: Mapper<Calligraphy, CalligraphyUIModel>,
+    navigator: Navigator
 ) : BaseProcessor<SettingsIntent, SettingsResult>() {
 
     override fun transformers(): List<FlowBlock<SettingsIntent, SettingsResult>> = listOf(
@@ -29,7 +35,8 @@ class SettingsProcessor(
         changeFirstTranslationCalligraphy,
         changeSecondTranslationCalligraphy,
         setQuranFontSize,
-        setTranslateFontSize
+        setTranslateFontSize,
+        licensesClicked
     )
 
     private val getSurahNameCalligraphies: FlowBlock<SettingsIntent, SettingsResult> = {
@@ -215,5 +222,13 @@ class SettingsProcessor(
                 settingsRepo.setAyaTranslateFontSize(TranslateReadFontSize(it.size))
                 emit(SettingsResult.TranslateFontSize(it.size))
             }
+    }
+
+    private val licensesClicked: FlowBlock<SettingsIntent, SettingsResult> = {
+        ofType<SettingsIntent.LicensesClicked>()
+            .map {
+                Screens.Licenses()
+            }
+            .navigateTo(navigator)
     }
 }

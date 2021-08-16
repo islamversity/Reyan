@@ -9,6 +9,11 @@
     <string name="translate_text_size">Translate text size</string>
     <string name="main_text_size">Main text size</string>
 
+    <string name="contact_us">Contact Us</string>
+    <string name="version">Version</string>
+    <string name="contact_us_value" translatable="false">islamversity@gmail.com</string>
     <string name="app_font_size">App Font Size</string>
+    <string name="foss">Open Source Licenses</string>
+    <string name="tap_to_view">Tap to View</string>
 
 </resources>
