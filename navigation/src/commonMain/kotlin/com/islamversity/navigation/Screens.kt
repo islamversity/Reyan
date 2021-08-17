@@ -89,7 +89,7 @@ sealed class Screens(
     class Licenses : Screens(name,url) {
         companion object {
             const val name = "com.islamversity.settings.LicensesView"
-            const val url = "/licenses  "
+            const val url = "/licenses"
         }
     }
 }
