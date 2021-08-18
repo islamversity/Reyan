@@ -34,10 +34,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:adjustViewBounds="true"
+                android:contentDescription="Reyan Logo"
                 android:maxWidth="150dp"
                 android:maxHeight="150dp"
                 android:src="@drawable/reyan_logo"
-                android:contentDescription="Reyan Logo"
                 tools:ignore="HardcodedText" />
 
         </androidx.cardview.widget.CardView>
@@ -107,24 +107,24 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
+        android:id="@+id/languageLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
         android:gravity="center_horizontal"
-        android:id="@+id/languageLayout"
-        app:layout_constraintTop_toBottomOf="@+id/titleLayout"
+        android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@+id/progressLayout"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        android:orientation="vertical">
+        app:layout_constraintTop_toBottomOf="@+id/titleLayout">
 
         <com.islamversity.base.widgets.ScalableTextView
             android:id="@+id/selectLanguageTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/medium_padding"
             android:text="@string/app_language"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold"
-            android:paddingVertical="@dimen/medium_padding"
             app:layout_constraintTop_toBottomOf="@+id/titleLayout" />
 
         <com.airbnb.epoxy.EpoxyRecyclerView
@@ -142,21 +142,21 @@
     <RelativeLayout
         android:id="@+id/progressLayout"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/btnContinue"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/languageLayout"
         app:layout_constraintRight_toRightOf="parent"
-        android:layout_height="wrap_content">
+        app:layout_constraintTop_toBottomOf="@+id/languageLayout">
 
         <com.islamversity.base.widgets.ScalableTextView
             android:id="@+id/assistiveTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/medium_margin"
             android:text="@string/on_boarding_initialize_message"
             android:textColor="@color/black"
             android:textStyle="bold"
-            android:layout_marginBottom="@dimen/medium_margin"
             tools:ignore="UnusedAttribute"
             tools:visibility="visible" />
 
@@ -164,34 +164,34 @@
             android:id="@+id/progressPercentTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/assistiveTextView"
+            android:layout_alignRight="@+id/pbLoadingBar"
+            android:layout_marginTop="@dimen/low_margin"
             android:text="0 %"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/medium_text"
             android:textStyle="bold"
-            android:layout_marginTop="@dimen/low_margin"
-            android:layout_below="@+id/assistiveTextView"
-            android:layout_alignRight="@+id/pbLoadingBar"
             tools:ignore="HardcodedText,SpUsage" />
 
         <com.islamversity.base.widgets.ScalableTextView
             android:id="@+id/progressTitleTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/assistiveTextView"
+            android:layout_alignLeft="@+id/pbLoadingBar"
+            android:layout_marginTop="@dimen/low_margin"
             android:text="@string/loading"
             android:textColor="@color/colorPrimary"
             android:textSize="@dimen/medium_text"
-            android:layout_marginTop="@dimen/low_margin"
-            android:layout_below="@+id/assistiveTextView"
             android:textStyle="bold"
-            android:layout_alignLeft="@+id/pbLoadingBar"
             tools:ignore="SpUsage" />
 
         <ProgressBar
             android:id="@+id/pbLoadingBar"
-            android:layout_below="@+id/progressTitleTextView"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/progressTitleTextView"
             android:layout_marginHorizontal="@dimen/horizontal_margin"
             android:indeterminate="false"
             android:max="100"
@@ -204,9 +204,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:enabled="false"
-        android:minWidth="200dp"
-        app:layout_constraintTop_toBottomOf="@+id/progressLayout"
         android:fontFamily="@font/english_regular_medium"
+        android:minWidth="200dp"
         android:paddingHorizontal="@dimen/large_padding"
         android:text="@string/lets_get_started"
         android:textAllCaps="false"
@@ -217,6 +216,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressLayout"
         tools:enabled="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,8 +22,8 @@ class QuranHomeView : CoroutineView<QuranHomeViewBinding, QuranHomeState, QuranH
     override lateinit var presenter: MviPresenter<QuranHomeIntent, QuranHomeState>
 
     override fun bindView(
-        inflater: LayoutInflater,
-        container: ViewGroup
+            inflater: LayoutInflater,
+            container: ViewGroup
     ): QuranHomeViewBinding = QuranHomeViewBinding.inflate(inflater, container, false)
 
     override fun beforeBindingView(binding: QuranHomeViewBinding) {
@@ -53,13 +53,13 @@ class QuranHomeView : CoroutineView<QuranHomeViewBinding, QuranHomeState, QuranH
 
     override fun injectDependencies(core: CoreComponent) {
         DaggerQuranHomeComponent
-            .builder()
-            .bindRouter(router)
-            .coreComponent(core)
-            .lifecycleComponent(activity!!.lifecycleComponent)
-            .navComponent(DaggerDefaultNavigationComponent.factory().create(core, router))
-            .build()
-            .inject(this)
+                .builder()
+                .bindRouter(router)
+                .coreComponent(core)
+                .lifecycleComponent(activity!!.lifecycleComponent)
+                .navComponent(DaggerDefaultNavigationComponent.factory().create(core, router))
+                .build()
+                .inject(this)
     }
 
     override fun render(state: QuranHomeState) {
@@ -73,6 +73,6 @@ class QuranHomeView : CoroutineView<QuranHomeViewBinding, QuranHomeState, QuranH
     }
 
     override fun intents(): Flow<QuranHomeIntent> =
-        flowOf(QuranHomeIntent.Initial)
+            flowOf(QuranHomeIntent.Initial)
 
 }

@@ -29,9 +29,9 @@ fun RecyclerView.setHidable(
             }
 
             if (isTop() || dy > 0 && fab.isShown) {
-                fab.hide();
+                fab.hide()
             } else if (dy < 0 && !fab.isShown) {
-                fab.show();
+                fab.show()
             }
         }
     })

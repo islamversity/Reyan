@@ -6,8 +6,8 @@ inline class CalligraphyId(override val id: String) : EntityUUID
 
 class CalligraphyIdAdapter : ColumnAdapter<CalligraphyId, String> {
     override fun decode(databaseValue: String): CalligraphyId =
-        CalligraphyId(databaseValue)
+            CalligraphyId(databaseValue)
 
     override fun encode(value: CalligraphyId): String =
-        value.id
+            value.id
 }

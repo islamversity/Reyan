@@ -19,9 +19,9 @@ interface NameLocalDataSource {
     fun getNameById(id: NameId, context: CoroutineContext = Dispatchers.Default): Flow<Name?>
 
     fun getNameByParentIdAndCalligraphy(
-        parentId: RawId,
-        calligraphy: Calligraphy,
-        context: CoroutineContext = Dispatchers.Default
+            parentId: RawId,
+            calligraphy: Calligraphy,
+            context: CoroutineContext = Dispatchers.Default
     ): Flow<Name?>
 
     fun observeAllNamesForParent(parentId: RawId, context: CoroutineContext = Dispatchers.Default): Flow<List<Name>>
@@ -30,7 +30,7 @@ interface NameLocalDataSource {
 }
 
 class NameLocalDataSourceImpl(
-    private val queries: NameQueries
+        private val queries: NameQueries
 ) : NameLocalDataSource {
     override suspend fun insertName(name: No_rowId_name, context: CoroutineContext) {
         withContext(context) {
@@ -39,34 +39,34 @@ class NameLocalDataSourceImpl(
     }
 
     override fun getNameByContent(content: String, context: CoroutineContext): Flow<Name?> =
-        queries.getNameId(content)
-            .asFlow()
-            .mapToOneOrNull(context)
+            queries.getNameId(content)
+                    .asFlow()
+                    .mapToOneOrNull(context)
 
     override fun getNameById(id: NameId, context: CoroutineContext): Flow<Name?> =
-        queries.getNameContent(id)
-            .asFlow()
-            .mapToOneOrNull(context)
+            queries.getNameContent(id)
+                    .asFlow()
+                    .mapToOneOrNull(context)
 
     override fun getNameByParentIdAndCalligraphy(
-        parentId: RawId,
-        calligraphy: Calligraphy,
-        context: CoroutineContext
+            parentId: RawId,
+            calligraphy: Calligraphy,
+            context: CoroutineContext
     ): Flow<Name?> =
-        queries.getNameByParentIdAndCalligraphy(parentId, calligraphy)
-            .asFlow()
-            .mapToOneOrNull(context)
+            queries.getNameByParentIdAndCalligraphy(parentId, calligraphy)
+                    .asFlow()
+                    .mapToOneOrNull(context)
 
     override fun observeAllNamesForParent(
-        parentId: RawId,
-        context: CoroutineContext
+            parentId: RawId,
+            context: CoroutineContext
     ): Flow<List<Name>> =
-        queries.getAllNamesForParentId(parentId)
-            .asFlow()
-            .mapToList(context)
+            queries.getAllNamesForParentId(parentId)
+                    .asFlow()
+                    .mapToList(context)
 
     override fun observeAllNames(context: CoroutineContext): Flow<List<Name>> =
-        queries.getAllNames()
-            .asFlow()
-            .mapToList(context)
+            queries.getAllNames()
+                    .asFlow()
+                    .mapToList(context)
 }

@@ -6,8 +6,8 @@ inline class AyaOrderId(override val order: Long) : OrderId
 
 class AyaOrderIdAdapter : ColumnAdapter<AyaOrderId, Long> {
     override fun decode(databaseValue: Long): AyaOrderId =
-        AyaOrderId(databaseValue)
+            AyaOrderId(databaseValue)
 
     override fun encode(value: AyaOrderId): Long =
-        value.order
+            value.order
 }

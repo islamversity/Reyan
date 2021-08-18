@@ -6,8 +6,8 @@ inline class NameId(override val id: String) : EntityUUID
 
 class NameIdAdapter : ColumnAdapter<NameId, String> {
     override fun decode(databaseValue: String): NameId =
-        NameId(databaseValue)
+            NameId(databaseValue)
 
     override fun encode(value: NameId): String =
-        value.id
+            value.id
 }

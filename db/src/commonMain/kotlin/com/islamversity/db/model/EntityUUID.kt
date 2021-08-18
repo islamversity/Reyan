@@ -16,8 +16,8 @@ inline class RawId(override val id: String) : EntityUUID
 
 class RawIdAdapter : ColumnAdapter<RawId, String> {
     override fun decode(databaseValue: String): RawId =
-        RawId(databaseValue)
+            RawId(databaseValue)
 
     override fun encode(value: RawId): String =
-        value.id
+            value.id
 }

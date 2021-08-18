@@ -4,16 +4,16 @@ import com.islamversity.db.model.*
 import com.squareup.sqldelight.db.SqlDriver
 
 fun createMainDB(
-    driver: SqlDriver
+        driver: SqlDriver
 ): Main =
-    Main(
-        driver,
-        provideAyaAdapter(),
-        provideAyaContentAdapter(),
-        provideCalligraphyAdapter(),
-        provideNameAdapter(),
-        provideSurahAdapter(),
-    )
+        Main(
+                driver,
+                provideAyaAdapter(),
+                provideAyaContentAdapter(),
+                provideCalligraphyAdapter(),
+                provideNameAdapter(),
+                provideSurahAdapter(),
+        )
 
 
 private val ayaIdAdapter = AyaIdAdapter()
@@ -43,34 +43,34 @@ private val hizbOrderAdapter = HizbAdapter()
 
 
 private fun provideAyaAdapter() =
-    Aya.Adapter(
-        ayaIdAdapter,
-        ayaOrderIdAdapter,
-        surahIdAdapter,
-        sajdahTypeFlagAdapter,
-        juzOrderAdapter,
-        hizbOrderAdapter
-    )
+        Aya.Adapter(
+                ayaIdAdapter,
+                ayaOrderIdAdapter,
+                surahIdAdapter,
+                sajdahTypeFlagAdapter,
+                juzOrderAdapter,
+                hizbOrderAdapter
+        )
 
 private fun provideAyaContentAdapter(): Aya_content.Adapter =
-    Aya_content.Adapter(ayaContentIdAdapter, ayaIdAdapter, calligraphyIdAdapter)
+        Aya_content.Adapter(ayaContentIdAdapter, ayaIdAdapter, calligraphyIdAdapter)
 
 private fun provideCalligraphyAdapter(): Calligraphy.Adapter =
-    Calligraphy.Adapter(
-        calligraphyIdAdapter,
-        languageCodeAdapter,
-        calligraphyNameAdapter,
-        calligraphyAdapter
-    )
+        Calligraphy.Adapter(
+                calligraphyIdAdapter,
+                languageCodeAdapter,
+                calligraphyNameAdapter,
+                calligraphyAdapter
+        )
 
 private fun provideNameAdapter(): Name.Adapter =
-    Name.Adapter(nameIdAdapter, rawIdAdapter, calligraphyIdAdapter)
+        Name.Adapter(nameIdAdapter, rawIdAdapter, calligraphyIdAdapter)
 
 private fun provideSurahAdapter(): Surah.Adapter =
-    Surah.Adapter(
-        surahIdAdapter,
-        surahOrderIdAdapter,
-        surahFlagAdapter,
-        bismillahFlagAdapter
-    )
+        Surah.Adapter(
+                surahIdAdapter,
+                surahOrderIdAdapter,
+                surahFlagAdapter,
+                bismillahFlagAdapter
+        )
 

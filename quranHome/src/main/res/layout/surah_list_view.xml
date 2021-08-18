@@ -1,6 +1,7 @@
-<FrameLayout android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <com.islamversity.base.epoxyhelper.EpoxyAsyncRecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/epoxyView"
@@ -8,5 +9,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:itemCount="114"
-        tools:listitem="@layout/surah_view" />
+        tools:listitem="@layout/surah_view"/>
+
+
 </FrameLayout>

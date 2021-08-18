@@ -4,18 +4,18 @@ import com.islamversity.db.No_rowId_aya_content
 import com.squareup.sqldelight.ColumnAdapter
 
 data class Aya(
-    val index: Long,
-    val id: AyaId,
-    val order: AyaOrderId,
-    val surahId: SurahId,
-    val content: String,
-    val translation1: String? = null,
-    val translation2: String? = null,
-    val sajdahType: SajdahTypeFlag?,
-    val juz: Juz,
-    val hizb: HizbQuarter,
-    val startOfHizb: Boolean?,
-    val endingOfHizb: Boolean?,
+        val index: Long,
+        val id: AyaId,
+        val order: AyaOrderId,
+        val surahId: SurahId,
+        val content: String,
+        val translation1: String? = null,
+        val translation2: String? = null,
+        val sajdahType: SajdahTypeFlag?,
+        val juz: Juz,
+        val hizb: HizbQuarter,
+        val startOfHizb: Boolean?,
+        val endingOfHizb: Boolean?,
 ) {
     init {
         juz.validated()
@@ -24,15 +24,15 @@ data class Aya(
 }
 
 data class AyaWithFullContent(
-    val id: AyaId,
-    val surahId: SurahId,
-    val order: AyaOrderId,
-    val content: No_rowId_aya_content,
-    val sajdahTypeFlag: SajdahTypeFlag,
-    val juz: Juz,
-    val hizb: HizbQuarter,
-    val startOfHizb: Boolean? = null,
-    val endingOfHizb: Boolean? = null,
+        val id: AyaId,
+        val surahId: SurahId,
+        val order: AyaOrderId,
+        val content: No_rowId_aya_content,
+        val sajdahTypeFlag: SajdahTypeFlag,
+        val juz: Juz,
+        val hizb: HizbQuarter,
+        val startOfHizb: Boolean? = null,
+        val endingOfHizb: Boolean? = null,
 ) {
     init {
         juz.validated()
@@ -72,16 +72,16 @@ inline class HizbQuarter(val value: Long) {
 
 class JuzAdapter : ColumnAdapter<Juz, Long> {
     override fun decode(databaseValue: Long): Juz =
-        Juz(databaseValue)
+            Juz(databaseValue)
 
     override fun encode(value: Juz): Long =
-        value.value
+            value.value
 }
 
 class HizbAdapter : ColumnAdapter<HizbQuarter, Long> {
     override fun decode(databaseValue: Long): HizbQuarter =
-        HizbQuarter(databaseValue)
+            HizbQuarter(databaseValue)
 
     override fun encode(value: HizbQuarter): Long =
-        value.value
+            value.value
 }

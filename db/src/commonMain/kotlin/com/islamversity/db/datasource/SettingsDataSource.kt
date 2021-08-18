@@ -16,20 +16,20 @@ interface SettingsDataSource {
     fun observeKey(key: String, context: CoroutineContext = Dispatchers.Default): Flow<String?>
 
     fun observeKey(
-        key: String,
-        defaultValue: String,
-        context: CoroutineContext = Dispatchers.Default
+            key: String,
+            defaultValue: String,
+            context: CoroutineContext = Dispatchers.Default
     ): Flow<String> = observeKey(key, { defaultValue }, context)
 
     fun observeKey(
-        key: String,
-        defaultValue: suspend () -> String,
-        context: CoroutineContext = Dispatchers.Default
+            key: String,
+            defaultValue: suspend () -> String,
+            context: CoroutineContext = Dispatchers.Default
     ): Flow<String>
 }
 
 class SettingsDataSourceImpl(
-    private val queries: SettingsQueries
+        private val queries: SettingsQueries
 ) : SettingsDataSource {
     override suspend fun put(key: String, value: String?, context: CoroutineContext) {
         withContext(context) {
@@ -38,24 +38,24 @@ class SettingsDataSourceImpl(
     }
 
     override fun get(key: String, context: CoroutineContext): String? =
-        queries.getWithKey(key).executeAsOneOrNull()?.value
+            queries.getWithKey(key).executeAsOneOrNull()?.value
 
     override fun observeKey(key: String, context: CoroutineContext): Flow<String?> =
-        queries.getWithKey(key)
-            .asFlow()
-            .mapToOneOrNull(context)
-            .map {
-                it?.value
-            }
+            queries.getWithKey(key)
+                    .asFlow()
+                    .mapToOneOrNull(context)
+                    .map {
+                        it?.value
+                    }
 
     override fun observeKey(
-        key: String,
-        defaultValue: suspend () -> String,
-        context: CoroutineContext
+            key: String,
+            defaultValue: suspend () -> String,
+            context: CoroutineContext
     ): Flow<String> =
-        observeKey(key, context)
-            .distinctUntilChanged()
-            .map {
-                it ?: defaultValue()
-            }
+            observeKey(key, context)
+                    .distinctUntilChanged()
+                    .map {
+                        it ?: defaultValue()
+                    }
 }

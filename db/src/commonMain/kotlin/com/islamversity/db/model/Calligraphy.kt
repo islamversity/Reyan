@@ -33,10 +33,10 @@ inline class CalligraphyName(val name: String) {
 
 //please don't change the order of parameters
 data class Calligraphy(
-    //en, fa, ar, ...
-    internal val languageCode: LanguageCode,
-    //uthmani, nastaligh
-    internal val calligraphyName: CalligraphyName?
+        //en, fa, ar, ...
+        internal val languageCode: LanguageCode,
+        //uthmani, nastaligh
+        internal val calligraphyName: CalligraphyName?
 ) {
     init {
         languageCode.validated()
@@ -44,9 +44,9 @@ data class Calligraphy(
     }
 
     val code: String
-        get() = if(calligraphyName != null){
+        get() = if (calligraphyName != null) {
             "${languageCode.lang}_${calligraphyName.name}"
-        }else{
+        } else {
             languageCode.lang
         }
 
@@ -61,9 +61,9 @@ data class Calligraphy(
                 throw IllegalArgumentException("a calligraphy is created using at least one parameter: LanguageCode")
             }
             val lang = LanguageCode(codes[0])
-            val calligraphyName =  if(codes.size > 1){
+            val calligraphyName = if (codes.size > 1) {
                 CalligraphyName(codes[1])
-            }else{
+            } else {
                 null
             }
 
@@ -74,24 +74,24 @@ data class Calligraphy(
 
 class CalligraphyAdapter : ColumnAdapter<Calligraphy, String> {
     override fun decode(databaseValue: String): Calligraphy =
-        Calligraphy(databaseValue)
+            Calligraphy(databaseValue)
 
     override fun encode(value: Calligraphy): String =
-        value.code
+            value.code
 }
 
 class LanguageCodeAdapter : ColumnAdapter<LanguageCode, String> {
     override fun decode(databaseValue: String): LanguageCode =
-        LanguageCode(databaseValue)
+            LanguageCode(databaseValue)
 
     override fun encode(value: LanguageCode): String =
-        value.lang
+            value.lang
 }
 
 class CalligraphyNameAdapter : ColumnAdapter<CalligraphyName, String> {
     override fun decode(databaseValue: String): CalligraphyName =
-        CalligraphyName(databaseValue)
+            CalligraphyName(databaseValue)
 
     override fun encode(value: CalligraphyName): String =
-        value.name
+            value.name
 }
