@@ -3,6 +3,7 @@ package com.islamversity.surah
 import com.islamversity.core.mvi.BaseState
 import com.islamversity.core.mvi.BaseViewState
 import com.islamversity.domain.model.QuranReadFontSize
+import com.islamversity.domain.model.TranslateReadFontSize
 import com.islamversity.surah.model.UIItem
 import com.islamversity.surah.settings.SurahSettingsState
 
@@ -30,7 +31,7 @@ data class SurahState(
                         scrollToAya = null,
                         settingsState = SurahSettingsState(),
                         mainAyaFontSize = QuranReadFontSize.DEFAULT.size,
-                        translationFontSize = QuranReadFontSize.DEFAULT.size,
+                        translationFontSize = TranslateReadFontSize.DEFAULT.size,
                 )
     }
 }
