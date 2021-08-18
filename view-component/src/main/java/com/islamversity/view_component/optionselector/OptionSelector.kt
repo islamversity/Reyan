@@ -9,7 +9,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.islamversity.view_component.R
 import com.islamversity.view_component.databinding.SheetOptionBinding
 
-class OptionSelector(context: Context) : BottomSheetDialog(context, R.style.OptionsSelectorTheme) {
+class OptionSelector(context: Context) : BottomSheetDialog(context, R.style.Theme_MaterialComponents_Light_BottomSheetDialog) {
 
     @RecyclerView.Orientation
     private var orientation = RecyclerView.VERTICAL
