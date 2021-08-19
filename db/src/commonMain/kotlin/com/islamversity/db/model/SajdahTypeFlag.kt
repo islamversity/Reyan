@@ -7,19 +7,19 @@ enum class SajdahTypeFlag(val raw: String) {
     OBLIGATORY("OBLIGATORY"),
     ;
 
-    companion object{
-        operator fun invoke(raw : String) : SajdahTypeFlag? =
-            fromRaw(raw)
+    companion object {
+        operator fun invoke(raw: String): SajdahTypeFlag? =
+                fromRaw(raw)
 
-        private fun fromRaw(raw : String) : SajdahTypeFlag? =
-            values().find { it.raw == raw }
+        private fun fromRaw(raw: String): SajdahTypeFlag? =
+                values().find { it.raw == raw }
     }
 }
 
 class SajdahTypeFlagAdapter : ColumnAdapter<SajdahTypeFlag, String> {
     override fun decode(databaseValue: String): SajdahTypeFlag =
-        SajdahTypeFlag(databaseValue)!!
+            SajdahTypeFlag(databaseValue)!!
 
     override fun encode(value: SajdahTypeFlag): String =
-        value.raw
+            value.raw
 }

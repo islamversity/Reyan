@@ -6,8 +6,8 @@ inline class AyaId(override val id: String) : EntityUUID
 
 class AyaIdAdapter : ColumnAdapter<AyaId, String> {
     override fun decode(databaseValue: String): AyaId =
-        AyaId(databaseValue)
+            AyaId(databaseValue)
 
     override fun encode(value: AyaId): String =
-        value.id
+            value.id
 }

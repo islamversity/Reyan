@@ -54,19 +54,19 @@ kotlin {
     sourceSets.create("nativeMain")
 
     configure(listOf(
-        targets["iosArm64"],
-        targets["iosX64"],
+            targets["iosArm64"],
+            targets["iosX64"],
 
-        targets["watchosArm32"],
-        targets["watchosArm64"],
-        targets["watchosX86"],
+            targets["watchosArm32"],
+            targets["watchosArm64"],
+            targets["watchosX86"],
 
-        targets["tvosArm64"],
-        targets["tvosX64"],
+            targets["tvosArm64"],
+            targets["tvosX64"],
 
-        targets["linuxX64"],
-        targets["macos"],
-        targets["mingwX64"]
+            targets["linuxX64"],
+            targets["macos"],
+            targets["mingwX64"]
     )) {
         compilations["main"].source(sourceSets["nativeMain"])
         compilations["test"].source(sourceSets["nativeTest"])

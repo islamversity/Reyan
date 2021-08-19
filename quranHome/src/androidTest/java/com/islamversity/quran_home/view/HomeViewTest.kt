@@ -1,5 +1,3 @@
 package com.islamversity.quran_home.view
 
-class HomeViewTest {
-
-}
+class HomeViewTest
