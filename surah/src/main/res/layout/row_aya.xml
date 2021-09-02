@@ -113,6 +113,22 @@
             android:background="?android:selectableItemBackgroundBorderless"
             android:visibility="gone"
             tools:visibility="visible"
+            app:srcCompat="@drawable/ic_add_reminder"/>
+
+        <Space
+            android:layout_width="@dimen/medium_margin"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:id="@+id/ivAyaReminder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:contentDescription="@string/play_button"
+            android:scaleType="fitCenter"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:visibility="gone"
+            tools:visibility="visible"
             app:srcCompat="@drawable/ic_play"/>
 
         <Space
