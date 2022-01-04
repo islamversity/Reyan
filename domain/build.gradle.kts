@@ -46,7 +46,18 @@ kotlin {
         implementation(Deps.Tools.logger)
         implementation(Deps.Coroutines.coroutinesWorker)
     }
-
+    sourceSets["commonTest"].dependencies {
+        implementation(kotlin(Deps.Kotlin.common))
+        implementation(Deps.KotlinTest.jvm)
+        implementation(Deps.KotlinTest.common)
+        implementation(Deps.Coroutines.common)
+        implementation(Deps.Coroutines.test)
+        implementation(Deps.Android.Test.junit)
+        implementation(Deps.Android.Test.junitExt)
+        implementation(Deps.Android.Test.mockkUnit)
+        implementation(Deps.Android.Test.truth)
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.1")
+    }
     jvm()
     sourceSets["jvmMain"].dependencies {
         implementation(kotlin("stdlib", Versions.kotlin))
