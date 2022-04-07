@@ -38,6 +38,7 @@ sealed class SurahIntent : MviIntent {
             val model : AyaUIModel
     ) : SurahIntent(){
         data class Share(val aya : AyaUIModel) : AyaActions(aya)
+        data class SetReminder(val aya: AyaUIModel) : AyaActions(aya)
     }
 
     data class Scrolled(

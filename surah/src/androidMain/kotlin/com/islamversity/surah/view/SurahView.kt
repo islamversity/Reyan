@@ -151,14 +151,19 @@ class SurahView(
             }
         }
     }
-
-    private fun ayaClicks(actions: SurahIntent.AyaActions) {
+.3
+3    private fun ayaClicks(actions: SurahIntent.AyaActions) {
         when (actions) {
             is SurahIntent.AyaActions.Share -> {
                 shareAya(actions)
             }
         }
     }
+
+    private fun setReminder(actions: SurahIntent.SetReminder()) {
+        
+    }
+
 
     private fun shareAya(actions: SurahIntent.AyaActions.Share) {
         ShareCompat.IntentBuilder.from(activity!!)
